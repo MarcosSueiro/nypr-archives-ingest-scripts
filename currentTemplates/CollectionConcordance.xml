@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<collections>
+	<collection>
+		<collAcro>BPL</collAcro>
+		<collName>Boston Public Library</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n79117036</collURL>
+	</collection>
+	<collection>
+		<collAcro>CBC</collAcro>
+		<collName>Canadian Broadcasting Corporation</collName>
+		<collLocation>CA</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n80085267</collURL>
+	</collection>
+	<collection>
+		<collAcro>CBS</collAcro>
+		<collName>CBS</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n82221065</collURL>
+	</collection>
+	<collection>
+		<collAcro>CINE</collAcro>
+		<collName>Cinema Sound</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n94033371</collURL>
+	</collection>
+	<collection>
+		<collAcro>COLU</collAcro>
+		<collName>Columbia University</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n81024714</collURL>
+	</collection>
+	<collection>
+		<collAcro>COMM</collAcro>
+		<collName>Commercial Recording</collName>
+		<collLocation>US</collLocation>
+	</collection>
+	<collection>
+		<collAcro>CUNY</collAcro>
+		<collName>City University of New York</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n79052227</collURL>
+	</collection>
+	<collection>
+		<collAcro>FSHR</collAcro>
+		<collName>Eleanor Fischer</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n80085267</collURL>
+	</collection>
+	<collection>
+		<collAcro>GREE</collAcro>
+		<collName>The Greene Space</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n81047053</collURL>
+	</collection>
+	<collection>
+		<collAcro>JAY</collAcro>
+		<collName>John Jay College of Criminal Justice</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n79082351</collURL>
+	</collection>
+	<collection>
+		<collAcro>LANS</collAcro>
+		<collName>Andy Lanset Collection</collName>
+		<collLocation>US</collLocation>
+	</collection>
+	<collection>
+		<collAcro>LGWA</collAcro>
+		<collName>La Guardia Wagner Archives</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/no97037110</collURL>
+	</collection>
+	<collection>
+		<collAcro>METM</collAcro>
+		<collName>Metropolitan Museum of New York</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n79129629</collURL>
+	</collection>
+	<collection>
+		<collAcro>MUNI</collAcro>
+		<collName>Municipal Archives</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/no98091861</collURL>
+	</collection>
+	<collection>
+		<collAcro>NARA</collAcro>
+		<collName>National Archives</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n84176101</collURL>
+	</collection>
+	<collection>
+		<collAcro>NBC</collAcro>
+		<collName>NBC</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n80050398</collURL>
+	</collection>
+	<collection>
+		<collAcro>NPR</collAcro>
+		<collName>NPR</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n79033338</collURL>
+	</collection>
+	<collection>
+		<collAcro>NY1</collAcro>
+		<collName>NY1</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n93118236</collURL>
+	</collection>
+	<collection>
+		<collAcro>NYAM</collAcro>
+		<collName>New York Academy of Medicine</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n79132010</collURL>
+	</collection>
+	<collection>
+		<collAcro>PRI</collAcro>
+		<collName>Public Radio International</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/no96018119</collURL>
+	</collection>
+	<collection>
+		<collAcro>SMTH</collAcro>
+		<collName>Smithsonian Institution</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n79053968</collURL>
+	</collection>
+	<collection>
+		<collAcro>UWYO</collAcro>
+		<collName>University of Wyoming</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n87896648</collURL>
+	</collection>
+	<collection>
+		<collAcro>WABC</collAcro>
+		<collName>ABC</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n79053131</collURL>
+	</collection>
+	<collection>
+		<collAcro>WBAI</collAcro>
+		<collName>WBAI Radio</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n92041737</collURL>
+	</collection>
+	<collection>
+		<collAcro>WFMT</collAcro>
+		<collName>WFMT Radio</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n87812608</collURL>
+	</collection>
+	<collection>
+		<collAcro>WKCR</collAcro>
+		<collName>WKCR Radio</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n87845396</collURL>
+	</collection>
+	<collection>
+		<collAcro>WMCA</collAcro>
+		<collName>MCA</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/no98086347</collURL>
+	</collection>
+	<collection>
+		<collAcro>WNET</collAcro>
+		<collName>WNET Radio</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n80014556</collURL>
+	</collection>
+	<collection>
+		<collAcro>WNEW</collAcro>
+		<collName>WNEW Radio</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n00065670</collURL>
+	</collection>
+	<collection>
+		<collAcro>WNYC</collAcro>
+		<collName>WNYC Radio</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n81047053</collURL>
+	</collection>
+	<collection>
+		<collAcro>WNYE</collAcro>
+		<collName>WNYE</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n88222018</collURL>
+	</collection>
+	<collection>
+		<collAcro>WOR</collAcro>
+		<collName>WOR Radio</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n2001121048</collURL>
+	</collection>
+	<collection>
+		<collAcro>WQEW</collAcro>
+		<collName>WQEW</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n81050013</collURL>
+	</collection>
+	<collection>
+		<collAcro>WQXR</collAcro>
+		<collName>WQXR Radio</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n85268774</collURL>
+	</collection>
+	<collection>
+		<collAcro>WREC</collAcro>
+		<collName>WREC Radio</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n2003124873</collURL>
+	</collection>
+	<collection>
+		<collAcro>WRVR</collAcro>
+		<collName>WRVR Radio</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/no2012067764</collURL>
+	</collection>
+	<collection>
+		<collAcro>WVOI</collAcro>
+		<collName>WVOI Radio</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/subjects/sh85110575</collURL>
+	</collection>
+	<collection>
+		<collAcro>YALE</collAcro>
+		<collName>Yale University</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n79043367</collURL>
+	</collection>
+</collections>
