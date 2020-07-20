@@ -1058,12 +1058,7 @@
             </xsl:result-document>
         </xsl:if>
 
-        <!-- Output 5: Slack -->
-        <xsl:apply-templates select="
-            $newExifOutput
-            /rdf:RDF
-            [not(//error)]" 
-            mode="slack"/>
+        
 
     </xsl:template>
 
