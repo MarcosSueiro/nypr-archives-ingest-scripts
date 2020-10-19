@@ -257,11 +257,10 @@
             </xsl:if>
             <xsl:variable name="cmsImageIDCount"
                 select="
-                    count(
-                    pb:pbcoreDescription
-                    /pbcoreAnnotation
-                    [@annotationType = 'CMS Image']
-                    )"/>
+                count(
+                pb:pbcoreAnnotation
+                [@annotationType = 'CMS Image']
+                )"/>
             <xsl:if test="$cmsImageIDCount gt 1">
                 <xsl:message terminate="no"
                     select="
@@ -313,10 +312,22 @@
         </cavafyEntry>
     </xsl:template>
 
-    <xsl:template match="pbcoreInstantiation" mode="instantiationQC">
+    <xsl:template match="pb:pbcoreInstantiation" mode="instantiationQC">
         <!-- INSTANTIATION LEVEL:-->
         <!--    Exactly one instantiation ID with @source = 'WNYC Archive Catalog' -->
+        <!--    Exactly one Format, Format Location, Media Type and Generation-->
         <!--    At most one essence track-->
+        <xsl:param name="minInstantiationIDCount" select="1"/>
+        <xsl:param name="maxInstantiationIDCount" select="1"/>
+        <xsl:param name="minFormatCount" select="1"/>
+        <xsl:param name="maxFormatCount" select="1"/>
+        <xsl:param name="minLocationCount" select="1"/>
+        <xsl:param name="maxLocationCount" select="1"/>
+        <xsl:param name="minGenerationCount" select="1"/>
+        <xsl:param name="maxGenerationCount" select="1"/>
+        <xsl:param name="minEssenceTrackCount" select="0"/>
+        <xsl:param name="maxEssenceTrackCount" select="1"/>
+        
         <xsl:variable name="instantiationIDCount"
             select="
                 count(

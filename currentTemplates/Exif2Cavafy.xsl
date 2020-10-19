@@ -706,7 +706,7 @@ to a pbcore cavafy entry -->
                 <xsl:message 
                     select="'Copyright in cavafy: ', 
                     $copyrightAlreadyInCavafy"/>
-                <xsl:if test="$copyrightAlreadyInCavafy eq ''">
+                <xsl:if test="$copyrightAlreadyInCavafy = ''">
                     <pbcoreRightsSummary>
                         <rightsSummary>
                             <xsl:value-of 

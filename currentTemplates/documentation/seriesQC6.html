@@ -33,10 +33,6 @@
         
         var usedByBoxes= new Array('uB_T_splitParseValidateS_utilities.xsl', 
 				'uB_T_strip-tagsS_utilities.xsl', 
-				'uB_T_ASCIIFyS_utilities.xsl', 
-				'uB_V_validatingKeywordStringS_utilities.xsl', 
-				'uB_V_validatingNameStringS_utilities.xsl', 
-				'uB_F_CapitalizeS_utilities.xsl', 
 				'uB_F_splitParseValidateS_utilities.xsl', 
 				'uB_F_ASCIIFierS_utilities.xsl', 
 				'uB_F_quotesS_utilities.xsl', 
@@ -50,8 +46,7 @@
 				'uB_F_middleDotS_utilities.xsl', 
 				'uB_F_controlS_utilities.xsl', 
 				'uB_F_cedillaS_utilities.xsl', 
-				'uB_F_CopyrightS_utilities.xsl', 
-				'uB_F_trimFinalPeriodS_utilities.xsl');
+				'uB_F_CopyrightS_utilities.xsl');
 
         var docBoxes= new Array('dS_utilities.xsl', 
 				'dS_M_nodeM_noAttributesS_utilities.xsl');
@@ -84,10 +79,7 @@
 				'src_F_trimFinalPeriodS_utilities.xsl', 
 				'src_O_S_utilities.xsl');
 
-        var supersedesBoxes= new Array('sps_V_separatingTokenS_utilities.xsl', 
-				'sps_V_validatingKeywordStringS_utilities.xsl', 
-				'sps_V_validatingNameStringS_utilities.xsl');
-
+        
         var overridingBoxes= new Array('ovr_V_separatingTokenS_utilities.xsl');
 
         var referencesBoxes= new Array('refs_T_strip-tagsS_utilities.xsl', 
@@ -408,9 +400,6 @@
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, referencesBoxes);" class="control" /></span><span class="globalControlName">References </span></td>
                      </tr>
                      <tr>
-                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, supersedesBoxes);" class="control" /></span><span class="globalControlName">Supersedes </span></td>
-                     </tr>
-                     <tr>
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, overridingBoxes);" class="control" /></span><span class="globalControlName">Overriding </span></td>
                      </tr>
                      <tr>
@@ -467,7 +456,7 @@
                                  <tr>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter16.html#manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')">manageDuplicates.xsl</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC4.html#manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')">manageDuplicates.xsl</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -518,9 +507,8 @@
                                     <td class="fCol">Templates</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_checkConflictsS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')"><span class="nRf">checkConflicts</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter14.html#T_collectionsS_processCollection.xsl" target="_self" title="No namespace" onclick="updPT('processCollection.xsl')"><span class="nRf">collections</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_mergeDataS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')"><span class="nRf">mergeData</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC4.html#T_checkConflictsS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')"><span class="nRf">checkConflicts</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC4.html#T_mergeDataS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')"><span class="nRf">mergeData</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -528,7 +516,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_splitParseValidateS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>WNYC:splitParseValidate (</span><span class="fParams">input, separatingToken, validatingString</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_splitParseValidateS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>WNYC:splitParseValidate (</span><span class="fParams">input, separatingToken, validatingString</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -588,7 +576,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -668,12 +656,10 @@
                            <div id="uB_T_strip-tagsS_utilities.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
-                                    <td class="fCol">Templates</td>
+                                    <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter9.html#T_exifFillerS_cms2BWFMetaEdit.xsl" target="_self" title="No namespace" onclick="updPT('cms2BWFMetaEdit.xsl')"><span class="nRf">exifFiller</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter1.html#T_newExifS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')"><span class="nRf">newExif</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_strip-tagsS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')"><span class="nRf">strip-tags</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#T_strip-tagsS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')"><span class="nRf">strip-tags</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -693,7 +679,7 @@
                                     <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_strip-tagsS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')"><span class="nRf">strip-tags</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#T_strip-tagsS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')"><span class="nRf">strip-tags</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -725,7 +711,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -793,26 +779,6 @@
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Used by</div>
-                           <div class="flR"><input id="bt_uB_T_ASCIIFyS_utilities.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_T_ASCIIFyS_utilities.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="uB_T_ASCIIFyS_utilities.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Template</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter1.html#T_newExifS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')"><span class="nRf">newExif</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
                            <div class="flL">References</div>
                            <div class="flR"><input id="bt_refs_T_ASCIIFyS_utilities.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_T_ASCIIFyS_utilities.xsl');" class="control" /></div>
                         </td>
@@ -823,7 +789,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -857,7 +823,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -969,7 +935,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -1043,7 +1009,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -1097,26 +1063,6 @@
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Supersedes</div>
-                           <div class="flR"><input id="bt_sps_V_separatingTokenS_utilities.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_separatingTokenS_utilities.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="sps_V_separatingTokenS_utilities.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Variable</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter1.html#V_separatingTokenS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')">separatingToken</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
                            <div class="flL">Overriding</div>
                            <div class="flR"><input id="bt_ovr_V_separatingTokenS_utilities.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_separatingTokenS_utilities.xsl');" class="control" /></div>
                         </td>
@@ -1127,7 +1073,7 @@
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter16.html#V_separatingTokenS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')">separatingToken</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC4.html#V_separatingTokenS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')">separatingToken</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1183,55 +1129,6 @@
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Used by</div>
-                           <div class="flR"><input id="bt_uB_V_validatingKeywordStringS_utilities.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_V_validatingKeywordStringS_utilities.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="uB_V_validatingKeywordStringS_utilities.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Templates</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter15.html#T_LOCOccupationsAndFieldsOfActivityS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">LOCOccupationsAndFieldsOfActivity</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter15.html#T_wideLOCSubjectSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">wideLOCSubjectSearch</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">Variable</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter15.html#V_combinedValidatingStringsS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">combinedValidatingStrings</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Supersedes</div>
-                           <div class="flR"><input id="bt_sps_V_validatingKeywordStringS_utilities.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_validatingKeywordStringS_utilities.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="sps_V_validatingKeywordStringS_utilities.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Variable</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter1.html#V_validatingKeywordStringS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')">validatingKeywordString</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
                            <div class="flL">Source</div>
                            <div class="flR"><input id="bt_src_V_validatingKeywordStringS_utilities.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_V_validatingKeywordStringS_utilities.xsl');" class="control" /></div>
                         </td>
@@ -1278,55 +1175,6 @@
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Used by</div>
-                           <div class="flR"><input id="bt_uB_V_validatingNameStringS_utilities.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_V_validatingNameStringS_utilities.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="uB_V_validatingNameStringS_utilities.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Templates</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter15.html#T_LOCOccupationsAndFieldsOfActivityS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">LOCOccupationsAndFieldsOfActivity</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter15.html#T_wideLOCNameSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">wideLOCNameSearch</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">Variable</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter15.html#V_combinedValidatingStringsS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">combinedValidatingStrings</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Supersedes</div>
-                           <div class="flR"><input id="bt_sps_V_validatingNameStringS_utilities.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_validatingNameStringS_utilities.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="sps_V_validatingNameStringS_utilities.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Variable</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter1.html#V_validatingNameStringS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')">validatingNameString</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
                            <div class="flL">Source</div>
                            <div class="flR"><input id="bt_src_V_validatingNameStringS_utilities.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_V_validatingNameStringS_utilities.xsl');" class="control" /></div>
                         </td>
@@ -1369,30 +1217,6 @@
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Used by</div>
-                           <div class="flR"><input id="bt_uB_F_CapitalizeS_utilities.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_F_CapitalizeS_utilities.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="uB_F_CapitalizeS_utilities.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Templates</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter15.html#T_LOCSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">LOCSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter15.html#T_directLOCNameSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCNameSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter15.html#T_directLOCSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter15.html#T_directLOCSubjectSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSubjectSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter1.html#T_newExifS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')"><span class="nRf">newExif</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
                            <div class="flL">Parameters</div>
                            <div class="flR"><input id="bt_prs_F_CapitalizeS_utilities.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_F_CapitalizeS_utilities.xsl');" class="control" /></div>
                         </td>
@@ -1419,7 +1243,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -1483,14 +1307,9 @@
                                     <td class="fCol">Templates</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter15.html#T_LOCOccupationsAndFieldsOfActivityS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">LOCOccupationsAndFieldsOfActivity</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter15.html#T_directLOCSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter19.html#T_generatePbCoreCollectionS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="nRf">generatePbCoreCollection</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter19.html#T_generatePbCoreDescriptionDocumentS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="nRf">generatePbCoreDescriptionDocument</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter19.html#T_generateSearchStringS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="nRf">generateSearchString</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter15.html#T_narrowSubjectsS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">narrowSubjects</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter1.html#T_newExifS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')"><span class="nRf">newExif</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter15.html#M_RIFFKeywordsM_broaderSubjectsS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="mRf">RIFF:Keywords</span><span class="mdRf">broaderSubjects</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC2.html#T_generatePbCoreCollectionS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="nRf">generatePbCoreCollection</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC2.html#T_generatePbCoreDescriptionDocumentS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="nRf">generatePbCoreDescriptionDocument</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC2.html#T_generateSearchStringS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="nRf">generateSearchString</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1510,7 +1329,7 @@
                                     <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_splitParseValidateS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')"><span class="nRf">splitParseValidate</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#T_splitParseValidateS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')"><span class="nRf">splitParseValidate</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1554,7 +1373,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -1644,7 +1463,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -1701,12 +1520,10 @@
                            <div id="uB_F_ASCIIFierS_utilities.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
-                                    <td class="fCol">Templates</td>
+                                    <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_ASCIIFyS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')"><span class="nRf">ASCIIFy</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter15.html#T_wideLOCNameSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">wideLOCNameSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter15.html#T_wideLOCSubjectSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">wideLOCSubjectSearch</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#T_ASCIIFyS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')"><span class="nRf">ASCIIFy</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1726,18 +1543,18 @@
                                     <td class="fCol">Functions</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_CopyrightS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>Copyright (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_apostrophesS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>apostrophes (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_cedillaS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>cedilla (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_controlS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>control (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_ellipsisS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ellipsis (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_emdashS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>emdash (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_endashS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>endash (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_e%C3%B1eS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>eñe (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_middleDotS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>middleDot (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_quotesS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>quotes (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_vowelsLCS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>vowelsLC (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_vowelsUCS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>vowelsUC (</span><span class="fParams">string1</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_CopyrightS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>Copyright (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_apostrophesS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>apostrophes (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_cedillaS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>cedilla (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_controlS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>control (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_ellipsisS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ellipsis (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_emdashS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>emdash (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_endashS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>endash (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_e%C3%B1eS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>eñe (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_middleDotS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>middleDot (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_quotesS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>quotes (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_vowelsLCS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>vowelsLC (</span><span class="fParams">string1</span><span>)</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_vowelsUCS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>vowelsUC (</span><span class="fParams">string1</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1769,7 +1586,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -1834,7 +1651,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1866,7 +1683,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -1926,7 +1743,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1958,7 +1775,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2018,7 +1835,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2050,7 +1867,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2110,7 +1927,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2142,7 +1959,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2202,7 +2019,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2234,7 +2051,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2294,7 +2111,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2326,7 +2143,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2387,7 +2204,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2419,7 +2236,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2480,7 +2297,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2512,7 +2329,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2572,7 +2389,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2604,7 +2421,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2664,7 +2481,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2696,7 +2513,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2768,7 +2585,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2828,7 +2645,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2860,7 +2677,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2921,7 +2738,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC6.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCII:ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2953,7 +2770,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -3003,27 +2820,6 @@
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Used by</div>
-                           <div class="flR"><input id="bt_uB_F_trimFinalPeriodS_utilities.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_F_trimFinalPeriodS_utilities.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="uB_F_trimFinalPeriodS_utilities.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Templates</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter15.html#T_directLOCSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter15.html#T_directLOCSubjectSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSubjectSearch</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
                            <div class="flL">Parameters</div>
                            <div class="flR"><input id="bt_prs_F_trimFinalPeriodS_utilities.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_F_trimFinalPeriodS_utilities.xsl');" class="control" /></div>
                         </td>
@@ -3046,7 +2842,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>25</td>
+                        <td>1</td>
                      </tr>
                      <tr>
                         <td class="fCol">

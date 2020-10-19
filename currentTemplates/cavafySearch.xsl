@@ -25,8 +25,10 @@ https://www.url-encode-decode.com/
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:xhtml="http://www.w3.org/1999/xhtml" 
     xmlns:WNYC="http://www.wnyc.org"
+    xmlns:pma="http://www.phpmyadmin.net/some_doc_url/"
     xmlns:op="https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321/"
     xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html" 
+    xmlns:pb="http://www.pbcore.org/PBCore/PBCoreNamespace.html"
     exclude-result-prefixes="#all">
     
     <xsl:output method="xml" version="1.0" indent="yes"/>
@@ -61,6 +63,44 @@ https://www.url-encode-decode.com/
     </xsl:param>
     <xsl:param name="todaysDate" 
         select="xs:date(current-date())"/>
+    
+    <xsl:template match="pma_xml_export">
+        <xsl:variable name="urls">
+            <dc:url>
+                <xsl:value-of select="
+                        database/table/column[@name = 'url']"
+                    separator="
+                {$separatingTokenLong}"/>
+            </dc:url>
+        </xsl:variable>
+        <xsl:variable name="newSoundsDupes">
+            <xsl:apply-templates select="$urls"/>
+        </xsl:variable>
+        <xsl:variable name="newSoundsDupesDuplicated">
+            <xsl:copy select="$newSoundsDupes/pb:pbcoreCollection">
+                <xsl:for-each
+                    select="$newSoundsDupes/*:pbcoreCollection/*:pbcoreDescriptionDocument">
+                    <xsl:variable name="newAssetID" select="86536 + position()"/>
+                    <xsl:copy>
+                        <xsl:comment select="'************ORIGINAL ', *:pbcoreIdentifier[@source = 'WNYC Archive Catalog'], '**********'"/>
+                        <xsl:copy-of select="*"/>
+                    </xsl:copy>
+                    <xsl:copy>
+                        <xsl:comment select="'++++++++++++++++NEW ', $newAssetID, '++++++++++++++'"/>
+                        <xsl:copy-of
+                            select="*[following-sibling::*:pbcoreIdentifier[@source = 'WNYC Archive Catalog']]"/>
+                        <pbcoreIdentifier source="WNYC Archive Catalog">
+                            <xsl:value-of select="$newAssetID"/>
+                        </pbcoreIdentifier>
+                        <xsl:copy-of
+                            select="*[preceding-sibling::*:pbcoreIdentifier[@source = 'WNYC Archive Catalog']]"
+                        />
+                    </xsl:copy>
+                </xsl:for-each>
+            </xsl:copy>
+        </xsl:variable>
+        <xsl:apply-templates select="$newSoundsDupesDuplicated" mode="importReady"/>
+    </xsl:template>
     
     <xsl:template name="generateSearchString" 
         match="." mode="generateSearchString">
@@ -195,6 +235,12 @@ https://www.url-encode-decode.com/
         <xsl:param name="stopIfTooMany" as="xs:boolean" select="false()"/>
         <xsl:param name="stopIfTooFew" as="xs:boolean" select="false()"/>
         <xsl:param name="htmlResult" select="document($searchString)"/>
+        <xsl:message select="'htmlResult: ', $htmlResult"/>
+        <xsl:if test="$htmlResult/html/head/title[contains(., 'Sign in')]">
+            <xsl:message terminate="yes">
+                <xsl:value-of select="'Please log into cavafy.wnyc.org'"/>
+            </xsl:message>
+        </xsl:if>
         
         <xsl:if test="$minResults gt $maxResults">
             <xsl:message terminate="yes"
@@ -379,7 +425,7 @@ https://www.url-encode-decode.com/
         
         <xsl:param name="cavafyURLs">
             <xsl:call-template name="checkResult">
-                <xsl:with-param name="searchString" select="$searchString"/>
+                <xsl:with-param name="searchString" select="$searchString[contains(., 'https://cavafy.wnyc.org/')]"/>
                 <xsl:with-param name="minResults" select="$minResults"/>
                 <xsl:with-param name="maxResults" select="$maxResults"/>
                 <xsl:with-param name="stopIfTooMany" select="$stopIfTooMany"/>
@@ -406,14 +452,55 @@ https://www.url-encode-decode.com/
         </xsl:call-template>
     </xsl:template>
     
+    <xsl:template match="url" xpath-default-namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
+        <xsl:apply-templates select="." mode="
+            generatePbCoreCollectionWRepeats"/>
+    </xsl:template>
+    
+    <xsl:template name="generatePbCoreCollectionWRepeats" match="url"
+        mode="generatePbCoreCollectionWRepeats" xpath-default-namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
+        <!-- From a token-separated list of URLs,
+        generate a pbcore collection
+        of xmls including repeats-->
+        <xsl:param name="urls" select="."/>
+        <xsl:message
+            select="
+                'From a token-separated list of URLs, ',
+                'generate a pbcore collection of xmls ',
+                'including repeats'"/>
+
+        <xsl:element name="pbcoreCollection">
+            <xsl:namespace name="xsi" select="'http://www.w3.org/2001/XMLSchema-instance'"/>
+            <xsl:attribute name="xsi:schemaLocation"
+                select="'http://pbcore.org/PBCore/PBCoreNamespace.html http://pbcore.org/xsd/pbcore-2.0.xsd'"/>
+
+            <xsl:for-each select="
+                    tokenize($urls, $separatingToken)">
+                <xsl:call-template name="
+                    generatePbCoreDescriptionDocument">
+                    <xsl:with-param name="url" select="normalize-space(.)"/>
+                </xsl:call-template>
+            </xsl:for-each>
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="dc:url">
+        <xsl:apply-templates select="." mode="
+            generatePbCoreCollection"/>
+    </xsl:template>
+    
+    
     <xsl:template name="generatePbCoreCollection" 
         match="dc:url" 
         mode="generatePbCoreCollection">
         <!-- From a token-separated list of URLs,
         generate a pbcore collection
-        of xmls ready for import-->
-        <xsl:param name="urls"/>
-
+        of UNIQUE xmls ready for import-->
+        <xsl:param name="urls" select="."/>
+        <xsl:message select="
+            'From a token-separated list of URLs, ', 
+            'generate a pbcore collection of unique xmls ', 
+            'ready for import'"/>
         <xsl:for-each
             select="
                 WNYC:splitParseValidate($urls, $separatingToken, $cavafyValidatingString)
@@ -671,28 +758,29 @@ https://www.url-encode-decode.com/
     
     <xsl:template name="findInstantiation" 
         match="instantiationID" mode="processInstantiation">
-        <!-- Find a specific instnatiationID in cavafy -->
+        <!-- Find a specific instantiationID in cavafy -->
         <!-- NOTE: mode "processInstantiation"
         is part of a set
         along with template
         "nextInstantiationID"-->
         <xsl:param name="instantiationID" select="."/>
         <xsl:param name="assetID" select="substring-before($instantiationID, '.')"/>
-        <xsl:param name="instantiationSuffix" select="substring-after($instantiationID, '.')"/>
-        <xsl:param name="format"/>
-        <xsl:param name="translatedFormat" select="if (upper-case($format) = 'WAV')
-            then 'BWF'
-            else $format"/>
         <xsl:param name="cavafyEntry">
             <xsl:call-template name="findSpecificCavafyAssetXML">
                 <xsl:with-param name="assetID" select="$assetID"/>
             </xsl:call-template>
         </xsl:param>
+        <xsl:param name="instantiationSuffix" select="substring-after($instantiationID, '.')"/>
+        <xsl:param name="format"/>
+        <xsl:param name="translatedFormat" select="
+            if (upper-case($format) = 'WAV')
+            then 'BWF'
+            else $format"/>
         
         <xsl:message select="
             concat(
             'Find instantiation info for ', $instantiationID,
-            ' of format ', $format
+            ' of format ', $translatedFormat
             )"/>        
         
         <xsl:variable name="matchedInstantiation"
@@ -702,15 +790,16 @@ https://www.url-encode-decode.com/
             /*:pbcoreInstantiation
             [*:instantiationIdentifier = $instantiationID]"/>
         <xsl:variable name="matchedInstantiationID"
-            select="$matchedInstantiation/*:instantiationIdentifier[. = $instantiationID]"/>
-        <xsl:message select="
-            concat(
+            select="$matchedInstantiation
+            /*:instantiationIdentifier
+            [. = $instantiationID]"/>
+        <xsl:message select="            
             count($matchedInstantiation), 
             ' instantiations with ID ', 
-            $matchedInstantiationID, 
+            $instantiationID, 
             ' found in cavafy: ',
             $matchedInstantiation
-            )"/>
+            "/>
         <xsl:variable name="matchedInstantiationIDSource">
             <xsl:value-of select="
                 $matchedInstantiationID/@source"/>
@@ -735,24 +824,26 @@ https://www.url-encode-decode.com/
             
             
             <!--Generate error if instantiation formats do not match-->
-            <xsl:if test="$matchedInstantiationID">
-                <!--<xsl:call-template name="checkConflicts">
-                    <xsl:with-param name="field1" select="$format"/>
-                    <xsl:with-param name="field2" select="
-                        $matchedInstantiation//(instantiationPhysical | instantiationDigital)"/>
-                    <xsl:with-param name="fieldName" select="'instantiationFormat'"/>
-                </xsl:call-template>-->
+            <xsl:if test="$matchedInstantiationID">                
+                <xsl:variable name="matchedInstantiationFormat" select="
+                    $matchedInstantiation
+                    //(*:instantiationPhysical | *:instantiationDigital)
+                    [. !='']"/>
                 <xsl:choose>
-                    <xsl:when test="$matchedInstantiation//*:instantiationPhysical">
+                    <xsl:when test="
+                        $matchedInstantiationFormat                         
+                        != $translatedFormat">
                         <xsl:variable name="errorMessage"
                             select="
-                            'ATTENTION! You are about to wipe out physical instantiation ',
+                            'ATTENTION!!!', 
+                            ' You are about to wipe out instantiation ',
                             $instantiationID,
-                            ', a ', $matchedInstantiation//*:instantiationPhysical"/>
+                            ', a ', $matchedInstantiationFormat, ', ',
+                            ' with a ', $translatedFormat, '!!!'"/>
                         <xsl:message terminate="no" select="$errorMessage"/>
                         <xsl:element name="error">
                             <xsl:attribute name="type" 
-                                select="'existing_physical_instantiation'"/>
+                                select="'mismatched_format'"/>
                             <xsl:value-of select="$errorMessage"/>
                         </xsl:element>
                     </xsl:when>
@@ -761,8 +852,10 @@ https://www.url-encode-decode.com/
                         <xsl:variable name="errorMessage"
                             select="
                             'ATTENTION! ',
-                            'Instantiation ID ', $matchedInstantiationID,
-                            ' has a nonstandard ID source: ', $matchedInstantiationIDSource,
+                            'Instantiation ID ', 
+                            $matchedInstantiationID,
+                            ' has a nonstandard ID source: ', 
+                            $matchedInstantiationIDSource,
                             '&#10;',
                             'Please change to WNYC Media Archive Label.'"/>
                         <xsl:message select="$errorMessage"/>
@@ -950,4 +1043,191 @@ https://www.url-encode-decode.com/
             </xsl:call-template>
         </xsl:element>
     </xsl:template>
+    
+    <xsl:template name="findSpecificNewSoundsProgramNoXML" 
+        match="programNo"
+        mode="findSpecificNewSoundsProgramNoXML">
+        <!-- Search for records with specific New Sounds Program ID 
+        (which should be unique) -->
+        
+        <xsl:param name="newSoundsEpisodeID" select="."/>
+        <xsl:param name="newSoundsEpisodeIDPadded" select="
+            format-number($newSoundsEpisodeID, '0000')"/>
+        <xsl:param name="additionalTextToSearch"/>
+        <xsl:param name="textToSearch">
+            <xsl:value-of select="$newSoundsEpisodeIDPadded"/>
+            <xsl:if test="$additionalTextToSearch">
+                <xsl:value-of select="concat('+', $additionalTextToSearch)"/>
+            </xsl:if>
+        </xsl:param>
+        <xsl:param name="additionalFieldsToSearch"/>
+        
+        <xsl:param name="isPartOf"/>
+        <xsl:param name="series" select="'New Sounds'"/>
+        <xsl:param name="subject"/>
+        <xsl:param name="genre"/>
+        <xsl:param name="contributor"/>
+        <xsl:param name="location"/>
+        <xsl:param name="coverage"/>
+        
+        <xsl:param name="searchString">
+            <xsl:call-template name="generateSearchString">
+                <xsl:with-param name="textToSearch" select="$textToSearch"/>
+                <xsl:with-param name="field1ToSearch" select="'identifier'"/>
+                <xsl:with-param name="field2ToSearch" select="$additionalFieldsToSearch"/>
+                
+                <xsl:with-param name="isPartOf" select="$isPartOf"/>
+                <xsl:with-param name="series" select="$series"/>
+                <xsl:with-param name="subject" select="$subject"/>
+                <xsl:with-param name="genre" select="$genre"/>
+                <xsl:with-param name="contributor" select="$contributor"/>
+                <xsl:with-param name="location" select="$location"/>
+                <xsl:with-param name="coverage" select="$coverage"/>
+            </xsl:call-template>
+        </xsl:param>
+        <xsl:param name="stopIfTooMany" as="xs:boolean" select="false()"/>
+        <xsl:param name="stopIfTooFew" as="xs:boolean" select="false()"/>
+        
+        <xsl:message select="
+            'Search for records ',
+            'with specific New Sounds Episode ID ',
+            string($newSoundsEpisodeIDPadded), 
+            ' (which should be unique)'"/>
+        
+        <!-- Initial cavafy search -->
+        <xsl:variable name="foundAssets">
+            <xsl:call-template name="findCavafyXMLs">
+                <xsl:with-param name="searchString" 
+                    select="$searchString"/>
+                <xsl:with-param name="minResults" select="1"/>
+                <xsl:with-param name="maxResults" select="20"/>
+            </xsl:call-template>
+        </xsl:variable>
+        
+        <xsl:message select="
+            'Found assets', $foundAssets"/>
+        
+        <xsl:variable name="matchingAssets">
+            <xsl:copy-of
+                select="
+                $foundAssets
+                /*:pbcoreCollection
+                /*:pbcoreDescriptionDocument
+                [*:pbcoreIdentifier[@source='New Sounds episode ID'] = $newSoundsEpisodeIDPadded]"
+            />
+        </xsl:variable>        
+        
+        <xsl:variable name="resultsCount"
+            select="count(
+            $matchingAssets
+            //*:pbcoreDescriptionDocument
+            )"/>
+        
+        <xsl:variable name="resultsMessage" select="
+            concat($resultsCount, ' matching assets ', 
+            'with New Sounds episode ID ' , $newSoundsEpisodeIDPadded,
+            ' using search string ', $searchString, ': '), 
+            $matchingAssets"/>
+        
+        <xsl:message select="$resultsMessage"/>
+        
+        <!-- Errors when not a single matching asset -->
+        <xsl:choose>
+            <xsl:when test="$resultsCount &lt; 1">
+                <xsl:element name="error">
+                    <xsl:attribute name="type" select="'no_matching_asset'"/>
+                    <xsl:attribute name="newSoundsEpisodeID" select="$newSoundsEpisodeIDPadded"/>
+                    <xsl:copy-of
+                        select="
+                        'ATTENTION!',
+                        $resultsMessage"
+                    />
+                </xsl:element>
+            </xsl:when>
+            <xsl:when test="$resultsCount &gt; 1">
+                <xsl:element name="error">
+                    <xsl:attribute name="type" select="'too_many__matching_assets'"/>
+                    <xsl:attribute name="newSoundsEpisodeID" select="$newSoundsEpisodeIDPadded"/>
+                    <xsl:copy-of
+                        select="
+                        'ATTENTION!',
+                        $resultsMessage"
+                    />
+                </xsl:element>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="$matchingAssets"/>                
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="pbcoreDescriptionDocument" mode="maxInstantiationID">
+        <xsl:param name="assetID" select="pbcoreIdentifier[@source = 'WNYC Archive Catalog']"/>
+        <xsl:param name="instantiationIDRegexPattern" select="concat('^', $assetID, '\.[0-9]+$')"/>
+        <xsl:param name="matchingInstantiationIDs">
+            <matchingInstantiationIDs>
+                <xsl:copy-of select="pbcoreInstantiation/instantiationIdentifier"/>
+            </matchingInstantiationIDs>
+        </xsl:param>
+        <xsl:param name="matchingInstantiationIdSuffixes">
+            <matchingInstantiationIDSuffixes>
+                <xsl:for-each select="$matchingInstantiationIDs/instantiationIdentifier">
+                    <instantiationIDSuffix>
+                        <xsl:value-of select="xs:integer(substring-after(., '.'))"/>
+                    </instantiationIDSuffix>
+                </xsl:for-each>                
+            </matchingInstantiationIDSuffixes>
+        </xsl:param>
+        <xsl:message select="'Find highes instantiation ID'"/>
+        <xsl:variable name="maxInstSuffix" select="
+            max($matchingInstantiationIdSuffixes/instantiationIDSuffix)"/>
+        <xsl:value-of select="$maxInstSuffix"/>
+        <xsl:message select="$maxInstSuffix"/>
+    </xsl:template>
+    
+    <xsl:template match="pb:pbcoreCollection" mode="importReady">
+        <!-- Get a collection ready for import into Cavafy -->
+        <xsl:copy>
+            <xsl:apply-templates select="
+                pb:pbcoreDescriptionDocument" mode="importReady"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="pb:pbcoreDescriptionDocument" mode="importReady">
+        <!-- Get an asset ready for import into Cavafy -->
+        <xsl:copy>
+            <xsl:copy-of select="comment()"/>
+            <!-- Copy asset level fields
+            except relation and instantiations-->
+            <xsl:copy-of
+                select="
+                *
+                [not(self::pb:pbcoreRelation)]
+                [not(self::pb:pbcoreInstantiation)]
+                "/>
+            <!-- Copy relation sans @ref,
+                    which somehow throws an error upon import-->
+            <xsl:apply-templates select="
+                pb:pbcoreRelation" mode="noAttributes"/>
+            <!-- Generate new instantiation section -->
+            <xsl:apply-templates select="pb:pbcoreInstantiation" mode="importReady"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template
+        match="
+        pb:pbcoreInstantiation" mode="importReady">
+        <!-- Get an instantiation ready for import into Cavafy -->
+        <xsl:copy>
+            <!-- Copy instantiation IDs except UUID and empty essence tracks -->
+            <xsl:copy-of
+                select="
+                *
+                [not(self::pb:instantiationIdentifier[@source = 'pbcore XML database UUID'])]
+                [not(self::pb:instantiationEssenceTrack[not(descendant::*)])]"
+            />
+        </xsl:copy>
+    </xsl:template>
+    
+    
 </xsl:stylesheet>

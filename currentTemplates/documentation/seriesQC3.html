@@ -10,10 +10,17 @@
         var parametersBoxes= new Array('prs_T_generateErrorLogS_errorLog.xsl');
 
         
-        var usedByBoxes= new Array('uB_T_generateErrorLogS_errorLog.xsl');
+        var usedByBoxes= new Array('uB_T_generateErrorLogS_errorLog.xsl', 
+				'uB_V_baseURIS_errorLog.xsl', 
+				'uB_V_parsedBaseURIS_errorLog.xsl', 
+				'uB_V_docFilenameS_errorLog.xsl', 
+				'uB_V_docFilenameNoExtensionS_errorLog.xsl', 
+				'uB_V_baseFolderS_errorLog.xsl', 
+				'uB_V_logFolderS_errorLog.xsl', 
+				'uB_V_currentTimeS_errorLog.xsl', 
+				'uB_O_logS_errorLog.xsl');
 
-        var docBoxes= new Array('dS_errorLog.xsl');
-
+        
         var sourceBoxes= new Array('src_T_generateErrorLogS_errorLog.xsl', 
 				'src_V_baseURIS_errorLog.xsl', 
 				'src_V_parsedBaseURIS_errorLog.xsl', 
@@ -26,24 +33,8 @@
 				'src_V_archiveAuthorsS_errorLog.xsl', 
 				'src_O_logS_errorLog.xsl');
 
-        var supersedesBoxes= new Array('sps_V_baseURIS_errorLog.xsl', 
-				'sps_V_parsedBaseURIS_errorLog.xsl', 
-				'sps_V_docFilenameS_errorLog.xsl', 
-				'sps_V_docFilenameNoExtensionS_errorLog.xsl', 
-				'sps_V_baseFolderS_errorLog.xsl', 
-				'sps_V_logFolderS_errorLog.xsl', 
-				'sps_V_currentTimeS_errorLog.xsl');
-
-        var overridingBoxes= new Array('ovr_V_baseURIS_errorLog.xsl', 
-				'ovr_V_parsedBaseURIS_errorLog.xsl', 
-				'ovr_V_docFilenameS_errorLog.xsl', 
-				'ovr_V_docFilenameNoExtensionS_errorLog.xsl', 
-				'ovr_V_baseFolderS_errorLog.xsl', 
-				'ovr_V_logFolderS_errorLog.xsl', 
-				'ovr_V_currentTimeS_errorLog.xsl', 
-				'ovr_V_pbcorePhysicalInstantiationsS_errorLog.xsl', 
-				'ovr_V_archiveAuthorsS_errorLog.xsl');
-
+        
+        
         var referencesBoxes= new Array('refs_T_generateErrorLogS_errorLog.xsl', 
 				'refs_V_parsedBaseURIS_errorLog.xsl', 
 				'refs_V_docFilenameS_errorLog.xsl', 
@@ -351,10 +342,6 @@
                   <h3>Showing:</h3>
                   <table>
                      <tr>
-                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, docBoxes);" class="control" /></span><span class="globalControlName">Documentation
-                              </span></td>
-                     </tr>
-                     <tr>
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, parametersBoxes);" class="control" /></span><span class="globalControlName">Parameters </span></td>
                      </tr>
                      <tr>
@@ -362,12 +349,6 @@
                      </tr>
                      <tr>
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, referencesBoxes);" class="control" /></span><span class="globalControlName">References </span></td>
-                     </tr>
-                     <tr>
-                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, supersedesBoxes);" class="control" /></span><span class="globalControlName">Supersedes </span></td>
-                     </tr>
-                     <tr>
-                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, overridingBoxes);" class="control" /></span><span class="globalControlName">Overriding </span></td>
                      </tr>
                      <tr>
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, importedFromBoxes);" class="control" /></span><span class="globalControlName">Imported from
@@ -402,19 +383,6 @@
                   <tbody>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Documentation</div>
-                           <div class="flR"><input id="bt_dS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_errorLog.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="dS_errorLog.xsl" style="display:block">
-                              <div>
-                                 <h3>Description</h3><pre> Accept an error log in xml
-and output an html error doc </pre></div>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
                            <div class="flL">Imported from</div>
                            <div class="flR"><input id="bt_ipF_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ipF_errorLog.xsl');" class="control" /></div>
                         </td>
@@ -424,7 +392,7 @@ and output an html error doc </pre></div>
                                  <tr>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">masterRouter.xsl</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC1.html#cavafyStrictQC.xsl" target="_self" title="No namespace" onclick="updPT('cavafyStrictQC.xsl')">cavafyStrictQC.xsl</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -475,7 +443,7 @@ and output an html error doc </pre></div>
                                     <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#T_exiftoolS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')"><span class="nRf">exiftool</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC0.html#M_seriesS_seriesQC.xsl" target="_self" title="No namespace" onclick="updPT('seriesQC.xsl')"><span class="mRf">series</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -495,9 +463,9 @@ and output an html error doc </pre></div>
                                     <td class="fCol">Variables</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_currentTimeS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">currentTime</a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_docFilenameNoExtensionS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">docFilenameNoExtension</a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_logFolderS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">logFolder</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC3.html#V_currentTimeS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">currentTime</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC3.html#V_docFilenameNoExtensionS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">docFilenameNoExtension</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC3.html#V_logFolderS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">logFolder</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -505,7 +473,7 @@ and output an html error doc </pre></div>
                                     <td class="fCol">Output</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#O_logS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">log</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC3.html#O_logS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">log</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -564,7 +532,7 @@ and output an html error doc </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>29</td>
+                        <td>4</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -731,37 +699,18 @@ and output an html error doc </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Supersedes</div>
-                           <div class="flR"><input id="bt_sps_V_baseURIS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_baseURIS_errorLog.xsl');" class="control" /></div>
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_V_baseURIS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_V_baseURIS_errorLog.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="sps_V_baseURIS_errorLog.xsl" style="display:block">
+                           <div id="uB_V_baseURIS_errorLog.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
-                                    <td class="fCol">Parameter</td>
+                                    <td class="fCol">Variables</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter4.html#P_baseURIS_Exif2Slack.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Slack.xsl')">baseURI</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_V_baseURIS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_baseURIS_errorLog.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="ovr_V_baseURIS_errorLog.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Variable</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_baseURIS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">baseURI</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC3.html#V_baseFolderS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">baseFolder</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC3.html#V_parsedBaseURIS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">parsedBaseURI</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -817,6 +766,26 @@ and output an html error doc </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_V_parsedBaseURIS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_V_parsedBaseURIS_errorLog.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_V_parsedBaseURIS_errorLog.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Variable</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="seriesQC3.html#V_docFilenameS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">docFilename</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
                            <div class="flL">References</div>
                            <div class="flR"><input id="bt_refs_V_parsedBaseURIS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_V_parsedBaseURIS_errorLog.xsl');" class="control" /></div>
                         </td>
@@ -827,47 +796,7 @@ and output an html error doc </pre></div>
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_baseURIS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">baseURI</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Supersedes</div>
-                           <div class="flR"><input id="bt_sps_V_parsedBaseURIS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_parsedBaseURIS_errorLog.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="sps_V_parsedBaseURIS_errorLog.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Parameter</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter4.html#P_parsedBaseURIS_Exif2Slack.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Slack.xsl')">parsedBaseURI</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_V_parsedBaseURIS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_parsedBaseURIS_errorLog.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="ovr_V_parsedBaseURIS_errorLog.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Variable</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_parsedBaseURIS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">parsedBaseURI</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC3.html#V_baseURIS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">baseURI</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -923,6 +852,27 @@ and output an html error doc </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_V_docFilenameS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_V_docFilenameS_errorLog.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_V_docFilenameS_errorLog.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Variables</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="seriesQC3.html#V_baseFolderS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">baseFolder</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC3.html#V_docFilenameNoExtensionS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">docFilenameNoExtension</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
                            <div class="flL">References</div>
                            <div class="flR"><input id="bt_refs_V_docFilenameS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_V_docFilenameS_errorLog.xsl');" class="control" /></div>
                         </td>
@@ -933,47 +883,7 @@ and output an html error doc </pre></div>
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_parsedBaseURIS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">parsedBaseURI</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Supersedes</div>
-                           <div class="flR"><input id="bt_sps_V_docFilenameS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_docFilenameS_errorLog.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="sps_V_docFilenameS_errorLog.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Parameter</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter4.html#P_docFilenameS_Exif2Slack.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Slack.xsl')">docFilename</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_V_docFilenameS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_docFilenameS_errorLog.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="ovr_V_docFilenameS_errorLog.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Variable</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_docFilenameS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">docFilename</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC3.html#V_parsedBaseURIS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">parsedBaseURI</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1029,6 +939,26 @@ and output an html error doc </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_V_docFilenameNoExtensionS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_V_docFilenameNoExtensionS_errorLog.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_V_docFilenameNoExtensionS_errorLog.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Template</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="seriesQC3.html#T_generateErrorLogS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')"><span class="nRf">generateErrorLog</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
                            <div class="flL">References</div>
                            <div class="flR"><input id="bt_refs_V_docFilenameNoExtensionS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_V_docFilenameNoExtensionS_errorLog.xsl');" class="control" /></div>
                         </td>
@@ -1039,47 +969,7 @@ and output an html error doc </pre></div>
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_docFilenameS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">docFilename</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Supersedes</div>
-                           <div class="flR"><input id="bt_sps_V_docFilenameNoExtensionS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_docFilenameNoExtensionS_errorLog.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="sps_V_docFilenameNoExtensionS_errorLog.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Parameter</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter4.html#P_docFilenameNoExtensionS_Exif2Slack.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Slack.xsl')">docFilenameNoExtension</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_V_docFilenameNoExtensionS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_docFilenameNoExtensionS_errorLog.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="ovr_V_docFilenameNoExtensionS_errorLog.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Variable</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_docFilenameNoExtensionS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">docFilenameNoExtension</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC3.html#V_docFilenameS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">docFilename</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1135,6 +1025,26 @@ and output an html error doc </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_V_baseFolderS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_V_baseFolderS_errorLog.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_V_baseFolderS_errorLog.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Variable</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="seriesQC3.html#V_logFolderS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">logFolder</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
                            <div class="flL">References</div>
                            <div class="flR"><input id="bt_refs_V_baseFolderS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_V_baseFolderS_errorLog.xsl');" class="control" /></div>
                         </td>
@@ -1145,48 +1055,8 @@ and output an html error doc </pre></div>
                                     <td class="fCol">Variables</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_baseURIS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">baseURI</a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_docFilenameS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">docFilename</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Supersedes</div>
-                           <div class="flR"><input id="bt_sps_V_baseFolderS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_baseFolderS_errorLog.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="sps_V_baseFolderS_errorLog.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Parameter</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter4.html#P_baseFolderS_Exif2Slack.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Slack.xsl')">baseFolder</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_V_baseFolderS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_baseFolderS_errorLog.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="ovr_V_baseFolderS_errorLog.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Variable</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_baseFolderS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">baseFolder</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC3.html#V_baseURIS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">baseURI</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC3.html#V_docFilenameS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">docFilename</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1242,6 +1112,26 @@ and output an html error doc </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_V_logFolderS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_V_logFolderS_errorLog.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_V_logFolderS_errorLog.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Template</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="seriesQC3.html#T_generateErrorLogS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')"><span class="nRf">generateErrorLog</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
                            <div class="flL">References</div>
                            <div class="flR"><input id="bt_refs_V_logFolderS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_V_logFolderS_errorLog.xsl');" class="control" /></div>
                         </td>
@@ -1252,47 +1142,7 @@ and output an html error doc </pre></div>
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_baseFolderS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">baseFolder</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Supersedes</div>
-                           <div class="flR"><input id="bt_sps_V_logFolderS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_logFolderS_errorLog.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="sps_V_logFolderS_errorLog.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Parameter</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter4.html#P_logFolderS_Exif2Slack.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Slack.xsl')">logFolder</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_V_logFolderS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_logFolderS_errorLog.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="ovr_V_logFolderS_errorLog.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Variable</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_logFolderS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">logFolder</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC3.html#V_baseFolderS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">baseFolder</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1348,37 +1198,17 @@ and output an html error doc </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Supersedes</div>
-                           <div class="flR"><input id="bt_sps_V_currentTimeS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_currentTimeS_errorLog.xsl');" class="control" /></div>
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_V_currentTimeS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_V_currentTimeS_errorLog.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="sps_V_currentTimeS_errorLog.xsl" style="display:block">
+                           <div id="uB_V_currentTimeS_errorLog.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
-                                    <td class="fCol">Parameter</td>
+                                    <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter4.html#P_currentTimeS_Exif2Slack.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Slack.xsl')">currentTime</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_V_currentTimeS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_currentTimeS_errorLog.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="ovr_V_currentTimeS_errorLog.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Variable</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_currentTimeS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">currentTime</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC3.html#T_generateErrorLogS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')"><span class="nRf">generateErrorLog</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1434,26 +1264,6 @@ and output an html error doc </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_V_pbcorePhysicalInstantiationsS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_pbcorePhysicalInstantiationsS_errorLog.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="ovr_V_pbcorePhysicalInstantiationsS_errorLog.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Variable</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_pbcorePhysicalInstantiationsS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">pbcorePhysicalInstantiations</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
                            <div class="flL">Source</div>
                            <div class="flR"><input id="bt_src_V_pbcorePhysicalInstantiationsS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_V_pbcorePhysicalInstantiationsS_errorLog.xsl');" class="control" /></div>
                         </td>
@@ -1500,26 +1310,6 @@ and output an html error doc </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_V_archiveAuthorsS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_archiveAuthorsS_errorLog.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="ovr_V_archiveAuthorsS_errorLog.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Variable</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_archiveAuthorsS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">archiveAuthors</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
                            <div class="flL">Source</div>
                            <div class="flR"><input id="bt_src_V_archiveAuthorsS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_V_archiveAuthorsS_errorLog.xsl');" class="control" /></div>
                         </td>
@@ -1562,6 +1352,26 @@ and output an html error doc </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_O_logS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_O_logS_errorLog.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_O_logS_errorLog.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Template</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="seriesQC3.html#T_generateErrorLogS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')"><span class="nRf">generateErrorLog</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
                            <div class="flL">Output properties</div>
                            <div class="flR"><input id="bt_o_" type="image" src="img/btM.gif" value="-" onclick="switchState('o_');" class="control" /></div>
                         </td>
@@ -1575,7 +1385,7 @@ and output an html error doc </pre></div>
                                     </tr>
                                  </thead>
                                  <tr>
-                                    <td></td>
+                                    <td>html</td>
                                     <td>yes</td>
                                  </tr>
                               </table>

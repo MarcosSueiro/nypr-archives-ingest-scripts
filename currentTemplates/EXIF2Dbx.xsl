@@ -125,18 +125,35 @@ into an xml .DBX file suitable for ingest into D.A.V.I.D. -->
         <xsl:variable name="originalMedium" select="normalize-space(RIFF:Medium)"/>
         <xsl:variable name="theme">
             <xsl:choose>
-                <xsl:when test="contains($filename, ' WEB EDIT')">
-                    <xsl:value-of select="concat('archive_import', $assetID)"/>
-                </xsl:when>
                 <xsl:when test="contains($freeText, 'ACLIP')">
                     <xsl:value-of
                         select="concat('archives', $instantiationDateMMDDYY, '_clip_from_', $assetID, '_', substring-after($instantiationID, '.'))"
                     />
                 </xsl:when>
-                <xsl:when test="contains($freeText, 'SEGMENT')">
+                <xsl:when
+                    test="
+                        matches(
+                        $freeText, $segmentFlags
+                        )
+                        and contains($freeText, 'WEB EDIT')">
+                    <xsl:variable name="matchedSegmentFlag">
+                        <xsl:value-of
+                            select="
+                                analyze-string($freeText, $segmentFlags)
+                                /fn:match
+                                "/>
+                    </xsl:variable>
                     <xsl:value-of
-                        select="concat('archives', $instantiationDateMMDDYY, '_segment_from_', $assetID, '_', substring-after($instantiationID, '.'))"
+                        select="
+                            concat(
+                            'archives',
+                            $instantiationDateMMDDYY, '_',
+                            lower-case($matchedSegmentFlag),
+                            '_from_', $assetID, '_', $instantiationSuffix)"
                     />
+                </xsl:when>
+                <xsl:when test="contains($filename, ' WEB EDIT')">
+                    <xsl:value-of select="concat('archive_import', $assetID)"/>
                 </xsl:when>
             </xsl:choose>
         </xsl:variable>

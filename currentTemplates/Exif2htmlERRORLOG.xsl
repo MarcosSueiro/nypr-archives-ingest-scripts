@@ -124,9 +124,9 @@
                 <xsl:variable name="parsedPersons" select="$parsedArtists|$parsedCommissioned"/>
                 <xsl:variable name="distinctPersons" select="distinct-values($parsedPersons/normalize-space(.))"/>
                 <xsl:variable name="distinctNonDefaultPersons" select="$distinctPersons
-                    [. ne 'http://id.loc.gov/authorities/names/n81047053']
-                    [. ne 'http://id.loc.gov/authorities/names/no98091861']
-                    [. ne 'http://id.loc.gov/authorities/names/n85268774']
+                    [not(contains(., 'id.loc.gov/authorities/names/n81047053'))]
+                    [not(contains(., 'id.loc.gov/authorities/names/no98091861'))]
+                    [not(contains(., 'id.loc.gov/authorities/names/n85268774'))]
                     "/> <!-- WNYC, WQXR, MUNI are default and need not be listed -->
                 
                                 
@@ -169,7 +169,7 @@
 
                 <xsl:variable name="validKeywords"
                     select="analyze-string(RIFF:Keywords[contains(., $validatingSubjectString)], ';')"/>
-                <xsl:variable name="parsedKeywords" select="distinct-values($validKeywords/fn:non-match/normalize-space(.)[normalize-space(.) ne 'http://id.loc.gov/authorities/subjects/sh85061212'])"/>                
+                <xsl:variable name="parsedKeywords" select="distinct-values($validKeywords/fn:non-match/normalize-space(.)[not(contains(., 'id.loc.gov/authorities/subjects/sh85061212'))])"/>                
                 <xsl:if
                     test="normalize-space($parsedKeywords[1]) ne ''">
                     <div

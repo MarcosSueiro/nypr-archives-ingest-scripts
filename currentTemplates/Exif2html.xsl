@@ -202,9 +202,9 @@
                     )"/>
                 <xsl:variable name="distinctNonDefaultPersons" select="
                     $distinctPersons
-                    [. ne 'http://id.loc.gov/authorities/names/n81047053']
-                    [. ne 'http://id.loc.gov/authorities/names/no98091861']
-                    [. ne 'http://id.loc.gov/authorities/names/n85268774']
+                    [not (matches(., 'id.loc.gov/authorities/names/n81047053'))]
+                    [not (matches(., 'id.loc.gov/authorities/names/no98091861'))]
+                    [not (matches(., 'id.loc.gov/authorities/names/n85268774'))]
                     "/> <!-- WNYC, WQXR, MUNI are default and need not be listed -->
                                 
                 <xsl:if
@@ -287,8 +287,8 @@
                     $validKeywords
                     /fn:non-match
                     /normalize-space(.)
-                    [normalize-space(.) ne 
-                    'http://id.loc.gov/authorities/subjects/sh85061212']
+                    [not (matches(.,  
+                    'id.loc.gov/authorities/subjects/sh85061212'))]
                     )"/><!-- 'History' is a deprecated default term -->
                 <xsl:if
                     test="normalize-space($parsedKeywords[1]) ne ''">

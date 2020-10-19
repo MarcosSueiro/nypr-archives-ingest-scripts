@@ -18,6 +18,7 @@
 				'uB_P_todaysDateS_Exif2Slack.xsl', 
 				'uB_P_todaysDateFormattedS_Exif2Slack.xsl', 
 				'uB_P_validatingSubjectStringS_Exif2Slack.xsl', 
+				'uB_P_webhookFileLocationS_Exif2Slack.xsl', 
 				'uB_P_webhookURLMarcosS_Exif2Slack.xsl', 
 				'uB_P_webhookURLArchivesNewlyAddedS_Exif2Slack.xsl', 
 				'uB_P_twentyFiveYearResultS_Exif2Slack.xsl', 
@@ -29,7 +30,7 @@
 				'dS_O_S_Exif2Slack.xsl');
 
         var sourceBoxes= new Array('src_T_headerBlockS_Exif2Slack.xsl', 
-				'src_M_rdfRDFS_Exif2Slack.xsl', 
+				'src_M_rdfRDFM_slackS_Exif2Slack.xsl', 
 				'src_M_rdfRDFM_mapS_Exif2Slack.xsl', 
 				'src_T_generateCurlS_Exif2Slack.xsl', 
 				'src_T_breakItUpS_Exif2Slack.xsl', 
@@ -37,6 +38,7 @@
 				'src_P_todaysDateFormattedS_Exif2Slack.xsl', 
 				'src_P_publishDateS_Exif2Slack.xsl', 
 				'src_P_validatingSubjectStringS_Exif2Slack.xsl', 
+				'src_P_webhookFileLocationS_Exif2Slack.xsl', 
 				'src_P_webhookURLMarcosS_Exif2Slack.xsl', 
 				'src_P_webhookURLArchivesNewlyAddedS_Exif2Slack.xsl', 
 				'src_P_baseURIS_Exif2Slack.xsl', 
@@ -67,9 +69,12 @@
 
         var referencesBoxes= new Array('refs_T_headerBlockS_Exif2Slack.xsl', 
 				'refs_M_rdfRDFM_mapS_Exif2Slack.xsl', 
+				'refs_T_generateCurlS_Exif2Slack.xsl', 
 				'refs_T_breakItUpS_Exif2Slack.xsl', 
 				'refs_P_todaysDateFormattedS_Exif2Slack.xsl', 
 				'refs_P_publishDateS_Exif2Slack.xsl', 
+				'refs_P_webhookURLMarcosS_Exif2Slack.xsl', 
+				'refs_P_webhookURLArchivesNewlyAddedS_Exif2Slack.xsl', 
 				'refs_P_parsedBaseURIS_Exif2Slack.xsl', 
 				'refs_P_docFilenameS_Exif2Slack.xsl', 
 				'refs_P_docFilenameNoExtensionS_Exif2Slack.xsl', 
@@ -458,7 +463,7 @@ of 40 items max
                                  <tr>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">cavafySearch.xsl</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter19.html#cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">cavafySearch.xsl</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -620,7 +625,7 @@ of 40 items max
         </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT"> :radio:</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
 </span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'       ',                         $noOfAssets, 'assets',                          'from', $seriesIncluded, 'series'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'       ',                         $noOfAssets, 'assets',                          'from series ', $seriesIncluded"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tEl">&lt;/fn:string&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/fn:map&gt;</span><span class="tI">
@@ -642,8 +647,8 @@ of 40 items max
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="M_rdfRDFS_Exif2Slack.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">rdf:RDF</span></div>
+      </table><a id="M_rdfRDFM_slackS_Exif2Slack.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">rdf:RDF</span><span class="titleTemplateMode">slack</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -665,7 +670,7 @@ of 40 items max
                      </tr>
                      <tr>
                         <td class="fCol">Mode</td>
-                        <td>#default</td>
+                        <td>slack</td>
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
@@ -674,13 +679,13 @@ of 40 items max
                      <tr>
                         <td class="fCol">
                            <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_M_rdfRDFS_Exif2Slack.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_rdfRDFS_Exif2Slack.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_src_M_rdfRDFM_slackS_Exif2Slack.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_rdfRDFM_slackS_Exif2Slack.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_M_rdfRDFS_Exif2Slack.xsl" style="display:block">
+                           <div id="src_M_rdfRDFM_slackS_Exif2Slack.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:RDF"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:RDF"</span><span class="tAN"> mode=</span><span class="tAV">"slack"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Match top-level element 
         and group by pbcore assets, not files--&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"uniqueAssets"</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -886,6 +891,26 @@ of 40 items max
                      </tr>
                      <tr>
                         <td class="fCol">
+                           <div class="flL">References</div>
+                           <div class="flR"><input id="bt_refs_T_generateCurlS_Exif2Slack.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_T_generateCurlS_Exif2Slack.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="refs_T_generateCurlS_Exif2Slack.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Parameter</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter4.html#P_webhookURLMarcosS_Exif2Slack.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Slack.xsl')">webhookURLMarcos</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
                            <div class="flL">Parameters</div>
                            <div class="flR"><input id="bt_prs_T_generateCurlS_Exif2Slack.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_T_generateCurlS_Exif2Slack.xsl');" class="control" /></div>
                         </td>
@@ -912,7 +937,7 @@ of 40 items max
                                  <tr>
                                     <td class="fCol">webhookURL</td>
                                     <td>No namespace</td>
-                                    <td>'https://hooks.slack.com/services/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'</td>
+                                    <td>$webhookURLMarcos</td>
                                  </tr>
                               </table>
                            </div>
@@ -938,7 +963,7 @@ of 40 items max
         not as a file--&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"filenameSlack"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"filenameSlackRaw"</span><span class="tAN"> select=</span><span class="tAV">"replace(fn:substring-after($filenameSlack, 'file:/'), '%20', ' ')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"webhookURL"</span><span class="tAN"> select=</span><span class="tAV">"'https://hooks.slack.com/services/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'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"webhookURL"</span><span class="tAN"> select=</span><span class="tAV">"$webhookURLMarcos"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
 </span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">curl -X POST -H </span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
@@ -946,6 +971,8 @@ of 40 items max
   </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">-d @</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"             concat(             '"',              $filenameSlackRaw,              '" ')"</span><span class="tAN"> disable-output-escaping=</span><span class="tAV">"yes"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$webhookURL"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
 </span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
                                  </tr>
                               </table>
@@ -1104,25 +1131,25 @@ of 40 items max
         and generate Slack json documents --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"firstOccurrence"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tAN"> as=</span><span class="tAV">"xs:integer"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"maxOccurrences"</span><span class="tAN"> as=</span><span class="tAV">"xs:integer"</span><span class="tAN"> select=</span><span class="tAV">"40"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"lastPosition"</span><span class="tAN"> select=</span><span class="tAV">"count(*[position() ge $firstOccurrence])"</span><span class="tAN"> as=</span><span class="tAV">"xs:integer"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"lastPosition"</span><span class="tAN"> select=</span><span class="tAV">"             count(             *[position() ge $firstOccurrence]             )"</span><span class="tAN"> as=</span><span class="tAV">"xs:integer"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
                                                     </span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"'last position: ', $lastPosition, 'maxOcccurrences: ', $maxOccurrences"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"             'last position: ', $lastPosition,              'maxOcccurrences: ', $maxOccurrences"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$lastPosition le $maxOccurrences"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"filenameSlack"</span><span class="tAN"> select=</span><span class="tAV">"concat(substring-before($baseURI, '.'), '_ForSlack', format-date(current-date(), '[Y0001][M01][D01]'), '_Assets', $firstOccurrence, '-', $firstOccurrence + $lastPosition - 1, '.json')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"filenameSlack"</span><span class="tAN"> select=</span><span class="tAV">"                     concat(                     substring-before($baseURI, '.'),                      '_ForSlack',                      format-date(                     current-date(), '[Y0001][M01][D01]'                     ),                      '_Assets',                      $firstOccurrence,                      '-',                      $firstOccurrence + $lastPosition - 1,                      '.json'                     )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
    </span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">marcosCURL</span><span class="tXSLEl">&lt;/xsl:comment&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"generateCurl"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"filenameSlack"</span><span class="tAN"> select=</span><span class="tAV">"$filenameSlack"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"filenameSlack"</span><span class="tAN"> select=</span><span class="tAV">"                         $filenameSlack"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"webhookURL"</span><span class="tAN"> select=</span><span class="tAV">"$webhookURLMarcos"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
 </span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">archivesNewlyAddedCURL</span><span class="tXSLEl">&lt;/xsl:comment&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"generateCurl"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"filenameSlack"</span><span class="tAN"> select=</span><span class="tAV">"$filenameSlack"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"filenameSlack"</span><span class="tAN"> select=</span><span class="tAV">"                         $filenameSlack"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"webhookURL"</span><span class="tAN"> select=</span><span class="tAV">"$webhookURLArchivesNewlyAdded"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:result-document</span><span class="tAN"> href=</span><span class="tAV">"{$filenameSlack}"</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -1132,10 +1159,10 @@ of 40 items max
               </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"headerBlock"</span><span class="tXSLEl">&gt;</span><span class="tI">
                 </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"noOfAssets"</span><span class="tAN"> select=</span><span class="tAV">"$lastPosition"</span><span class="tXSLEl">/&gt;</span><span class="tI">
                 </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"seriesIncluded"</span><span class="tXSLEl">&gt;</span><span class="tI">
-                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                             distinct-values(rdf:Description/RIFF:Product)"</span><span class="tAN"> separator=</span><span class="tAV">", "</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                             distinct-values(                                             rdf:Description                                             [position() ge $firstOccurrence]                                              [position() le 40]                                             /RIFF:Product                                             )"</span><span class="tAN"> separator=</span><span class="tAV">", "</span><span class="tXSLEl">/&gt;</span><span class="tI">
                 </span><span class="tXSLEl">&lt;/xsl:with-param&gt;</span><span class="tI">
               </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:for-each-group</span><span class="tAN"> select=</span><span class="tAV">"rdf:Description[position() ge $firstOccurrence]"</span><span class="tAN"> group-by=</span><span class="tAV">"RIFF:Source"</span><span class="tXSLEl">&gt;</span><span class="tI">
+              </span><span class="tXSLEl">&lt;xsl:for-each-group</span><span class="tAN"> select=</span><span class="tAV">"                                     rdf:Description                                     [position() ge $firstOccurrence]"</span><span class="tAN"> group-by=</span><span class="tAV">"                                     RIFF:Source"</span><span class="tXSLEl">&gt;</span><span class="tI">
                 </span><span class="tEl">&lt;fn:map</span><span class="tEl">&gt;</span><span class="tI">
                   </span><span class="tEl">&lt;fn:string</span><span class="tAN"> key=</span><span class="tAV">"type"</span><span class="tEl">&gt;</span><span class="tT">section</span><span class="tEl">&lt;/fn:string&gt;</span><span class="tI">
                   </span><span class="tEl">&lt;fn:map</span><span class="tAN"> key=</span><span class="tAV">"text"</span><span class="tEl">&gt;</span><span class="tI">
@@ -1148,8 +1175,6 @@ of 40 items max
               </span><span class="tXSLEl">&lt;/xsl:for-each-group&gt;</span><span class="tI">
             </span><span class="tEl">&lt;/fn:array&gt;</span><span class="tI">
           </span><span class="tEl">&lt;/fn:map&gt;</span><span class="tI">
-          </span><span class="tC">&lt;!--        &lt;xsl:text disable-output-escaping="yes"&gt;" 
-                https://hooks.slack.com/services/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&lt;/xsl:text&gt;--&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"xml-to-json($xmlOutput, map{'indent':true()})"</span><span class="tAN"> disable-output-escaping=</span><span class="tAV">"yes"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:result-document&gt;</span><span class="tI">
@@ -1178,7 +1203,7 @@ of 40 items max
               </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"headerBlock"</span><span class="tXSLEl">&gt;</span><span class="tI">
                 </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"noOfAssets"</span><span class="tAN"> select=</span><span class="tAV">"$maxOccurrences"</span><span class="tXSLEl">/&gt;</span><span class="tI">
                 </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"seriesIncluded"</span><span class="tXSLEl">&gt;</span><span class="tI">
-                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                             distinct-values(rdf:Description/RIFF:Product)"</span><span class="tAN"> separator=</span><span class="tAV">", "</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                             distinct-values(                                             rdf:Description                                             [position() ge $firstOccurrence]                                              [position() le 40]                                             /RIFF:Product                                             )"</span><span class="tAN"> separator=</span><span class="tAV">", "</span><span class="tXSLEl">/&gt;</span><span class="tI">
                 </span><span class="tXSLEl">&lt;/xsl:with-param&gt;</span><span class="tI">
               </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
               </span><span class="tXSLEl">&lt;xsl:for-each-group</span><span class="tAN"> select=</span><span class="tAV">"rdf:Description[position() ge $firstOccurrence and position() lt $firstOccurrence + $maxOccurrences]"</span><span class="tAN"> group-by=</span><span class="tAV">"RIFF:Source"</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -1274,7 +1299,7 @@ of 40 items max
                                     <td class="fCol">Parameter</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#P_todaysDateS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">todaysDate</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter19.html#P_todaysDateS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">todaysDate</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1567,6 +1592,73 @@ of 40 items max
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
+      </table><a id="P_webhookFileLocationS_Exif2Slack.xsl"></a><div class="cmpT">Parameter
+         <span class="qname">webhookFileLocation</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Select</td>
+                        <td>concat(         'file:/T:/02%20CATALOGING/Instantiation%20uploads/',          'InstantiationUploadTEMPLATES/slackWebhooks.xml')</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_P_webhookFileLocationS_Exif2Slack.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_P_webhookFileLocationS_Exif2Slack.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_P_webhookFileLocationS_Exif2Slack.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Parameters</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter4.html#P_webhookURLArchivesNewlyAddedS_Exif2Slack.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Slack.xsl')">webhookURLArchivesNewlyAdded</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter4.html#P_webhookURLMarcosS_Exif2Slack.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Slack.xsl')">webhookURLMarcos</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_P_webhookFileLocationS_Exif2Slack.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_P_webhookFileLocationS_Exif2Slack.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_P_webhookFileLocationS_Exif2Slack.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"webhookFileLocation"</span><span class="tAN"> select=</span><span class="tAV">"concat(         'file:/T:/02%20CATALOGING/Instantiation%20uploads/',          'InstantiationUploadTEMPLATES/slackWebhooks.xml')"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
       </table><a id="P_webhookURLMarcosS_Exif2Slack.xsl"></a><div class="cmpT">Parameter
          <span class="qname">webhookURLMarcos</span></div>
       <table class="rt">
@@ -1585,10 +1677,6 @@ of 40 items max
                         <td>No namespace</td>
                      </tr>
                      <tr>
-                        <td class="fCol">Select</td>
-                        <td>         'https://hooks.slack.com/services/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'</td>
-                     </tr>
-                     <tr>
                         <td class="fCol">
                            <div class="flL">Used by</div>
                            <div class="flR"><input id="bt_uB_P_webhookURLMarcosS_Exif2Slack.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_P_webhookURLMarcosS_Exif2Slack.xsl');" class="control" /></div>
@@ -1597,10 +1685,31 @@ of 40 items max
                            <div id="uB_P_webhookURLMarcosS_Exif2Slack.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
-                                    <td class="fCol">Template</td>
+                                    <td class="fCol">Templates</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter4.html#T_breakItUpS_Exif2Slack.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Slack.xsl')"><span class="nRf">breakItUp</span></a></div>
+                                          <div class="refItemBlock"><a href="masterRouter4.html#T_breakItUpS_Exif2Slack.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Slack.xsl')"><span class="nRf">breakItUp</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter4.html#T_generateCurlS_Exif2Slack.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Slack.xsl')"><span class="nRf">generateCurl</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">References</div>
+                           <div class="flR"><input id="bt_refs_P_webhookURLMarcosS_Exif2Slack.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_P_webhookURLMarcosS_Exif2Slack.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="refs_P_webhookURLMarcosS_Exif2Slack.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Parameter</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter4.html#P_webhookFileLocationS_Exif2Slack.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Slack.xsl')">webhookFileLocation</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1617,7 +1726,9 @@ of 40 items max
                            <div id="src_P_webhookURLMarcosS_Exif2Slack.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"webhookURLMarcos"</span><span class="tAN"> select=</span><span class="tAV">"         'https://hooks.slack.com/services/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'"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"webhookURLMarcos"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"             doc($webhookFileLocation)             /slackWebhooks/marcosWebhook"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:param&gt;</span></pre></td>
                                  </tr>
                               </table>
                            </div>
@@ -1651,10 +1762,6 @@ of 40 items max
                         <td>No namespace</td>
                      </tr>
                      <tr>
-                        <td class="fCol">Select</td>
-                        <td>         'https://hooks.slack.com/services/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'</td>
-                     </tr>
-                     <tr>
                         <td class="fCol">
                            <div class="flL">Used by</div>
                            <div class="flR"><input id="bt_uB_P_webhookURLArchivesNewlyAddedS_Exif2Slack.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_P_webhookURLArchivesNewlyAddedS_Exif2Slack.xsl');" class="control" /></div>
@@ -1676,6 +1783,26 @@ of 40 items max
                      </tr>
                      <tr>
                         <td class="fCol">
+                           <div class="flL">References</div>
+                           <div class="flR"><input id="bt_refs_P_webhookURLArchivesNewlyAddedS_Exif2Slack.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_P_webhookURLArchivesNewlyAddedS_Exif2Slack.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="refs_P_webhookURLArchivesNewlyAddedS_Exif2Slack.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Parameter</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter4.html#P_webhookFileLocationS_Exif2Slack.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Slack.xsl')">webhookFileLocation</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
                            <div class="flL">Source</div>
                            <div class="flR"><input id="bt_src_P_webhookURLArchivesNewlyAddedS_Exif2Slack.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_P_webhookURLArchivesNewlyAddedS_Exif2Slack.xsl');" class="control" /></div>
                         </td>
@@ -1683,7 +1810,9 @@ of 40 items max
                            <div id="src_P_webhookURLArchivesNewlyAddedS_Exif2Slack.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"webhookURLArchivesNewlyAdded"</span><span class="tAN"> select=</span><span class="tAV">"         'https://hooks.slack.com/services/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'"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"webhookURLArchivesNewlyAdded"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"             doc($webhookFileLocation)             /slackWebhooks/archivesNewlyAddedWebhook"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:param&gt;</span></pre></td>
                                  </tr>
                               </table>
                            </div>
@@ -1732,7 +1861,7 @@ of 40 items max
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_baseURIS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">baseURI</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter5.html#V_baseURIS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">baseURI</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1784,7 +1913,7 @@ of 40 items max
                      </tr>
                      <tr>
                         <td class="fCol">Select</td>
-                        <td>analyze-string($baseURI, '/')</td>
+                        <td>         analyze-string($baseURI, '/')</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -1818,7 +1947,7 @@ of 40 items max
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_parsedBaseURIS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">parsedBaseURI</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter5.html#V_parsedBaseURIS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">parsedBaseURI</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1835,7 +1964,7 @@ of 40 items max
                            <div id="src_P_parsedBaseURIS_Exif2Slack.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"parsedBaseURI"</span><span class="tAN"> select=</span><span class="tAV">"analyze-string($baseURI, '/')"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"parsedBaseURI"</span><span class="tAN"> select=</span><span class="tAV">"         analyze-string($baseURI, '/')"</span><span class="tXSLEl">/&gt;</span></pre></td>
                                  </tr>
                               </table>
                            </div>
@@ -1904,7 +2033,7 @@ of 40 items max
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_docFilenameS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">docFilename</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter5.html#V_docFilenameS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">docFilename</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1990,7 +2119,7 @@ of 40 items max
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_docFilenameNoExtensionS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">docFilenameNoExtension</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter5.html#V_docFilenameNoExtensionS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">docFilenameNoExtension</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2056,7 +2185,7 @@ of 40 items max
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_baseFolderS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">baseFolder</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter5.html#V_baseFolderS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">baseFolder</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2142,7 +2271,7 @@ of 40 items max
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_logFolderS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">logFolder</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter5.html#V_logFolderS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">logFolder</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2194,7 +2323,7 @@ of 40 items max
                      </tr>
                      <tr>
                         <td class="fCol">Select</td>
-                        <td>substring(translate(string(current-time()), ':', ''), 1, 4)</td>
+                        <td>substring(         translate(string(current-time()),         ':', ''), 1, 4)</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2208,7 +2337,7 @@ of 40 items max
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_currentTimeS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">currentTime</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter5.html#V_currentTimeS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">currentTime</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2225,7 +2354,7 @@ of 40 items max
                            <div id="src_P_currentTimeS_Exif2Slack.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"currentTime"</span><span class="tAN"> select=</span><span class="tAV">"substring(translate(string(current-time()), ':', ''), 1, 4)"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"currentTime"</span><span class="tAN"> select=</span><span class="tAV">"substring(         translate(string(current-time()),         ':', ''), 1, 4)"</span><span class="tXSLEl">/&gt;</span></pre></td>
                                  </tr>
                               </table>
                            </div>
@@ -2290,7 +2419,7 @@ of 40 items max
                                     <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_anniversariesS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="nRf">anniversaries</span></a></div>
+                                          <div class="refItemBlock"><a href="masterRouter19.html#T_anniversariesS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="nRf">anniversaries</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2376,7 +2505,7 @@ of 40 items max
                                     <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_anniversariesS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="nRf">anniversaries</span></a></div>
+                                          <div class="refItemBlock"><a href="masterRouter19.html#T_anniversariesS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="nRf">anniversaries</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2486,8 +2615,8 @@ of 40 items max
   </span><span class="tEl">&lt;fn:map</span><span class="tEl">&gt;</span><span class="tI">
     </span><span class="tEl">&lt;fn:string</span><span class="tAN"> key=</span><span class="tAV">"type"</span><span class="tEl">&gt;</span><span class="tT">actions</span><span class="tEl">&lt;/fn:string&gt;</span><span class="tI">
     </span><span class="tEl">&lt;fn:array</span><span class="tAN"> key=</span><span class="tAV">"elements"</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                     $twentyFiveYearResult[not(*[//local-name() = 'error'])]                     "</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"twentyFiveYrCavafySearchString"</span><span class="tAN"> select=</span><span class="tAV">"$twentyFiveYearResult//@searchString"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                     $twentyFiveYearResult                     [not(*[//local-name() = 'error'])]                     "</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"twentyFiveYrCavafySearchString"</span><span class="tAN"> select=</span><span class="tAV">"                         $twentyFiveYearResult//@searchString"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tEl">&lt;fn:map</span><span class="tEl">&gt;</span><span class="tI">
           </span><span class="tEl">&lt;fn:string</span><span class="tAN"> key=</span><span class="tAV">"type"</span><span class="tEl">&gt;</span><span class="tT">button</span><span class="tEl">&lt;/fn:string&gt;</span><span class="tI">
           </span><span class="tEl">&lt;fn:map</span><span class="tAN"> key=</span><span class="tAV">"text"</span><span class="tEl">&gt;</span><span class="tI">
@@ -2495,12 +2624,12 @@ of 40 items max
             </span><span class="tEl">&lt;fn:string</span><span class="tAN"> key=</span><span class="tAV">"text"</span><span class="tEl">&gt;</span><span class="tT">25 yrs ago</span><span class="tEl">&lt;/fn:string&gt;</span><span class="tI">
           </span><span class="tEl">&lt;/fn:map&gt;</span><span class="tI">
           </span><span class="tEl">&lt;fn:string</span><span class="tAN"> key=</span><span class="tAV">"url"</span><span class="tEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$twentyFiveYrCavafySearchString"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 $twentyFiveYrCavafySearchString"</span><span class="tXSLEl">/&gt;</span><span class="tI">
           </span><span class="tEl">&lt;/fn:string&gt;</span><span class="tI">
         </span><span class="tEl">&lt;/fn:map&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                     $fiftyYearResult[not(*[//local-name() = 'error'])]                     "</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"fiftyYrCavafySearchString"</span><span class="tAN"> select=</span><span class="tAV">"$fiftyYearResult//@searchString"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                     $fiftyYearResult                     [not(*[//local-name() = 'error'])]                     "</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"fiftyYrCavafySearchString"</span><span class="tAN"> select=</span><span class="tAV">"                         $fiftyYearResult//@searchString"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tEl">&lt;fn:map</span><span class="tEl">&gt;</span><span class="tI">
           </span><span class="tEl">&lt;fn:string</span><span class="tAN"> key=</span><span class="tAV">"type"</span><span class="tEl">&gt;</span><span class="tT">button</span><span class="tEl">&lt;/fn:string&gt;</span><span class="tI">
           </span><span class="tEl">&lt;fn:map</span><span class="tAN"> key=</span><span class="tAV">"text"</span><span class="tEl">&gt;</span><span class="tI">
@@ -2508,7 +2637,7 @@ of 40 items max
             </span><span class="tEl">&lt;fn:string</span><span class="tAN"> key=</span><span class="tAV">"text"</span><span class="tEl">&gt;</span><span class="tT">50 yrs ago</span><span class="tEl">&lt;/fn:string&gt;</span><span class="tI">
           </span><span class="tEl">&lt;/fn:map&gt;</span><span class="tI">
           </span><span class="tEl">&lt;fn:string</span><span class="tAN"> key=</span><span class="tAV">"url"</span><span class="tEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$fiftyYrCavafySearchString"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 $fiftyYrCavafySearchString"</span><span class="tXSLEl">/&gt;</span><span class="tI">
           </span><span class="tEl">&lt;/fn:string&gt;</span><span class="tI">
         </span><span class="tEl">&lt;/fn:map&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">

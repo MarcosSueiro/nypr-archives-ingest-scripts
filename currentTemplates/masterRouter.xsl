@@ -3,6 +3,8 @@
         Identify the type of xml, 
         and create separate documents.-->
 
+<!-- You will probably need to first log into cavafy.wnyc.org -->
+
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -17,8 +19,10 @@
     <xsl:import href="Exif2html.xsl"/>
     <xsl:import href="BWF2Exif.xsl"/>
     <xsl:import href="Exif2Slack.xsl"/>
+    <xsl:import href="errorLog.xsl"/>
 
     <xsl:output name="log" method="html" version="4.0" indent="yes"/>
+    <xsl:output name="logXml" method="xml" version="1.0" indent="yes"/>
     <xsl:output name="Exif" method="xml" version="1.0" indent="yes"/>
     <xsl:output name="FADGI" encoding="ASCII" method="xml" version="1.0" indent="yes"/>
     <xsl:output name="cavafy" encoding="UTF-8" method="xml" version="1.0" indent="yes"/>
@@ -663,7 +667,7 @@
         </xsl:variable>
 
         <xsl:result-document format="
-            log" href="
+            logXml" href="
             {$filenameLog}">
             <xsl:copy-of select="$completeLog"/>
         </xsl:result-document>
@@ -684,156 +688,14 @@
                     $newExifOutput/rdf:RDF" mode="html"/>
         </xsl:result-document>
 
-        <!-- Error log -->       
-            
-            <xsl:variable name="errorFreeMessage">
-                <xsl:value-of select="
-                    count(
-                    $completeLog//result
-                    [not(.//*[local-name() = 'error'])]
-                    )"/> files are all right: <br/>
-                <xsl:for-each
-                    select="
-                        $completeLog
-                        //result
-                        [not(.//*[local-name() = 'error'])]
-                        ">
-                    <xsl:value-of select="
-                        ./@filename"/>
-                    <br/>
-                </xsl:for-each>
-            </xsl:variable>
-            <xsl:variable name="duplicateInstantiationMessage">
-                <b>
-                    <xsl:value-of select="
-                    count(
-                    $duplicateInstantiations
-                    /error
-                    )"/> files have duplicate instantiation numbers and must be renamed: <br/>
-                
-                    <xsl:for-each select="$duplicateInstantiations/error">
-                        <xsl:value-of select="@DAVIDTitle"/>
-                        <br/>
-                    </xsl:for-each>
-                </b>
-            </xsl:variable>
-            <xsl:variable name="errorMessage">
-                <xsl:value-of select="
-                    count(
-                    $completeLog
-                    //result
-                    [.//*[local-name() = 'error']]
-                    )"/> files have errors: <br/>
-                <xsl:for-each
-                    select="
-                        $completeLog
-                        //result
-                        [.//*[local-name() = 'error']]">
-                    <xsl:value-of select="./@filename"/>
-                    <br/>
-                </xsl:for-each>                
-            </xsl:variable>
-            
-            <xsl:message select="$errorFreeMessage"/>
-            <xsl:message select="$duplicateInstantiationMessage"/>
-            <xsl:message select="$errorMessage"/>
-
-            <!--        Output 0.3: Error Log-->
-            <xsl:variable name="filenameErrorLog"
-                select="
-                    concat(
-                    $logFolder,
-                    $docFilenameNoExtension,
-                    '_ERRORLOG',
-                    format-date(current-date(), 
-                    '[Y0001][M01][D01]'),
-                    '_T', $currentTime,
-                    '.html')"/>
-            <xsl:result-document format="log" href="
-                {$filenameErrorLog}">
-                <html>
-                    <head> <xsl:value-of select="concat(
-                        'Error log for ',
-                        $docFilenameNoExtension,
-                        ' on ',
-                        format-date(
-                        current-date(), '[Y0001][M01][D01]'),
-                        ' at ', $currentTime)"/> </head>
-                    <body>
-                        <p/>
-                        <xsl:copy-of select="
-                            $errorFreeMessage"/>
-                        <p> ******************* </p>
-                        <xsl:copy-of select="
-                            $duplicateInstantiationMessage"/>
-                        <p> ******************* </p>
-                        <xsl:copy-of select="
-                            $errorMessage"/>
-                        <p> ******************* </p>
-                        <br/>
-                        
-                        <div>
-                            <b><xsl:for-each select="
-                                $duplicateInstantiations//error">
-                                <xsl:value-of select="concat(@type, ': ', @DAVIDTitle)"/>
-                                <br/>
-                            </xsl:for-each></b>
-                        </div>
-                        
-                        <xsl:for-each
-                            select="
-                                $completeLog//result
-                                [.//*[local-name() = 'error']]">
-                            <xsl:variable name="justFilename">
-                                <xsl:value-of
-                                    select="
-                                    tokenize(
-                                    translate(
-                                    @filename, '\', '/'), '/')
-                                    [last()]"/> <!-- Extract just the filename -->
-                            </xsl:variable>
-                            <div>
-                                <p>
-                                    <b> ERRORS related to filename <a>
-                                            <xsl:attribute name="href">
-                                                <xsl:value-of
-                                                  select="(
-                                                  concat('file:///', 
-                                                  inputs/originalExif
-                                                  /rdf:Description
-                                                  /System:Directory, 
-                                                  '/', 
-                                                  $justFilename))"
-                                                /> <!-- Link to the file -->
-                                            </xsl:attribute>
-                                            <xsl:value-of select="$justFilename"/></a>: </b>
-                                    <br/>
-                                    <p>
-                                        <xsl:for-each select=".//*:error">
-                                            <xsl:value-of select="@type, ': '"/>
-                                            <xsl:value-of select="."/>
-                                            <br/>
-                                        </xsl:for-each>
-                                    </p>
-                                    <a>
-                                        <xsl:attribute name="href">
-                                            <xsl:value-of
-                                                select="./inputs/parsedDAVIDTitle/parsedElements/finalCavafyURL"
-                                            /> </xsl:attribute>
-                                        <xsl:attribute name="
-                                            target" select="
-                                            '_blank'"/>cavafy entry
-                                        (if found) </a>
-                                </p>
-                            </div>
-                        </xsl:for-each>
-
-                        <xsl:element name="warnings">
-                            <xsl:copy-of select="$WARNINGS"/>
-                        </xsl:element>
-                    </body>
-                </html>
-            </xsl:result-document>
+       <!-- Output 0.3: Error log
+       (stop if errors)-->
+        
+        <xsl:call-template name="generateErrorLog">
+            <xsl:with-param name="completeLog" select="$completeLog"/>
+            <xsl:with-param name="duplicateInstantiations" select="$duplicateInstantiations"/>
+            <xsl:with-param name="WARNINGS" select="$WARNINGS"/>
+        </xsl:call-template>
         
         <!-- If errors, stop right here -->
         <xsl:if
@@ -842,13 +704,12 @@
             //*[local-name() = 'error']
             ">
             <xsl:message terminate="yes">
-                <xsl:value-of select="$errorMessage"/>
+                <xsl:value-of select="'Errors found.'"/>
                 <xsl:copy-of select="$completeLog//*[local-name() = 'error']"/>
             </xsl:message>
         </xsl:if>
         
-
-        <!-- Otherwise, all other outputs -->
+        <!-- If no errors, all other outputs -->
 
         <!--        Output 1: New ExifTool-->
         <xsl:variable name="filenameExif"
@@ -875,12 +736,9 @@
         <xsl:variable name="maxCavafyAssets" select="40" as="xs:integer"/>
         <xsl:comment select="'total instances', count(*)"/>
 
-
-
         <xsl:apply-templates select="$cavafyOutput/pb:pbcoreCollection" mode="breakItUp">
             <xsl:with-param name="maxOccurrences" select="$maxCavafyAssets"/>
         </xsl:apply-templates>
-
 
         <!--        Output 4: DAVID-->
         <!-- Output 4.1: MUNI -->
@@ -1058,7 +916,12 @@
             </xsl:result-document>
         </xsl:if>
 
-        
+        <!-- Output 5: Slack -->
+        <xsl:apply-templates select="
+            $newExifOutput
+            /rdf:RDF
+            [not(//error)]" 
+            mode="slack"/>
 
     </xsl:template>
 
@@ -1205,5 +1068,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
+    
 
 </xsl:stylesheet>

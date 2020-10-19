@@ -17,7 +17,8 @@
 				'uB_V_legalCharactersS_exif2NewExif.xsl');
 
         var docBoxes= new Array('dS_exif2NewExif.xsl', 
-				'dS_M_rdfRDFstarts-withrdfDescriptionRIFFCommenthttpss3.amazonaws.comamericanarchive.orgtranscriptsS_exif2NewExif.xsl');
+				'dS_M_rdfRDFstarts-withrdfDescriptionRIFFCommenthttpss3.amazonaws.comamericanarchive.orgtranscriptsS_exif2NewExif.xsl', 
+				'dS_V_separatingTokenForFreeTextFieldsS_exif2NewExif.xsl');
 
         var sourceBoxes= new Array('src_M_rdfDescriptionS_exif2NewExif.xsl', 
 				'src_T_newExifS_exif2NewExif.xsl', 
@@ -33,7 +34,8 @@
 				'src_V_validatingKeywordStringS_exif2NewExif.xsl', 
 				'src_V_validatingNameStringS_exif2NewExif.xsl', 
 				'src_V_separatingTokenS_exif2NewExif.xsl', 
-				'src_V_separatingTokenLongS_exif2NewExif.xsl');
+				'src_V_separatingTokenLongS_exif2NewExif.xsl', 
+				'src_V_separatingTokenForFreeTextFieldsS_exif2NewExif.xsl');
 
         var supersedesBoxes= new Array('sps_V_illegalCharactersS_exif2NewExif.xsl', 
 				'sps_V_legalCharactersS_exif2NewExif.xsl', 
@@ -46,7 +48,8 @@
 				'ovr_V_validatingKeywordStringS_exif2NewExif.xsl', 
 				'ovr_V_validatingNameStringS_exif2NewExif.xsl', 
 				'ovr_V_separatingTokenS_exif2NewExif.xsl', 
-				'ovr_V_separatingTokenLongS_exif2NewExif.xsl');
+				'ovr_V_separatingTokenLongS_exif2NewExif.xsl', 
+				'ovr_V_separatingTokenForFreeTextFieldsS_exif2NewExif.xsl');
 
         var referencesBoxes= new Array('refs_T_newExifS_exif2NewExif.xsl', 
 				'refs_V_separatingTokenLongS_exif2NewExif.xsl');
@@ -482,11 +485,11 @@ Subject headings / IKEY
                                  <tr>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter5.html#Exif2BWF.xsl" target="_self" title="No namespace" onclick="updPT('Exif2BWF.xsl')">Exif2BWF.xsl</a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter6.html#Exif2Cavafy.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Cavafy.xsl')">Exif2Cavafy.xsl</a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter7.html#Exif2Dbx.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Dbx.xsl')">Exif2Dbx.xsl</a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter9.html#cavafyQC.xsl" target="_self" title="No namespace" onclick="updPT('cavafyQC.xsl')">cavafyQC.xsl</a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter8.html#cms2BWFMetaEdit.xsl" target="_self" title="No namespace" onclick="updPT('cms2BWFMetaEdit.xsl')">cms2BWFMetaEdit.xsl</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter6.html#Exif2BWF.xsl" target="_self" title="No namespace" onclick="updPT('Exif2BWF.xsl')">Exif2BWF.xsl</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter7.html#Exif2Cavafy.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Cavafy.xsl')">Exif2Cavafy.xsl</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter8.html#Exif2Dbx.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Dbx.xsl')">Exif2Dbx.xsl</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter10.html#cavafyQC.xsl" target="_self" title="No namespace" onclick="updPT('cavafyQC.xsl')">cavafyQC.xsl</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter9.html#cms2BWFMetaEdit.xsl" target="_self" title="No namespace" onclick="updPT('cms2BWFMetaEdit.xsl')">cms2BWFMetaEdit.xsl</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -651,7 +654,7 @@ Subject headings / IKEY
     </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cavafyEntry"</span><span class="tXSLEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"                         $parsedDAVIDTitle                         /parsedDAVIDTitle                         /parsedElements                         /finalCavafyEntry                         /pb:pbcoreDescriptionDocument"</span><span class="tAN"> mode=</span><span class="tAV">"cavafyQC"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                     concat('parsed DAVID title: ',                      $parsedDAVIDTitle)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                     'parsed DAVID title: ',                     $parsedDAVIDTitle"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                     'cavafy entry: ', $cavafyEntry"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tC">&lt;!-- The corresponding instantiation  --&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"instantiationData"</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -669,7 +672,7 @@ Subject headings / IKEY
         </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$parsedDAVIDTitle"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$cavafyEntry"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$seriesData"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tC">&lt;!--                    &lt;xsl:copy-of select="$seriesData"/&gt;--&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$instantiationData"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$dbxData"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$cmsData"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -739,8 +742,17 @@ Subject headings / IKEY
                                     <td class="fCol">Parameters</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#P_separatingTokenS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">separatingToken</a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter18.html#P_separatingTokenLongS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">separatingTokenLong</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter19.html#P_separatingTokenS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">separatingToken</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter19.html#P_separatingTokenLongS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">separatingTokenLong</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">Variables</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter15.html#V_combinedValidatingStringsS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">combinedValidatingStrings</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter16.html#V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')">separatingTokenForFreeTextFields</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -748,27 +760,20 @@ Subject headings / IKEY
                                     <td class="fCol">Templates</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter17.html#T_ASCIIFyS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')"><span class="nRf">ASCIIFy</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter14.html#T_LOCOccupationsAndFieldsOfActivityS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">LOCOccupationsAndFieldsOfActivity</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter15.html#T_checkConflictsS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')"><span class="nRf">checkConflicts</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter15.html#T_mergeDataS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')"><span class="nRf">mergeData</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter17.html#T_strip-tagsS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')"><span class="nRf">strip-tags</span></a></div>
+                                          <div class="refItemBlock"><a href="masterRouter18.html#T_ASCIIFyS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')"><span class="nRf">ASCIIFy</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter15.html#T_LOCOccupationsAndFieldsOfActivityS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">LOCOccupationsAndFieldsOfActivity</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter16.html#T_checkConflictsS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')"><span class="nRf">checkConflicts</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter16.html#T_mergeDataS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')"><span class="nRf">mergeData</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter18.html#T_strip-tagsS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')"><span class="nRf">strip-tags</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td class="fCol">Function</td>
+                                    <td class="fCol">Functions</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter17.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">Variable</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter14.html#V_combinedValidatingStringsS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">combinedValidatingStrings</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter18.html#F_CapitalizeS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>Capitalize (</span><span class="fParams">textToCapitalize, numberOflettersToCapitalize</span><span>)</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter18.html#F_splitParseValidateS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>splitParseValidate (</span><span class="fParams">input, separatingToken, validatingString</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -829,7 +834,7 @@ Subject headings / IKEY
                                  <tr>
                                     <td class="fCol">seriesData</td>
                                     <td>No namespace</td>
-                                    <td>/inputs/seriesData</td>
+                                    <td>/inputs/parsedDAVIDTitle/parsedElements/seriesData</td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">validatingCatalogString</td>
@@ -870,7 +875,7 @@ Subject headings / IKEY
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"parsedDAVIDTitle"</span><span class="tAN"> select=</span><span class="tAV">"/inputs/parsedDAVIDTitle"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"inDAVID"</span><span class="tAN"> select=</span><span class="tAV">"inDAVID"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"cavafyEntry"</span><span class="tAN"> select=</span><span class="tAV">"/inputs/parsedDAVIDTitle/parsedElements/finalCavafyEntry"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"seriesData"</span><span class="tAN"> select=</span><span class="tAV">"/inputs/seriesData"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"seriesData"</span><span class="tAN"> select=</span><span class="tAV">"/inputs/parsedDAVIDTitle/parsedElements/seriesData"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"instantiationData"</span><span class="tAN"> select=</span><span class="tAV">"/inputs/instantiationData"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"dbxData"</span><span class="tAN"> select=</span><span class="tAV">"/inputs/dbxData"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"cmsData"</span><span class="tAN"> select=</span><span class="tAV">"/inputs/cmsData"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -894,9 +899,26 @@ Subject headings / IKEY
     </span><span class="tXSLEl">&lt;/xsl:apply-templates&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Generation --&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- (Note: If 'Generation' includes 'segment', 
-            this has consequences for the treatment of metadata)--&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Note: If 'Generation' includes 'segment', 
+            this has consequences for the treatment of metadata.
+        Specifically:
+         * Embedded IART, ICMS, IKEY are not merged with 
+         pbcoreContributor, pbcoreCreator and pbcoreSubject respectively; 
+        but, if empty, the values come from pbcore
+         * Embedded IGNR takes precedence over pbcoreGenre;
+         but, if empty, the value comes from pbcore
+         * Embedded INAM takes precedence over 
+         pbcoreTitle[@titleType='Episode'];
+         but, if empty, will append ", part [segmentsuffix]" to  
+         pbcoreTitle. (E.g. 'Ravi Shankar, part b')  
+         * Embedded ISBJ takes precedence over 
+         pbcoreDescription[@descriptionType='Abstract'];
+         but, if empty, will prepend "Part [segmentsuffix] of:" to  
+         pbcoreDescription. 
+         (E.g. 'Part b of: Interview and concert with Ravi Shankar')
+        --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"parsedGeneration"</span><span class="tAN"> select=</span><span class="tAV">"$parsedDAVIDTitle/parsedElements/parsedGeneration"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'Parsed generation:', $parsedGeneration"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"generation"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tAN"> mode=</span><span class="tAV">"checkConflicts"</span><span class="tXSLEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"$parsedGeneration"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -904,8 +926,9 @@ Subject headings / IKEY
       </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'Generation'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:apply-templates&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"instantiationSegmentSuffix"</span><span class="tAN"> select=</span><span class="tAV">"             $parsedDAVIDTitle             //parsedElements/instantiationSegmentSuffix"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"segmentFlag"</span><span class="tAN"> select=</span><span class="tAV">"             $parsedDAVIDTitle             //parsedElements/segmentFlag"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'Generation: ', $generation"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"instantiationSegmentSuffix"</span><span class="tAN"> select=</span><span class="tAV">"                 $parsedDAVIDTitle                 //parsedElements/instantiationSegmentSuffix"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"segmentFlag"</span><span class="tAN"> select=</span><span class="tAV">"                 $parsedDAVIDTitle                 //parsedElements/segmentFlag"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"producingOrganizations"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tC">&lt;!-- Culled from CMS data --&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -965,28 +988,43 @@ Subject headings / IKEY
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"seriesCreatorsPublishers"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     $seriesData/pb:pbcoreDescriptionDocument                     /pb:*/(pb:creator | pb:publisher)                     /@ref[contains(., $validatingNameString)]"</span><span class="tAN"> separator=</span><span class="tAV">"{$separatingTokenLong}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"             'seriesCreatorsPublishers: ',              $seriesCreatorsPublishers"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                 'seriesCreatorsPublishers: ',                 $seriesCreatorsPublishers"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"defaultCreatorsPublishers"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     if                     ($seriesCreatorsPublishers != '')                     then                         $seriesCreatorsPublishers                     else                         $collectionURL"</span><span class="tAN"> separator=</span><span class="tAV">" ; "</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"             'defaultCreatorsPublishers: ',              $defaultCreatorsPublishers"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                 'defaultCreatorsPublishers: ',                 $defaultCreatorsPublishers"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"mergedCommissioned"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tAN"> mode=</span><span class="tAV">"mergeData"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"$exiftoolCommissioned"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tAN"> select=</span><span class="tAV">"$assetCreatorsPublishers"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field3"</span><span class="tAN"> select=</span><span class="tAV">"$cmsCreators"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"$defaultCreatorsPublishers"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"validatingString"</span><span class="tAN"> select=</span><span class="tAV">"$combinedValidatingStrings"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'Creators'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:apply-templates&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"RIFF:Commissioned"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"'Exif commissioned: ', $exiftoolCommissioned"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"'Cavafy creators and publishers: ', $assetCreatorsPublishers"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"'CMS creators: ', $cmsCreators"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tEl">&lt;RIFF:Commissioned</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tAN"> mode=</span><span class="tAV">"mergeData"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"$exiftoolCommissioned"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tAN"> select=</span><span class="tAV">"$assetCreatorsPublishers"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field3"</span><span class="tAN"> select=</span><span class="tAV">"$cmsCreators"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"$defaultCreatorsPublishers"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"validatingString"</span><span class="tAN"> select=</span><span class="tAV">"$validatingNameString"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'Creators'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:apply-templates&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"not(contains($generation, 'segment'))"</span><span class="tXSLEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$mergedCommissioned"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"mergeData"</span><span class="tXSLEl">&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"$exiftoolCommissioned"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"$mergedCommissioned"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"validatingString"</span><span class="tAN"> select=</span><span class="tAV">"$combinedValidatingStrings"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'Creators'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/RIFF:Commissioned&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- 3. Contributors as RIFF:Artist --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"exiftoolArtists"</span><span class="tAN"> select=</span><span class="tAV">"$originalExif/rdf:Description/RIFF:Artist"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"exiftoolArtists"</span><span class="tAN"> select=</span><span class="tAV">"             $originalExif/rdf:Description/RIFF:Artist"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cavafyContributors"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     $cavafyEntry/pb:pbcoreDescriptionDocument                     /pb:pbcoreContributor/pb:contributor                     /@ref[contains(., $validatingNameString)]"</span><span class="tAN"> separator=</span><span class="tAV">"{$separatingTokenLong}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
@@ -1023,10 +1061,11 @@ Subject headings / IKEY
           </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$mergedArtists"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains($generation, 'segment')"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'Make sure the artists for', $parsedDAVIDTitle/parsedElements/DAVIDTitle, 'segment are right!'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"'Make sure the artists for', $parsedDAVIDTitle/parsedElements/DAVIDTitle, 'segment are right!'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"segmentArtistWarning"</span><span class="tAN"> select=</span><span class="tAV">"                             'Make sure the artists for',                              $parsedDAVIDTitle/parsedElements/DAVIDTitle,                              'segment are right!'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"$segmentArtistWarning"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"$segmentArtistWarning"</span><span class="tXSLEl">/&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tAN"> mode=</span><span class="tAV">"mergeData"</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"                                     $originalExif/rdf:Description/RIFF:Artist"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"                                     $exiftoolArtists"</span><span class="tXSLEl">/&gt;</span><span class="tI">
             </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"$mergedArtists"</span><span class="tXSLEl">/&gt;</span><span class="tI">
             </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"validatingString"</span><span class="tAN"> select=</span><span class="tAV">"$validatingNameString"</span><span class="tXSLEl">/&gt;</span><span class="tI">
             </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'Contributors'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -1047,30 +1086,31 @@ Subject headings / IKEY
   </span><span class="tC">&lt;!-- 4. Relevant date --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"RIFF:DateCreated"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tEl">&lt;RIFF:DateCreated</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"translate($parsedDAVIDTitle/parsedElements/DAVIDTitleDateTranslated, ':', '-')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     translate(                     $parsedDAVIDTitle/parsedElements/DAVIDTitleDateTranslated,                      ':', '-'                     )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/RIFF:DateCreated&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- 5. Genre --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"seriesGenre"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$seriesData//pb:pbcoreDescriptionDocument/pb:pbcoreGenre"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                 $seriesData                 //pb:pbcoreDescriptionDocument                 /pb:pbcoreGenre"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"RIFF:Genre"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tEl">&lt;RIFF:Genre</span><span class="tEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"not(contains($generation, 'segment'))"</span><span class="tXSLEl">&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tAN"> mode=</span><span class="tAV">"checkConflicts"</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"$originalExif/rdf:Description/RIFF:Genre"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tAN"> select=</span><span class="tAV">"$cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreGenre"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"$originalExif                                 /rdf:Description/RIFF:Genre"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tAN"> select=</span><span class="tAV">"$cavafyEntry                                 /pb:pbcoreDescriptionDocument/pb:pbcoreGenre"</span><span class="tXSLEl">/&gt;</span><span class="tI">
             </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"$seriesGenre"</span><span class="tXSLEl">/&gt;</span><span class="tI">
             </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'Genre'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;/xsl:apply-templates&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'Make sure the genre for', $parsedDAVIDTitle/parsedElements/DAVIDTitle, 'segment is right!'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"'Make sure the genre for', $parsedDAVIDTitle/parsedElements/DAVIDTitle, 'segment is right!'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"segmentGenreWarning"</span><span class="tAN"> select=</span><span class="tAV">"'Make sure the genre for',                              $parsedDAVIDTitle/parsedElements/DAVIDTitle,                              'segment is right!'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"$segmentGenreWarning"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"$segmentGenreWarning"</span><span class="tXSLEl">/&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tAN"> mode=</span><span class="tAV">"checkConflicts"</span><span class="tXSLEl">&gt;</span><span class="tI">
             </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"$originalExif/rdf:Description/RIFF:Genre"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"$cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreGenre"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"$cavafyEntry                                 /pb:pbcoreDescriptionDocument/pb:pbcoreGenre"</span><span class="tXSLEl">/&gt;</span><span class="tI">
             </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'Genre'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;/xsl:apply-templates&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
@@ -1085,7 +1125,7 @@ Subject headings / IKEY
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"ASCIIfiedExifTitle"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"ASCIIFy"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"inputText"</span><span class="tAN"> select=</span><span class="tAV">"$originalExif/rdf:Description/RIFF:Title"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"inputText"</span><span class="tAN"> select=</span><span class="tAV">"                         $originalExif/rdf:Description/RIFF:Title"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"RIFF:Title"</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -1095,9 +1135,11 @@ Subject headings / IKEY
         </span><span class="tC">&lt;!--Audio is not a segment--&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"not(contains($generation, 'segment'))"</span><span class="tXSLEl">&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tAN"> mode=</span><span class="tAV">"checkConflicts"</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"$ASCIIfiedExifTitle/ASCIIResult/ASCIIFiedText"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tAN"> select=</span><span class="tAV">"$ASCIIfiedCavafyTitle/ASCIIResult/ASCIIFiedText"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'Title'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"                                     $ASCIIfiedExifTitle                                     /ASCIIResult/ASCIIFiedText"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tAN"> select=</span><span class="tAV">"                                     $ASCIIfiedCavafyTitle                                     /ASCIIResult/ASCIIFiedText"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"                                     'Title'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tC">&lt;!-- To avoid semicolons separating a single field --&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"separatingToken"</span><span class="tAN"> select=</span><span class="tAV">"                                     $separatingTokenForFreeTextFields"</span><span class="tXSLEl">/&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;/xsl:apply-templates&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
         </span><span class="tC">&lt;!--Audio is a clip or segment--&gt;</span><span class="tI">
@@ -1109,12 +1151,12 @@ Subject headings / IKEY
             </span><span class="tC">&lt;!-- Create a default segment title based on an existing asset title--&gt;</span><span class="tI">
             </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"$ASCIIfiedCavafyTitle/ASCIIResult/ASCIIFiedText != ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
               </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$ASCIIfiedCavafyTitle/ASCIIResult/ASCIIFiedText"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-              </span><span class="tC">&lt;!-- Add the part bits to the default title --&gt;</span><span class="tI">
+              </span><span class="tC">&lt;!-- Add the part bit to the default title --&gt;</span><span class="tI">
               </span><span class="tC">&lt;!-- From the instantiation segment bit --&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                     $instantiationSegmentSuffix/concat(', Part ', $instantiationSegmentSuffix)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                         $instantiationSegmentSuffix/concat(', Part ', $instantiationSegmentSuffix)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
               </span><span class="tC">&lt;!-- ...or from the segment flag --&gt;</span><span class="tI">
               </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"empty($instantiationSegmentSuffix)"</span><span class="tXSLEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$segmentFlag/concat(' (',., ')')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$segmentFlag/concat(' (', ., ')')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
               </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
             </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
@@ -1122,6 +1164,7 @@ Subject headings / IKEY
             </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"                                     $ASCIIfiedExifTitle                                     /ASCIIResult                                     /ASCIIFiedText"</span><span class="tXSLEl">/&gt;</span><span class="tI">
             </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"$defaultSegmentTitle"</span><span class="tXSLEl">/&gt;</span><span class="tI">
             </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'SegmentTitle'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"separatingToken"</span><span class="tAN"> select=</span><span class="tAV">"$separatingTokenForFreeTextFields"</span><span class="tXSLEl">/&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
@@ -1130,7 +1173,7 @@ Subject headings / IKEY
   </span><span class="tC">&lt;!--Description as RIFF:Subject--&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"ASCIIfiedExifSubject"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"ASCIIFy"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"inputText"</span><span class="tAN"> select=</span><span class="tAV">"                         $originalExif/rdf:Description/RIFF:Subject"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"inputText"</span><span class="tAN"> select=</span><span class="tAV">"                         normalize-space($originalExif/rdf:Description/RIFF:Subject)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"ASCIIfiedCavafyAbstract"</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -1138,9 +1181,9 @@ Subject headings / IKEY
       </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"inputText"</span><span class="tAN"> select=</span><span class="tAV">"                         $cavafyEntry                         /pb:pbcoreDescriptionDocument                         /pb:pbcoreDescription                         [@descriptionType = 'Abstract']                         [. ne 'No Description available']                         [not(//error)]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'ASCIIFied Asbtract: ',              $ASCIIfiedCavafyAbstract"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                 'ASCIIFied Asbtract: ',                 $ASCIIfiedCavafyAbstract"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"defaultAbstract"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                 if($ASCIIfiedCavafyAbstract/ASCIIResult/ASCIIFiedText != '')                 then $ASCIIfiedCavafyAbstract/ASCIIResult/ASCIIFiedText                 else                 concat(                 $cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreTitle[@titleType = 'Episode'],                 ' on ',                 $cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreTitle[@titleType = 'Series'],                 ' on ',                 $parsedDAVIDTitle/parsedElements/DAVIDTitleDate)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     if ($ASCIIfiedCavafyAbstract/ASCIIResult/ASCIIFiedText != '')                     then                         $ASCIIfiedCavafyAbstract/ASCIIResult/ASCIIFiedText                     else                         concat(                         $cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreTitle[@titleType = 'Episode'],                         ' on ',                         $cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreTitle[@titleType = 'Series'],                         ' on ',                         $parsedDAVIDTitle/parsedElements/DAVIDTitleDate)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"description"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tC">&lt;!--This is dealt differently when audio is a segment--&gt;</span><span class="tI">
@@ -1149,29 +1192,32 @@ Subject headings / IKEY
       </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"not(contains($generation, 'segment'))"</span><span class="tXSLEl">&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tAN"> mode=</span><span class="tAV">"checkConflicts"</span><span class="tXSLEl">&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"$ASCIIfiedExifSubject/ASCIIResult/ASCIIFiedText"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tAN"> select=</span><span class="tAV">"$ASCIIfiedCavafyAbstract/ASCIIResult/ASCIIFiedText"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tAN"> select=</span><span class="tAV">"                             $ASCIIfiedCavafyAbstract/ASCIIResult/ASCIIFiedText"</span><span class="tXSLEl">/&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'Description'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tC">&lt;!-- To avoid semicolons separating a single field --&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"separatingToken"</span><span class="tAN"> select=</span><span class="tAV">"$separatingTokenForFreeTextFields"</span><span class="tXSLEl">/&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"$defaultAbstract"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;/xsl:apply-templates&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
       </span><span class="tC">&lt;!-- Audio is a clip or segment --&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains($generation, 'segment')"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"warningMessage"</span><span class="tAN"> select=</span><span class="tAV">"                         'Make sure the description for',                          $parsedDAVIDTitle/parsedElements/DAVIDTitle,                          'segment is right!'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"warningMessage"</span><span class="tAN"> select=</span><span class="tAV">"                             'Make sure the description for',                             $parsedDAVIDTitle/parsedElements/DAVIDTitle,                             'segment is right!'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"$warningMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"$warningMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"defaultSegmentDescription"</span><span class="tXSLEl">&gt;</span><span class="tI">
           </span><span class="tC">&lt;!-- Create a default segment description based on an existing asset title--&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                             $ASCIIfiedCavafyAbstract/ASCIIResult/ASCIIFiedText != ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                                 $ASCIIfiedCavafyAbstract/ASCIIResult/ASCIIFiedText != ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
             </span><span class="tC">&lt;!-- Add the segment bits --&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 if ($instantiationSegmentSuffix)                                 then concat('Part ', $instantiationSegmentSuffix, ' of: 
-')                                 else if ($segmentFlag)                                 then concat($segmentFlag, ' OF: 
-')                                 else ''"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 $defaultAbstract                                 "</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                     if ($instantiationSegmentSuffix)                                     then                                         concat('Part ', $instantiationSegmentSuffix, ' of: 
+')                                     else                                         if ($segmentFlag)                                         then                                             concat($segmentFlag, ' OF: 
+')                                         else                                             ''"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                     $defaultAbstract                                     "</span><span class="tXSLEl">/&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"checkConflicts"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"                             $ASCIIfiedExifSubject                             /ASCIIResult/ASCIIFiedText"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"                                 $ASCIIfiedExifSubject                                 /ASCIIResult/ASCIIFiedText"</span><span class="tXSLEl">/&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"$defaultSegmentDescription"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"separatingToken"</span><span class="tAN"> select=</span><span class="tAV">"$separatingTokenForFreeTextFields"</span><span class="tXSLEl">/&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'SegmentDescription'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
@@ -1179,7 +1225,7 @@ Subject headings / IKEY
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"descriptionNoHtml"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"strip-tags"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"text"</span><span class="tAN"> select=</span><span class="tAV">"$description[not(//error)]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"text"</span><span class="tAN"> select=</span><span class="tAV">"                     $description[not(//error)]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$description[//error]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
@@ -1188,18 +1234,32 @@ Subject headings / IKEY
       </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$descriptionNoHtml"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/RIFF:Subject&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"defaultMedium"</span><span class="tAN"> select=</span><span class="tAV">"                 if ($collection eq 'MUNI')                 then                     $parsedDAVIDTitle/parsedElements/MUNIMedium                 else                     'audio material'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tC">&lt;!--Medium--&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"pbcorePhysicalMediums"</span><span class="tAN"> select=</span><span class="tAV">"             doc('http://metadataregistry.org/vocabulary/show/id/462.xsd')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cavafyFormats"</span><span class="tAN"> select=</span><span class="tAV">"             doc('cavafyFormats.xml')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"acceptableMediums"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'Audio material|'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                 $cavafyFormats/cavafyFormats/format"</span><span class="tAN"> separator=</span><span class="tAV">"|"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"             $acceptableMediums"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"defaultMedium"</span><span class="tAN"> select=</span><span class="tAV">"                 if ($collection eq 'MUNI')                 then                     $parsedDAVIDTitle                     /parsedElements                     /MUNIMedium                 else                     'audio material'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"originalMedium"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tAN"> mode=</span><span class="tAV">"mergeData"</span><span class="tXSLEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"$originalExif/rdf:Description/RIFF:Medium"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"'audio material'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"$defaultMedium"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'Medium'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:apply-templates&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"RIFF:Medium"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tEl">&lt;RIFF:Medium</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"concat(substring(upper-case($originalMedium), 1, 1), substring($originalMedium, 2))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"capitalizedMedium"</span><span class="tAN"> select=</span><span class="tAV">"                     WNYC:Capitalize($originalMedium, 1)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                     not(                     matches(                     $capitalizedMedium,                      $acceptableMediums))"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"unacceptableMedium"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             'Medium', $capitalizedMedium,                              'is not an acceptable medium.',                              'Acceptable mediums include',                              $acceptableMediums"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"WNYC:Capitalize($originalMedium, 1)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/RIFF:Medium&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Series as RIFF:Product--&gt;</span><span class="tI">
@@ -1217,11 +1277,11 @@ Subject headings / IKEY
   </span><span class="tC">&lt;!-- the cavafy URL has historically been embedded in different places --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"embeddedCatalogURL"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"checkConflicts"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"                     $originalExif                     /rdf:Description                     /RIFF:Source                     [contains(., $validatingCatalogString)]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tAN"> select=</span><span class="tAV">"                     $originalExif                     /rdf:Description                     /XMP-WNYCSchema:CatalogURL                     [contains(., $validatingCatalogString)]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"                         $originalExif                         /rdf:Description                         /RIFF:Source                         [contains(., $validatingCatalogString)]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tAN"> select=</span><span class="tAV">"                         $originalExif                         /rdf:Description                         /XMP-WNYCSchema:CatalogURL                         [contains(., $validatingCatalogString)]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field3"</span><span class="tAN"> select=</span><span class="tAV">"                         $originalExif                         /rdf:Description                         /RIFF:Comment                         [starts-with(., $validatingCatalogString)]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field4"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"                                 analyze-string(                                 $originalExif                                 /rdf:Description                                 /RIFF:Comment                                 [starts-with(., 'For additional details')],                                 concat($validatingCatalogString,'[0-z,-]*')                                 )                                 /fn:match[1]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"                             analyze-string(                             $originalExif                             /rdf:Description                             /RIFF:Comment                             [starts-with(., 'For additional details')],                             concat($validatingCatalogString, '[0-z,-]*')                             )                             /fn:match[1]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:with-param&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'embeddedURL'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"''"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -1245,19 +1305,31 @@ Subject headings / IKEY
     </span><span class="tEl">&lt;/RIFF:Source&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Copyright info --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"ASCIIFiedExifCopyright"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"ASCIIFy"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"inputText"</span><span class="tAN"> select=</span><span class="tAV">"                         $originalExif                         /rdf:Description                         /RIFF:Copyright"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"ASCIIFiedCavafyCopyright"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"ASCIIFy"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"inputText"</span><span class="tAN"> select=</span><span class="tAV">"                         $cavafyEntry                         /pb:pbcoreDescriptionDocument                         /pb:pbcoreRightsSummary                         /pb:rightsSummary"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"ASCIIFiedSeriesCopyright"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"ASCIIFy"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"inputText"</span><span class="tAN"> select=</span><span class="tAV">"                         $seriesData                         /pb:pbcoreDescriptionDocument                         /pb:pbcoreRightsSummary                         /pb:rightsSummary"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"defaultCopyright"</span><span class="tAN"> select=</span><span class="tAV">"             if ($ASCIIFiedSeriesCopyright/ASCIIResult/ASCIIFiedText != '')                 then                 $ASCIIFiedSeriesCopyright/ASCIIResult/ASCIIFiedText                 else                     concat(                     'Terms of Use and Reproduction: ',                     $parsedDAVIDTitle/parsedElements/collectionName, '.',                     ' Additional copyright may apply to musical selections.')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"RIFF:Copyright"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"defaultCopyright"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         concat(                         'Terms of Use and Reproduction: ',                         $parsedDAVIDTitle/parsedElements/collectionName)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-Additional copyright may apply to musical selections.
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
     </span><span class="tEl">&lt;RIFF:Copyright</span><span class="tEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tAN"> mode=</span><span class="tAV">"checkConflicts"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"ASCII:ASCIIFier($originalExif/rdf:Description/RIFF:Copyright)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tAN"> select=</span><span class="tAV">"ASCII:ASCIIFier($cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreRightsSummary/pb:rightsSummary)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"$ASCIIFiedExifCopyright/ASCIIResult/ASCIIFiedText"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tAN"> select=</span><span class="tAV">"$ASCIIFiedCavafyCopyright/ASCIIResult/ASCIIFiedText"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"$defaultCopyright"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'Copyright'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tC">&lt;!-- To avoid semicolons separating a single field --&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"separatingToken"</span><span class="tAN"> select=</span><span class="tAV">"$separatingTokenForFreeTextFields"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:apply-templates&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/RIFF:Copyright&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
@@ -1341,6 +1413,7 @@ Additional copyright may apply to musical selections.
       </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tAN"> mode=</span><span class="tAV">"checkConflicts"</span><span class="tXSLEl">&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"$goodExifCodingHistory"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"$defaultCodingHistory"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"separatingToken"</span><span class="tAN"> select=</span><span class="tAV">"$separatingTokenForFreeTextFields"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'CodingHistory'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:apply-templates&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                         $originalExif/rdf:Description/XMP-WNYCSchema:Stylus_size                         and                         not(                         contains($originalExif/rdf:Description/RIFF:CodingHistory, 'Stylus size:')                         )"</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -1351,13 +1424,13 @@ Stylus size: ',                             $originalExif/rdf:Description/XMP-WN
         </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             concat(                             '
 Turnover: ',                             rdf:Description/XMP-WNYCSchema:LF_turnover, ' Hz'                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                         $originalExif/rdf:Description/XMP-WNYCSchema:Tag_0kHz_att                         and                         not(                         contains($originalExif/rdf:Description/RIFF:CodingHistory, 'Att. at 10kHz')                         )"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                         $originalExif                         /rdf:Description                         /XMP-WNYCSchema:Tag_0kHz_att                         and                         not(                         contains(                         $originalExif                         /rdf:Description                         /RIFF:CodingHistory,                         'Att. at 10kHz'                         )                         )"</span><span class="tXSLEl">&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             concat(                             '
-Att. at 10kHz: ',                             $originalExif/rdf:Description/XMP-WNYCSchema:Tag_0kHz_att, ' dB'                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+Att. at 10kHz: ',                             $originalExif                             /rdf:Description                             /XMP-WNYCSchema:Tag_0kHz_att,                             ' dB'                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                         $originalExif/rdf:Description/XMP-WNYCSchema:Rumble_filter                         and                         not(                         contains(                         $originalExif/rdf:Description/RIFF:CodingHistory, 'Rumble filter'                         ))"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                         $originalExif                         /rdf:Description                         /XMP-WNYCSchema:Rumble_filter                         and                         not(                         contains(                         $originalExif                         /rdf:Description                         /RIFF:CodingHistory,                         'Rumble filter'                         ))"</span><span class="tXSLEl">&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             concat(                             '
-Rumble filter: ',                             $originalExif/rdf:Description/XMP-WNYCSchema:Rumble_filter,                             ' Hz'                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+Rumble filter: ',                             $originalExif                             /rdf:Description                             /XMP-WNYCSchema:Rumble_filter,                             ' Hz'                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/RIFF:CodingHistory&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
@@ -1387,101 +1460,126 @@ Rumble filter: ',                             $originalExif/rdf:Description/XMP-
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     $cavafyEntry/pb:pbcoreDescriptionDocument                     /pb:pbcoreSubject                     /@ref[matches(., $combinedValidatingStrings)]"</span><span class="tAN"> separator=</span><span class="tAV">"{$separatingTokenLong}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"exifKeywords"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$originalExif/rdf:Description/RIFF:Keywords"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     $originalExif/rdf:Description/RIFF:Keywords"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Artist names and fields of activity
         as subjects--&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"LOCOccupationsAndFieldsOfActivity"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"LOCOccupationsAndFieldsOfActivity"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"artists"</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:Artist/RIFF:Artist"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"artists"</span><span class="tAN"> select=</span><span class="tAV">"                         $RIFF:Artist/RIFF:Artist"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"subjectsAndKeywords"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                 $cavafySubjects[. !=''] | $exifKeywords[. !=''] | $LOCOccupationsAndFieldsOfActivity [. !='']"</span><span class="tAN"> separator=</span><span class="tAV">"{$separatingTokenLong}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"exifSubjectsAndKeywords"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     $exifKeywords[. != ''] |                     $LOCOccupationsAndFieldsOfActivity[. != '']"</span><span class="tAN"> separator=</span><span class="tAV">"{$separatingTokenLong}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'Narrowize', $subjectsAndKeywords"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"subjectsKeywordsOccupationsAndFieldsOfActivity"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     $cavafySubjects[. != ''] |                     $exifKeywords[. != ''] |                     $LOCOccupationsAndFieldsOfActivity[. != '']"</span><span class="tAN"> separator=</span><span class="tAV">"{$separatingTokenLong}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"             'Narrowize',              $subjectsKeywordsOccupationsAndFieldsOfActivity"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"exifSubjectsAndKeywordsNarrowed"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"                     $exifSubjectsAndKeywords"</span><span class="tAN"> mode=</span><span class="tAV">"                 narrowSubjects"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"subjectsAndKeywordsNarrowed"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"$subjectsAndKeywords"</span><span class="tAN"> mode=</span><span class="tAV">"narrowSubjects"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"trimmedNarrowedSubjectsRDFBag"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"rdf:Bag"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"$subjectsAndKeywordsNarrowed/madsrdf:*"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"rdf:li"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(@rdf:about)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"$subjectsKeywordsOccupationsAndFieldsOfActivity"</span><span class="tAN"> mode=</span><span class="tAV">"                 narrowSubjects"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"seriesSubjectsRef"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     $seriesData/pb:pbcoreDescriptionDocument                     /pb:pbcoreSubject                     /@ref[matches(., $combinedValidatingStrings)]"</span><span class="tAN"> separator=</span><span class="tAV">"{$separatingTokenLong}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"exifSubjectsAndKeywordsNarrowedRef"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     $exifSubjectsAndKeywordsNarrowed                     /madsrdf:*/@rdf:about                     [matches(., $combinedValidatingStrings)]"</span><span class="tAN"> separator=</span><span class="tAV">"{$separatingTokenLong}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"subjectsAndKeywordsNarrowedRef"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     $subjectsAndKeywordsNarrowed                     /madsrdf:*/@rdf:about                     [matches(., $combinedValidatingStrings)]"</span><span class="tAN"> separator=</span><span class="tAV">"{$separatingTokenLong}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"assetKeywords"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"mergeData"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             $subjectsAndKeywordsNarrowedRef                             "</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:with-param&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"                         $seriesSubjectsRef"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'Keywords'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"assetKeywordsRDFBag"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;rdf:bag</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                         WNYC:splitParseValidate(                         $assetKeywords, ';', $combinedValidatingStrings                         )/valid"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"rdf:li"</span><span class="tXSLEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/rdf:bag&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"                 'Exif keywords: ', $exifKeywords"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"                 'Cavafy subject headings: ', $cavafySubjects"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"segmentKeywords"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"mergeData"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             $exifSubjectsAndKeywordsNarrowedRef                             "</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:with-param&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"                         $assetKeywords"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"                         'segmentKeywords'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"segmentKeywordsRDFBag"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;rdf:bag</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                         WNYC:splitParseValidate(                         $segmentKeywords, ';', $combinedValidatingStrings                         )/valid"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"rdf:li"</span><span class="tXSLEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/rdf:bag&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"RIFF:Keywords"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"'Exif keywords: ', $exifKeywords"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"'Cavafy subject headings: ', $cavafySubjects"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"assetKeywords"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"mergeData"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             $subjectsAndKeywordsNarrowedRef                             "</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:with-param&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"$seriesSubjectsRef"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'Keywords'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;RIFF:Keywords</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"not(contains($generation, 'segment'))"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"                         not(                         contains($generation, 'segment')                         )"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;RIFF:Keywords</span><span class="tEl">&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$assetKeywords"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'Make sure the keywords for', $parsedDAVIDTitle/parsedElements/DAVIDTitle, 'segment are right!'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"'Make sure the keywords for', $parsedDAVIDTitle/parsedElements/DAVIDTitle, 'segment are right!'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tC">&lt;!--                        &lt;xsl:copy-of select="$subjectsAndKeywordsNarrowedRef"/&gt;--&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"checkConflicts"</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"$originalExif/rdf:Description/RIFF:Keywords"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tAN"> select=</span><span class="tAV">"$assetKeywords"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'Keywords'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/RIFF:Keywords&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/RIFF:Keywords&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"message"</span><span class="tAN"> select=</span><span class="tAV">"concat(                             'Make sure the keywords for ',                             $parsedDAVIDTitle                             /parsedElements                             /DAVIDTitle,                             ' segment are right!'                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"$message"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"$message"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;RIFF:Keywords</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 $segmentKeywords"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/RIFF:Keywords&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Various and sundry comments --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"RIFF:Comment"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;RIFF:Comment</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tC">&lt;!-- A processed comment, just passed through --&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"                             starts-with($originalExif                             /rdf:Description                             /RIFF:Comment, 'For additional details see https://cavafy.')"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 $originalExif                                 /rdf:Description                                 /RIFF:Comment"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tC">&lt;!-- Add the bit about additional details --&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 $RIFF:Source                                 [starts-with(., $validatingCatalogString)]                                 /concat('For additional details see ', .)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- 'Approximate date' comment --&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                         contains($parsedDAVIDTitle/parsedElements/DAVIDTitleDate, 'u')                         and                         not(                         contains($originalExif/rdf:Description/RIFF:Comment,                         'Date is approximate. Given date is'                         ))"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat('
-Date is approximate. Given date is ', $parsedDAVIDTitle/parsedElements/DAVIDTitleDate, '.')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- AAPB Additions --&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         $originalExif/rdf:Description/RIFF:Source                         [contains(., '//americanarchive.org/catalog/')]                         /concat('
+    </span><span class="tC">&lt;!-- The original embedded comment --&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"exifComment"</span><span class="tAN"> select=</span><span class="tAV">"                     $originalExif                     /rdf:Description                     /RIFF:Comment"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tC">&lt;!-- Embedded cavafy-url comment --&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cavafyURLComment"</span><span class="tAN"> select=</span><span class="tAV">"                     $RIFF:Source                     [starts-with(., $validatingCatalogString)]                     /concat('For additional details see ', .)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tC">&lt;!-- Approximate date comment --&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"approximateDateComment"</span><span class="tAN"> select=</span><span class="tAV">"                     if (                     contains($parsedDAVIDTitle/parsedElements/DAVIDTitleDate, 'u')                     )                     then                         concat(                         '
+Date is approximate. Given date is ',                         $parsedDAVIDTitle/parsedElements/DAVIDTitleDate, '.'                         )                     else                         ''"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tC">&lt;!-- AAPB Additions --&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"aapbURLInSource"</span><span class="tAN"> select=</span><span class="tAV">"                     $originalExif/rdf:Description/RIFF:Source                     [contains(., '//americanarchive.org/catalog/')]                     /concat('
 American Archive catalog entry available at: ', .)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         $originalExif/rdf:Description/RIFF:Comment                         [starts-with(., 'https://s3.amazonaws.com/americanarchive.org/transcripts/')]                         /concat('
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"aapbTranscriptURLInComment"</span><span class="tAN"> select=</span><span class="tAV">"                     $originalExif/rdf:Description/RIFF:Comment                     [starts-with(., 'https://s3.amazonaws.com/americanarchive.org/transcripts/')]                     /concat('
 Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;RIFF:Comment</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"contains($exifComment, 'Date is approximate.')                     and                      not(                     contains(                     $parsedDAVIDTitle/parsedElements/DAVIDTitleDate, 'u')                     )"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"dateNotApproximateMessage"</span><span class="tAN"> select=</span><span class="tAV">"                         'ATTENTION!',                         'Embedded comment', $exifComment,                         'implies an approximate date.',                         'But in fact the date is',                         $parsedDAVIDTitle/parsedElements/DAVIDTitleDate                         "</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"$dateNotApproximateMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"'dateNotApproximate'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$dateNotApproximateMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$exifComment"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         $cavafyURLComment                         [not(                         contains(                         $exifComment, 'For additional details see https://cavafy.')                         )]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         $approximateDateComment                         [not(                         contains(                         $exifComment, 'Date is approximate')                         )]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         $aapbURLInSource                         [not(                         contains(                         $exifComment, 'American Archive catalog entry available at: ')                         )]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         $aapbTranscriptURLInComment                         [not(                         contains(                         $exifComment, 'Automated transcript available from')                         )]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/RIFF:Comment&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tC">&lt;!--                Originator field; not to be trusted much in DAVID--&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"RIFF:Originator"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tEl">&lt;RIFF:Originator</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"rdf:Description/RIFF:Technician != 'UNKNOWN TRANSFER TECH'"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"rdf:Description/RIFF:Technician"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tT">ARCHIVES</span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:Technician"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
 </span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/RIFF:Originator&gt;</span><span class="tI">
@@ -1494,7 +1592,8 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
       </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat('Catalog number ', $assetID)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/RIFF:OriginatorReference&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Other potentially useful variables: CMS Image ID, Transcript, Coverage --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Other potentially useful variables: 
+            CMS Image ID, Transcript, Coverage --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"defaultCMSImageID"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"                         $seriesData/pb:pbcoreDescriptionDocument                         /pb:pbcoreAnnotation                         [@annotationType = 'CMS Image']                         ne ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -1640,7 +1739,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
           </span><span class="tC">&lt;!-- Checking for files dangerously close to 4 gigs in size --&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"                                 upper-case($originalExif/rdf:Description/File:FileType) eq 'WAV'                                 and (                                 $systemFileSizeMB gt 4265                                 or                                 $DAVIDFileSizeMB gt 4265                                 )                                 "</span><span class="tXSLEl">&gt;</span><span class="tI">
             </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"                                     'file_too_big'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+              </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"                                         'file_too_big'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
               </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                         'File', $originalExif/rdf:Description/System:FileName,                                         'is dangerously large:', $DAVIDFileSizeMB, 'or', $systemFileSizeMB, 'MB.'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
             </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
@@ -1656,7 +1755,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
               </span><span class="tC">&lt;!-- Conflicting size values --&gt;</span><span class="tI">
               </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$systemFileSizeMB[. gt 0] ne $DAVIDFileSizeMB[. gt 0]"</span><span class="tXSLEl">&gt;</span><span class="tI">
                 </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
-                  </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"                                             'conflicting_file_size'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                  </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"                                                 'conflicting_file_size'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
                   </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'Conflicting file size: '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
                   </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">/&gt;</span><span class="tI">
                   </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat('system: ', $systemFileSizeMB, ' MB.')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -1698,7 +1797,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
           </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains($originalExif/rdf:Description/File:FileType, 'RF64')"</span><span class="tXSLEl">&gt;</span><span class="tI">
             </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
               </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"'unacceptable_file_type'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'Unacceptable file type: ',                                          $originalExif/rdf:Description/File:FileType"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                         'Unacceptable file type: ',                                         $originalExif/rdf:Description/File:FileType"</span><span class="tXSLEl">/&gt;</span><span class="tI">
             </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -1780,7 +1879,14 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
       </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$originalExif/rdf:Description/XML:*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$originalExif/rdf:Description/XMP-x:*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tEl">&lt;XMP-dc:Subject</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$trimmedNarrowedSubjectsRDFBag"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"                                 not(                                 contains($generation, 'segment')                                 )"</span><span class="tXSLEl">&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$assetKeywordsRDFBag"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$segmentKeywordsRDFBag"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
       </span><span class="tEl">&lt;/XMP-dc:Subject&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"XMP-dc:Format"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$originalExif/rdf:Description/XMP-xmp:*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -1798,9 +1904,6 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
       </span><span class="tEl">&lt;XMP-dc:Description</span><span class="tEl">&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space($descriptionNoHtml)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tEl">&lt;/XMP-dc:Description&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!--                &lt;xsl:element name="XMP-dc:Subject"&gt;
-                    &lt;xsl:copy-of select="$trimmedNarrowedSubjectsRDFBag"/&gt;
-                &lt;/xsl:element&gt;--&gt;</span><span class="tI">
       </span><span class="tEl">&lt;XMP-plus:ImageSupplierImageID</span><span class="tEl">&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$cmsImageID"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tEl">&lt;/XMP-plus:ImageSupplierImageID&gt;</span><span class="tI">
@@ -1831,7 +1934,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
             <td class="rt_cBR"></td>
          </tr>
       </table><a id="T_aapbDataS_exif2NewExif.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">rdf:Description/RIFF:Source         [starts-with(., 'http://americanarchive.org/catalog/')]</span><span class="titleTemplateName">aapbData</span></div>
+         <span class="titleTemplateMatch">             rdf:Description/RIFF:Source             [starts-with(., 'http://americanarchive.org/catalog/')]</span><span class="titleTemplateName">aapbData</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -1849,7 +1952,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                      </tr>
                      <tr>
                         <td class="fCol">Match</td>
-                        <td>rdf:Description/RIFF:Source         [starts-with(., 'http://americanarchive.org/catalog/')]</td>
+                        <td>             rdf:Description/RIFF:Source             [starts-with(., 'http://americanarchive.org/catalog/')]</td>
                      </tr>
                      <tr>
                         <td class="fCol">Mode</td>
@@ -1868,7 +1971,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                            <div id="src_T_aapbDataS_exif2NewExif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"aapbData"</span><span class="tAN"> match=</span><span class="tAV">"rdf:Description/RIFF:Source         [starts-with(., 'http://americanarchive.org/catalog/')]"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"aapbData"</span><span class="tAN"> match=</span><span class="tAV">"             rdf:Description/RIFF:Source             [starts-with(., 'http://americanarchive.org/catalog/')]"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tC">&lt;!--Obtain data and transcripts
             from American Archive (AAPB) 
             when an AAPB URL is in the RIFF:Source field--&gt;</span><span class="tI">
@@ -1892,7 +1995,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
             <td class="rt_cBR"></td>
          </tr>
       </table><a id="T_aapbData2S_exif2NewExif.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">rdf:Description/RIFF:Comment         [contains(., 'http://americanarchive.org/catalog/')]</span><span class="titleTemplateName">aapbData2</span></div>
+         <span class="titleTemplateMatch">             rdf:Description/RIFF:Comment             [contains(., 'http://americanarchive.org/catalog/')]</span><span class="titleTemplateName">aapbData2</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -1910,7 +2013,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                      </tr>
                      <tr>
                         <td class="fCol">Match</td>
-                        <td>rdf:Description/RIFF:Comment         [contains(., 'http://americanarchive.org/catalog/')]</td>
+                        <td>             rdf:Description/RIFF:Comment             [contains(., 'http://americanarchive.org/catalog/')]</td>
                      </tr>
                      <tr>
                         <td class="fCol">Mode</td>
@@ -1929,11 +2032,11 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                            <div id="src_T_aapbData2S_exif2NewExif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"aapbData2"</span><span class="tAN"> match=</span><span class="tAV">"rdf:Description/RIFF:Comment         [contains(., 'http://americanarchive.org/catalog/')]"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"aapbData2"</span><span class="tAN"> match=</span><span class="tAV">"             rdf:Description/RIFF:Comment             [contains(., 'http://americanarchive.org/catalog/')]"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tC">&lt;!--Obtain data and transcripts
             from American Archive (AAPB) 
             when an AAPB URL is in the RIFF:Comment field--&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"aapbURL"</span><span class="tAN"> select=</span><span class="tAV">"             concat(             'http://americanarchive.org/catalog/',              substring-before(             substring-after(             RIFF:Comment, 'http://americanarchive.org/catalog/'),             '.pbcore'),              '.pbcore')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"aapbURL"</span><span class="tAN"> select=</span><span class="tAV">"                 concat(                 'http://americanarchive.org/catalog/',                 substring-before(                 substring-after(                 RIFF:Comment, 'http://americanarchive.org/catalog/'),                 '.pbcore'),                 '.pbcore')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"aapbData"</span><span class="tAN"> select=</span><span class="tAV">"document($aapbURL)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$aapbData"</span><span class="tXSLEl">/&gt;</span><span class="tI">
 </span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
@@ -2115,7 +2218,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
             <td class="rt_cBR"></td>
          </tr>
       </table><a id="T_DAVIDdbxS_exif2NewExif.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">rdf:Description         [contains(System:Directory, 'wnycdavidmedia')]</span><span class="titleTemplateName">DAVIDdbx</span><span class="titleTemplateMode">DAVIDdbx</span></div>
+         <span class="titleTemplateMatch">             rdf:Description             [contains(System:Directory, 'wnycdavidmedia')]</span><span class="titleTemplateName">DAVIDdbx</span><span class="titleTemplateMode">DAVIDdbx</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -2133,7 +2236,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                      </tr>
                      <tr>
                         <td class="fCol">Match</td>
-                        <td>rdf:Description         [contains(System:Directory, 'wnycdavidmedia')]</td>
+                        <td>             rdf:Description             [contains(System:Directory, 'wnycdavidmedia')]</td>
                      </tr>
                      <tr>
                         <td class="fCol">Mode</td>
@@ -2196,7 +2299,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                            <div id="src_T_DAVIDdbxS_exif2NewExif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"DAVIDdbx"</span><span class="tAN"> match=</span><span class="tAV">"rdf:Description         [contains(System:Directory, 'wnycdavidmedia')]"</span><span class="tAN"> mode=</span><span class="tAV">"DAVIDdbx"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"DAVIDdbx"</span><span class="tAN"> match=</span><span class="tAV">"             rdf:Description             [contains(System:Directory, 'wnycdavidmedia')]"</span><span class="tAN"> mode=</span><span class="tAV">"DAVIDdbx"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Obtain DAVID fields --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"wavURI"</span><span class="tAN"> select=</span><span class="tAV">"translate(concat(System:Directory, '/', System:FileName), '\', '/')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'Find DBX file for', $wavURI"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -2253,7 +2356,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                                     <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter8.html#T_exifFillerS_cms2BWFMetaEdit.xsl" target="_self" title="No namespace" onclick="updPT('cms2BWFMetaEdit.xsl')"><span class="nRf">exifFiller</span></a></div>
+                                          <div class="refItemBlock"><a href="masterRouter9.html#T_exifFillerS_cms2BWFMetaEdit.xsl" target="_self" title="No namespace" onclick="updPT('cms2BWFMetaEdit.xsl')"><span class="nRf">exifFiller</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2273,7 +2376,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter5.html#V_illegalCharactersS_Exif2BWF.xsl" target="_self" title="No namespace" onclick="updPT('Exif2BWF.xsl')">illegalCharacters</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter6.html#V_illegalCharactersS_Exif2BWF.xsl" target="_self" title="No namespace" onclick="updPT('Exif2BWF.xsl')">illegalCharacters</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2338,7 +2441,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                                     <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter8.html#T_exifFillerS_cms2BWFMetaEdit.xsl" target="_self" title="No namespace" onclick="updPT('cms2BWFMetaEdit.xsl')"><span class="nRf">exifFiller</span></a></div>
+                                          <div class="refItemBlock"><a href="masterRouter9.html#T_exifFillerS_cms2BWFMetaEdit.xsl" target="_self" title="No namespace" onclick="updPT('cms2BWFMetaEdit.xsl')"><span class="nRf">exifFiller</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2358,7 +2461,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter5.html#V_legalCharactersS_Exif2BWF.xsl" target="_self" title="No namespace" onclick="updPT('Exif2BWF.xsl')">legalCharacters</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter6.html#V_legalCharactersS_Exif2BWF.xsl" target="_self" title="No namespace" onclick="updPT('Exif2BWF.xsl')">legalCharacters</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2504,7 +2607,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                      </tr>
                      <tr>
                         <td class="fCol">Select</td>
-                        <td>'http://id.loc.gov/authorities/subjects/'</td>
+                        <td>'id.loc.gov/authorities/subjects/'</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2518,7 +2621,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter14.html#V_validatingKeywordStringS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">validatingKeywordString</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter15.html#V_validatingKeywordStringS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">validatingKeywordString</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2538,7 +2641,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter17.html#V_validatingKeywordStringS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">validatingKeywordString</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter18.html#V_validatingKeywordStringS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">validatingKeywordString</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2555,7 +2658,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                            <div id="src_V_validatingKeywordStringS_exif2NewExif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"validatingKeywordString"</span><span class="tAN"> select=</span><span class="tAV">"'http://id.loc.gov/authorities/subjects/'"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"validatingKeywordString"</span><span class="tAN"> select=</span><span class="tAV">"'id.loc.gov/authorities/subjects/'"</span><span class="tXSLEl">/&gt;</span></pre></td>
                                  </tr>
                               </table>
                            </div>
@@ -2590,7 +2693,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                      </tr>
                      <tr>
                         <td class="fCol">Select</td>
-                        <td>'http://id.loc.gov/authorities/names/'</td>
+                        <td>'id.loc.gov/authorities/names/'</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2604,7 +2707,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter14.html#V_validatingNameStringS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">validatingNameString</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter15.html#V_validatingNameStringS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">validatingNameString</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2624,7 +2727,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter17.html#V_validatingNameStringS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">validatingNameString</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter18.html#V_validatingNameStringS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">validatingNameString</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2641,7 +2744,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                            <div id="src_V_validatingNameStringS_exif2NewExif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"validatingNameString"</span><span class="tAN"> select=</span><span class="tAV">"'http://id.loc.gov/authorities/names/'"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"validatingNameString"</span><span class="tAN"> select=</span><span class="tAV">"'id.loc.gov/authorities/names/'"</span><span class="tXSLEl">/&gt;</span></pre></td>
                                  </tr>
                               </table>
                            </div>
@@ -2690,7 +2793,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                                     <td class="fCol">Parameter</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter13.html#P_separatingTokenS_processCollection.xsl" target="_self" title="No namespace" onclick="updPT('processCollection.xsl')">separatingToken</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter14.html#P_separatingTokenS_processCollection.xsl" target="_self" title="No namespace" onclick="updPT('processCollection.xsl')">separatingToken</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2710,7 +2813,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter17.html#V_separatingTokenS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">separatingToken</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter18.html#V_separatingTokenS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">separatingToken</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2762,7 +2865,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                      </tr>
                      <tr>
                         <td class="fCol">Select</td>
-                        <td>concat(' ', $separatingToken, ' ')</td>
+                        <td>         concat(' ', $separatingToken, ' ')</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2776,7 +2879,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                                     <td class="fCol">Parameter</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#P_separatingTokenS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">separatingToken</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter19.html#P_separatingTokenS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">separatingToken</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2796,7 +2899,7 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter14.html#V_separatingTokenLongS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">separatingTokenLong</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter15.html#V_separatingTokenLongS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">separatingTokenLong</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2813,10 +2916,10 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                            <div id="ovr_V_separatingTokenLongS_exif2NewExif.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
-                                    <td class="fCol">Parameter</td>
+                                    <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#P_separatingTokenLongS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">separatingTokenLong</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter16.html#V_separatingTokenLongS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')">separatingTokenLong</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2833,7 +2936,85 @@ Automated transcript available from ', .)"</span><span class="tXSLEl">/&gt;</spa
                            <div id="src_V_separatingTokenLongS_exif2NewExif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"separatingTokenLong"</span><span class="tAN"> select=</span><span class="tAV">"concat(' ', $separatingToken, ' ')"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"separatingTokenLong"</span><span class="tAN"> select=</span><span class="tAV">"         concat(' ', $separatingToken, ' ')"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="V_separatingTokenForFreeTextFieldsS_exif2NewExif.xsl"></a><div class="cmpT">Variable
+         <span class="qname">separatingTokenForFreeTextFields</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Documentation</div>
+                           <div class="flR"><input id="bt_dS_V_separatingTokenForFreeTextFieldsS_exif2NewExif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_V_separatingTokenForFreeTextFieldsS_exif2NewExif.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="dS_V_separatingTokenForFreeTextFieldsS_exif2NewExif.xsl" style="display:block">
+                              <div>
+                                 <h3>Description</h3><pre> To avoid semicolons separating a single field </pre></div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Select</td>
+                        <td>'###===###'</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Overriding</div>
+                           <div class="flR"><input id="bt_ovr_V_separatingTokenForFreeTextFieldsS_exif2NewExif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_separatingTokenForFreeTextFieldsS_exif2NewExif.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="ovr_V_separatingTokenForFreeTextFieldsS_exif2NewExif.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Variable</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter16.html#V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')">separatingTokenForFreeTextFields</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_V_separatingTokenForFreeTextFieldsS_exif2NewExif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_V_separatingTokenForFreeTextFieldsS_exif2NewExif.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_V_separatingTokenForFreeTextFieldsS_exif2NewExif.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"separatingTokenForFreeTextFields"</span><span class="tAN"> select=</span><span class="tAV">"'###===###'"</span><span class="tXSLEl">/&gt;</span></pre></td>
                                  </tr>
                               </table>
                            </div>

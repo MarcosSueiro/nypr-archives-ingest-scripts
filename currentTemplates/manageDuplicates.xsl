@@ -28,7 +28,12 @@ from different sources -->
     <xsl:import href="utilities.xsl"/>
     
     <xsl:variable name="separatingToken" select="';'"/>
-    <xsl:variable name="separatingTokenLong" select="concat(' ', $separatingToken, ' ')"/>
+    <xsl:variable name="separatingTokenLong" select="
+        concat(' ', $separatingToken, ' ')"/>
+    <!-- To avoid semicolons separating a single field -->
+    <xsl:variable name="separatingTokenForFreeTextFields"
+        select="
+        '###===###'"/>
     
     <xsl:template name="checkConflicts" 
         match="inputs" 
@@ -51,28 +56,47 @@ from different sources -->
                 <xsl:value-of select="$fieldName[1]"/>
             </xsl:element>
         </xsl:param>
+        <xsl:message select="'
+            Check for conflicts among values for ', $fieldName[1], ': ', 
+            string-join(
+            ($field1, $field2, $field3, $field4, $field5), 
+            $separatingToken)"/>
+        <xsl:message select="'Default value: ', $defaultValue"/>
 
         <xsl:variable name="distinctFields">
             <xsl:call-template name="splitParseValidate">
                 <xsl:with-param name="input">
-                    <xsl:value-of select="
-                        $field1 | 
-                        $field2 | 
-                        $field3 | 
-                        $field4 | 
-                        $field5" 
-                        separator="{$separatingToken}"/>
+                    <xsl:value-of select="string-join(
+                        ($field1, $field2, $field3, $field4, $field5), 
+                        $separatingToken)"/>
                 </xsl:with-param>
                 <xsl:with-param name="separatingToken" select="$separatingToken"/>
                 <xsl:with-param name="validatingString" select="
                     $validatingString"/>
             </xsl:call-template>
-        </xsl:variable>        
+        </xsl:variable>
+        <xsl:message>
+            SPLIT PARSE VALIDATE
+                <xsl:value-of select="
+                    $field1 | 
+                    $field2 | 
+                    $field3 | 
+                    $field4 | 
+                    $field5" 
+                    separator="{$separatingToken}"/>
+            VALIDATING STRING
+            <xsl:value-of 
+            select="
+                $validatingString"/>
+        </xsl:message>        
         <xsl:variable name="distinctFoundCount" select="
             count($distinctFields/inputParsed/valid)"/>
-        <xsl:message select="
-            $distinctFoundCount, ' distinct values for ',
-            $fieldName, ' found.'"/>
+        <xsl:message>
+            <xsl:value-of select="
+                $distinctFoundCount, ' distinct values for ',
+                $fieldName, ' found: '"/>
+            <xsl:value-of select="$distinctFields/inputParsed/valid" separator=" --- "/>
+        </xsl:message>
         <xsl:choose>
             <xsl:when test="$distinctFoundCount eq 1">                
                 <xsl:value-of select="$distinctFields/inputParsed/valid"/>
@@ -84,9 +108,9 @@ from different sources -->
                 <xsl:element name="error">
                     <xsl:attribute name="type"
                         select="'conflicting_values'"/>
-                    <xsl:value-of select="'conflicting values', 
+                    <xsl:value-of select="'conflicting values for', 
                         $fieldName, 
-                        ' in ', .//System:FileName"/>
+                        ' in ', .//System:FileName, ': '"/>
                     <xsl:value-of select="$distinctFields/inputParsed/valid" separator=" -- "/>
                 </xsl:element>
             </xsl:when>
@@ -164,19 +188,16 @@ from different sources -->
             normalize-space($field1) 
             eq normalize-space($field2)
             )">
-            <xsl:value-of 
+            <xsl:variable name="errorMessage" 
                 select="
                 concat(
                 'ERROR: ', 
-                $field1, 
-                ' and ', 
-                $field2, 
+                $field1, ' and ', $field2, 
                 ' are not equal.'
                 )"/>
-            <xsl:message terminate="yes">
-                <xsl:value-of
-                    select="concat('ERROR: ', $field1, ' and ', $field2, ' are not equal.')"/>
-            </xsl:message>
+            <xsl:value-of 
+                select="$errorMessage"/>
+            <xsl:message terminate="yes" select="$errorMessage"/>                
         </xsl:if>
     </xsl:template>
 
@@ -185,13 +206,16 @@ from different sources -->
         <!-- Terminate if field1
         does not contain field2 -->
         <xsl:param name="field1"/>
-        <xsl:param name="field2"/>
+        <xsl:param name="field2"/>        
 
         <xsl:if test="not(contains($field1, $field2))">
-            <xsl:value-of select="concat('ERROR: ', $field1, ' does not contain ', $field2)"/>
-            <xsl:message terminate="yes">
-                <xsl:value-of select="concat('ERROR: ', $field1, ' does not contain ', $field2)"/>
-            </xsl:message>
+            <xsl:variable name="errorMessage" select="
+                concat(
+                'ERROR: ', 
+                $field1, ' does not contain ', $field2
+                )"/>
+            <xsl:value-of select="$errorMessage"/>
+            <xsl:message terminate="yes" select="$errorMessage"/>                
         </xsl:if>
     </xsl:template>
 
@@ -203,10 +227,13 @@ from different sources -->
         <xsl:param name="field2"/>
 
         <xsl:if test="contains($field1, $field2)">
-            <xsl:value-of select="concat('ERROR: ', $field1, ' contains ', $field2)"/>
-            <xsl:message terminate="yes">
-                <xsl:value-of select="concat('ERROR: ', $field1, ' contains ', $field2)"/>
-            </xsl:message>
+            <xsl:variable name="errorMessage" select="
+                concat(
+                'ERROR: ', 
+                $field1, ' contains ', $field2
+                )"/>
+            <xsl:value-of select="$errorMessage"/>
+            <xsl:message terminate="yes" select="$errorMessage"/>
         </xsl:if>
     </xsl:template>
 

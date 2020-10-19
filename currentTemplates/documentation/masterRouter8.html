@@ -3,28 +3,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <title>Stylesheet documentation for: cms2BWFMetaEdit.xsl</title>
+      <title>Stylesheet documentation for: Exif2Dbx.xsl</title>
       <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
          <!--
         
-        var parametersBoxes= new Array('prs_M_MOTIVES_cms2BWFMetaEdit.xsl', 
-				'prs_T_exifFillerS_cms2BWFMetaEdit.xsl');
+        
+        
+        
+        var docBoxes= new Array('dS_Exif2Dbx.xsl', 
+				'dS_M_rdfRDFM_DAVIDS_Exif2Dbx.xsl');
+
+        var sourceBoxes= new Array('src_M_rdfRDFM_DAVIDS_Exif2Dbx.xsl', 
+				'src_M_rdfDescriptionM_DAVIDS_Exif2Dbx.xsl');
 
         
         
-        var docBoxes= new Array('dS_cms2BWFMetaEdit.xsl');
-
-        var sourceBoxes= new Array('src_M_MOTIVES_cms2BWFMetaEdit.xsl', 
-				'src_M_keyS_cms2BWFMetaEdit.xsl', 
-				'src_T_exifFillerS_cms2BWFMetaEdit.xsl');
+        var referencesBoxes= new Array('refs_M_rdfDescriptionM_DAVIDS_Exif2Dbx.xsl');
 
         
         
-        var referencesBoxes= new Array('refs_T_exifFillerS_cms2BWFMetaEdit.xsl');
-
-        
-        
-        var importedFromBoxes= new Array('ipF_cms2BWFMetaEdit.xsl');
+        var importedFromBoxes= new Array('ipF_Exif2Dbx.xsl');
 
         
         var button_prefix = 'bt_';
@@ -326,9 +324,6 @@
                               </span></td>
                      </tr>
                      <tr>
-                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, parametersBoxes);" class="control" /></span><span class="globalControlName">Parameters </span></td>
-                     </tr>
-                     <tr>
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, referencesBoxes);" class="control" /></span><span class="globalControlName">References </span></td>
                      </tr>
                      <tr>
@@ -349,8 +344,8 @@
                <td class="rt_cBR"></td>
             </tr>
          </table>
-      </div><a id="cms2BWFMetaEdit.xsl"></a><div class="cmpT">Stylesheet
-         <span class="qname">cms2BWFMetaEdit.xsl</span></div>
+      </div><a id="Exif2Dbx.xsl"></a><div class="cmpT">Stylesheet
+         <span class="qname">Exif2Dbx.xsl</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -365,23 +360,23 @@
                      <tr>
                         <td class="fCol">
                            <div class="flL">Documentation</div>
-                           <div class="flR"><input id="bt_dS_cms2BWFMetaEdit.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_cms2BWFMetaEdit.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_dS_Exif2Dbx.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_Exif2Dbx.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="dS_cms2BWFMetaEdit.xsl" style="display:block">
+                           <div id="dS_Exif2Dbx.xsl" style="display:block">
                               <div>
-                                 <h3>Description</h3><pre> Find a cms entry from a 'motive / theme' field 
-and output its data in BWF MetaEdit Core format</pre></div>
+                                 <h3>Description</h3><pre> Transform an exiftool xml
+into an xml .DBX file suitable for ingest into D.A.V.I.D. </pre></div>
                            </div>
                         </td>
                      </tr>
                      <tr>
                         <td class="fCol">
                            <div class="flL">Imported from</div>
-                           <div class="flR"><input id="bt_ipF_cms2BWFMetaEdit.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ipF_cms2BWFMetaEdit.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_ipF_Exif2Dbx.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ipF_Exif2Dbx.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="ipF_cms2BWFMetaEdit.xsl" style="display:block">
+                           <div id="ipF_Exif2Dbx.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
                                     <td>
@@ -408,8 +403,80 @@ and output its data in BWF MetaEdit Core format</pre></div>
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="M_MOTIVES_cms2BWFMetaEdit.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">MOTIVE</span></div>
+      </table><a id="M_rdfRDFM_DAVIDS_Exif2Dbx.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">rdf:RDF</span><span class="titleTemplateMode">DAVID</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Documentation</div>
+                           <div class="flR"><input id="bt_dS_M_rdfRDFM_DAVIDS_Exif2Dbx.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_M_rdfRDFM_DAVIDS_Exif2Dbx.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="dS_M_rdfRDFM_DAVIDS_Exif2Dbx.xsl" style="display:block">
+                              <div>
+                                 <h3>Description</h3><pre>Output definitions </pre></div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Match</td>
+                        <td>rdf:RDF</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Mode</td>
+                        <td>DAVID</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>10</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_M_rdfRDFM_DAVIDS_Exif2Dbx.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_rdfRDFM_DAVIDS_Exif2Dbx.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_M_rdfRDFM_DAVIDS_Exif2Dbx.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:RDF"</span><span class="tAN"> mode=</span><span class="tAV">"DAVID"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Match top element --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'DAVID here we go'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;ENTRIES</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"rdf:Description"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/ENTRIES&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="M_rdfDescriptionM_DAVIDS_Exif2Dbx.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">rdf:Description</span><span class="titleTemplateMode">DAVID</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -427,231 +494,35 @@ and output its data in BWF MetaEdit Core format</pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">Match</td>
-                        <td>MOTIVE</td>
+                        <td>rdf:Description</td>
                      </tr>
                      <tr>
                         <td class="fCol">Mode</td>
-                        <td>#default</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Parameters</div>
-                           <div class="flR"><input id="bt_prs_M_MOTIVES_cms2BWFMetaEdit.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_M_MOTIVES_cms2BWFMetaEdit.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="prs_M_MOTIVES_cms2BWFMetaEdit.xsl" style="display:block">
-                              <table class="attsT">
-                                 <thead>
-                                    <tr>
-                                       <th>QName</th>
-                                       <th>Namespace</th>
-                                       <th>Select</th>
-                                    </tr>
-                                 </thead>
-                                 <tr>
-                                    <td class="fCol">queryURL</td>
-                                    <td>No namespace</td>
-                                    <td>             concat(             'https://api.wnyc.org/api/v3/story/?audio_file=/',
-                                       $theme, '.mp3'             )
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">theme</td>
-                                    <td>No namespace</td>
-                                    <td>.</td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Import precedence</td>
-                        <td>11</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_M_MOTIVES_cms2BWFMetaEdit.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_MOTIVES_cms2BWFMetaEdit.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="src_M_MOTIVES_cms2BWFMetaEdit.xsl" style="display:block">
-                              <table class="pWCont">
-                                 <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"MOTIVE"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Input: 'motive/theme' field
-            Output: cms data from the API
-            as xml
-        --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"theme"</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"queryURL"</span><span class="tAN"> select=</span><span class="tAV">"             concat(             'https://api.wnyc.org/api/v3/story/?audio_file=/',             $theme, '.mp3'             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"searchResultJson"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;searchResultJson</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"unparsed-text($queryURL)"</span><span class="tAN"> copy-namespaces=</span><span class="tAV">"no"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/searchResultJson&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"searchResultXml"</span><span class="tAN"> select=</span><span class="tAV">"json-to-xml($searchResultJson)/*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'xml search data: ',              $searchResultXml"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cmsRecordsFoundCount"</span><span class="tAN"> select=</span><span class="tAV">"$searchResultXml             /fn:map[@key='meta']             /fn:map[@key='pagination']             /fn:number[@key='count']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cmsRecordsFoundMessage"</span><span class="tAN"> select=</span><span class="tAV">"$cmsRecordsFoundCount,              'entries for',              $theme,             'with query',             $queryURL"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"$cmsRecordsFoundMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$cmsRecordsFoundCount = 1"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cmsData"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tEl">&lt;cmsData</span><span class="tEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"$searchResultXml/*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tEl">&lt;/cmsData&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$cmsData"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"'cms_records_found_count'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         $cmsRecordsFoundMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-            </td>
-            <td class="rt_lR"></td>
-         </tr>
-         <tr>
-            <td class="rt_cBL"></td>
-            <td class="rt_lB"></td>
-            <td class="rt_cBR"></td>
-         </tr>
-      </table><a id="M_keyS_cms2BWFMetaEdit.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">*[@key]</span></div>
-      <table class="rt">
-         <tr>
-            <td class="rt_cTL"></td>
-            <td class="rt_lT"></td>
-            <td class="rt_cTR"></td>
-         </tr>
-         <tr>
-            <td class="rt_lL"></td>
-            <td class="rt_cnt">
-               <table class="component">
-                  <tbody>
-                     <tr>
-                        <td class="fCol">Namespace</td>
-                        <td>No namespace</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Match</td>
-                        <td>*[@key]</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Mode</td>
-                        <td>#default</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Import precedence</td>
-                        <td>11</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_M_keyS_cms2BWFMetaEdit.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_keyS_cms2BWFMetaEdit.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="src_M_keyS_cms2BWFMetaEdit.xsl" style="display:block">
-                              <table class="pWCont">
-                                 <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"*[@key]"</span><span class="tAN"> xpath-default-namespace=</span><span class="tAV">"http://www.w3.org/2005/xpath-functions"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Convert @keys to elements --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"{@key}"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-            </td>
-            <td class="rt_lR"></td>
-         </tr>
-         <tr>
-            <td class="rt_cBL"></td>
-            <td class="rt_lB"></td>
-            <td class="rt_cBR"></td>
-         </tr>
-      </table><a id="T_exifFillerS_cms2BWFMetaEdit.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateName">exifFiller</span></div>
-      <table class="rt">
-         <tr>
-            <td class="rt_cTL"></td>
-            <td class="rt_lT"></td>
-            <td class="rt_cTR"></td>
-         </tr>
-         <tr>
-            <td class="rt_lL"></td>
-            <td class="rt_cnt">
-               <table class="component">
-                  <tbody>
-                     <tr>
-                        <td class="fCol">Namespace</td>
-                        <td>No namespace</td>
+                        <td>DAVID</td>
                      </tr>
                      <tr>
                         <td class="fCol">
                            <div class="flL">References</div>
-                           <div class="flR"><input id="bt_refs_T_exifFillerS_cms2BWFMetaEdit.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_T_exifFillerS_cms2BWFMetaEdit.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_refs_M_rdfDescriptionM_DAVIDS_Exif2Dbx.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_M_rdfDescriptionM_DAVIDS_Exif2Dbx.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="refs_T_exifFillerS_cms2BWFMetaEdit.xsl" style="display:block">
+                           <div id="refs_M_rdfDescriptionM_DAVIDS_Exif2Dbx.xsl" style="display:block">
                               <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Parameter</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter12.html#P_segmentFlagsS_parseDAVIDTitle.xsl" target="_self" title="No namespace" onclick="updPT('parseDAVIDTitle.xsl')">segmentFlags</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
                                  <tr>
                                     <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter17.html#T_strip-tagsS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')"><span class="nRf">strip-tags</span></a></div>
+                                          <div class="refItemBlock"><a href="masterRouter17.html#T_substring-before-lastS_trimStrings.xsl" target="_self" title="No namespace" onclick="updPT('trimStrings.xsl')"><span class="nRf">substring-before-last</span></a></div>
                                        </div>
                                     </td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">Variables</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter1.html#V_illegalCharactersS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')">illegalCharacters</a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter1.html#V_legalCharactersS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')">legalCharacters</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Parameters</div>
-                           <div class="flR"><input id="bt_prs_T_exifFillerS_cms2BWFMetaEdit.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_T_exifFillerS_cms2BWFMetaEdit.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="prs_T_exifFillerS_cms2BWFMetaEdit.xsl" style="display:block">
-                              <table class="attsT">
-                                 <thead>
-                                    <tr>
-                                       <th>QName</th>
-                                       <th>Namespace</th>
-                                    </tr>
-                                 </thead>
-                                 <tr>
-                                    <td class="fCol">cmsData</td>
-                                    <td>No namespace</td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">dbxURL</td>
-                                    <td>No namespace</td>
                                  </tr>
                               </table>
                            </div>
@@ -659,305 +530,240 @@ and output its data in BWF MetaEdit Core format</pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>11</td>
+                        <td>10</td>
                      </tr>
                      <tr>
                         <td class="fCol">
                            <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_T_exifFillerS_cms2BWFMetaEdit.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_exifFillerS_cms2BWFMetaEdit.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_src_M_rdfDescriptionM_DAVIDS_Exif2Dbx.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_rdfDescriptionM_DAVIDS_Exif2Dbx.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_T_exifFillerS_cms2BWFMetaEdit.xsl" style="display:block">
+                           <div id="src_M_rdfDescriptionM_DAVIDS_Exif2Dbx.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"exifFiller"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Map cms data as xml
-        to a bwf metaEdit kind of output --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"cmsData"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"dbxURL"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">exifFiller!</span><span class="tXSLEl">&lt;/xsl:message&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'xmlData:', $cmsData"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"producingOrganizations"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:Description"</span><span class="tAN"> mode=</span><span class="tAV">"DAVID"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Process a file --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"filename"</span><span class="tAN"> select=</span><span class="tAV">"                 normalize-space(RIFF:Description)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"catalogURL"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     normalize-space(RIFF:Source)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"instantiationDate"</span><span class="tAN"> select=</span><span class="tAV">"                 substring-before(System:FileCreateDate, ' ')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"instantiationDateMMDDYY"</span><span class="tAN"> select=</span><span class="tAV">"                 concat(                 substring($instantiationDate, 6, 2),                 substring($instantiationDate, 9, 2),                 substring($instantiationDate, 3, 2)                 )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!--        Parse the DAVID Title--&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"DAVIDTitleBeforeSpace"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     analyze-string(RIFF:Description, ' ')/fn:non-match[1]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!--        First, the tokenized title--&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"collectionAcronym"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     analyze-string(                     $DAVIDTitleBeforeSpace, '-')                     /fn:non-match[1]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"seriesAcronym"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"analyze-string($DAVIDTitleBeforeSpace, '-')/fn:non-match[2]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"parsedYear"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"analyze-string($DAVIDTitleBeforeSpace, '-')/fn:non-match[3]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"parsedMonth"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"analyze-string($DAVIDTitleBeforeSpace, '-')/fn:non-match[4]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"parsedDay"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"analyze-string($DAVIDTitleBeforeSpace, '-')/fn:non-match[5]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"DAVIDTitleDate"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"string-join(($parsedYear, $parsedMonth, $parsedDay), '-')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"DAVIDTitleDateTranslated"</span><span class="tAN"> select=</span><span class="tAV">"                 concat(                 translate(                 substring($DAVIDTitleDate, 1, 1),                 'u', '1'),                 translate(                 substring($DAVIDTitleDate, 2, 5),                 'u', '0'),                 translate(                 substring($DAVIDTitleDate, 7, 2),                 'u', '1'),                 translate(                 substring($DAVIDTitleDate, 9, 1),                 'u', '0'),                 translate(                 substring($DAVIDTitleDate, 10, 1),                 'u', '1')                 )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"instantiationID"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"analyze-string($DAVIDTitleBeforeSpace, '-')/fn:non-match[6]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"assetID"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"substring-before($instantiationID, '.')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"instantiationSuffix"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"substring-after($instantiationID, '.')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"freeText"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     normalize-space(                     substring-after(RIFF:Description, $DAVIDTitleBeforeSpace)                     )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"broadcastDate"</span><span class="tAN"> select=</span><span class="tAV">"RIFF:DateCreated"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"broadcastDateTranslated"</span><span class="tAN"> select=</span><span class="tAV">"concat(translate(substring($broadcastDate, 1, 1), 'u', '1'), translate(substring($broadcastDate, 2, 5), 'u', '0'), translate(substring($broadcastDate, 7, 2), 'u', '1'), translate(substring($broadcastDate, 9, 1), 'u', '0'), translate(substring($broadcastDate, 10, 1), 'u', '1'))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"originalMedium"</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Medium)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"theme"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"normalize-space($cmsData//data/attributes/producing-organizations)"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$cmsData//data/attributes/producing-organizations/name"</span><span class="tAN"> separator=</span><span class="tAV">" ; "</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains($freeText, 'ACLIP')"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat('archives', $instantiationDateMMDDYY, '_clip_from_', $assetID, '_', substring-after($instantiationID, '.'))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$cmsData//npr-analytics-dimensions[contains(./*, 'wnyc')]"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:message</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">NPR analytics!</span><span class="tXSLEl">&lt;/xsl:message&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'WNYC'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"                         matches(                         $freeText, $segmentFlags                         )                         and contains($freeText, 'WEB EDIT')"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"matchedSegmentFlag"</span><span class="tXSLEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 analyze-string($freeText, $segmentFlags)                                 /fn:match                                 "</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             concat(                             'archives',                             $instantiationDateMMDDYY, '_',                             lower-case($matchedSegmentFlag),                             '_from_', $assetID, '_', $instantiationSuffix)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$cmsData//npr-analytics-dimensions[contains(./*, 'wqxr')]"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:message</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">NPR analytics!</span><span class="tXSLEl">&lt;/xsl:message&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'WQXR'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains($filename, ' WEB EDIT')"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat('archive_import', $assetID)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains($cmsData//attributes/headers/brand/url, 'wqxr')"</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">WQXR</span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains($cmsData//attributes/headers/brand/url, 'wnyc')"</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">WNYC</span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">NYPR</span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"producers"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cmsURL"</span><span class="tAN"> select=</span><span class="tAV">"concat('http://audio.wnyc.org/archive_import', $theme, '.mp3')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"subjectNames"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     document(                     analyze-string(RIFF:Keywords, ';')/                     fn:non-match[contains(., 'id.loc.gov')]/                     concat(normalize-space(.), '.rdf')                     )/                     rdf:RDF/madsrdf:*/madsrdf:authoritativeLabel"</span><span class="tAN"> separator=</span><span class="tAV">" ; "</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"sampleRate"</span><span class="tAN"> select=</span><span class="tAV">"                 normalize-space(RIFF:SampleRate)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"dbxURL"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$cmsData//data/attributes/appearances/producers"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$cmsData//data/attributes/appearances/producers/name"</span><span class="tAN"> separator=</span><span class="tAV">" ; "</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"ends-with(System:FileName, '.WAV')"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat(substring-before(System:FileName, '.WAV'), '.DBX')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains($cmsData//attributes/headers/brand/url, 'wqxr')"</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">WQXR</span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">NYPR</span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"ends-with(System:FileName, '.wav')"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat(substring-before(System:FileName, '.wav'), '.DBX')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"authors"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$cmsData//data/attributes/appearances/authors"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$cmsData//data/attributes/appearances/authors/name"</span><span class="tAN"> separator=</span><span class="tAV">" ; "</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains($cmsData//attributes/headers/brand/url, 'wqxr')"</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">WQXR</span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">NYPR</span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"dbxFile"</span><span class="tAN"> select=</span><span class="tAV">"document($dbxURL[doc-available(.)])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"softDeleted"</span><span class="tAN"> select=</span><span class="tAV">"$dbxFile/ENTRIES/ENTRY/SOFTDELETED"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"performerNames"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     document(                     analyze-string(                     string-join((RIFF:Commissioned, RIFF:Artist), ' ; '),                     ';')/                     fn:non-match[contains(., 'id.loc.gov')]/                     concat(normalize-space(.), '.rdf')                     )/                     rdf:RDF/madsrdf:*/madsrdf:authoritativeLabel"</span><span class="tAN"> separator=</span><span class="tAV">" ; "</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"hosts"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$cmsData//data/attributes/appearances/hosts"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$cmsData//data/attributes/appearances/hosts/name"</span><span class="tAN"> separator=</span><span class="tAV">" ; "</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">NYPR Host</span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"publisherNames"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     document(                     analyze-string(RIFF:Commissioned, ';')/                     fn:non-match[contains(., 'id.loc.gov')]/                     concat(normalize-space(.), '.rdf')                     )/                     rdf:RDF/madsrdf:*/madsrdf:authoritativeLabel"</span><span class="tAN"> separator=</span><span class="tAV">" ; "</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!--        &lt;originaldata&gt;
-            &lt;xsl:copy-of select="$xmlData"&gt;&lt;/xsl:copy-of&gt;
-        &lt;/originaldata&gt;--&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;IARL</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"concat('US, ', $producingOrganizations)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/IARL&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;IART</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$cmsData/data/attributes/appearances/*/name"</span><span class="tAN"> separator=</span><span class="tAV">" ; "</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"not($cmsData//data/attributes/appearances/*/name)"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$producingOrganizations"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/IART&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;ICMS</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tC">&lt;!--&lt;xsl:variable name="producingOrganizationsAndProducers"&gt;
-                &lt;xsl:call-template name="mergeFields"&gt;
-                    &lt;xsl:with-param name="field1" select="$producingOrganizations"/&gt;
-                    &lt;xsl:with-param name="field2" select="$producers"/&gt;
-                &lt;/xsl:call-template&gt;
-            &lt;/xsl:variable&gt;
-            &lt;xsl:variable name="producingOrganizationsAndProducersAndAuthors"&gt;
-                &lt;xsl:call-template name="mergeFields"&gt;
-                    &lt;xsl:with-param name="field1" select="$producingOrganizationsAndProducers"/&gt;
-                    &lt;xsl:with-param name="field2" select="$authors"/&gt;
-                &lt;/xsl:call-template&gt;
-            &lt;/xsl:variable&gt;
-            &lt;xsl:call-template name="recursive-out-trim"&gt;
-                &lt;xsl:with-param name="input" select="$producingOrganizationsAndProducersAndAuthors"/&gt;
-                &lt;xsl:with-param name="endStr" select="';'"/&gt;
-            &lt;/xsl:call-template&gt;
-            &lt;xsl:text&gt;&amp;#013;&lt;/xsl:text&gt;--&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/ICMS&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;ICMT</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"normalize-space(document($cmsData//dbxURL)/ENTRIES/ENTRY/REMARK)"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"document($cmsData//dbxURL)/ENTRIES/ENTRY/REMARK"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT"> ; </span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"strip-tags"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"text"</span><span class="tAN"> select=</span><span class="tAV">"concat('Story published at ', $cmsData//data/attributes/url, ' on ', $cmsData//data/attributes/newsdate)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"strip-tags"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"text"</span><span class="tAN"> select=</span><span class="tAV">"concat('. mp3 available at ', $cmsData//data/attributes/audio, ' as of ', current-date())"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-    </span><span class="tC">&lt;!--&lt;xsl:value-of
-                select="concat('Story published at ', $xmlData//data/attributes/url, ' on ', $xmlData//data/attributes/newsdate)"/&gt;--&gt;</span><span class="tI">
-    </span><span class="tC">&lt;!--            &lt;xsl:value-of
-                select="concat('. mp3 available at ', $xmlData//data/attributes/audio, ' as of ', current-date())"/&gt;--&gt;</span><span class="tI">
-    </span><span class="tC">&lt;!--&lt;xsl:text&gt;&amp;#013;&lt;/xsl:text&gt;--&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/ICMT&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;ICOP</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat('Terms of Use and Reproduction: ', $producingOrganizations)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"$cmsData//data/attributes/audio-may-download = 'true'"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat('
-Audio may download as of ', current-date())"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"$cmsData//data/attributes/audio-may-download = 'false'"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat('
-Audio may NOT download as of ', current-date())"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"$cmsData//data/attributes/audio-may-embed = 'true'"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat('
-Audio may be embedded as of ', current-date())"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"$cmsData//data/attributes/audio-may-embed = 'false'"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat('
-Audio may NOT be embedded as of ', current-date())"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"$cmsData//data/attributes/audio-may-stream = 'true'"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat('
-Audio may stream as of ', current-date())"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"$cmsData//data/attributes/audio-may-stream = 'false'"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat('
-Audio may NOT stream as of ', current-date())"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-For more information, visit http://www.wnyc.org
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/ICOP&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;ICRD</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$cmsData//data/attributes/newsdate"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/ICRD&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;IENG</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tC">&lt;!--&lt;xsl:choose&gt;
-                &lt;xsl:when test="document($dbxURL)/ENTRIES/ENTRY/EDITOR"&gt;
-                    &lt;xsl:value-of select="document($dbxURL)/ENTRIES/ENTRY/EDITOR"/&gt;
-                &lt;/xsl:when&gt;
-                &lt;xsl:when test="document($dbxURL)/ENTRIES/ENTRY/AUTHOR"&gt;
-                    &lt;xsl:value-of select="document($dbxURL)/ENTRIES/ENTRY/AUTHOR"/&gt;
-                &lt;/xsl:when&gt;
-                &lt;xsl:when test="document($dbxURL)/ENTRIES/ENTRY/CHANGEUSER"&gt;
-                    &lt;xsl:value-of select="document($dbxURL)/ENTRIES/ENTRY/CHANGEUSER"/&gt;
-                &lt;/xsl:when&gt;
-                &lt;xsl:otherwise&gt;
-                    &lt;xsl:value-of select="concat($producingOrganizations, ' engineer')"/&gt;
-                &lt;/xsl:otherwise&gt;
-            &lt;/xsl:choose&gt;--&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/IENG&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;IGNR</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tC">&lt;!--&lt;xsl:value-of select="document($dbxURL)/ENTRIES/ENTRY/CLASS"/&gt;
-            &lt;xsl:value-of select="concat(' ', $xmlData//data/type)"/&gt;--&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/IGNR&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;IKEY</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$cmsData//data/attributes/keywords != ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$cmsData//data/attributes/keywords"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$producingOrganizations"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/IKEY&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;IMED</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'audio'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/IMED&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;INAM</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"normalize-space($cmsData//data/attributes/title)"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"strip-tags"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"text"</span><span class="tAN"> select=</span><span class="tAV">"translate($cmsData//data/attributes/title, $illegalCharacters, $legalCharacters)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-        </span><span class="tC">&lt;!--                    &lt;xsl:value-of
-                        select="translate($xmlData//data/attributes/title, $illegalCharacters, $legalCharacters)"
-                    /&gt;--&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"normalize-space($cmsData//data/attributes/twitter-headline)"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"strip-tags"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"text"</span><span class="tAN"> select=</span><span class="tAV">"$cmsData//data/attributes/twitter-headline"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-        </span><span class="tC">&lt;!--                    &lt;xsl:value-of select="$xmlData//data/attributes/twitter-headline"/&gt;--&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"normalize-space($cmsData//data/attributes/tease)"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"strip-tags"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"text"</span><span class="tAN"> select=</span><span class="tAV">"translate($cmsData//data/attributes/tease, $illegalCharacters, $legalCharacters)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-        </span><span class="tC">&lt;!--&lt;xsl:value-of
-                        select="translate($xmlData//data/attributes/tease, $illegalCharacters, $legalCharacters)"
-                    /&gt;--&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"strip-tags"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"text"</span><span class="tAN"> select=</span><span class="tAV">"$cmsData//data/attributes/slug"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-        </span><span class="tC">&lt;!--                    &lt;xsl:value-of select="$xmlData//data/attributes/slug"/&gt;--&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/INAM&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;IPRD</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$cmsData//data/attributes/show-title != ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"translate($cmsData//data/attributes/show-title, $illegalCharacters, $legalCharacters)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat(' (', $producingOrganizations, ' show)')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$cmsData//data/attributes/series != ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"translate($cmsData//data/attributes/series/title, $illegalCharacters, $legalCharacters)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat(' (', $producingOrganizations, ' series)')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$cmsData//data/attributes/channel-title != ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"translate($cmsData//data/attributes/channel-title, $illegalCharacters, $legalCharacters)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat(' (', $producingOrganizations, ' channel)')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$producingOrganizations"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/IPRD&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;ISBJ</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"strip-tags"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"text"</span><span class="tAN"> select=</span><span class="tAV">"translate($cmsData//data/attributes/body, $illegalCharacters, $legalCharacters)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-    </span><span class="tC">&lt;!--&lt;xsl:value-of
-                select="translate($xmlData//data/attributes/body, $illegalCharacters, $legalCharacters)"/&gt;--&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'
-
-'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"document($cmsData//dbxURL)/ENTRIES/ENTRY/REMARK"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"document($cmsData//dbxURL)/ENTRIES/ENTRY/REMARK"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"contains($cmsData//data/attributes/url, '-dummy-post-')"</span><span class="tXSLEl">&gt;</span><span class="tT"> DUMMY POST </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"$cmsData//data/attributes/body = ''"</span><span class="tXSLEl">&gt;</span><span class="tT">NO DESCRIPTION</span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/ISBJ&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!--        &lt;ISFT&gt;
-            &lt;xsl:choose&gt;
-                &lt;xsl:when test="document($xmlData//dbxURL)/ENTRIES/ENTRY/GENERATOR"&gt;
-                    &lt;xsl:value-of select="document($xmlData//dbxURL)/ENTRIES/ENTRY/GENERATOR"/&gt;
-                &lt;/xsl:when&gt;
-                &lt;xsl:otherwise&gt;UNKNOWN SOFTWARE&lt;/xsl:otherwise&gt;
-            &lt;/xsl:choose&gt;
-            &lt;xsl:text&gt;&amp;#013;&lt;/xsl:text&gt;
-        &lt;/ISFT&gt;--&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;ISRC</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$cmsData//data/attributes/url"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/ISRC&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;ISRF</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat($producingOrganizations, ' audio. ', upper-case(substring($cmsData//data/type, 1, 1)), substring($cmsData//data/type, 2), ' id is ', $cmsData//data/id, '.')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/ISRF&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;ITCH</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tC">&lt;!--&lt;xsl:choose&gt;
-                &lt;xsl:when test="document($dbxURL)/ENTRIES/ENTRY/EDITOR"&gt;
-                    &lt;xsl:value-of select="document($dbxURL)/ENTRIES/ENTRY/EDITOR"/&gt;
-                &lt;/xsl:when&gt;
-                &lt;xsl:when test="document($dbxURL)/ENTRIES/ENTRY/AUTHOR"&gt;
-                    &lt;xsl:value-of select="document($dbxURL)/ENTRIES/ENTRY/AUTHOR"/&gt;
-                &lt;/xsl:when&gt;
-                &lt;xsl:when test="document($dbxURL)/ENTRIES/ENTRY/CHANGEUSER"&gt;
-                    &lt;xsl:value-of select="document($dbxURL)/ENTRIES/ENTRY/CHANGEUSER"/&gt;
-                &lt;/xsl:when&gt;
-                &lt;xsl:otherwise&gt;
-                    &lt;xsl:value-of select="concat($producingOrganizations, ' engineer')"/&gt;
-                &lt;/xsl:otherwise&gt;
-            &lt;/xsl:choose&gt;--&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/ITCH&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- DBX OUTPUT --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$sampleRate = ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> terminate=</span><span class="tAV">"yes"</span><span class="tAN"> select=</span><span class="tAV">"'UNKNOWN SAMPLE RATE'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             concat(                             '***********************ONLY ', $sampleRate, ' FILES!!!!!!!!!!',                             '***********************ONLY ', $sampleRate, ' FILES!!!!!!!!!!',                             '***********************ONLY ', $sampleRate, ' FILES!!!!!!!!!!',                             '***********************ONLY ', $sampleRate, ' FILES!!!!!!!!!!',                             '***********************ONLY ', $sampleRate, ' FILES!!!!!!!!!!',                             '***********************ONLY ', $sampleRate, ' FILES!!!!!!!!!!'                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:comment&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;ENTRY</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;CLASS</span><span class="tEl">&gt;</span><span class="tT">Audio</span><span class="tEl">&lt;/CLASS&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"concat('SAMPLE RATE: ', $sampleRate)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;TITLE</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains($filename, '.wav')"</span><span class="tXSLEl">&gt;</span><span class="tI">
+              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"substring-before($filename, concat('.', 'wav'))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains($filename, '.WAV')"</span><span class="tXSLEl">&gt;</span><span class="tI">
+              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"substring-before($filename, concat('.', 'WAV'))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
+              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$filename"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/TITLE&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;FILENAME</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat(System:Directory, '/', System:FileName)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/FILENAME&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;DATE</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$DAVIDTitleDateTranslated"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/DATE&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;TIME</span><span class="tEl">&gt;</span><span class="tT">00:00:00</span><span class="tEl">&lt;/TIME&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;TIMESTAMP</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:DateTimeOriginal)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/TIMESTAMP&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"contains($freeText, ' WEB EDIT') or contains($freeText, ' ACLIP')"</span><span class="tXSLEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;READY</span><span class="tEl">&gt;</span><span class="tT">1</span><span class="tEl">&lt;/READY&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;PERFECT</span><span class="tEl">&gt;</span><span class="tT">1</span><span class="tEl">&lt;/PERFECT&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;PROGRAM</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Product)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/PROGRAM&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;SUBJECT</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Genre)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/SUBJECT&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;RESSORT</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Genre)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/RESSORT&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;BROADCASTDATE</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$broadcastDateTranslated"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/BROADCASTDATE&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;AUTHOR</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Technician)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/AUTHOR&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;EDITOR</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Technician)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/EDITOR&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;SOURCE</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Medium)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/SOURCE&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;KEYWORDS</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tC">&lt;!-- This field accepts up to 99 characters --&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"string-length($subjectNames) gt 99"</span><span class="tXSLEl">&gt;</span><span class="tI">
+              </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"trimmedSubjects"</span><span class="tAN"> select=</span><span class="tAV">"substring($subjectNames, 1, 99)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+              </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"substring-before-last"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tAN"> select=</span><span class="tAV">"$trimmedSubjects"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"substr"</span><span class="tAN"> select=</span><span class="tAV">"';'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+              </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
+              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$subjectNames"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/KEYWORDS&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;REMARK</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat(RIFF:Subject, '
+')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"(RIFF:CodingHistory) and not(contains(RIFF:CodingHistory, 'D.A.V.I.D.'))"</span><span class="tXSLEl">&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat('Technical info: ', RIFF:CodingHistory, '
+')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat('Comment: ', RIFF:Comment, '
+')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/REMARK&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;BITRATE</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:BitsPerSample"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/BITRATE&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;TYPE</span><span class="tEl">&gt;</span><span class="tT">Raw Audio</span><span class="tEl">&lt;/TYPE&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"$theme ne ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;MOTIVE</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$theme"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/MOTIVE&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;GENERICTITLE</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Title)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/GENERICTITLE&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;PERFORMER</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$performerNames"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/PERFORMER&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;ALBUM</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Product)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/ALBUM&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;DISTRIBUTION</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Copyright)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/DISTRIBUTION&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;CDINFO</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;GENRE</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Genre)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/GENRE&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;PUBLISHER</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$publisherNames"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/PUBLISHER&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/CDINFO&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;USA</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;WNYC</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;CATALOG</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$catalogURL"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/CATALOG&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"normalize-space(XMP-dc:Coverage)"</span><span class="tXSLEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;LOCATION</span><span class="tEl">&gt;</span><span class="tI">
+                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat(substring-before(substring-after(XMP-dc:Coverage, '@'), ','), ', ', substring-before(substring-after(substring-after(XMP-dc:Coverage, '@'), ','), ','))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;/LOCATION&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"normalize-space(XMP-xmpDM:Lyrics)"</span><span class="tXSLEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;TRANSCRIPT</span><span class="tEl">&gt;</span><span class="tI">
+                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"XMP-xmpDM:Lyrics"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;/TRANSCRIPT&gt;</span><span class="tI">
+            </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;TYPE</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'Raw Audio'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/TYPE&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/WNYC&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/USA&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/ENTRY&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
 </span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
                                  </tr>
                               </table>

@@ -113,6 +113,12 @@
 		<collURL>http://id.loc.gov/authorities/names/n79132010</collURL>
 	</collection>
 	<collection>
+		<collAcro>PALY</collAcro>
+		<collName>Paley Center for Media</collName>
+		<collLocation>US</collLocation>
+		<collURL>https://id.loc.gov/authorities/names/no2011055387</collURL>
+	</collection>
+	<collection>
 		<collAcro>PRI</collAcro>
 		<collName>Public Radio International</collName>
 		<collLocation>US</collLocation>

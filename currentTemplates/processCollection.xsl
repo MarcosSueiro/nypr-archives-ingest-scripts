@@ -18,7 +18,7 @@
 
     <xsl:param name="collectionConcordance" select="document('CollectionConcordance.xml')"/>
     <xsl:param name="separatingToken" select="';'"/>
-    <xsl:param name="validatingString" select="'http://id.loc.gov/'"/>
+    <xsl:param name="validatingString" select="'id.loc.gov/'"/>
 
     <xsl:template name="collections">
         <!-- Accept one or more collection acronyms -->
@@ -55,7 +55,7 @@
                 select="
                     $collectionConcordance/collections
                     /collection[collAcro = $collectionAcronym]
-                    /collURL[starts-with(., 'http://id.loc.gov')]"
+                    /collURL[contains(., 'id.loc.gov')]"
                 mode="getLOCData"/>
         </xsl:variable>
         <collectionInfo>
@@ -96,9 +96,9 @@
     </xsl:template>
 
     <xsl:template name="getCollectionLoCName" 
-        match=".[starts-with(., 'http://id.loc.gov')]"
+        match=".[contains(., 'id.loc.gov')]"
         mode="getCollectionLoCName">
-        <xsl:call-template name="locName">
+        <xsl:call-template name="locLabel">
             <xsl:with-param name="url" select="."/>
         </xsl:call-template>
     </xsl:template>

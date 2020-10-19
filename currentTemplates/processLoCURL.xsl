@@ -42,14 +42,14 @@
 
     <xsl:variable name="separatingToken" select="';'"/>
     <xsl:variable name="separatingTokenLong" select="concat(' ', $separatingToken, ' ')"/>
-    <xsl:variable name="validatingKeywordString" select="'http://id.loc.gov/authorities/subjects/'"/>
-    <xsl:variable name="validatingNameString" select="'http://id.loc.gov/authorities/names/'"/>
+    <xsl:variable name="validatingKeywordString" select="'id.loc.gov/authorities/subjects/'"/>
+    <xsl:variable name="validatingNameString" select="'id.loc.gov/authorities/names/'"/>
     <xsl:variable name="combinedValidatingStrings"
         select="
             string-join(($validatingKeywordString, $validatingNameString), '|')"/>
 
     <xsl:template name="getLOCData" match="
-            .[starts-with(., 'http://id.loc.gov')]"
+            .[contains(., 'id.loc.gov')]"
         mode="getLOCData">
         <!-- Get data from an LoC URL -->
         <xsl:param name="LOCURL" select="."/>
@@ -120,9 +120,9 @@
             separator="{$separatingTokenLong}"/>
     </xsl:template>
 
-    <xsl:template name="locName" match="
-            .[starts-with(., 'http://id.loc.gov/')]"
-        mode="locName">
+    <xsl:template name="locLabel" match="
+            .[contains(., 'id.loc.gov/')]"
+        mode="locLabel">
         <!-- Get LoC name from URL-->
         <xsl:param name="url" select="."/>
         <xsl:param name="locData">
@@ -137,9 +137,9 @@
         </locName>
     </xsl:template>
 
-    <xsl:template name="extractName" match="
-            madsrdf:NameTitle" mode="extractName">
-        <!-- Find the author in name/title LoC Entries -->
+    <xsl:template name="nameInNameTitle" match="
+            madsrdf:NameTitle" mode="nameInNameTitle">
+        <!-- Find the name in name/title LoC Entries -->
         <xsl:param name="input" select="."/>
         <xsl:message select="concat('Extract name in nameTitle ', @rdf:about)"/>
         <xsl:variable name="nameInNameTitle"
@@ -147,10 +147,15 @@
                 madsrdf:componentList
                 /(madsrdf:PersonalName | madsrdf:CorporateName)
                 /madsrdf:authoritativeLabel"/>
-        <xsl:message select="concat('Find LoC entry for ', $nameInNameTitle)"/>
+        <xsl:message select="
+            concat(
+            'Find LoC entry for ', 
+            $nameInNameTitle
+            )"/>
         <xsl:variable name="nameLoCEntry">
             <xsl:call-template name="directLOCSearch">
-                <xsl:with-param name="input" select="$nameInNameTitle"/>
+                <xsl:with-param name="input" select="
+                    $nameInNameTitle"/>
                 <xsl:with-param name="mustFind" select="true()"/>
             </xsl:call-template>
         </xsl:variable>
@@ -324,7 +329,7 @@
                 select="
                     $LOCData/rdf:RDF
                     /madsrdf:NameTitle"
-                mode="extractName"/>
+                mode="nameInNameTitle"/>
         </xsl:variable>
         <xsl:apply-templates
             select="
@@ -337,7 +342,8 @@
     <xsl:template name="narrowSubjects" match="
         ." mode="narrowSubjects" expand-text="yes">
         <!-- Accept a bunch of keywords; 
-            parse out only the simplest and narrowest.
+            parse out only the narrowest
+            or most specific.
         
         This template is the opposite of "broaderSubjects"-->
         <xsl:param name="subjectsProcessed"/>
@@ -352,9 +358,9 @@
             $validatingNameString"/>
         <xsl:param name="combinedValidatingStrings" select="
             $combinedValidatingStrings"/>
-
         <xsl:message select="
-            'Find narrower subjects for: ', $subjectsToProcess"/>
+            'Find narrowest subjects for: ', $subjectsToProcess, 
+            ' matching validating strings ', $combinedValidatingStrings"/>
         <xsl:variable name="subjectsToProcessParsed"
             select="
             WNYC:splitParseValidate(
@@ -370,118 +376,154 @@
                 $subjectsToProcessParsed/valid"/>
         <xsl:message select="
             'Valid subjects to process:', 
-            $subjectsToProcessValid"/>
+            string-join($subjectsToProcessValid, $separatingTokenLong)"/>
         <xsl:variable name="subjectsToProcessInvalid"
             select="
                 $subjectsToProcessParsed/invalid"/>
         <xsl:message select="
             'Invalid subjects to process:', 
             $subjectsToProcessInvalid"/>
-        <xsl:variable name="simpleSubjectsToProcessValid">
-            <xsl:for-each select="$subjectsToProcessValid">
+        <xsl:variable name="validComponents">
+            <xsl:for-each select="$subjectsToProcessValid">                
                 <xsl:variable name="LOCURL" select="."/>
                 <xsl:variable name="LOCRDF" select="
                     concat($LOCURL, '.rdf')"/>
                 <xsl:variable name="LOCData" select="
                     document($LOCRDF)"/>
-                <xsl:variable name="simpleSubject">
-                    <xsl:value-of
-                        select="
-                            $LOCData/rdf:RDF
-                            /madsrdf:*
-                            [not(madsrdf:componentList)]
-                            /@rdf:about"
-                    />
-                </xsl:variable>
-                <xsl:variable name="extractedName">
+                <xsl:variable name="LOCLabel" select="
+                    $LOCData
+                    /rdf:RDF
+                    /madsrdf:*
+                    /madsrdf:authoritativeLabel
+                    [@xml:lang='en' or not(@xml:lang)]"/>
+                <xsl:message select="
+                    concat('Extract components or names from ', 
+                    $LOCLabel)"/>
+                <!-- Extract name from name/title entry -->
+                
+                <xsl:variable name="nameInNameTitle">
                     <xsl:apply-templates
                         select="
                             $LOCData/rdf:RDF
-                            /madsrdf:NameTitle
-                            /@rdf:about"
-                        mode="extractName"/>
+                            /madsrdf:NameTitle"
+                        mode="nameInNameTitle"/>
                 </xsl:variable>
-                <xsl:variable name="componentTopics">
-                    <xsl:value-of
+                
+                <xsl:variable name="nameInNameTitleURL" select="
+                    $nameInNameTitle
+                    /rdf:RDF/@rdf:about"/>
+                <xsl:variable name="
+                    nameInNameTitleLabel" select="
+                    $nameInNameTitle
+                    /rdf:RDF
+                    /madsrdf:*
+                    /madsrdf:authoritativeLabel"/>
+                <xsl:message select="
+                    count($nameInNameTitle/rdf:RDF),
+                    'name in name title ', 
+                    $LOCLabel, ': ',
+                    $nameInNameTitleLabel"/>
+                <!-- Extract component topics -->
+                <xsl:variable name="componentTopics" 
                         select="
                             $LOCData/rdf:RDF
                             /madsrdf:*
                             /madsrdf:componentList
-                            /madsrdf:*
-                            /@rdf:about
-                            [matches(., $combinedValidatingStrings)]"
-                        separator="{$separatingTokenLong}"/>
-                </xsl:variable>
-                <xsl:message select="
-                    'Component topics: ', 
-                    $componentTopics"/>
-                <xsl:variable name="
-                    allSimpleSubjectsNamesComponents">
+                            /madsrdf:*                            
+                            [matches(@rdf:about, $combinedValidatingStrings)]"
+                        />
+                <xsl:message>
+                    <xsl:value-of select="
+                        count($componentTopics), 
+                        'component topics in ', 
+                        $LOCLabel, ': ' 
+                        "/>
+                    <xsl:value-of select="
+                        $componentTopics/madsrdf:authoritativeLabel
+                        [@xml:lang='en' or not(@xml:lang)]/normalize-space(.)" separator="
+                        {$separatingTokenLong}"/>
+                </xsl:message> 
+                <xsl:variable name="allNamesComponentsURLs">
                     <xsl:value-of
-                        select="
-                            $simpleSubject[. != ''] | 
-                            $extractedName[. != ''] | 
-                            $componentTopics[. != '']"
+                        select="                            
+                            $nameInNameTitle[. != '']/rdf:RDF/madsrdf:*/@rdf:about | 
+                            $componentTopics[. != '']/@rdf:about"
                         separator="{$separatingTokenLong}"/>
                 </xsl:variable>
                 <xsl:message
                     select="
-                    'All simple subject names components: ', 
-                    $allSimpleSubjectsNamesComponents"/>
+                    'URLs from names in nameTitles and components in', 
+                    $LOCLabel, ': ', 
+                    $allNamesComponentsURLs"/>
                 <xsl:copy-of
                     select="
                         WNYC:splitParseValidate(
-                        $allSimpleSubjectsNamesComponents, 
+                        $allNamesComponentsURLs, 
                         $separatingToken, 
                         $combinedValidatingStrings
                         )/valid"
                 />
             </xsl:for-each>
         </xsl:variable>
-        <xsl:message select="
-            'Simple subjects to process: ', 
-            $simpleSubjectsToProcessValid"/>
+        
+        <xsl:message>
+            <xsl:value-of select="'All valid URLs from names in nameTitles and components from '"/>
+            <xsl:value-of select="$subjectsToProcessValid" separator="{$separatingTokenLong}"/>
+            <xsl:value-of select="': '"/>
+            <xsl:copy-of select="$validComponents"/>
+        </xsl:message>
 
-        <!-- Output only simple topics 
-                without a narrower topic already included -->
+        <!-- Output only topics 
+                without a narrower 
+                or more specific topic 
+                already included -->
         <xsl:for-each select="
-            $simpleSubjectsToProcessValid/valid">
+            $subjectsToProcessValid">
+            <xsl:message select="
+                'Check to see if ', ., 
+                ' is the narrowest topic in this bunch.'"/>
             <xsl:variable name="LOCURL" select="."/>
             <xsl:variable name="LOCRDF" select="
                 concat($LOCURL, '.rdf')"/>
             <xsl:variable name="LOCData" select="
                 doc($LOCRDF)"/>
+            <xsl:variable name="subjectName" select="string(
+                $LOCData
+                /rdf:RDF
+                /madsrdf:*
+                /madsrdf:authoritativeLabel
+                )"/>
+            <xsl:variable name="narrowerTopics" select="
+                $LOCData/rdf:RDF/madsrdf:*
+                /madsrdf:hasNarrowerAuthority"/>
             <xsl:message
                 select="
-                    count(
-                    $LOCData/rdf:RDF/madsrdf:*
-                    /madsrdf:hasNarrowerAuthority
-                    ),
+                    count($narrowerTopics),
                     'narrower topic(s) found for',
-                    string(
-                    $LOCData
-                    /rdf:RDF
-                    /madsrdf:*
-                    /madsrdf:authoritativeLabel
-                    )"/>
+                    $subjectName"/>
+            <xsl:message select="
+                'See if narrower topics ', 
+                $narrowerTopics/madsrdf:Authority/@rdf:about, 
+                ' are already in ', $subjectsToProcessValid
+                "/>
+            <xsl:message>
+                <xsl:value-of select="
+                    'See if current URL ', $LOCURL, 
+                ' is in one of components ', $validComponents"/>
+                <xsl:value-of select="$LOCURL = $validComponents/valid"/>
+            </xsl:message>
             <xsl:copy
                 select="
                     $LOCData/rdf:RDF
-                    /madsrdf:*
+                    /madsrdf:*                    
                     [not(
                     madsrdf:hasNarrowerAuthority
                     /madsrdf:Authority
-                    /@rdf:about 
-                    = 
-                    $subjectsToProcessValid
-                    )]
-                    [not(
-                    madsrdf:componentList
-                    /madsrdf:*
                     /@rdf:about
-                    = 
+                    =
                     $subjectsToProcessValid
-                    )]
+                    )]                    
+                    [not($validComponents/valid =  $LOCURL)]
                     ">
                 <xsl:copy-of select="@rdf:about"/>
                 <xsl:copy-of select="madsrdf:authoritativeLabel"/>

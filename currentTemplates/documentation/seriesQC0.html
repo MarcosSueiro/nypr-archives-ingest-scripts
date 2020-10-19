@@ -3,25 +3,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <title>Stylesheet documentation for: selectionOrExcerpt.xsl</title>
+      <title>Stylesheet documentation for: seriesQC.xsl</title>
       <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
          <!--
         
-        var parametersBoxes= new Array('prs_M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl');
+        
+        
+        
+        var docBoxes= new Array('dS_seriesQC.xsl');
+
+        var sourceBoxes= new Array('src_M_seriesListS_seriesQC.xsl', 
+				'src_M_seriesS_seriesQC.xsl');
 
         
         
-        var docBoxes= new Array('dS_selectionOrExcerpt.xsl');
+        var referencesBoxes= new Array('refs_M_seriesS_seriesQC.xsl');
 
-        var sourceBoxes= new Array('src_M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl');
+        var importsBoxes= new Array('ip_seriesQC.xsl');
 
         
         
-        
-        
-        
-        var importedFromBoxes= new Array('ipF_selectionOrExcerpt.xsl');
-
         
         var button_prefix = 'bt_';
         
@@ -322,10 +323,10 @@
                               </span></td>
                      </tr>
                      <tr>
-                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, parametersBoxes);" class="control" /></span><span class="globalControlName">Parameters </span></td>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, referencesBoxes);" class="control" /></span><span class="globalControlName">References </span></td>
                      </tr>
                      <tr>
-                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, importedFromBoxes);" class="control" /></span><span class="globalControlName">Imported from
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, importsBoxes);" class="control" /></span><span class="globalControlName">Imported modules
                               </span></td>
                      </tr>
                      <tr>
@@ -342,8 +343,8 @@
                <td class="rt_cBR"></td>
             </tr>
          </table>
-      </div><a id="selectionOrExcerpt.xsl"></a><div class="cmpT">Stylesheet
-         <span class="qname">selectionOrExcerpt.xsl</span></div>
+      </div><a id="seriesQC.xsl"></a><div class="cmpT">Main stylesheet
+         <span class="qname">seriesQC.xsl</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -358,38 +359,51 @@
                      <tr>
                         <td class="fCol">
                            <div class="flL">Documentation</div>
-                           <div class="flR"><input id="bt_dS_selectionOrExcerpt.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_selectionOrExcerpt.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_dS_seriesQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_seriesQC.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="dS_selectionOrExcerpt.xsl" style="display:block">
+                           <div id="dS_seriesQC.xsl" style="display:block">
                               <div>
-                                 <h3>Description</h3><pre> Format XMP markers into text such as
-    
-Edited file timings:
-00:00:00 - Intro (.49 m)
+                                 <h3>Description</h3><pre> Accept a series list (with optional additional restrictions)
+        and generate a detailed error log 
+        according to the NYPR 'strict rules'
 
-00:00:00 - Intro
-00:26:00 - end hour
-00:26:00 - Intro (.49 m)
+Source document:
 
-00:26:00 - Intro
-00:52:00 - Marker 22
-</pre></div>
+Enter the series name under &lt;seriesName&gt;
+and any further refinements under &lt;searchString&gt;.
+
+For example, to QC the series 'Central Park Summerstage' and
+assets without a cassette instantiation from 'Memoirs of the Movies',
+the source xml document would be:
+
+&lt;seriesList&gt;
+    &lt;series&gt;
+        &lt;seriesName&gt;Central Park SummerStage&lt;/seriesName&gt;
+        &lt;searchString&gt;&lt;/searchString&gt;
+    &lt;/series&gt;
+&lt;/seriesList&gt;
+&lt;seriesList&gt;
+    &lt;series&gt;
+        &lt;seriesName&gt;Memoirs of the Movies&lt;/seriesName&gt;
+        &lt;searchString&gt;https://cavafy.wnyc.org/?facet_Series+Title%5B%5D=Memoirs+of+the+Movies&amp;amp;q=%22memoirs+of+the+movies%22+-cassette&lt;/searchString&gt;
+    &lt;/series&gt;
+&lt;/seriesList&gt; </pre></div>
                            </div>
                         </td>
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Imported from</div>
-                           <div class="flR"><input id="bt_ipF_selectionOrExcerpt.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ipF_selectionOrExcerpt.xsl');" class="control" /></div>
+                           <div class="flL">Imported modules</div>
+                           <div class="flR"><input id="bt_ip_seriesQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ip_seriesQC.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="ipF_selectionOrExcerpt.xsl" style="display:block">
+                           <div id="ip_seriesQC.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter7.html#Exif2Cavafy.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Cavafy.xsl')">Exif2Cavafy.xsl</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC1.html#cavafyStrictQC.xsl" target="_self" title="No namespace" onclick="updPT('cavafyStrictQC.xsl')">cavafyStrictQC.xsl</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -399,7 +413,7 @@ Edited file timings:
                      </tr>
                      <tr>
                         <td class="fCol">Stylesheet version</td>
-                        <td>1.0</td>
+                        <td>2.0</td>
                      </tr>
                   </tbody>
                </table>
@@ -411,10 +425,8 @@ Edited file timings:
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">             XMP-xmpDM:Tracks             /rdf:Bag             /rdf:li[@rdf:parseType
-            = 'Resource']             /XMP-xmpDM:Markers             /rdf:Bag             /rdf:li[@rdf:parseType
-            = 'Resource']</span></div>
+      </table><a id="M_seriesListS_seriesQC.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">seriesList</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -432,10 +444,63 @@ Edited file timings:
                      </tr>
                      <tr>
                         <td class="fCol">Match</td>
-                        <td>             XMP-xmpDM:Tracks             /rdf:Bag             /rdf:li[@rdf:parseType
-                           = 'Resource']             /XMP-xmpDM:Markers             /rdf:Bag             /rdf:li[@rdf:parseType
-                           = 'Resource']
+                        <td>seriesList</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Mode</td>
+                        <td>#default</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>6</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_M_seriesListS_seriesQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_seriesListS_seriesQC.xsl');" class="control" /></div>
                         </td>
+                        <td>
+                           <div id="src_M_seriesListS_seriesQC.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"seriesList"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tXSLEl">/&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="M_seriesS_seriesQC.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">series</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Match</td>
+                        <td>series</td>
                      </tr>
                      <tr>
                         <td class="fCol">Mode</td>
@@ -443,25 +508,20 @@ Edited file timings:
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Parameters</div>
-                           <div class="flR"><input id="bt_prs_M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl');" class="control" /></div>
+                           <div class="flL">References</div>
+                           <div class="flR"><input id="bt_refs_M_seriesS_seriesQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_M_seriesS_seriesQC.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="prs_M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl" style="display:block">
-                              <table class="attsT">
-                                 <thead>
-                                    <tr>
-                                       <th>QName</th>
-                                       <th>Namespace</th>
-                                       <th>Select</th>
-                                    </tr>
-                                 </thead>
+                           <div id="refs_M_seriesS_seriesQC.xsl" style="display:block">
+                              <table class="uBT">
                                  <tr>
-                                    <td class="fCol">frameRate</td>
-                                    <td>No namespace</td>
-                                    <td>                 number(                 substring-after(                 /rdf:RDF/rdf:Description
-                                       /*[local-name() = 'Tracks']                 /rdf:Bag                 /rdf:li     
-                                       /*[local-name() = 'FrameRate']                 , 'f'                 ))
+                                    <td class="fCol">Templates</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="seriesQC2.html#T_findCavafyXMLsS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="nRf">findCavafyXMLs</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC2.html#T_findSeriesXMLFromNameS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="nRf">findSeriesXMLFromName</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC3.html#T_generateErrorLogS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')"><span class="nRf">generateErrorLog</span></a></div>
+                                       </div>
                                     </td>
                                  </tr>
                               </table>
@@ -470,86 +530,62 @@ Edited file timings:
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>1</td>
+                        <td>6</td>
                      </tr>
                      <tr>
                         <td class="fCol">
                            <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_src_M_seriesS_seriesQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_seriesS_seriesQC.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl" style="display:block">
+                           <div id="src_M_seriesS_seriesQC.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"             XMP-xmpDM:Tracks             /rdf:Bag             /rdf:li[@rdf:parseType = 'Resource']             /XMP-xmpDM:Markers             /rdf:Bag             /rdf:li[@rdf:parseType = 'Resource']"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Format XMP markers into text --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"frameRate"</span><span class="tAN"> select=</span><span class="tAV">"                 number(                 substring-after(                 /rdf:RDF/rdf:Description                 /*[local-name() = 'Tracks']                 /rdf:Bag                 /rdf:li                 /*[local-name() = 'FrameRate']                 , 'f'                 ))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'Frame rate is ', $frameRate"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:message&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains(XMP-xmpDM:StartTime, 'f')"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"startHours"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             format-number(                             floor(                             (substring-before(                             XMP-xmpDM:StartTime, 'f'                             )                             div                             substring-after(XMP-xmpDM:StartTime, 'f')                             ) div 3600),                             '00'                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"startMinutes"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             format-number(                             floor(                             (                             (substring-before(XMP-xmpDM:StartTime, 'f')                             div                             substring-after(XMP-xmpDM:StartTime, 'f')                             ) mod 3600)                             div 60),                             '00'                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"startSeconds"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             format-number(                             floor(                             (                             (substring-before(XMP-xmpDM:StartTime, 'f')                             div substring-after(XMP-xmpDM:StartTime, 'f')                             ) mod 3600                             ) mod 60                             ),                             '00'                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"normalize-space(XMP-xmpDM:Duration)"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 concat(                                 $startHours, ':',                                 $startMinutes, ':',                                 $startSeconds                                 )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' - '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"XMP-xmpDM:Name"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' ('"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 format-number((                                 (substring-before(XMP-xmpDM:Duration, 'f')                                 div                                 substring-after(XMP-xmpDM:Duration, 'f'))                                 div 60),                                 '#.##'                                 )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' m)
-'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             concat(                             $startHours, ':',                              $startMinutes, ':',                              $startSeconds, ' - ',                              XMP-xmpDM:Name,                              '
-')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"startHours"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         format-number(                         floor(                         (XMP-xmpDM:StartTime div $frameRate)                          div 3600),                          '00')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"startMinutes"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         format-number(                         floor((                         (XMP-xmpDM:StartTime div $frameRate)                          mod 3600)                          div 60),                          '00')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"startSeconds"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         format-number(                         floor((                         (XMP-xmpDM:StartTime div $frameRate)                          mod 3600)                          mod 60),                          '00')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"normalize-space(XMP-xmpDM:Duration)"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains(XMP-xmpDM:Duration, 'f')"</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 concat(                                 $startHours, ':',                                  $startMinutes, ':',                                  $startSeconds)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' - '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"XMP-xmpDM:Name"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' ('"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"format-number((                                 (substring-before(XMP-xmpDM:Duration, 'f')                                  div substring-after(XMP-xmpDM:Duration, 'f')                                 ) div 60),                                  '#.##')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' m)
-'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 concat(                                 $startHours, ':',                                  $startMinutes, ':',                                  $startSeconds                                 )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' - '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"XMP-xmpDM:Name"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' ('"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"format-number(                                 (XMP-xmpDM:Duration div $frameRate)                                  div 60,                                  '#.##')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' m)
-'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     concat(                     $startHours, ':',                      $startMinutes, ':',                      $startSeconds, ' - ',                      XMP-xmpDM:Name,                      '
-')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"series"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"seriesEntry"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"findSeriesXMLFromName"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"seriesName"</span><span class="tAN"> select=</span><span class="tAV">"seriesName"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"seriesAssetsXMLs"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains(searchString, 'https://cavafy.wnyc.org/')"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"findCavafyXMLs"</span><span class="tXSLEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"textToSearch"</span><span class="tAN"> select=</span><span class="tAV">"                                 encode-for-uri(seriesName[. != ''])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1ToSearch"</span><span class="tAN"> select=</span><span class="tAV">"'title'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"series"</span><span class="tAN"> select=</span><span class="tAV">"seriesName[. != '']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"maxResults"</span><span class="tAN"> select=</span><span class="tAV">"10000"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"searchString"</span><span class="tAN"> select=</span><span class="tAV">"                                 searchString[contains(., 'https://cavafy.wnyc.org/')]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"findCavafyXMLs"</span><span class="tXSLEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"textToSearch"</span><span class="tAN"> select=</span><span class="tAV">"                                 encode-for-uri(seriesName[. != ''])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1ToSearch"</span><span class="tAN"> select=</span><span class="tAV">"'title'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"series"</span><span class="tAN"> select=</span><span class="tAV">"seriesName[. != '']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"maxResults"</span><span class="tAN"> select=</span><span class="tAV">"10000"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"completeLog"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;completeLog</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;seriesName</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"seriesName"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/seriesName&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;seriesEntry</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$seriesEntry"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/seriesEntry&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;seriesURL</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             $seriesEntry                             /pb:pbcoreCollection                             /pb:pbcoreDescriptionDocument                             /pb:pbcoreIdentifier                             [@source = 'pbcore XML database UUID']                             /concat(                             'https://cavafy.wnyc.org/assets/', .                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/seriesURL&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"                         $seriesAssetsXMLs/pb:pbcoreCollection"</span><span class="tAN"> mode=</span><span class="tAV">"cavafyStrictQC"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/completeLog&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"generateErrorLog"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"completeLog"</span><span class="tAN"> select=</span><span class="tAV">"$completeLog"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$completeLog"</span><span class="tXSLEl">/&gt;</span><span class="tI">
 </span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
                                  </tr>
                               </table>
