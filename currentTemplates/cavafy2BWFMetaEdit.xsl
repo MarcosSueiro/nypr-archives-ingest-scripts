@@ -15,11 +15,13 @@
     xmlns:madsrdf="http://www.loc.gov/mads/rdf/v1#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:pb="http://www.pbcore.org/PBCore/PBCoreNamespace.html" 
+    xmlns:RIFF="http://ns.exiftool.ca/RIFF/RIFF/1.0/"
     exclude-result-prefixes="#all">
     
     <xsl:output method="xml" version="1.0" indent="yes" encoding="ASCII"/>
 
     <xsl:import href="processLoCURL.xsl"/>
+    <xsl:import href="parseDAVIDTitle.xsl"/>
 
     <xsl:param name="cavafyValidatingString" 
         select="'https://cavafy.wnyc.org/assets/'"/>
@@ -37,7 +39,169 @@
     </xsl:template>
     
     <xsl:template match="pb:pbcoreDescriptionDocument">
-        <xsl:variable name="filename" select="concat('Filename', position() div 2, '.wav')"/>
+        <xsl:param name="cavafyxml" select="."/>
+        <xsl:param name="filename" select="concat('Filename', position() div 2, '.wav')"/>
+        <xsl:param name="parsedDAVIDTitle">
+            <xsl:call-template name="parseDAVIDTitle">
+                <xsl:with-param name="filenameToParse" select="$filename"/>
+            </xsl:call-template>
+        </xsl:param>
+        <xsl:param name="generation" select="
+            $parsedDAVIDTitle/parsedElements/parsedGeneration"/>        
+        <xsl:param name="assetID" select="
+            $parsedDAVIDTitle/parsedElements/assetID"/>
+        <xsl:param name="RIFF:ArchivalLocation">
+            <xsl:variable name="multipleCollections" select="count(pb:pbcoreTitle
+                [@titleType='Collection']) gt 1"/>
+                <xsl:value-of select="
+                    'MULTIPLE COLLECTIONS'[$multipleCollections]"/>
+                <xsl:value-of select="
+                    concat(
+                    'US, ', 
+                    pb:pbcoreTitle
+                    [@titleType='Collection']
+                    )"/>            
+        </xsl:param>
+        <xsl:param name="RIFF:Artist">
+            <xsl:value-of select="
+                    pb:pbcoreContributor
+                    /pb:contributor
+                    /@ref
+                    [matches(., $validatingNameString)]" separator="
+                    {$separatingTokenLong}"/>
+        </xsl:param>
+        <xsl:param name="RIFF:CommissionedBy">
+            <xsl:value-of select="
+                    pb:pbcoreCreator
+                    /pb:Creator
+                    /@ref
+                    [matches(., $validatingNameString)]" separator="
+                    {$separatingTokenLong}"/>
+        </xsl:param>
+        <xsl:param name="RIFF:Comment">
+            <xsl:value-of select="
+                    pb:pbcoreAnnotation" 
+                    separator="{$separatingTokenLong}"/>
+        </xsl:param>
+        <xsl:param name="RIFF:Copyright">
+            <xsl:value-of select="
+                    pb:pbcoreRightsSummary/pb:rightsSummary"/>
+        </xsl:param>
+        <xsl:param name="RIFF:CreateDate">
+            <xsl:variable name="chosenAssetDate">
+                    <xsl:variable name="earliestAssetDate" select="
+                        min(
+                        pb:pbcoreAssetDate
+                        [not(contains(., 'u'))]/xs:date(.)
+                        )"/>
+                    <xsl:variable name="approxAssetDates" select="
+                        pb:pbcoreAssetDate[contains(., 'u')]"/>
+                    <xsl:value-of select="
+                        if(
+                        $earliestAssetDate gt xs:date('1000-01-01')
+                        )
+                        then $earliestAssetDate
+                        else if (min($approxAssetDates/pb:pbcoreAssetDate) !='')
+                        then min($approxAssetDates/pb:pbcoreAssetDate)
+                        else 'uuuu-uu-uu'"/>
+                </xsl:variable>
+                <xsl:value-of select="$chosenAssetDate"/>
+        </xsl:param>
+        <xsl:param name="RIFF:Engineer">
+            <xsl:value-of select="
+                pb:pbcoreContributor
+                [contains(pb:contributorRole, 'ngineer')]
+                /pb:contributor" separator="{$separatingTokenLong}"/>
+        </xsl:param>
+        <xsl:param name="RIFF:Genre">
+            <IGNR>
+                <xsl:value-of select="
+                    'MULTIPLE GENRES'[$multipleGenres]"/>
+                <xsl:value-of select="pb:pbcoreGenre"/>
+            </IGNR>
+        </xsl:param>
+        <xsl:param name="RIFF:Keywords">
+            <xsl:variable name="narrowSubjects">
+                    <xsl:call-template name="narrowSubjects">
+                        <xsl:with-param name="subjectsToProcess">
+                            <xsl:value-of
+                                select="
+                                pb:pbcoreSubject
+                                /@ref
+                                [matches(., $combinedValidatingStrings)]"
+                                separator="
+                                {$separatingTokenLong}"
+                            />
+                        </xsl:with-param>
+                    </xsl:call-template>
+                </xsl:variable>
+                <xsl:value-of select="
+                    $narrowSubjects
+                    /madsrdf:*
+                    /@rdf:about" separator="
+                    {$separatingTokenLong}"/>
+        </xsl:param>
+        <xsl:param name="RIFF:Medium">            
+            <xsl:variable name="possibleMediums">
+                <xsl:value-of
+                    select="
+                        distinct-values(
+                        pb:pbcoreInstantiation
+                        /pb:instantiationPhysical)"
+                    separator="
+                    {$separatingTokenLong}"/>
+            </xsl:variable>
+            <xsl:value-of
+                    select="
+                        
+                        if (contains($possibleMediums, $separatingToken))
+                        then
+                            'Audio material'
+                        else
+                            $possibleMediums"
+                />
+        </xsl:param>
+        <xsl:param name="RIFF:Name">
+            <xsl:variable name="multipleTitles" select="
+                count(pb:pbcoreTitle[@titleType='Episode']) gt 1"/>
+            <xsl:value-of select="'MULTIPLE TITLES'[$multipleTitles]"/>
+                <xsl:value-of select="
+                    pb:pbcoreTitle[@titleType='Episode']"/>
+        </xsl:param>
+        <xsl:param name="RIFF:Product">
+            <xsl:variable name="multipleSeries" select="
+                count(pb:pbcoreTitle[@titleType='Series']) gt 1"/>
+            <xsl:value-of select="'MULTIPLE SERIES'[$multipleSeries]"/>
+                    <xsl:value-of select="pb:pbcoreTitle[@titleType='Series']"/>
+        </xsl:param>
+        <xsl:param name="RIFF:Subject">
+            <xsl:variable name="multipleAbstracts" select="
+                count(pb:pbcoreDescription[@descriptionType='Abstract']) gt 1"/>
+            <xsl:value-of select="'MULTIPLE ABSTRACTS'[$multipleAbstracts]"/>
+            <xsl:value-of select="pb:pbcoreDescription[@descriptionType='Abstract']"/>
+        </xsl:param>
+        <xsl:param name="RIFF:Software" select="'Unknown software'"/>
+        <xsl:param name="RIFF:Source">
+            <xsl:value-of select="
+                concat(
+                'https://cavafy.wnyc.org/assets/', 
+                pb:pbcoreIdentifier
+                [@source='pbcore XML database UUID']
+                )"/>
+        </xsl:param>
+        <xsl:param name="RIFF:SourceForm">
+            <xsl:call-template name="checkConflicts">
+                <xsl:with-param name="field1" select="
+                    pb:pbcoreAnnotation
+                    [@annotationType = 'Provenance']"/>
+                <xsl:with-param name="defaultValue" select="
+                    concat(
+                    pb:pbcoreTitle[@titleType='Collection'], ' ', 
+                    $RIFF:Medium, ' ', 
+                    $generation, ' from ', $assetID)"/>
+            </xsl:call-template>
+            <xsl:value-of select="concat($RIFF:Medium, ' from ', pb:pbcoreIdentifier[@source='WNYC Archive Catalog'])"/>
+        </xsl:param>
         <xsl:element name="File">
             <xsl:attribute name="name" select="$filename"/>
                 <Core>
@@ -45,104 +209,49 @@
                         <xsl:value-of select="$filename"/>
                     </Description>
                     <IARL>
-                        <xsl:value-of select="
-                            concat(
-                            'US, ', 
-                            pb:pbcoreTitle
-                            [@titleType='Collection']
-                            )"/>
+                        <xsl:value-of select="$RIFF:ArchivalLocation"/>
                     </IARL>
                     <IART>
-                        <xsl:value-of select="
-                            pb:pbcoreContributor
-                            /pb:contributor
-                            /@ref
-                            [matches(., $validatingNameString)]" separator="
-                            {$separatingTokenLong}"/>
+                        <xsl:value-of select="$RIFF:Artist"/>
                     </IART>
                     <ICMS>
-                        <xsl:value-of select="
-                            pb:pbcoreCreator
-                            /pb:Creator
-                            /@ref
-                            [matches(., $validatingNameString)]" separator="
-                            {$separatingTokenLong}"/>
+                        <xsl:value-of select="$RIFF:CommissionedBy"/>
                     </ICMS>
                     <ICMT>
-                        <xsl:value-of select="
-                            pb:pbcoreAnnotation" 
-                            separator="{$separatingTokenLong}"/>
+                        <xsl:value-of select="$RIFF:Comment"/>
                     </ICMT>
-                    <ICOP>
-                        <xsl:value-of select="
-                            pb:pbcoreRightsSummary/pb:rightsSummary"/>
-                    </ICOP>                    
                     <ICRD>
-                        <xsl:variable name="chosenAssetDate">
-                            <xsl:variable name="earliestAssetDate" select="
-                                min(
-                                pb:pbcoreAssetDate
-                                [not(contains(., 'u'))]/xs:date(.)
-                                )"/>
-                            <xsl:variable name="approxAssetDates" select="
-                                pb:pbcoreAssetDate[contains(., 'u')]"/>
-                            <xsl:value-of select="
-                                if(
-                                $earliestAssetDate gt xs:date('1000-01-01')
-                                )
-                                then $earliestAssetDate
-                                else if (min($approxAssetDates/pb:pbcoreAssetDate) !='')
-                                then min($approxAssetDates/pb:pbcoreAssetDate)
-                                else 'uuuu-uu-uu'"/>
-                        </xsl:variable>
-                        <xsl:value-of select="$chosenAssetDate"/>
+                        <xsl:value-of select="$RIFF:CreateDate"/>
                     </ICRD>
-                    <IENG>Unknown engineer&#xD;</IENG>
+                    <IENG>
+                        <xsl:value-of select="$RIFF:Engineer"/>
+                    </IENG>
                     <IGNR>
-                        <xsl:value-of select="pb:pbcoreGenre"/>
+                        <xsl:value-of select="$RIFF:Genre"/>
                     </IGNR>
-                <IKEY>
-                    <xsl:variable name="narrowSubjects">
-                        <xsl:call-template name="narrowSubjects">
-                            <xsl:with-param name="subjectsToProcess">
-                                <xsl:value-of
-                                    select="
-                                        pb:pbcoreSubject
-                                        /@ref
-                                        [matches(., $combinedValidatingStrings)]"
-                                    separator="
-                                    {$separatingTokenLong}"
-                                />
-                            </xsl:with-param>
-                        </xsl:call-template>
-                    </xsl:variable>
-                    <xsl:value-of select="
-                        $narrowSubjects
-                        /madsrdf:*
-                        /@rdf:about" separator="
-                        {$separatingTokenLong}"/>
-                </IKEY>
-                    <IMED>Audio material</IMED>
+                    <IKEY>
+                        <xsl:value-of select="$RIFF:Keywords"/>
+                    </IKEY>
+                    <IMED>
+                        <xsl:value-of select="$RIFF:Medium"/>
+                    </IMED>
                     <INAM>
-                        <xsl:value-of select="pb:pbcoreTitle[@titleType='Episode']"/>
+                        <xsl:value-of select="$RIFF:Name"/>
                     </INAM>
                     <IPRD>
-                        <xsl:value-of select="pb:pbcoreTitle[@titleType='Series']"/>
+                        <xsl:value-of select="$RIFF:Product"/>
                     </IPRD>
                     <ISBJ>
-                        <xsl:value-of select="pb:pbcoreDescription[@descriptionType='Abstract']"/>
+                        <xsl:value-of select="$RIFF:Subject"/>
                     </ISBJ>
-                    <ISFT>Unknown software</ISFT>
+                    <ISFT>
+                        <xsl:value-of select="$RIFF:Software"/>
+                    </ISFT>
                     <ISRC>
-                        <xsl:value-of select="
-                            concat(
-                            'https://cavafy.wnyc.org/assets/', 
-                            pb:pbcoreIdentifier
-                            [@source='pbcore XML database UUID']
-                            )"/>
+                        <xsl:value-of select="$RIFF:Source"/>
                     </ISRC>
                     <ISRF>
-                        <xsl:value-of select="concat('Audio material from ', pb:pbcoreIdentifier[@source='WNYC Archive Catalog'])"/>
+                        <xsl:value-of select="$RIFF:SourceForm"/>
                     </ISRF>
                     <ITCH>Unknown technician</ITCH>
                 </Core>

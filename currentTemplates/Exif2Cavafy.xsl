@@ -79,7 +79,7 @@ to a pbcore cavafy entry -->
 
         <!--Collection -->
         <!--Embedded collection is of the type 'US, WNYC' 
-                    So we look after the comma-->
+                    So we look after the comma -->
         <xsl:variable name="collectionAcronym">
             <xsl:value-of
                 select="
@@ -176,7 +176,7 @@ to a pbcore cavafy entry -->
                 <!-- Identifiers -->
                 <!-- The identifier of type 'WNYC Archive Catalog', 
                     along with the collection name,
-                    are necessary to import assets into cavafy-->
+                    are necessary to import assets into cavafy -->
                 <pbcoreIdentifier source="WNYC Archive Catalog">
                     <xsl:value-of select="$assetID"/>
                 </pbcoreIdentifier>
@@ -276,7 +276,7 @@ to a pbcore cavafy entry -->
                 <!-- The collection name, 
                     along with the identifier 
                     of type 'WNYC Archive Catalog',
-                    are necessary to import assets into cavafy-->
+                    are necessary to import assets into cavafy -->
                 <pbcoreTitle titleType="Collection">
                     <xsl:value-of select="$collectionAcronym"/>
                 </pbcoreTitle>
@@ -286,7 +286,7 @@ to a pbcore cavafy entry -->
                 </pbcoreTitle>
                 
                 <!-- Apply asset-level fields 
-                    to instantiations that are not an excerpt-->
+                    to instantiations that are not an excerpt -->
                 <xsl:if test="
                         not(contains($generation, 'segment'))">
 
@@ -338,7 +338,7 @@ to a pbcore cavafy entry -->
                         </pbcoreDescription>
                     </xsl:if>
 
-                    <!-- Markers as excerpts-->
+                    <!-- Markers as excerpts -->
                     <xsl:if
                         test="
                         XMP-xmpDM:Tracks
@@ -422,7 +422,7 @@ to a pbcore cavafy entry -->
                             [@descriptionType = 'Transcript']
                             /normalize-space(.)
                             "
-                            separator="+++++++++++++++++++++++++++++++"/>
+                            separator="{$separatingTokenForFreeTextFields}"/>
                     </xsl:variable>
 
                     <xsl:if test="normalize-space(XMP-xmpDM:Lyrics)">
@@ -655,7 +655,7 @@ to a pbcore cavafy entry -->
                     </xsl:if>
                 </xsl:if>
 
-                <!--Adding creators-->
+                <!--Adding creators -->
                 <xsl:call-template name="parseContributors">
                     <xsl:with-param name="contributorsToProcess" 
                         select="RIFF:Commissioned"/>
@@ -728,7 +728,7 @@ to a pbcore cavafy entry -->
                     </xsl:when>
                     <xsl:otherwise>
 
-                        <!-- instantiations-->
+                        <!-- instantiations -->
 
                         <pbcoreInstantiation>
                             <instantiationIdentifier source="WNYC Media Archive Label">
@@ -843,7 +843,7 @@ to a pbcore cavafy entry -->
                                 <xsl:value-of select="normalize-space(RIFF:Comment)"/>
                             </instantiationAnnotation>
 
-                            <!--essence tracks-->
+                            <!--essence tracks -->
                             <instantiationEssenceTrack>
                                 <essenceTrackType>audio</essenceTrackType>
                                 <essenceTrackIdentifier source="DAVID Title">

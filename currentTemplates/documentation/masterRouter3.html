@@ -455,7 +455,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>23</td>
+                        <td>28</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -530,12 +530,12 @@
                                  <tr>
                                     <td class="fCol">directory</td>
                                     <td>No namespace</td>
-                                    <td>substring-before($fullFilenameTranslated, $filename)</td>
+                                    <td>             substring-before($fullFilenameTranslated, $filename)</td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">filename</td>
                                     <td>No namespace</td>
-                                    <td>$parsedFullFilename/fn:non-match[last()]</td>
+                                    <td>             $parsedFullFilename/fn:non-match[last()]</td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">filenameExtension</td>
@@ -561,12 +561,12 @@
                                  <tr>
                                     <td class="fCol">fullFilenameTranslated</td>
                                     <td>No namespace</td>
-                                    <td>translate(@name, '\', '/')</td>
+                                    <td>             translate(@name, '\', '/')</td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">parsedFullFilename</td>
                                     <td>No namespace</td>
-                                    <td>analyze-string($fullFilenameTranslated, '/')</td>
+                                    <td>             analyze-string($fullFilenameTranslated, '/')</td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">token</td>
@@ -579,7 +579,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>23</td>
+                        <td>28</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -591,13 +591,13 @@
                               <table class="pWCont">
                                  <tr>
                                     <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"File"</span><span class="tAN"> mode=</span><span class="tAV">"BWFMetaEdit"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Transform each WAVE file --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Transform each WAVE file to exiftool --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"fullFilename"</span><span class="tAN"> select=</span><span class="tAV">"@name"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"fullFilenameTranslated"</span><span class="tAN"> select=</span><span class="tAV">"translate(@name, '\', '/')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"parsedFullFilename"</span><span class="tAN"> select=</span><span class="tAV">"analyze-string($fullFilenameTranslated, '/')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"filename"</span><span class="tAN"> select=</span><span class="tAV">"$parsedFullFilename/fn:non-match[last()]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"fullFilenameTranslated"</span><span class="tAN"> select=</span><span class="tAV">"             translate(@name, '\', '/')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"parsedFullFilename"</span><span class="tAN"> select=</span><span class="tAV">"             analyze-string($fullFilenameTranslated, '/')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"filename"</span><span class="tAN"> select=</span><span class="tAV">"             $parsedFullFilename/fn:non-match[last()]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"token"</span><span class="tAN"> select=</span><span class="tAV">"'.'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"directory"</span><span class="tAN"> select=</span><span class="tAV">"substring-before($fullFilenameTranslated, $filename)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"directory"</span><span class="tAN"> select=</span><span class="tAV">"             substring-before($fullFilenameTranslated, $filename)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"filenameNoExtensionRaw"</span><span class="tAN"> select=</span><span class="tAV">"                 if ($token)                 then                     if (contains($filename, $token)) then                         string-join(tokenize($filename, $token, 'q')                         [position() ne last()], $token)                     else                         ''                 else                     $filename"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"filenameExtension"</span><span class="tAN"> select=</span><span class="tAV">"                 substring-after(                 substring-after($filename, $filenameNoExtensionRaw),                 $token)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tEl">&lt;rdf:Description</span><span class="tEl">&gt;</span><span class="tI">
@@ -706,6 +706,7 @@
     </span><span class="tEl">&lt;RIFF:CodingHistory</span><span class="tEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(Core/CodingHistory)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/RIFF:CodingHistory&gt;</span><span class="tI">
+    </span><span class="tC">&lt;!-- XMP --&gt;</span><span class="tI">
     </span><span class="tEl">&lt;XMP-xmp:CreatorTool</span><span class="tEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(Core/ISFT)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/XMP-xmp:CreatorTool&gt;</span><span class="tI">
@@ -790,7 +791,7 @@
                         <td>
                            <div id="dS_O_S_BWF2Exif.xsl" style="display:block">
                               <div>
-                                 <h3>Description</h3><pre>Gives line breaks etc</pre></div>
+                                 <h3>Description</h3><pre>Gives line breaks etc </pre></div>
                            </div>
                         </td>
                      </tr>

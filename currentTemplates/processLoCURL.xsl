@@ -37,7 +37,7 @@
 
     <xsl:mode on-no-match="deep-skip"/>
 
-    <!--Gives line breaks etc-->
+    <!--Gives line breaks etc -->
     <xsl:output method="xml" version="1.0" indent="yes"/>
 
     <xsl:variable name="separatingToken" select="';'"/>
@@ -73,7 +73,7 @@
         mode="LOCOccupationsAndFieldsOfActivity">
         <!-- Find LOC occupations
         and fields of activity
-        for a URL-->
+        for a URL -->
         <xsl:param name="artists"/>
         <xsl:param name="LOCURLs"
             select="
@@ -123,7 +123,7 @@
     <xsl:template name="locLabel" match="
             .[contains(., 'id.loc.gov/')]"
         mode="locLabel">
-        <!-- Get LoC name from URL-->
+        <!-- Get LoC name from URL -->
         <xsl:param name="url" select="."/>
         <xsl:param name="locData">
             <xsl:apply-templates select="." mode="getLOCData"/>
@@ -272,7 +272,7 @@
                 'broader topic(s) found for',
                 string($LOCData/rdf:RDF/madsrdf:*/madsrdf:authoritativeLabel)"/>
 
-        <!-- We only accept simple names and subjects-->
+        <!-- We only accept simple names and subjects -->
 
         <xsl:copy select="
                 $LOCData/rdf:RDF/madsrdf:*">
@@ -284,7 +284,7 @@
                 /madsrdf:*/madsrdf:authoritativeLabel"/>
         </xsl:copy>
 
-        <!--Recursively process broader topics-->
+        <!--Recursively process broader topics -->
         <xsl:apply-templates
             select="
                 $LOCData
@@ -534,7 +534,7 @@
     <xsl:template name="directLOCNameSearch" match="
         ." mode="directLOCNameSearch">
         <!-- Search for an exact name match in LOC
-        for a string-->
+        for a string -->
         <xsl:param name="termToSearch" select="."/>
         <xsl:param name="termToSearchClean"
             select="
@@ -569,7 +569,7 @@
     <xsl:template name="directLOCSubjectSearch" match="
         ." mode="directLOCSubjectSearch">
         <!-- Search for an exact subject in LOC
-        for a string-->
+        for a string -->
         <xsl:param name="termToSearch" select="."/>
         <xsl:param name="termToSearchClean"
             select="
@@ -966,7 +966,7 @@
             "
         mode="LOCSearch">
         <!-- Search LOC for strings
-        using its sru API-->
+        using its sru API -->
         <xsl:param name="searchTerm" select="."/>
         <xsl:param name="searchTermCap" select="
             WNYC:Capitalize($searchTerm, 1)"/>
@@ -1010,7 +1010,7 @@
             madsrdf:ConferenceName"
         mode="LOCtoPBCore" xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
         <!-- Convert an LOC entry
-        to a pbcoreSubject-->
+        to a pbcoreSubject -->
         <xsl:param name="LOCURL" select="@rdf:about"/>
         <xsl:param name="LOCRDF" select="concat($LOCURL, '.rdf')"/>
 
@@ -1035,7 +1035,7 @@
     <xsl:template match="assetsSubjects">
         <!-- Accept xml from phpMyAdmin 
         and select subjects 
-        without LOC URL entry-->
+        without LOC URL entry -->
         <xsl:copy>
             <xsl:apply-templates
                 select="
@@ -1048,7 +1048,7 @@
     <xsl:template match="assetSubject[chosenURL = 'paste URL here']">
         <!-- Accept row 
         from xml output by phpMyAdmin
-        and search LOC for possible matches to subject-->
+        and search LOC for possible matches to subject -->
         <xsl:copy>
             <subject>
                 <xsl:value-of select="@subject"/>
@@ -1274,7 +1274,7 @@
     <xsl:template match="pma_xml_export">
         <!-- Accept xml table from phpMyAdmin 
         and select subjects 
-        without LOC URL entry-->
+        without LOC URL entry -->
         <assetsSubjects>
             <xsl:apply-templates select="*:database[@name = 'pbcore']/table"/>
         </assetsSubjects>

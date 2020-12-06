@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Check and parse a DAVID title or filename 
-using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]-->
+using the pattern COLL-SERI-YYYY-MM-DD-12345.6[suffix] [generation] [MUNIID] [free text]-->
 <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:RIFF="http://ns.exiftool.ca/RIFF/RIFF/1.0/"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -14,7 +14,6 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
 
     <!-- Parse an NYPR Archives-conforming DAVID title -->
     <xsl:param name="maxCharacters" select="79"/>
-
 
     <!-- NYPR naming convention -->
     <xsl:param name="nyprNamingConvention" select="
@@ -383,35 +382,35 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
                 [not(//error)]
                 /checkedDAVIDTitle/DAVIDTitleBeforeSpace"/>
 
-        <xsl:message select="
+       <!-- <xsl:message select="
             concat('Filename to parse: ', $filenameToParse)"/>
         <xsl:message select="
             concat('Title to parse: ', $titleToParse)"/>
-
+-->
         <!--        Parse the DAVID Title -->
 
-        <xsl:variable name="splitDAVIDTitle">
+        <xsl:param name="splitDAVIDTitle">
             <xsl:apply-templates
                 select="
                     $checkedDAVIDTitle
                     [not(//error)]
                     /checkedDAVIDTitle/DAVIDTitle"
                 mode="splitDAVIDTitle"/>
-        </xsl:variable>
+        </xsl:param>
 
         <!--        First, the tokenized title -->
-        <xsl:variable name="DAVIDTitleTokenized" select="fn:tokenize($DAVIDTitleBeforeSpace, '-')"/>
-        <xsl:variable name="collectionAcronym" select="$splitDAVIDTitle/collectionAcronym"/>
-        <xsl:variable name="seriesAcronym" select="$splitDAVIDTitle/seriesAcronym"/>
-        <xsl:variable name="parsedYear" select="$splitDAVIDTitle/parsedYear"/>
-        <xsl:variable name="parsedMonth" select="$splitDAVIDTitle/parsedMonth"/>
-        <xsl:variable name="parsedDay" select="$splitDAVIDTitle/parsedDay"/>
-        <xsl:variable name="DAVIDTitleDate" select="$splitDAVIDTitle/DAVIDTitleDate"/>
-        <xsl:variable name="instantiationID" select="$splitDAVIDTitle/instantiationID"/>
-        <xsl:variable name="assetID" select="$splitDAVIDTitle/assetID"/>
-        <xsl:variable name="instantiationSuffix" select="$splitDAVIDTitle/instantiationSuffix"/>
-        <xsl:variable name="instantiationSegmentSuffix" select="$splitDAVIDTitle/instantiationSegmentSuffix"/>
-        <xsl:variable name="freeText" select="$splitDAVIDTitle/freeText"/>
+        <xsl:param name="DAVIDTitleTokenized" select="fn:tokenize($DAVIDTitleBeforeSpace, '-')"/>
+        <xsl:param name="collectionAcronym" select="$splitDAVIDTitle/collectionAcronym"/>
+        <xsl:param name="seriesAcronym" select="$splitDAVIDTitle/seriesAcronym"/>
+        <xsl:param name="parsedYear" select="$splitDAVIDTitle/parsedYear"/>
+        <xsl:param name="parsedMonth" select="$splitDAVIDTitle/parsedMonth"/>
+        <xsl:param name="parsedDay" select="$splitDAVIDTitle/parsedDay"/>
+        <xsl:param name="DAVIDTitleDate" select="$splitDAVIDTitle/DAVIDTitleDate"/>
+        <xsl:param name="instantiationID" select="$splitDAVIDTitle/instantiationID"/>
+        <xsl:param name="assetID" select="$splitDAVIDTitle/assetID"/>
+        <xsl:param name="instantiationSuffix" select="$splitDAVIDTitle/instantiationSuffix"/>
+        <xsl:param name="instantiationSegmentSuffix" select="$splitDAVIDTitle/instantiationSegmentSuffix"/>
+        <xsl:param name="freeText" select="$splitDAVIDTitle/freeText"/>
 
 
 
@@ -498,7 +497,7 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
             else
             $filenameExtension"/>
 
-        <!--            Find a matching instantiation -->
+        <!-- Find a matching instantiation -->
         <xsl:variable name="instantiationData">
             <xsl:call-template name="findInstantiation">
                 <xsl:with-param name="instantiationID" select="

@@ -20,6 +20,7 @@
     <xsl:import href="BWF2Exif.xsl"/>
     <xsl:import href="Exif2Slack.xsl"/>
     <xsl:import href="errorLog.xsl"/>
+    <xsl:import href="instantiationID2Exif.xsl"/>
 
     <xsl:output name="log" method="html" version="4.0" indent="yes"/>
     <xsl:output name="logXml" method="xml" version="1.0" indent="yes"/>
@@ -56,12 +57,13 @@
             <xsl:apply-templates select="entries" mode="spreadsheet"/>
             <xsl:apply-templates select="MediaInfo"/>
             <xsl:apply-templates select="rdf:RDF" mode="masterRouter"/>
+            <xsl:apply-templates select="instantiationIDs"/>
         </xsl:element>
     </xsl:template>
 
     <xsl:template name="BWFMetaEdit" match="conformance_point_document" mode="BWFMetaEdit">
         <!-- Accept a BWF MetaEdit xml document 
-            and convert to an exiftool kind of rdf document-->
+            and convert to an exiftool kind of rdf document -->
         <xsl:message>
             <xsl:value-of select="'This appears to be a BWF MetaEdit kind of document.'"/>
         </xsl:message>
@@ -84,7 +86,7 @@
     </xsl:template>
 
     <xsl:template name="mediaInfo" match="Mediainfo">
-        <!-- Accept a MediaInfo kind of xml document-->
+        <!-- Accept a MediaInfo kind of xml document -->
         <xsl:message>
             <xsl:value-of select="'This appears to be a MediaInfo kind of document.'"/>
         </xsl:message>
@@ -95,7 +97,7 @@
         <!-- Accept an exiftool kind of xml document
         as output from the command 
            exiftool -X -a -ext wav [directoryWithFiles]
-        or something similar to this-->
+        or something similar to this -->
 
         <!-- Basic info: type of document, number of instantiations -->
         <xsl:param name="input" select="."/>
@@ -150,7 +152,7 @@
         </xsl:for-each-group>
 
 
-        <!--Normally coming from a spreadsheet-->
+        <!--Normally coming from a spreadsheet -->
         <xsl:variable name="newAssets">
             <newAssets>
                 <xsl:copy-of
@@ -230,6 +232,7 @@
                 count(
                 $wavInstantiations/wavInstantiations/rdf:Description
                 )"/>
+       
         <xsl:variable name="archivesINGESTWavInstantiations">
             <archivesINGESTWavInstantiations>
                 <xsl:copy-of
@@ -239,6 +242,7 @@
                 />
             </archivesINGESTWavInstantiations>
         </xsl:variable>
+        
         <xsl:variable name="totalArchivesINGESTWavInstantiations"
             select="
                 count(
@@ -330,7 +334,7 @@
         </xsl:variable>
 
 
-        <!--        Check for errors in templates-->
+        <!--        Check for errors in templates -->
         <xsl:variable name="newAssetResults">
             <newAssetResults>
                 <xsl:apply-templates
@@ -371,6 +375,7 @@
                 />
             </archivesINGESTWavResults>
         </xsl:variable>
+        <xsl:message select="'Archives INGEST wav Instantiations:' , $archivesINGESTWavInstantiations/archivesINGESTWavInstantiations/rdf:Description"></xsl:message>
         <xsl:variable name="DAVIDWavInstantiationsFromArchivesResults">
             <DAVIDWavInstantiationsFromArchivesResults>
                 <xsl:apply-templates
@@ -405,7 +410,7 @@
             </DAVIDWavInstantiationsLatestNewscast>
         </xsl:variable>
         <xsl:variable name="DAVIDWavInstantiationsWNoThemeNotFromArchivesResults">
-            <DAVIDWavInstantiationsWNoThemeNotFromArchivesResults>
+            
                 <xsl:apply-templates
                     select="
                         $DAVIDWavInstantiationsWNoThemeNotFromArchives
@@ -413,10 +418,10 @@
                         /DAVIDWavInstantiation
                         /rdf:Description"
                 />
-            </DAVIDWavInstantiationsWNoThemeNotFromArchivesResults>
+            
         </xsl:variable>
 
-        <!--        Check for duplicate instantiations-->
+        <!--        Check for duplicate instantiations -->
         <xsl:variable name="allParsedElements">
             <allParsedElements>
                 <xsl:copy-of
@@ -441,7 +446,7 @@
                 mode="duplicateInstantiations"/>
         </xsl:variable>
 
-        <!--        All errors-->
+        <!--        All errors -->
         <xsl:variable name="ERRORS">
             <xsl:copy-of select="
                 $duplicateInstantiations"/>
@@ -583,9 +588,7 @@
         </xsl:variable>
 
 
-        <!--        ALL OUTPUTS-->
-
-        <xsl:message select="concat('Directory: ', $baseURI)"/>
+        <!--        ALL OUTPUTS -->
         <xsl:variable name="newExifOutput">
             <xsl:element name="rdf:RDF">
                 <xsl:namespace name="rdf"
@@ -637,7 +640,7 @@
             </xsl:element>
         </xsl:variable>
 
-<!--        Output 0.1: Complete Result Log-->
+<!--        Output 0.1: Complete Result Log -->
         <xsl:variable name="filenameLog"
             select="
                 concat(
@@ -711,21 +714,21 @@
         
         <!-- If no errors, all other outputs -->
 
-        <!--        Output 1: New ExifTool-->
+        <!--        Output 1: New ExifTool -->
         <xsl:variable name="filenameExif"
             select="concat(substring-before($baseURI, '.'), '_NewExif', format-date(current-date(), '[Y0001][M01][D01]'), '.xml')"/>
         <xsl:result-document format="Exif" href="{$filenameExif}">
             <xsl:copy-of select="$newExifOutput"/>
         </xsl:result-document>
 
-        <!--        Output 2: FADGI-->
+        <!--        Output 2: FADGI -->
         <xsl:variable name="filenameFADGI"
             select="concat(substring-before($baseURI, '.'), '_ForFADGI', format-date(current-date(), '[Y0001][M01][D01]'), '.xml')"/>
         <xsl:result-document format="FADGI" href="{$filenameFADGI}">
             <xsl:apply-templates select="$newExifOutput/rdf:RDF" mode="ixmlFiller"/>
         </xsl:result-document>
 
-        <!--        Output 3: cavafy-->
+        <!--        Output 3: cavafy -->
         <xsl:variable name="cavafyOutput">
             <xsl:apply-templates select="$newExifOutput/rdf:RDF" mode="cavafy"/>
         </xsl:variable>
@@ -740,7 +743,7 @@
             <xsl:with-param name="maxOccurrences" select="$maxCavafyAssets"/>
         </xsl:apply-templates>
 
-        <!--        Output 4: DAVID-->
+        <!--        Output 4: DAVID -->
         <!-- Output 4.1: MUNI -->
 
         <xsl:if
@@ -928,7 +931,8 @@
     <xsl:template name="duplicateInstantiations" match="
         allParsedElements" mode="
         duplicateInstantiations">
-        <!-- Check for duplicate instantiations within the document -->
+        <!-- Check for duplicate instantiations 
+            within the document -->
         <xsl:message>
             <xsl:value-of select="
                 'Check for duplicate instantiations ',
@@ -941,7 +945,7 @@
         <xsl:for-each
             select="
                 parsedElements
-                [./instantiationID =
+                [./instantiationID[. != ''] =
                 ./following-sibling::parsedElements
                 /instantiationID]">
             <xsl:variable name="errorMessage">
@@ -966,7 +970,7 @@
         <xsl:for-each
             select="
             parsedElements
-            [./instantiationID =
+            [./instantiationID[. != ''] =
             ./preceding-sibling::parsedElements
             /instantiationID]">
             <xsl:variable name="errorMessage">
@@ -989,9 +993,62 @@
         </xsl:for-each>
     </xsl:template>
 
-    <xsl:template name="breakItUp" match="
+    <xsl:template match="node()" name="breakItUp" mode="breakItUp">
+        <xsl:param name="firstOccurrence" select="1"/>
+        <xsl:param name="maxOccurrences" select="40"/>
+        <xsl:param name="total" select="count(child::*)"/>
+        <xsl:param name="baseURI" select="$baseURI"/>
+        <xsl:param name="filename" select="document-uri()"/>
+        <xsl:param name="filenameSuffix" select="'_ForCAVAFY'"/>
+        <xsl:param name="currentDate"
+            select="
+            format-date(current-date(), '[Y0001][M01][D01]')"/>
+        <xsl:param name="assetName" select="name(child::*[1])"/>
+        
+        <xsl:message select="'Break up document into ', $maxOccurrences, 'size pieces'"/>
+        
+        <xsl:variable name="lastPosition"
+            select="
+            count(
+            *[position() ge $firstOccurrence]
+            [position() le $maxOccurrences])"/>
+        <xsl:variable name="filenameCavafy"
+            select="
+            concat(
+            substring-before(
+            $baseURI, '.'),
+            $filenameSuffix,
+            $currentDate,
+            '_', $assetName,
+            $firstOccurrence, '-',
+            ($firstOccurrence + $lastPosition - 1),
+            '.xml'
+            )"/>
+        <xsl:result-document href="{$filenameCavafy}">
+            <xsl:copy>
+                <xsl:comment select="$assetName, $firstOccurrence, 'to', ($firstOccurrence + $lastPosition - 1), 'from a total of', $total"/>
+                <xsl:copy-of
+                    select="child::*[position() ge $firstOccurrence][position() le ($maxOccurrences)]"
+                />
+            </xsl:copy>
+        </xsl:result-document>
+        <xsl:if test="
+            ($firstOccurrence + $maxOccurrences) 
+            le $total">            
+            <xsl:call-template name="breakItUp">
+                <xsl:with-param name="firstOccurrence" select="
+                    $firstOccurrence + $maxOccurrences"/>
+                <xsl:with-param name="maxOccurrences" select="
+                    $maxOccurrences"/>
+                <xsl:with-param name="assetName" select="
+                    $assetName"/>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+
+    <!--<xsl:template name="breakItUp" match="
             pb:pbcoreCollection" mode="breakItUp">
-        <!-- break up large cavafy files -->
+        <!-\- break up large cavafy files -\->
         <xsl:param name="firstOccurrence" select="
             1" as="xs:integer"/>
         <xsl:param name="maxOccurrences" as="
@@ -1067,7 +1124,7 @@
                 </xsl:apply-templates>
             </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>
+    </xsl:template>-->
     
     
 

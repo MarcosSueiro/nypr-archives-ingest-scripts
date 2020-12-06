@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
     <!-- Convert Exif to BWF MetaEdit Core document, 
-    suitable for import-->
+    suitable for import -->
 <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:et="http://ns.exiftool.ca/1.0/"
     et:toolkit="Image::ExifTool 10.82" xmlns:ExifTool="http://ns.exiftool.ca/ExifTool/1.0/"
@@ -44,7 +44,7 @@
                 </xsl:element>
 
                 <!--NOTE: Originator Reference is too small (32 char) 
-                    to be used for storing cavafy UUIDs-->
+                    to be used for storing cavafy UUIDs -->
                 <OriginatorReference>  
                     <xsl:value-of select="RIFF:OriginatorReference"/>
                 </OriginatorReference>

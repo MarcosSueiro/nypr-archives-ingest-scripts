@@ -3,28 +3,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <title>Stylesheet documentation for: Exif2Cavafy.xsl</title>
+      <title>Stylesheet documentation for: Exif2BWF.xsl</title>
       <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
          <!--
         
-        var parametersBoxes= new Array('prs_M_rdfDescriptionM_cavafyS_Exif2Cavafy.xsl');
+        
+        
+        
+        var docBoxes= new Array('dS_Exif2BWF.xsl');
+
+        var sourceBoxes= new Array('src_M_rdfRDFM_ixmlFillerS_Exif2BWF.xsl', 
+				'src_T_ixmlFillerS_Exif2BWF.xsl', 
+				'src_V_illegalCharactersS_Exif2BWF.xsl', 
+				'src_V_legalCharactersS_Exif2BWF.xsl', 
+				'src_O_FADGIS_Exif2BWF.xsl');
+
+        
+        var overridingBoxes= new Array('ovr_V_illegalCharactersS_Exif2BWF.xsl', 
+				'ovr_V_legalCharactersS_Exif2BWF.xsl');
 
         
         
-        var docBoxes= new Array('dS_Exif2Cavafy.xsl');
-
-        var sourceBoxes= new Array('src_M_rdfRDFM_cavafyS_Exif2Cavafy.xsl', 
-				'src_M_rdfDescriptionM_cavafyS_Exif2Cavafy.xsl', 
-				'src_P_exifInputS_Exif2Cavafy.xsl');
-
         
-        
-        var referencesBoxes= new Array('refs_M_rdfDescriptionM_cavafyS_Exif2Cavafy.xsl');
-
-        var importsBoxes= new Array('ip_Exif2Cavafy.xsl');
-
-        
-        var importedFromBoxes= new Array('ipF_Exif2Cavafy.xsl');
+        var importedFromBoxes= new Array('ipF_Exif2BWF.xsl');
 
         
         var button_prefix = 'bt_';
@@ -326,14 +327,7 @@
                               </span></td>
                      </tr>
                      <tr>
-                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, parametersBoxes);" class="control" /></span><span class="globalControlName">Parameters </span></td>
-                     </tr>
-                     <tr>
-                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, referencesBoxes);" class="control" /></span><span class="globalControlName">References </span></td>
-                     </tr>
-                     <tr>
-                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, importsBoxes);" class="control" /></span><span class="globalControlName">Imported modules
-                              </span></td>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, overridingBoxes);" class="control" /></span><span class="globalControlName">Overriding </span></td>
                      </tr>
                      <tr>
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, importedFromBoxes);" class="control" /></span><span class="globalControlName">Imported from
@@ -353,8 +347,8 @@
                <td class="rt_cBR"></td>
             </tr>
          </table>
-      </div><a id="Exif2Cavafy.xsl"></a><div class="cmpT">Stylesheet
-         <span class="qname">Exif2Cavafy.xsl</span></div>
+      </div><a id="Exif2BWF.xsl"></a><div class="cmpT">Stylesheet
+         <span class="qname">Exif2BWF.xsl</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -369,44 +363,23 @@
                      <tr>
                         <td class="fCol">
                            <div class="flL">Documentation</div>
-                           <div class="flR"><input id="bt_dS_Exif2Cavafy.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_Exif2Cavafy.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_dS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_Exif2BWF.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="dS_Exif2Cavafy.xsl" style="display:block">
+                           <div id="dS_Exif2BWF.xsl" style="display:block">
                               <div>
-                                 <h3>Description</h3><pre> Convert output from exiftool
-to a pbcore cavafy entry </pre></div>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Imported modules</div>
-                           <div class="flR"><input id="bt_ip_Exif2Cavafy.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ip_Exif2Cavafy.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="ip_Exif2Cavafy.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter13.html#parseContributors.xsl" target="_self" title="No namespace" onclick="updPT('parseContributors.xsl')">parseContributors.xsl</a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter12.html#parseDAVIDTitle.xsl" target="_self" title="No namespace" onclick="updPT('parseDAVIDTitle.xsl')">parseDAVIDTitle.xsl</a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter11.html#selectionOrExcerpt.xsl" target="_self" title="No namespace" onclick="updPT('selectionOrExcerpt.xsl')">selectionOrExcerpt.xsl</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
+                                 <h3>Description</h3><pre> Convert Exif to BWF MetaEdit Core document, 
+    suitable for import </pre></div>
                            </div>
                         </td>
                      </tr>
                      <tr>
                         <td class="fCol">
                            <div class="flL">Imported from</div>
-                           <div class="flR"><input id="bt_ipF_Exif2Cavafy.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ipF_Exif2Cavafy.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_ipF_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ipF_Exif2BWF.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="ipF_Exif2Cavafy.xsl" style="display:block">
+                           <div id="ipF_Exif2BWF.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
                                     <td>
@@ -433,8 +406,8 @@ to a pbcore cavafy entry </pre></div>
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="M_rdfRDFM_cavafyS_Exif2Cavafy.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">rdf:RDF</span><span class="titleTemplateMode">cavafy</span></div>
+      </table><a id="M_rdfRDFM_ixmlFillerS_Exif2BWF.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">rdf:RDF</span><span class="titleTemplateMode">ixmlFiller</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -456,29 +429,26 @@ to a pbcore cavafy entry </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">Mode</td>
-                        <td>cavafy</td>
+                        <td>ixmlFiller</td>
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>9</td>
+                        <td>0</td>
                      </tr>
                      <tr>
                         <td class="fCol">
                            <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_M_rdfRDFM_cavafyS_Exif2Cavafy.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_rdfRDFM_cavafyS_Exif2Cavafy.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_src_M_rdfRDFM_ixmlFillerS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_rdfRDFM_ixmlFillerS_Exif2BWF.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_M_rdfRDFM_cavafyS_Exif2Cavafy.xsl" style="display:block">
+                           <div id="src_M_rdfRDFM_ixmlFillerS_Exif2BWF.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:RDF"</span><span class="tAN"> mode=</span><span class="tAV">"cavafy"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Wrap all entries as a 'pbcoreCollection' --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"pbcoreCollection"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">""</span><span class="tAN"> select=</span><span class="tAV">"'http://www.pbcore.org/PBCore/PBCoreNamespace.html'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"xsi"</span><span class="tAN"> select=</span><span class="tAV">"'http://www.w3.org/2001/XMLSchema-instance'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"xsi:schemaLocation"</span><span class="tAN"> select=</span><span class="tAV">"'http://pbcore.org/PBCore/PBCoreNamespace.html http://pbcore.org/xsd/pbcore-2.0.xsd'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"rdf:Description"</span><span class="tAN"> mode=</span><span class="tAV">"cavafy"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:RDF"</span><span class="tAN"> mode=</span><span class="tAV">"ixmlFiller"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Match top level element --&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;conformance_point_document</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"rdf:Description"</span><span class="tAN"> mode=</span><span class="tAV">"ixmlFiller"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/conformance_point_document&gt;</span><span class="tI">
 </span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
                                  </tr>
                               </table>
@@ -495,8 +465,8 @@ to a pbcore cavafy entry </pre></div>
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="M_rdfDescriptionM_cavafyS_Exif2Cavafy.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">rdf:Description</span><span class="titleTemplateMode">cavafy</span></div>
+      </table><a id="T_ixmlFillerS_Exif2BWF.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">rdf:Description</span><span class="titleTemplateName">ixmlFiller</span><span class="titleTemplateMode">ixmlFiller</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -518,506 +488,124 @@ to a pbcore cavafy entry </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">Mode</td>
-                        <td>cavafy</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">References</div>
-                           <div class="flR"><input id="bt_refs_M_rdfDescriptionM_cavafyS_Exif2Cavafy.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_M_rdfDescriptionM_cavafyS_Exif2Cavafy.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="refs_M_rdfDescriptionM_cavafyS_Exif2Cavafy.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Template</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter13.html#T_parseContributorsS_parseContributors.xsl" target="_self" title="No namespace" onclick="updPT('parseContributors.xsl')"><span class="nRf">parseContributors</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Parameters</div>
-                           <div class="flR"><input id="bt_prs_M_rdfDescriptionM_cavafyS_Exif2Cavafy.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_M_rdfDescriptionM_cavafyS_Exif2Cavafy.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="prs_M_rdfDescriptionM_cavafyS_Exif2Cavafy.xsl" style="display:block">
-                              <table class="attsT">
-                                 <thead>
-                                    <tr>
-                                       <th>QName</th>
-                                       <th>Namespace</th>
-                                    </tr>
-                                 </thead>
-                                 <tr>
-                                    <td class="fCol">catalogURL</td>
-                                    <td>No namespace</td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">catalogxml</td>
-                                    <td>No namespace</td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">cavafyEntry</td>
-                                    <td>No namespace</td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">parsedDAVIDTitle</td>
-                                    <td>No namespace</td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
+                        <td>ixmlFiller</td>
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>9</td>
+                        <td>0</td>
                      </tr>
                      <tr>
                         <td class="fCol">
                            <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_M_rdfDescriptionM_cavafyS_Exif2Cavafy.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_rdfDescriptionM_cavafyS_Exif2Cavafy.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_src_T_ixmlFillerS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_ixmlFillerS_Exif2BWF.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_M_rdfDescriptionM_cavafyS_Exif2Cavafy.xsl" style="display:block">
+                           <div id="src_T_ixmlFillerS_Exif2BWF.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:Description"</span><span class="tAN"> mode=</span><span class="tAV">"cavafy"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Process each exiftool entry --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"catalogURL"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Source)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"catalogxml"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"string(concat($catalogURL, '.xml'))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"cavafyEntry"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"document($catalogxml)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"parsedDAVIDTitle"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tC">&lt;!-- Parse DAVID title or filename --&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"File:FileType = 'NEWASSET'"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"System:FileName"</span><span class="tAN"> mode=</span><span class="tAV">"parseDAVIDTitle"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"filenameToParse"</span><span class="tAN"> select=</span><span class="tAV">"System:FileName"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:apply-templates&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains(System:Directory, 'ARCHIVESNAS1/INGEST')"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"System:FileName"</span><span class="tAN"> mode=</span><span class="tAV">"parseDAVIDTitle"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains(System:Directory, 'wnycdavidmedia')"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'DAVID File'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"System:FileName"</span><span class="tAN"> mode=</span><span class="tAV">"parseDAVIDTitle"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"filenameToParse"</span><span class="tAN"> select=</span><span class="tAV">"concat(RIFF:Description, '.', File:FileType)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:apply-templates&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'Parsed new asset agaiiiiiiin*************************************', $parsedDAVIDTitle"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!--Collection --&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!--Embedded collection is of the type 'US, WNYC' 
-                    So we look after the comma--&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"collectionAcronym"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     RIFF:ArchivalLocation/                     normalize-space(substring-after(., ','))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Asset ID --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"assetID"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                 $parsedDAVIDTitle/parsedDAVIDTitle                 /parsedElements/assetID"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Instantiation ID --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"instantiationID"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                 $parsedDAVIDTitle/parsedDAVIDTitle                 /parsedElements/instantiationID"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Generation --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"generation"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"                 $parsedDAVIDTitle/parsedDAVIDTitle                 /parsedElements/parsedGeneration"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"CMSTeaseAlreadyInCavafy"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                 $cavafyEntry/pb:pbcoreDescriptionDocument                 /pb:pbcoreDescription[@descriptionType = 'CMS Tease']"</span><span class="tAN"> separator=</span><span class="tAV">"+++++++++++++++++++++++++++++++++++++++++++"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"DAVIDTitleDate"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                 $parsedDAVIDTitle/parsedDAVIDTitle                 /parsedElements/DAVIDTitleDate"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- American Archive of Public Media variables --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"aapbURL"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"                     starts-with(                     RIFF:Source,                      'http://americanarchive.org/catalog/'                     )"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(rdf:Source)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"                     contains(                     RIFF:Comment,                      'http://americanarchive.org/catalog/'                     )"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         concat(                         'http://americanarchive.org/catalog/',                          substring-before(                         substring-after(                         RIFF:Comment,                          'http://americanarchive.org/catalog/'                         ),                          '.pbcore'),                          '.pbcore'                         )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"aapbData"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"doc($aapbURL)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- cavafy output --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cavafyOutput"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"pbcoreDescriptionDocument"</span><span class="tAN"> namespace=</span><span class="tAV">"http://www.pbcore.org/PBCore/PBCoreNamespace.html"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- Identifiers --&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- The identifier of type 'WNYC Archive Catalog', 
-                    along with the collection name,
-                    are necessary to import assets into cavafy--&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;pbcoreIdentifier</span><span class="tAN"> source=</span><span class="tAV">"WNYC Archive Catalog"</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$assetID"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/pbcoreIdentifier&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- Additional MUNI ID --&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"starts-with(RIFF:Description, 'MUNI')"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"MuniIDsAlreadyInCavafy"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             $cavafyEntry/pb:pbcoreDescriptionDocument                             /pb:pbcoreIdentifier[@source = 'Municipal Archives']"</span><span class="tAN"> separator=</span><span class="tAV">" ; "</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"parsedMuniID"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             analyze-string(                             System:FileName, '\s+L*T+[0-9]{2,5}'                             )                             //fn:match[1]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                         matches(                         RIFF:Description,                          '\s+L*T+[0-9]{2,5}'                         )"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                             not(                             contains(                             $MuniIDsAlreadyInCavafy,                              $parsedMuniID                             )                             )"</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;pbcoreIdentifier</span><span class="tAN"> source=</span><span class="tAV">"Municipal Archives"</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$parsedMuniID"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/pbcoreIdentifier&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- Dates --&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tC">&lt;!-- To ensure things get published to the web, 
-                        which needs a broadcast date --&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"                         contains(RIFF:Description, 'WEB EDIT')                          and                          not(                         $DAVIDTitleDate eq                          $cavafyEntry                         /pb:pbcoreDescriptionDocument                         /pb:pbcoreDate[@dateType = 'broadcast']                         )"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;pbcoreAssetDate</span><span class="tAN"> dateType=</span><span class="tAV">"broadcast"</span><span class="tEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$DAVIDTitleDate"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;/pbcoreAssetDate&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                             not(                             $cavafyEntry                             /pb:pbcoreDescriptionDocument                             /pb:pbcoreAssetDate                             [. eq $DAVIDTitleDate]                             )"</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;pbcoreAssetDate</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$DAVIDTitleDate"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/pbcoreAssetDate&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- Episode and Collection Titles --&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"normalize-space(RIFF:Title) ne ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                         normalize-space(                         $cavafyEntry                         /pb:pbcoreDescriptionDocument                         /pb:pbcoreTitle                         [@titleType eq 'Episode']                         ) eq ''                         "</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;pbcoreTitle</span><span class="tAN"> titleType=</span><span class="tAV">"Episode"</span><span class="tEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Title)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;/pbcoreTitle&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- The collection name, 
-                    along with the identifier 
-                    of type 'WNYC Archive Catalog',
-                    are necessary to import assets into cavafy--&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;pbcoreTitle</span><span class="tAN"> titleType=</span><span class="tAV">"Collection"</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$collectionAcronym"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/pbcoreTitle&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;pbcoreTitle</span><span class="tAN"> titleType=</span><span class="tAV">"Series"</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:Product"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/pbcoreTitle&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- Apply asset-level fields 
-                    to instantiations that are not an excerpt--&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                         not(contains($generation, 'segment'))"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tC">&lt;!-- CMS Tease (a short description) --&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                         contains(RIFF:Description, 'WEB EDIT')                         "</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                             normalize-space($CMSTeaseAlreadyInCavafy)                              eq ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;pbcoreDescription</span><span class="tAN"> descriptionType=</span><span class="tAV">"CMS Tease"</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"                                         string-length(RIFF:Subject) &lt; 180"</span><span class="tXSLEl">&gt;</span><span class="tI">
-                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:Subject"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                             concat(                                             substring(                                             normalize-space(                                             RIFF:Subject                                             ), 1, 177                                             ),                                              '...')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/pbcoreDescription&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-        </span><span class="tC">&lt;!-- Abstract, a main description --&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                         normalize-space(                         $cavafyEntry                         /pb:pbcoreDescriptionDocument                         /pb:pbcoreDescription                         [@descriptionType = 'Abstract']                         )                         eq ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;pbcoreDescription</span><span class="tAN"> descriptionType=</span><span class="tAV">"Abstract"</span><span class="tEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Subject)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;/pbcoreDescription&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-        </span><span class="tC">&lt;!-- Markers as excerpts--&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                         XMP-xmpDM:Tracks                         /rdf:Bag                         /rdf:li[@rdf:parseType = 'Resource']                         /XMP-xmpDM:Markers                         /rdf:Bag                         /rdf:li[@rdf:parseType = 'Resource']"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"excerptsAlreadyInCavafy"</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                                 $cavafyEntry                                 //*[@descriptionType = 'Selection or Excerpt']"</span><span class="tXSLEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tAN"> separator=</span><span class="tAV">" ; "</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"currentExcerpt"</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"                                 XMP-xmpDM:Tracks                                 /rdf:Bag                                 /rdf:li[@rdf:parseType = 'Resource']                                 /XMP-xmpDM:Markers                                 /rdf:Bag                                 /rdf:li[@rdf:parseType = 'Resource']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                                                         'Excerpts already in cavafy: ',                              $excerptsAlreadyInCavafy                             "</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                                                         'Excerpt - current:',                              $currentExcerpt                             "</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                             not(                             contains(                             normalize-space($excerptsAlreadyInCavafy),                              normalize-space($currentExcerpt)                             ))"</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;pbcoreDescription</span><span class="tAN"> descriptionType=</span><span class="tAV">"Selection or Excerpt"</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"                                         matches(                                         RIFF:Description,                                          'WEB EDIT|MONO EQ|MONO EDIT|RESTORED')                                         "</span><span class="tXSLEl">&gt;</span><span class="tI">
-                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                             concat(                                             'Edited file timings:
-',                                              $currentExcerpt                                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                             concat(                                             'Raw file timings:
-',                                              $currentExcerpt                                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/pbcoreDescription&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-        </span><span class="tC">&lt;!-- Transcripts --&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"transcriptAlreadyInCavafy"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             $cavafyEntry                             /pb:pbcoreDescriptionDocument                             /pb:pbcoreDescription                             [@descriptionType = 'Transcript']                             /normalize-space(.)                             "</span><span class="tAN"> separator=</span><span class="tAV">"+++++++++++++++++++++++++++++++"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"normalize-space(XMP-xmpDM:Lyrics)"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                             not(                             contains(                             $transcriptAlreadyInCavafy,                              XMP-xmpDM:Lyrics                             ))"</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;pbcoreDescription</span><span class="tAN"> descriptionType=</span><span class="tAV">"Transcript"</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"XMP-xmpDM:Lyrics"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/pbcoreDescription&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- Publish to the web --&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"contains(RIFF:Description, 'WEB EDIT')"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$collectionAcronym eq 'WQXR'"</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                                 not(                                 $cavafyEntry                                 /pb:pbcoreDescriptionDocument                                 /pb:pbcoreRelation                                 [pb:pbcoreRelationType eq 'Is Part Of']                                 /pb:pbcoreRelationIdentifier[. eq 'CMSWQXR']                                 )"</span><span class="tXSLEl">&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;pbcoreRelation</span><span class="tEl">&gt;</span><span class="tI">
-                </span><span class="tEl">&lt;pbcoreRelationType</span><span class="tEl">&gt;</span><span class="tT">Is Part Of</span><span class="tEl">&lt;/pbcoreRelationType&gt;</span><span class="tI">
-                </span><span class="tEl">&lt;pbcoreRelationIdentifier</span><span class="tEl">&gt;</span><span class="tT">CMSWQXR</span><span class="tEl">&lt;/pbcoreRelationIdentifier&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;/pbcoreRelation&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                                 not(                                 $cavafyEntry                                 /pb:pbcoreDescriptionDocument                                 /pb:pbcoreRelation                                 [pb:pbcoreRelationType eq 'Is Part Of']                                 /pb:pbcoreRelationIdentifier[. eq 'CMS'])"</span><span class="tXSLEl">&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;pbcoreRelation</span><span class="tEl">&gt;</span><span class="tI">
-                </span><span class="tEl">&lt;pbcoreRelationType</span><span class="tEl">&gt;</span><span class="tT">Is Part Of</span><span class="tEl">&lt;/pbcoreRelationType&gt;</span><span class="tI">
-                </span><span class="tEl">&lt;pbcoreRelationIdentifier</span><span class="tEl">&gt;</span><span class="tT">CMS</span><span class="tEl">&lt;/pbcoreRelationIdentifier&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;/pbcoreRelation&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-        </span><span class="tEl">&lt;pbcoreRelation</span><span class="tEl">&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;pbcoreRelationType</span><span class="tEl">&gt;</span><span class="tT">Website Series</span><span class="tEl">&lt;/pbcoreRelationType&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;pbcoreRelationIdentifier</span><span class="tEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"                                     normalize-space(RIFF:Product) = 'On the Media'                                      and                                      substring-before(RIFF:DateCreated, ':') &lt; '2001'"</span><span class="tXSLEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'On the Media, 1993-2000'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"                                     ends-with(                                     normalize-space(RIFF:Product),                                     ', The'                                     )"</span><span class="tXSLEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                         concat(                                         'The ',                                          normalize-space(                                         substring-before(                                         RIFF:Product, ', The'                                         )))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Product)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;/pbcoreRelationIdentifier&gt;</span><span class="tI">
-        </span><span class="tEl">&lt;/pbcoreRelation&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- Relations --&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"relationsAlreadyInCavafy"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         $cavafyEntry                         /pb:pbcoreDescriptionDocument                         /pb:pbcoreRelation                         /pb:pbcoreRelationIdentifier"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                     normalize-space($aapbURL)                      and                      not(contains($relationsAlreadyInCavafy, $aapbURL))"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tEl">&lt;pbcoreRelation</span><span class="tEl">&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;pbcoreRelationType</span><span class="tEl">&gt;</span><span class="tT">References</span><span class="tEl">&lt;/pbcoreRelationType&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;pbcoreRelationIdentifier</span><span class="tEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$aapbURL"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;/pbcoreRelationIdentifier&gt;</span><span class="tI">
-        </span><span class="tEl">&lt;/pbcoreRelation&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- Location of recording --&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"coverageAlreadyInCavafy"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         normalize-space(                         $cavafyEntry                         /pb:pbcoreDescriptionDocument                         /pb:pbcoreCoverage                         [pb:coverageType = 'Spatial']                         /coverage                         )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"normalize-space(XMP-dc:Coverage) ne ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                         not(                         contains(                         XMP-dc:Coverage,                          $coverageAlreadyInCavafy                         ))"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;pbcoreCoverage</span><span class="tEl">&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;coverage</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"                                         contains(                                         normalize-space(                                         XMP-dc:Coverage                                         ),                                         'google'                                         )"</span><span class="tXSLEl">&gt;</span><span class="tI">
-                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                             concat(                                             substring-before(                                             substring-after(                                             XMP-dc:Coverage,                                             '@'),                                              ','),                                              ', ',                                              substring-before(                                             substring-after(                                             substring-after(                                             XMP-dc:Coverage,                                              '@'),                                              ','),                                              ','                                             ))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"XMP-dc:Coverage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/coverage&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;coverageType</span><span class="tEl">&gt;</span><span class="tT">Spatial</span><span class="tEl">&lt;/coverageType&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;/pbcoreCoverage&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- Subject headings --&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- The template 'Broader Subjects' 
-                    travels up the LOC hierarchy --&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"subjectsAlreadyInCavafy"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"                         $cavafyEntry                         /pb:pbcoreDescriptionDocument                         /pb:pbcoreSubject                         [contains(@ref, 'id.loc.gov')]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                         'subjects already in cavafy',                         $subjectsAlreadyInCavafy"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"broaderSubjects"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"RIFF:Keywords"</span><span class="tAN"> mode=</span><span class="tAV">"broaderSubjects"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"$broaderSubjects"</span><span class="tAN"> mode=</span><span class="tAV">"LOCtoPBCore"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"genreAlreadyInCavafy"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         $cavafyEntry                         /pb:pbcoreDescriptionDocument                         /pb:pbcoreGenre"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"$genreAlreadyInCavafy eq ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tEl">&lt;pbcoreGenre</span><span class="tAN"> source=</span><span class="tAV">"PBCore Genre Picklist"</span><span class="tEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:Genre"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tEl">&lt;/pbcoreGenre&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- CMS Image ID --&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cmsImageAlreadyInCavafy"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$cavafyEntry                         /pb:pbcoreDescriptionDocument                         /pb:pbcoreAnnotation                         [@annotationType = 'CMS Image']"</span><span class="tAN"> separator=</span><span class="tAV">" ; "</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"XMP-plus:ImageSupplierImageID ne ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"$cmsImageAlreadyInCavafy eq ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;pbcoreAnnotation</span><span class="tAN"> annotationType=</span><span class="tAV">"CMS Image"</span><span class="tEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"XMP-plus:ImageSupplierImageID"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;/pbcoreAnnotation&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!--Adding creators--&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"parseContributors"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"contributorsToProcess"</span><span class="tAN"> select=</span><span class="tAV">"RIFF:Commissioned"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"token"</span><span class="tAN"> select=</span><span class="tAV">"';'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"contributorsAlreadyInCavafy"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             $cavafyEntry                             /pb:pbcoreDescriptionDocument                             /pb:pbcoreCreator                             /pb:creator                             /@ref[contains(., 'id.loc.gov')]"</span><span class="tAN"> separator=</span><span class="tAV">" ; "</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:with-param&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"role"</span><span class="tAN"> select=</span><span class="tAV">"'creator'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- Adding contributors --&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"parseContributors"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"contributorsToProcess"</span><span class="tAN"> select=</span><span class="tAV">"RIFF:Artist"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"token"</span><span class="tAN"> select=</span><span class="tAV">"';'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"contributorsAlreadyInCavafy"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             $cavafyEntry                             /pb:pbcoreDescriptionDocument                             /pb:pbcoreContributor                             /pb:contributor                             /@ref[contains(., 'id.loc.gov')]"</span><span class="tAN"> separator=</span><span class="tAV">" ; "</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:with-param&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"role"</span><span class="tAN"> select=</span><span class="tAV">"'contributor'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- Copyright info --&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"copyrightAlreadyInCavafy"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         normalize-space(                         $cavafyEntry                         /pb:pbcoreDescriptionDocument                         /pb:pbcoreRightsSummary                         /pb:rightsSummary                         )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'Copyright in cavafy: ',                      $copyrightAlreadyInCavafy"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"$copyrightAlreadyInCavafy = ''"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tEl">&lt;pbcoreRightsSummary</span><span class="tEl">&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;rightsSummary</span><span class="tEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 normalize-space(RIFF:Copyright)                                 "</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;/rightsSummary&gt;</span><span class="tI">
-        </span><span class="tEl">&lt;/pbcoreRightsSummary&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"File:FileType = 'NEWASSET'"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;pbcoreAnnotation</span><span class="tAN"> annotationType=</span><span class="tAV">"Provenance"</span><span class="tEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 normalize-space(RIFF:Comment)                                 "</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;/pbcoreAnnotation&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tC">&lt;!-- instantiations--&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;pbcoreInstantiation</span><span class="tEl">&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;instantiationIdentifier</span><span class="tAN"> source=</span><span class="tAV">"WNYC Media Archive Label"</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$instantiationID"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/instantiationIdentifier&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;instantiationIdentifier</span><span class="tAN"> source=</span><span class="tAV">"DAVID Title"</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Description)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/instantiationIdentifier&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;instantiationDate</span><span class="tAN"> dateType=</span><span class="tAV">"Created"</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                     normalize-space(                                     translate(                                     substring-before(                                     System:FileCreateDate,                                      ' '),                                      ':',                                      '-'                                     ))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/instantiationDate&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;instantiationDigital</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"File:FileType eq 'WAV'"</span><span class="tXSLEl">&gt;</span><span class="tI">
-                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'BWF'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-                  </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
-                    </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"'unknown_format'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-                    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"File:FileType"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-                  </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/instantiationDigital&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;instantiationLocation</span><span class="tEl">&gt;</span><span class="tT">DAVID</span><span class="tEl">&lt;/instantiationLocation&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;instantiationMediaType</span><span class="tEl">&gt;</span><span class="tT">Sound</span><span class="tEl">&lt;/instantiationMediaType&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;instantiationGenerations</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$generation"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/instantiationGenerations&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;instantiationFileSize</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"System:FileSize"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/instantiationFileSize&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;instantiationDuration</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"Composite:Duration"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/instantiationDuration&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;instantiationDataRate</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:AvgBytesPerSec"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/instantiationDataRate&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;instantiationChannelConfiguration</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"RIFF:NumChannels = 1"</span><span class="tXSLEl">&gt;</span><span class="tT">Mono</span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"RIFF:NumChannels = 2"</span><span class="tXSLEl">&gt;</span><span class="tT">Stereo</span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/instantiationChannelConfiguration&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"contains($generation, 'segment')"</span><span class="tXSLEl">&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;instantiationAnnotation</span><span class="tAN"> annotationType=</span><span class="tAV">"Embedded Title"</span><span class="tEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Title)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;/instantiationAnnotation&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;instantiationAnnotation</span><span class="tAN"> annotationType=</span><span class="tAV">"Embedded Description"</span><span class="tEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Subject)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;/instantiationAnnotation&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"RIFF:CodingHistory ne ''                                  and                                  not(                                 contains(RIFF:CodingHistory, 'D.A.V.I.D.'                                 ))"</span><span class="tXSLEl">&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;instantiationAnnotation</span><span class="tAN"> annotationType=</span><span class="tAV">"Encoding_Notes"</span><span class="tEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:CodingHistory)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;/instantiationAnnotation&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"contains(RIFF:CodingHistory, '[TO]')"</span><span class="tXSLEl">&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;instantiationAnnotation</span><span class="tAN"> annotationType=</span><span class="tAV">"LF_turnover"</span><span class="tEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                         substring-before(                                         substring-after(                                         RIFF:CodingHistory,                                          '[TO]'                                         ),                                          '[RO]'                                         )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;/instantiationAnnotation&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"contains(RIFF:CodingHistory, '[RO]')"</span><span class="tXSLEl">&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;instantiationAnnotation</span><span class="tAN"> annotationType=</span><span class="tAV">"10kHz_att"</span><span class="tEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                         substring-after(                                         RIFF:CodingHistory, '[RO]'                                         )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;/instantiationAnnotation&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;instantiationAnnotation</span><span class="tAN"> annotationType=</span><span class="tAV">"Provenance"</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:SourceForm)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/instantiationAnnotation&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;instantiationAnnotation</span><span class="tAN"> annotationType=</span><span class="tAV">"Embedded_Comments"</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Comment)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/instantiationAnnotation&gt;</span><span class="tI">
-            </span><span class="tC">&lt;!--essence tracks--&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;instantiationEssenceTrack</span><span class="tEl">&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;essenceTrackType</span><span class="tEl">&gt;</span><span class="tT">audio</span><span class="tEl">&lt;/essenceTrackType&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;essenceTrackIdentifier</span><span class="tAN"> source=</span><span class="tAV">"DAVID Title"</span><span class="tEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Description)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;/essenceTrackIdentifier&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;essenceTrackStandard</span><span class="tEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"File:FileType"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;/essenceTrackStandard&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;essenceTrackEncoding</span><span class="tEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:Encoding"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;/essenceTrackEncoding&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;essenceTrackDataRate</span><span class="tEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:AvgBytesPerSec"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;/essenceTrackDataRate&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;essenceTrackSamplingRate</span><span class="tEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:SampleRate"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;/essenceTrackSamplingRate&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;essenceTrackBitDepth</span><span class="tEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat(RIFF:BitsPerSample, ' bit')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-              </span><span class="tEl">&lt;/essenceTrackBitDepth&gt;</span><span class="tI">
-            </span><span class="tEl">&lt;/instantiationEssenceTrack&gt;</span><span class="tI">
-          </span><span class="tEl">&lt;/pbcoreInstantiation&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$cavafyOutput"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:Description"</span><span class="tAN"> name=</span><span class="tAV">"ixmlFiller"</span><span class="tAN"> mode=</span><span class="tAV">"ixmlFiller"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Process each WAVE file --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- CORE OUTPUT --&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;File</span><span class="tAN"> name=</span><span class="tAV">"{@rdf:about}"</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;Core</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"Description"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         normalize-space(RIFF:Description)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+      </span><span class="tC">&lt;!-- NOTE: Do not trust BEXT's Originator,
+                    as it conflicts with DAVID's "Author" --&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"Originator"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:Originator"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+      </span><span class="tC">&lt;!--NOTE: Originator Reference is too small (32 char) 
+                    to be used for storing cavafy UUIDs --&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;OriginatorReference</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:OriginatorReference"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/OriginatorReference&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;CodingHistory</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:CodingHistory)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/CodingHistory&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;IARL</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:ArchivalLocation)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/IARL&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;IART</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Artist)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/IART&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;ICMS</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Commissioned)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/ICMS&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;ICMT</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Comment)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT"> </span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/ICMT&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;ICOP</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Copyright)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/ICOP&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;ICRD</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:DateCreated)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/ICRD&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;IENG</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Engineer)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/IENG&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;IGNR</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Genre)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/IGNR&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;IKEY</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Keywords)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/IKEY&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;IMED</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Medium)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/IMED&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;INAM</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Title)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/INAM&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;IPRD</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Product)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/IPRD&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;ISBJ</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Subject)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/ISBJ&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"ISFT"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Software)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;ISRC</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Source)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/ISRC&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;ISRF</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:SourceForm)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/ISRF&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;ITCH</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Technician)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/ITCH&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/Core&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/File&gt;</span><span class="tI">
 </span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
                                  </tr>
                               </table>
@@ -1034,8 +622,8 @@ to a pbcore cavafy entry </pre></div>
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="P_exifInputS_Exif2Cavafy.xsl"></a><div class="cmpT">Parameter
-         <span class="qname">exifInput</span></div>
+      </table><a id="V_illegalCharactersS_Exif2BWF.xsl"></a><div class="cmpT">Variable
+         <span class="qname">illegalCharacters</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -1053,14 +641,169 @@ to a pbcore cavafy entry </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_P_exifInputS_Exif2Cavafy.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_P_exifInputS_Exif2Cavafy.xsl');" class="control" /></div>
+                           <div class="flL">Overriding</div>
+                           <div class="flR"><input id="bt_ovr_V_illegalCharactersS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_illegalCharactersS_Exif2BWF.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_P_exifInputS_Exif2Cavafy.xsl" style="display:block">
+                           <div id="ovr_V_illegalCharactersS_Exif2BWF.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Variable</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter1.html#V_illegalCharactersS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')">illegalCharacters</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_V_illegalCharactersS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_V_illegalCharactersS_Exif2BWF.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_V_illegalCharactersS_Exif2BWF.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"exifInput"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"illegalCharacters"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">“” &#x80;&#x93;&#x94;¦—’</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">ÂÃ±â&#x99;&#x9c;&#x9d;</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:variable&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="V_legalCharactersS_Exif2BWF.xsl"></a><div class="cmpT">Variable
+         <span class="qname">legalCharacters</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Overriding</div>
+                           <div class="flR"><input id="bt_ovr_V_legalCharactersS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_legalCharactersS_Exif2BWF.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="ovr_V_legalCharactersS_Exif2BWF.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Variable</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter1.html#V_legalCharactersS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')">legalCharacters</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_V_legalCharactersS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_V_legalCharactersS_Exif2BWF.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_V_legalCharactersS_Exif2BWF.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"legalCharacters"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"" '——…—'</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:variable&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="O_FADGIS_Exif2BWF.xsl"></a><div class="cmpT">Output
+         <span class="qname">FADGI</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Output properties</div>
+                           <div class="flR"><input id="bt_o_" type="image" src="img/btM.gif" value="-" onclick="switchState('o_');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="o_" style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>method</th>
+                                       <th>encoding</th>
+                                       <th>indent</th>
+                                       <th>standalone</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td></td>
+                                    <td>UTF-8</td>
+                                    <td>yes</td>
+                                    <td>yes</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_O_FADGIS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_O_FADGIS_Exif2BWF.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_O_FADGIS_Exif2BWF.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:output</span><span class="tAN"> name=</span><span class="tAV">"FADGI"</span><span class="tAN"> encoding=</span><span class="tAV">"UTF-8"</span><span class="tAN"> method=</span><span class="tAV">"xml"</span><span class="tAN"> version=</span><span class="tAV">"1.0"</span><span class="tAN"> standalone=</span><span class="tAV">"yes"</span><span class="tAN"> indent=</span><span class="tAV">"yes"</span><span class="tXSLEl">/&gt;</span></pre></td>
                                  </tr>
                               </table>
                            </div>

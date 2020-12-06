@@ -90,8 +90,41 @@
             </xsl:for-each>
         </inputParsed>
     </xsl:template>
+    
+    <xsl:template name="strip-tags" match="text()" mode="strip-tags">
+        <!-- Get rid of html tags using regexp -->
+        <xsl:param name="text" select="."/>
+        <xsl:message select="'Get rid of html tags'"/>
+        <!-- Replace <p>, <br> and <div> with new lines  -->
+        <xsl:variable name="newLines" select="
+            replace(
+            $text, 
+            '&lt;/*p&gt;|&lt;/*br&gt;|&lt;/*div&gt;', 
+            '&#x0A;')"/>
+        <!-- Then, delete all other tags: 
+            identified as text inside two carets < and > -->
+        <xsl:variable name="noHtml" select="
+            replace(
+            $newLines, 
+            '&lt;[^&gt;]+&gt;', '')"/>
+        <!-- Get rid of weird spaces -->
+        <xsl:variable name="normalizeSpaces" select="
+            replace($noHtml, '\p{Zs}', ' ')"/>
+        <!-- Finally, change more than two new lines to just two -->
+        <xsl:value-of select="
+            replace($normalizeSpaces, 
+            '&#x0A;{3,}', '&#x0A;&#x0A;')"/>
+    </xsl:template>
+    
+    <xsl:function name="WNYC:strip-tags">
+        <xsl:param name="text"/>
+        <xsl:call-template name="strip-tags">
+            <xsl:with-param name="text" select="$text"/>
+        </xsl:call-template>
+    </xsl:function>
 
-    <xsl:template name="strip-tags">
+    <!-- Below is the old strip-tag function -->
+    <!--<xsl:template name="strip-tags">
         <xsl:param name="text"/>
         <xsl:message select="'Get rid of html tags'"/>
         <xsl:choose>
@@ -105,7 +138,7 @@
                 <xsl:value-of select="$text"/>
             </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>
+    </xsl:template>-->
 
     <xsl:function name="WNYC:stripNonASCII" expand-text="yes">
         <!-- Strip non-ASCII characters -->
@@ -290,7 +323,7 @@
     </xsl:function>
     <xsl:function name="ASCII:cedilla">
         <!-- Replace ç with c
-        and Ç with C-->
+        and Ç with C -->
         <xsl:param name="string1"/>
         <xsl:value-of
             select="

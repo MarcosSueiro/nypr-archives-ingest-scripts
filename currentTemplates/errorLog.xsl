@@ -55,6 +55,7 @@ and output an html error doc -->
                 <br/>
             </xsl:for-each>
         </xsl:variable>
+        
         <xsl:variable name="duplicateInstantiationMessage">
             <b>
                 <xsl:value-of select="
@@ -75,6 +76,12 @@ and output an html error doc -->
             //result
             [.//*[local-name() = 'error']]
             )"/>
+        <xsl:variable name="warningCount" select="
+            count(
+            $completeLog
+            //result
+            [.//*[local-name() = 'warning']]
+            )"/>
         <xsl:variable name="totalCount" select="
             count(
             $completeLog
@@ -82,6 +89,8 @@ and output an html error doc -->
             )"/>
         <xsl:variable name="errorPercent" select="format-number(
             $errorCount div $totalCount, '##%')"/>
+        <xsl:variable name="warningPercent" select="format-number(
+            $warningCount div $totalCount, '##%')"/>
         <xsl:variable name="errorMessage">
             <xsl:value-of select="$errorCount"/>
             <xsl:value-of select="' files ('"/>
@@ -97,12 +106,28 @@ and output an html error doc -->
                 <br/>
             </xsl:for-each>                
         </xsl:variable>
+        <xsl:variable name="warningMessage">
+            <xsl:value-of select="$warningCount"/>
+            <xsl:value-of select="' files ('"/>
+            <xsl:value-of select="$warningPercent"/>
+            <xsl:value-of select="') have warnings: '"/>
+            <br/>
+            <xsl:for-each
+                select="
+                $completeLog
+                //result
+                [.//*[local-name() = 'warning']]">
+                <xsl:value-of select="./@filename"/>
+                <br/>
+            </xsl:for-each>                
+        </xsl:variable>
         
-        <xsl:message select="$errorFreeMessage"/>
+        <xsl:message select="$errorFreeMessage"/>        
         <xsl:message select="$duplicateInstantiationMessage"/>
         <xsl:message select="$errorMessage"/>
+        <xsl:message select="$warningMessage"/>
         
-        <!--    Error Log-->
+        <!--    Error Log -->
         <xsl:variable name="filenameErrorLog"
             select="
             concat(
@@ -147,6 +172,8 @@ and output an html error doc -->
                     <p> ******************* </p>
                     <xsl:copy-of select="
                         $errorMessage"/>
+                    <xsl:copy-of select="
+                        $warningMessage"/>
                     <p> ******************* </p>
                     <br/>
                     
@@ -197,6 +224,63 @@ and output an html error doc -->
                                 <br/>
                                 <p>
                                     <xsl:for-each select=".//*:error">
+                                        <xsl:value-of select="@type, ': '"/>
+                                        <xsl:value-of select="."/>
+                                        <br/>
+                                    </xsl:for-each>
+                                </p>
+                                <a>
+                                    <xsl:attribute name="href">
+                                        <xsl:value-of
+                                            select="./inputs/parsedDAVIDTitle/parsedElements/finalCavafyURL"
+                                        /> </xsl:attribute>
+                                    <xsl:attribute name="
+                                        target" select="
+                                        '_blank'"/>cavafy entry
+                                    (if found) </a>
+                            </p>
+                        </div>
+                    </xsl:for-each>
+                    
+                    <xsl:for-each
+                        select="
+                        $completeLog//result
+                        [.//*[local-name() = 'warning']]">
+                        <xsl:variable name="justFilename">
+                            <xsl:value-of
+                                select="
+                                tokenize(
+                                translate(
+                                @filename[not(contains(., 'cavafy'))], '\', '/'), '/')
+                                [last()]"/> <!-- Extract just the filename -->
+                            <xsl:value-of select="@filename[contains(., 'cavafy')]"/><!--Or the cavafy link -->
+                        </xsl:variable>
+                        <!-- Link to the file -->
+                        <xsl:variable name="href" select="
+                            if 
+                            (contains(@filename, 'cavafy'))
+                            then
+                            @filename
+                            else
+                            concat('file:///', 
+                            inputs/originalExif
+                            /rdf:Description
+                            /System:Directory, 
+                            '/', 
+                            $justFilename[. != ''])"/>
+                        
+                        <div>
+                            <p>
+                                <b> Warnings related to filename or asset <a>
+                                    <xsl:attribute name="href">
+                                        <xsl:value-of
+                                            select="$href"
+                                        /> 
+                                    </xsl:attribute>
+                                    <xsl:value-of select="$justFilename"/></a>: </b>
+                                <br/>
+                                <p>
+                                    <xsl:for-each select=".//*:warning">
                                         <xsl:value-of select="@type, ': '"/>
                                         <xsl:value-of select="."/>
                                         <br/>

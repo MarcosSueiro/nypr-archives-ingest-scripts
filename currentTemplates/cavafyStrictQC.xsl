@@ -8,7 +8,7 @@
 <!--    At least one properly formatted asset date -->
 <!--    Exactly one collection, Series and Episode titles -->
 <!--    At least one subject heading with @ref='id.loc.gov/authorities/' -->
-<!--    Exactly one abstract with decent length and content-->
+<!--    Exactly one abstract with decent length and content -->
 <!--    Exactly one genre -->
 <!--    At least one Creator or publisher with @ref='id.loc.gov/authorities/' -->
 <!--    At least one Contributor with @ref='id.loc.gov/authorities/' -->        
@@ -27,6 +27,7 @@
 
     <xsl:import href="cavafySearch.xsl"/>
     <xsl:import href="errorLog.xsl"/>
+    <xsl:import href="processCollection.xsl"/>
 
     <xsl:output method="xml" version="1.0" indent="yes"/>
     <xsl:mode on-no-match="deep-skip"/>
@@ -40,8 +41,7 @@
     </xsl:template>
 
     <xsl:template match="pb:pbcoreDescriptionDocument
-        [not (pb:pbcoreRelation/pb:pbcoreRelationIdentifier = 'SRSLST')]" mode="
-        cavafyStrictQC">
+        [not (pb:pbcoreRelation/pb:pbcoreRelationIdentifier = 'SRSLST')]" mode="cavafyStrictQC">
         <!-- Test whether each cavafy entry has any errors -->
         
         <xsl:param name="cavafyURL"
@@ -59,6 +59,9 @@
             $cavafyURL,
             ' has any errors'
             "/>
+        <xsl:variable name="cavafyWarnings">
+            <xsl:apply-templates select="." mode="defaultValuesWarning"/>
+        </xsl:variable>
       
         <xsl:variable name="cavafyErrors">            
             <xsl:variable name="assetIDCount"
@@ -282,6 +285,8 @@
         <result>
             <xsl:attribute name="filename" select="$cavafyURL"/>
                     <xsl:copy-of select="$cavafyErrors"/>
+            <xsl:copy-of select="$cavafyWarnings"/>
+            <xsl:message select="$cavafyWarnings"/>
         </result>
     </xsl:template>
 
@@ -289,8 +294,8 @@
         <!-- INSTANTIATION LEVEL:-->
         <!--    Exactly one instantiation ID with @source = 'WNYC Archive Media Archive Label' and format 'asset.xx'-->
         <!--    Exactly one Format, Format Location, and Media Type -->
-        <!--    At most one Generation-->
-        <!--    At most one essence track-->
+        <!--    At most one Generation -->
+        <!--    At most one essence track -->
         <xsl:param name="cavafyxml"/>
         <xsl:param name="cavafyAssetID" select="
             $cavafyxml
@@ -431,5 +436,120 @@
             <xsl:value-of select="$errorMessage"/>
         </xsl:message>
         <xsl:copy-of select="$errorMessage"/>
+    </xsl:template>
+
+    <xsl:template match="pb:pbcoreDescriptionDocument"
+        name="defaultValuesWarning" mode="defaultValuesWarning">
+        <!-- Check to see if a cavafy asset 
+            has default values 
+            for abstract, contributors, or subject headings -->
+        <xsl:param name="cavafyURL"
+            select="
+            concat(
+            'https://cavafy.wnyc.org/assets/',
+            pb:pbcoreIdentifier
+            [@source = 'pbcore XML database UUID'][1]
+            )"/>
+        <xsl:param name="cavafyxml" select="concat($cavafyURL, '.xml')"/>
+        <xsl:param name="cavafyData" select="."/>
+        <xsl:message select="
+            'Check to see if cavafy entry', $cavafyURL, 
+            ' has default values for',
+            ' abstract, contributors, or subject headings'"/>
+        <xsl:variable name="collectionInfo">
+            <xsl:call-template name="processCollection">
+                <xsl:with-param name="
+                    collectionAcronym"
+                    select="
+                    pb:pbcoreTitle[@titleType = 'Collection']"/>
+            </xsl:call-template>
+        </xsl:variable>        
+        <xsl:variable name="collectionurl" select="$collectionInfo/collectionInfo/collURL"/>        
+        <xsl:variable name="seriesName" select="pb:pbcoreTitle[@titleType = 'Series']"/>
+        <xsl:variable name="seriesData">
+            <xsl:call-template name="findSeriesXMLFromName">
+                <xsl:with-param name="seriesName" select="$seriesName"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="seriesKeywords">
+            <xsl:value-of
+                select="
+                $seriesData//pb:pbcoreSubject
+                /@ref[contains(., 'id.loc.gov')]"
+                separator="
+                {$separatingTokenLong}"/>
+        </xsl:variable>
+        <xsl:variable name="assetKeywords">
+            <xsl:value-of
+                select="
+                pb:pbcoreSubject
+                /@ref[contains(., 'id.loc.gov')]"
+                separator="
+                {$separatingTokenLong}"/>
+        </xsl:variable>
+        <xsl:variable name="seriesAbstract"
+            select="
+            $seriesData
+            /pb:pbcoreDescriptionDocument
+            /pb:pbcoreDescription
+            [@descriptionType = 'Abstract']
+            [. != '']"/>
+        <xsl:variable name="defaultAbstractStart"
+            select="
+            concat(
+            pb:pbcoreTitle[@titleType = 'Episode'],
+            ' on ',
+            pb:pbcoreTitle[@titleType = 'Series'],
+            ' on ')"/>
+        <xsl:variable name="assetContributors">
+            <xsl:value-of select="
+            pb:pbcoreContributor
+            /pb:contributor
+            /@ref[contains(., 'id.loc.gov')]" separator="{$separatingTokenLong}"/>
+        </xsl:variable>
+        <xsl:if test="$seriesKeywords[. != ''] = $assetKeywords[. != '']">
+            <xsl:call-template name="generateWarning">
+                <xsl:with-param name="fieldName" select="'subjectHeadings'"/>
+                <xsl:with-param name="fieldValue" select="$assetKeywords"/>
+            </xsl:call-template>
+        </xsl:if>
+        <xsl:apply-templates select="
+            pb:pbcoreDescription
+            [@descriptionType='Abstract']
+            [starts-with(., $defaultAbstractStart)]" 
+            mode="generateWarning">
+            <xsl:with-param name="warningMessage" select="
+                'Possibly default value for abstract'"/>
+        </xsl:apply-templates>
+        <xsl:apply-templates select="
+            pb:pbcoreDescription
+            [@descriptionType='Abstract']
+            [. = $seriesAbstract]" 
+            mode="generateWarning">
+            <xsl:with-param name="fieldName" select="'abstract'"/>
+        </xsl:apply-templates>
+        <xsl:message select="'assetContributors', $assetContributors"/>
+        <xsl:if test="$assetContributors[. != ''] = $collectionurl[. != '']">
+            <xsl:call-template name="generateWarning">
+                <xsl:with-param name="fieldName" select="'contributors'"/>
+                <xsl:with-param name="fieldValue" select="pb:pbcoreContributor"/>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template name="generateWarning" match="node()" mode="generateWarning">
+        <xsl:param name="fieldName" select="local-name()"/>
+        <xsl:param name="warningType" select="'defaultValue'"/>
+        <xsl:param name="warningMessage" select="
+            concat(
+            'Default series values in ', $fieldName
+            )"/>
+        <xsl:param name="fieldValue" select="."/>
+        <xsl:message select="$warningMessage, ."/>
+        <xsl:element name="warning">
+            <xsl:attribute name="type" select="$warningType"/>
+            <xsl:value-of select="$warningMessage"/>
+            <xsl:copy-of select="$fieldValue"/>
+        </xsl:element>
     </xsl:template>
 </xsl:stylesheet>

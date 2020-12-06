@@ -3,29 +3,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <title>Stylesheet documentation for: Exif2BWF.xsl</title>
+      <title>Stylesheet documentation for: instantiationID2Exif.xsl</title>
       <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
          <!--
         
-        
-        
-        
-        var docBoxes= new Array('dS_Exif2BWF.xsl');
-
-        var sourceBoxes= new Array('src_M_rdfRDFM_ixmlFillerS_Exif2BWF.xsl', 
-				'src_T_ixmlFillerS_Exif2BWF.xsl', 
-				'src_V_illegalCharactersS_Exif2BWF.xsl', 
-				'src_V_legalCharactersS_Exif2BWF.xsl', 
-				'src_O_FADGIS_Exif2BWF.xsl');
+        var parametersBoxes= new Array('prs_M_instantiationIDM_generateExifS_instantiationID2Exif.xsl');
 
         
-        var overridingBoxes= new Array('ovr_V_illegalCharactersS_Exif2BWF.xsl', 
-				'ovr_V_legalCharactersS_Exif2BWF.xsl');
+        var usedByBoxes= new Array('uB_P_vendorNameS_instantiationID2Exif.xsl');
+
+        var docBoxes= new Array('dS_P_vendorNameS_instantiationID2Exif.xsl', 
+				'dS_P_DirectoryS_instantiationID2Exif.xsl', 
+				'dS_P_FileTypeS_instantiationID2Exif.xsl');
+
+        var sourceBoxes= new Array('src_M_S_instantiationID2Exif.xsl', 
+				'src_M_instantiationIDsS_instantiationID2Exif.xsl', 
+				'src_M_instantiationIDM_generateExifS_instantiationID2Exif.xsl', 
+				'src_P_vendorNameS_instantiationID2Exif.xsl', 
+				'src_P_DirectoryS_instantiationID2Exif.xsl', 
+				'src_P_FileTypeS_instantiationID2Exif.xsl');
+
+        
+        var overridingBoxes= new Array('ovr_M_S_instantiationID2Exif.xsl');
+
+        var referencesBoxes= new Array('refs_M_instantiationIDM_generateExifS_instantiationID2Exif.xsl', 
+				'refs_P_DirectoryS_instantiationID2Exif.xsl');
 
         
         
-        
-        var importedFromBoxes= new Array('ipF_Exif2BWF.xsl');
+        var importedFromBoxes= new Array('ipF_instantiationID2Exif.xsl');
 
         
         var button_prefix = 'bt_';
@@ -327,6 +333,15 @@
                               </span></td>
                      </tr>
                      <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, parametersBoxes);" class="control" /></span><span class="globalControlName">Parameters </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, referencesBoxes);" class="control" /></span><span class="globalControlName">References </span></td>
+                     </tr>
+                     <tr>
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, overridingBoxes);" class="control" /></span><span class="globalControlName">Overriding </span></td>
                      </tr>
                      <tr>
@@ -347,8 +362,514 @@
                <td class="rt_cBR"></td>
             </tr>
          </table>
-      </div><a id="Exif2BWF.xsl"></a><div class="cmpT">Stylesheet
-         <span class="qname">Exif2BWF.xsl</span></div>
+      </div><a id="instantiationID2Exif.xsl"></a><div class="cmpT">Stylesheet
+         <span class="qname">instantiationID2Exif.xsl</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Imported from</div>
+                           <div class="flR"><input id="bt_ipF_instantiationID2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ipF_instantiationID2Exif.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="ipF_instantiationID2Exif.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter0.html#masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">masterRouter.xsl</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Stylesheet version</td>
+                        <td>2.0</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="M_S_instantiationID2Exif.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">/</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Match</td>
+                        <td>/</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Mode</td>
+                        <td>#default</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Overriding</div>
+                           <div class="flR"><input id="bt_ovr_M_S_instantiationID2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_M_S_instantiationID2Exif.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="ovr_M_S_instantiationID2Exif.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Template</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter0.html#T_masterRouterS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')"><span class="mRf">/</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>35</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_M_S_instantiationID2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_S_instantiationID2Exif.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_M_S_instantiationID2Exif.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"/"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"instantiationIDs"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="M_instantiationIDsS_instantiationID2Exif.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">instantiationIDs</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Match</td>
+                        <td>instantiationIDs</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Mode</td>
+                        <td>#default</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>35</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_M_instantiationIDsS_instantiationID2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_instantiationIDsS_instantiationID2Exif.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_M_instantiationIDsS_instantiationID2Exif.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"instantiationIDs"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"             'Generate a fake Exif document from',             count(instantiationID), 'instantiationIDs.'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"fakeExif"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"rdf:RDF"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"rdf"</span><span class="tAN"> select=</span><span class="tAV">"                     'http://www.w3.org/1999/02/22-rdf-syntax-ns#'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"instantiationID"</span><span class="tAN"> mode=</span><span class="tAV">"generateExif"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"$fakeExif/rdf:RDF"</span><span class="tAN"> mode=</span><span class="tAV">"masterRouter"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="M_instantiationIDM_generateExifS_instantiationID2Exif.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">instantiationID</span><span class="titleTemplateMode">generateExif</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Match</td>
+                        <td>instantiationID</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Mode</td>
+                        <td>generateExif</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">References</div>
+                           <div class="flR"><input id="bt_refs_M_instantiationIDM_generateExifS_instantiationID2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_M_instantiationIDM_generateExifS_instantiationID2Exif.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="refs_M_instantiationIDM_generateExifS_instantiationID2Exif.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Template</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter17.html#T_checkConflictsS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')"><span class="nRf">checkConflicts</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">Parameter</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter6.html#P_vendorNameS_instantiationID2Exif.xsl" target="_self" title="No namespace" onclick="updPT('instantiationID2Exif.xsl')">vendorName</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Parameters</div>
+                           <div class="flR"><input id="bt_prs_M_instantiationIDM_generateExifS_instantiationID2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_M_instantiationIDM_generateExifS_instantiationID2Exif.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="prs_M_instantiationIDM_generateExifS_instantiationID2Exif.xsl" style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th>Namespace</th>
+                                       <th>Select</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="fCol">DAVIDTitle</td>
+                                    <td>No namespace</td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">File:FileType</td>
+                                    <td>http://ns.exiftool.ca/File/1.0/</td>
+                                    <td>$File:FileType</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">File:FileTypeExtension</td>
+                                    <td>http://ns.exiftool.ca/File/1.0/</td>
+                                    <td>$File:FileType</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">RIFF:AvgBytesPerSec</td>
+                                    <td>http://ns.exiftool.ca/RIFF/RIFF/1.0/</td>
+                                    <td>'2000'</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">RIFF:BitsPerSample</td>
+                                    <td>http://ns.exiftool.ca/RIFF/RIFF/1.0/</td>
+                                    <td>'8'</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">RIFF:Encoding</td>
+                                    <td>http://ns.exiftool.ca/RIFF/RIFF/1.0/</td>
+                                    <td>'Microsoft PCM'</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">RIFF:Medium</td>
+                                    <td>http://ns.exiftool.ca/RIFF/RIFF/1.0/</td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">RIFF:NumChannels</td>
+                                    <td>http://ns.exiftool.ca/RIFF/RIFF/1.0/</td>
+                                    <td>'2'</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">RIFF:Product</td>
+                                    <td>http://ns.exiftool.ca/RIFF/RIFF/1.0/</td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">RIFF:SampleRate</td>
+                                    <td>http://ns.exiftool.ca/RIFF/RIFF/1.0/</td>
+                                    <td>'1000'</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">System:Directory</td>
+                                    <td>http://ns.exiftool.ca/File/System/1.0/</td>
+                                    <td>             $System:Directory</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">System:FileCreateDate</td>
+                                    <td>http://ns.exiftool.ca/File/System/1.0/</td>
+                                    <td>format-dateTime(             current-dateTime(),              '[Y0001]-[M01]-[D01]
+                                       [H01]:[m01]:[s01][Z]'             )
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">System:FileName</td>
+                                    <td>http://ns.exiftool.ca/File/System/1.0/</td>
+                                    <td>concat(             $DAVIDTitle, '.', $File:FileTypeExtension)</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">System:FileSize</td>
+                                    <td>http://ns.exiftool.ca/File/System/1.0/</td>
+                                    <td>'1 MB'</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">cavafySeriesTitle</td>
+                                    <td>No namespace</td>
+                                    <td>$generatedNextFilename/pb:inputs/pb:cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreTitle[@titleType='Series']</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">cavafySourceFormat</td>
+                                    <td>No namespace</td>
+                                    <td>             $generatedNextFilename/pb:inputs/             pb:parsedDAVIDTitle/pb:parsedElements/
+                                       pb:instantiationData/pb:pbcoreInstantiation/             (pb:instantiationDigital
+                                       |              pb:instantiationPhysical)
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">expectedSeries</td>
+                                    <td>No namespace</td>
+                                    <td>             parent::instantiationIDs/@series</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">generatedNextFilename</td>
+                                    <td>No namespace</td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">instantiationID</td>
+                                    <td>No namespace</td>
+                                    <td>.</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">reportedSourceFormat</td>
+                                    <td>No namespace</td>
+                                    <td>             $instantiationID/@format</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">sourceFormat</td>
+                                    <td>No namespace</td>
+                                    <td></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>35</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_M_instantiationIDM_generateExifS_instantiationID2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_instantiationIDM_generateExifS_instantiationID2Exif.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_M_instantiationIDM_generateExifS_instantiationID2Exif.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"instantiationID"</span><span class="tAN"> mode=</span><span class="tAV">"         generateExif"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"instantiationID"</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"generatedNextFilename"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tAN"> mode=</span><span class="tAV">"                 generateNextFilename"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"DAVIDTitle"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                 $generatedNextFilename/                 pb:inputs/                 pb:parsedDAVIDTitle/@DAVIDTitle"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"reportedSourceFormat"</span><span class="tAN"> select=</span><span class="tAV">"             $instantiationID/@format"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"cavafySourceFormat"</span><span class="tAN"> select=</span><span class="tAV">"             $generatedNextFilename/pb:inputs/             pb:parsedDAVIDTitle/pb:parsedElements/             pb:instantiationData/pb:pbcoreInstantiation/             (pb:instantiationDigital |              pb:instantiationPhysical)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"sourceFormat"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"checkConflicts"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"$reportedSourceFormat"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tAN"> select=</span><span class="tAV">"$cavafySourceFormat"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'reportedFormat'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"filename"</span><span class="tAN"> select=</span><span class="tAV">"$instantiationID"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"expectedSeries"</span><span class="tAN"> select=</span><span class="tAV">"             parent::instantiationIDs/@series"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"cavafySeriesTitle"</span><span class="tAN"> select=</span><span class="tAV">"$generatedNextFilename/pb:inputs/pb:cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreTitle[@titleType='Series']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"System:Directory"</span><span class="tAN"> select=</span><span class="tAV">"             $System:Directory"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"System:FileSize"</span><span class="tAN"> select=</span><span class="tAV">"'1 MB'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"System:FileCreateDate"</span><span class="tAN"> select=</span><span class="tAV">"format-dateTime(             current-dateTime(),              '[Y0001]-[M01]-[D01] [H01]:[m01]:[s01][Z]'             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"File:FileType"</span><span class="tAN"> select=</span><span class="tAV">"$File:FileType"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"File:FileTypeExtension"</span><span class="tAN"> select=</span><span class="tAV">"$File:FileType"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"System:FileName"</span><span class="tAN"> select=</span><span class="tAV">"concat(             $DAVIDTitle, '.', $File:FileTypeExtension)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"RIFF:Encoding"</span><span class="tAN"> select=</span><span class="tAV">"'Microsoft PCM'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"RIFF:NumChannels"</span><span class="tAN"> select=</span><span class="tAV">"'2'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"RIFF:SampleRate"</span><span class="tAN"> select=</span><span class="tAV">"'1000'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"RIFF:AvgBytesPerSec"</span><span class="tAN"> select=</span><span class="tAV">"'2000'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"RIFF:BitsPerSample"</span><span class="tAN"> select=</span><span class="tAV">"'8'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"RIFF:Medium"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$sourceFormat[//error]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat($sourceFormat[not(//error)], ' ', $instantiationID)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"RIFF:Product"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"checkConflicts"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"$expectedSeries"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tAN"> select=</span><span class="tAV">"$cavafySeriesTitle"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'expectedSeries'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"filename"</span><span class="tAN"> select=</span><span class="tAV">"$instantiationID"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"rdf:Description"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"rdf:about"</span><span class="tAN"> select=</span><span class="tAV">"                     concat(                     $System:Directory, '/', $System:FileName)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"ExifTool"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/ExifTool/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"et"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"et:toolkit"</span><span class="tAN"> select=</span><span class="tAV">"'Image::ExifTool 10.82'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"System"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/File/System/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"File"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/File/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"RIFF"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/RIFF/RIFF/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-x"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-x/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-xmp"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-xmp/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-xmpDM"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-xmpDM/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-xmpMM"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-xmpMM/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-dc"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-dc/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-plus"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-plus/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XML"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XML/XML/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"Composite"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/Composite/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">************************************************ A NON-EXISTENT FILE FOR PROCESSING PURPOSES ONLY ************************************************</span><span class="tXSLEl">&lt;/xsl:comment&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;ExifTool:ExifToolVersion</span><span class="tEl">&gt;</span><span class="tT">1.0 (FAKE VERSION)</span><span class="tEl">&lt;/ExifTool:ExifToolVersion&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;System:FileName</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$System:FileName"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/System:FileName&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;System:Directory</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$System:Directory"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/System:Directory&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;System:FileSize</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$System:FileSize"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/System:FileSize&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">Date of metadata creation, actually</span><span class="tXSLEl">&lt;/xsl:comment&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;System:FileCreateDate</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$System:FileCreateDate"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/System:FileCreateDate&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;System:FilePermissions</span><span class="tEl">&gt;</span><span class="tT">rw-rw-rw-</span><span class="tEl">&lt;/System:FilePermissions&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;File:FileType</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$File:FileType"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/File:FileType&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;File:FileTypeExtension</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$File:FileTypeExtension"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/File:FileTypeExtension&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;File:MIMEType</span><span class="tEl">&gt;</span><span class="tT">audio/x-wav</span><span class="tEl">&lt;/File:MIMEType&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;RIFF:Encoding</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:Encoding"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/RIFF:Encoding&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;RIFF:NumChannels</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:NumChannels"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/RIFF:NumChannels&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;RIFF:SampleRate</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:SampleRate"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/RIFF:SampleRate&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;RIFF:AvgBytesPerSec</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:AvgBytesPerSec"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/RIFF:AvgBytesPerSec&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;RIFF:BitsPerSample</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:BitsPerSample"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/RIFF:BitsPerSample&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;RIFF:Description</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$DAVIDTitle"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/RIFF:Description&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;RIFF:Originator</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$vendorName"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/RIFF:Originator&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;RIFF:Medium</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:Medium"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/RIFF:Medium&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;RIFF:Product</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:Product"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/RIFF:Product&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="P_vendorNameS_instantiationID2Exif.xsl"></a><div class="cmpT">Parameter
+         <span class="qname">vendorName</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -363,295 +884,69 @@
                      <tr>
                         <td class="fCol">
                            <div class="flL">Documentation</div>
-                           <div class="flR"><input id="bt_dS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_Exif2BWF.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_dS_P_vendorNameS_instantiationID2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_P_vendorNameS_instantiationID2Exif.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="dS_Exif2BWF.xsl" style="display:block">
+                           <div id="dS_P_vendorNameS_instantiationID2Exif.xsl" style="display:block">
                               <div>
-                                 <h3>Description</h3><pre> Convert Exif to BWF MetaEdit Core document, 
-    suitable for import</pre></div>
+                                 <h3>Description</h3><pre> Generate a set of Archive ingest documents 
+        from a list of cavafy pbcoreInstantiation IDs. 
+        Source document must have the format
+        &lt;instantiationIDs&gt;
+          &lt;instantiationID&gt;12345.3&lt;/instantiationID&gt;
+          &lt;instantiationID&gt;56789.4&lt;/instantiationID&gt;
+        &lt;/instantiationIDs&gt;
+        
+        Error Checking:
+        
+        The script can perform a couple of cross-checks 
+        to minimize mistyping of instantiation IDs.
+        
+        (1) If all the instantiation IDs 
+        come from one series,
+        you can add its name as an attribute @series 
+        to the top element instantiationIDs:
+        
+        &lt;instantiationIDs series="Around New York"&gt;
+                
+        (2) If you know it, 
+        you may include a @format attrbute 
+        at the instantiationID level: 
+        &lt;instantiationID format="1/4 inch audio tape"&gt;19719.1&lt;/instantiationID&gt;
+        
+    </pre></div>
                            </div>
                         </td>
                      </tr>
                      <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Select</td>
+                        <td>'MEMNON'</td>
+                     </tr>
+                     <tr>
                         <td class="fCol">
-                           <div class="flL">Imported from</div>
-                           <div class="flR"><input id="bt_ipF_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ipF_Exif2BWF.xsl');" class="control" /></div>
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_P_vendorNameS_instantiationID2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_P_vendorNameS_instantiationID2Exif.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="ipF_Exif2BWF.xsl" style="display:block">
+                           <div id="uB_P_vendorNameS_instantiationID2Exif.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
+                                    <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter1.html#exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')">exif2NewExif.xsl</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter6.html#M_instantiationIDM_generateExifS_instantiationID2Exif.xsl" target="_self" title="No namespace" onclick="updPT('instantiationID2Exif.xsl')"><span class="mRf">instantiationID</span><span class="mdRf">generateExif</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Stylesheet version</td>
-                        <td>3.0</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </td>
-            <td class="rt_lR"></td>
-         </tr>
-         <tr>
-            <td class="rt_cBL"></td>
-            <td class="rt_lB"></td>
-            <td class="rt_cBR"></td>
-         </tr>
-      </table><a id="M_rdfRDFM_ixmlFillerS_Exif2BWF.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">rdf:RDF</span><span class="titleTemplateMode">ixmlFiller</span></div>
-      <table class="rt">
-         <tr>
-            <td class="rt_cTL"></td>
-            <td class="rt_lT"></td>
-            <td class="rt_cTR"></td>
-         </tr>
-         <tr>
-            <td class="rt_lL"></td>
-            <td class="rt_cnt">
-               <table class="component">
-                  <tbody>
-                     <tr>
-                        <td class="fCol">Namespace</td>
-                        <td>No namespace</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Match</td>
-                        <td>rdf:RDF</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Mode</td>
-                        <td>ixmlFiller</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Import precedence</td>
-                        <td>0</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_M_rdfRDFM_ixmlFillerS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_rdfRDFM_ixmlFillerS_Exif2BWF.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="src_M_rdfRDFM_ixmlFillerS_Exif2BWF.xsl" style="display:block">
-                              <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:RDF"</span><span class="tAN"> mode=</span><span class="tAV">"ixmlFiller"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Match top level element --&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;conformance_point_document</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"rdf:Description"</span><span class="tAN"> mode=</span><span class="tAV">"ixmlFiller"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/conformance_point_document&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-            </td>
-            <td class="rt_lR"></td>
-         </tr>
-         <tr>
-            <td class="rt_cBL"></td>
-            <td class="rt_lB"></td>
-            <td class="rt_cBR"></td>
-         </tr>
-      </table><a id="T_ixmlFillerS_Exif2BWF.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">rdf:Description</span><span class="titleTemplateName">ixmlFiller</span><span class="titleTemplateMode">ixmlFiller</span></div>
-      <table class="rt">
-         <tr>
-            <td class="rt_cTL"></td>
-            <td class="rt_lT"></td>
-            <td class="rt_cTR"></td>
-         </tr>
-         <tr>
-            <td class="rt_lL"></td>
-            <td class="rt_cnt">
-               <table class="component">
-                  <tbody>
-                     <tr>
-                        <td class="fCol">Namespace</td>
-                        <td>No namespace</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Match</td>
-                        <td>rdf:Description</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Mode</td>
-                        <td>ixmlFiller</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Import precedence</td>
-                        <td>0</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_T_ixmlFillerS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_ixmlFillerS_Exif2BWF.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="src_T_ixmlFillerS_Exif2BWF.xsl" style="display:block">
-                              <table class="pWCont">
-                                 <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:Description"</span><span class="tAN"> name=</span><span class="tAV">"ixmlFiller"</span><span class="tAN"> mode=</span><span class="tAV">"ixmlFiller"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Process each WAVE file --&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- CORE OUTPUT --&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;File</span><span class="tAN"> name=</span><span class="tAV">"{@rdf:about}"</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;Core</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"Description"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         normalize-space(RIFF:Description)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!-- NOTE: Do not trust BEXT's Originator,
-                    as it conflicts with DAVID's "Author" --&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"Originator"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:Originator"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
-      </span><span class="tC">&lt;!--NOTE: Originator Reference is too small (32 char) 
-                    to be used for storing cavafy UUIDs--&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;OriginatorReference</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:OriginatorReference"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/OriginatorReference&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;CodingHistory</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:CodingHistory)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/CodingHistory&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;IARL</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:ArchivalLocation)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/IARL&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;IART</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Artist)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/IART&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;ICMS</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Commissioned)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/ICMS&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;ICMT</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Comment)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT"> </span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/ICMT&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;ICOP</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Copyright)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/ICOP&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;ICRD</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:DateCreated)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/ICRD&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;IENG</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Engineer)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/IENG&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;IGNR</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Genre)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/IGNR&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;IKEY</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Keywords)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/IKEY&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;IMED</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Medium)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/IMED&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;INAM</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Title)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/INAM&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;IPRD</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Product)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/IPRD&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;ISBJ</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Subject)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/ISBJ&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"ISFT"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Software)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;ISRC</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Source)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/ISRC&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;ISRF</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:SourceForm)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/ISRF&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;ITCH</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Technician)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-      </span><span class="tEl">&lt;/ITCH&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/Core&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/File&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-            </td>
-            <td class="rt_lR"></td>
-         </tr>
-         <tr>
-            <td class="rt_cBL"></td>
-            <td class="rt_lB"></td>
-            <td class="rt_cBR"></td>
-         </tr>
-      </table><a id="V_illegalCharactersS_Exif2BWF.xsl"></a><div class="cmpT">Variable
-         <span class="qname">illegalCharacters</span></div>
-      <table class="rt">
-         <tr>
-            <td class="rt_cTL"></td>
-            <td class="rt_lT"></td>
-            <td class="rt_cTR"></td>
-         </tr>
-         <tr>
-            <td class="rt_lL"></td>
-            <td class="rt_cnt">
-               <table class="component">
-                  <tbody>
-                     <tr>
-                        <td class="fCol">Namespace</td>
-                        <td>No namespace</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_V_illegalCharactersS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_illegalCharactersS_Exif2BWF.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="ovr_V_illegalCharactersS_Exif2BWF.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Variable</td>
+                                    <td class="fCol">Parameter</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter1.html#V_illegalCharactersS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')">illegalCharacters</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter6.html#P_DirectoryS_instantiationID2Exif.xsl" target="_self" title="http://ns.exiftool.ca/File/System/1.0/" onclick="updPT('instantiationID2Exif.xsl')">System:Directory</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -662,16 +957,13 @@
                      <tr>
                         <td class="fCol">
                            <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_V_illegalCharactersS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_V_illegalCharactersS_Exif2BWF.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_src_P_vendorNameS_instantiationID2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_P_vendorNameS_instantiationID2Exif.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_V_illegalCharactersS_Exif2BWF.xsl" style="display:block">
+                           <div id="src_P_vendorNameS_instantiationID2Exif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"illegalCharacters"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">“” &#x80;&#x93;&#x94;¦—’</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">ÂÃ±â&#x99;&#x9c;&#x9d;</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:variable&gt;</span></pre></td>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"vendorName"</span><span class="tAN"> select=</span><span class="tAV">"'MEMNON'"</span><span class="tXSLEl">/&gt;</span></pre></td>
                                  </tr>
                               </table>
                            </div>
@@ -687,8 +979,8 @@
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="V_legalCharactersS_Exif2BWF.xsl"></a><div class="cmpT">Variable
-         <span class="qname">legalCharacters</span></div>
+      </table><a id="P_DirectoryS_instantiationID2Exif.xsl"></a><div class="cmpT">Parameter
+         <span class="qname">System:Directory</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -701,22 +993,38 @@
                <table class="component">
                   <tbody>
                      <tr>
+                        <td class="fCol">
+                           <div class="flL">Documentation</div>
+                           <div class="flR"><input id="bt_dS_P_DirectoryS_instantiationID2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_P_DirectoryS_instantiationID2Exif.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="dS_P_DirectoryS_instantiationID2Exif.xsl" style="display:block">
+                              <div>
+                                 <h3>Description</h3><pre> Generic filepath for future files </pre></div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
                         <td class="fCol">Namespace</td>
-                        <td>No namespace</td>
+                        <td>http://ns.exiftool.ca/File/System/1.0/</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Select</td>
+                        <td>concat('W:/ARCHIVESNAS1/INGEST/', $vendorName)</td>
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_V_legalCharactersS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_legalCharactersS_Exif2BWF.xsl');" class="control" /></div>
+                           <div class="flL">References</div>
+                           <div class="flR"><input id="bt_refs_P_DirectoryS_instantiationID2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_P_DirectoryS_instantiationID2Exif.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="ovr_V_legalCharactersS_Exif2BWF.xsl" style="display:block">
+                           <div id="refs_P_DirectoryS_instantiationID2Exif.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
-                                    <td class="fCol">Variable</td>
+                                    <td class="fCol">Parameter</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter1.html#V_legalCharactersS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')">legalCharacters</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter6.html#P_vendorNameS_instantiationID2Exif.xsl" target="_self" title="No namespace" onclick="updPT('instantiationID2Exif.xsl')">vendorName</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -727,15 +1035,13 @@
                      <tr>
                         <td class="fCol">
                            <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_V_legalCharactersS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_V_legalCharactersS_Exif2BWF.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_src_P_DirectoryS_instantiationID2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_P_DirectoryS_instantiationID2Exif.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_V_legalCharactersS_Exif2BWF.xsl" style="display:block">
+                           <div id="src_P_DirectoryS_instantiationID2Exif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"legalCharacters"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"" '——…—'</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:variable&gt;</span></pre></td>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"System:Directory"</span><span class="tAN"> select=</span><span class="tAV">"concat('W:/ARCHIVESNAS1/INGEST/', $vendorName)"</span><span class="tXSLEl">/&gt;</span></pre></td>
                                  </tr>
                               </table>
                            </div>
@@ -751,8 +1057,8 @@
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="O_FADGIS_Exif2BWF.xsl"></a><div class="cmpT">Output
-         <span class="qname">FADGI</span></div>
+      </table><a id="P_FileTypeS_instantiationID2Exif.xsl"></a><div class="cmpT">Parameter
+         <span class="qname">File:FileType</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -765,45 +1071,35 @@
                <table class="component">
                   <tbody>
                      <tr>
-                        <td class="fCol">Namespace</td>
-                        <td>No namespace</td>
-                     </tr>
-                     <tr>
                         <td class="fCol">
-                           <div class="flL">Output properties</div>
-                           <div class="flR"><input id="bt_o_" type="image" src="img/btM.gif" value="-" onclick="switchState('o_');" class="control" /></div>
+                           <div class="flL">Documentation</div>
+                           <div class="flR"><input id="bt_dS_P_FileTypeS_instantiationID2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_P_FileTypeS_instantiationID2Exif.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="o_" style="display:block">
-                              <table class="attsT">
-                                 <thead>
-                                    <tr>
-                                       <th>method</th>
-                                       <th>encoding</th>
-                                       <th>indent</th>
-                                       <th>standalone</th>
-                                    </tr>
-                                 </thead>
-                                 <tr>
-                                    <td></td>
-                                    <td>UTF-8</td>
-                                    <td>yes</td>
-                                    <td>yes</td>
-                                 </tr>
-                              </table>
+                           <div id="dS_P_FileTypeS_instantiationID2Exif.xsl" style="display:block">
+                              <div>
+                                 <h3>Description</h3><pre> Type of files </pre></div>
                            </div>
                         </td>
                      </tr>
                      <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>http://ns.exiftool.ca/File/1.0/</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Select</td>
+                        <td>'WAV'</td>
+                     </tr>
+                     <tr>
                         <td class="fCol">
                            <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_O_FADGIS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_O_FADGIS_Exif2BWF.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_src_P_FileTypeS_instantiationID2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_P_FileTypeS_instantiationID2Exif.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_O_FADGIS_Exif2BWF.xsl" style="display:block">
+                           <div id="src_P_FileTypeS_instantiationID2Exif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:output</span><span class="tAN"> name=</span><span class="tAV">"FADGI"</span><span class="tAN"> encoding=</span><span class="tAV">"UTF-8"</span><span class="tAN"> method=</span><span class="tAV">"xml"</span><span class="tAN"> version=</span><span class="tAV">"1.0"</span><span class="tAN"> standalone=</span><span class="tAV">"yes"</span><span class="tAN"> indent=</span><span class="tAV">"yes"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"File:FileType"</span><span class="tAN"> select=</span><span class="tAV">"'WAV'"</span><span class="tXSLEl">/&gt;</span></pre></td>
                                  </tr>
                               </table>
                            </div>

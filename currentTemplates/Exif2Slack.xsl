@@ -12,11 +12,10 @@ of 40 items max
     xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:madsrdf="http://www.loc.gov/mads/rdf/v1#"
     xmlns:WNYC="http://www.wnyc.org" exclude-result-prefixes="#all">
 
-    <xsl:import href="
-        file:/T:/02%20CATALOGING/Instantiation%20uploads/InstantiationUploadTEMPLATES/currentTemplates/cavafySearch.xsl"/>
+    <xsl:import href="file:/T:/02%20CATALOGING/Instantiation%20uploads/InstantiationUploadTEMPLATES/currentTemplates/cavafySearch.xsl"/>
     
     <xsl:mode on-no-match="deep-skip"/>
-    <!--Gives line breaks etc-->
+    <!--Gives line breaks etc -->
     <xsl:output encoding="UTF-8" method="xml" indent="yes" omit-xml-declaration="yes"/>
 
     <xsl:param name="todaysDate" select="xs:date(current-date())"/>
@@ -52,19 +51,20 @@ of 40 items max
         select="substring(
         translate(string(current-time()),
         ':', ''), 1, 4)"/>
-    <xsl:param name="twentyFiveYearResult">
-        <xsl:call-template name="anniversaries">
-            <xsl:with-param name="xYears" select="25"/>
-        </xsl:call-template>
-    </xsl:param>
-    <xsl:param name="fiftyYearResult">
-        <xsl:call-template name="anniversaries">
-            <xsl:with-param name="xYears" select="50"/>
-        </xsl:call-template>
-    </xsl:param>
     
-    <xsl:variable name="buttonBlock">
-        <!-- 25 year and 50 year ago buttons -->
+    
+    <xsl:template name="buttonBlock">
+        <xsl:param name="twentyFiveYearResult">
+            <xsl:call-template name="anniversaries">
+                <xsl:with-param name="xYears" select="25"/>
+            </xsl:call-template>
+        </xsl:param>
+        <xsl:param name="fiftyYearResult">
+            <xsl:call-template name="anniversaries">
+                <xsl:with-param name="xYears" select="50"/>
+            </xsl:call-template>
+        </xsl:param>
+        <xsl:message>Generate 25 year and 50 year ago buttons</xsl:message>
         <fn:map>
             <fn:string key="type">actions</fn:string>
             <fn:array key="elements">
@@ -106,15 +106,17 @@ of 40 items max
                         </fn:string>
                     </fn:map>
                 </xsl:if>
-                
             </fn:array>
         </fn:map>
-    </xsl:variable>
+    </xsl:template>
     
-    <xsl:template name="headerBlock">
-        <!-- Create header block -->
+    <xsl:template name="headerBlock">        
         <xsl:param name="noOfAssets"/>
         <xsl:param name="seriesIncluded"/>
+        <xsl:message select="
+            'Generate header block for ', 
+            $noOfAssets, ' assets', 
+            'from the series ', $seriesIncluded"/>
         <fn:map>
             <fn:string key="type">section</fn:string>
             <fn:map key="text">
@@ -136,12 +138,12 @@ of 40 items max
                 </fn:string>
             </fn:map>
         </fn:map>
-        <xsl:copy-of select="$buttonBlock"/>
+        <xsl:call-template name="buttonBlock"/>
     </xsl:template>
     
-    <xsl:template match="rdf:RDF" mode="slack">
-        <!-- Match top-level element 
-        and group by pbcore assets, not files-->
+    <xsl:template name="slack" match="rdf:RDF" mode="slack">
+        <xsl:message select="
+            'Match top-level element and group by pbcore assets, not files'"/>
         <xsl:variable name="uniqueAssets">
             <xsl:copy>
             <xsl:for-each-group select="
@@ -151,13 +153,19 @@ of 40 items max
             </xsl:for-each-group>
             </xsl:copy>
         </xsl:variable>
-        <xsl:apply-templates select="$uniqueAssets" mode="breakItUp"/>
+        <xsl:apply-templates select="
+            $uniqueAssets" mode="breakItUpAndGenerateSlack">
+            <xsl:with-param name="filenameSuffix" select="
+                '_forSlack'"/>
+            <xsl:with-param name="assetName" select="
+                'assets'"/>
+        </xsl:apply-templates>
     </xsl:template>
 
     <xsl:template match="rdf:RDF" mode="map">
         <!-- Create an xml array
         and convert it to json
-        for use in Slack-->
+        for use in Slack -->
         <xsl:variable name="xmlOutput">
             <fn:map>
                 <fn:array key="blocks">
@@ -225,31 +233,43 @@ of 40 items max
         <!-- Generate Slack posting CURL commands,
             including 'webhooks' 
         This is output as a text which you can copy,
-        not as a file-->
+        not as a file -->
         <xsl:param name="filenameSlack"/>
-        <xsl:param name="filenameSlackRaw" select="replace(fn:substring-after($filenameSlack, 'file:/'), '%20', ' ')"/>
-        <xsl:param name="webhookURL" select="$webhookURLMarcos"/>
+        <xsl:param name="filenameSlackRaw"
+            select="
+                replace(substring-after($filenameSlack, 'file:/'),
+                '%20', ' '
+                )"/>
+        <xsl:param name="webhookURL" select="
+                $webhookURLMarcos"/>
+        <xsl:message select="
+                'Generate Slack posting CURL commands'"/>
         <xsl:text>
 </xsl:text>
         <xsl:text>curl -X POST -H </xsl:text>
         <xsl:text>"Content-type: application/json" </xsl:text>
         <xsl:text>-d @</xsl:text>
-        <xsl:value-of 
+        <xsl:value-of
             select="
-            concat(
-            '&quot;', 
-            $filenameSlackRaw, 
-            '&quot; ')" disable-output-escaping="yes"/>
+                concat(
+                '&quot;',
+                $filenameSlackRaw,
+                '&quot; ')"
+            disable-output-escaping="yes"/>
         <xsl:value-of select="$webhookURL"/>
-        <xsl:text>
+        <xsl:text>    
 </xsl:text>
     </xsl:template>
     
     <xsl:function name="WNYC:slackURL">
         <!-- Create a Slack markup hyperlink
-        from a URL and a string-->
+        from a URL and a string -->
         <xsl:param name="URL"/>
         <xsl:param name="text"/>
+        <xsl:message select="
+            'Create a Slack markup hyperlink ',
+            ' from URL ', $URL,
+            'and the string _', $text, '_.'"/>
         <xsl:text disable-output-escaping="yes">&lt;</xsl:text>
         <xsl:value-of select="normalize-space($URL)"/>
         <xsl:text>|</xsl:text>
@@ -257,11 +277,13 @@ of 40 items max
         <xsl:text disable-output-escaping="yes">&gt;</xsl:text>
     </xsl:function>
 
-    <xsl:template match="rdf:RDF" mode="breakItUp" name="breakItUp">
-        <!-- break up large files 
+    <xsl:template match="rdf:RDF" mode="breakItUpAndGenerateSlack" name="breakItUpAndGenerateSlack">
+        <!-- Break up large files 
         and generate Slack json documents -->
         <xsl:param name="firstOccurrence" select="1" as="xs:integer"/>
         <xsl:param name="maxOccurrences" as="xs:integer" select="40"/>
+        <xsl:message select="'Break up document',
+            ' into ', $maxOccurrences, '-size bits.'"/>
 
         <xsl:variable name="lastPosition" select="
             count(
@@ -380,7 +402,7 @@ of 40 items max
                     <xsl:variable name="xmlOutput">
                         <fn:map>
                             <fn:array key="blocks">
-                                <xsl:copy-of select="$buttonBlock"/>
+                                <xsl:call-template name="buttonBlock"/>
                                 <xsl:call-template name="headerBlock">
                                     <xsl:with-param name="noOfAssets" 
                                         select="$maxOccurrences"/>
@@ -418,7 +440,7 @@ of 40 items max
                         disable-output-escaping="yes"/>
                 </xsl:result-document>
 
-                <xsl:apply-templates select="." mode="breakItUp">
+                <xsl:apply-templates select="." mode="breakItUpAndGenerateSlack">
                     <xsl:with-param name="firstOccurrence"
                         select="$firstOccurrence + $maxOccurrences"/>
                     <xsl:with-param name="maxOccurrences" select="$maxOccurrences"/>

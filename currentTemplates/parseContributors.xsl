@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Process contributors and creators,
 their occupations and their fields of activity
-and output pbcoreCreator / pbcoreContributor-->
+and output pbcoreCreator / pbcoreContributor -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
     xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html" 
@@ -172,7 +172,7 @@ and output pbcoreCreator / pbcoreContributor-->
                             />
                         </xsl:call-template>
                     </xsl:when>
-                    <!--Not a valid LOC contributor; skip over-->
+                    <!--Not a valid LOC contributor; skip over -->
                     <xsl:otherwise>
                         <xsl:call-template name="parseContributorOccupations">
                             <xsl:with-param name="contributorsToProcess"

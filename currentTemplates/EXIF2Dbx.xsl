@@ -51,7 +51,7 @@ into an xml .DBX file suitable for ingest into D.A.V.I.D. -->
                 substring($instantiationDate, 3, 2)
                 )"/>
 
-        <!--        Parse the DAVID Title-->
+        <!--        Parse the DAVID Title -->
         <xsl:variable name="DAVIDTitleBeforeSpace">
             <xsl:value-of
                 select="
@@ -59,7 +59,7 @@ into an xml .DBX file suitable for ingest into D.A.V.I.D. -->
             />
         </xsl:variable>
 
-        <!--        First, the tokenized title-->
+        <!--        First, the tokenized title -->
         <xsl:variable name="collectionAcronym">
             <xsl:value-of
                 select="

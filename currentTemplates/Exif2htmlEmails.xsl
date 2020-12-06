@@ -25,7 +25,7 @@
     
 
 
-    <!--Gives line breaks etc-->
+    <!--Gives line breaks etc -->
     <xsl:output name="email" encoding="UTF-8" method="html" html-version="5.0" indent="yes"/>
 
 

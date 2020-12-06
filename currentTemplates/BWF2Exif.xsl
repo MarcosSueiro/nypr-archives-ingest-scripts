@@ -23,7 +23,7 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     exclude-result-prefixes="xsi xi lc #default fn xhtml rdf XMP-WNYCSchema XMP-exif XML">
 
-    <!--Gives line breaks etc-->
+    <!--Gives line breaks etc -->
         <xsl:output encoding="UTF-8" method="xml" version="1.0" indent="yes"/>
 
     <xsl:template match="conformance_point_document" mode="BWFMetaEdit">
@@ -34,14 +34,17 @@
     </xsl:template>
 
     <xsl:template match="File" mode="BWFMetaEdit">
-        <!-- Transform each WAVE file -->
+        <!-- Transform each WAVE file to exiftool -->
         <xsl:param name="fullFilename" select="@name"/>
-        <xsl:param name="fullFilenameTranslated" select="translate(@name, '\', '/')"/>
-        <xsl:param name="parsedFullFilename" select="analyze-string($fullFilenameTranslated, '/')"/>
-        <xsl:param name="filename" select="$parsedFullFilename/fn:non-match[last()]"/>
+        <xsl:param name="fullFilenameTranslated" select="
+            translate(@name, '\', '/')"/>
+        <xsl:param name="parsedFullFilename" select="
+            analyze-string($fullFilenameTranslated, '/')"/>
+        <xsl:param name="filename" select="
+            $parsedFullFilename/fn:non-match[last()]"/>
         <xsl:param name="token" select="'.'"/>
-        <xsl:param name="directory" select="substring-before($fullFilenameTranslated, $filename)"/>
-
+        <xsl:param name="directory" select="
+            substring-before($fullFilenameTranslated, $filename)"/>
         <xsl:param name="filenameNoExtensionRaw"
             select="
                 if ($token)
@@ -58,7 +61,6 @@
                 substring-after(
                 substring-after($filename, $filenameNoExtensionRaw),
                 $token)"/>
-
         <rdf:Description>
             <xsl:attribute name="rdf:about">
                 <xsl:value-of select="$fullFilenameTranslated"/>
@@ -170,6 +172,8 @@
             <RIFF:CodingHistory>
                 <xsl:value-of select="normalize-space(Core/CodingHistory)"/>
             </RIFF:CodingHistory>
+            
+            <!-- XMP -->
             <XMP-xmp:CreatorTool>
                 <xsl:value-of select="normalize-space(Core/ISFT)"/>
             </XMP-xmp:CreatorTool>
@@ -191,7 +195,6 @@
             <XMP-xmpDM:Genre>
                 <xsl:value-of select="normalize-space(Core/IGNR)"/>
             </XMP-xmpDM:Genre>
-
             <XMP-dc:Rights>
                 <xsl:value-of select="normalize-space(Core/ICOP)"/>
             </XMP-dc:Rights>

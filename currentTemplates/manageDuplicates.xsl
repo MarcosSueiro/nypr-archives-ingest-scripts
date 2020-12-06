@@ -47,6 +47,7 @@ from different sources -->
         <xsl:param name="field4" select="dummyNode"/>
         <xsl:param name="field5" select="dummyNode"/>
         <xsl:param name="fieldName" select="name($field1(.!='')[1])"/>
+        <xsl:param name="filename" select=".//System:FileName"/>
         <xsl:param name="validatingString" select="''"/>
         <xsl:param name="separatingToken" select="$separatingToken"/>
         <xsl:param name="defaultValue">
@@ -61,7 +62,6 @@ from different sources -->
             string-join(
             ($field1, $field2, $field3, $field4, $field5), 
             $separatingToken)"/>
-        <xsl:message select="'Default value: ', $defaultValue"/>
 
         <xsl:variable name="distinctFields">
             <xsl:call-template name="splitParseValidate">
@@ -95,8 +95,11 @@ from different sources -->
             <xsl:value-of select="
                 $distinctFoundCount, ' distinct values for ',
                 $fieldName, ' found: '"/>
-            <xsl:value-of select="$distinctFields/inputParsed/valid" separator=" --- "/>
+            <xsl:value-of select="
+                $distinctFields/inputParsed/valid" separator="
+                {$separatingToken}"/>
         </xsl:message>
+        <xsl:variable name="checkConflictResult">
         <xsl:choose>
             <xsl:when test="$distinctFoundCount eq 1">                
                 <xsl:value-of select="$distinctFields/inputParsed/valid"/>
@@ -110,11 +113,16 @@ from different sources -->
                         select="'conflicting_values'"/>
                     <xsl:value-of select="'conflicting values for', 
                         $fieldName, 
-                        ' in ', .//System:FileName, ': '"/>
-                    <xsl:value-of select="$distinctFields/inputParsed/valid" separator=" -- "/>
+                        ' in ', $filename, ': '"/>
+                    <xsl:value-of select="
+                        $distinctFields/inputParsed/valid" separator="
+                        {$separatingToken}"/>
                 </xsl:element>
             </xsl:when>
         </xsl:choose>
+        </xsl:variable>
+        <xsl:copy-of select="$checkConflictResult"/>
+        <xsl:message select="$checkConflictResult"/>
     </xsl:template>
 
     <xsl:template name="mergeData" 

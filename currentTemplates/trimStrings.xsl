@@ -119,4 +119,35 @@
         
     </xsl:template>
     
+    <xsl:template match="text()" name="abbreviateText" mode="
+        abbreviateText">
+        <!-- Get rid of words shorter than a certain minimum -->
+        <!-- Also, get rid of non-letter and non-number characters -->
+        <xsl:param name="text" select="."/>
+        <xsl:param name="maxTitleLength" select="30"/>
+        <xsl:param name="minWordLength" select="4"/>
+        <xsl:param name="regexMatch" select="concat(
+            ' \w{1,', $minWordLength - 1, '} ')"/>
+        <xsl:param name="deleteShortWords" select="
+            replace($text, $regexMatch, ' ')"/>
+        <xsl:param name="replaceDashes" select="
+            replace($deleteShortWords, '-', ' ')"/>
+        <xsl:variable name="cleanEntry">
+            <xsl:value-of select="analyze-string(
+                $replaceDashes, '[ A-Za-z0-9]')/*:match" separator=""/>
+        </xsl:variable>        <xsl:value-of select="matches('hello ', '\w{5,} ')"/>
+        <originalText>
+            <xsl:value-of select="$text"/>
+        </originalText>
+        <abbreviatedText>
+            <xsl:call-template name="substring-before-last">
+                <xsl:with-param name="input" select="
+                    replace($cleanEntry, ' {2,}', ' ')"/>
+                <xsl:with-param name="substr" select="' '"/>
+            </xsl:call-template>
+        </abbreviatedText>
+    </xsl:template>
+    
+    
+    
 </xsl:stylesheet>

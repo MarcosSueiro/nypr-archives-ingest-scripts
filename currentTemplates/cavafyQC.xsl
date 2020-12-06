@@ -5,6 +5,7 @@
     xmlns:pb="http://www.pbcore.org/PBCore/PBCoreNamespace.html" version="2.0">
 
     <xsl:import href="cavafySearch.xsl"/>
+    <xsl:import href="processCollection.xsl"/>
 
     <xsl:output method="xml" version="1.0" indent="yes"/>
     <xsl:mode on-no-match="deep-skip"/>
@@ -17,11 +18,6 @@
         </xsl:copy>
     </xsl:template>
 
-    <!--<xsl:template match="pb:pbcoreDescriptionDocument">
-        <!-\- Match asset element -\->
-        <xsl:apply-templates select="." mode="cavafyQC"/>
-    </xsl:template>-->
-
     <xsl:template match="pb:pbcoreDescriptionDocument" mode="cavafyQC">
         <!-- Test whether the cavafy entry has any errors, with the following defaults: -->
 
@@ -30,14 +26,14 @@
         <!--    At least one asset date -->
         <!--    Exactly one collection, Series and Episode titles -->
         <!--    Exactly one genre -->
-        <!--    Exactly one abstract with decent length and content-->
+        <!--    Exactly one abstract with decent length and content -->
         <!--    At most one CMS Image -->
         <!--    Exactly one Copyright notice -->
 
         <!-- INSTANTIATION LEVEL:-->
         <!--    Exactly one instantiation ID with @source = 'WNYC Archive Catalog' -->
-        <!--    Exactly one Format, Format Location, Media Type and Generation-->
-        <!--    At most one essence track-->
+        <!--    Exactly one Format, Format Location, Media Type and Generation -->
+        <!--    At most one essence track -->
         <xsl:param name="minAssetIDCount" select="1"/>
         <xsl:param name="maxAssetIDCount" select="1"/>
         <xsl:param name="minAssetDateCount" select="1"/>
@@ -56,19 +52,20 @@
         <xsl:param name="maxCopyrightCount" select="1"/>
         <xsl:param name="cavafyURL"
             select="
-            concat(
-            'https://cavafy.wnyc.org/assets/', 
-            pb:pbcoreIdentifier
-            [@source = 'pbcore XML database UUID'][1]
-            )"/>
+                concat(
+                'https://cavafy.wnyc.org/assets/',
+                pb:pbcoreIdentifier
+                [@source = 'pbcore XML database UUID'][1]
+                )"/>
         <xsl:param name="cavafyxml" select="concat($cavafyURL, '.xml')"/>
-        
-        <xsl:message select="
-            'Test whether the cavafy entry ',
-            $cavafyURL,
-            ' has any errors'
-            "/>
-      
+
+        <xsl:message
+            select="
+                'Test whether the cavafy entry ',
+                $cavafyURL,
+                ' has any errors'
+                "/>
+
         <xsl:variable name="cavafyErrors">
             <xsl:variable name="assetIDCount"
                 select="
@@ -222,8 +219,7 @@
                         'ATTENTION: Multiple abstracts in ',
                         $cavafyxml"/>
                 <xsl:element name="error">
-                    <xsl:attribute name="type"
-                        select="'abstract_count'"/>
+                    <xsl:attribute name="type" select="'abstract_count'"/>
                     <xsl:value-of
                         select="
                             'ATTENTION: Multiple abstracts in ',
@@ -249,18 +245,17 @@
                 <xsl:message terminate="no"
                     select="'ATTENTION: Very short abstract in ', $cavafyxml"/>
                 <xsl:element name="error">
-                    <xsl:attribute name="type"
-                        select="'short_abstract'"/>
+                    <xsl:attribute name="type" select="'short_abstract'"/>
                     <xsl:value-of select="'ATTENTION: Very short abstract in ', $cavafyxml, ': '"/>
                     <xsl:copy-of select="pb:pbcoreDescription[@descriptionType = 'Abstract']"/>
                 </xsl:element>
             </xsl:if>
             <xsl:variable name="cmsImageIDCount"
                 select="
-                count(
-                pb:pbcoreAnnotation
-                [@annotationType = 'CMS Image']
-                )"/>
+                    count(
+                    pb:pbcoreAnnotation
+                    [@annotationType = 'CMS Image']
+                    )"/>
             <xsl:if test="$cmsImageIDCount gt 1">
                 <xsl:message terminate="no"
                     select="
@@ -268,8 +263,7 @@
                         $cmsImageIDCount,
                         ' in ', $cavafyxml"/>
                 <xsl:element name="error">
-                    <xsl:attribute name="type"
-                        select="'multiple_CMS_image_IDs'"/>
+                    <xsl:attribute name="type" select="'multiple_CMS_image_IDs'"/>
                     <xsl:value-of select="'ATTENTION: Multiple CMS Image IDs in ', $cavafyxml, ': '"/>
                     <xsl:value-of
                         select="pb:pbcoreDescription/pbcoreAnnotation[@annotationType = 'CMS Image']"
@@ -279,28 +273,32 @@
             <xsl:variable name="copyrightCount" select="count(pb:pbcoreRightsSummary)"/>
             <xsl:if
                 test="
-                $copyrightCount lt $minCopyrightCount
-                or
-                $copyrightCount gt $maxCopyrightCount">
+                    $copyrightCount lt $minCopyrightCount
+                    or
+                    $copyrightCount gt $maxCopyrightCount">
                 <xsl:message>
                     <xsl:value-of
                         select="
-                        concat(
-                        'ATTENTION: ',
-                        $copyrightCount, ' rights notices in ',
-                        $cavafyxml,
-                        '(range allowed:', $minCopyrightCount, '-', $maxCopyrightCount, ')',
-                        ': '
-                        )"/>
+                            concat(
+                            'ATTENTION: ',
+                            $copyrightCount, ' rights notices in ',
+                            $cavafyxml,
+                            '(range allowed:', $minCopyrightCount, '-', $maxCopyrightCount, ')',
+                            ': '
+                            )"/>
                     <xsl:copy-of select="pb:pbcoreRightsSummary"/>
                 </xsl:message>
             </xsl:if>
             <xsl:apply-templates select="pb:pbcoreInstantiation" mode="instantiationQC"/>
         </xsl:variable>
 
-
+        <xsl:variable name="cavafyWarnings">
+            <xsl:apply-templates select="." mode="defaultValuesWarning"/>
+        </xsl:variable>
 
         <cavafyEntry>
+            <xsl:copy-of select="$cavafyWarnings"/>
+            <xsl:message select="$cavafyWarnings"/>
             <xsl:choose>
                 <xsl:when test="$cavafyErrors//error">
                     <xsl:copy-of select="$cavafyErrors"/>
@@ -308,15 +306,15 @@
                 <xsl:otherwise>
                     <xsl:copy-of select="."/>
                 </xsl:otherwise>
-            </xsl:choose>
+            </xsl:choose>            
         </cavafyEntry>
     </xsl:template>
 
     <xsl:template match="pb:pbcoreInstantiation" mode="instantiationQC">
         <!-- INSTANTIATION LEVEL:-->
         <!--    Exactly one instantiation ID with @source = 'WNYC Archive Catalog' -->
-        <!--    Exactly one Format, Format Location, Media Type and Generation-->
-        <!--    At most one essence track-->
+        <!--    Exactly one Format, Format Location, Media Type and Generation -->
+        <!--    At most one essence track -->
         <xsl:param name="minInstantiationIDCount" select="1"/>
         <xsl:param name="maxInstantiationIDCount" select="1"/>
         <xsl:param name="minFormatCount" select="1"/>
@@ -369,4 +367,109 @@
             </xsl:element>
         </xsl:if>
     </xsl:template>
+
+    <xsl:template match="pb:pbcoreDescriptionDocument" mode="defaultValuesWarning"
+        name="defaultValuesWarning">
+        <!-- Check to see if a cavafy asset 
+            has default values 
+            for abstract, contributors, or subject headings -->
+        <xsl:param name="cavafyURL"
+            select="
+                concat(
+                'https://cavafy.wnyc.org/assets/',
+                pb:pbcoreIdentifier
+                [@source = 'pbcore XML database UUID'][1]
+                )"/>
+        <xsl:param name="cavafyxml" select="concat($cavafyURL, '.xml')"/>
+        <xsl:param name="cavafyData" select="."/>
+        <xsl:message select="
+            'Check to see if a cavafy asset', $cavafyURL, 
+            ' has default values for',
+            ' abstract, contributors, or subject headings'"/>
+        <xsl:variable name="collectionInfo">
+            <xsl:call-template name="processCollection">
+                <xsl:with-param name="
+                    collectionAcronym"
+                    select="
+                        pb:pbcoreTitle[@titleType = 'Collection']"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="collectionurl" select="$collectionInfo//collURL"/>
+        <xsl:variable name="seriesName" select="pb:pbcoreTitle[@titleType = 'Series']"/>
+        <xsl:variable name="seriesData">
+            <xsl:call-template name="findSeriesXMLFromName">
+                <xsl:with-param name="seriesName" select="$seriesName"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="seriesKeywords">
+            <xsl:value-of
+                select="
+                    $seriesData//pb:pbcoreSubject
+                    /@ref[contains(., 'id.loc.gov')]"
+                separator="
+                {$separatingTokenLong}"/>
+        </xsl:variable>
+        <xsl:variable name="assetKeywords">
+            <xsl:value-of
+                select="
+                    pb:pbcoreSubject
+                    /@ref[contains(., 'id.loc.gov')]"
+                separator="
+                {$separatingTokenLong}"/>
+        </xsl:variable>
+        <xsl:variable name="seriesAbstract"
+            select="
+                $seriesData
+                /pb:pbcoreDescriptionDocument
+                /pb:pbcoreDescription
+                [@descriptionType = 'Abstract']
+                [. != '']"/>
+        <xsl:variable name="defaultAbstractStart"
+            select="
+                concat(
+                pb:pbcoreTitle[@titleType = 'Episode'],
+                ' on ',
+                pb:pbcoreTitle[@titleType = 'Series'],
+                ' on ')"/>
+        
+        <xsl:if test="$seriesKeywords[. != ''] = $assetKeywords[. != '']">
+            <xsl:call-template name="generateWarning">
+                <xsl:with-param name="fieldName" select="'subjectHeadings'"/>
+                <xsl:with-param name="fieldValue" select="$assetKeywords"/>
+            </xsl:call-template>
+        </xsl:if>
+        <xsl:apply-templates select="
+            pb:pbcoreDescription
+            [@descriptionType='Abstract']
+            [starts-with(., $defaultAbstractStart)]" 
+            mode="generateWarning">
+            <xsl:with-param name="warningMessage" select="
+                'Possibly default value for abstract'"/>
+        </xsl:apply-templates>
+        <xsl:apply-templates select="
+            pb:pbcoreDescription
+            [@descriptionType='Abstract']
+             = $seriesAbstract" 
+            mode="generateWarning">
+            <xsl:with-param name="fieldName" select="'abstract'"/>
+        </xsl:apply-templates>
+        
+    </xsl:template>
+    
+    <xsl:template name="generateWarning" match="node()" mode="generateWarning">
+        <xsl:param name="fieldName" select="local-name()"/>
+        <xsl:param name="warningType" select="'defaultValue'"/>
+        <xsl:param name="warningMessage" select="
+            concat(
+            'Default series values in ', $fieldName
+            )"/>
+        <xsl:param name="fieldValue" select="."/>
+        <xsl:message select="$warningMessage, ."/>
+        <xsl:element name="warning">
+            <xsl:attribute name="{$warningType}"/>
+            <xsl:value-of select="$warningMessage"/>
+            <xsl:copy-of select="."/>
+        </xsl:element>
+    </xsl:template>
+
 </xsl:stylesheet>

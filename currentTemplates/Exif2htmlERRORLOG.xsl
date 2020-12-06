@@ -14,7 +14,7 @@
 
     <xsl:import href="cavafySearch.xsl"/>
     
-    <!--Gives line breaks etc-->
+    <!--Gives line breaks etc -->
     <xsl:output encoding="UTF-8" method="xml" standalone="yes" indent="yes"/>
     
 
@@ -88,7 +88,7 @@
             </xsl:choose>
         </xsl:variable>
 
-        <!--assets-->
+        <!--assets -->
         <xsl:if test="not(RIFF:Source = preceding::RIFF:Source)">
             <h3 style="color:red; ">
                 <a href="{RIFF:Source}">

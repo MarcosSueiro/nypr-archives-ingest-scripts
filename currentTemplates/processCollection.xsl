@@ -41,10 +41,10 @@
     <xsl:template name="processCollection" match="collectionAcronym" mode="processCollection">
         <!-- Process a single collection 
         and output 
-        collectionInfo/collectionLOCName-->
+        collectionInfo/collectionLOCName -->
         <xsl:param name="collectionAcronym" select="."/>
         <xsl:message select="
-            concat('Process collection ', $collectionAcronym)"/>
+            'Process collection ', $collectionAcronym"/>
         <!-- Collection found -->
         <xsl:variable name="collectionConcordanceInfo"
             select="

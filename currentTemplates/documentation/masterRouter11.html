@@ -3,24 +3,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <title>Stylesheet documentation for: selectionOrExcerpt.xsl</title>
+      <title>Stylesheet documentation for: cavafyQC.xsl</title>
       <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
          <!--
         
-        var parametersBoxes= new Array('prs_M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl');
+        var parametersBoxes= new Array('prs_M_pbpbcoreDescriptionDocumentM_cavafyQCS_cavafyQC.xsl', 
+				'prs_M_pbpbcoreInstantiationM_instantiationQCS_cavafyQC.xsl', 
+				'prs_T_defaultValuesWarningS_cavafyQC.xsl', 
+				'prs_T_generateWarningS_cavafyQC.xsl');
+
+        
+        var usedByBoxes= new Array('uB_T_generateWarningS_cavafyQC.xsl');
+
+        var docBoxes= new Array('dS_cavafyQC.xsl');
+
+        var sourceBoxes= new Array('src_M_pbpbcoreCollectionS_cavafyQC.xsl', 
+				'src_M_pbpbcoreDescriptionDocumentM_cavafyQCS_cavafyQC.xsl', 
+				'src_M_pbpbcoreInstantiationM_instantiationQCS_cavafyQC.xsl', 
+				'src_T_defaultValuesWarningS_cavafyQC.xsl', 
+				'src_T_generateWarningS_cavafyQC.xsl', 
+				'src_O_S_cavafyQC.xsl');
 
         
         
-        var docBoxes= new Array('dS_selectionOrExcerpt.xsl');
+        var referencesBoxes= new Array('refs_T_defaultValuesWarningS_cavafyQC.xsl');
 
-        var sourceBoxes= new Array('src_M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl');
+        var importsBoxes= new Array('ip_cavafyQC.xsl');
 
         
-        
-        
-        
-        
-        var importedFromBoxes= new Array('ipF_selectionOrExcerpt.xsl');
+        var importedFromBoxes= new Array('ipF_cavafyQC.xsl');
 
         
         var button_prefix = 'bt_';
@@ -325,6 +336,16 @@
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, parametersBoxes);" class="control" /></span><span class="globalControlName">Parameters </span></td>
                      </tr>
                      <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, referencesBoxes);" class="control" /></span><span class="globalControlName">References </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, importsBoxes);" class="control" /></span><span class="globalControlName">Imported modules
+                              </span></td>
+                     </tr>
+                     <tr>
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, importedFromBoxes);" class="control" /></span><span class="globalControlName">Imported from
                               </span></td>
                      </tr>
@@ -342,8 +363,8 @@
                <td class="rt_cBR"></td>
             </tr>
          </table>
-      </div><a id="selectionOrExcerpt.xsl"></a><div class="cmpT">Stylesheet
-         <span class="qname">selectionOrExcerpt.xsl</span></div>
+      </div><a id="cavafyQC.xsl"></a><div class="cmpT">Stylesheet
+         <span class="qname">cavafyQC.xsl</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -358,38 +379,47 @@
                      <tr>
                         <td class="fCol">
                            <div class="flL">Documentation</div>
-                           <div class="flR"><input id="bt_dS_selectionOrExcerpt.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_selectionOrExcerpt.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_dS_cavafyQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_cavafyQC.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="dS_selectionOrExcerpt.xsl" style="display:block">
+                           <div id="dS_cavafyQC.xsl" style="display:block">
                               <div>
-                                 <h3>Description</h3><pre> Format XMP markers into text such as
-    
-Edited file timings:
-00:00:00 - Intro (.49 m)
-
-00:00:00 - Intro
-00:26:00 - end hour
-00:26:00 - Intro (.49 m)
-
-00:26:00 - Intro
-00:52:00 - Marker 22
-</pre></div>
+                                 <h3>Description</h3><pre> Perform QC on cavafy pbcore entries </pre></div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Imported modules</div>
+                           <div class="flR"><input id="bt_ip_cavafyQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ip_cavafyQC.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="ip_cavafyQC.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter20.html#cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">cavafySearch.xsl</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter15.html#processCollection.xsl" target="_self" title="No namespace" onclick="updPT('processCollection.xsl')">processCollection.xsl</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
                            </div>
                         </td>
                      </tr>
                      <tr>
                         <td class="fCol">
                            <div class="flL">Imported from</div>
-                           <div class="flR"><input id="bt_ipF_selectionOrExcerpt.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ipF_selectionOrExcerpt.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_ipF_cavafyQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ipF_cavafyQC.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="ipF_selectionOrExcerpt.xsl" style="display:block">
+                           <div id="ipF_cavafyQC.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter7.html#Exif2Cavafy.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Cavafy.xsl')">Exif2Cavafy.xsl</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter1.html#exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')">exif2NewExif.xsl</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -399,7 +429,7 @@ Edited file timings:
                      </tr>
                      <tr>
                         <td class="fCol">Stylesheet version</td>
-                        <td>1.0</td>
+                        <td>2.0</td>
                      </tr>
                   </tbody>
                </table>
@@ -411,10 +441,8 @@ Edited file timings:
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">             XMP-xmpDM:Tracks             /rdf:Bag             /rdf:li[@rdf:parseType
-            = 'Resource']             /XMP-xmpDM:Markers             /rdf:Bag             /rdf:li[@rdf:parseType
-            = 'Resource']</span></div>
+      </table><a id="M_pbpbcoreCollectionS_cavafyQC.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">pb:pbcoreCollection</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -432,22 +460,78 @@ Edited file timings:
                      </tr>
                      <tr>
                         <td class="fCol">Match</td>
-                        <td>             XMP-xmpDM:Tracks             /rdf:Bag             /rdf:li[@rdf:parseType
-                           = 'Resource']             /XMP-xmpDM:Markers             /rdf:Bag             /rdf:li[@rdf:parseType
-                           = 'Resource']
-                        </td>
+                        <td>pb:pbcoreCollection</td>
                      </tr>
                      <tr>
                         <td class="fCol">Mode</td>
                         <td>#default</td>
                      </tr>
                      <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>21</td>
+                     </tr>
+                     <tr>
                         <td class="fCol">
-                           <div class="flL">Parameters</div>
-                           <div class="flR"><input id="bt_prs_M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl');" class="control" /></div>
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_M_pbpbcoreCollectionS_cavafyQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_pbpbcoreCollectionS_cavafyQC.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="prs_M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl" style="display:block">
+                           <div id="src_M_pbpbcoreCollectionS_cavafyQC.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"pb:pbcoreCollection"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Match top-level element --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:copy</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"                 pb:pbcoreDescriptionDocument"</span><span class="tAN"> mode=</span><span class="tAV">"cavafyQC"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:copy&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="M_pbpbcoreDescriptionDocumentM_cavafyQCS_cavafyQC.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">pb:pbcoreDescriptionDocument</span><span class="titleTemplateMode">cavafyQC</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Match</td>
+                        <td>pb:pbcoreDescriptionDocument</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Mode</td>
+                        <td>cavafyQC</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Parameters</div>
+                           <div class="flR"><input id="bt_prs_M_pbpbcoreDescriptionDocumentM_cavafyQCS_cavafyQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_M_pbpbcoreDescriptionDocumentM_cavafyQCS_cavafyQC.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="prs_M_pbpbcoreDescriptionDocumentM_cavafyQCS_cavafyQC.xsl" style="display:block">
                               <table class="attsT">
                                  <thead>
                                     <tr>
@@ -457,12 +541,97 @@ Edited file timings:
                                     </tr>
                                  </thead>
                                  <tr>
-                                    <td class="fCol">frameRate</td>
+                                    <td class="fCol">cavafyURL</td>
                                     <td>No namespace</td>
-                                    <td>                 number(                 substring-after(                 /rdf:RDF/rdf:Description
-                                       /*[local-name() = 'Tracks']                 /rdf:Bag                 /rdf:li     
-                                       /*[local-name() = 'FrameRate']                 , 'f'                 ))
+                                    <td>                 concat(                 'https://cavafy.wnyc.org/assets/',      
+                                       pb:pbcoreIdentifier                 [@source = 'pbcore XML database UUID'][1]    
+                                       )
                                     </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">cavafyxml</td>
+                                    <td>No namespace</td>
+                                    <td>concat($cavafyURL, '.xml')</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">maxAbstractCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">maxAssetDateCount</td>
+                                    <td>No namespace</td>
+                                    <td>100</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">maxAssetIDCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">maxCollectionCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">maxCopyrightCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">maxEpisodeCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">maxGenreCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">maxSeriesCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">minAbstractCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">minAssetDateCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">minAssetIDCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">minCollectionCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">minCopyrightCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">minEpisodeCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">minGenreCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">minSeriesCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
                                  </tr>
                               </table>
                            </div>
@@ -470,87 +639,663 @@ Edited file timings:
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>1</td>
+                        <td>21</td>
                      </tr>
                      <tr>
                         <td class="fCol">
                            <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_src_M_pbpbcoreDescriptionDocumentM_cavafyQCS_cavafyQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_pbpbcoreDescriptionDocumentM_cavafyQCS_cavafyQC.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_M_XMP-xmpDMTracksrdfBagrdflirdfparseTypeResourceXMP-xmpDMMarkersrdfBagrdflirdfparseTypeResourceS_selectionOrExcerpt.xsl" style="display:block">
+                           <div id="src_M_pbpbcoreDescriptionDocumentM_cavafyQCS_cavafyQC.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"             XMP-xmpDM:Tracks             /rdf:Bag             /rdf:li[@rdf:parseType = 'Resource']             /XMP-xmpDM:Markers             /rdf:Bag             /rdf:li[@rdf:parseType = 'Resource']"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Format XMP markers into text --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"frameRate"</span><span class="tAN"> select=</span><span class="tAV">"                 number(                 substring-after(                 /rdf:RDF/rdf:Description                 /*[local-name() = 'Tracks']                 /rdf:Bag                 /rdf:li                 /*[local-name() = 'FrameRate']                 , 'f'                 ))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'Frame rate is ', $frameRate"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:message&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains(XMP-xmpDM:StartTime, 'f')"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"startHours"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             format-number(                             floor(                             (substring-before(                             XMP-xmpDM:StartTime, 'f'                             )                             div                             substring-after(XMP-xmpDM:StartTime, 'f')                             ) div 3600),                             '00'                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"startMinutes"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             format-number(                             floor(                             (                             (substring-before(XMP-xmpDM:StartTime, 'f')                             div                             substring-after(XMP-xmpDM:StartTime, 'f')                             ) mod 3600)                             div 60),                             '00'                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"startSeconds"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             format-number(                             floor(                             (                             (substring-before(XMP-xmpDM:StartTime, 'f')                             div substring-after(XMP-xmpDM:StartTime, 'f')                             ) mod 3600                             ) mod 60                             ),                             '00'                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"normalize-space(XMP-xmpDM:Duration)"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 concat(                                 $startHours, ':',                                 $startMinutes, ':',                                 $startSeconds                                 )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' - '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"XMP-xmpDM:Name"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' ('"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 format-number((                                 (substring-before(XMP-xmpDM:Duration, 'f')                                 div                                 substring-after(XMP-xmpDM:Duration, 'f'))                                 div 60),                                 '#.##'                                 )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' m)
-'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             concat(                             $startHours, ':',                              $startMinutes, ':',                              $startSeconds, ' - ',                              XMP-xmpDM:Name,                              '
-')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"startHours"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         format-number(                         floor(                         (XMP-xmpDM:StartTime div $frameRate)                          div 3600),                          '00')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"startMinutes"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         format-number(                         floor((                         (XMP-xmpDM:StartTime div $frameRate)                          mod 3600)                          div 60),                          '00')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"startSeconds"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         format-number(                         floor((                         (XMP-xmpDM:StartTime div $frameRate)                          mod 3600)                          mod 60),                          '00')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"normalize-space(XMP-xmpDM:Duration)"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"contains(XMP-xmpDM:Duration, 'f')"</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 concat(                                 $startHours, ':',                                  $startMinutes, ':',                                  $startSeconds)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' - '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"XMP-xmpDM:Name"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' ('"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"format-number((                                 (substring-before(XMP-xmpDM:Duration, 'f')                                  div substring-after(XMP-xmpDM:Duration, 'f')                                 ) div 60),                                  '#.##')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' m)
-'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 concat(                                 $startHours, ':',                                  $startMinutes, ':',                                  $startSeconds                                 )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' - '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"XMP-xmpDM:Name"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' ('"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"format-number(                                 (XMP-xmpDM:Duration div $frameRate)                                  div 60,                                  '#.##')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' m)
-'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     concat(                     $startHours, ':',                      $startMinutes, ':',                      $startSeconds, ' - ',                      XMP-xmpDM:Name,                      '
-')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"pb:pbcoreDescriptionDocument"</span><span class="tAN"> mode=</span><span class="tAV">"cavafyQC"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Test whether the cavafy entry has any errors, with the following defaults: --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- ASSET LEVEL: --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!--    Exactly one asset ID with @source = 'WNYC Archive Catalog' --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!--    At least one asset date --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!--    Exactly one collection, Series and Episode titles --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!--    Exactly one genre --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!--    Exactly one abstract with decent length and content --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!--    At most one CMS Image --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!--    Exactly one Copyright notice --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- INSTANTIATION LEVEL:--&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!--    Exactly one instantiation ID with @source = 'WNYC Archive Catalog' --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!--    Exactly one Format, Format Location, Media Type and Generation --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!--    At most one essence track --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"minAssetIDCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"maxAssetIDCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"minAssetDateCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"maxAssetDateCount"</span><span class="tAN"> select=</span><span class="tAV">"100"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"minCollectionCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"maxCollectionCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"minSeriesCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"maxSeriesCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"minEpisodeCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"maxEpisodeCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"minGenreCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"maxGenreCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"minAbstractCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"maxAbstractCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"minCopyrightCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"maxCopyrightCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"cavafyURL"</span><span class="tAN"> select=</span><span class="tAV">"                 concat(                 'https://cavafy.wnyc.org/assets/',                 pb:pbcoreIdentifier                 [@source = 'pbcore XML database UUID'][1]                 )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"cavafyxml"</span><span class="tAN"> select=</span><span class="tAV">"concat($cavafyURL, '.xml')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                 'Test whether the cavafy entry ',                 $cavafyURL,                 ' has any errors'                 "</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cavafyErrors"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"assetIDCount"</span><span class="tAN"> select=</span><span class="tAV">"                     count(                     pb:pbcoreIdentifier                     [@source = 'WNYC Archive Catalog']                     )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                     $assetIDCount lt $minAssetIDCount                     or                     $assetIDCount gt $maxAssetIDCount"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"'asset_ID_count'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             concat(                             'ATTENTION: ',                             $assetIDCount,                             ' cavafy asset numbers in ',                             $cavafyxml,                             '(range allowed:', $minAssetIDCount, '-', $maxAssetIDCount, ')',                             ': ')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"pb:pbcoreIdentifier[@source = 'WNYC Archive Catalog']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"assetDateCount"</span><span class="tAN"> select=</span><span class="tAV">"                     count(                     pb:pbcoreAssetDate                     )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                     $assetDateCount lt $minAssetDateCount                     or                     $assetDateCount gt $maxAssetDateCount"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:message</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             concat(                             'ATTENTION: ',                             $assetDateCount, ' Asset Dates in ',                             $cavafyxml,                             '(range allowed:', $minAssetDateCount, '-', $maxAssetDateCount, ')',                             ': '                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"pb:pbcoreAssetDate"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:message&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"collectionCount"</span><span class="tAN"> select=</span><span class="tAV">"                     count(                     pb:pbcoreTitle[@titleType = 'Collection']                     )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                     $collectionCount lt $minCollectionCount                     or                     $collectionCount gt $maxCollectionCount"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"'collection_title_count'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             concat(                             'ATTENTION: ',                             $collectionCount,                             ' Collection titles in ',                             $cavafyxml,                             '(range allowed:', $minCollectionCount, '-', $maxCollectionCount, ')',                             ': '                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"pb:pbcoreTitle[@titleType = 'Collection']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"seriesCount"</span><span class="tAN"> select=</span><span class="tAV">"                     count(                     pb:pbcoreTitle[@titleType = 'Series']                     )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                     $seriesCount lt $minSeriesCount                     or                     $seriesCount gt $maxSeriesCount"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"'series_title_count'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             concat(                             'ATTENTION: ',                             $seriesCount,                             ' Series titles in ',                             $cavafyxml,                             '(range allowed:', $minSeriesCount, '-', $maxSeriesCount, ')',                             ': '                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"pb:pbcoreTitle[@titleType = 'Series']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"episodeCount"</span><span class="tAN"> select=</span><span class="tAV">"                     count(                     pb:pbcoreTitle[@titleType = 'Episode']                     )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                     $episodeCount lt $minEpisodeCount                     or                     $episodeCount gt $maxEpisodeCount"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"'episode_title_count'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             concat(                             'ATTENTION: ',                             $episodeCount,                             ' episode titles in ',                             $cavafyxml,                             '(range allowed:', $minEpisodeCount, '-', $maxEpisodeCount, ')',                             ': '                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"pb:pbcoreTitle[@titleType = 'Episode']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"genreCount"</span><span class="tAN"> select=</span><span class="tAV">"count(pb:pbcoreGenre)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                     $genreCount lt $minGenreCount                     or                     $genreCount gt $maxGenreCount"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:message</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             concat(                             'ATTENTION: ',                             $genreCount, ' genres in ',                             $cavafyxml,                             '(range allowed:', $minGenreCount, '-', $maxGenreCount, ')',                             ': '                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"pb:pbcoreGenre"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:message&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"abstractCount"</span><span class="tAN"> select=</span><span class="tAV">"                     count(pb:pbcoreDescription                     [@descriptionType = 'Abstract'])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"$abstractCount gt 1"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> terminate=</span><span class="tAV">"no"</span><span class="tAN"> select=</span><span class="tAV">"                         'ATTENTION: Multiple abstracts in ',                         $cavafyxml"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"'abstract_count'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             'ATTENTION: Multiple abstracts in ',                             $cavafyxml, ': '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             pb:pbcoreDescription[@descriptionType = 'Abstract']"</span><span class="tAN"> separator=</span><span class="tAV">"*************************************************************************************"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"pb:pbcoreDescription[@descriptionType = 'Abstract'][contains(., 'No description available')]"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> terminate=</span><span class="tAV">"no"</span><span class="tAN"> select=</span><span class="tAV">"'ATTENTION: Useless abstract in ', $cavafyxml"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"'useless_abstract'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'ATTENTION: Useless abstract in ', $cavafyxml, ': '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"pb:pbcoreDescription[@descriptionType = 'Abstract']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"pb:pbcoreDescription[@descriptionType = 'Abstract'][string-length(.) lt 20]"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> terminate=</span><span class="tAV">"no"</span><span class="tAN"> select=</span><span class="tAV">"'ATTENTION: Very short abstract in ', $cavafyxml"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"'short_abstract'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'ATTENTION: Very short abstract in ', $cavafyxml, ': '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"pb:pbcoreDescription[@descriptionType = 'Abstract']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cmsImageIDCount"</span><span class="tAN"> select=</span><span class="tAV">"                     count(                     pb:pbcoreAnnotation                     [@annotationType = 'CMS Image']                     )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"$cmsImageIDCount gt 1"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> terminate=</span><span class="tAV">"no"</span><span class="tAN"> select=</span><span class="tAV">"                         'ATTENTION: ',                         $cmsImageIDCount,                         ' in ', $cavafyxml"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"'multiple_CMS_image_IDs'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'ATTENTION: Multiple CMS Image IDs in ', $cavafyxml, ': '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"pb:pbcoreDescription/pbcoreAnnotation[@annotationType = 'CMS Image']"</span><span class="tAN"> separator=</span><span class="tAV">" ; "</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"copyrightCount"</span><span class="tAN"> select=</span><span class="tAV">"count(pb:pbcoreRightsSummary)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"                     $copyrightCount lt $minCopyrightCount                     or                     $copyrightCount gt $maxCopyrightCount"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:message</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             concat(                             'ATTENTION: ',                             $copyrightCount, ' rights notices in ',                             $cavafyxml,                             '(range allowed:', $minCopyrightCount, '-', $maxCopyrightCount, ')',                             ': '                             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"pb:pbcoreRightsSummary"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:message&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"pb:pbcoreInstantiation"</span><span class="tAN"> mode=</span><span class="tAV">"instantiationQC"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cavafyWarnings"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tAN"> mode=</span><span class="tAV">"defaultValuesWarning"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;cavafyEntry</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$cavafyWarnings"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"$cavafyWarnings"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$cavafyErrors//error"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$cavafyErrors"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/cavafyEntry&gt;</span><span class="tI">
 </span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="M_pbpbcoreInstantiationM_instantiationQCS_cavafyQC.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">pb:pbcoreInstantiation</span><span class="titleTemplateMode">instantiationQC</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Match</td>
+                        <td>pb:pbcoreInstantiation</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Mode</td>
+                        <td>instantiationQC</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Parameters</div>
+                           <div class="flR"><input id="bt_prs_M_pbpbcoreInstantiationM_instantiationQCS_cavafyQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_M_pbpbcoreInstantiationM_instantiationQCS_cavafyQC.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="prs_M_pbpbcoreInstantiationM_instantiationQCS_cavafyQC.xsl" style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th>Namespace</th>
+                                       <th>Select</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="fCol">maxEssenceTrackCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">maxFormatCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">maxGenerationCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">maxInstantiationIDCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">maxLocationCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">minEssenceTrackCount</td>
+                                    <td>No namespace</td>
+                                    <td>0</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">minFormatCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">minGenerationCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">minInstantiationIDCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">minLocationCount</td>
+                                    <td>No namespace</td>
+                                    <td>1</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>21</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_M_pbpbcoreInstantiationM_instantiationQCS_cavafyQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_pbpbcoreInstantiationM_instantiationQCS_cavafyQC.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_M_pbpbcoreInstantiationM_instantiationQCS_cavafyQC.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"pb:pbcoreInstantiation"</span><span class="tAN"> mode=</span><span class="tAV">"instantiationQC"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- INSTANTIATION LEVEL:--&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!--    Exactly one instantiation ID with @source = 'WNYC Archive Catalog' --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!--    Exactly one Format, Format Location, Media Type and Generation --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!--    At most one essence track --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"minInstantiationIDCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"maxInstantiationIDCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"minFormatCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"maxFormatCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"minLocationCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"maxLocationCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"minGenerationCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"maxGenerationCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"minEssenceTrackCount"</span><span class="tAN"> select=</span><span class="tAV">"0"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"maxEssenceTrackCount"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"instantiationIDCount"</span><span class="tAN"> select=</span><span class="tAV">"                 count(                 pb:instantiationIdentifier                 [@source = 'WNYC Media Archive Label']                 )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"$instantiationIDCount != 1"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"'instantiation_ID_count'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         concat(                         'ATTENTION: ',                         $instantiationIDCount,                         ' instantiation IDs in ',                         ../pb:pbcoreAssetID[@source = 'WNYC Archive Catalog'][1]                         )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"pb:instantiationIdentifier"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"essenceTrackCount"</span><span class="tAN"> select=</span><span class="tAV">"                 count(                 pb:instantiationEssenceTrack                 )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"$essenceTrackCount gt 1"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"'essence_track_count'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         'ATTENTION: ',                         $essenceTrackCount,                         ' essence tracks in ',                         pb:instantiationIdentifier[1], '. ',                         'Please keep each instantiation to one essence track.'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="T_defaultValuesWarningS_cavafyQC.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">pb:pbcoreDescriptionDocument</span><span class="titleTemplateName">defaultValuesWarning</span><span class="titleTemplateMode">defaultValuesWarning</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Match</td>
+                        <td>pb:pbcoreDescriptionDocument</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Mode</td>
+                        <td>defaultValuesWarning</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">References</div>
+                           <div class="flR"><input id="bt_refs_T_defaultValuesWarningS_cavafyQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_T_defaultValuesWarningS_cavafyQC.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="refs_T_defaultValuesWarningS_cavafyQC.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Templates</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter20.html#T_findSeriesXMLFromNameS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="nRf">findSeriesXMLFromName</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter11.html#T_generateWarningS_cavafyQC.xsl" target="_self" title="No namespace" onclick="updPT('cavafyQC.xsl')"><span class="nRf">generateWarning</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter15.html#T_processCollectionS_processCollection.xsl" target="_self" title="No namespace" onclick="updPT('processCollection.xsl')"><span class="nRf">processCollection</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">Parameter</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter20.html#P_separatingTokenLongS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">separatingTokenLong</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Parameters</div>
+                           <div class="flR"><input id="bt_prs_T_defaultValuesWarningS_cavafyQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_T_defaultValuesWarningS_cavafyQC.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="prs_T_defaultValuesWarningS_cavafyQC.xsl" style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th>Namespace</th>
+                                       <th>Select</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="fCol">cavafyData</td>
+                                    <td>No namespace</td>
+                                    <td>.</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">cavafyURL</td>
+                                    <td>No namespace</td>
+                                    <td>                 concat(                 'https://cavafy.wnyc.org/assets/',      
+                                       pb:pbcoreIdentifier                 [@source = 'pbcore XML database UUID'][1]    
+                                       )
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">cavafyxml</td>
+                                    <td>No namespace</td>
+                                    <td>concat($cavafyURL, '.xml')</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>21</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_T_defaultValuesWarningS_cavafyQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_defaultValuesWarningS_cavafyQC.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_T_defaultValuesWarningS_cavafyQC.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"pb:pbcoreDescriptionDocument"</span><span class="tAN"> mode=</span><span class="tAV">"defaultValuesWarning"</span><span class="tAN"> name=</span><span class="tAV">"defaultValuesWarning"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Check to see if a cavafy asset 
+            has default values 
+            for abstract, contributors, or subject headings --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"cavafyURL"</span><span class="tAN"> select=</span><span class="tAV">"                 concat(                 'https://cavafy.wnyc.org/assets/',                 pb:pbcoreIdentifier                 [@source = 'pbcore XML database UUID'][1]                 )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"cavafyxml"</span><span class="tAN"> select=</span><span class="tAV">"concat($cavafyURL, '.xml')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"cavafyData"</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"             'Check to see if a cavafy asset', $cavafyURL,              ' has default values for',             ' abstract, contributors, or subject headings'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"collectionInfo"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"processCollection"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"                     collectionAcronym"</span><span class="tAN"> select=</span><span class="tAV">"                         pb:pbcoreTitle[@titleType = 'Collection']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"collectionurl"</span><span class="tAN"> select=</span><span class="tAV">"$collectionInfo//collURL"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"seriesName"</span><span class="tAN"> select=</span><span class="tAV">"pb:pbcoreTitle[@titleType = 'Series']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"seriesData"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"findSeriesXMLFromName"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"seriesName"</span><span class="tAN"> select=</span><span class="tAV">"$seriesName"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"seriesKeywords"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     $seriesData//pb:pbcoreSubject                     /@ref[contains(., 'id.loc.gov')]"</span><span class="tAN"> separator=</span><span class="tAV">"                 {$separatingTokenLong}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"assetKeywords"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     pb:pbcoreSubject                     /@ref[contains(., 'id.loc.gov')]"</span><span class="tAN"> separator=</span><span class="tAV">"                 {$separatingTokenLong}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"seriesAbstract"</span><span class="tAN"> select=</span><span class="tAV">"                 $seriesData                 /pb:pbcoreDescriptionDocument                 /pb:pbcoreDescription                 [@descriptionType = 'Abstract']                 [. != '']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"defaultAbstractStart"</span><span class="tAN"> select=</span><span class="tAV">"                 concat(                 pb:pbcoreTitle[@titleType = 'Episode'],                 ' on ',                 pb:pbcoreTitle[@titleType = 'Series'],                 ' on ')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"$seriesKeywords[. != ''] = $assetKeywords[. != '']"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"generateWarning"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'subjectHeadings'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldValue"</span><span class="tAN"> select=</span><span class="tAV">"$assetKeywords"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"             pb:pbcoreDescription             [@descriptionType='Abstract']             [starts-with(., $defaultAbstractStart)]"</span><span class="tAN"> mode=</span><span class="tAV">"generateWarning"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"warningMessage"</span><span class="tAN"> select=</span><span class="tAV">"                 'Possibly default value for abstract'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:apply-templates&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"             pb:pbcoreDescription             [@descriptionType='Abstract']              = $seriesAbstract"</span><span class="tAN"> mode=</span><span class="tAV">"generateWarning"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"'abstract'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:apply-templates&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="T_generateWarningS_cavafyQC.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">node()</span><span class="titleTemplateName">generateWarning</span><span class="titleTemplateMode">generateWarning</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Match</td>
+                        <td>node()</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Mode</td>
+                        <td>generateWarning</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_T_generateWarningS_cavafyQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_T_generateWarningS_cavafyQC.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_T_generateWarningS_cavafyQC.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Template</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter11.html#T_defaultValuesWarningS_cavafyQC.xsl" target="_self" title="No namespace" onclick="updPT('cavafyQC.xsl')"><span class="nRf">defaultValuesWarning</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Parameters</div>
+                           <div class="flR"><input id="bt_prs_T_generateWarningS_cavafyQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_T_generateWarningS_cavafyQC.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="prs_T_generateWarningS_cavafyQC.xsl" style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th>Namespace</th>
+                                       <th>Select</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="fCol">fieldName</td>
+                                    <td>No namespace</td>
+                                    <td>local-name()</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">fieldValue</td>
+                                    <td>No namespace</td>
+                                    <td>.</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">warningMessage</td>
+                                    <td>No namespace</td>
+                                    <td>             concat(             'Default series values in ', $fieldName         
+                                       )
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">warningType</td>
+                                    <td>No namespace</td>
+                                    <td>'defaultValue'</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>21</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_T_generateWarningS_cavafyQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_generateWarningS_cavafyQC.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_T_generateWarningS_cavafyQC.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"generateWarning"</span><span class="tAN"> match=</span><span class="tAV">"node()"</span><span class="tAN"> mode=</span><span class="tAV">"generateWarning"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"local-name()"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"warningType"</span><span class="tAN"> select=</span><span class="tAV">"'defaultValue'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"warningMessage"</span><span class="tAN"> select=</span><span class="tAV">"             concat(             'Default series values in ', $fieldName             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"fieldValue"</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"$warningMessage, ."</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"warning"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"{$warningType}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$warningMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="O_S_cavafyQC.xsl"></a><div class="cmpT">Output
+         <span class="qname">(default)</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Output properties</div>
+                           <div class="flR"><input id="bt_o_" type="image" src="img/btM.gif" value="-" onclick="switchState('o_');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="o_" style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>method</th>
+                                       <th>encoding</th>
+                                       <th>indent</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_O_S_cavafyQC.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_O_S_cavafyQC.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_O_S_cavafyQC.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:output</span><span class="tAN"> method=</span><span class="tAV">"xml"</span><span class="tAN"> version=</span><span class="tAV">"1.0"</span><span class="tAN"> indent=</span><span class="tAV">"yes"</span><span class="tXSLEl">/&gt;</span></pre></td>
                                  </tr>
                               </table>
                            </div>

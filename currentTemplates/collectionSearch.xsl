@@ -4,7 +4,7 @@
     exclude-result-prefixes="#all"
     version="3.0">
     
-    <!--Collection list concordance-->
+    <!--Collection list concordance -->
     <xsl:template name="collectionSearch">
         <xsl:param name="collectionAcronym" select="'WNYC'"/>
         <xsl:param name="collectionURL"

@@ -3,7 +3,7 @@
     to a promotional html document
     that includes links to cavafy
     and links to entries
-    25 and 50 years ago-->
+    25 and 50 years ago -->
 
 <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
@@ -29,7 +29,7 @@
 
     <xsl:template match="rdf:RDF" mode="html">
         <!-- Create the overall html template,
-        including the 25 and 50 yrs ago buttons-->
+        including the 25 and 50 yrs ago buttons -->
         <xsl:param name="todaysDate" select="$todaysDate"/>
         <xsl:variable name="twentyFiveYearResult">
             <xsl:call-template name="anniversaries">
@@ -145,7 +145,7 @@
             </xsl:choose>
         </xsl:variable>
 
-        <!--assets-->
+        <!--assets -->
         <xsl:if test="not(RIFF:Source = preceding::RIFF:Source)">
             <h3 style="color:red; ">
                 <a href="{RIFF:Source}">
