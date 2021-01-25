@@ -261,7 +261,12 @@
         <xsl:param name="LOCURL" select="."/>
         <xsl:param name="LOCRDF" select="concat($LOCURL, '.rdf')"/>
         <xsl:param name="LOCData" select="doc($LOCRDF)"/>
-        <xsl:message select="'Find broader topics for', string($LOCURL)"/>
+        <xsl:message select="
+            'Find broader topics for', 
+            string(
+            $LOCData/rdf:RDF/
+            madsrdf:*/
+            madsrdf:authoritativeLabel)"/>
         <xsl:message
             select="
                 count(

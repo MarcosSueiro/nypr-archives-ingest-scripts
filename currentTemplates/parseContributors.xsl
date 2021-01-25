@@ -7,6 +7,7 @@ and output pbcoreCreator / pbcoreContributor -->
     xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html" 
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:madsrdf="http://www.loc.gov/mads/rdf/v1#"
+    xmlns:WNYC="http://www.wnyc.org"
     exclude-result-prefixes="#all">
 
     <xsl:template name="parseContributors">
@@ -16,7 +17,18 @@ and output pbcoreCreator / pbcoreContributor -->
         <xsl:param name="contributorsAlreadyInCavafy"/>
         <xsl:param name="role" select="contributor"/>
         <xsl:param name="validatingString" select="'id.loc.gov'"/>
-        <xsl:param name="validatedSource" select="'Library of Congress'"/>
+        <xsl:param name="validatedSource" select="'Library of Congress'[$validatingString = 'id.loc.gov']"/>
+
+        <xsl:variable name="capsRole" 
+            select="WNYC:Capitalize($role, 1)"/>
+
+        <xsl:message select="concat(
+            'Parse ', $capsRole,'s ', 
+            $contributorsToProcess)"/>
+
+        <xsl:message select="
+            $capsRole,'s', 'already in cavafy: ', 
+            $contributorsAlreadyInCavafy"/>
 
         <xsl:if 
             test="
@@ -30,95 +42,37 @@ and output pbcoreCreator / pbcoreContributor -->
                 'You entered ', $role)"
             />
         </xsl:if>
-
-        <xsl:variable name="capsRole" 
-            select="concat('C', substring($role, 2))"/>
-
         <xsl:variable name="pbcoreRole" select="concat('pbcore', $capsRole)"/>
 
-        <xsl:choose>
-            <!-- More than one contributor -->
-            <xsl:when test="contains($contributorsToProcess, $token)">
-                <xsl:variable name="currentContributor"
-                    select="
-                    normalize-space(
-                    substring-before(
-                    $contributorsToProcess, $token
-                    ))"/>
-
-                <!-- Accepted LOC contributor -->
-                <xsl:if 
-                    test="
-                    contains($currentContributor, $validatingString)">
-                    <xsl:if 
-                        test="not(
-                        contains(
-                        $contributorsAlreadyInCavafy, $currentContributor
-                        ))">
-                        <xsl:variable name="currentContributorxml"
-                            select="concat($currentContributor, '.rdf')"/>
-                        <xsl:variable name="currentContributorName"
-                            select="
-                            doc($currentContributorxml)
-                            //rdf:RDF
-                            /*
-                            /madsrdf:authoritativeLabel
-                                "/>
-                        <xsl:element name="{$pbcoreRole}">
-                            <xsl:element name="{$role}">
-                                <xsl:attribute name="ref" select="$currentContributor"/>
-                                <xsl:attribute name="source" select="$validatedSource"/>
-                                <xsl:value-of select="$currentContributorName"/>
-                            </xsl:element>
-                        </xsl:element>
-                    </xsl:if>
-                </xsl:if>
-                <xsl:call-template name="parseContributors">
-                    <xsl:with-param name="contributorsToProcess"
-                        select="
-                        normalize-space(
-                        substring-after(
-                        substring-after(
-                        $contributorsToProcess, 
-                        $currentContributor), 
-                        $token
-                        ))"/>
-                    <xsl:with-param name="token" select="$token"/>
-                    <xsl:with-param name="contributorsAlreadyInCavafy"
-                        select="
-                        string-join(
-                        ($contributorsAlreadyInCavafy, $currentContributor),
-                        $longToken
-                        )"/>
-                    <xsl:with-param name="role" select="$role"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:variable name="currentContributor"
-                    select="normalize-space($contributorsToProcess)"/>
-                <xsl:if test="contains($currentContributor, $validatingString)">
-                    <xsl:variable name="currentContributorxml"
-                        select="concat($currentContributor, '.rdf')"/>
-                    <xsl:variable name="currentContributorName"
-                        select="doc($currentContributorxml)
-                        //rdf:RDF/*
-                        /madsrdf:authoritativeLabel
-                        "/>
-                    <xsl:if 
-                        test="
-                        not(
-                        contains($contributorsAlreadyInCavafy, $currentContributor))">
-                        <xsl:element name="{$pbcoreRole}">
-                            <xsl:element name="{$role}">
-                                <xsl:attribute name="ref" select="$currentContributor"/>
-                                <xsl:attribute name="source" select="$validatedSource"/>
-                                <xsl:value-of select="$currentContributorName"/>
-                            </xsl:element>
-                        </xsl:element>
-                    </xsl:if>
-                </xsl:if>
-            </xsl:otherwise>
-        </xsl:choose>
+        <xsl:variable name="contributorsToProcessParsed" select="
+            WNYC:splitParseValidate(
+            $contributorsToProcess, $longToken, $validatingString)"/>
+    <xsl:variable name="contributorsAlreadyInCavafyParsed" select="
+            WNYC:splitParseValidate(
+            $contributorsAlreadyInCavafy, $longToken, $validatingString)"/>
+        <xsl:for-each select="
+            $contributorsToProcessParsed/valid
+            [not(. = $contributorsAlreadyInCavafyParsed/valid)]">            
+            <xsl:variable name="currentContributorxml"
+                select="concat(., '.rdf')"/>
+            <xsl:variable name="currentContributorName"
+                select="
+                doc($currentContributorxml)
+                //rdf:RDF
+                /*
+                /madsrdf:authoritativeLabel
+                "/>
+            <xsl:message select="
+                concat(
+                $currentContributorName, ' not in cavafy.')"/>
+            <xsl:element name="{$pbcoreRole}">
+                <xsl:element name="{$role}">
+                    <xsl:attribute name="ref" select="."/>
+                    <xsl:attribute name="source" select="$validatedSource"/>
+                    <xsl:value-of select="$currentContributorName"/>
+                </xsl:element>
+            </xsl:element>
+        </xsl:for-each>
     </xsl:template>
 
     <xsl:template name="parseContributorOccupations">

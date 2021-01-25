@@ -14,7 +14,9 @@ and output its data in BWF MetaEdit Core format -->
     exclude-result-prefixes="#all"
     version="3.0">
 
-    <xsl:template match="MOTIVE">
+    <xsl:mode on-no-match="text-only-copy"/>
+
+    <xsl:template match="MOTIVE" mode="getCMSData" name="getCMSData">
         <!-- Input: 'motive/theme' field
             Output: cms data from the API
             as xml
@@ -25,6 +27,10 @@ and output its data in BWF MetaEdit Core format -->
             concat(
             'https://api.wnyc.org/api/v3/story/?audio_file=/',
             $theme, '.mp3'
+            )"/>
+        <xsl:message select="concat(
+            'Search WNYC CMS for entry with MP3 ', $theme,
+            ' using search string ', $queryURL
             )"/>
         <xsl:variable name="searchResultJson">
             <searchResultJson>
@@ -45,20 +51,22 @@ and output its data in BWF MetaEdit Core format -->
             /fn:map[@key='pagination']
             /fn:number[@key='count']"/>
         <xsl:variable name="cmsRecordsFoundMessage"
-            select="$cmsRecordsFoundCount, 
-            'entries for', 
+            select="concat($cmsRecordsFoundCount, 
+            ' entries for ', 
             $theme,
-            'with query',
-            $queryURL"/>
+            ' with query ',
+            $queryURL)"/>
         <xsl:message select="$cmsRecordsFoundMessage"/>
         <xsl:choose>
             <xsl:when test="$cmsRecordsFoundCount = 1">
                 <xsl:variable name="cmsData">
                     <cmsData>
                         <xsl:apply-templates 
-                            select="$searchResultXml/*"/>
+                            select="$searchResultXml/*[@key]" mode="mapToElement"/>
                     </cmsData>
                 </xsl:variable>
+                <xsl:message select="'CMS DATA:'"/>
+                <xsl:message select="$searchResultXml"/>
                 <xsl:copy-of select="$cmsData"/>
             </xsl:when>
             <xsl:otherwise>
@@ -72,10 +80,10 @@ and output its data in BWF MetaEdit Core format -->
     </xsl:template>
     
     <xsl:template match="*[@key]" 
-        xpath-default-namespace="http://www.w3.org/2005/xpath-functions">        
+        xpath-default-namespace="http://www.w3.org/2005/xpath-functions" mode="mapToElement">        
         <!-- Convert @keys to elements -->
         <xsl:element name="{@key}">
-            <xsl:apply-templates/>
+            <xsl:apply-templates mode="mapToElement"/>
         </xsl:element>
     </xsl:template>
  
@@ -376,7 +384,7 @@ and output its data in BWF MetaEdit Core format -->
 
     </xsl:template>
 
-<!--    <xsl:template match="*[@key]">
+<xsl:template match="*[@key]">
         <xsl:choose>
             <xsl:when test="@key = 'tags'">
                 <xsl:element name="keywords">
@@ -392,7 +400,7 @@ and output its data in BWF MetaEdit Core format -->
             </xsl:otherwise>
         </xsl:choose>
 
-    </xsl:template>-->
+    </xsl:template>
     
     
     <!--    <xsl:template match="fn:map/fn:array[@key='tags']" >

@@ -6,6 +6,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:WNYC="http://www.wnyc.org" xmlns:functx="http://www.functx.com"
     xmlns:ASCII="https://www.ecma-international.org/publications/standards/Ecma-094.htm"
+    xmlns:pb="http://www.pbcore.org/PBCore/PBCoreNamespace.html"
     exclude-result-prefixes="#all">
 
     <xsl:mode on-no-match="deep-skip"/>
@@ -58,25 +59,34 @@
     <xsl:template name="splitParseValidate">
         <!-- Parse a token-separated string into unique, 
             non-empty components;
-        validate (or not) each component   -->
+        validate (or not) each component 
+         Output format: 
+        <inputParsed>
+              <valid>
+              <invalid>   -->
         <xsl:param name="input" as="xs:string"/>
         <xsl:param name="separatingToken" select="$separatingToken"/>
         <xsl:param name="validatingString" select="'id.loc.gov'"/>
-        <xsl:param name="stripASCII" select="false()"/>
+        <xsl:param name="normalize" select="true()"/>
 
         <xsl:param name="inputTokenized">
             <xsl:for-each select="fn:tokenize($input, $separatingToken)">
                 <tokenized>
-                    <xsl:value-of select="normalize-space(.)"/>
+                    <xsl:value-of select="normalize-space(.)[$normalize]"/>
+                <xsl:value-of select=".[not($normalize)]"/>
                 </tokenized>
             </xsl:for-each>
         </xsl:param>
+        <xsl:message select="
+            'Split parse and validate string ', $input, 
+            'separated by', $separatingToken, 
+            'with validating string', $validatingString"/> 
         <inputParsed>
             <xsl:for-each
                 select="
                     distinct-values($inputTokenized/tokenized)[. != ''][matches(., $validatingString)]">
                 <valid>
-                    <xsl:value-of select="normalize-space(.)"/>
+                    <xsl:value-of select="."/>
                 </valid>
             </xsl:for-each>
             <xsl:for-each
@@ -85,7 +95,7 @@
                     [. != '']
                     [not(matches(., $validatingString))]">
                 <invalid>
-                    <xsl:value-of select="normalize-space(.)"/>
+                    <xsl:value-of select="."/>
                 </invalid>
             </xsl:for-each>
         </inputParsed>
@@ -123,34 +133,18 @@
         </xsl:call-template>
     </xsl:function>
 
-    <!-- Below is the old strip-tag function -->
-    <!--<xsl:template name="strip-tags">
-        <xsl:param name="text"/>
-        <xsl:message select="'Get rid of html tags'"/>
-        <xsl:choose>
-            <xsl:when test="contains($text, '&lt;')">
-                <xsl:value-of select="substring-before($text, '&lt;')"/>
-                <xsl:call-template name="strip-tags">
-                    <xsl:with-param name="text" select="substring-after($text, '&gt;')"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$text"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>-->
-
     <xsl:function name="WNYC:stripNonASCII" expand-text="yes">
         <!-- Strip non-ASCII characters -->
         <xsl:param name="inputText"/>
         <xsl:value-of select="replace($inputText, '[^ -~]', '')"/>
     </xsl:function>
 
-    <xsl:template name="ASCIIFy" match="*[matches(., '/P{IsBasicLatin}')]" mode="ASCIIFy">
+    <xsl:template name="ASCIIFy" match="node()" mode="ASCIIFy">
         <!-- Translate non-ASCII characters
         such as é
         to their ASCII "equivalent"
-        such as e
+        such as e;        
+        generate error if non-ASCII characters remain
         -->
         <xsl:param name="inputText" select="."/>
         <xsl:variable name="ASCIIFiedText" select="
@@ -221,24 +215,26 @@
                 ASCII:ellipsis(
                 ASCII:vowelsUC(
                 ASCII:vowelsLC(
-                ASCII:eñe(
+                ASCII:c(
+                ASCII:n(
+                ASCII:y(
+                ASCII:z(
                 ASCII:middleDot(
-                ASCII:control(
-                ASCII:cedilla(
-                ASCII:Copyright(
-                $string1))))))))))))"
+                ASCII:control(                
+                ASCII:Copyright(                
+                $string1))))))))))))))"
         />
     </xsl:function>
     <xsl:function name="ASCII:quotes">
         <!-- Replace quotes with "-->
         <xsl:param name="string1"/>
-        <xsl:value-of select="replace($string1, '”|“', '&quot;')"/>
+        <xsl:value-of select="replace($string1, '[”“]', '&quot;')"/>
     </xsl:function>
     <xsl:function name="ASCII:apostrophes">
         <!-- Replace apostrophes with '-->
         <xsl:param name="string1"/>
         <xsl:value-of select='
-                replace($string1, "’|‘|’", "&apos;")'/>
+                replace($string1, "[’‘’]", "&apos;")'/>
     </xsl:function>
     <xsl:function name="ASCII:emdash">
         <!-- Replace emdash with two dashes -->
@@ -287,13 +283,26 @@
                 replace(
                 $string1,
                 '[ù-ü]', 'u'),
-                '[ò-ö]', 'o'),
+                '[ò-öø]', 'o'),
                 '[ì-ï]', 'i'),
                 '[è-ë]', 'e'),
-                '[à-å]|ā', 'a')"
+                '[à-åā]', 'a')"
         />
     </xsl:function>
-    <xsl:function name="ASCII:eñe">
+    <xsl:function name="ASCII:c">
+        <!-- Replace ç and ć with c
+        and Ç with C -->
+        <xsl:param name="string1"/>
+        <xsl:value-of
+            select="
+            replace(
+            replace(
+            $string1,
+            '[çć]', 'c'),
+            'Ç', 'C')
+            "/>
+    </xsl:function>
+    <xsl:function name="ASCII:n">
         <!-- Replace ñ with n -->
         <xsl:param name="string1"/>
         <xsl:value-of
@@ -304,6 +313,25 @@
                 'ñ', 'n'),
                 'Ñ', 'N')
                 "
+        />
+    </xsl:function>
+    <xsl:function name="ASCII:y">
+        <!-- Replace ÿ with y -->
+        <xsl:param name="string1"/>
+        <xsl:value-of
+            select="
+            replace(
+            $string1,
+            'ÿ', 'y')"/>
+    </xsl:function>
+    <xsl:function name="ASCII:z">
+        <!-- Replace ž with z -->
+        <xsl:param name="string1"/>
+        <xsl:value-of
+            select="
+            replace($string1,
+            'ž', 'z')
+            "
         />
     </xsl:function>
     <xsl:function name="ASCII:middleDot">
@@ -317,22 +345,9 @@
         <xsl:value-of select="replace($string1, '&#157;', '')"/>
     </xsl:function>
     <xsl:function name="ASCII:space">
-        <!-- Replace funky spaces with good old spacebar -->
+        <!-- Replace funky space with good old spacebar -->
         <xsl:param name="string1"/>
         <xsl:value-of select="replace($string1, '&#160;', ' ')"/>
-    </xsl:function>
-    <xsl:function name="ASCII:cedilla">
-        <!-- Replace ç with c
-        and Ç with C -->
-        <xsl:param name="string1"/>
-        <xsl:value-of
-            select="
-                replace(
-                replace(
-                $string1,
-                '&#231;', 'c'),
-                '&#199;', 'C')"
-        />
     </xsl:function>
     <xsl:function name="ASCII:Copyright">
         <!-- Replace © with (c) -->
@@ -360,7 +375,7 @@
         />
     </xsl:function>
 
-    <xsl:template name="cavafyBasicsHtml" match="*:pbcoreDescriptionDocument"
+    <xsl:template name="cavafyBasicsHtml" match="pb:pbcoreDescriptionDocument"
         mode="cavafyBasicsHtml">
         <xsl:param name="cavafyData" select="."/>
         <xsl:message select="'Basic asset fields as html'"/>
@@ -376,6 +391,47 @@
         <xsl:copy>
             <xsl:apply-templates select="node()" mode="noAttributes"/>
         </xsl:copy>
+    </xsl:template>
+
+<xsl:template name="checkTextLength" match="
+        text()" mode="checkTextLength">        
+        <xsl:param name="text" select="."/>
+        <xsl:param name="maxCharacters" select="80"/>
+        <xsl:param name="fieldName" select="local-name(.)"/>
+        <xsl:param name="characterCount" select="
+            string-length($text)"/>
+        <xsl:param name="excessCharacterCount" select="
+            $characterCount - $maxCharacters"/>
+        <xsl:param name="fileTooLong" select="$excessCharacterCount gt 0"/>
+        <xsl:param name="generateError" select="true()"/>
+        
+        <xsl:copy-of select="$fileTooLong"/>
+        <xsl:variable name="excessCharacters"
+            select="substring($text, $maxCharacters)"/>
+        <xsl:variable name="errorMessage"
+            select="
+            $fieldName, $text, 
+            '_ is', $excessCharacterCount, ' characters too long!',
+            'Remove string _', $excessCharacters, '_'"/>
+        <xsl:apply-templates select="
+            $text[$excessCharacterCount gt 0]
+            [$generateError]" mode="
+            generateError">
+            <xsl:with-param name="errorType" select="'textTooLong'"/>
+            <xsl:with-param name="errorMessage" select="$errorMessage"/>
+            <xsl:with-param name="fieldName" select="'DAVIDTitle'"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xsl:template name="generateError" match="node()" mode="generateError">
+        <xsl:param name="errorType" select="'Error'"/>
+        <xsl:param name="fieldName" select="local-name(.)"/>
+        <xsl:param name="errorMessage" select="$errorType, 'in field', $fieldName"/>
+        <xsl:element name="error">
+            <xsl:attribute name="type" select="$errorType"/>
+            <xsl:value-of select="$errorMessage"/>
+        </xsl:element>
+        <xsl:message select="$errorMessage"/>
     </xsl:template>
 
 </xsl:stylesheet>

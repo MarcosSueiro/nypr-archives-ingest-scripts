@@ -12,13 +12,15 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
 
     <xsl:import href="processCollection.xsl"/>    
 
+    <xsl:import href="cavafyQC.xsl"/>    
+
     <!-- Parse an NYPR Archives-conforming DAVID title -->
     <xsl:param name="maxCharacters" select="79"/>
 
 
     <!-- NYPR naming convention -->
     <xsl:param name="nyprNamingConvention" select="
-        '[\S]{3,5}-[\S]{2,5}-[12u][0123456789u]{3}-[01u][0123456789u]-[0123u][0123456789u]-[0-9]{4,}\.[0-9][\S]{0,3}'"/>
+        '^[\S]{3,5}-[\S]{2,5}-[12u][0123456789u]{3}-[01u][0123456789u]-[0123u][0123456789u]-[0-9]{4,}\.[0-9][\S]{0,3}'"/>
     
     <!-- Flags that indicate
     the audio file is not an original -->
@@ -85,64 +87,32 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
         <xsl:param name="DAVIDTitleBeforeSpace" select="tokenize($DAVIDTitleToCheck, ' ')[1]"/>
 
         <xsl:param name="maxCharacters" select="$maxCharacters"/>
-        <!--<xsl:message select="'Filename to check: ', $filenameNormalized"/>
-        <xsl:message
-            select="
-                'DAVID Title to check: ',
-                $DAVIDTitleToCheck"/>
--->
-        <xsl:variable name="checkedDAVIDTitle">
-            <!-- Is filename too long?  -->
-            <xsl:variable name="characterCount" select="
-                string-length($DAVIDTitleToCheck)"/>
-            <xsl:variable name="excessCharacterCount" select="
-                $characterCount - $maxCharacters"/>
-            <xsl:if test="$excessCharacterCount gt 0">
-                <xsl:variable name="excessCharacters"
-                    select="substring($DAVIDTitleToCheck, $maxCharacters)"/>
-                <xsl:variable name="errorMessage"
-                    select="
-                        'FILENAME _', $DAVIDTitleToCheck, 
-                        '_ TOO LONG!',
-                        'Remove string _', $excessCharacters, '_'"/>
-                <xsl:message select="$errorMessage"/>
-                <xsl:element name="error">
-                    <xsl:attribute name="type" select="'title_too_long'"/>
-                    <xsl:value-of select="$errorMessage"/>
-                </xsl:element>
-            </xsl:if>
+        <xsl:variable name="titleTooLong">          
+            <xsl:call-template name="checkTextLength">
+                <xsl:with-param name="text" select="$DAVIDTitleToCheck"/>
+                <xsl:with-param name="fieldName" select="'DAVIDTitle'"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="funnyDates" select="
+            contains($DAVIDTitleBeforeSpace, '-00-')"/>
 
-            <!-- Does filename conform to NYPR Archives naming convention?  -->
-            <xsl:choose>
-                <xsl:when
-                    test="
-                        matches(
-                        $DAVIDTitleBeforeSpace,
-                           '[\S]{3,5}-[\S]{2,5}-[12u][0123456789u]{3}-[01u][0123456789u]-[0123u][0123456789u]-[0-9]{4,}\.[0-9][\S]{0,3}')
-                        and not(
-                        contains($DAVIDTitleBeforeSpace, '-00-')
-                        )">
-                    <xsl:message
-                        select="
-                            concat(
-                            $DAVIDTitleToCheck,
-                            ' conforms to the NYPR Archives naming convention.')"
-                    />
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:variable name="errorMessage"
-                        select="
-                            '*****   _', $DAVIDTitleToCheck,
-                            '_ does not conform to the NYPR Archives naming convention.',
-                            '    *****'"/>
-                    <xsl:message select="$errorMessage"/>
-                    <xsl:element name="error">
-                        <xsl:attribute name="type" select="
-                            'non_compliant_DAVID_title'"/>
-                        <xsl:value-of select="$errorMessage"/>
-                    </xsl:element>
-                </xsl:otherwise>
-            </xsl:choose>
+        <xsl:variable name="namingConventionViolation" select="
+            not(matches($DAVIDTitleToCheck, $nyprNamingConvention))"/>
+        <xsl:variable name="illegalName" select="
+            $titleTooLong or $funnyDates or $namingConventionViolation"/>
+        <xsl:variable name="titleTooLongMessage" select="
+            ($DAVIDTitleToCheck, 'is too long')
+            [$titleTooLong]"/>
+        <xsl:variable name="funnyDateMessage" select="
+            ('Funny dates in', $DAVIDTitleBeforeSpace)
+            [$funnyDates]"/>
+        <xsl:variable name="namingConventionViolationMessage" select="
+            ($DAVIDTitleToCheck,
+            '_ does not conform to the NYPR Archives naming convention.')
+            [$namingConventionViolation]"/>
+        
+
+        <xsl:variable name="checkedDAVIDTitle">
             <xsl:element name="filenameToCheck">
                 <xsl:value-of select="$filenameNormalized"/>
             </xsl:element>
@@ -155,13 +125,25 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
             <xsl:element name="DAVIDTitleBeforeSpace">
                 <xsl:value-of select="$DAVIDTitleBeforeSpace"/>
             </xsl:element>
+            <xsl:copy-of select="$titleTooLong"/>
+            <xsl:apply-templates select="$DAVIDTitleToCheck[$funnyDates]" mode="generateError">
+                <xsl:with-param name="errorType" select="'funnyDate'"/>
+                <xsl:with-param name="fieldName" select="'DAVIDTitle'"/>
+                <xsl:with-param name="errorMessage" select="$funnyDateMessage"/>
+            </xsl:apply-templates>
+            <xsl:apply-templates select="$DAVIDTitleToCheck[$namingConventionViolation]" mode="generateError">
+                <xsl:with-param name="errorType" select="'namingConventionViolation'"/>
+                <xsl:with-param name="fieldName" select="'DAVIDTitle'"/>
+                <xsl:with-param name="errorMessage" select="$namingConventionViolationMessage"/>
+            </xsl:apply-templates>
+            
         </xsl:variable>
 
         <!-- Output -->
         <checkedDAVIDTitle>
             <xsl:attribute name="filenameNoExtension" select="$DAVIDTitleToCheck"/>
             <xsl:attribute name="DAVIDTitleComplies"
-                select="not(exists($checkedDAVIDTitle[//error]))"/>
+                select="not($illegalName)"/>
             <xsl:copy-of select="$checkedDAVIDTitle"/>
         </checkedDAVIDTitle>
     </xsl:template>
@@ -216,9 +198,13 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
         </DAVIDTitleDate>
         <xsl:variable name="instantiationID" select="
             $DAVIDTitleTokenized[6]"/>
+        <xsl:variable name="instantiationIDParsed">
+            <xsl:apply-templates select="$instantiationID" mode="parseInstantiationID"/>
+        </xsl:variable>
         <instantiationID>
             <xsl:value-of select="$instantiationID"/>
         </instantiationID>
+        <xsl:copy-of select="$instantiationIDParsed"/>        
         <assetID>
             <xsl:value-of select="
                 substring-before($instantiationID, '.')"/>
@@ -663,6 +649,79 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
                 </xsl:element>
             </parsedElements>
         </parsedDAVIDTitle>
+    </xsl:template>
+
+<xsl:template match="
+        instantiationID | 
+        pb:instantiationIdentifier
+        [@source = 'WNYC Media Archive Label']" mode="parseInstantiationID">
+        <!-- Parse cavafy instantiaion ID -->
+        <xsl:param name="instantiationID" select="."/>
+        <xsl:param name="validated" select="
+            matches(normalize-space($instantiationID), '^\d+\.\d+\p{L}*$')"/>
+        <xsl:param name="assetID" select="
+            substring-before($instantiationID[$validated], '.')"/>
+        <xsl:param name="instantiationSuffix">
+            <xsl:copy-of select="substring-after($instantiationID[$validated], '.')"/>
+        </xsl:param>
+        <!-- Capture just the digit part of the instantiation suffix -->
+        <xsl:param name="instantiationSuffixDigit">
+            <xsl:value-of select="
+                xs:integer(analyze-string($instantiationSuffix, '\d+')//*:match)"/>
+        </xsl:param>
+        <!-- Capture just the letter part 
+      (aka segment suffix) 
+        of the instantiation suffix 
+        and make it lowercase -->
+        <xsl:param name="instantiationSegmentSuffix">
+            <xsl:value-of
+                select="
+                analyze-string(
+                lower-case(
+                $instantiationSuffix
+                ), '[a-z]+'
+                )/*:match"
+            />
+        </xsl:param>
+        <!-- instantiationID sans suffix segment -->
+        <xsl:param name="instantiationIDwOutSuffixSegment">
+            <xsl:value-of
+                select="concat($assetID, '.', $instantiationSuffixDigit)"
+            />
+        </xsl:param>
+        <xsl:variable name="instantiationIDParsed">
+            <instantiationIDParsed>
+                <xsl:apply-templates select="$instantiationID[not($validated)]" mode="generateError">
+                    <xsl:with-param name="errorMessage">
+                        <error>
+                            <xsl:value-of select="'Instantiation ID', $instantiationID, 'is not valid.'"/>
+                        </error>
+                    </xsl:with-param>
+                </xsl:apply-templates>
+                <instantiationID>
+                    <xsl:value-of select="
+                        normalize-space($instantiationID[$validated])"/>
+                </instantiationID>
+                
+                <assetID>
+                    <xsl:value-of select="$assetID"/>
+                </assetID>
+                <instantiationSuffix>
+                    <xsl:value-of select="$instantiationSuffix"/>
+                </instantiationSuffix>
+                <instantiationSuffixDigit>
+                    <xsl:value-of select="number($instantiationSuffixDigit)"/>
+                </instantiationSuffixDigit>
+                <instantiationSegmentSuffix>
+                    <xsl:value-of select="$instantiationSegmentSuffix"/>
+                </instantiationSegmentSuffix>
+                <instantiationIDwOutSuffixSegment>
+                    <xsl:value-of select="$instantiationIDwOutSuffixSegment"/>
+                </instantiationIDwOutSuffixSegment>
+            </instantiationIDParsed>
+        </xsl:variable>
+        <xsl:copy-of select="$instantiationIDParsed"/>
+        
     </xsl:template>
 
 </xsl:stylesheet>

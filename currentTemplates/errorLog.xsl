@@ -58,12 +58,11 @@ and output an html error doc -->
         
         <xsl:variable name="duplicateInstantiationMessage">
             <b>
-                <xsl:value-of select="
-                    count(
-                    $duplicateInstantiations
-                    /error
-                    )"/> files have duplicate instantiation numbers and must be renamed: <br/>
-                
+                <xsl:value-of
+                    select="
+                        count($duplicateInstantiations/error[@type = 'duplicate_instantiation']
+                        )"
+                /> files have duplicate instantiation numbers and must be renamed: <br/>
                 <xsl:for-each select="$duplicateInstantiations/error">
                     <xsl:value-of select="@DAVIDTitle"/>
                     <br/>
@@ -72,9 +71,7 @@ and output an html error doc -->
         </xsl:variable>
         <xsl:variable name="errorCount" select="
             count(
-            $completeLog
-            //result
-            [.//*[local-name() = 'error']]
+            $completeLog//result[//*[local-name() = 'error']]
             )"/>
         <xsl:variable name="warningCount" select="
             count(
@@ -84,8 +81,11 @@ and output an html error doc -->
             )"/>
         <xsl:variable name="totalCount" select="
             count(
-            $completeLog
-            //result
+            $completeLog//
+            result
+            ) + count(
+            $completeLog/completeLog/
+            unacceptableFiles/error
             )"/>
         <xsl:variable name="errorPercent" select="format-number(
             $errorCount div $totalCount, '##%')"/>
@@ -99,10 +99,9 @@ and output an html error doc -->
             <br/>
             <xsl:for-each
                 select="
-                $completeLog
-                //result
-                [.//*[local-name() = 'error']]">
-                <xsl:value-of select="./@filename"/>
+                $completeLog//result
+                [//*[local-name() = 'error']]">
+                <xsl:value-of select="@filename"/>
                 <br/>
             </xsl:for-each>                
         </xsl:variable>

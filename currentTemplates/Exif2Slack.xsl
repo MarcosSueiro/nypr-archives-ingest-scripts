@@ -12,7 +12,7 @@ of 40 items max
     xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:madsrdf="http://www.loc.gov/mads/rdf/v1#"
     xmlns:WNYC="http://www.wnyc.org" exclude-result-prefixes="#all">
 
-    <xsl:import href="file:/T:/02%20CATALOGING/Instantiation%20uploads/InstantiationUploadTEMPLATES/currentTemplates/cavafySearch.xsl"/>
+    <xsl:import href="cavafySearch.xsl"/>
     
     <xsl:mode on-no-match="deep-skip"/>
     <!--Gives line breaks etc -->
@@ -25,7 +25,7 @@ of 40 items max
     <xsl:param name="validatingSubjectString" select="'id.loc.gov'"/>
     <xsl:param name="webhookFileLocation" select="concat(
         'file:/T:/02%20CATALOGING/Instantiation%20uploads/', 
-        'InstantiationUploadTEMPLATES/slackWebhooks.xml')"/>
+        'slack/slackWebhooks.xml')"/>
     <xsl:param name="webhookURLMarcos">
         <xsl:value-of select="
             doc($webhookFileLocation)

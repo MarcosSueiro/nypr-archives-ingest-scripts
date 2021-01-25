@@ -2,48 +2,54 @@
 <!-- Trim strings -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" version="3.0">
+    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" 
+    xmlns:WNYC="http://www.wnyc.org"
+    version="3.0"
+    xmlns:fn="http://www.w3.org/2005/xpath-functions">
     
     
+    <xsl:template name="substring-before-last-regex">
+        <!-- substring-before-last, or entire string otherwise -->
+        <xsl:param name="input"/>
+        <xsl:param name="substr"/>
+        <xsl:value-of select="$input[not(matches(., $substr))]"/>
+    <xsl:value-of select="
+            analyze-string($input, $substr)
+            /fn:match[last()]
+            /preceding-sibling::*" separator=""/>
+    </xsl:template>
+
     <xsl:template name="substring-before-last">
-        <!-- substring-before-last -->
         <xsl:param name="input"/>
         <xsl:param name="substr"/>
         <xsl:choose>
-        <xsl:when test="$substr and contains($input, $substr)">
-            <xsl:variable name="temp" select="substring-after($input, $substr)"/>
-            <xsl:value-of select="substring-before($input, $substr)"/>
-            <xsl:if test="contains($temp, $substr)">
-                <xsl:value-of select="$substr"/>
-                <xsl:call-template name="substring-before-last">
-                    <xsl:with-param name="input" select="$temp"/>
-                    <xsl:with-param name="substr" select="$substr"/>
-                </xsl:call-template>
-            </xsl:if>
-        </xsl:when>
+            <xsl:when test="$substr and contains($input, $substr)">
+                <xsl:variable name="temp" select="substring-after($input, $substr)"/>
+                <xsl:value-of select="substring-before($input, $substr)"/>
+                <xsl:if test="contains($temp, $substr)">
+                    <xsl:value-of select="$substr"/>
+                    <xsl:call-template name="substring-before-last">
+                        <xsl:with-param name="input" select="$temp"/>
+                        <xsl:with-param name="substr" select="$substr"/>
+                    </xsl:call-template>
+                </xsl:if>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$input"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
+    
     <xsl:template name="substring-after-last">
-        <!-- substring-after-last -->
+        <!-- substring-before-last, or entire string otherwise -->
         <xsl:param name="input"/>
         <xsl:param name="substr"/>
-        <xsl:variable name="temp" select="substring-after($input, $substr)"/>
+        <xsl:value-of select="$input[not(contains(., $substr))]"/>
         
-        <xsl:choose>
-            <xsl:when test="$substr and contains($temp,$substr)">
-                <xsl:call-template name="substring-after-last">
-                    <xsl:with-param name="input" select="$temp"/>
-                    <xsl:with-param name="substr" select="$substr"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$temp"/>
-            </xsl:otherwise>
-        </xsl:choose>
+        <xsl:value-of select="
+            analyze-string($input, $substr)
+            /fn:match[last()]
+            /following-sibling::*" separator=""/>
     </xsl:template>
 
     <xsl:template name="recursive-in-trim">
@@ -149,5 +155,14 @@
     </xsl:template>
     
     
+    
+<xsl:function name="WNYC:substring-before-last">
+        <xsl:param name="input"/>
+        <xsl:param name="substr"/>
+        <xsl:call-template name="substring-before-last">
+            <xsl:with-param name="input" select="$input"/>
+            <xsl:with-param name="substr" select="$substr"/>
+        </xsl:call-template>
+    </xsl:function>
     
 </xsl:stylesheet>

@@ -50,7 +50,7 @@
                 </OriginatorReference>
 
                 <CodingHistory>
-                    <xsl:value-of select="normalize-space(RIFF:CodingHistory)"/>
+                    <xsl:value-of select="RIFF:CodingHistory"/>
                 </CodingHistory>
                 <IARL>
                     <xsl:value-of select="normalize-space(RIFF:ArchivalLocation)"/>
@@ -65,11 +65,14 @@
                     <xsl:text>&#013;</xsl:text>
                 </ICMS>
                 <ICMT>
-                    <xsl:value-of select="normalize-space(RIFF:Comment)"/>
-                    <xsl:text>&#032;</xsl:text>
+                    <xsl:variable name="endsWithParagraph" select="ends-with(RIFF:Comment, '&#032;')"/>
+                    <xsl:value-of select="RIFF:Comment"/>
+                <xsl:value-of select="'&#032;'[not($endsWithParagraph)]"/>
                 </ICMT>
                 <ICOP>
-                    <xsl:value-of select="normalize-space(RIFF:Copyright)"/>
+                    <xsl:variable name="endsWithParagraph" select="ends-with(RIFF:Copyright, '&#032;')"/>
+                <xsl:value-of select="RIFF:Copyright"/>
+                    <xsl:value-of select="'&#032;'[not($endsWithParagraph)]"/>                    
                 </ICOP>
                 <ICRD>
                     <xsl:value-of select="normalize-space(RIFF:DateCreated)"/>
@@ -99,8 +102,9 @@
                     <xsl:text>&#013;</xsl:text>
                 </IPRD>
                 <ISBJ>
-                    <xsl:value-of select="normalize-space(RIFF:Subject)"/>
-                    <xsl:text>&#013;</xsl:text>
+                    <xsl:variable name="endsWithParagraph" select="ends-with(RIFF:Subject, '&#032;')"/>
+                    <xsl:value-of select="RIFF:Subject"/>
+                <xsl:value-of select="'&#032;'[not($endsWithParagraph)]"/>
                 </ISBJ>
 
                 <xsl:element name="ISFT">

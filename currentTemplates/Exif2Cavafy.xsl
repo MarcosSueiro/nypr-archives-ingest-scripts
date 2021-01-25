@@ -282,7 +282,7 @@ to a pbcore cavafy entry -->
                 </pbcoreTitle>
 
                 <pbcoreTitle titleType="Series">
-                    <xsl:value-of select="RIFF:Product"/>
+                    <xsl:value-of select="normalize-space(RIFF:Product)"/>
                 </pbcoreTitle>
                 
                 <!-- Apply asset-level fields 
@@ -334,37 +334,24 @@ to a pbcore cavafy entry -->
                         )
                         eq ''">
                         <pbcoreDescription descriptionType="Abstract">
-                            <xsl:value-of select="normalize-space(RIFF:Subject)"/>
+                            <xsl:value-of select="RIFF:Subject"/>
                         </pbcoreDescription>
                     </xsl:if>
 
                     <!-- Markers as excerpts -->
-                    <xsl:if
-                        test="
-                        XMP-xmpDM:Tracks
-                        /rdf:Bag
-                        /rdf:li[@rdf:parseType = 'Resource']
-                        /XMP-xmpDM:Markers
-                        /rdf:Bag
-                        /rdf:li[@rdf:parseType = 'Resource']">
-                        <xsl:variable name="excerptsAlreadyInCavafy">
-                            <xsl:for-each
-                                select="
-                                $cavafyEntry
-                                //*[@descriptionType = 'Selection or Excerpt']">
-                                <xsl:value-of select="." separator=" ; "/>
-                            </xsl:for-each>
-                        </xsl:variable>
-                        <xsl:variable name="currentExcerpt">
-                            <xsl:apply-templates
-                                select="
-                                XMP-xmpDM:Tracks
-                                /rdf:Bag
-                                /rdf:li[@rdf:parseType = 'Resource']
-                                /XMP-xmpDM:Markers
-                                /rdf:Bag
-                                /rdf:li[@rdf:parseType = 'Resource']"
+                    <xsl:variable name="excerptsAlreadyInCavafy">
+                        <xsl:for-each select="
+                            $cavafyEntry/pb:pbcoreDescriptionDocument/
+                            pb:pbcoreDescription
+                            [@descriptionType = 'Selection or Excerpt']">
+                            <xsl:value-of select="." separator="
+                                {$separatingTokenForFreeTextFields}"
                             />
+                        </xsl:for-each>
+                        </xsl:variable>
+
+                    <xsl:variable name="currentExcerpt">
+                            <xsl:apply-templates select="XMP-xmpDM:Tracks"/>
                         </xsl:variable>
                         <xsl:message
                             select="                            
@@ -410,7 +397,7 @@ to a pbcore cavafy entry -->
                                 </xsl:choose>
                             </pbcoreDescription>
                         </xsl:if>
-                    </xsl:if>
+                    
 
                     <!-- Transcripts -->
                     <xsl:variable name="transcriptAlreadyInCavafy">
@@ -620,8 +607,18 @@ to a pbcore cavafy entry -->
                         mode="broaderSubjects"/>
                 </xsl:variable>
 
+                <xsl:message select="'BROADER SUBJECTS', $broaderSubjects"/>
+                
                 <xsl:apply-templates 
-                    select="$broaderSubjects" 
+                    select="$broaderSubjects/(madsrdf:Topic |
+                    madsrdf:NameTitle |
+                    madsrdf:Geographic |
+                    madsrdf:Name |
+                    madsrdf:FamilyName |
+                    madsrdf:CorporateName |
+                    madsrdf:Title |
+                    madsrdf:PersonalName |
+                    madsrdf:ConferenceName)" 
                     mode="LOCtoPBCore"/>
                 
                 <xsl:variable name="genreAlreadyInCavafy">
@@ -763,7 +760,14 @@ to a pbcore cavafy entry -->
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </instantiationDigital>
-                            <instantiationLocation>DAVID</instantiationLocation>
+                            <instantiationLocation>
+                                <xsl:call-template name="checkConflicts">
+                                    <xsl:with-param name="field1" select="
+                                        normalize-space(System:Directory[contains(., 'Levy')])"/>
+                                    <xsl:with-param name="defaultValue" select="'DAVID'"/>
+                                    <xsl:with-param name="fieldName" select="'instantiationLocation'"/>
+                                </xsl:call-template>
+                            </instantiationLocation>
                             <instantiationMediaType>Sound</instantiationMediaType>
                             <instantiationGenerations>
                                 <xsl:value-of select="$generation"/>
@@ -783,6 +787,9 @@ to a pbcore cavafy entry -->
                                         test="RIFF:NumChannels = 1">Mono</xsl:when>
                                     <xsl:when 
                                         test="RIFF:NumChannels = 2">Stereo</xsl:when>
+                                <xsl:otherwise>
+                                        <xsl:value-of select="RIFF:NumChannels"/>
+                                    </xsl:otherwise>
                                 </xsl:choose>
                             </instantiationChannelConfiguration>
 
@@ -841,6 +848,10 @@ to a pbcore cavafy entry -->
                             </instantiationAnnotation>
                             <instantiationAnnotation annotationType="Embedded_Comments">
                                 <xsl:value-of select="normalize-space(RIFF:Comment)"/>
+                            </instantiationAnnotation>
+
+                            <instantiationAnnotation annotationType="Transfer_Technician">
+                                <xsl:value-of select="normalize-space(RIFF:Technician)"/>
                             </instantiationAnnotation>
 
                             <!--essence tracks -->

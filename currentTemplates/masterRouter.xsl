@@ -42,26 +42,36 @@
         select="doc('pbcore_instantiationphysicalaudio_vocabulary.xml')"/>
     <xsl:variable name="archiveAuthors" select="doc('archivesAuthors.xml')"/>
 
-    <xsl:template name="masterRouter" match="/">
-        <!-- Identify the type of document -->
+    <xsl:template match="/">
+        <xsl:message
+            select="
+                'Now processing file ', base-uri(),
+                ' on this fine day of ', current-dateTime()"/>
         <xsl:message>
-            <xsl:value-of
-                select="
-                    'Now processing file ', base-uri(),
-                    ' on this fine day of ', current-dateTime()"
-            />
+            <xsl:value-of select="
+                'This', local-name(*), 'document contains'"/>
+        <xsl:for-each-group select="*/*"
+                group-by="local-name()">
+                <xsl:value-of
+                    select="
+                    '&#10;', count(current-group()), 
+                    current-grouping-key(), 'elements.'"
+                />
+            </xsl:for-each-group>
+            <xsl:for-each-group select="*"
+                group-by="
+                    rdf:Description/File:FileType">
+                <xsl:value-of
+                    select="
+                        '&#10;', count(*), 
+                        current-grouping-key(), 'files.'"
+                />
+            </xsl:for-each-group>
         </xsl:message>
-        <xsl:element name="choice">
-            <xsl:apply-templates select="conformance_point_document" mode="BWFMetaEdit"/>
-            <xsl:apply-templates select="ENTRIES" mode="DAVIDdbx"/>
-            <xsl:apply-templates select="entries" mode="spreadsheet"/>
-            <xsl:apply-templates select="MediaInfo"/>
-            <xsl:apply-templates select="rdf:RDF" mode="masterRouter"/>
-            <xsl:apply-templates select="instantiationIDs"/>
-        </xsl:element>
+        <xsl:apply-templates/>
     </xsl:template>
 
-    <xsl:template name="BWFMetaEdit" match="conformance_point_document" mode="BWFMetaEdit">
+    <xsl:template name="BWFMetaEdit" match="conformance_point_document">
         <!-- Accept a BWF MetaEdit xml document 
             and convert to an exiftool kind of rdf document -->
         <xsl:message>
@@ -73,10 +83,11 @@
             </rdf:RDF>
         </xsl:variable>
         <xsl:copy-of select="$exifFromFADGI"/>
-        <xsl:apply-templates select="$exifFromFADGI/rdf:RDF" mode="masterRouter"/>
+        <xsl:message select="'Exif from BWF MetaEdit', $exifFromFADGI"/>
+    <xsl:apply-templates select="$exifFromFADGI/rdf:RDF"/>
     </xsl:template>
 
-    <xsl:template name="DAVIDdbx" match="ENTRIES" mode="DAVIDdbx">
+    <xsl:template name="DAVIDdbx" match="ENTRIES">
         <!-- Accept an xml document (with extension '.DBX')
         as output from D.A.V.I.D.-->
         <xsl:message>
@@ -85,15 +96,7 @@
         <xsl:apply-templates select="ENTRY"/>
     </xsl:template>
 
-    <xsl:template name="mediaInfo" match="Mediainfo">
-        <!-- Accept a MediaInfo kind of xml document -->
-        <xsl:message>
-            <xsl:value-of select="'This appears to be a MediaInfo kind of document.'"/>
-        </xsl:message>
-        <xsl:apply-templates select="File"/>
-    </xsl:template>
-
-    <xsl:template name="exiftool" match="rdf:RDF" mode="masterRouter">
+    <xsl:template name="exiftool" match="rdf:RDF">
         <!-- Accept an exiftool kind of xml document
         as output from the command 
            exiftool -X -a -ext wav [directoryWithFiles]
@@ -103,7 +106,7 @@
         <xsl:param name="input" select="."/>
         <xsl:message
             select="
-                'Process rdf document',
+                'Process', local-name(), 'document',
                 'with', count(*), 'elements.'"/>
 
         <!-- Sort according to what type of instantiation 
@@ -126,28 +129,28 @@
         <!-- Message with format count -->
         <xsl:for-each-group
             select="
-                $input/rdf:Description
-                [upper-case(RIFF:Source) != 'NEW']"
+            $input/rdf:Description
+            [upper-case(RIFF:Source) = 'NEW']"
             group-by="File:FileType">
             <xsl:message
                 select="
-                    count(current-group()),
-                    current-grouping-key(),
-                    'instantiations',
-                    'with an existing asset.'"
+                count(current-group()),
+                current-grouping-key(),
+                'with no existing asset.'"
             />
         </xsl:for-each-group>
 
         <xsl:for-each-group
             select="
                 $input/rdf:Description
-                [upper-case(RIFF:Source) = 'NEW']"
+                [not(upper-case(RIFF:Source) = 'NEW')]"
             group-by="File:FileType">
             <xsl:message
                 select="
                     count(current-group()),
                     current-grouping-key(),
-                    'with no existing asset.'"
+                    'instantiations',
+                    'with a presumed existing cavafy asset.'"
             />
         </xsl:for-each-group>
 
@@ -162,11 +165,6 @@
                 />
             </newAssets>
         </xsl:variable>
-        <xsl:variable name="totalNewAssets"
-            select="
-                count(
-                $newAssets/newAssets/rdf:Description
-                )"/>
         <xsl:variable name="updateAssets">
             <updateAssets>
                 <xsl:copy-of
@@ -177,11 +175,6 @@
                 />
             </updateAssets>
         </xsl:variable>
-        <xsl:variable name="totalUpdateAssets"
-            select="
-                count(
-                $updateAssets/updateAssets/rdf:Description
-                )"/>
         <xsl:variable name="physicalInstantiations">
             <physicalInstantiations>
                 <xsl:copy-of
@@ -195,12 +188,6 @@
                 />
             </physicalInstantiations>
         </xsl:variable>
-        <xsl:variable name="totalPhysicalInstantiations"
-            select="
-                count(
-                $physicalInstantiations
-                /physicalInstantiations/rdf:Description
-                )"/>
         <xsl:variable name="wavInstantiations">
             <wavInstantiations>
                 <xsl:copy-of
@@ -227,12 +214,6 @@
                 </xsl:for-each>
             </unacceptableFiles>
         </xsl:variable>
-        <xsl:variable name="totalWavInstantiations"
-            select="
-                count(
-                $wavInstantiations/wavInstantiations/rdf:Description
-                )"/>
-       
         <xsl:variable name="archivesINGESTWavInstantiations">
             <archivesINGESTWavInstantiations>
                 <xsl:copy-of
@@ -243,11 +224,6 @@
             </archivesINGESTWavInstantiations>
         </xsl:variable>
         
-        <xsl:variable name="totalArchivesINGESTWavInstantiations"
-            select="
-                count(
-                $archivesINGESTWavInstantiations
-                /archivesINGESTWavInstantiations/rdf:Description)"/>
         <xsl:variable name="DAVIDWavInstantiations">
             <DAVIDWavInstantiations>
                 <xsl:for-each
@@ -260,12 +236,12 @@
                         />
                     </xsl:variable>
                     <xsl:variable name="dbxURL"
-                        select="$dbxData/dbxData/ENTRIES/ENTRY/MEDIUM/FILE/FILEREF[ends-with(., '.DBX')][1]"/>
-                    <xsl:variable name="dbxTheme" select="$dbxData/dbxData/ENTRIES/ENTRY/MOTIVE"/>
-                    <xsl:variable name="dbxAuthor" select="$dbxData/dbxData/ENTRIES/ENTRY/AUTHOR"/>
-                    <xsl:variable name="dbxCreator" select="$dbxData/dbxData/ENTRIES/ENTRY/CREATOR"/>
+                        select="$dbxData/ENTRIES/ENTRY/MEDIUM/FILE/FILEREF[ends-with(., '.DBX')][1]"/>
+                    <xsl:variable name="dbxTheme" select="$dbxData/ENTRIES/ENTRY/MOTIVE"/>
+                    <xsl:variable name="dbxAuthor" select="$dbxData/ENTRIES/ENTRY/AUTHOR"/>
+                    <xsl:variable name="dbxCreator" select="$dbxData/ENTRIES/ENTRY/CREATOR"/>
                     <xsl:variable name="dbxDeleted"
-                        select="$dbxData/dbxData/ENTRIES/ENTRY/SOFTDELETED"/>
+                        select="$dbxData/ENTRIES/ENTRY/SOFTDELETED"/>
                     <DAVIDWavInstantiation>
                         <xsl:copy-of select="."/>
                         <xsl:copy-of select="$dbxURL"/>
@@ -278,11 +254,6 @@
                 </xsl:for-each>
             </DAVIDWavInstantiations>
         </xsl:variable>
-        <xsl:variable name="totalDAVIDWavInstantiations"
-            select="
-                count(
-                $DAVIDWavInstantiations
-                /DAVIDWavInstantiations/DAVIDWavInstantiation/rdf:Description)"/>
         <xsl:variable name="DAVIDWavInstantiationsFromArchives">
             <DAVIDWavInstantiationsFromArchives>
                 <xsl:copy-of
@@ -736,7 +707,7 @@
         <!-- Needs to be split into bite-size chunks of about 40 assets -->
         <xsl:variable name="cavafyAssetsCount"
             select="count($cavafyOutput/pb:pbcoreCollection/pb:pbcoreDescriptionDocument)"/>
-        <xsl:variable name="maxCavafyAssets" select="40" as="xs:integer"/>
+        <xsl:variable name="maxCavafyAssets" select="20" as="xs:integer"/>
         <xsl:comment select="'total instances', count(*)"/>
 
         <xsl:apply-templates select="$cavafyOutput/pb:pbcoreCollection" mode="breakItUp">
@@ -995,7 +966,7 @@
 
     <xsl:template match="node()" name="breakItUp" mode="breakItUp">
         <xsl:param name="firstOccurrence" select="1"/>
-        <xsl:param name="maxOccurrences" select="40"/>
+        <xsl:param name="maxOccurrences" select="20"/>
         <xsl:param name="total" select="count(child::*)"/>
         <xsl:param name="baseURI" select="$baseURI"/>
         <xsl:param name="filename" select="document-uri()"/>
@@ -1005,7 +976,9 @@
             format-date(current-date(), '[Y0001][M01][D01]')"/>
         <xsl:param name="assetName" select="name(child::*[1])"/>
         
-        <xsl:message select="'Break up document into ', $maxOccurrences, 'size pieces'"/>
+        <xsl:message select="
+            'Break up document into ', 
+            $maxOccurrences, '-size pieces'"/>
         
         <xsl:variable name="lastPosition"
             select="
@@ -1046,86 +1019,4 @@
         </xsl:if>
     </xsl:template>
 
-    <!--<xsl:template name="breakItUp" match="
-            pb:pbcoreCollection" mode="breakItUp">
-        <!-\- break up large cavafy files -\->
-        <xsl:param name="firstOccurrence" select="
-            1" as="xs:integer"/>
-        <xsl:param name="maxOccurrences" as="
-            xs:integer" select="40"/>
-
-        <xsl:variable name="lastPosition" select="
-            count(
-            *[position() ge $firstOccurrence]
-            )"
-            as="xs:integer"/>
-        <xsl:comment select="
-            'last position: ', $lastPosition, 
-            'maxOcccurrences: ', $maxOccurrences"/>
-
-        <xsl:choose>
-            <xsl:when test="
-                $lastPosition le $maxOccurrences">
-                <xsl:variable name="
-                    filenameCavafy"
-                    select="concat(
-                    substring-before(
-                    $baseURI, '.'), 
-                    '_ForCAVAFY', 
-                    format-date(current-date(), 
-                    '[Y0001][M01][D01]'), 
-                    '_Assets', 
-                    $firstOccurrence, '-', 
-                    $firstOccurrence + $lastPosition - 1, 
-                    '.xml'
-                    )"/>
-                <xsl:result-document format="
-                    cavafy" href="{$filenameCavafy}">
-                    <xsl:copy select=".">
-                        <xsl:copy-of select="
-                            ./*[position() ge $firstOccurrence]
-                            "/>
-                    </xsl:copy>
-                </xsl:result-document>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:variable name="filenameCavafy"
-                    select="
-                    concat(
-                    substring-before($baseURI, '.'), 
-                    '_ForCAVAFY', 
-                    format-date(current-date(), 
-                    '[Y0001][M01][D01]'), 
-                    '_Assets', $firstOccurrence, '-', 
-                    $firstOccurrence + $maxOccurrences - 1, 
-                    '.xml'
-                    )"/>
-                <xsl:result-document format="
-                    cavafy" href="{$filenameCavafy}">
-                    <xsl:copy select=".">
-                        <xsl:copy-of
-                            select="
-                            ./*
-                            [position() ge $firstOccurrence 
-                            and 
-                            position() lt $firstOccurrence + $maxOccurrences]"
-                        />
-                    </xsl:copy>
-                </xsl:result-document>
-                <xsl:apply-templates select="." mode="breakItUp">
-                    <xsl:with-param name="firstOccurrence"
-                        select="
-                        $firstOccurrence 
-                        + 
-                        $maxOccurrences"/>
-                    <xsl:with-param name="
-                        maxOccurrences" select="
-                        $maxOccurrences"/>
-                </xsl:apply-templates>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>-->
-    
-    
-
-</xsl:stylesheet>
+    </xsl:stylesheet>

@@ -41,12 +41,12 @@ from different sources -->
         
         <!-- Check for data inconsistencies -->
         
-        <xsl:param name="field1" select="dummyNode"/>
-        <xsl:param name="field2" select="dummyNode"/>
-        <xsl:param name="field3" select="dummyNode"/>
-        <xsl:param name="field4" select="dummyNode"/>
-        <xsl:param name="field5" select="dummyNode"/>
-        <xsl:param name="fieldName" select="name($field1(.!='')[1])"/>
+        <xsl:param name="field1"/>
+        <xsl:param name="field2"/>
+        <xsl:param name="field3"/>
+        <xsl:param name="field4"/>
+        <xsl:param name="field5"/>
+        <xsl:param name="fieldName" select="name($field1(. != '')[1])"/>
         <xsl:param name="filename" select=".//System:FileName"/>
         <xsl:param name="validatingString" select="''"/>
         <xsl:param name="separatingToken" select="$separatingToken"/>
@@ -57,6 +57,7 @@ from different sources -->
                 <xsl:value-of select="$fieldName[1]"/>
             </xsl:element>
         </xsl:param>
+        <xsl:param name="normalize" select="true()"/>
         <xsl:message select="'
             Check for conflicts among values for ', $fieldName[1], ': ', 
             string-join(
@@ -73,22 +74,9 @@ from different sources -->
                 <xsl:with-param name="separatingToken" select="$separatingToken"/>
                 <xsl:with-param name="validatingString" select="
                     $validatingString"/>
+            <xsl:with-param name="normalize" select="$normalize"/>
             </xsl:call-template>
         </xsl:variable>
-        <xsl:message>
-            SPLIT PARSE VALIDATE
-                <xsl:value-of select="
-                    $field1 | 
-                    $field2 | 
-                    $field3 | 
-                    $field4 | 
-                    $field5" 
-                    separator="{$separatingToken}"/>
-            VALIDATING STRING
-            <xsl:value-of 
-            select="
-                $validatingString"/>
-        </xsl:message>        
         <xsl:variable name="distinctFoundCount" select="
             count($distinctFields/inputParsed/valid)"/>
         <xsl:message>
@@ -105,7 +93,7 @@ from different sources -->
                 <xsl:value-of select="$distinctFields/inputParsed/valid"/>
             </xsl:when>
             <xsl:when test="$distinctFoundCount lt 1">                
-                <xsl:copy-of select="$defaultValue"/>
+                <xsl:value-of select="$defaultValue"/>
             </xsl:when>            
             <xsl:when test="$distinctFoundCount gt 1">
                 <xsl:element name="error">
@@ -122,7 +110,7 @@ from different sources -->
         </xsl:choose>
         </xsl:variable>
         <xsl:copy-of select="$checkConflictResult"/>
-        <xsl:message select="$checkConflictResult"/>
+        <xsl:message select="'Chosen value:', $checkConflictResult"/>
     </xsl:template>
 
     <xsl:template name="mergeData" 
