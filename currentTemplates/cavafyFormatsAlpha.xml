@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cavafyFormats xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<format>1 inch audio tape</format>
+	<format>1/4 inch audio tape</format>
+	<format>3/4 inch videotape: U-matic</format>
+	<format>AIT</format>
+	<format>Art original</format>
+	<format>Art print</format>
+	<format>Art reproduction</format>
+	<format>Audio cart</format>
+	<format>Audio cassette</format>
+	<format>audio/mpeg</format>
+	<format>BD-Videodisc</format>
+	<format>Beta II</format>
+	<format>Beta II Digital</format>
+	<format>Beta PCM F-1</format>
+	<format>Betacam</format>
+	<format>Betacam Digital (Digi Beta)</format>
+	<format>Betacam SP</format>
+	<format>Book</format>
+	<format>BWF</format>
+	<format>CD-Audio</format>
+	<format>CD-Data</format>
+	<format>CD-Data/Audio</format>
+	<format>CD-ROM</format>
+	<format>DAT</format>
+	<format>DBX 700 VHS tape</format>
+	<format>DDS Data Tape</format>
+	<format>Digital Betacam</format>
+	<format>DTRS</format>
+	<format>DV Mini</format>
+	<format>DVCam: Sony</format>
+	<format>DVD+R</format>
+	<format>DVD-Audio</format>
+	<format>DVD-Data</format>
+	<format>DVD-Graphic</format>
+	<format>DVD-MPEG4</format>
+	<format>DVD-R</format>
+	<format>Electronic Image Files</format>
+	<format>Film: 16mm</format>
+	<format>Flexidisc</format>
+	<format>Hard Drive</format>
+	<format>HDCAM</format>
+	<format>image/jpeg</format>
+	<format>image/jpg</format>
+	<format>image/pdf</format>
+	<format>image/tiff</format>
+	<format>Lacquer disc</format>
+	<format>LP Record</format>
+	<format>Mini DV</format>
+	<format>Minidisc</format>
+	<format>not specified</format>
+	<format>Paper</format>
+	<format>Photograph</format>
+	<format>Shellac disc</format>
+	<format>Sound disc</format>
+	<format>VHS</format>
+	<format>Video Beta</format>
+	<format>video/DV</format>
+	<format>video/mp4</format>
+</cavafyFormats>
