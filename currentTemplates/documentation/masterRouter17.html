@@ -500,6 +500,7 @@ from different sources </pre></div>
                                     <td>
                                        <div class="listGrouping">
                                           <div class="refItemBlock"><a href="masterRouter1.html#T_newExifS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')"><span class="nRf">newExif</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter8.html#M_rdfDescriptionM_cavafyS_Exif2Cavafy.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Cavafy.xsl')"><span class="mRf">rdf:Description</span><span class="mdRf">cavafy</span></a><span class="refItemSep">;</span></div>
                                           <div class="refItemBlock"><a href="masterRouter6.html#M_instantiationIDM_generateExifS_instantiationID2Exif.xsl" target="_self" title="No namespace" onclick="updPT('instantiationID2Exif.xsl')"><span class="mRf">instantiationID</span><span class="mdRf">generateExif</span></a></div>
                                        </div>
                                     </td>
@@ -551,37 +552,42 @@ from different sources </pre></div>
                                  <tr>
                                     <td class="fCol">field1</td>
                                     <td>No namespace</td>
-                                    <td>dummyNode</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">field2</td>
                                     <td>No namespace</td>
-                                    <td>dummyNode</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">field3</td>
                                     <td>No namespace</td>
-                                    <td>dummyNode</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">field4</td>
                                     <td>No namespace</td>
-                                    <td>dummyNode</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">field5</td>
                                     <td>No namespace</td>
-                                    <td>dummyNode</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">fieldName</td>
                                     <td>No namespace</td>
-                                    <td>name($field1(.!='')[1])</td>
+                                    <td>name($field1(. != '')[1])</td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">filename</td>
                                     <td>No namespace</td>
                                     <td>.//System:FileName</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">normalize</td>
+                                    <td>No namespace</td>
+                                    <td>true()</td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">separatingToken</td>
@@ -612,12 +618,12 @@ from different sources </pre></div>
                                  <tr>
                                     <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"checkConflicts"</span><span class="tAN"> match=</span><span class="tAV">"inputs"</span><span class="tAN"> mode=</span><span class="tAV">"checkConflicts"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Check for data inconsistencies --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"dummyNode"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tAN"> select=</span><span class="tAV">"dummyNode"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field3"</span><span class="tAN"> select=</span><span class="tAV">"dummyNode"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field4"</span><span class="tAN"> select=</span><span class="tAV">"dummyNode"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field5"</span><span class="tAN"> select=</span><span class="tAV">"dummyNode"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"name($field1(.!='')[1])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field3"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field4"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field5"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"name($field1(. != '')[1])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"filename"</span><span class="tAN"> select=</span><span class="tAV">".//System:FileName"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"validatingString"</span><span class="tAN"> select=</span><span class="tAV">"''"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"separatingToken"</span><span class="tAN"> select=</span><span class="tAV">"$separatingToken"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -627,6 +633,7 @@ from different sources </pre></div>
       </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$fieldName[1]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"normalize"</span><span class="tAN"> select=</span><span class="tAV">"true()"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'             Check for conflicts among values for ', $fieldName[1], ': ',              string-join(             ($field1, $field2, $field3, $field4, $field5),              $separatingToken)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"distinctFields"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"splitParseValidate"</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -635,12 +642,9 @@ from different sources </pre></div>
       </span><span class="tXSLEl">&lt;/xsl:with-param&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"separatingToken"</span><span class="tAN"> select=</span><span class="tAV">"$separatingToken"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"validatingString"</span><span class="tAN"> select=</span><span class="tAV">"                     $validatingString"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"normalize"</span><span class="tAN"> select=</span><span class="tAV">"$normalize"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">SPLIT PARSE VALIDATE</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     $field1 |                      $field2 |                      $field3 |                      $field4 |                      $field5"</span><span class="tAN"> separator=</span><span class="tAV">"{$separatingToken}"</span><span class="tXSLEl">/&gt;</span><span class="tT" style="white-space:normal">VALIDATING STRING</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                 $validatingString"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:message&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"distinctFoundCount"</span><span class="tAN"> select=</span><span class="tAV">"             count($distinctFields/inputParsed/valid)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:message</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                 $distinctFoundCount, ' distinct values for ',                 $fieldName, ' found: '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -652,7 +656,7 @@ from different sources </pre></div>
         </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$distinctFields/inputParsed/valid"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$distinctFoundCount lt 1"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$defaultValue"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$defaultValue"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$distinctFoundCount gt 1"</span><span class="tXSLEl">&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -664,7 +668,7 @@ from different sources </pre></div>
     </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$checkConflictResult"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"$checkConflictResult"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'Chosen value:', $checkConflictResult"</span><span class="tXSLEl">/&gt;</span><span class="tI">
 </span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
                                  </tr>
                               </table>

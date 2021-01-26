@@ -29,10 +29,9 @@
 
         var docBoxes= new Array('dS_masterRouter.xsl');
 
-        var sourceBoxes= new Array('src_T_masterRouterS_masterRouter.xsl', 
+        var sourceBoxes= new Array('src_M_S_masterRouter.xsl', 
 				'src_T_BWFMetaEditS_masterRouter.xsl', 
 				'src_T_DAVIDdbxS_masterRouter.xsl', 
-				'src_T_mediaInfoS_masterRouter.xsl', 
 				'src_T_exiftoolS_masterRouter.xsl', 
 				'src_T_duplicateInstantiationsS_masterRouter.xsl', 
 				'src_T_breakItUpS_masterRouter.xsl', 
@@ -53,9 +52,9 @@
 				'src_O_DAVIDS_masterRouter.xsl', 
 				'src_O_emailS_masterRouter.xsl');
 
-        var supersedesBoxes= new Array('sps_T_masterRouterS_masterRouter.xsl', 
-				'sps_T_BWFMetaEditS_masterRouter.xsl', 
+        var supersedesBoxes= new Array('sps_M_S_masterRouter.xsl', 
 				'sps_T_DAVIDdbxS_masterRouter.xsl', 
+				'sps_T_exiftoolS_masterRouter.xsl', 
 				'sps_V_baseURIS_masterRouter.xsl', 
 				'sps_V_parsedBaseURIS_masterRouter.xsl', 
 				'sps_V_docFilenameS_masterRouter.xsl', 
@@ -429,7 +428,7 @@
                         <td>
                            <div id="dS_masterRouter.xsl" style="display:block">
                               <div>
-                                 <h3>Description</h3><pre>    Route an input xml for processing.
+                                 <h3>Description</h3><pre>      Route an input xml for processing.
         Identify the type of xml, 
         and create separate documents.</pre><pre> You will probably need to first log into cavafy.wnyc.org </pre></div>
                            </div>
@@ -473,8 +472,8 @@
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="T_masterRouterS_masterRouter.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">/</span><span class="titleTemplateName">masterRouter</span></div>
+      </table><a id="M_S_masterRouter.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">/</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -501,10 +500,10 @@
                      <tr>
                         <td class="fCol">
                            <div class="flL">Supersedes</div>
-                           <div class="flR"><input id="bt_sps_T_masterRouterS_masterRouter.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_T_masterRouterS_masterRouter.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_sps_M_S_masterRouter.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_M_S_masterRouter.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="sps_T_masterRouterS_masterRouter.xsl" style="display:block">
+                           <div id="sps_M_S_masterRouter.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
                                     <td class="fCol">Template</td>
@@ -525,25 +524,26 @@
                      <tr>
                         <td class="fCol">
                            <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_T_masterRouterS_masterRouter.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_masterRouterS_masterRouter.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_src_M_S_masterRouter.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_S_masterRouter.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_T_masterRouterS_masterRouter.xsl" style="display:block">
+                           <div id="src_M_S_masterRouter.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"masterRouter"</span><span class="tAN"> match=</span><span class="tAV">"/"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Identify the type of document --&gt;</span><span class="tI">
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"/"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                 'Now processing file ', base-uri(),                 ' on this fine day of ', current-dateTime()"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:message</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     'Now processing file ', base-uri(),                     ' on this fine day of ', current-dateTime()"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                 'This', local-name(*), 'document contains'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:for-each-group</span><span class="tAN"> select=</span><span class="tAV">"*/*"</span><span class="tAN"> group-by=</span><span class="tAV">"local-name()"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     '
+', count(current-group()),                      current-grouping-key(), 'elements.'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:for-each-group&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:for-each-group</span><span class="tAN"> select=</span><span class="tAV">"*"</span><span class="tAN"> group-by=</span><span class="tAV">"                     rdf:Description/File:FileType"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         '
+', count(*),                          current-grouping-key(), 'files.'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:for-each-group&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:message&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"choice"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"conformance_point_document"</span><span class="tAN"> mode=</span><span class="tAV">"BWFMetaEdit"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"ENTRIES"</span><span class="tAN"> mode=</span><span class="tAV">"DAVIDdbx"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"entries"</span><span class="tAN"> mode=</span><span class="tAV">"spreadsheet"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"MediaInfo"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"rdf:RDF"</span><span class="tAN"> mode=</span><span class="tAV">"masterRouter"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"instantiationIDs"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tXSLEl">/&gt;</span><span class="tI">
 </span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
                                  </tr>
                               </table>
@@ -561,7 +561,7 @@
             <td class="rt_cBR"></td>
          </tr>
       </table><a id="T_BWFMetaEditS_masterRouter.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">conformance_point_document</span><span class="titleTemplateName">BWFMetaEdit</span><span class="titleTemplateMode">BWFMetaEdit</span></div>
+         <span class="titleTemplateMatch">conformance_point_document</span><span class="titleTemplateName">BWFMetaEdit</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -583,27 +583,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Mode</td>
-                        <td>BWFMetaEdit</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Supersedes</div>
-                           <div class="flR"><input id="bt_sps_T_BWFMetaEditS_masterRouter.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_T_BWFMetaEditS_masterRouter.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="sps_T_BWFMetaEditS_masterRouter.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Template</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter3.html#M_conformance_point_documentM_BWFMetaEditS_BWF2Exif.xsl" target="_self" title="No namespace" onclick="updPT('BWF2Exif.xsl')"><span class="mRf">conformance_point_document</span><span class="mdRf">BWFMetaEdit</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
+                        <td>#default</td>
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
@@ -618,7 +598,7 @@
                            <div id="src_T_BWFMetaEditS_masterRouter.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"BWFMetaEdit"</span><span class="tAN"> match=</span><span class="tAV">"conformance_point_document"</span><span class="tAN"> mode=</span><span class="tAV">"BWFMetaEdit"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"BWFMetaEdit"</span><span class="tAN"> match=</span><span class="tAV">"conformance_point_document"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Accept a BWF MetaEdit xml document 
             and convert to an exiftool kind of rdf document --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:message</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -630,7 +610,8 @@
     </span><span class="tEl">&lt;/rdf:RDF&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$exifFromFADGI"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"$exifFromFADGI/rdf:RDF"</span><span class="tAN"> mode=</span><span class="tAV">"masterRouter"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'Exif from BWF MetaEdit', $exifFromFADGI"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"$exifFromFADGI/rdf:RDF"</span><span class="tXSLEl">/&gt;</span><span class="tI">
 </span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
                                  </tr>
                               </table>
@@ -648,7 +629,7 @@
             <td class="rt_cBR"></td>
          </tr>
       </table><a id="T_DAVIDdbxS_masterRouter.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">ENTRIES</span><span class="titleTemplateName">DAVIDdbx</span><span class="titleTemplateMode">DAVIDdbx</span></div>
+         <span class="titleTemplateMatch">ENTRIES</span><span class="titleTemplateName">DAVIDdbx</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -670,7 +651,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Mode</td>
-                        <td>DAVIDdbx</td>
+                        <td>#default</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -705,7 +686,7 @@
                            <div id="src_T_DAVIDdbxS_masterRouter.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"DAVIDdbx"</span><span class="tAN"> match=</span><span class="tAV">"ENTRIES"</span><span class="tAN"> mode=</span><span class="tAV">"DAVIDdbx"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"DAVIDdbx"</span><span class="tAN"> match=</span><span class="tAV">"ENTRIES"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Accept an xml document (with extension '.DBX')
         as output from D.A.V.I.D.--&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:message</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -728,68 +709,8 @@
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="T_mediaInfoS_masterRouter.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">Mediainfo</span><span class="titleTemplateName">mediaInfo</span></div>
-      <table class="rt">
-         <tr>
-            <td class="rt_cTL"></td>
-            <td class="rt_lT"></td>
-            <td class="rt_cTR"></td>
-         </tr>
-         <tr>
-            <td class="rt_lL"></td>
-            <td class="rt_cnt">
-               <table class="component">
-                  <tbody>
-                     <tr>
-                        <td class="fCol">Namespace</td>
-                        <td>No namespace</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Match</td>
-                        <td>Mediainfo</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Mode</td>
-                        <td>#default</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Import precedence</td>
-                        <td>36</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_T_mediaInfoS_masterRouter.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_mediaInfoS_masterRouter.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="src_T_mediaInfoS_masterRouter.xsl" style="display:block">
-                              <table class="pWCont">
-                                 <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"mediaInfo"</span><span class="tAN"> match=</span><span class="tAV">"Mediainfo"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Accept a MediaInfo kind of xml document --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'This appears to be a MediaInfo kind of document.'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:message&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"File"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-            </td>
-            <td class="rt_lR"></td>
-         </tr>
-         <tr>
-            <td class="rt_cBL"></td>
-            <td class="rt_lB"></td>
-            <td class="rt_cBR"></td>
-         </tr>
       </table><a id="T_exiftoolS_masterRouter.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">rdf:RDF</span><span class="titleTemplateName">exiftool</span><span class="titleTemplateMode">masterRouter</span></div>
+         <span class="titleTemplateMatch">rdf:RDF</span><span class="titleTemplateName">exiftool</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -811,7 +732,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Mode</td>
-                        <td>masterRouter</td>
+                        <td>#default</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -859,6 +780,26 @@
                      </tr>
                      <tr>
                         <td class="fCol">
+                           <div class="flL">Supersedes</div>
+                           <div class="flR"><input id="bt_sps_T_exiftoolS_masterRouter.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_T_exiftoolS_masterRouter.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="sps_T_exiftoolS_masterRouter.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Template</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter1.html#M_rdfRDFS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')"><span class="mRf">rdf:RDF</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
                            <div class="flL">Parameters</div>
                            <div class="flR"><input id="bt_prs_T_exiftoolS_masterRouter.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_T_exiftoolS_masterRouter.xsl');" class="control" /></div>
                         </td>
@@ -894,14 +835,14 @@
                            <div id="src_T_exiftoolS_masterRouter.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"exiftool"</span><span class="tAN"> match=</span><span class="tAV">"rdf:RDF"</span><span class="tAN"> mode=</span><span class="tAV">"masterRouter"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"exiftool"</span><span class="tAN"> match=</span><span class="tAV">"rdf:RDF"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Accept an exiftool kind of xml document
         as output from the command 
            exiftool -X -a -ext wav [directoryWithFiles]
         or something similar to this --&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Basic info: type of document, number of instantiations --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                 'Process rdf document',                 'with', count(*), 'elements.'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                 'Process', local-name(), 'document',                 'with', count(*), 'elements.'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Sort according to what type of instantiation 
             (at the rdf:Description/File:FileType level)
         
@@ -919,11 +860,11 @@
                 2.2.4. DAVID Wav files with 'news_latest_newscast' 'theme' (MOTIVE)
                 (these should have NewsBoss metadata)--&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Message with format count --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:for-each-group</span><span class="tAN"> select=</span><span class="tAV">"                 $input/rdf:Description                 [upper-case(RIFF:Source) != 'NEW']"</span><span class="tAN"> group-by=</span><span class="tAV">"File:FileType"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                     count(current-group()),                     current-grouping-key(),                     'instantiations',                     'with an existing asset.'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:for-each-group</span><span class="tAN"> select=</span><span class="tAV">"             $input/rdf:Description             [upper-case(RIFF:Source) = 'NEW']"</span><span class="tAN"> group-by=</span><span class="tAV">"File:FileType"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                 count(current-group()),                 current-grouping-key(),                 'with no existing asset.'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:for-each-group&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:for-each-group</span><span class="tAN"> select=</span><span class="tAV">"                 $input/rdf:Description                 [upper-case(RIFF:Source) = 'NEW']"</span><span class="tAN"> group-by=</span><span class="tAV">"File:FileType"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                     count(current-group()),                     current-grouping-key(),                     'with no existing asset.'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:for-each-group</span><span class="tAN"> select=</span><span class="tAV">"                 $input/rdf:Description                 [not(upper-case(RIFF:Source) = 'NEW')]"</span><span class="tAN"> group-by=</span><span class="tAV">"File:FileType"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                     count(current-group()),                     current-grouping-key(),                     'instantiations',                     'with a presumed existing cavafy asset.'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:for-each-group&gt;</span><span class="tI">
   </span><span class="tC">&lt;!--Normally coming from a spreadsheet --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"newAssets"</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -931,19 +872,16 @@
       </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"                         $input/rdf:Description                         [File:FileType = 'asset'][upper-case(RIFF:Source) = 'NEW']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/newAssets&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"totalNewAssets"</span><span class="tAN"> select=</span><span class="tAV">"                 count(                 $newAssets/newAssets/rdf:Description                 )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"updateAssets"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tEl">&lt;updateAssets</span><span class="tEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"                         $input/rdf:Description                         [File:FileType = 'asset']                         [not(upper-case(RIFF:Source) = 'NEW')]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/updateAssets&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"totalUpdateAssets"</span><span class="tAN"> select=</span><span class="tAV">"                 count(                 $updateAssets/updateAssets/rdf:Description                 )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"physicalInstantiations"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tEl">&lt;physicalInstantiations</span><span class="tEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"                         $input/rdf:Description                         [File:FileType =                         $pbcorePhysicalInstantiations                         /pbcoreInstantiationPhysicalAudioVocabulary                         /pbcoreInstantiationPhysicalAudioTerm                         /term]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/physicalInstantiations&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"totalPhysicalInstantiations"</span><span class="tAN"> select=</span><span class="tAV">"                 count(                 $physicalInstantiations                 /physicalInstantiations/rdf:Description                 )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"wavInstantiations"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tEl">&lt;wavInstantiations</span><span class="tEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"                         $input/rdf:Description                         [upper-case(File:FileType) = 'WAV']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -959,24 +897,22 @@
       </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/unacceptableFiles&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"totalWavInstantiations"</span><span class="tAN"> select=</span><span class="tAV">"                 count(                 $wavInstantiations/wavInstantiations/rdf:Description                 )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"archivesINGESTWavInstantiations"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tEl">&lt;archivesINGESTWavInstantiations</span><span class="tEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"                         $wavInstantiations/wavInstantiations/rdf:Description                         [contains(@rdf:about, 'ARCHIVESNAS1/INGEST/')]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/archivesINGESTWavInstantiations&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"totalArchivesINGESTWavInstantiations"</span><span class="tAN"> select=</span><span class="tAV">"                 count(                 $archivesINGESTWavInstantiations                 /archivesINGESTWavInstantiations/rdf:Description)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"DAVIDWavInstantiations"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tEl">&lt;DAVIDWavInstantiations</span><span class="tEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                         $wavInstantiations/wavInstantiations/rdf:Description                         [contains(@rdf:about, 'wnycdavidmedia')]"</span><span class="tXSLEl">&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"dbxData"</span><span class="tXSLEl">&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">".[contains(System:Directory, 'wnycdavidmedia')]"</span><span class="tAN"> mode=</span><span class="tAV">"DAVIDdbx"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"dbxURL"</span><span class="tAN"> select=</span><span class="tAV">"$dbxData/dbxData/ENTRIES/ENTRY/MEDIUM/FILE/FILEREF[ends-with(., '.DBX')][1]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"dbxTheme"</span><span class="tAN"> select=</span><span class="tAV">"$dbxData/dbxData/ENTRIES/ENTRY/MOTIVE"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"dbxAuthor"</span><span class="tAN"> select=</span><span class="tAV">"$dbxData/dbxData/ENTRIES/ENTRY/AUTHOR"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"dbxCreator"</span><span class="tAN"> select=</span><span class="tAV">"$dbxData/dbxData/ENTRIES/ENTRY/CREATOR"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"dbxDeleted"</span><span class="tAN"> select=</span><span class="tAV">"$dbxData/dbxData/ENTRIES/ENTRY/SOFTDELETED"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"dbxURL"</span><span class="tAN"> select=</span><span class="tAV">"$dbxData/ENTRIES/ENTRY/MEDIUM/FILE/FILEREF[ends-with(., '.DBX')][1]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"dbxTheme"</span><span class="tAN"> select=</span><span class="tAV">"$dbxData/ENTRIES/ENTRY/MOTIVE"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"dbxAuthor"</span><span class="tAN"> select=</span><span class="tAV">"$dbxData/ENTRIES/ENTRY/AUTHOR"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"dbxCreator"</span><span class="tAN"> select=</span><span class="tAV">"$dbxData/ENTRIES/ENTRY/CREATOR"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"dbxDeleted"</span><span class="tAN"> select=</span><span class="tAV">"$dbxData/ENTRIES/ENTRY/SOFTDELETED"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tEl">&lt;DAVIDWavInstantiation</span><span class="tEl">&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$dbxURL"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -989,7 +925,6 @@
       </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/DAVIDWavInstantiations&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"totalDAVIDWavInstantiations"</span><span class="tAN"> select=</span><span class="tAV">"                 count(                 $DAVIDWavInstantiations                 /DAVIDWavInstantiations/DAVIDWavInstantiation/rdf:Description)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"DAVIDWavInstantiationsFromArchives"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tEl">&lt;DAVIDWavInstantiationsFromArchives</span><span class="tEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"                         $DAVIDWavInstantiations                         /DAVIDWavInstantiations                         /DAVIDWavInstantiation                         [AUTHOR = $archiveAuthors/ARCHIVEAUTHORS/AUTHOR                         or                         CREATOR = $archiveAuthors/ARCHIVEAUTHORS/AUTHOR]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -1168,7 +1103,7 @@
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Needs to be split into bite-size chunks of about 40 assets --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cavafyAssetsCount"</span><span class="tAN"> select=</span><span class="tAV">"count($cavafyOutput/pb:pbcoreCollection/pb:pbcoreDescriptionDocument)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"maxCavafyAssets"</span><span class="tAN"> select=</span><span class="tAV">"40"</span><span class="tAN"> as=</span><span class="tAV">"xs:integer"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"maxCavafyAssets"</span><span class="tAN"> select=</span><span class="tAV">"20"</span><span class="tAN"> as=</span><span class="tAV">"xs:integer"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"'total instances', count(*)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"$cavafyOutput/pb:pbcoreCollection"</span><span class="tAN"> mode=</span><span class="tAV">"breakItUp"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"maxOccurrences"</span><span class="tAN"> select=</span><span class="tAV">"$maxCavafyAssets"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -1462,7 +1397,7 @@
                                  <tr>
                                     <td class="fCol">maxOccurrences</td>
                                     <td>No namespace</td>
-                                    <td>40</td>
+                                    <td>20</td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">total</td>
@@ -1488,14 +1423,14 @@
                                  <tr>
                                     <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"node()"</span><span class="tAN"> name=</span><span class="tAV">"breakItUp"</span><span class="tAN"> mode=</span><span class="tAV">"breakItUp"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"firstOccurrence"</span><span class="tAN"> select=</span><span class="tAV">"1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"maxOccurrences"</span><span class="tAN"> select=</span><span class="tAV">"40"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"maxOccurrences"</span><span class="tAN"> select=</span><span class="tAV">"20"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"total"</span><span class="tAN"> select=</span><span class="tAV">"count(child::*)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"baseURI"</span><span class="tAN"> select=</span><span class="tAV">"$baseURI"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"filename"</span><span class="tAN"> select=</span><span class="tAV">"document-uri()"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"filenameSuffix"</span><span class="tAN"> select=</span><span class="tAV">"'_ForCAVAFY'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"currentDate"</span><span class="tAN"> select=</span><span class="tAV">"             format-date(current-date(), '[Y0001][M01][D01]')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"assetName"</span><span class="tAN"> select=</span><span class="tAV">"name(child::*[1])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'Break up document into ', $maxOccurrences, 'size pieces'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"             'Break up document into ',              $maxOccurrences, '-size pieces'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"lastPosition"</span><span class="tAN"> select=</span><span class="tAV">"             count(             *[position() ge $firstOccurrence]             [position() le $maxOccurrences])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"filenameCavafy"</span><span class="tAN"> select=</span><span class="tAV">"             concat(             substring-before(             $baseURI, '.'),             $filenameSuffix,             $currentDate,             '_', $assetName,             $firstOccurrence, '-',             ($firstOccurrence + $lastPosition - 1),             '.xml'             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:result-document</span><span class="tAN"> href=</span><span class="tAV">"{$filenameCavafy}"</span><span class="tXSLEl">&gt;</span><span class="tI">

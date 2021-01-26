@@ -19,8 +19,7 @@
 				'src_O_S_BWF2Exif.xsl');
 
         
-        var overridingBoxes= new Array('ovr_M_conformance_point_documentM_BWFMetaEditS_BWF2Exif.xsl');
-
+        
         
         
         
@@ -329,9 +328,6 @@
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, parametersBoxes);" class="control" /></span><span class="globalControlName">Parameters </span></td>
                      </tr>
                      <tr>
-                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, overridingBoxes);" class="control" /></span><span class="globalControlName">Overriding </span></td>
-                     </tr>
-                     <tr>
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, importedFromBoxes);" class="control" /></span><span class="globalControlName">Imported from
                               </span></td>
                      </tr>
@@ -432,26 +428,6 @@
                      <tr>
                         <td class="fCol">Mode</td>
                         <td>BWFMetaEdit</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_M_conformance_point_documentM_BWFMetaEditS_BWF2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_M_conformance_point_documentM_BWFMetaEditS_BWF2Exif.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="ovr_M_conformance_point_documentM_BWFMetaEditS_BWF2Exif.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Template</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#T_BWFMetaEditS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')"><span class="mRf">conformance_point_document</span><span class="mdRf">BWFMetaEdit</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
@@ -600,6 +576,7 @@
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"directory"</span><span class="tAN"> select=</span><span class="tAV">"             substring-before($fullFilenameTranslated, $filename)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"filenameNoExtensionRaw"</span><span class="tAN"> select=</span><span class="tAV">"                 if ($token)                 then                     if (contains($filename, $token)) then                         string-join(tokenize($filename, $token, 'q')                         [position() ne last()], $token)                     else                         ''                 else                     $filename"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"filenameExtension"</span><span class="tAN"> select=</span><span class="tAV">"                 substring-after(                 substring-after($filename, $filenameNoExtensionRaw),                 $token)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'Convert BWF MetaEdit Core metadata from', @name"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tEl">&lt;rdf:Description</span><span class="tEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"rdf:about"</span><span class="tXSLEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$fullFilenameTranslated"</span><span class="tXSLEl">/&gt;</span><span class="tI">

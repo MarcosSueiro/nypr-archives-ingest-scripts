@@ -522,7 +522,7 @@
         </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:OriginatorReference"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tEl">&lt;/OriginatorReference&gt;</span><span class="tI">
       </span><span class="tEl">&lt;CodingHistory</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:CodingHistory)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:CodingHistory"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tEl">&lt;/CodingHistory&gt;</span><span class="tI">
       </span><span class="tEl">&lt;IARL</span><span class="tEl">&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:ArchivalLocation)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -540,11 +540,14 @@
 </span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
       </span><span class="tEl">&lt;/ICMS&gt;</span><span class="tI">
       </span><span class="tEl">&lt;ICMT</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Comment)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT"> </span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"endsWithParagraph"</span><span class="tAN"> select=</span><span class="tAV">"ends-with(RIFF:Comment, ' ')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:Comment"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' '[not($endsWithParagraph)]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tEl">&lt;/ICMT&gt;</span><span class="tI">
       </span><span class="tEl">&lt;ICOP</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Copyright)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"endsWithParagraph"</span><span class="tAN"> select=</span><span class="tAV">"ends-with(RIFF:Copyright, ' ')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:Copyright"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' '[not($endsWithParagraph)]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tEl">&lt;/ICOP&gt;</span><span class="tI">
       </span><span class="tEl">&lt;ICRD</span><span class="tEl">&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:DateCreated)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -580,9 +583,9 @@
 </span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
       </span><span class="tEl">&lt;/IPRD&gt;</span><span class="tI">
       </span><span class="tEl">&lt;ISBJ</span><span class="tEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Subject)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
-</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"endsWithParagraph"</span><span class="tAN"> select=</span><span class="tAV">"ends-with(RIFF:Subject, ' ')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:Subject"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' '[not($endsWithParagraph)]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tEl">&lt;/ISBJ&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"ISFT"</span><span class="tXSLEl">&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Software)"</span><span class="tXSLEl">/&gt;</span><span class="tI">

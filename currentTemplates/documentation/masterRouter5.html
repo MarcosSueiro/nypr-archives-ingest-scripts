@@ -593,16 +593,16 @@ and output an html error doc </pre></div>
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"duplicateInstantiationMessage"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tEl">&lt;b</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     count(                     $duplicateInstantiations                     /error                     )"</span><span class="tXSLEl">/&gt;</span><span class="tT"> files have duplicate instantiation numbers and must be renamed: </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         count($duplicateInstantiations/error[@type = 'duplicate_instantiation']                         )"</span><span class="tXSLEl">/&gt;</span><span class="tT"> files have duplicate instantiation numbers and must be renamed: </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"$duplicateInstantiations/error"</span><span class="tXSLEl">&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"@DAVIDTitle"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/b&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"errorCount"</span><span class="tAN"> select=</span><span class="tAV">"             count(             $completeLog             //result             [.//*[local-name() = 'error']]             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"errorCount"</span><span class="tAN"> select=</span><span class="tAV">"             count(             $completeLog//result[//*[local-name() = 'error']]             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"warningCount"</span><span class="tAN"> select=</span><span class="tAV">"             count(             $completeLog             //result             [.//*[local-name() = 'warning']]             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"totalCount"</span><span class="tAN"> select=</span><span class="tAV">"             count(             $completeLog             //result             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"totalCount"</span><span class="tAN"> select=</span><span class="tAV">"             count(             $completeLog//             result             ) + count(             $completeLog/completeLog/             unacceptableFiles/error             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"errorPercent"</span><span class="tAN"> select=</span><span class="tAV">"format-number(             $errorCount div $totalCount, '##%')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"warningPercent"</span><span class="tAN"> select=</span><span class="tAV">"format-number(             $warningCount div $totalCount, '##%')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"errorMessage"</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -611,8 +611,8 @@ and output an html error doc </pre></div>
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$errorPercent"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"') have errors: '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                 $completeLog                 //result                 [.//*[local-name() = 'error']]"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"./@filename"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                 $completeLog//result                 [//*[local-name() = 'error']]"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"@filename"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">

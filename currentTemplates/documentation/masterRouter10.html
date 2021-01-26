@@ -7,16 +7,17 @@
       <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
          <!--
         
-        var parametersBoxes= new Array('prs_M_MOTIVES_cms2BWFMetaEdit.xsl', 
+        var parametersBoxes= new Array('prs_T_getCMSDataS_cms2BWFMetaEdit.xsl', 
 				'prs_T_exifFillerS_cms2BWFMetaEdit.xsl');
 
         
         
         var docBoxes= new Array('dS_cms2BWFMetaEdit.xsl');
 
-        var sourceBoxes= new Array('src_M_MOTIVES_cms2BWFMetaEdit.xsl', 
-				'src_M_keyS_cms2BWFMetaEdit.xsl', 
-				'src_T_exifFillerS_cms2BWFMetaEdit.xsl');
+        var sourceBoxes= new Array('src_T_getCMSDataS_cms2BWFMetaEdit.xsl', 
+				'src_M_keyM_mapToElementS_cms2BWFMetaEdit.xsl', 
+				'src_T_exifFillerS_cms2BWFMetaEdit.xsl', 
+				'src_M_keyS_cms2BWFMetaEdit.xsl');
 
         
         
@@ -408,8 +409,8 @@ and output its data in BWF MetaEdit Core format </pre></div>
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="M_MOTIVES_cms2BWFMetaEdit.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">MOTIVE</span></div>
+      </table><a id="T_getCMSDataS_cms2BWFMetaEdit.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">MOTIVE</span><span class="titleTemplateName">getCMSData</span><span class="titleTemplateMode">getCMSData</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -431,15 +432,15 @@ and output its data in BWF MetaEdit Core format </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">Mode</td>
-                        <td>#default</td>
+                        <td>getCMSData</td>
                      </tr>
                      <tr>
                         <td class="fCol">
                            <div class="flL">Parameters</div>
-                           <div class="flR"><input id="bt_prs_M_MOTIVES_cms2BWFMetaEdit.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_M_MOTIVES_cms2BWFMetaEdit.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_prs_T_getCMSDataS_cms2BWFMetaEdit.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_T_getCMSDataS_cms2BWFMetaEdit.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="prs_M_MOTIVES_cms2BWFMetaEdit.xsl" style="display:block">
+                           <div id="prs_T_getCMSDataS_cms2BWFMetaEdit.xsl" style="display:block">
                               <table class="attsT">
                                  <thead>
                                     <tr>
@@ -466,24 +467,25 @@ and output its data in BWF MetaEdit Core format </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>11</td>
+                        <td>21</td>
                      </tr>
                      <tr>
                         <td class="fCol">
                            <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_M_MOTIVES_cms2BWFMetaEdit.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_MOTIVES_cms2BWFMetaEdit.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_src_T_getCMSDataS_cms2BWFMetaEdit.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_getCMSDataS_cms2BWFMetaEdit.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_M_MOTIVES_cms2BWFMetaEdit.xsl" style="display:block">
+                           <div id="src_T_getCMSDataS_cms2BWFMetaEdit.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"MOTIVE"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"MOTIVE"</span><span class="tAN"> mode=</span><span class="tAV">"getCMSData"</span><span class="tAN"> name=</span><span class="tAV">"getCMSData"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Input: 'motive/theme' field
             Output: cms data from the API
             as xml
         --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"theme"</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"queryURL"</span><span class="tAN"> select=</span><span class="tAV">"             concat(             'https://api.wnyc.org/api/v3/story/?audio_file=/',             $theme, '.mp3'             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"concat(             'Search WNYC CMS for entry with MP3 ', $theme,             ' using search string ', $queryURL             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"searchResultJson"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tEl">&lt;searchResultJson</span><span class="tEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"unparsed-text($queryURL)"</span><span class="tAN"> copy-namespaces=</span><span class="tAV">"no"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -492,15 +494,17 @@ and output its data in BWF MetaEdit Core format </pre></div>
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"searchResultXml"</span><span class="tAN"> select=</span><span class="tAV">"json-to-xml($searchResultJson)/*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'xml search data: ',              $searchResultXml"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cmsRecordsFoundCount"</span><span class="tAN"> select=</span><span class="tAV">"$searchResultXml             /fn:map[@key='meta']             /fn:map[@key='pagination']             /fn:number[@key='count']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cmsRecordsFoundMessage"</span><span class="tAN"> select=</span><span class="tAV">"$cmsRecordsFoundCount,              'entries for',              $theme,             'with query',             $queryURL"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cmsRecordsFoundMessage"</span><span class="tAN"> select=</span><span class="tAV">"concat($cmsRecordsFoundCount,              ' entries for ',              $theme,             ' with query ',             $queryURL)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"$cmsRecordsFoundMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$cmsRecordsFoundCount = 1"</span><span class="tXSLEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cmsData"</span><span class="tXSLEl">&gt;</span><span class="tI">
         </span><span class="tEl">&lt;cmsData</span><span class="tEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"$searchResultXml/*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"$searchResultXml/*[@key]"</span><span class="tAN"> mode=</span><span class="tAV">"mapToElement"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tEl">&lt;/cmsData&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'CMS DATA:'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"$searchResultXml"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$cmsData"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -526,8 +530,8 @@ and output its data in BWF MetaEdit Core format </pre></div>
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="M_keyS_cms2BWFMetaEdit.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">*[@key]</span></div>
+      </table><a id="M_keyM_mapToElementS_cms2BWFMetaEdit.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">*[@key]</span><span class="titleTemplateMode">mapToElement</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -549,25 +553,25 @@ and output its data in BWF MetaEdit Core format </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">Mode</td>
-                        <td>#default</td>
+                        <td>mapToElement</td>
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>11</td>
+                        <td>21</td>
                      </tr>
                      <tr>
                         <td class="fCol">
                            <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_M_keyS_cms2BWFMetaEdit.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_keyS_cms2BWFMetaEdit.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_src_M_keyM_mapToElementS_cms2BWFMetaEdit.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_keyM_mapToElementS_cms2BWFMetaEdit.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_M_keyS_cms2BWFMetaEdit.xsl" style="display:block">
+                           <div id="src_M_keyM_mapToElementS_cms2BWFMetaEdit.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"*[@key]"</span><span class="tAN"> xpath-default-namespace=</span><span class="tAV">"http://www.w3.org/2005/xpath-functions"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"*[@key]"</span><span class="tAN"> xpath-default-namespace=</span><span class="tAV">"http://www.w3.org/2005/xpath-functions"</span><span class="tAN"> mode=</span><span class="tAV">"mapToElement"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Convert @keys to elements --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"{@key}"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> mode=</span><span class="tAV">"mapToElement"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
 </span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
                                  </tr>
@@ -659,7 +663,7 @@ and output its data in BWF MetaEdit Core format </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>11</td>
+                        <td>21</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -958,6 +962,75 @@ For more information, visit http://www.wnyc.org
     </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
 </span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
   </span><span class="tEl">&lt;/ITCH&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="M_keyS_cms2BWFMetaEdit.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">*[@key]</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Match</td>
+                        <td>*[@key]</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Mode</td>
+                        <td>#default</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>21</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_M_keyS_cms2BWFMetaEdit.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_keyS_cms2BWFMetaEdit.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_M_keyS_cms2BWFMetaEdit.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"*[@key]"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"@key = 'tags'"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"keywords"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy</span><span class="tXSLEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"./*"</span><span class="tAN"> separator=</span><span class="tAV">" ; "</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;/xsl:copy&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"{@key}"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
 </span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
                                  </tr>
                               </table>

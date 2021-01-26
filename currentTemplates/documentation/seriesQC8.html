@@ -23,13 +23,15 @@
 				'prs_T_LOCtoPBCoreS_processLoCURL.xsl');
 
         
-        var usedByBoxes= new Array('uB_T_LOCOccupationsAndFieldsOfActivityS_processLoCURL.xsl', 
-				'uB_T_locLabelS_processLoCURL.xsl', 
+        var usedByBoxes= new Array('uB_T_locLabelS_processLoCURL.xsl', 
 				'uB_T_directLOCNameSearchS_processLoCURL.xsl', 
 				'uB_T_directLOCSubjectSearchS_processLoCURL.xsl', 
 				'uB_T_directLOCSearchS_processLoCURL.xsl', 
 				'uB_T_wideLOCSubjectSearchS_processLoCURL.xsl', 
 				'uB_T_wideLOCNameSearchS_processLoCURL.xsl', 
+				'uB_V_separatingTokenLongS_processLoCURL.xsl', 
+				'uB_V_validatingKeywordStringS_processLoCURL.xsl', 
+				'uB_V_validatingNameStringS_processLoCURL.xsl', 
 				'uB_V_combinedValidatingStringsS_processLoCURL.xsl');
 
         var docBoxes= new Array('dS_processLoCURL.xsl', 
@@ -61,12 +63,13 @@
 				'src_V_combinedValidatingStringsS_processLoCURL.xsl', 
 				'src_O_S_processLoCURL.xsl');
 
-        
-        var overridingBoxes= new Array('ovr_M_pma_xml_exportS_processLoCURL.xsl', 
-				'ovr_V_separatingTokenS_processLoCURL.xsl', 
-				'ovr_V_separatingTokenLongS_processLoCURL.xsl', 
-				'ovr_V_validatingKeywordStringS_processLoCURL.xsl', 
-				'ovr_V_validatingNameStringS_processLoCURL.xsl');
+        var supersedesBoxes= new Array('sps_M_pma_xml_exportS_processLoCURL.xsl', 
+				'sps_V_separatingTokenS_processLoCURL.xsl', 
+				'sps_V_separatingTokenLongS_processLoCURL.xsl', 
+				'sps_V_validatingKeywordStringS_processLoCURL.xsl', 
+				'sps_V_validatingNameStringS_processLoCURL.xsl');
+
+        var overridingBoxes= new Array('ovr_V_separatingTokenS_processLoCURL.xsl');
 
         var referencesBoxes= new Array('refs_T_LOCOccupationsAndFieldsOfActivityS_processLoCURL.xsl', 
 				'refs_T_nameInNameTitleS_processLoCURL.xsl', 
@@ -398,6 +401,9 @@
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, referencesBoxes);" class="control" /></span><span class="globalControlName">References </span></td>
                      </tr>
                      <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, supersedesBoxes);" class="control" /></span><span class="globalControlName">Supersedes </span></td>
+                     </tr>
+                     <tr>
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, overridingBoxes);" class="control" /></span><span class="globalControlName">Overriding </span></td>
                      </tr>
                      <tr>
@@ -465,7 +471,7 @@
                                  <tr>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter17.html#manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')">manageDuplicates.xsl</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC5.html#manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')">manageDuplicates.xsl</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -484,7 +490,7 @@
                                  <tr>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter14.html#processCollection.xsl" target="_self" title="No namespace" onclick="updPT('processCollection.xsl')">processCollection.xsl</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC4.html#processCollection.xsl" target="_self" title="No namespace" onclick="updPT('processCollection.xsl')">processCollection.xsl</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -566,7 +572,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -626,26 +632,6 @@
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Used by</div>
-                           <div class="flR"><input id="bt_uB_T_LOCOccupationsAndFieldsOfActivityS_processLoCURL.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_T_LOCOccupationsAndFieldsOfActivityS_processLoCURL.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="uB_T_LOCOccupationsAndFieldsOfActivityS_processLoCURL.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Template</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter1.html#T_newExifS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')"><span class="nRf">newExif</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
                            <div class="flL">References</div>
                            <div class="flR"><input id="bt_refs_T_LOCOccupationsAndFieldsOfActivityS_processLoCURL.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_T_LOCOccupationsAndFieldsOfActivityS_processLoCURL.xsl');" class="control" /></div>
                         </td>
@@ -653,11 +639,10 @@
                            <div id="refs_T_LOCOccupationsAndFieldsOfActivityS_processLoCURL.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
-                                    <td class="fCol">Parameters</td>
+                                    <td class="fCol">Parameter</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter20.html#P_separatingTokenS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">separatingToken</a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter20.html#P_separatingTokenLongS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">separatingTokenLong</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC4.html#P_separatingTokenS_processCollection.xsl" target="_self" title="No namespace" onclick="updPT('processCollection.xsl')">separatingToken</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -665,8 +650,9 @@
                                     <td class="fCol">Variables</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter19.html#V_validatingKeywordStringS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">validatingKeywordString</a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter19.html#V_validatingNameStringS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">validatingNameString</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#V_separatingTokenLongS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">separatingTokenLong</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#V_validatingKeywordStringS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">validatingKeywordString</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#V_validatingNameStringS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">validatingNameString</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -674,7 +660,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter19.html#F_splitParseValidateS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>splitParseValidate (</span><span class="fParams">input, separatingToken, validatingString</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC7.html#F_splitParseValidateS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>splitParseValidate (</span><span class="fParams">input, separatingToken, validatingString</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -720,7 +706,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -806,7 +792,7 @@
                                     <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter14.html#T_getCollectionLoCNameS_processCollection.xsl" target="_self" title="No namespace" onclick="updPT('processCollection.xsl')"><span class="nRf">getCollectionLoCName</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC4.html#T_getCollectionLoCNameS_processCollection.xsl" target="_self" title="No namespace" onclick="updPT('processCollection.xsl')"><span class="nRf">getCollectionLoCName</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -845,7 +831,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -918,7 +904,7 @@
                                     <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_directLOCSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSearch</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_directLOCSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSearch</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -952,7 +938,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -1029,7 +1015,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter19.html#F_splitParseValidateS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>splitParseValidate (</span><span class="fParams">input, separatingToken, validatingString</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC7.html#F_splitParseValidateS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>splitParseValidate (</span><span class="fParams">input, separatingToken, validatingString</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1093,7 +1079,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -1203,7 +1189,7 @@
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter16.html#V_combinedValidatingStringsS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">combinedValidatingStrings</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#V_combinedValidatingStringsS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">combinedValidatingStrings</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1247,7 +1233,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -1350,7 +1336,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter19.html#F_splitParseValidateS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>splitParseValidate (</span><span class="fParams">input, separatingToken, validatingString</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC7.html#F_splitParseValidateS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>splitParseValidate (</span><span class="fParams">input, separatingToken, validatingString</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1414,7 +1400,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -1553,9 +1539,9 @@
                                     <td class="fCol">Templates</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_directLOCSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter16.html#M_assetSubjectchosenURLpasteURLhereS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="mRf">assetSubject[chosenURL = 'paste URL here']</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter16.html#M_tableS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="mRf">table</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_directLOCSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSearch</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#M_assetSubjectchosenURLpasteURLhereS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="mRf">assetSubject[chosenURL = 'paste URL here']</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#M_tableS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="mRf">table</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1575,7 +1561,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter19.html#F_CapitalizeS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>Capitalize (</span><span class="fParams">textToCapitalize, numberOflettersToCapitalize</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC7.html#F_CapitalizeS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>Capitalize (</span><span class="fParams">textToCapitalize, numberOflettersToCapitalize</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1616,7 +1602,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -1689,9 +1675,9 @@
                                     <td class="fCol">Templates</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_directLOCSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter16.html#M_assetSubjectchosenURLpasteURLhereS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="mRf">assetSubject[chosenURL = 'paste URL here']</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter16.html#M_tableS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="mRf">table</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_directLOCSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSearch</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#M_assetSubjectchosenURLpasteURLhereS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="mRf">assetSubject[chosenURL = 'paste URL here']</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#M_tableS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="mRf">table</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1711,8 +1697,8 @@
                                     <td class="fCol">Functions</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter19.html#F_CapitalizeS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>Capitalize (</span><span class="fParams">textToCapitalize, numberOflettersToCapitalize</span><span>)</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter19.html#F_trimFinalPeriodS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>trimFinalPeriod (</span><span class="fParams">text</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC7.html#F_CapitalizeS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>Capitalize (</span><span class="fParams">textToCapitalize, numberOflettersToCapitalize</span><span>)</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC7.html#F_trimFinalPeriodS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>trimFinalPeriod (</span><span class="fParams">text</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1753,7 +1739,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -1826,7 +1812,7 @@
                                     <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_nameInNameTitleS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">nameInNameTitle</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_nameInNameTitleS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">nameInNameTitle</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1843,19 +1829,19 @@
                            <div id="refs_T_directLOCSearchS_processLoCURL.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
-                                    <td class="fCol">Parameters</td>
+                                    <td class="fCol">Parameter</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter20.html#P_separatingTokenS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">separatingToken</a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter20.html#P_separatingTokenLongS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">separatingTokenLong</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC4.html#P_separatingTokenS_processCollection.xsl" target="_self" title="No namespace" onclick="updPT('processCollection.xsl')">separatingToken</a></div>
                                        </div>
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td class="fCol">Variable</td>
+                                    <td class="fCol">Variables</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter16.html#V_combinedValidatingStringsS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">combinedValidatingStrings</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#V_combinedValidatingStringsS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">combinedValidatingStrings</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#V_separatingTokenLongS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">separatingTokenLong</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1863,9 +1849,9 @@
                                     <td class="fCol">Functions</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter19.html#F_CapitalizeS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>Capitalize (</span><span class="fParams">textToCapitalize, numberOflettersToCapitalize</span><span>)</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter19.html#F_splitParseValidateS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>splitParseValidate (</span><span class="fParams">input, separatingToken, validatingString</span><span>)</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter19.html#F_trimFinalPeriodS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>trimFinalPeriod (</span><span class="fParams">text</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC7.html#F_CapitalizeS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>Capitalize (</span><span class="fParams">textToCapitalize, numberOflettersToCapitalize</span><span>)</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC7.html#F_splitParseValidateS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>splitParseValidate (</span><span class="fParams">input, separatingToken, validatingString</span><span>)</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC7.html#F_trimFinalPeriodS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>trimFinalPeriod (</span><span class="fParams">text</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1873,8 +1859,8 @@
                                     <td class="fCol">Templates</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_directLOCNameSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCNameSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_directLOCSubjectSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSubjectSearch</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_directLOCNameSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCNameSearch</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_directLOCSubjectSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSubjectSearch</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1925,7 +1911,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2020,8 +2006,8 @@
                                     <td class="fCol">Templates</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter16.html#M_assetSubjectchosenURLpasteURLhereS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="mRf">assetSubject[chosenURL = 'paste URL here']</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter16.html#M_tableS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="mRf">table</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#M_assetSubjectchosenURLpasteURLhereS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="mRf">assetSubject[chosenURL = 'paste URL here']</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#M_tableS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="mRf">table</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2041,7 +2027,7 @@
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter19.html#V_validatingKeywordStringS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">validatingKeywordString</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#V_validatingKeywordStringS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">validatingKeywordString</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2049,7 +2035,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter19.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC7.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2136,7 +2122,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2261,8 +2247,8 @@
                                     <td class="fCol">Templates</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter16.html#M_assetSubjectchosenURLpasteURLhereS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="mRf">assetSubject[chosenURL = 'paste URL here']</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter16.html#M_tableS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="mRf">table</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#M_assetSubjectchosenURLpasteURLhereS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="mRf">assetSubject[chosenURL = 'paste URL here']</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#M_tableS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="mRf">table</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2282,7 +2268,7 @@
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter19.html#V_validatingNameStringS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">validatingNameString</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#V_validatingNameStringS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">validatingNameString</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2290,7 +2276,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter19.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC7.html#F_ASCIIFierS_utilities.xsl" target="_self" title="https://www.ecma-international.org/publications/standards/Ecma-094.htm" onclick="updPT('utilities.xsl')"><span>ASCIIFier (</span><span class="fParams">string1</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2377,7 +2363,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2506,7 +2492,7 @@
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter16.html#V_combinedValidatingStringsS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">combinedValidatingStrings</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#V_combinedValidatingStringsS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">combinedValidatingStrings</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2514,7 +2500,7 @@
                                     <td class="fCol">Function</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter19.html#F_CapitalizeS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>Capitalize (</span><span class="fParams">textToCapitalize, numberOflettersToCapitalize</span><span>)</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC7.html#F_CapitalizeS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>Capitalize (</span><span class="fParams">textToCapitalize, numberOflettersToCapitalize</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2606,7 +2592,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2711,7 +2697,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2792,7 +2778,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2864,10 +2850,10 @@
                                     <td class="fCol">Templates</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_directLOCNameSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCNameSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_directLOCSubjectSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSubjectSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_wideLOCNameSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">wideLOCNameSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_wideLOCSubjectSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">wideLOCSubjectSearch</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_directLOCNameSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCNameSearch</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_directLOCSubjectSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSubjectSearch</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_wideLOCNameSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">wideLOCNameSearch</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_wideLOCSubjectSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">wideLOCSubjectSearch</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -2877,7 +2863,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -2997,17 +2983,17 @@
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_M_pma_xml_exportS_processLoCURL.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_M_pma_xml_exportS_processLoCURL.xsl');" class="control" /></div>
+                           <div class="flL">Supersedes</div>
+                           <div class="flR"><input id="bt_sps_M_pma_xml_exportS_processLoCURL.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_M_pma_xml_exportS_processLoCURL.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="ovr_M_pma_xml_exportS_processLoCURL.xsl" style="display:block">
+                           <div id="sps_M_pma_xml_exportS_processLoCURL.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
                                     <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter20.html#M_pma_xml_exportS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="mRf">pma_xml_export</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC2.html#M_pma_xml_exportS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="mRf">pma_xml_export</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -3017,7 +3003,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -3088,10 +3074,10 @@
                                     <td class="fCol">Templates</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_directLOCNameSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCNameSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_directLOCSubjectSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSubjectSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_wideLOCNameSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">wideLOCNameSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_wideLOCSubjectSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">wideLOCSubjectSearch</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_directLOCNameSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCNameSearch</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_directLOCSubjectSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSubjectSearch</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_wideLOCNameSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">wideLOCNameSearch</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_wideLOCSubjectSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">wideLOCSubjectSearch</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -3101,7 +3087,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>14</td>
+                        <td>8</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -3220,6 +3206,26 @@
                      </tr>
                      <tr>
                         <td class="fCol">
+                           <div class="flL">Supersedes</div>
+                           <div class="flR"><input id="bt_sps_V_separatingTokenS_processLoCURL.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_separatingTokenS_processLoCURL.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="sps_V_separatingTokenS_processLoCURL.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Variable</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="seriesQC5.html#V_separatingTokenS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')">separatingToken</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
                            <div class="flL">Overriding</div>
                            <div class="flR"><input id="bt_ovr_V_separatingTokenS_processLoCURL.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_separatingTokenS_processLoCURL.xsl');" class="control" /></div>
                         </td>
@@ -3230,7 +3236,7 @@
                                     <td class="fCol">Parameter</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter14.html#P_separatingTokenS_processCollection.xsl" target="_self" title="No namespace" onclick="updPT('processCollection.xsl')">separatingToken</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC4.html#P_separatingTokenS_processCollection.xsl" target="_self" title="No namespace" onclick="updPT('processCollection.xsl')">separatingToken</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -3286,6 +3292,31 @@
                      </tr>
                      <tr>
                         <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_V_separatingTokenLongS_processLoCURL.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_V_separatingTokenLongS_processLoCURL.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_V_separatingTokenLongS_processLoCURL.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Templates</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_LOCOccupationsAndFieldsOfActivityS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">LOCOccupationsAndFieldsOfActivity</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC1.html#T_defaultValuesWarningS_cavafyStrictQC.xsl" target="_self" title="No namespace" onclick="updPT('cavafyStrictQC.xsl')"><span class="nRf">defaultValuesWarning</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_directLOCSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSearch</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC2.html#T_findCavafyXMLsS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="nRf">findCavafyXMLs</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC5.html#T_mergeDataS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')"><span class="nRf">mergeData</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC2.html#M_pma_xml_exportS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="mRf">pma_xml_export</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
                            <div class="flL">References</div>
                            <div class="flR"><input id="bt_refs_V_separatingTokenLongS_processLoCURL.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_V_separatingTokenLongS_processLoCURL.xsl');" class="control" /></div>
                         </td>
@@ -3296,7 +3327,7 @@
                                     <td class="fCol">Parameter</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter20.html#P_separatingTokenS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">separatingToken</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC4.html#P_separatingTokenS_processCollection.xsl" target="_self" title="No namespace" onclick="updPT('processCollection.xsl')">separatingToken</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -3306,17 +3337,17 @@
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_V_separatingTokenLongS_processLoCURL.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_separatingTokenLongS_processLoCURL.xsl');" class="control" /></div>
+                           <div class="flL">Supersedes</div>
+                           <div class="flR"><input id="bt_sps_V_separatingTokenLongS_processLoCURL.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_separatingTokenLongS_processLoCURL.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="ovr_V_separatingTokenLongS_processLoCURL.xsl" style="display:block">
+                           <div id="sps_V_separatingTokenLongS_processLoCURL.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter1.html#V_separatingTokenLongS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')">separatingTokenLong</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC5.html#V_separatingTokenLongS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')">separatingTokenLong</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -3372,17 +3403,46 @@
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_V_validatingKeywordStringS_processLoCURL.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_validatingKeywordStringS_processLoCURL.xsl');" class="control" /></div>
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_V_validatingKeywordStringS_processLoCURL.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_V_validatingKeywordStringS_processLoCURL.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="ovr_V_validatingKeywordStringS_processLoCURL.xsl" style="display:block">
+                           <div id="uB_V_validatingKeywordStringS_processLoCURL.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Templates</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_LOCOccupationsAndFieldsOfActivityS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">LOCOccupationsAndFieldsOfActivity</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_wideLOCSubjectSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">wideLOCSubjectSearch</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">Variable</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="seriesQC8.html#V_combinedValidatingStringsS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">combinedValidatingStrings</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Supersedes</div>
+                           <div class="flR"><input id="bt_sps_V_validatingKeywordStringS_processLoCURL.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_validatingKeywordStringS_processLoCURL.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="sps_V_validatingKeywordStringS_processLoCURL.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter1.html#V_validatingKeywordStringS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')">validatingKeywordString</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC7.html#V_validatingKeywordStringS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">validatingKeywordString</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -3438,17 +3498,46 @@
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_V_validatingNameStringS_processLoCURL.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_validatingNameStringS_processLoCURL.xsl');" class="control" /></div>
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_V_validatingNameStringS_processLoCURL.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_V_validatingNameStringS_processLoCURL.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="ovr_V_validatingNameStringS_processLoCURL.xsl" style="display:block">
+                           <div id="uB_V_validatingNameStringS_processLoCURL.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Templates</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_LOCOccupationsAndFieldsOfActivityS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">LOCOccupationsAndFieldsOfActivity</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_wideLOCNameSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">wideLOCNameSearch</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">Variable</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="seriesQC8.html#V_combinedValidatingStringsS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">combinedValidatingStrings</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Supersedes</div>
+                           <div class="flR"><input id="bt_sps_V_validatingNameStringS_processLoCURL.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_validatingNameStringS_processLoCURL.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="sps_V_validatingNameStringS_processLoCURL.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter1.html#V_validatingNameStringS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')">validatingNameString</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC7.html#V_validatingNameStringS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">validatingNameString</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -3514,10 +3603,9 @@
                                     <td class="fCol">Templates</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_LOCSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">LOCSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_broaderSubjectsS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">broaderSubjects</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter16.html#T_directLOCSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSearch</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter1.html#T_newExifS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')"><span class="nRf">newExif</span></a></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_LOCSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">LOCSearch</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_broaderSubjectsS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">broaderSubjects</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#T_directLOCSearchS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')"><span class="nRf">directLOCSearch</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -3537,8 +3625,8 @@
                                     <td class="fCol">Variables</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter19.html#V_validatingKeywordStringS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">validatingKeywordString</a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter19.html#V_validatingNameStringS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">validatingNameString</a></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#V_validatingKeywordStringS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">validatingKeywordString</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="seriesQC8.html#V_validatingNameStringS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">validatingNameString</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -3611,10 +3699,12 @@
                                  <thead>
                                     <tr>
                                        <th>method</th>
+                                       <th>encoding</th>
                                        <th>indent</th>
                                     </tr>
                                  </thead>
                                  <tr>
+                                    <td></td>
                                     <td></td>
                                     <td>yes</td>
                                  </tr>
