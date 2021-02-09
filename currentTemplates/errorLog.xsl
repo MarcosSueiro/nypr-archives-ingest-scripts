@@ -71,7 +71,7 @@ and output an html error doc -->
         </xsl:variable>
         <xsl:variable name="errorCount" select="
             count(
-            $completeLog//result[//*[local-name() = 'error']]
+            $completeLog//result[.//*[local-name() = 'error']]
             )"/>
         <xsl:variable name="warningCount" select="
             count(
@@ -100,7 +100,7 @@ and output an html error doc -->
             <xsl:for-each
                 select="
                 $completeLog//result
-                [//*[local-name() = 'error']]">
+                [.//*[local-name() = 'error']]">
                 <xsl:value-of select="@filename"/>
                 <br/>
             </xsl:for-each>                
@@ -113,8 +113,7 @@ and output an html error doc -->
             <br/>
             <xsl:for-each
                 select="
-                $completeLog
-                //result
+                $completeLog//result
                 [.//*[local-name() = 'warning']]">
                 <xsl:value-of select="./@filename"/>
                 <br/>

@@ -50,7 +50,7 @@
             select="
                 $collectionConcordance/collections
                 /collection[collAcro = $collectionAcronym]/*"/>
-        <xsl:variable name="collectionLocInfo">
+        <xsl:variable name="collectionLOCData">
             <xsl:apply-templates
                 select="
                     $collectionConcordance/collections
@@ -58,6 +58,7 @@
                     /collURL[contains(., 'id.loc.gov')]"
                 mode="getLOCData"/>
         </xsl:variable>
+        
         <collectionInfo>
             <xsl:attribute name="collectionAcronym" select="$collectionAcronym"/>
             <!-- Collection not Found -->
@@ -74,11 +75,11 @@
             <collLOCName>
                 <xsl:value-of
                     select="
-                        $collectionLocInfo/rdf:RDF
+                        $collectionLOCData/rdf:RDF
                         /madsrdf:*/madsrdf:authoritativeLabel"
                 />
             </collLOCName>
-            <xsl:copy-of select="$collectionLocInfo"/>
+            <xsl:copy-of select="$collectionLOCData"/>
         </collectionInfo>
     </xsl:template>
 

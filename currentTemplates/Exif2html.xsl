@@ -14,6 +14,7 @@
     xmlns:RIFF="http://ns.exiftool.ca/RIFF/RIFF/1.0/"    
     xmlns:xi="http://www.w3.org/2001/XInclude"    
     xmlns:madsrdf="http://www.loc.gov/mads/rdf/v1#" 
+    xmlns:ASCII="https://www.ecma-international.org/publications/standards/Ecma-094.htm"
     exclude-result-prefixes="#all">
 
     <xsl:import href="cavafySearch.xsl"/>
@@ -149,12 +150,12 @@
         <xsl:if test="not(RIFF:Source = preceding::RIFF:Source)">
             <h3 style="color:red; ">
                 <a href="{RIFF:Source}">
-                    <xsl:value-of select="RIFF:Title"/>
+                    <xsl:value-of select="ASCII:ASCIIFier(RIFF:Title)"/>
                 </a>
             </h3>
             
             <div style="text-indent:50px; font-family:Open Sans; font-weight:book; color:#000000; margin-top:-15px;">
-                <xsl:value-of select="RIFF:Subject"/>
+                <xsl:value-of select="ASCII:ASCIIFier(RIFF:Subject)"/>
                 <div style="text-indent:50px">
                     <xsl:choose>
                         <xsl:when test="
@@ -181,7 +182,6 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </div>
-
                
                 <xsl:variable name="parsedArtists" select="
                     analyze-string(
@@ -194,7 +194,7 @@
                     )
                     /fn:non-match"/>
                 <xsl:variable name="parsedPersons" select="
-                    $parsedArtists|$parsedCommissioned"/>
+                    $parsedArtists, $parsedCommissioned"/>
                 <xsl:variable name="distinctPersons" select="
                     distinct-values(
                     $parsedPersons

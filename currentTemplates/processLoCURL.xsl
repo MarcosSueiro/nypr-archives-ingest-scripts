@@ -33,7 +33,7 @@
     xmlns:ASCII="https://www.ecma-international.org/publications/standards/Ecma-094.htm"
     exclude-result-prefixes="#all">
 
-    <xsl:import href="manageDuplicates.xsl"/>    
+    <xsl:import href="manageDuplicates.xsl"/>
 
     <xsl:mode on-no-match="deep-skip"/>
 
@@ -48,25 +48,85 @@
         select="
             string-join(($validatingKeywordString, $validatingNameString), '|')"/>
 
+    <xsl:template match="rdf:RDF">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+    <xsl:template match="rdf:Description">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+    <xsl:template match="RIFF:Keywords">
+        <xsl:param name="keywords" select="."/>
+        <xsl:copy-of select="WNYC:splitParseValidate($keywords, $separatingToken, 'id.loc.gov')//valid/WNYC:getLOCData(.)"/>
+    </xsl:template>
+    
+    <xsl:template match="RIFF:Artist">
+        <xsl:param name="artist" select="."/>
+        <xsl:copy-of select="WNYC:splitParseValidate($artist, $separatingToken, 'id.loc.gov')//valid/WNYC:getLOCData(.)"/>
+    </xsl:template>
+    
+    <xsl:template name="generateLOCRDF" match="node()[matches(., 'id.loc.gov')]" mode="generateLOCRDF">
+        <!-- Normalize LOCURLs with proper .rdf extension, etc. -->
+        <xsl:param name="LOCURL" select="."/>
+        <xsl:message select="concat(
+            'Generate LoCRDF from ', $LOCURL
+            )"/>
+        <xsl:variable name="LOCRDF">
+            <!-- Create a proper rdf in with all the proper elements -->
+            <!-- Strip http protocol
+            in case it is entered as https -->
+            <xsl:variable name="nothttp">
+                <xsl:value-of select="
+                    analyze-string($LOCURL, '^https*://')/fn:non-match"/>
+            </xsl:variable>
+            <!-- Add plain ole http -->            
+            <xsl:value-of select="
+                'http://'"/>
+            <!-- Strip extension -->
+            <xsl:value-of select="
+                WNYC:substring-before-last-regex(
+                $nothttp, '\.\w{3,4}$'
+                )"/> 
+            <!-- Add .rdf extension -->
+            <xsl:value-of select="'.rdf'"/>
+        </xsl:variable>
+        <xsl:message select="'LOCRDF:', $LOCRDF"/>
+        <xsl:copy-of select="$LOCRDF"/>
+    </xsl:template>
+
+    <xsl:function name="WNYC:generateLOCRDF">
+        <xsl:param name="LOCURL"/>
+        <xsl:call-template name="generateLOCRDF">
+            <xsl:with-param name="LOCURL" select="$LOCURL"/>
+        </xsl:call-template>
+    </xsl:function>
+
     <xsl:template name="getLOCData" match="
-            .[contains(., 'id.loc.gov')]"
+            node()[matches(., 'id.loc.gov')]"
         mode="getLOCData">
         <!-- Get data from an LoC URL -->
         <xsl:param name="LOCURL" select="."/>
-        <xsl:param name="LOCRDF"
-            select="
-                if (ends-with($LOCURL, '.rdf'))
-                then
-                    $LOCURL
-                else
-                    if (ends-with($LOCURL, '.html'))
-                    then
-                        concat(substring-before($LOCURL, '.html'), '.rdf')
-                    else
-                        concat($LOCURL, '.rdf')"/>
-        <xsl:message select="concat('Get LOC Data for ', $LOCURL)"/>
-        <xsl:copy-of select="doc($LOCRDF)"/>
+        <xsl:message select="concat('Get LOC Data for ', $LOCURL)"/>        
+        <xsl:variable name="LOCRDF" select="WNYC:generateLOCRDF($LOCURL)"/>
+        <xsl:variable name="LOCRDFAvailable" select="fn:doc-available($LOCRDF)"/>        
+        
+        <xsl:if test="not($LOCRDFAvailable)">
+            <rdf:RDF>
+            <error errorType='LOCSH Not found'>
+                <xsl:value-of select="$LOCURL, 'cannot be found online'"/>
+            </error>
+            </rdf:RDF>
+        </xsl:if>
+        <xsl:copy-of select="doc($LOCRDF)[$LOCRDFAvailable]"/>
     </xsl:template>
+    
+    <xsl:function name="WNYC:getLOCData">
+        <xsl:param name="LOCURL"/>
+        <xsl:call-template name="getLOCData">
+            <xsl:with-param name="LOCURL" select="$LOCURL"/>
+        </xsl:call-template>
+    </xsl:function>
 
     <xsl:template name="LOCOccupationsAndFieldsOfActivity" match="
             RIFF:Artist"
@@ -85,8 +145,7 @@
         <xsl:param name="validatingNameString" select="$validatingNameString"/>
         <xsl:variable name="occupationsAndFieldsOfActivity">
             <xsl:for-each select="$LOCURLs/valid">
-                <xsl:variable name="LOCRDF" select="concat(., '.rdf')"/>
-                <xsl:variable name="LOCData" select="doc($LOCRDF)"/>
+                <xsl:variable name="LOCData" select="WNYC:getLOCData(.)"/>
                 <xsl:copy-of select="$artists"/>
                 <!--Find occupations -->
                 <occupations>
@@ -121,8 +180,7 @@
     </xsl:template>
 
     <xsl:template name="locLabel" match="
-            .[contains(., 'id.loc.gov/')]"
-        mode="locLabel">
+            .[contains(., 'id.loc.gov/')]" mode="locLabel">
         <!-- Get LoC name from URL -->
         <xsl:param name="url" select="."/>
         <xsl:param name="locData">
@@ -138,24 +196,27 @@
     </xsl:template>
 
     <xsl:template name="nameInNameTitle" match="
-            madsrdf:NameTitle" mode="nameInNameTitle">
+            madsrdf:NameTitle"
+        mode="nameInNameTitle">
         <!-- Find the name in name/title LoC Entries -->
         <xsl:param name="input" select="."/>
-        <xsl:message select="concat('Extract name in nameTitle ', @rdf:about)"/>
+        <xsl:message select="
+            concat('Extract name in nameTitle ', @rdf:about)"/>
         <xsl:variable name="nameInNameTitle"
             select="
                 madsrdf:componentList
                 /(madsrdf:PersonalName | madsrdf:CorporateName)
                 /madsrdf:authoritativeLabel"/>
-        <xsl:message select="
-            concat(
-            'Find LoC entry for ', 
-            $nameInNameTitle
-            )"/>
+        <xsl:message
+            select="
+                concat(
+                'Find LoC entry for ',
+                $nameInNameTitle
+                )"/>
         <xsl:variable name="nameLoCEntry">
-            <xsl:call-template name="directLOCSearch">
-                <xsl:with-param name="input" select="
-                    $nameInNameTitle"/>
+            <xsl:call-template name="directLOCNameSearch">
+                <xsl:with-param name="termToSearch" select="
+                        $nameInNameTitle"/>
                 <xsl:with-param name="mustFind" select="true()"/>
             </xsl:call-template>
         </xsl:variable>
@@ -167,6 +228,54 @@
                 /rdf:RDF
                 "
         />
+    </xsl:template>
+    
+    <xsl:template name="placeInSubjectPlace"
+        match="
+            madsrdf:ComplexSubject
+            [madsrdf:componentList/madsrdf:Geographic]"
+        mode="placeInSubjectPlace">
+        <!-- Find the place in subject-place complex LoC Entries -->
+        <xsl:param name="input" select="."/>
+        <xsl:message
+            select="
+                concat(
+                'Extract place in subject-place complex subject ',
+                $input/madsrdf:authoritativeLabel[@xml:lang = 'en'])"/>
+        <xsl:for-each
+            select="
+                $input//
+                madsrdf:componentList/
+                madsrdf:Geographic">
+            <xsl:variable name="placeInSubjectPlace" select="
+                madsrdf:authoritativeLabel"/>
+            <xsl:message
+                select="
+                    concat
+                    (
+                    'Find LoC entry for place named ',
+                    $placeInSubjectPlace
+                    )"/>
+            <xsl:variable name="placeLoCEntry">
+                <xsl:call-template name="directLOCNameSearch">
+                    <xsl:with-param name="termToSearch"
+                        select="
+                            $placeInSubjectPlace"/>
+                </xsl:call-template>
+            </xsl:variable>
+            <xsl:copy-of
+                select="
+                    $placeLoCEntry/
+                    rdf:RDF
+                    "/>
+            <xsl:message
+                select="
+                    concat(
+                    'Found rdf ',
+                    $placeLoCEntry/rdf:RDF/madsrdf:Geographic/@rdf:about,
+                    ' for place ', $placeInSubjectPlace)"
+            />
+        </xsl:for-each>
     </xsl:template>
 
     <xsl:template match="RIFF:Keywords" mode="
@@ -223,11 +332,19 @@
 
         <xsl:copy-of select="$exactResultURL"/>-->
 
-        <xsl:variable name="allBroaderTopicsActivitiesOccupationsComponents">
+        <xsl:variable name="
+            allBroaderTopicsActivitiesOccupationsComponents">
             <allTopics>
-                <xsl:apply-templates select="$subjectsToProcessValid" mode="broaderSubjects"/>
+                <xsl:apply-templates select="
+                    $subjectsToProcessValid" mode="broaderSubjects"/>
             </allTopics>
         </xsl:variable>
+        <xsl:message>
+            <xsl:value-of select="'All broader topics: '"/>
+            <xsl:value-of select="
+                $allBroaderTopicsActivitiesOccupationsComponents/
+                allTopics/madsrdf:*" separator="{$separatingTokenLong}"/>
+        </xsl:message>
         <xsl:variable name="distinctAllTopics">
             <xsl:for-each-group
                 select="
@@ -238,10 +355,11 @@
             </xsl:for-each-group>
         </xsl:variable>
         <xsl:copy-of select="$distinctAllTopics"/>
+        
     </xsl:template>
 
     <xsl:template name="broaderSubjects" match="
-        ." mode="broaderSubjects"
+            ." mode="broaderSubjects"
         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
         <!-- 
             Take a keyword with an accepted URL 
@@ -259,46 +377,47 @@
             </madsrdf:Topic>
             -->
         <xsl:param name="LOCURL" select="."/>
-        <xsl:param name="LOCRDF" select="concat($LOCURL, '.rdf')"/>
-        <xsl:param name="LOCData" select="doc($LOCRDF)"/>
-        <xsl:message select="
-            'Find broader topics for', 
-            string(
+        <xsl:param name="LOCData" select="WNYC:getLOCData($LOCURL)"/>
+        <xsl:param name="LOCURI" select="$LOCData/rdf:RDF
+            /madsrdf:*/@rdf:about"/>
+        <xsl:param name="LOCLabel" select="
             $LOCData/rdf:RDF/
             madsrdf:*/
-            madsrdf:authoritativeLabel)"/>
+            madsrdf:authoritativeLabel[@xml:lang='en' or not(@xml:lang)]"/> 
+        <xsl:param name="broaderTopics" select="
+            $LOCData
+            /rdf:RDF/madsrdf:*
+            /madsrdf:hasBroaderAuthority
+            /madsrdf:Topic"/>
         <xsl:message
-            select="
-                count(
-                $LOCData/rdf:RDF/madsrdf:*
-                /madsrdf:hasBroaderAuthority
-                /madsrdf:Topic
+            select="concat(
+                'Find broader topics for ',
+                $LOCLabel)"/>
+        <xsl:message
+            select="concat(
+                count($broaderTopics
                 ),
-                'broader topic(s) found for',
-                string($LOCData/rdf:RDF/madsrdf:*/madsrdf:authoritativeLabel)"/>
+                ' broader topic(s) found for ',                
+                $LOCLabel)"/>
 
-        <!-- We only accept simple names and subjects -->
-
+        <!-- Copy the original -->
         <xsl:copy select="
                 $LOCData/rdf:RDF/madsrdf:*">
-            <xsl:copy-of select="
-                $LOCData/rdf:RDF
-                /madsrdf:*/@rdf:about"/>
-            <xsl:copy-of select="
-                $LOCData/rdf:RDF
-                /madsrdf:*/madsrdf:authoritativeLabel"/>
+            <xsl:copy-of
+                select="$LOCURI"/>
+            <xsl:copy-of
+                select="$LOCLabel"
+            />
         </xsl:copy>
 
-        <!--Recursively process broader topics -->
+        <!-- Recursively process broader topics -->
         <xsl:apply-templates
             select="
-                $LOCData
-                /rdf:RDF/madsrdf:*
-                /madsrdf:hasBroaderAuthority
-                /madsrdf:Topic
+                $broaderTopics
                 /@rdf:about"
             mode="broaderSubjects"/>
-        <!--Recursively process component topics -->
+        <!-- Recursively process component topics 
+        with a valid URI -->
         <xsl:apply-templates
             select="
                 $LOCData
@@ -308,7 +427,7 @@
                 /@rdf:about
                 [matches(., $combinedValidatingStrings)]"
             mode="broaderSubjects"/>
-        <!--Recursively process fields of activity -->
+        <!-- Recursively process fields of activity -->
         <xsl:apply-templates
             select="
                 $LOCData
@@ -319,7 +438,7 @@
                 /skos:Concept/@rdf:about
                 "
             mode="broaderSubjects"/>
-        <!--Recursively process occupations -->
+        <!-- Recursively process occupations -->
         <xsl:apply-templates
             select="
                 $LOCData
@@ -338,74 +457,100 @@
         </xsl:variable>
         <xsl:apply-templates
             select="
-                $nameInNameTitle[. != '']
-                /rdf:RDF/madsrdf:*
-                /@rdf:about"
+            $nameInNameTitle[. != '']
+            /rdf:RDF/madsrdf:*
+            /@rdf:about"
+            mode="broaderSubjects"/>
+        <!-- Recursively process geographic part 
+            of subject-place complex subject -->
+        <xsl:variable name="placeInSubjectPlace">            
+            <xsl:apply-templates
+                select="
+                $LOCData/rdf:RDF/
+                madsrdf:ComplexSubject
+                [madsrdf:componentList/madsrdf:Geographic]"
+                mode="placeInSubjectPlace"/>            
+        </xsl:variable>
+        <xsl:message select="count($LOCData/rdf:RDF/
+            madsrdf:ComplexSubject/
+            madsrdf:componentList/madsrdf:Geographic), ' geographic place(s) in ', $LOCLabel">
+            <xsl:copy-of select="$placeInSubjectPlace"/>
+        </xsl:message>
+        
+        <xsl:apply-templates
+            select="
+            $placeInSubjectPlace/rdf:RDF/madsrdf:Geographic/
+            @rdf:about"
             mode="broaderSubjects"/>
     </xsl:template>
 
     <xsl:template name="narrowSubjects" match="
-        ." mode="narrowSubjects" expand-text="yes">
+            ." mode="narrowSubjects"
+        expand-text="yes">
         <!-- Accept a bunch of keywords; 
             parse out only the narrowest
-            or most specific.
-        
+            or most specific.        
         This template is the opposite of "broaderSubjects"-->
         <xsl:param name="subjectsProcessed"/>
         <xsl:param name="subjectsToProcess" select="."/>
         <xsl:param name="separatingToken" select="
-            $separatingToken"/>
-        <xsl:param name="separatingTokenLong" select="
-            concat(' ', $separatingToken, ' ')"/>
+                $separatingToken"/>
+        <xsl:param name="separatingTokenLong"
+            select="
+                concat(' ', $separatingToken, ' ')"/>
         <xsl:param name="validatingKeywordString" select="
-            $validatingKeywordString"/>
+                $validatingKeywordString"/>
         <xsl:param name="validatingNameString" select="
-            $validatingNameString"/>
-        <xsl:param name="combinedValidatingStrings" select="
-            $combinedValidatingStrings"/>
-        <xsl:message select="
-            'Find narrowest subjects for: ', $subjectsToProcess, 
-            ' matching validating strings ', $combinedValidatingStrings"/>
+                $validatingNameString"/>
+        <xsl:param name="combinedValidatingStrings"
+            select="
+                $combinedValidatingStrings"/>
+        <xsl:message
+            select="
+                'Find narrowest subjects for: ', $subjectsToProcess,
+                ' matching validating strings ', $combinedValidatingStrings"/>
         <xsl:variable name="subjectsToProcessParsed"
             select="
-            WNYC:splitParseValidate(
-            $subjectsToProcess, 
-            $separatingToken, 
-            $combinedValidatingStrings
-            )"/>
-        <xsl:message select="
-            'Subjects parsed:', 
-            $subjectsToProcessParsed"/>
+                WNYC:splitParseValidate(
+                $subjectsToProcess,
+                $separatingToken,
+                $combinedValidatingStrings
+                )"/>
+        <xsl:message
+            select="
+                'Subjects parsed:',
+                $subjectsToProcessParsed"/>
         <xsl:variable name="subjectsToProcessValid"
             select="
                 $subjectsToProcessParsed/valid"/>
-        <xsl:message select="
-            'Valid subjects to process:', 
-            string-join($subjectsToProcessValid, $separatingTokenLong)"/>
+        <xsl:message
+            select="
+                'Valid subjects to process:',
+                string-join($subjectsToProcessValid, $separatingTokenLong)"/>
         <xsl:variable name="subjectsToProcessInvalid"
             select="
                 $subjectsToProcessParsed/invalid"/>
-        <xsl:message select="
-            'Invalid subjects to process:', 
-            $subjectsToProcessInvalid"/>
+        <xsl:message
+            select="
+                'Invalid subjects to process:',
+                $subjectsToProcessInvalid"/>
         <xsl:variable name="validComponents">
-            <xsl:for-each select="$subjectsToProcessValid">                
-                <xsl:variable name="LOCURL" select="."/>
-                <xsl:variable name="LOCRDF" select="
-                    concat($LOCURL, '.rdf')"/>
-                <xsl:variable name="LOCData" select="
-                    document($LOCRDF)"/>
-                <xsl:variable name="LOCLabel" select="
-                    $LOCData
-                    /rdf:RDF
-                    /madsrdf:*
-                    /madsrdf:authoritativeLabel
-                    [@xml:lang='en' or not(@xml:lang)]"/>
-                <xsl:message select="
-                    concat('Extract components or names from ', 
-                    $LOCLabel)"/>
+            <xsl:for-each select="$subjectsToProcessValid">
+                <xsl:variable name="LOCURL" select="."/>                
+                <xsl:variable name="LOCData" select="WNYC:getLOCData($LOCURL)"/>
+                <xsl:variable name="LOCLabel"
+                    select="
+                        $LOCData
+                        /rdf:RDF
+                        /madsrdf:*
+                        /madsrdf:authoritativeLabel
+                        [@xml:lang = 'en' or not(@xml:lang)]"/>
+                <xsl:message
+                    select="
+                        concat('Extract components or names from ',
+                        $LOCLabel)"/>
                 <!-- Extract name from name/title entry -->
-                
+
                 <xsl:variable name="nameInNameTitle">
                     <xsl:apply-templates
                         select="
@@ -413,66 +558,106 @@
                             /madsrdf:NameTitle"
                         mode="nameInNameTitle"/>
                 </xsl:variable>
+
+                <xsl:variable name="nameInNameTitleURL"
+                    select="
+                        $nameInNameTitle
+                        /rdf:RDF/@rdf:about"/>
+                <xsl:variable name="
+                    nameInNameTitleLabel"
+                    select="
+                        $nameInNameTitle
+                        /rdf:RDF
+                        /madsrdf:*
+                        /madsrdf:authoritativeLabel"/>
+                <xsl:message
+                    select="
+                        count($nameInNameTitle/rdf:RDF),
+                        'name in name title ',
+                        $LOCLabel, ': ',
+                        $nameInNameTitleLabel"/>
                 
-                <xsl:variable name="nameInNameTitleURL" select="
-                    $nameInNameTitle
+                <!-- Extract place from subjeect/place complex entry -->
+                
+                <xsl:variable name="placeInSubjectPlace">
+                    <xsl:apply-templates
+                        select="
+                        $LOCData/rdf:RDF
+                        /madsrdf:ComplexSubject
+                        [madsrdf:componentList/madsrdf:Geographic]"
+                        mode="placeInSubjectPlace"/>
+                </xsl:variable>
+                
+                <xsl:variable name="placeInSubjectPlaceURL"
+                    select="
+                    $placeInSubjectPlace[. !='']
                     /rdf:RDF/@rdf:about"/>
                 <xsl:variable name="
-                    nameInNameTitleLabel" select="
-                    $nameInNameTitle
+                    placeInSubjectPlaceLabel"
+                    select="
+                    $placeInSubjectPlace
                     /rdf:RDF
                     /madsrdf:*
                     /madsrdf:authoritativeLabel"/>
-                <xsl:message select="
-                    count($nameInNameTitle/rdf:RDF),
-                    'name in name title ', 
-                    $LOCLabel, ': ',
-                    $nameInNameTitleLabel"/>
-                <!-- Extract component topics -->
-                <xsl:variable name="componentTopics" 
-                        select="
-                            $LOCData/rdf:RDF
-                            /madsrdf:*
-                            /madsrdf:componentList
-                            /madsrdf:*                            
-                            [matches(@rdf:about, $combinedValidatingStrings)]"
-                        />
                 <xsl:message>
                     <xsl:value-of select="
-                        count($componentTopics), 
-                        'component topics in ', 
-                        $LOCLabel, ': ' 
-                        "/>
-                    <xsl:value-of select="
-                        $componentTopics/madsrdf:authoritativeLabel
-                        [@xml:lang='en' or not(@xml:lang)]/normalize-space(.)" separator="
+                        count(
+                        $placeInSubjectPlace/rdf:RDF), 
+                        ' place(s) in subject place topic ',
+                        $LOCLabel, ': '"/>
+                    <xsl:value-of select="$placeInSubjectPlaceLabel" separator="{$separatingTokenLong}"/>
+                </xsl:message>
+                <!-- Extract other component topics' rdfs -->
+                <xsl:variable name="componentTopics"
+                    select="
+                        $LOCData/rdf:RDF
+                        /madsrdf:*
+                        /madsrdf:componentList
+                        /madsrdf:*
+                        [matches(@rdf:about, $combinedValidatingStrings)]"/>
+                <xsl:message>
+                    <xsl:value-of
+                        select="
+                            count($componentTopics),
+                            'component topics in ',
+                            $LOCLabel, ': '
+                            "/>
+                    <xsl:value-of
+                        select="
+                            $componentTopics/madsrdf:authoritativeLabel
+                            [@xml:lang = 'en' or not(@xml:lang)]/normalize-space(.)"
+                        separator="
                         {$separatingTokenLong}"/>
-                </xsl:message> 
+                </xsl:message>
                 <xsl:variable name="allNamesComponentsURLs">
                     <xsl:value-of
-                        select="                            
-                            $nameInNameTitle[. != '']/rdf:RDF/madsrdf:*/@rdf:about | 
+                        select="
+                            $nameInNameTitle[. != '']/rdf:RDF/madsrdf:*/@rdf:about |
                             $componentTopics[. != '']/@rdf:about"
                         separator="{$separatingTokenLong}"/>
                 </xsl:variable>
                 <xsl:message
                     select="
-                    'URLs from names in nameTitles and components in', 
-                    $LOCLabel, ': ', 
-                    $allNamesComponentsURLs"/>
+                        'URLs from names in nameTitles and components in',
+                        $LOCLabel, ': ',
+                        $allNamesComponentsURLs"/>
                 <xsl:copy-of
                     select="
                         WNYC:splitParseValidate(
-                        $allNamesComponentsURLs, 
-                        $separatingToken, 
+                        $allNamesComponentsURLs,
+                        $separatingToken,
                         $combinedValidatingStrings
                         )/valid"
                 />
             </xsl:for-each>
         </xsl:variable>
-        
+
         <xsl:message>
-            <xsl:value-of select="'All valid URLs from names in nameTitles and components from '"/>
+            <xsl:value-of select="
+                'All valid URLs from ', 
+                'names in nameTitles, ', 
+                'places in complex subjects, ', 
+                'and other components from '"/>
             <xsl:value-of select="$subjectsToProcessValid" separator="{$separatingTokenLong}"/>
             <xsl:value-of select="': '"/>
             <xsl:copy-of select="$validComponents"/>
@@ -483,52 +668,56 @@
                 or more specific topic 
                 already included -->
         <xsl:for-each select="
-            $subjectsToProcessValid">
-            <xsl:message select="
-                'Check to see if ', ., 
-                ' is the narrowest topic in this bunch.'"/>
+                $subjectsToProcessValid">
+            <xsl:message
+                select="
+                    'Check to see if ', .,
+                    ' is the narrowest topic in this bunch.'"/>
             <xsl:variable name="LOCURL" select="."/>
-            <xsl:variable name="LOCRDF" select="
-                concat($LOCURL, '.rdf')"/>
-            <xsl:variable name="LOCData" select="
-                doc($LOCRDF)"/>
-            <xsl:variable name="subjectName" select="string(
-                $LOCData
-                /rdf:RDF
-                /madsrdf:*
-                /madsrdf:authoritativeLabel
-                )"/>
-            <xsl:variable name="narrowerTopics" select="
-                $LOCData/rdf:RDF/madsrdf:*
-                /madsrdf:hasNarrowerAuthority"/>
+            <xsl:variable name="LOCRDF" select="WNYC:generateLOCRDF($LOCURL)"/>
+            <xsl:variable name="LOCData" select="WNYC:getLOCData($LOCURL)"/>
+            <xsl:variable name="subjectName"
+                select="
+                    string(
+                    $LOCData
+                    /rdf:RDF
+                    /madsrdf:*
+                    /madsrdf:authoritativeLabel
+                    )"/>
+            <xsl:variable name="narrowerTopics"
+                select="
+                    $LOCData/rdf:RDF/madsrdf:*
+                    /madsrdf:hasNarrowerAuthority"/>
             <xsl:message
                 select="
                     count($narrowerTopics),
                     'narrower topic(s) found for',
                     $subjectName"/>
-            <xsl:message select="
-                'See if narrower topics ', 
-                $narrowerTopics/madsrdf:Authority/@rdf:about, 
-                ' are already in ', $subjectsToProcessValid
-                "/>
+            <xsl:message
+                select="
+                    'See if narrower topics ',
+                    $narrowerTopics/madsrdf:Authority/@rdf:about,
+                    ' are already in ', $subjectsToProcessValid
+                    "/>
             <xsl:message>
-                <xsl:value-of select="
-                    'See if current URL ', $LOCURL, 
-                ' is in one of components ', $validComponents"/>
+                <xsl:value-of
+                    select="
+                        'See if current URL ', $LOCURL,
+                        ' is in one of components ', $validComponents"/>
                 <xsl:value-of select="$LOCURL = $validComponents/valid"/>
             </xsl:message>
             <xsl:copy
                 select="
                     $LOCData/rdf:RDF
-                    /madsrdf:*                    
+                    /madsrdf:*
                     [not(
                     madsrdf:hasNarrowerAuthority
                     /madsrdf:Authority
                     /@rdf:about
                     =
                     $subjectsToProcessValid
-                    )]                    
-                    [not($validComponents/valid =  $LOCURL)]
+                    )]
+                    [not($validComponents/valid = $LOCURL)]
                     ">
                 <xsl:copy-of select="@rdf:about"/>
                 <xsl:copy-of select="madsrdf:authoritativeLabel"/>
@@ -537,9 +726,10 @@
     </xsl:template>
 
     <xsl:template name="directLOCNameSearch" match="
-        ." mode="directLOCNameSearch">
+            ." mode="directLOCNameSearch">
         <!-- Search for an exact name match in LOC
         for a string -->
+        <xsl:param name="mustFind" select="false()"/>
         <xsl:param name="termToSearch" select="."/>
         <xsl:param name="termToSearchClean"
             select="
@@ -558,8 +748,8 @@
         <xsl:message
             select="
                 'Search LoC name authorities directly for the term ',
-                $termToSearchClean, 
-                'using search string', 
+                $termToSearchClean,
+                ' using search string ',
                 $nameSearchString
                 "/>
         <xsl:copy-of
@@ -568,11 +758,11 @@
                 $nameSearchString
                 [unparsed-text-available(.)]
                 )"
-        />
+        />        
     </xsl:template>
 
     <xsl:template name="directLOCSubjectSearch" match="
-        ." mode="directLOCSubjectSearch">
+            ." mode="directLOCSubjectSearch">
         <!-- Search for an exact subject in LOC
         for a string -->
         <xsl:param name="termToSearch" select="."/>
@@ -594,8 +784,8 @@
         <xsl:message
             select="
                 'Search LoC subject headings directly for the term ',
-                $termToSearchClean, 
-                'using search string', 
+                $termToSearchClean,
+                'using search string',
                 $subjectSearchString
                 "/>
         <xsl:copy-of
@@ -608,7 +798,7 @@
     </xsl:template>
 
     <xsl:template name="directLOCSearch" match="
-        ." mode="directLOCSearch">
+            ." mode="directLOCSearch">
         <!-- Search for an exact match in LOC
             for a string
         -->
@@ -625,10 +815,11 @@
                 /invalid"/>
 
         <xsl:message select="
-            concat('Search LoC directly for the terms ', $input)"/>
+                concat('Search LoC directly for the terms ', $input)"/>
         <results>
             <xsl:attribute name="termsToSearch">
-                <xsl:value-of select="$termsToSearch" separator="
+                <xsl:value-of select="$termsToSearch"
+                    separator="
                     {$separatingTokenLong}"/>
             </xsl:attribute>
             <xsl:for-each select="$termsToSearch">
@@ -642,15 +833,17 @@
                 <subject>
                     <xsl:attribute name="searchTerm" select="."/>
                     <xsl:call-template name="directLOCSubjectSearch">
-                        <xsl:with-param name="termToSearchClean" select="
-                            $termToSearchClean"/>
+                        <xsl:with-param name="termToSearchClean"
+                            select="
+                                $termToSearchClean"/>
                     </xsl:call-template>
                 </subject>
                 <name>
                     <xsl:attribute name="searchTerm" select="."/>
                     <xsl:call-template name="directLOCNameSearch">
-                        <xsl:with-param name="termToSearchClean" select="
-                            $termToSearchClean"/>
+                        <xsl:with-param name="termToSearchClean"
+                            select="
+                                $termToSearchClean"/>
                     </xsl:call-template>
                 </name>
             </xsl:for-each>
@@ -679,15 +872,15 @@
         <xsl:param name="mustFind" as="xs:boolean" select="false()"/>
         <xsl:param name="maximumRetrievals" select="5"/>
         <xsl:param name="basicURL" select="
-            'http://lx2.loc.gov:210/'"/>
+                'http://lx2.loc.gov:210/'"/>
         <xsl:param name="database" select="
-            'SAF?version=2.0'"/>
+                'SAF?version=2.0'"/>
         <xsl:param name="operation" select="
             '&amp;operation=searchRetrieve'"/>
         <xsl:param name="fieldToSearch" select="
             '&amp;query=local.subjectTopical='"/>
         <xsl:param name="recordSchema" select="
-            'mads'"/>
+                'mads'"/>
 
         <!-- Build search string -->
         <xsl:variable name="searchString"
@@ -718,9 +911,9 @@
         <xsl:variable name="searchResult" select="document($searchString)"/>
         <xsl:variable name="searchResultTotals"
             select="
-            $searchResult
-            /zs:searchRetrieveResponse
-            /zs:numberOfRecords"/>
+                $searchResult
+                /zs:searchRetrieveResponse
+                /zs:numberOfRecords"/>
         <xsl:message
             select="
                 concat(
@@ -732,9 +925,12 @@
                 <xsl:element name="error">
                     <xsl:attribute name="type" select="'no_search_results'"/>
                     <xsl:attribute name="searchTerm" select="$searchTerm"/>
-                    <xsl:value-of select="$searchResultTotals, 
-                        ' results ',
-                        ' for search term ', $searchTerm"/>
+                    <xsl:value-of
+                        select="
+                            $searchResultTotals,
+                            ' results ',
+                            ' for search term ', $searchTerm"
+                    />
                 </xsl:element>
             </xsl:when>
             <xsl:otherwise>
@@ -747,10 +943,12 @@
                         [count(mads:authority/mads:*) = 1]
                         [mads:authority/mads:topic[@authority = 'lcsh'] = $searchTermURL]
                         "/>
-                <xsl:variable name="exactResultCount" select="
-                    count($exactResult)"/>
-                <xsl:message select="
-                    $exactResultCount, 'exact subject results found'"/>
+                <xsl:variable name="exactResultCount"
+                    select="
+                        count($exactResult)"/>
+                <xsl:message
+                    select="
+                        $exactResultCount, 'exact subject results found'"/>
                 <xsl:variable name="exactResultID"
                     select="
                         $exactResult
@@ -761,13 +959,14 @@
                         if ($exactResultID ne '')
                         then
                             concat(
-                            'http://id.loc.gov/authorities/subjects/', 
+                            'http://id.loc.gov/authorities/subjects/',
                             $exactResultID
                             )
                         else
                             ''"/>
-                <xsl:variable name="exactResultData" select="
-                    document($exactResultURL[. ne ''])"/>
+                <xsl:variable name="exactResultData"
+                    select="
+                        document($exactResultURL[. ne ''])"/>
 
                 <xsl:variable name="alternativeResults"
                     select="
@@ -778,26 +977,30 @@
                         mads:topic = $searchTermURL]"/>
                 <locSearchResults>
                     <exactResult>
-                        <xsl:attribute name="searchTerm" select="
-                            $searchTerm"/>
-                        <xsl:attribute name="numberOfResults" select="
-                            $exactResultCount"/>
+                        <xsl:attribute name="searchTerm"
+                            select="
+                                $searchTerm"/>
+                        <xsl:attribute name="numberOfResults"
+                            select="
+                                $exactResultCount"/>
                         <exactResultURL>
-                            <xsl:value-of select="
-                                $exactResultURL"/>
+                            <xsl:value-of
+                                select="
+                                    $exactResultURL"/>
                         </exactResultURL>
                         <exactResultData>
                             <xsl:copy-of select="
-                                $exactResult"/>
+                                    $exactResult"
+                            />
                         </exactResultData>
                     </exactResult>
                     <alternativeResults>
                         <xsl:copy-of select="
-                            $alternativeResults"/>
+                                $alternativeResults"/>
                     </alternativeResults>
                     <searchResultExpanded>
                         <xsl:copy-of select="
-                            $searchResult"/>
+                                $searchResult"/>
                     </searchResultExpanded>
                 </locSearchResults>
             </xsl:otherwise>
@@ -826,15 +1029,15 @@
         <xsl:param name="mustFind" as="xs:boolean" select="false()"/>
         <xsl:param name="maximumRetrievals" select="5"/>
         <xsl:param name="basicURL" select="
-            'http://lx2.loc.gov:210/'"/>
+                'http://lx2.loc.gov:210/'"/>
         <xsl:param name="database" select="
-            'NAF?version=2.0'"/>
+                'NAF?version=2.0'"/>
         <xsl:param name="operation" select="
             '&amp;operation=searchRetrieve'"/>
         <xsl:param name="fieldToSearch" select="
             '&amp;query=bath.Name='"/>
         <xsl:param name="recordSchema" select="
-            'mads'"/>
+                'mads'"/>
 
         <!-- Build search string -->
         <xsl:variable name="searchString"
@@ -860,12 +1063,12 @@
                 $recordSchema, ' subject records',
                 ' from search string ', $searchString"/>
         <xsl:variable name="searchResult" select="
-            document($searchString)"/>
+                document($searchString)"/>
         <xsl:variable name="searchResultTotals"
             select="
-            $searchResult
-            /zs:searchRetrieveResponse
-            /zs:numberOfRecords"/>
+                $searchResult
+                /zs:searchRetrieveResponse
+                /zs:numberOfRecords"/>
         <xsl:message
             select="
                 concat(
@@ -874,17 +1077,22 @@
                 )"/>
         <xsl:choose>
             <xsl:when test="
-                $searchResultTotals &lt; 1[$mustFind = true()]">
+                    $searchResultTotals &lt; 1[$mustFind = true()]">
                 <xsl:element name="error">
-                    <xsl:attribute name="type" select="
-                        'no_search_results'"/>
-                    <xsl:attribute name="searchTerm" select="
-                        $searchTerm"/>
-                    <xsl:value-of select="concat(
-                        $searchResultTotals, 
-                        ' results',
-                        ' for search term ',
-                        $searchTerm)"/>
+                    <xsl:attribute name="type"
+                        select="
+                            'no_search_results'"/>
+                    <xsl:attribute name="searchTerm"
+                        select="
+                            $searchTerm"/>
+                    <xsl:value-of
+                        select="
+                            concat(
+                            $searchResultTotals,
+                            ' results',
+                            ' for search term ',
+                            $searchTerm)"
+                    />
                 </xsl:element>
             </xsl:when>
             <xsl:otherwise>
@@ -898,10 +1106,12 @@
                         [mads:authority/mads:name[@authority = 'naf']
                         /fn:string-join(mads:namePart, ', ') = $searchTermURL]
                         "/>
-                <xsl:variable name="exactResultCount" select="
-                    count($exactResult)"/>
-                <xsl:message select="
-                    $exactResultCount, 'exact name results found'"/>
+                <xsl:variable name="exactResultCount"
+                    select="
+                        count($exactResult)"/>
+                <xsl:message
+                    select="
+                        $exactResultCount, 'exact name results found'"/>
                 <xsl:variable name="exactResultID"
                     select="
                         $exactResult
@@ -912,10 +1122,10 @@
                         if ($exactResultID)
                         then
                             concat(
-                            'http://id.loc.gov/authorities/names/', 
+                            'http://id.loc.gov/authorities/names/',
                             translate(
                             $exactResultID, ' ', ''
-                            ), 
+                            ),
                             '.rdf'
                             )
                         else
@@ -926,8 +1136,9 @@
                         /mads:authority
                         /mads:name[@authority = 'naf']
                         /fn:string-join(mads:namePart, ', ')"/>
-                <xsl:variable name="exactResultData" select="
-                    document($exactResultURL[. ne ''])"/>
+                <xsl:variable name="exactResultData"
+                    select="
+                        document($exactResultURL[. ne ''])"/>
 
                 <xsl:variable name="allResults">
                     <xsl:copy-of
@@ -941,8 +1152,9 @@
                 <locSearchResults>
                     <exactResult>
                         <xsl:attribute name="searchTerm" select="$searchTerm"/>
-                        <xsl:attribute name="numberOfResults" select="
-                            $exactResultCount"/>
+                        <xsl:attribute name="numberOfResults"
+                            select="
+                                $exactResultCount"/>
                         <exactResultName>
                             <xsl:value-of select="$exactResultName"/>
                         </exactResultName>
@@ -974,14 +1186,14 @@
         using its sru API -->
         <xsl:param name="searchTerm" select="."/>
         <xsl:param name="searchTermCap" select="
-            WNYC:Capitalize($searchTerm, 1)"/>
+                WNYC:Capitalize($searchTerm, 1)"/>
         <xsl:param name="searchSubjects" select="true()"/>
         <xsl:param name="mustFind" as="xs:boolean" select="false()"/>
         <xsl:param name="maximumRetrievals" select="200"/>
         <xsl:param name="basicURL" select="
-            'http://lx2.loc.gov:210/'"/>
+                'http://lx2.loc.gov:210/'"/>
         <xsl:param name="database" select="
-            'SAF?version=1.1'"/>
+                'SAF?version=1.1'"/>
         <xsl:param name="operation" select="
             '&amp;operation=searchRetrieve'"/>
         <xsl:param name="fieldToSearch" select="
@@ -997,7 +1209,8 @@
 
         <xsl:variable name="subjectSearchResults">
             <xsl:apply-templates select="
-                .[$searchSubjects]" mode="wideLOCSubjectSearch"/>
+                    .[$searchSubjects]"
+                mode="wideLOCSubjectSearch"/>
         </xsl:variable>
         <xsl:copy-of select="$subjectSearchResults"/>
     </xsl:template>
@@ -1034,7 +1247,7 @@
         </pbcoreSubject>
     </xsl:template>
 
-    <!-- Fiind subjects from xml tables 
+    <!-- Find subjects from xml tables 
         exported via phpMyAdmin -->
 
     <xsl:template match="assetsSubjects">
@@ -1072,24 +1285,26 @@
                 <xsl:call-template name="directLOCSubjectSearch">
                     <xsl:with-param name="termToSearch"
                         select="
-                        translate(
-                        translate(
-                        @subject, '/', ''), 
-                        ':', ''
-                        )
-                        [. ne '']"/>
+                            translate(
+                            translate(
+                            @subject, '/', ''),
+                            ':', ''
+                            )
+                            [. ne '']"
+                    />
                 </xsl:call-template>
             </xsl:variable>
             <xsl:variable name="directLOCNameSearchResult">
                 <xsl:call-template name="directLOCNameSearch">
                     <xsl:with-param name="termToSearch"
                         select="
-                        translate(
-                        translate(
-                        @subject, '/', ''
-                        ), ':', ''
-                        )
-                        [. ne '']"/>
+                            translate(
+                            translate(
+                            @subject, '/', ''
+                            ), ':', ''
+                            )
+                            [. ne '']"
+                    />
                 </xsl:call-template>
             </xsl:variable>
             <exactSubject>
@@ -1153,12 +1368,12 @@
                 <xsl:call-template name="wideLOCSubjectSearch">
                     <xsl:with-param name="searchTerm"
                         select="
-                        translate(
-                        translate(
-                        @subject, '/', ''), 
-                        ':', ''
-                        )
-                        [. ne '']"/>
+                            translate(
+                            translate(
+                            @subject, '/', ''),
+                            ':', ''
+                            )
+                            [. ne '']"/>
                     <xsl:with-param name="maximumRetrievals" select="5"/>
                 </xsl:call-template>
             </xsl:variable>
@@ -1184,7 +1399,8 @@
                         /mads:mads
                         /mads:recordInfo
                         /mads:recordIdentifier[@source = 'DLC']"/>
-                <xsl:element name="
+                <xsl:element
+                    name="
                     {concat('wideLOCSubjectSearchResult_', position())}">
                     <xsl:value-of
                         select="
@@ -1195,14 +1411,15 @@
                             "
                     />
                 </xsl:element>
-                <xsl:element name="
+                <xsl:element
+                    name="
                     {concat('wideLOCSubjectSearchURL_', position())}">
                     <xsl:value-of
                         select="
-                            if ($validID) 
+                            if ($validID)
                             then
                                 concat(
-                                'http://id.loc.gov/authorities/subjects/', 
+                                'http://id.loc.gov/authorities/subjects/',
                                 translate($validID, ' ', '')
                                 )
                             else
@@ -1215,14 +1432,15 @@
                 <xsl:call-template name="wideLOCNameSearch">
                     <xsl:with-param name="searchTerm"
                         select="
-                        translate(
-                        translate(
-                        @subject, '/', ''), 
-                        ':', ''
-                        )
-                        [. ne '']"/>
-                    <xsl:with-param name="maximumRetrievals" select="
-                        $maximumNameRetrievals"/>
+                            translate(
+                            translate(
+                            @subject, '/', ''),
+                            ':', ''
+                            )
+                            [. ne '']"/>
+                    <xsl:with-param name="maximumRetrievals"
+                        select="
+                            $maximumNameRetrievals"/>
                 </xsl:call-template>
             </xsl:variable>
             <xsl:for-each
@@ -1304,16 +1522,16 @@
             </xsl:for-each>
             <xsl:variable name="directLOCSubjectSearchResult">
                 <xsl:call-template name="directLOCSubjectSearch">
-                    <xsl:with-param name="termToSearch" select="
-                        column[@name = 'subject'][. ne '']"
-                    />
+                    <xsl:with-param name="termToSearch"
+                        select="
+                            column[@name = 'subject'][. ne '']"/>
                 </xsl:call-template>
             </xsl:variable>
             <xsl:variable name="directLOCNameSearchResult">
                 <xsl:call-template name="directLOCNameSearch">
-                    <xsl:with-param name="termToSearch" select="
-                        column[@name = 'subject'][. ne '']"
-                    />
+                    <xsl:with-param name="termToSearch"
+                        select="
+                            column[@name = 'subject'][. ne '']"/>
                 </xsl:call-template>
             </xsl:variable>
             <exactSubject>
@@ -1375,8 +1593,9 @@
             <chosenURL>paste URL here</chosenURL>
             <xsl:variable name="wideLOCSubjectSearchResults">
                 <xsl:call-template name="wideLOCSubjectSearch">
-                    <xsl:with-param name="searchTerm" select="
-                        column[@name = 'subject']"/>
+                    <xsl:with-param name="searchTerm"
+                        select="
+                            column[@name = 'subject']"/>
                     <xsl:with-param name="maximumRetrievals" select="5"/>
                 </xsl:call-template>
             </xsl:variable>
@@ -1414,10 +1633,10 @@
                 <xsl:element name="{concat('wideLOCSubjectSearchURL_', position())}">
                     <xsl:value-of
                         select="
-                            if ($validID) 
+                            if ($validID)
                             then
                                 concat(
-                                'http://id.loc.gov/authorities/subjects/', 
+                                'http://id.loc.gov/authorities/subjects/',
                                 translate($validID, ' ', '')
                                 )
                             else
@@ -1428,10 +1647,12 @@
             <xsl:variable name="maximumNameRetrievals" select="5"/>
             <xsl:variable name="wideLOCNameSearchResults">
                 <xsl:call-template name="wideLOCNameSearch">
-                    <xsl:with-param name="searchTerm" select="
-                        column[@name = 'subject']"/>
-                    <xsl:with-param name="maximumRetrievals" select="
-                        $maximumNameRetrievals"/>
+                    <xsl:with-param name="searchTerm"
+                        select="
+                            column[@name = 'subject']"/>
+                    <xsl:with-param name="maximumRetrievals"
+                        select="
+                            $maximumNameRetrievals"/>
                 </xsl:call-template>
             </xsl:variable>
             <xsl:for-each
@@ -1487,123 +1708,5 @@
         </xsl:element>
     </xsl:template>
 
-    <!--<xsl:template name="wideLOCNameSearchOld"
-        match="
-        text()
-        [not(matches(., $combinedValidatingStrings))]
-        "
-        mode="wideLOCNameSearch">
-        <xsl:param name="searchTerm" select="."/>
-        <xsl:param name="searchTermCap" select="WNYC:Capitalize($searchTerm, 1)"/>        
-        <xsl:param name="mustFind" as="xs:boolean" select="false()"/>        
-        <xsl:param name="maximumRetrievals" select="5"/>
-        <xsl:param name="basicURL" select="'http://lx2.loc.gov:210/'"/>
-        <xsl:param name="database" select="'NAF?version=1.1'"/>
-        <xsl:param name="operation" select="'&amp;operation=searchRetrieve'"/>
-        <xsl:param name="fieldToSearch" select="'&amp;query=bath.Name='"/>
-        
-        <xsl:param name="searchString"
-            select="
-            concat($basicURL,
-            $database,
-            $operation,
-            $fieldToSearch, 
-            $searchTerm)"/>
-        <xsl:message>
-            <xsl:value-of select="concat('Search for Name ', $searchTerm, 
-            ' using search string ', $searchString)" disable-output-escaping="yes"/>
-        </xsl:message>
-        <xsl:variable name="searchResult" select="document($searchString)"/>
-        <xsl:variable name="searchResultTotals"
-            select="$searchResult/zs:searchRetrieveResponse/zs:numberOfRecords"/>
-        <xsl:message select="concat(
-            $searchResultTotals, ' results found', 
-            ' using search string ', $searchString
-            )"/>
-        <xsl:choose>
-            <xsl:when test="$searchResultTotals &lt; 1[$mustFind]">
-                <xsl:element name="error">
-                    <xsl:attribute 
-                        name="searchTerm" 
-                        select="$searchTerm"/>
-                    <xsl:attribute name="type" select="$searchResultTotals, 'results found'"/>
-                </xsl:element>
-            </xsl:when>
-            <xsl:when test="$searchResultTotals &gt; 0">
-                <xsl:variable name="searchStringExpanded"
-                    select="
-                    concat(
-                    $searchString, 
-                    '&amp;maximumRecords=5',
-                    '&amp;recordSchema=mads'
-                    )"/>
-                <xsl:message select="'Retrieve mads record from search string', $searchStringExpanded"/>
-                <xsl:variable name="searchResultExpanded" select="document($searchStringExpanded)"/>
-                <xsl:variable name="exactResult"
-                    select="
-                    $searchResultExpanded/
-                    zs:searchRetrieveResponse/
-                    zs:records/zs:record/zs:recordData/
-                    mads:mads
-                    [count(mads:authority/mads:*) = 1]
-                    [mads:authority/mads:name[@authority = 'naf']/fn:string-join(mads:NamePart, ', ') = $searchTermCap]
-                    
-                    "/>
-                <xsl:variable name="exactResultCount" select="count($exactResult)"/>
-                <xsl:message select="$exactResultCount, 'exact results found'"/>
-                <xsl:choose>
-                    <xsl:when test="$exactResultCount = 1">
-                        <xsl:variable name="exactResultID"
-                            select="                                
-                            $exactResult/mads:identifier[not (@invalid='yes')]/translate(., ' ', '')"/>
-                        <xsl:variable name="exactResultURL"
-                            select="concat('http://id.loc.gov/authorities/names/', $exactResultID)"/>
-                        <xsl:variable name="exactResultData" select="document($exactResultURL)"/>
-                        <xsl:variable name="alternativeResults"
-                            select="
-                            $searchResultExpanded/
-                            zs:searchRetrieveResponse/
-                            zs:records/zs:record/zs:recordData/
-                            mads:mads[mads:related[@type = 'other']/
-                            mads:topic = $searchTermCap]"/>
-                        <locSearchResults>
-                            <exactResult>
-                                <xsl:attribute 
-                                    name="searchTerm" 
-                                    select="$searchTerm"/>
-                                <xsl:attribute 
-                                    name="numberOfResults" 
-                                    select="$exactResultCount"/>
-                                <exactResultURL>
-                                    <xsl:value-of select="$exactResultURL"/>
-                                </exactResultURL>
-                                <exactResultData>
-                                    <xsl:copy-of select="$exactResult"/>
-                                </exactResultData>
-                            </exactResult>
-                            <alternativeResults>
-                                <xsl:copy-of select="$alternativeResults"/>
-                            </alternativeResults>
-                            <searchResultExpanded>
-                                <xsl:copy-of select="$searchResultExpanded"/>
-                            </searchResultExpanded>
-                        </locSearchResults>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:message select="$exactResultCount, ' exact matches!!'"/>
-                        <xsl:copy-of select="$searchResultExpanded"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:element name="error">
-                    <xsl:attribute 
-                        name="searchTerm" 
-                        select="$searchTerm"/>
-                    <xsl:attribute name="type" select="'tooManyResults'"/>
-                    <xsl:value-of select="$searchResultTotals"/>
-                </xsl:element>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>-->
+    
 </xsl:stylesheet>

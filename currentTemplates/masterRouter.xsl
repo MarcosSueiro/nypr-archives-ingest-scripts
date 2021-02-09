@@ -24,8 +24,8 @@
 
     <xsl:output name="log" method="html" version="4.0" indent="yes"/>
     <xsl:output name="logXml" method="xml" version="1.0" indent="yes"/>
-    <xsl:output name="Exif" method="xml" version="1.0" indent="yes"/>
-    <xsl:output name="FADGI" encoding="ASCII" method="xml" version="1.0" indent="yes"/>
+    <xsl:output name="Exif" encoding="UTF-8" method="xml" version="1.0" indent="yes"/>
+    <xsl:output name="FADGI" encoding="US-ASCII" method="xml" version="1.0" indent="yes"/>
     <xsl:output name="cavafy" encoding="UTF-8" method="xml" version="1.0" indent="yes"/>
     <xsl:output name="DAVID" encoding="ISO-8859-1" method="xml" version="1.0" indent="yes"/>
     <xsl:output name="email" encoding="UTF-8" method="xml" version="1.0" indent="yes"/>
@@ -674,8 +674,7 @@
         <!-- If errors, stop right here -->
         <xsl:if
             test="
-            $completeLog
-            //*[local-name() = 'error']
+            $completeLog//*[local-name() = 'error']
             ">
             <xsl:message terminate="yes">
                 <xsl:value-of select="'Errors found.'"/>

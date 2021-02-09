@@ -2,24 +2,25 @@
 <!-- Trim strings -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" 
-    xmlns:WNYC="http://www.wnyc.org"
-    version="3.0"
+    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:WNYC="http://www.wnyc.org" version="3.0"
     xmlns:fn="http://www.w3.org/2005/xpath-functions">
-    
-    
+
+
     <xsl:template name="substring-before-last-regex">
-        <!-- substring-before-last, or entire string otherwise -->
+        <!-- substring-before-last regex, or entire string otherwise -->
         <xsl:param name="input"/>
         <xsl:param name="substr"/>
         <xsl:value-of select="$input[not(matches(., $substr))]"/>
-    <xsl:value-of select="
-            analyze-string($input, $substr)
-            /fn:match[last()]
-            /preceding-sibling::*" separator=""/>
+        <xsl:value-of
+            select="
+                analyze-string($input, $substr)
+                /fn:match[last()]
+                /preceding-sibling::*"
+            separator=""/>
     </xsl:template>
 
     <xsl:template name="substring-before-last">
+        <!-- substring-before-last, or entire string otherwise -->
         <xsl:param name="input"/>
         <xsl:param name="substr"/>
         <xsl:choose>
@@ -39,17 +40,19 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template name="substring-after-last">
         <!-- substring-before-last, or entire string otherwise -->
         <xsl:param name="input"/>
         <xsl:param name="substr"/>
         <xsl:value-of select="$input[not(contains(., $substr))]"/>
-        
-        <xsl:value-of select="
-            analyze-string($input, $substr)
-            /fn:match[last()]
-            /following-sibling::*" separator=""/>
+
+        <xsl:value-of
+            select="
+                analyze-string($input, $substr)
+                /fn:match[last()]
+                /following-sibling::*"
+            separator=""/>
     </xsl:template>
 
     <xsl:template name="recursive-in-trim">
@@ -92,7 +95,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template name="trimStrings">
         <!-- Trim a string 
         to the last occurrence
@@ -112,7 +115,7 @@
                 <xsl:value-of select="$input"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:variable name="firstTrim" select="substring($input,1,$charLimit)"/>
+                <xsl:variable name="firstTrim" select="substring($input, 1, $charLimit)"/>
                 <xsl:variable name="finalTrim">
                     <xsl:call-template name="substring-before-last">
                         <xsl:with-param name="input" select="$firstTrim"/>
@@ -122,9 +125,9 @@
                 <xsl:value-of select="normalize-space($finalTrim)"/>
             </xsl:otherwise>
         </xsl:choose>
-        
+
     </xsl:template>
-    
+
     <xsl:template match="text()" name="abbreviateText" mode="
         abbreviateText">
         <!-- Get rid of words shorter than a certain minimum -->
@@ -132,31 +135,38 @@
         <xsl:param name="text" select="."/>
         <xsl:param name="maxTitleLength" select="30"/>
         <xsl:param name="minWordLength" select="4"/>
-        <xsl:param name="regexMatch" select="concat(
-            ' \w{1,', $minWordLength - 1, '} ')"/>
-        <xsl:param name="deleteShortWords" select="
-            replace($text, $regexMatch, ' ')"/>
-        <xsl:param name="replaceDashes" select="
-            replace($deleteShortWords, '-', ' ')"/>
+        <xsl:param name="regexMatch"
+            select="
+                concat(
+                ' \w{1,', $minWordLength - 1, '} ')"/>
+        <xsl:param name="deleteShortWords"
+            select="
+                replace($text, $regexMatch, ' ')"/>
+        <xsl:param name="replaceDashes"
+            select="
+                replace($deleteShortWords, '-', ' ')"/>
         <xsl:variable name="cleanEntry">
-            <xsl:value-of select="analyze-string(
-                $replaceDashes, '[ A-Za-z0-9]')/*:match" separator=""/>
-        </xsl:variable>        <xsl:value-of select="matches('hello ', '\w{5,} ')"/>
+            <xsl:value-of
+                select="
+                    analyze-string(
+                    $replaceDashes, '[ A-Za-z0-9]')/*:match"
+                separator=""/>
+        </xsl:variable>
+        <xsl:value-of select="matches('hello ', '\w{5,} ')"/>
         <originalText>
             <xsl:value-of select="$text"/>
         </originalText>
         <abbreviatedText>
             <xsl:call-template name="substring-before-last">
-                <xsl:with-param name="input" select="
-                    replace($cleanEntry, ' {2,}', ' ')"/>
+                <xsl:with-param name="input"
+                    select="
+                        replace($cleanEntry, ' {2,}', ' ')"/>
                 <xsl:with-param name="substr" select="' '"/>
             </xsl:call-template>
         </abbreviatedText>
     </xsl:template>
     
-    
-    
-<xsl:function name="WNYC:substring-before-last">
+    <xsl:function name="WNYC:substring-before-last">
         <xsl:param name="input"/>
         <xsl:param name="substr"/>
         <xsl:call-template name="substring-before-last">
@@ -165,4 +175,13 @@
         </xsl:call-template>
     </xsl:function>
     
+    <xsl:function name="WNYC:substring-before-last-regex">
+        <xsl:param name="input"/>
+        <xsl:param name="regex"/>
+        <xsl:call-template name="substring-before-last-regex">
+            <xsl:with-param name="input" select="$input"/>
+            <xsl:with-param name="substr" select="$regex"/>
+        </xsl:call-template>
+    </xsl:function>
+
 </xsl:stylesheet>

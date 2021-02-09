@@ -37,10 +37,8 @@ from different sources -->
     
     <xsl:template name="checkConflicts" 
         match="inputs" 
-        mode="checkConflicts">
-        
-        <!-- Check for data inconsistencies -->
-        
+        mode="checkConflicts">        
+        <!-- Check for data inconsistencies -->        
         <xsl:param name="field1"/>
         <xsl:param name="field2"/>
         <xsl:param name="field3"/>

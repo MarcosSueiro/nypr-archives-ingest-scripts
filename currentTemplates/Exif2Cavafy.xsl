@@ -610,7 +610,9 @@ to a pbcore cavafy entry -->
                 <xsl:message select="'BROADER SUBJECTS', $broaderSubjects"/>
                 
                 <xsl:apply-templates 
-                    select="$broaderSubjects/(madsrdf:Topic |
+                    select="$broaderSubjects/
+                    (
+                    madsrdf:Topic |
                     madsrdf:NameTitle |
                     madsrdf:Geographic |
                     madsrdf:Name |
@@ -618,7 +620,9 @@ to a pbcore cavafy entry -->
                     madsrdf:CorporateName |
                     madsrdf:Title |
                     madsrdf:PersonalName |
-                    madsrdf:ConferenceName)" 
+                    madsrdf:ConferenceName | 
+                    madsrdf:ComplexSubject
+                    )" 
                     mode="LOCtoPBCore"/>
                 
                 <xsl:variable name="genreAlreadyInCavafy">

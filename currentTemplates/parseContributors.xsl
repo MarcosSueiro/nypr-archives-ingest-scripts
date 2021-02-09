@@ -53,18 +53,19 @@ and output pbcoreCreator / pbcoreContributor -->
         <xsl:for-each select="
             $contributorsToProcessParsed/valid
             [not(. = $contributorsAlreadyInCavafyParsed/valid)]">            
+            
             <xsl:variable name="currentContributorxml"
                 select="concat(., '.rdf')"/>
             <xsl:variable name="currentContributorName"
                 select="
-                doc($currentContributorxml)
+                WNYC:getLOCData(.)
                 //rdf:RDF
                 /*
                 /madsrdf:authoritativeLabel
                 "/>
             <xsl:message select="
                 concat(
-                $currentContributorName, ' not in cavafy.')"/>
+                $currentContributorName, ' not already in cavafy.')"/>
             <xsl:element name="{$pbcoreRole}">
                 <xsl:element name="{$role}">
                     <xsl:attribute name="ref" select="."/>
