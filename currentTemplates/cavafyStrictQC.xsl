@@ -303,7 +303,7 @@
             /pb:pbcoreIdentifier
             [@source = 'WNYC Archive Catalog']"/>
         <xsl:param name="instantiationIDPattern" select="concat(
-            '^', $cavafyAssetID, '\.', '[0-9]+', '[a-z]', '*'
+            '^', $cavafyAssetID[1], '\.', '[0-9]+', '[a-z]', '*'
             )"/>
         <xsl:variable name="instantiationIDCount"
             select="

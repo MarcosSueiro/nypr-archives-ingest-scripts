@@ -11,6 +11,7 @@ and output an html error doc -->
     version="2.0">
     
     <xsl:output name="log" method="html" version="4.0" indent="yes"/>
+    <xsl:output name="csv" method="text" indent="yes"/>
     
     <xsl:variable name="baseURI" select="base-uri()"/>
     <xsl:variable name="parsedBaseURI" select="analyze-string($baseURI, '/')"/>
@@ -137,6 +138,14 @@ and output an html error doc -->
             '[Y0001][M01][D01]'),
             '_T', $currentTime,
             '.html')"/>
+        <xsl:variable name="filenameErrorCSV"
+            select="
+            concat(
+            $logFolder,
+            $docFilenameNoExtension,
+            '_ERRORLOG',
+            $seriesNameNoSpace,
+            '.csv')"/>
         <xsl:result-document format="log" href="
             {$filenameErrorLog}">
             <html>
@@ -302,6 +311,75 @@ and output an html error doc -->
                     </xsl:element>
                 </body>
             </html>
+        </xsl:result-document>
+        <xsl:result-document format="csv" href="
+            {$filenameErrorCSV}">
+            <xsl:value-of
+                select="
+                string-join(
+                    ('filename', 'assetID', 'assetDate' ,
+                    'Collection', 'Series', 'Episode',
+                    'LoCSH',
+                    'Abstract', 'Genre',
+                    'Creators', 'Contributors',
+                    'CMSImage', 'Copyright',
+                    'instID', 'Format',
+                    'formatLocation', 'mediaType',
+                    'Generation', 'EssenceTrack'
+                    ),
+                    ','
+                    )"/>
+            <xsl:for-each
+                select="
+                    $completeLog//result
+                    [.//*[local-name() = 'error']]">
+                <xsl:variable name="justFilename">
+                    <!-- Extract just the filename -->
+                    <xsl:value-of
+                        select="
+                            tokenize(
+                            translate(
+                            @filename[not(contains(., 'cavafy'))], '\', '/'), '/')
+                            [last()]"/>
+                    <!--Or the cavafy link -->
+                    <xsl:value-of select="@filename[contains(., 'cavafy')]"/>                    
+                </xsl:variable>
+                <!-- Link to the file -->
+                <xsl:variable name="href"
+                    select="
+                        if
+                        (contains(@filename, 'cavafy'))
+                        then
+                            @filename
+                        else
+                            concat('file:///',
+                            inputs/originalExif
+                            /rdf:Description
+                            /System:Directory,
+                            '/',
+                            $justFilename[. != ''])"/>
+
+                <xsl:value-of select="'&#10;'"/>
+                <xsl:value-of select="$justFilename"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'cavafyID')])"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'assetDate')])"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'collection')])"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'series')])"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'episode')])"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'subjectHeading')])"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'abstract')])"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'genre')])"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'creatorPublisher')])"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'contributor')])"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'cmsImage')])"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'copyright')])"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'instantiationID')])"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'format')])"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'location')])"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'media')])"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'eneration')])"/><xsl:value-of select="','"/>
+                <xsl:value-of select="count(.//*:error/@type[contains(., 'essence')])"/><xsl:value-of select="','"/>
+            </xsl:for-each>
         </xsl:result-document>
     </xsl:template>
     

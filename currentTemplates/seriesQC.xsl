@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Accept a series list (with optional additional restrictions)
+<!-- Accept a list of NYPR series names 
+    (with optional additional restrictions)
         and generate a detailed error log 
-        according to the NYPR rules
+        according to the NYPR 'strict' schema
+        (see cavafystrictQC.xsl)
 
 Source document:
 
@@ -60,17 +62,10 @@ the source xml document would be:
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:call-template name="findCavafyXMLs">
-                        <xsl:with-param name="textToSearch"
-                            select="
-                                encode-for-uri(seriesName[. != ''])"/>
-                        <xsl:with-param name="field1ToSearch" select="'title'"/>
-                        <xsl:with-param name="series" select="seriesName[. != '']"/>
-                        <xsl:with-param name="maxResults" select="10000"/>
-                    </xsl:call-template>
+                    <xsl:apply-templates select="
+                        seriesName[. !='']" mode="findSeriesXMLFromName"/>                    
                 </xsl:otherwise>
             </xsl:choose>
-
         </xsl:variable>
 
         <xsl:variable name="completeLog">

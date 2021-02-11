@@ -523,8 +523,8 @@
     </xsl:template>
 
     <xsl:template name="generateError" match="node()" mode="generateError">
-        <xsl:param name="errorType" select="'Error'"/>
         <xsl:param name="fieldName" select="local-name(.)"/>
+        <xsl:param name="errorType" select="concat($fieldName, '_Error')"/>        
         <xsl:param name="errorMessage" select="$errorType, 'in field', $fieldName"/>
         <xsl:element name="error">
             <xsl:attribute name="type" select="$errorType"/>
