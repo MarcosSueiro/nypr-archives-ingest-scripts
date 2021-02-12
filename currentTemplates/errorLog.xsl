@@ -317,15 +317,15 @@ and output an html error doc -->
             <xsl:value-of
                 select="
                 string-join(
-                    ('filename', 'assetID', 'assetDate' ,
-                    'Collection', 'Series', 'Episode',
-                    'LoCSH',
-                    'Abstract', 'Genre',
-                    'Creators', 'Contributors',
-                    'CMSImage', 'Copyright',
-                    'instID', 'Format',
-                    'formatLocation', 'mediaType',
-                    'Generation', 'EssenceTrack'
+                    ('filename', 'assetID[1]', 'assetDate[1+]' ,
+                    'Collection[1]', 'Series[1]', 'Episode[1]',
+                    'LoCSH[1+]',
+                    'Abstract[1]', 'Genre[1]',
+                    'Creators[1+]', 'Contributors[1+]',
+                    'CMSImage[0-1]', 'Copyright[1]',
+                    'instID[1]', 'Format[1]',
+                    'formatLocation[1]', 'mediaType[1]',
+                    'Generation[0-1]', 'EssenceTrack[0-1]'
                     ),
                     ','
                     )"/>

@@ -62,8 +62,14 @@ the source xml document would be:
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:apply-templates select="
-                        seriesName[. !='']" mode="findSeriesXMLFromName"/>                    
+                    <xsl:call-template name="findCavafyXMLs">
+                        <xsl:with-param name="textToSearch"
+                            select="
+                            encode-for-uri(seriesName[. != ''])"/>
+                        <xsl:with-param name="field1ToSearch" select="'title'"/>
+                        <xsl:with-param name="series" select="seriesName[. != '']"/>
+                        <xsl:with-param name="maxResults" select="10000"/>
+                    </xsl:call-template>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
