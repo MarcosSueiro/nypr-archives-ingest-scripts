@@ -500,11 +500,13 @@
         <xsl:param name="excessCharacterCount"
             select="
                 $characterCount - $maxCharacters"/>
-        <xsl:param name="fileTooLong" select="$excessCharacterCount gt 0"/>
+        <xsl:param name="fileTooLong" select="
+            $excessCharacterCount gt 0"/>
         <xsl:param name="generateError" select="true()"/>
 
         <xsl:copy-of select="$fileTooLong"/>
-        <xsl:variable name="excessCharacters" select="substring($text, $maxCharacters)"/>
+        <xsl:variable name="excessCharacters" select="
+            substring($text, $maxCharacters)"/>
         <xsl:variable name="errorMessage"
             select="
                 $fieldName, $text,
@@ -517,7 +519,8 @@
             mode="
             generateError">
             <xsl:with-param name="errorType" select="'textTooLong'"/>
-            <xsl:with-param name="errorMessage" select="$errorMessage"/>
+            <xsl:with-param name="errorMessage" select="
+                $errorMessage"/>
             <xsl:with-param name="fieldName" select="'DAVIDTitle'"/>
         </xsl:apply-templates>
     </xsl:template>

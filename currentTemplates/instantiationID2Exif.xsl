@@ -77,7 +77,7 @@
         </xsl:param>
         <xsl:message>
             <xsl:value-of select="'Sorted instantiaiton IDs from '"/>
-            <xsl:value-of select="$instantiationIDsParsed//instantiationIDParsed" separator=", "/>
+            <xsl:value-of select="$instantiationIDsParsed//instantiationIDParsed/instantiationID" separator=", "/>
             <xsl:value-of select="' to '"/>
             <xsl:value-of select="$instantiationIDsSorted//instantiationID" separator=", "/>
         </xsl:message>
@@ -94,7 +94,8 @@
                 <xsl:namespace name="rdf"
                     select="
                         'http://www.w3.org/1999/02/22-rdf-syntax-ns#'"/>
-                <xsl:apply-templates select="instantiationID" mode="generateExif"/>
+                <xsl:apply-templates select="
+                    instantiationID" mode="generateExif"/>
             </xsl:element>
         </xsl:variable>
         <xsl:apply-templates select="$fakeExif/rdf:RDF"/>
@@ -112,10 +113,10 @@
         </xsl:param>
         <xsl:param name="DAVIDTitle">
             <xsl:value-of
- select="
-                $generatedNextFilename/
-                pb:inputs/
-                pb:parsedDAVIDTitle/@DAVIDTitle"
+                select="
+                    $generatedNextFilename/
+                    pb:inputs/
+                    pb:parsedDAVIDTitle/@DAVIDTitle"
             />
         </xsl:param>
         <xsl:param name="reportedSourceFormat" select="
@@ -137,7 +138,8 @@
         </xsl:param>
         <xsl:param name="expectedSeries" select="
             parent::instantiationIDs/@series"/>
-        <xsl:param name="cavafySeriesTitle" select="$generatedNextFilename/pb:inputs/pb:cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreTitle[@titleType = 'Series']"
+        <xsl:param name="cavafySeriesTitle" select="
+            $generatedNextFilename/pb:inputs/pb:cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreTitle[@titleType = 'Series']"
         />
         <xsl:param name="System:Directory" select="
             $System:Directory"/>

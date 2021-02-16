@@ -32,7 +32,7 @@ https://www.url-encode-decode.com/
 
     <xsl:import href="manageDuplicates.xsl"/>
 
-    <xsl:param name="cavafyValidatingString" select="'https://cavafy.wnyc.org/assets/'"/>
+    <xsl:param name="cavafyValidatingString" select="'^https://cavafy.wnyc.org/assets/'"/>
     <xsl:param name="separatingToken" select="';'"/>
     <xsl:param name="separatingTokenLong" select="concat(' ', $separatingToken, ' ')"/>
     <xsl:param name="acceptedSearchFields">
@@ -504,10 +504,13 @@ https://www.url-encode-decode.com/
                 'ready for import: '">
             <xsl:value-of select="$urls"/>
         </xsl:message>
+        <xsl:variable name="parsedURLS" select="
+            WNYC:splitParseValidate(
+            $urls, $separatingToken, $cavafyValidatingString)"/>
         <xsl:for-each
             select="
-                WNYC:splitParseValidate($urls, $separatingToken, $cavafyValidatingString)
-                /invalid">
+                $parsedURLS/invalid">
+            <xsl:message select="'Invalid entry:', ."/>
             <xsl:element name="error">
                 <xsl:attribute name="type" select="
                         'invalid_cavafy_URL'"/>
@@ -521,9 +524,8 @@ https://www.url-encode-decode.com/
                 select="'http://pbcore.org/PBCore/PBCoreNamespace.html http://pbcore.org/xsd/pbcore-2.0.xsd'"/>
 
             <xsl:for-each
-                select="
-                    WNYC:splitParseValidate($urls, ';', $cavafyValidatingString)
-                    /valid">
+                select="$parsedURLS/valid">
+                <xsl:message select="'Valid entry', ."/>
                 <xsl:call-template name="generatePbCoreDescriptionDocument">
                     <xsl:with-param name="url" select="."/>
                 </xsl:call-template>
@@ -538,30 +540,25 @@ https://www.url-encode-decode.com/
         -->
 
         <xsl:param name="url" select="."/>
+        <xsl:param name="parsedURL" select="
+            WNYC:splitParseValidate(
+            $url, $separatingToken, $cavafyValidatingString
+            )"/>        
 
         <!-- Reject non-cavafy URLs -->
         <xsl:for-each
-            select="
-                WNYC:splitParseValidate($url, $separatingToken, $cavafyValidatingString)
-                /invalid
-                |
-                WNYC:splitParseValidate($url, $separatingToken, $cavafyValidatingString)
-                /valid[not(starts-with(., $cavafyValidatingString))]">
+            select="$parsedURL/invalid">
             <xsl:element name="error">
                 <xsl:attribute name="type" select="'invalid_cavafy_URL'"/>
                 <xsl:value-of select="."/>
             </xsl:element>
         </xsl:for-each>
         <xsl:for-each
-            select="
-                WNYC:splitParseValidate($url, ';', $cavafyValidatingString)
-                /valid[starts-with(., $cavafyValidatingString)][ends-with(., '.xml')]">
+            select="$parsedURL/valid[ends-with(., '.xml')]">
             <xsl:copy-of select="document(.)"/>
         </xsl:for-each>
         <xsl:for-each
-            select="
-                WNYC:splitParseValidate($url, ';', $cavafyValidatingString)
-                /valid[starts-with(., $cavafyValidatingString)][not(ends-with(., '.xml'))]">
+            select="$parsedURL/valid[not(ends-with(., '.xml'))]">
             <xsl:copy-of select="document(concat(., '.xml'))"/>
         </xsl:for-each>
     </xsl:template>
@@ -731,20 +728,21 @@ https://www.url-encode-decode.com/
                 of relationType 'other'.            
             It includes default hosts, 
             genres and subject headings -->
-        <xsl:param name="seriesName" select="'New Sounds'"/>
-        <xsl:param name="message"
-            select="
-                'Find the series info in cavafy',
-                'from the series name ', $seriesName"/>
-        <xsl:message select="$message"/>
-        <xsl:variable name="searchString">
+        <xsl:param name="seriesName"/>        
+        <xsl:param name="searchString">
             <xsl:call-template name="generateSearchString">
                 <xsl:with-param name="textToSearch" select="concat('SRSLST+', $seriesName)"/>
                 <xsl:with-param name="field1ToSearch" select="'title'"/>
                 <xsl:with-param name="field2ToSearch" select="'relation'"/>
                 <xsl:with-param name="series" select="$seriesName"/>
             </xsl:call-template>
-        </xsl:variable>
+        </xsl:param>
+        <xsl:param name="message"
+            select="concat(
+            'Find the series info in cavafy ',
+            'from the series name ', $seriesName,
+            ' using search string ', $searchString)"/>
+        <xsl:message select="$message"/>
         <xsl:call-template name="findCavafyXMLs">
             <xsl:with-param name="searchString" select="$searchString"/>
             <xsl:with-param name="minResults" select="1"/>
@@ -753,7 +751,7 @@ https://www.url-encode-decode.com/
             <xsl:with-param name="stopIfTooMany" select="true()"/>
         </xsl:call-template>
     </xsl:template>
-
+    
     <xsl:template name="generateNextFilename" match="
         instantiationID | 
         pb:instantiationIdentifier
@@ -761,7 +759,8 @@ https://www.url-encode-decode.com/
         mode="generateNextFilename">
         <xsl:param name="instantiationID" select="."/>        
         <xsl:param name="instantiationIDParsed">
-            <xsl:apply-templates select="$instantiationID" mode="parseInstantiationID"/>
+            <xsl:apply-templates select="
+                $instantiationID" mode="parseInstantiationID"/>
         </xsl:param>
         <xsl:param name="assetID" select="
             $instantiationIDParsed/instantiationIDParsed/assetID"/>  
@@ -795,7 +794,9 @@ https://www.url-encode-decode.com/
             <xsl:value-of
                 select="
                     count(distinct-values(
-                    $precedingSiblings//instantiationID/analyze-string(., '[a-zA-Z]'
+                    $precedingSiblings//instantiationID/
+                    analyze-string(
+                    ., '[a-zA-Z]'
                     )/*:non-match))"
             />
         </xsl:param>        
@@ -832,7 +833,8 @@ https://www.url-encode-decode.com/
         </xsl:param>
         <xsl:param name="filenameDate">
             <xsl:call-template name="earliestDate">
-                <xsl:with-param name="cavafyXML" select="$foundAsset/pb:pbcoreDescriptionDocument"/>
+                <xsl:with-param name="cavafyXML" select="
+                    $foundAsset/pb:pbcoreDescriptionDocument"/>
             </xsl:call-template>
         </xsl:param>
         <xsl:param name="nextInstantiationID">
@@ -871,18 +873,21 @@ https://www.url-encode-decode.com/
             </xsl:variable>
             <xsl:value-of select="$abbreviatedText/abbreviatedText"/>
         </xsl:param>
-
         <xsl:param name="freeTextComplete">
             <xsl:value-of
                 select="
                     normalize-space(
                     string-join(
-                    ($freeTextInsert, $freeTextOtherAssetIDs, $freeTextShortenedTitle), ' '))"
+                    ($freeTextInsert,
+                    $freeTextOtherAssetIDs,
+                    $freeTextShortenedTitle), ' ')
+                    )"
             />
         </xsl:param>
-
-        <xsl:message select="'PREVIOUS INSTANTIATION LEVELS FOR', $instantiationID, ':', $precedingSiblingLevelsCount"/>
-
+        <xsl:message select="
+            'PREVIOUS INSTANTIATION LEVELS FOR', 
+            $instantiationID, ':', 
+            $precedingSiblingLevelsCount"/>
         <xsl:variable name="nextFilenameNoFreeText">
             <xsl:value-of
                 select="
@@ -904,14 +909,16 @@ https://www.url-encode-decode.com/
                 <xsl:with-param name="text" select="$freeTextComplete"/>
             </xsl:call-template>
         </xsl:variable>
+        <xsl:message select="'New Free text:', $newFreeText"/>
         <xsl:variable name="newFilename">
             <xsl:value-of
                 select="
                     string-join(
                     ($nextFilenameNoFreeText,
-                    $freeTextComplete), ' ')"
+                    $newFreeText/abbreviatedText), ' ')"
             />
         </xsl:variable>
+        <xsl:message select="'NEW FILENAME:', $newFilename"/>
         <inputs>
             <originalInstantiationID>
                 <xsl:value-of select="$instantiationID"/>

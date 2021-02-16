@@ -135,36 +135,34 @@
         <xsl:param name="text" select="."/>
         <xsl:param name="maxTitleLength" select="30"/>
         <xsl:param name="minWordLength" select="4"/>
-        <xsl:param name="regexMatch"
-            select="
-                concat(
-                ' \w{1,', $minWordLength - 1, '} ')"/>
-        <xsl:param name="deleteShortWords"
-            select="
-                replace($text, $regexMatch, ' ')"/>
+        
         <xsl:param name="replaceDashes"
             select="
-                replace($deleteShortWords, '-', ' ')"/>
+            replace($text, '-', ' ')"/>
         <xsl:variable name="cleanEntry">
             <xsl:value-of
                 select="
-                    analyze-string(
-                    $replaceDashes, '[ A-Za-z0-9]')/*:match"
+                analyze-string(
+                $replaceDashes, '[ A-Za-z0-9]')/*:match"
                 separator=""/>
         </xsl:variable>
-        <xsl:value-of select="matches('hello ', '\w{5,} ')"/>
+        <xsl:variable name="separatedWords">
+            <xsl:copy-of select="analyze-string($cleanEntry, ' ')"/>
+        </xsl:variable>
+        <xsl:variable name="minWordsOnly">
+            <xsl:value-of select="$separatedWords/fn:analyze-string-result/fn:non-match[string-length(.) ge $minWordLength]" separator=" "/>
+        </xsl:variable>
         <originalText>
             <xsl:value-of select="$text"/>
         </originalText>
         <abbreviatedText>
             <xsl:call-template name="substring-before-last">
                 <xsl:with-param name="input"
-                    select="
-                        replace($cleanEntry, ' {2,}', ' ')"/>
+                    select="substring($minWordsOnly, 1, $maxTitleLength)"/>
                 <xsl:with-param name="substr" select="' '"/>
             </xsl:call-template>
         </abbreviatedText>
-    </xsl:template>
+    </xsl:template> 
     
     <xsl:function name="WNYC:substring-before-last">
         <xsl:param name="input"/>
