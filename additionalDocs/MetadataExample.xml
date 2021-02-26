@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<conformance_point_document>
+ <File name="\\wnycdavidmedia\Media$\Archives_OTM\ARCH-DAWE-P7_36CEDBB5CF3D4E41A72A1D93BC4828DF.WAV">
+  <Core>
+   <Description>WNYC-OTM-2000-12-15-45245.5 Jon Stewart WEB EDIT</Description>
+   <Originator>The MediaPreserve</Originator>
+   <OriginationDate>2019-10-14</OriginationDate>
+   <OriginationTime>09:31:04</OriginationTime>
+   <TimeReference_translated>00:00:41.200</TimeReference_translated>
+   <TimeReference>1816920</TimeReference>
+   <BextVersion>1</BextVersion>
+   <CodingHistory>A=PCM,F=44100,W=16,M=stereo,T=Sony PCM-7030; DAT T=Gaps Between Segments on Tape A=PCM,F=44100,W=16,M=stereo,T=RME; AES32; DIO T=This is an edited version of the preservation master file.le.&#x0d;&#x0a;</CodingHistory>
+   <IARL>US, WNYC&#x0d;&#x0a;</IARL>
+   <IART>http://id.loc.gov/authorities/names/n78061373 ; http://id.loc.gov/authorities/names/n85223572 ; http://id.loc.gov/authorities/names/n96095635 ; http://id.loc.gov/authorities/names/n2001035833 ; http://id.loc.gov/authorities/names/n88127917 ; http://id.loc.gov/authorities/names/no98079562 ; http://id.loc.gov/authorities/names/no00048370 ; http://id.loc.gov/authorities/names/n2005012538&#x0d;&#x0a;</IART>
+   <ICMS>http://id.loc.gov/authorities/names/n86129990&#x0d;&#x0a;</ICMS>
+   <ICMT>For additional details see https://cavafy.wnyc.org/assets/3878a243-6d93-47be-8331-17cbb21a5a29</ICMT>
+   <ICOP>Terms of Use and Reproduction: WNYC (Radio station : New York, N.Y.) Additional copyright may apply to musical selections.</ICOP>
+   <ICRD>2000-12-15</ICRD>
+   <IENG>Unknown engineer&#x0d;&#x0a;</IENG>
+   <IGNR>Newsmagazine&#x0d;&#x0a;</IGNR>
+   <IKEY>http://id.loc.gov/authorities/names/n2002095863 ; http://id.loc.gov/authorities/subjects/sh85045477 ; http://id.loc.gov/authorities/names/n79018425 ; http://id.loc.gov/authorities/names/n50051145 ; http://id.loc.gov/authorities/subjects/sh2008109428 ; http://id.loc.gov/authorities/names/n80004058 ; http://id.loc.gov/authorities/subjects/sh85093651 ; http://id.loc.gov/authorities/subjects/sh85070788 ; http://id.loc.gov/authorities/subjects/sh93000452 ; http://id.loc.gov/authorities/names/n86709660 ; http://id.loc.gov/authorities/subjects/sh85047741 ; http://id.loc.gov/authorities/subjects/sh85147751 ; http://id.loc.gov/authorities/subjects/sh85117648 ; http://id.loc.gov/authorities/subjects/sh2009120725 ; http://id.loc.gov/authorities/subjects/sh2007100083 ; http://id.loc.gov/authorities/names/n97120028 ; http://id.loc.gov/authorities/subjects/sh2009121722 ; http://id.loc.gov/authorities/subjects/sh2008108982 ; http://id.loc.gov/authorities/subjects/sh85031323 ; http://id.loc.gov/authorities/subjects/sh85070927&#x0d;&#x0a;</IKEY>
+   <IMED>DAT 00-F52-00050&#x0d;&#x0a;</IMED>
+   <INAM>Supreme Court Decides; Jon Stewart; Ms.; McFadden&apos;s; Obits; Hearst; Word Watch: XFL&#x0d;&#x0a;</INAM>
+   <IPRD>On the Media&#x0d;&#x0a;</IPRD>
+   <ISBJ>Host Brian Lehrer and NPR&apos;s Nina Totenberg discuss reporting on the historic Supreme Court decision on the contested 2000 presidential election. Brian interviews &quot;Daily Show&quot; host Jon Stewart about the political satire on the show and its relationship with the politicians and journalists it skewers. Brian interviews &quot;Ms.&quot; editor Marcia Ann Gillespie about the magazine. David Wallace reports on former &quot;New York Daily News&quot; hangout McFadden&apos;s Saloon. Karen Michel reports on obituaries on NPR and in &quot;The New York Times.&quot; She interviews Marvin Siegel, Claiborne Ray, and Robert McG. Thomas of &quot;The Times&quot; and Tom Cole of NPR about writing obits. Brian interviews William Randolph Hearst biographer David Nasaw and discusses the similarities between Hearst and Orson Welles&apos; &quot;Citizen Kane.&quot; In a Word Watch segment, David C. Barnett investigates the word &quot;heartland.&quot; NBC is involved with the new XFL professional league founded by WWE&apos;s Vince McMahon. OTM spoofs the league. Non-ASCII characters found: with codes: 8217 8220 8221&#x0d;&#x0a;</ISBJ>
+   <ISFT>Unknown software&#x0d;&#x0a;</ISFT>
+   <ISRC>https://cavafy.wnyc.org/assets/3878a243-6d93-47be-8331-17cbb21a5a29&#x0d;&#x0a;</ISRC>
+   <ISRF>WNYC (Radio station : New York, N.Y.) DAT 00-F52-00050 Copy: access from 45245&#x0d;&#x0a;</ISRF>
+   <ITCH>LR MediaPreserve&#x0d;&#x0a;</ITCH>
+  </Core>
+ </File>
+ <File name="\\wnycdavidmedia\media$\Archives44k\ARCH-DAWA-P7_0AE7955CADBB44E4905F886F74FEDF38.WAV">
+  <Core>
+   <Description>Tom Stoppard&apos;s Take on Love and Art</Description>
+   <Originator>JVANASCO</Originator>
+   <OriginationDate>2014-10-10</OriginationDate>
+   <OriginationTime>19:25:34</OriginationTime>
+   <TimeReference_translated>00:00:00.000</TimeReference_translated>
+   <TimeReference>0</TimeReference>
+   <BextVersion>1</BextVersion>
+   <UMID>060A2B34010101010101021013000000405115C8406905845FDC000000000000</UMID>
+   <CodingHistory>A=PCM,F=44100,W=16,M=stereo &#x0d;&#x0a;A=PCM,F=44100,W=16,M=stereo,T=D.A.V.I.D. GmbH Audio Conversion Software V8.00 &#x0d;&#x0a;</CodingHistory>
+   <IARL>US, WNYC&#x0d;&#x0a;</IARL>
+   <IART>Jennifer Vanasco&#x0d;&#x0a;</IART>
+   <ICMS>WNYC ; Jennifer Vanasco&#x0d;&#x0a;</ICMS>
+   <ICMT>Story published at http://www.wnyc.org/story/indian-ink-stoppard-creates-romantic-world/ on 2014-10-11T04:00:00-04:00. mp3 available at https://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/news/news20141011_cms405186_pod.mp3 as of 2019-08-01-04:00</ICMT>
+   <ICOP>Terms of Use and Reproduction: WNYC&#x0d;&#x0a;Audio may download as of 2019-08-01-04:00&#x0d;&#x0a;Audio may be embedded as of 2019-08-01-04:00&#x0d;&#x0a;For more information, visit http://www.wnyc.org&#x0d;&#x0a;</ICOP>
+   <ICRD>2014-10-11T04:00:00-04:00&#x0d;&#x0a;</ICRD>
+   <IENG>JVANASCO&#x0d;&#x0a;</IENG>
+   <IGNR>Audio story&#x0d;&#x0a;</IGNR>
+   <IKEY>art ; life ; local_wnyc ; roundabout_theatre_company ; theater ; theater_review ; tom_stoppard&#x0d;&#x0a;</IKEY>
+   <IMED>audio&#x0d;&#x0a;</IMED>
+   <INAM>Tom Stoppard&apos;s Take on Love and Art&#x0d;&#x0a;</INAM>
+   <IPRD>WNYC&#x0d;&#x0a;</IPRD>
+   <ISBJ>Even if you&apos;ve walked where someone else has walked and have done your best to collect all the artifacts of someone&apos;s life, can you ever really know them? Maybe, says playwright Tom Stoppard in &quot;Indian Ink,&quot; now Off-Broadway at Roundabout Theatre. But only if you&apos;re an artist. Stoppard tends to wind heady themes throughout his work, and there&apos;s no shortage of those here. There are discussions of what makes an artwork great, the morality of the British Raj, the subjugation of women and people of color, the inanity of civil servants, celebrity culture. And the play is funny, in the witty, British-y Stoppard way. But at its heart, it says that we&apos;re trapped by our own perspective, and so can&apos;t really understand the mind, ideas or soul of someone else. As one character says, &quot;Biography is the worst possible excuse for getting people wrong.&quot; Rosemary Harris and Bhavesh Patel (Joan Marcus) One man, American academic Eldon Pike (Neal Huff) is trying anyway. He visits an elderly woman (the inestimable Rosemary Harris) in the mid 1980s in England, because he wants to write the story of her sister, Flora Crewe, who was a literary sensation when she was young. While we follow his quest, the narrative simultaneously goes back in time to track Flora, who has come to India in 1930 to escape gossip at home. The locals treat her like a celebrity, as does Professor Pike, who is years in the future. But Flora (played by the ebullient Romola Garai, known for her starring role in the movie &quot;Atonement&quot;) wants people to see her as she is: an adventurous, sensual woman and a serious poet. When she meets local painter Nirad Das (Firdous Bamji), he paints her — and through that, understands her. Director Carey Perloff moves us effortlessly back and forth through time and across numerous locations. He&apos;s aided by the romantic (and clarifying) set design of Neil Patel and lighting of Robert Wierzel, who together evoke an India in a long-ago time, as well as a more practical, contemporary Great Britain, on one simple set. But it is Garai&apos;s performance that really makes &apos;Indian Ink&apos; unforgettable. In her capable hands, Flora is a whirl of contradictions — direct and mysterious, brave and anxious. In a way, she proves the play&apos;s point. It is through her artistry that Flora feels like a real person whom we absolutely understand.&#x0d;&#x0a;&#x0d;&#x0a;&#x0d;&#x0a;</ISBJ>
+   <ISRC>http://www.wnyc.org/story/indian-ink-stoppard-creates-romantic-world/&#x0d;&#x0a;</ISRC>
+   <ISRF>WNYC audio. Story id is 405186.&#x0d;&#x0a;</ISRF>
+   <ITCH>JVANASCO&#x0d;&#x0a;</ITCH>
+  </Core>
+ </File>
+ <File name="\\wnycdavidmedia\media$\Archives44k\ARCH-DAWA-P7_A6AE6327630E46C995935B4DB9C84D92.WAV">
+  <Core>
+   <Description>The Play That Changed Tom Stoppard</Description>
+   <Originator>CR2USER</Originator>
+   <OriginationDate>2014-10-31</OriginationDate>
+   <OriginationTime>18:42:28</OriginationTime>
+   <TimeReference_translated>00:00:00.000</TimeReference_translated>
+   <TimeReference>0</TimeReference>
+   <BextVersion>1</BextVersion>
+   <UMID>060A2B340101010101010210130000009003ABC0616905844683001CC477AC24</UMID>
+   <CodingHistory>A=PCM,F=44100,W=16,M=stereo &#x0d;&#x0a;A=PCM,F=44100,W=16,M=stereo,T=D.A.V.I.D. GmbH Audio Conversion Software V8.00 &#x0d;&#x0a;</CodingHistory>
+   <IARL>US, WNYC&#x0d;&#x0a;</IARL>
+   <IART>Sarah Montague&#x0d;&#x0a;</IART>
+   <ICMS>WNYC ; Sarah Montague &#x0d;&#x0a;</ICMS>
+   <ICMT>Story published at http://www.wnyc.org/story/thinking-or-feeling-tom-stoppards-real-thing-returns-broadway/ on 2014-11-02T04:00:00-05:00. mp3 available at https://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/news/news20141102_cms410922_pod.mp3 as of 2019-03-19-04:00</ICMT>
+   <ICOP>Terms of Use and Reproduction: WNYC&#x0d;&#x0a;Audio may download as of 2019-03-19-04:00&#x0d;&#x0a;Audio may be embedded as of 2019-03-19-04:00&#x0d;&#x0a;For more information, visit http://www.wnyc.org&#x0d;&#x0a;</ICOP>
+   <ICRD>2014-11-02T04:00:00-05:00&#x0d;&#x0a;</ICRD>
+   <IENG>CR2USER&#x0d;&#x0a;</IENG>
+   <IGNR>Audio story&#x0d;&#x0a;</IGNR>
+   <IKEY>broadway ; culture ; life ; marriage ; new_york_city ; storytelling ; theater ; tom_stoppard&#x0d;&#x0a;</IKEY>
+   <IMED>audio&#x0d;&#x0a;</IMED>
+   <INAM>The Play That Changed Tom Stoppard&#x0d;&#x0a;</INAM>
+   <IPRD>WNYC&#x0d;&#x0a;</IPRD>
+   <ISBJ>Ewan McGregor, Maggie Gyllenhaal, and Cynthia Nixon star in the Roundabout Theatre Company&apos;s new production of Tom Stoppard&apos;s &quot;The Real Thing.&quot; &quot;What happens when you stop thinking, and start feeling?&quot; asks the marquee at the American Airlines Theatre, where the show opened on October 30th. The tag line capitalizes on play&apos;s mystique. It first premiered in London in 1982, and opened on Broadway in 1984, winning the Tony Award for Best Drama that year. On both sides of the Atlantic it was hailed as a watershed for the author of such manically erudite comedies as &quot;Rosencrantz and Guildenstern Are Dead,&quot; &quot;Jumpers,&quot; and &quot;Travesties.&quot; Joan Juliet Buck profiled Stoppard — and his new play — for Vogue in March 1984. &quot;Stoppard&apos;s plays flattered the intelligence of the audience and the audience came out whistling the puns,&quot; she said. &quot;So here&apos;s this magnificent playwright, who is not a kitchen-sink playwright, he is not a playwright of the unbearable tension of the unsaid like Pinter; he&apos;s someone with fireworks, verbal fireworks, but the question always was ‘where is his heart? What does he care about what are his feelings; is he going to make me cry?&apos;&quot; &quot;The Real Thing&quot; seemed to be the play to do it. Compared to the intellectual vaudeville of his earlier works, with their references to Hamlet, and Oscar Wilde, and academic philosophy, the play has a straightforward plot: Henry, a playwright married to an actress, Charlotte, falls in love with another actress, Annie. When their affair is discovered, they leave their spouses and marry. The rest of the play is about their attempts to make this new marriage succeed. &quot;And of course because the hero is a playwright there was this immediate assumption that Tom Stoppard, from his fortress of words, was dealing with his own personal problems about love,&quot; said Buck. &quot;It seemed to reveal things about him that had been out of reach before.&quot; Henry has the verbal dazzle we associate with Stoppard&apos;s characters, but he has to learn about feelings the hard way, said Cynthia Nixon. &quot;He&apos;s king of the world, but it really is the moment when he stops thinking and starts feeling he realizes that the brain is not the only organ you need — you need the heart too.&quot;Nixon has a unique perspective on the play. She&apos;s currently cast as Charlotte, Henry&apos;s discarded first wife. But she played his teenage daughter Debbie in the first New York production. &quot;And while I understood it intellectually, I think now, being a middle- aged person who&apos;s experienced marriage and separation, child-sharing and all sorts of grown-up big messy things like that, I understand it on a whole other level,&quot; she said. Sam Gold directed this new production, and said he was drawn to Stoppard&apos;s play because it uses language to explore emotion — unlike many contemporary writers, whose works are about &quot;the failure of language.&quot; One way Stoppard does that is to play both sides of the field, dramatically speaking. &quot;The arguments Stoppard creates in this play are brilliant,&quot; notes Gold, &quot;because they sound like something Tom would say, but then he gives another character the opposite argument, and sometimes, the character you think is arguing against Tom, has the upper hand, or wins.&quot; Roundabout Theatre Company&apos;s &quot;The Real Thing&quot; with Ewan McGregor (l), Cynthia Nixon, Josh Hamilton, Maggie Gyllenhaal (Joan Marcus/Roundabout Theatre) The play&apos;s many topics of debate include love, marriage, and fidelity, and the function of writing itself. Gold said that if you&apos;re someone in the arts, &quot;you connect with how to live and love and find your way as a person who creates fiction.&quot; In one impassioned speech, Henry defends the importance of good writing (Annie has accused him of being an intellectual snob): &quot;I don&apos;t think that writers are sacred, but words are. If you get the right ones in the right order, you can nudge the world a little,&quot; he said. Stoppard went on to &quot;nudge the world&quot; a lot in such intellectually complex works as &quot;Arcadia&quot; and &quot;The Invention of Love,&quot; and politically aware ones like &quot;Rock ‘n Roll&quot; and &quot;The Coast of Utopia.&quot; But Joan Juliet Buck has a soft spot for &quot;The Real Thing.&quot; &quot;It was the first piece about relationship, about love, about betrayal, about the danger of the limits and constraints of emotion. I think at the time I remember being disappointed that the play wasn&apos;t about happiness, but about the impossibility of happiness, the endless navigation of bad, rocky coastline; it&apos;s a very brave investigation.&quot; And a tender one. As they navigate love, betrayal and the dangers of emotion, Stoppard&apos;s characters are always asking &quot;Are you all right?&quot;&#x0d;&#x0a;&#x0d;&#x0a;&#x0d;&#x0a;</ISBJ>
+   <ISRC>http://www.wnyc.org/story/thinking-or-feeling-tom-stoppards-real-thing-returns-broadway/&#x0d;&#x0a;</ISRC>
+   <ISRF>WNYC audio. Story id is 410922.&#x0d;&#x0a;</ISRF>
+   <ITCH>CR2USER&#x0d;&#x0a;</ITCH>
+  </Core>
+ </File>
+</conformance_point_document>
