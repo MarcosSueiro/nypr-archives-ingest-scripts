@@ -15,7 +15,7 @@ The workflow accepts metadata from Broadcast WAV files as an xml RDF document. I
   4. Technical metadata
   5. XMP metadata
 2. NYPR sources
-  1. &quot;Cavafy&quot; Archives catalog
+  1. "Cavafy" Archives catalog
   2. DAVID System
   3. Publisher (NYPR&#39;s web publishing system)
   4. NewsBoss (yearly)
@@ -31,11 +31,11 @@ From this &quot;master file&quot;, various scripts generate xml documents to use
 
 ## ADDITIONAL OUTPUTS
 
-1. BWF MetaEdit (top level: \&lt;conformance\_point\_document\&gt;)
-2. DAVID (top level: \&lt;ENTRIES\&gt;) (file extension: .DBX)
-3. Cavafy (top level: \&lt;pbcoreCollection\&gt;)
+1. BWF MetaEdit (root element: conformance_point_document)
+2. DAVID (root element: ENTRIES) (file extension: .DBX)
+3. Cavafy (root element: pbcoreCollection)
 4. Html promotional document
-5. BWF MetaEdit (top level: rdf:RDF) (extension: .xmp)(to be implemented)
+5. BWF MetaEdit (root element: rdf:RDF) (extension: .xmp)(to be implemented)
 6. Complete log
 7. Error log
 
