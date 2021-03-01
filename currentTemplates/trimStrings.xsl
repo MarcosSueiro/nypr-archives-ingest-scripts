@@ -134,11 +134,15 @@
         <!-- Also, get rid of non-letter and non-number characters -->
         <xsl:param name="text" select="."/>
         <xsl:param name="maxTitleLength" select="30"/>
-        <xsl:param name="minWordLength" select="4"/>
-        
+        <xsl:param name="minWordLength" select="4"/>        
         <xsl:param name="replaceDashes"
             select="
             replace($text, '-', ' ')"/>
+        <xsl:message select="
+            'Get rid of words shorter than', 
+            $minWordLength, 
+            'legal characters',
+            'from text', $text"/>
         <xsl:variable name="cleanEntry">
             <xsl:value-of
                 select="
@@ -147,20 +151,34 @@
                 separator=""/>
         </xsl:variable>
         <xsl:variable name="separatedWords">
-            <xsl:copy-of select="analyze-string($cleanEntry, ' ')"/>
+            <xsl:copy-of select="
+                analyze-string($cleanEntry, ' ')"/>
         </xsl:variable>
         <xsl:variable name="minWordsOnly">
-            <xsl:value-of select="$separatedWords/fn:analyze-string-result/fn:non-match[string-length(.) ge $minWordLength]" separator=" "/>
+            <xsl:value-of
+                select="
+                    $separatedWords/
+                    fn:analyze-string-result/
+                    fn:non-match
+                    [string-length(.) ge $minWordLength]"
+                separator=" "/>
         </xsl:variable>
+        <xsl:variable name="abbreviatedText">
+            <xsl:call-template name="substring-before-last">
+                <xsl:with-param name="input"
+                    select="
+                    substring(
+                    $minWordsOnly, 1, $maxTitleLength
+                    )"/>
+                <xsl:with-param name="substr" select="' '"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:message select="'Abbreviated text:', $abbreviatedText"/>
         <originalText>
             <xsl:value-of select="$text"/>
         </originalText>
         <abbreviatedText>
-            <xsl:call-template name="substring-before-last">
-                <xsl:with-param name="input"
-                    select="substring($minWordsOnly, 1, $maxTitleLength)"/>
-                <xsl:with-param name="substr" select="' '"/>
-            </xsl:call-template>
+            <xsl:value-of select="$abbreviatedText"/>
         </abbreviatedText>
     </xsl:template> 
     

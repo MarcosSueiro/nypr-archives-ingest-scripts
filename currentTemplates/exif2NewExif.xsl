@@ -121,8 +121,10 @@ Subject headings / IKEY
         iZotope RX 7 Audio Editor|JPASSMOR|Jean-Hugues Chenot, ina.fr|KCARTER|
         MediaPreserve|MARCOS|Memnon|MKIDD|MLEVY|NYAM|
         NYPL|Paley Center|Seth B. Winner|Stephen Kairys|
-        TONY|UCLA technician|University of Maryland|University of Wyoming|
-        UNKNOWN TRANSFER TECH|VSMITH|WNYC Radio|Yale University transfer technician'"/>
+        TONY|UCLA technician|University of Maryland|
+        University of Wyoming|UNKNOWN TRANSFER TECH|
+        VSMITH|WNYC Radio|
+        Yale University transfer technician'"/>
     <!-- If we want to *exactly* match the author,
     use this variable -->
     <xsl:variable name="archivesAuthorsRegex"
@@ -366,6 +368,7 @@ Subject headings / IKEY
                 'exiftool -X -a -struct'"/>
         </xsl:if>
     </xsl:template>
+    
     <xsl:template name="newExif" match="inputs" mode="newExif">
         <!-- Generate a new rdf:Description document 
         by merging and checking various sources -->
@@ -399,6 +402,7 @@ Subject headings / IKEY
             $validatingNameString"/>
         <xsl:param name="fileType" select="
             $originalExif/rdf:Description/File:FileType"/>
+        
         
         <xsl:message> ******** GENERATE NEW COMBINED EXIF *********</xsl:message>
 
@@ -465,6 +469,9 @@ Subject headings / IKEY
             </xsl:apply-templates>
         </xsl:variable>
         <xsl:message select="'Generation: ', $generation"/>
+        <xsl:variable name="isSegment" select="
+            contains($generation, 'segment')"/>
+        <xsl:message select="'Is segment: ', $isSegment"/>
         <xsl:variable name="instantiationSegmentSuffix"
             select="
                 $parsedDAVIDTitle
@@ -473,6 +480,17 @@ Subject headings / IKEY
             select="
                 $parsedDAVIDTitle
                 //parsedElements/segmentFlag"/>
+        <xsl:variable name="instantiationFirstTrack"
+            select="
+            $parsedDAVIDTitle
+            //parsedElements/instantiationFirstTrack[matches(string(.), '^\d+$')]" as="xs:integer?"/>
+        <xsl:variable name="instantiationLastTrack"
+            select="
+            $parsedDAVIDTitle
+            //parsedElements/instantiationLastTrack[matches(string(.), '^\d+$')]" as="xs:integer?"/>
+        <xsl:variable name="isMultitrack" select="
+            $instantiationFirstTrack gt 0"/>
+        <xsl:message select="'Is multitrack: ', $isMultitrack"/>
 
         <xsl:variable name="producingOrganizations">
             <!-- Culled from CMS data -->
@@ -660,7 +678,7 @@ Subject headings / IKEY
                     )/valid/WNYC:getLOCData(.)//
                     error"/>
                 <xsl:choose>
-                    <xsl:when test="not(contains($generation, 'segment'))">
+                    <xsl:when test="not($isSegment)">
                         <xsl:value-of select="$mergedCommissioned"/>
                     </xsl:when>
                     <xsl:otherwise>
@@ -761,10 +779,10 @@ Subject headings / IKEY
                     )/valid/WNYC:getLOCData(.)//
                     error"/>
                 <xsl:choose>
-                    <xsl:when test="not(contains($generation, 'segment'))">                        
+                    <xsl:when test="not($isSegment)">                        
                         <xsl:value-of select="$mergedArtists"/>
                     </xsl:when>
-                    <xsl:when test="contains($generation, 'segment')">
+                    <xsl:when test="$isSegment">
                         <xsl:variable name="segmentArtistWarning" select="
                             'Make sure the artists for', 
                             $parsedDAVIDTitle/parsedElements/DAVIDTitle, 
@@ -812,13 +830,11 @@ Subject headings / IKEY
             </RIFF:DateCreated>
         </xsl:variable>
 
-
         <xsl:variable name="dateApproximate"
             select="
                 contains(
                 $parsedDAVIDTitle/parsedElements/
                 DAVIDTitleDate, 'u')"/>
-
 
         <!-- 5. Genre -->
         <xsl:variable name="seriesGenre"
@@ -839,14 +855,16 @@ Subject headings / IKEY
         <xsl:variable name="RIFF:Genre">
             <RIFF:Genre>
                 <xsl:choose>
-                    <xsl:when test="not(contains($generation, 'segment'))">
+                    <xsl:when test="not($isSegment)">
                         <xsl:apply-templates select="." mode="checkConflicts">
                             <xsl:with-param name="field1"
-                                select="$originalExif
-                                /rdf:Description/RIFF:Genre"/>
+                                select="
+                                    $originalExif/
+                                    rdf:Description/RIFF:Genre"/>
                             <xsl:with-param name="field2"
                                 select="
-                                    $cavafyEntry/                                    pb:pbcoreDescriptionDocument/pb:pbcoreGenre"/>
+                                    $cavafyEntry/
+                                    pb:pbcoreDescriptionDocument/pb:pbcoreGenre"/>
                             <xsl:with-param name="defaultValue" select="$seriesGenre"/>
                             <xsl:with-param name="fieldName" select="'Genre'"/>
                         </xsl:apply-templates>
@@ -871,72 +889,73 @@ Subject headings / IKEY
         </xsl:variable>
 
         <!--Title -->
+        <xsl:variable name="exifTitle" select="
+            $originalExif/rdf:Description/RIFF:Title"/>
+        <xsl:variable name="cavafyTitle"
+            select="
+            $cavafyEntry/pb:pbcoreDescriptionDocument/
+            pb:pbcoreTitle[@titleType = 'Episode']"/>
         <xsl:variable name="checkedTitle">
             <xsl:apply-templates select="." mode="checkConflicts">
-                <xsl:with-param name="field1"
-                    select="
-                    $originalExif/rdf:Description/RIFF:Title"/>
+                <xsl:with-param name="field1" select="$exifTitle"/>
                 <xsl:with-param name="field2"
                     select="
-                    $cavafyEntry/pb:pbcoreDescriptionDocument/
-                    pb:pbcoreTitle[@titleType = 'Episode']"/>
-                <xsl:with-param name="fieldName"
-                    select="
-                    'Title'"/>
+                        $cavafyTitle
+                        [not($isSegment)]
+                        [not($isMultitrack)]"/>
+                <xsl:with-param name="defaultValue" select="$cavafyTitle"/>
+                <xsl:with-param name="fieldName" select="
+                        'Title'"/>
                 <!-- To avoid semicolons 
                                 separating a single field -->
                 <xsl:with-param name="separatingToken"
                     select="
-                    $separatingTokenForFreeTextFields"
-                />
+                        $separatingTokenForFreeTextFields"/>
             </xsl:apply-templates>
-            </xsl:variable>
+        </xsl:variable>
+        <xsl:variable name="segmentTitleSuffix">
+            <!-- The 'part' bit -->
+            <xsl:if test="$isSegment">
+                <xsl:variable name="warningMessage"
+                    select="
+                        'Make sure the title for',
+                        $parsedDAVIDTitle/parsedElements/DAVIDTitle,
+                        'segment is right!'
+                        "/>
+                <xsl:message select="$warningMessage"/>
+                <xsl:comment select="$warningMessage"/>
+                <!-- From the instantiation segment bit... -->
+                <xsl:value-of
+                    select="
+                        (concat(', Part ', $instantiationSegmentSuffix))
+                        [not(empty($instantiationSegmentSuffix))]"/>
+                <!-- ...or from the segment flag -->
+                <xsl:value-of
+                    select="
+                        (concat(' (', $segmentFlag, ')'))
+                        [empty($instantiationSegmentSuffix)]"
+                />
+            </xsl:if>
+        </xsl:variable>
+        <xsl:variable name="multitrackTitleSuffix">
+            <!-- The 'multitrack' bit -->                            
+            <xsl:value-of
+                select="
+                (concat(', Track ', $instantiationFirstTrack))
+                [$isMultitrack]"/>
+        </xsl:variable>
+        
 
         <xsl:variable name="RIFF:Title">
-            <!--This is dealt with differently when audio is a segment -->
+            <!--This is dealt with differently 
+                when audio is a segment 
+            or a multitrack-->
             <RIFF:Title>
-                <xsl:choose>
-                    <!--Audio is not a segment -->
-                    <xsl:when test="not(contains($generation, 'segment'))">
-                        <xsl:copy-of select="$checkedTitle"/>
-                    </xsl:when>
-                    <!--Audio is a clip or segment -->
-                    <xsl:otherwise>
-                        <xsl:variable name="warningMessage"
-                            select="
-                                'Make sure the title for',
-                                $parsedDAVIDTitle/parsedElements/DAVIDTitle,
-                                'segment is right!'
-                                "/>
-                        <xsl:message select="$warningMessage"/>
-                        <xsl:comment select="$warningMessage"/>
-                        <xsl:variable name="defaultSegmentTitle">
-                            <!-- Create a default segment title 
-                                based on an existing asset title -->                            
-                                <xsl:value-of
-                                    select="$checkedTitle"/>
-                                <!-- Add the part bit to the default title -->
-                                <!-- From the instantiation segment bit... -->
-                                <xsl:value-of
-                                    select="
-                                    (concat(', Part ', $instantiationSegmentSuffix))
-                                    [not (empty($instantiationSegmentSuffix))]"/>
-                                <!-- ...or from the segment flag -->                                
-                                    <xsl:value-of select="
-                                        (concat(' (', $segmentFlag, ')'))
-                                        [empty($instantiationSegmentSuffix)]"/>
-                        </xsl:variable>
-                        <xsl:call-template name="checkConflicts">
-                            <xsl:with-param name="field1"
-                                select="$originalExif/rdf:Description/RIFF:Title"/>
-                            <xsl:with-param name="defaultValue" select="
-                                $defaultSegmentTitle"/>
-                            <xsl:with-param name="fieldName" select="'SegmentTitle'"/>
-                            <xsl:with-param name="separatingToken"
-                                select="$separatingTokenForFreeTextFields"/>
-                        </xsl:call-template>
-                    </xsl:otherwise>
-                </xsl:choose>
+                <xsl:copy-of select="$checkedTitle"/>
+                <!-- If the file does not have an embedded title, 
+                    add the segment and multitrack bits -->
+                <xsl:value-of select="$segmentTitleSuffix[not($exifTitle = '')]"/>
+                <xsl:value-of select="$multitrackTitleSuffix[not($exifTitle = '')]"/>
             </RIFF:Title>
         </xsl:variable>
         <!--Medium -->        
@@ -1010,112 +1029,108 @@ Subject headings / IKEY
             </xsl:variable>
 
         <!--Description as RIFF:Subject -->
+        <xsl:variable name="exifSubject" select="
+            $originalExif/rdf:Description/
+            RIFF:Subject"/>
+        <xsl:variable name="cavafyAbstract" select="
+            $cavafyEntry
+            /pb:pbcoreDescriptionDocument
+            /pb:pbcoreDescription
+            [@descriptionType = 'Abstract']"/>
+        
         <xsl:variable name="dbxAudioRemark"
             select="
             $dbxData/ENTRIES/ENTRY[CLASS = 'Audio']/REMARK"/>
         <!-- Trim the audio remark if it has additional tech, etc. info -->
-
         <xsl:variable name="dbxAudioRemarkTrimmed">
             <xsl:value-of
                 select="
-                $dbxAudioRemark[not(matches(., 'Technical info'))]"/>
-            <xsl:value-of
-                select="
-                substring-before(
-                $dbxAudioRemark[matches(., 'Technical info')],
-                'Technical info')"
-            />
+                tokenize($dbxAudioRemark, 'Technical info')[1]"/>
         </xsl:variable>
-        <xsl:variable name="boilerplateAbstract">
+        <xsl:variable name="multitrackDescriptionPrefix">
+            <!-- Add the multitrack bits -->
+            <xsl:if test="$isMultitrack">
+                <xsl:variable name="warningMessage"
+                    select="
+                    'Make sure the description for',
+                    $parsedDAVIDTitle/parsedElements/DAVIDTitle,
+                    'multitrack is right!'"/>
+                <xsl:message select="$warningMessage"/>
+                <xsl:comment select="$warningMessage"/>
+                <xsl:value-of
+                    select="
+                        concat('TRACK ', $instantiationFirstTrack,
+                        ' OF: &#x0D;')"
+                />
+            </xsl:if>
+        </xsl:variable>
+        <xsl:variable name="segmentDescriptionPrefix">
+            <xsl:if test="$isSegment">
+                <xsl:variable name="warningMessage"
+                    select="
+                    'Make sure the description for',
+                    $parsedDAVIDTitle/parsedElements/DAVIDTitle,
+                    'segment is right!'"/>
+                <xsl:message select="$warningMessage"/>
+                <xsl:comment select="$warningMessage"/>
+                <xsl:value-of
+                    select="
+                    if ($instantiationSegmentSuffix)
+                    then
+                    concat('PART ', $instantiationSegmentSuffix,
+                    ' OF: &#x0D;')
+                    else
+                    if ($segmentFlag)
+                    then
+                    concat($segmentFlag,
+                    ' OF: &#x0D;')
+                    else
+                    ''"
+                />
+            </xsl:if>            
+        </xsl:variable>
+        <xsl:variable name="boilerplateDescription">
             <xsl:value-of
                 select="
-                concat($RIFF:Title,
+                concat($checkedTitle,
                 ' on ',
                 $RIFF:Product,
                 ' on ',
                 $RIFF:DateCreated)"
             />
         </xsl:variable>
+        <xsl:variable name="defaultDescription">
+            <xsl:call-template name="checkConflicts">
+                <xsl:with-param name="field1" select="$cavafyAbstract"/>
+                <xsl:with-param name="defaultValue" select="$boilerplateDescription"/>
+                <xsl:with-param name="fieldName" select="'Default description'"/>
+                <xsl:with-param name="separatingToken" select="$separatingTokenForFreeTextFields"/>
+            </xsl:call-template>
+        </xsl:variable>
 
         <xsl:variable name="assetDescription">
             <xsl:call-template name="checkConflicts">
-                <xsl:with-param name="field1" select="
-                    $originalExif/rdf:Description/
-                    RIFF:Subject"/>
-                <xsl:with-param name="field2" select="
-                    $cavafyEntry
-                    /pb:pbcoreDescriptionDocument
-                    /pb:pbcoreDescription
-                    [@descriptionType = 'Abstract']
+                <xsl:with-param name="field1" select="$exifSubject"/>
+                <xsl:with-param name="field2" select="$cavafyAbstract
                     [. ne 'No Description available']
-                    [not(//error)]"/>                
+                    [not($isSegment)]
+                    [not($isMultitrack)]"/>                
                 <xsl:with-param name="field3" select="
                     $dbxAudioRemarkTrimmed"/>
                 <xsl:with-param name="defaultValue" select="
-                    $boilerplateAbstract"/>
+                    $defaultDescription"/>
                 <xsl:with-param name="separatingToken" select="
                     $separatingTokenForFreeTextFields"/>
                 <xsl:with-param name="fieldName" select="'assetDescription'"/>
             </xsl:call-template>
         </xsl:variable>
-        <xsl:variable name="boilerplateSegmentDescription">
-            <!-- Create a default segment description based on an existing asset description -->
-            <!-- Add the segment bits -->
-            <xsl:value-of
-                select="
-                    if ($instantiationSegmentSuffix)
-                    then
-                        concat('PART ', $instantiationSegmentSuffix,
-                        ' OF: &#x0D;')
-                    else
-                        if ($segmentFlag)
-                        then
-                            concat($segmentFlag,
-                            ' OF: &#x0D;')
-                        else
-                            ''"
-            />
-                <xsl:value-of
-                    select="
-                    $assetDescription
-                    "
-                />
-        </xsl:variable>
-
-        <xsl:variable name="segmentDescription">
-            <xsl:call-template name="checkConflicts">                
-                <xsl:with-param name="field1" select="
-                    $originalExif/rdf:Description/
-                    RIFF:Subject"/>
-                <xsl:with-param name="field3" select="
-                    $dbxAudioRemarkTrimmed"/>
-                <xsl:with-param name="defaultValue" select="
-                    $boilerplateSegmentDescription"/>
-                <xsl:with-param name="separatingToken" select="
-                    $separatingTokenForFreeTextFields"/>
-                <xsl:with-param name="fieldName" select="'segmentDescription'"/>
-            </xsl:call-template>
-        </xsl:variable>
         
         <xsl:variable name="description">
-            <!--This is dealt differently when audio is a segment -->
-            <xsl:choose>                
-                <!-- Audio is not a segment or clip -->
-                <xsl:when test="not(contains($generation, 'segment'))">
-                    <xsl:copy-of select="$assetDescription"/>
-                </xsl:when>
-                <!-- Audio is a clip or segment -->
-                <xsl:when test="contains($generation, 'segment')">
-                    <xsl:variable name="warningMessage"
-                        select="
-                        'Make sure the description for',
-                        $parsedDAVIDTitle/parsedElements/DAVIDTitle,
-                        'segment is right!'"/>
-                    <xsl:message select="$warningMessage"/>
-                    <xsl:comment select="$warningMessage"/>                    
-                    <xsl:copy-of select="$segmentDescription"/>                    
-                </xsl:when>
-            </xsl:choose>
+            <!-- Add the multitrack and segment prefixes -->
+            <xsl:value-of select="$multitrackDescriptionPrefix[not($exifSubject = '')]"/>
+            <xsl:value-of select="$segmentDescriptionPrefix[not($exifSubject = '')]"/>
+            <!-- Parsed description -->
+            <xsl:copy-of select="$assetDescription"/>
         </xsl:variable>
         
         <xsl:variable name="descriptionNoHtml">
@@ -1130,16 +1145,15 @@ Subject headings / IKEY
         <xsl:variable name="RIFF:Subject">
             <RIFF:Subject>
                 <!-- First, any errors -->
-                
-               
                 <xsl:copy-of select="$assetDescription[//error]"/>
-                <xsl:copy-of select="$segmentDescription[//error]"/>
                 <xsl:copy-of select="$descriptionNoHtml"/>
             </RIFF:Subject>
         </xsl:variable>
 
         <!-- cavafy URL as RIFF:Source -->
-        <!-- the cavafy URL has historically been embedded in different places -->
+        <!-- the cavafy URL 
+            has historically been embedded 
+            in different places -->
         <xsl:variable name="embeddedCatalogURL">
             <xsl:call-template name="checkConflicts">
                 <xsl:with-param name="field1"
@@ -1228,14 +1242,15 @@ Subject headings / IKEY
                     <xsl:with-param name="field1"
                         select="$originalExif
                         /rdf:Description
-                        /RIFF:Copyright"/>
+                        /RIFF:Copyright/WNYC:stripNonASCII(.)"/>
                     <xsl:with-param name="field2"
                         select="$cavafyEntry
                         /pb:pbcoreDescriptionDocument
                         /pb:pbcoreRightsSummary
-                        /pb:rightsSummary"/>
+                        /pb:rightsSummary/WNYC:stripNonASCII(.)"/>
                     <xsl:with-param name="defaultValue" select="$defaultCopyright"/>
                     <xsl:with-param name="fieldName" select="'Copyright'"/>
+                    
                     <!-- To avoid semicolons separating a single field -->
                     <xsl:with-param name="separatingToken" select="$separatingTokenForFreeTextFields"/>
                 </xsl:apply-templates>
@@ -1679,9 +1694,7 @@ Subject headings / IKEY
             <xsl:choose>
                 <xsl:when
                     test="
-                        not(
-                        contains($generation, 'segment')
-                        )">
+                        not($isSegment)">
                     <RIFF:Keywords>                        
                         <xsl:copy-of select="
                             WNYC:splitParseValidate(
@@ -1716,6 +1729,29 @@ Subject headings / IKEY
             select="normalize-space(
                 $originalExif/rdf:Description/                
                 RIFF:Comment)"/>
+        <!-- Multitrack warning -->
+        <xsl:variable name="multitrackWarning">
+            <xsl:if test="$isMultitrack">
+                <xsl:value-of
+                    select="
+                        'This audio file is intended to be played ',
+                        'simultaneously with at least '
+                        "/>
+                <xsl:value-of
+                    select="
+                        $instantiationLastTrack,
+                        'other tracks. '"/>
+                <xsl:value-of
+                    select="
+                        'Look for other files named',
+                        tokenize(
+                        $parsedDAVIDTitle/@DAVIDTitle,
+                        $multitrackFlag
+                        )[1]"
+                />
+                <xsl:value-of select="'_TK*'"/>
+            </xsl:if>
+        </xsl:variable>
         <!-- Cavafy generic comments
         not already embedded -->
         <xsl:variable name="cavafyInstantiationComments">
@@ -1784,6 +1820,7 @@ Subject headings / IKEY
                 </xsl:if>
                 
                 <!-- Gather all comments: -->
+                <!-- Multitrack warning -->
                 <!-- Original RIFF comment, if not empty -->
                 <!-- cavafyURL comment, if not already in -->
                 <!-- Approximate date comment, if not already in -->
@@ -1791,7 +1828,10 @@ Subject headings / IKEY
                 <!-- aapb transcript comment, if not already in -->
                 
                 <xsl:value-of
-                    select="$exifComment[. !=''],                        
+                    select="
+                    $exifComment[. !=''],
+                    $multitrackWarning
+                    [not(contains($exifComment, $multitrackWarning))],
                         $cavafyURLComment
                         [not(
                         contains(
@@ -2348,9 +2388,7 @@ Subject headings / IKEY
                     <xsl:choose>
                         <xsl:when
                             test="
-                                not(
-                                contains($generation, 'segment')
-                                )">
+                                not($isSegment)">
                             <xsl:copy-of select="$assetKeywordsRDFBag"/>
                         </xsl:when>
                         <xsl:otherwise>
@@ -2370,7 +2408,7 @@ Subject headings / IKEY
                 <xsl:if
                     test="
                         $transcript ne '' and
-                        not(contains($generation, 'segment'))">
+                        not($isSegment)">
                     <xsl:element name="XMP-xmpDM:Lyrics">
                         <xsl:value-of select="$transcript"/>
                     </xsl:element>

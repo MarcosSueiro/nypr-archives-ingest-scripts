@@ -28,7 +28,7 @@
         <instantiationIDs series="Around New York">
                 
         (2) If you know it, 
-        you may include a @format attrbute 
+        you may include a @format attribute 
         at the instantiationID level: 
         <instantiationID format="1/4 inch audio tape">19719.1</instantiationID>
         
@@ -67,10 +67,13 @@
                 <xsl:for-each select="$instantiationIDsParsed//instantiationIDParsed">
                     <!-- Sort by asset ID -->
                     <xsl:sort
-                        select="assetID"/>
+                        select="number(assetID)"/>
                     <!-- Sort by instantiation suffix -->
                     <xsl:sort
-                        select="instantiationSuffixDigit"/>
+                        select="number(instantiationSuffixDigit)"/>
+                    <!-- Sort by first track in multitrack -->
+                    <xsl:sort
+                        select="instantiationFirstTrack"/>
                     <xsl:copy-of select="instantiationID"/>
                 </xsl:for-each>
             </instantiationIDs>
@@ -111,14 +114,8 @@
                 mode="
                 generateNextFilename"/>
         </xsl:param>
-        <xsl:param name="DAVIDTitle">
-            <xsl:value-of
-                select="
-                    $generatedNextFilename/
-                    pb:inputs/
-                    pb:parsedDAVIDTitle/@DAVIDTitle"
-            />
-        </xsl:param>
+        
+        
         <xsl:param name="reportedSourceFormat" select="
             $instantiationID/@format"/>
         <xsl:param name="cavafySourceFormat"
@@ -139,7 +136,9 @@
         <xsl:param name="expectedSeries" select="
             parent::instantiationIDs/@series"/>
         <xsl:param name="cavafySeriesTitle" select="
-            $generatedNextFilename/pb:inputs/pb:cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreTitle[@titleType = 'Series']"
+            $generatedNextFilename/pb:inputs/
+            pb:cavafyEntry/pb:pbcoreDescriptionDocument/
+            pb:pbcoreTitle[@titleType = 'Series']"
         />
         <xsl:param name="System:Directory" select="
             $System:Directory"/>
@@ -152,12 +151,9 @@
             )"/>
         <xsl:param name="File:FileType" select="$File:FileType"/>
         <xsl:param name="File:FileTypeExtension" select="$File:FileType"/>
-        <xsl:param name="System:FileName"
- select="
-                concat(
-            $DAVIDTitle, '.', $File:FileTypeExtension)"/>
+        
         <xsl:param name="RIFF:Encoding" select="'Microsoft PCM'"/>
-        <xsl:param name="RIFF:NumChannels" select="'2'"/>
+        <xsl:param name="RIFF:NumChannels" select="'0'"/>
         <xsl:param name="RIFF:SampleRate" select="'1000'"/>
         <xsl:param name="RIFF:AvgBytesPerSec" select="'2000'"/>
         <xsl:param name="RIFF:BitsPerSample" select="'8'"/>
@@ -174,81 +170,91 @@
                 <xsl:with-param name="filename" select="$instantiationID"/>
             </xsl:call-template> 
         </xsl:param>
-        
-        <xsl:element name="rdf:Description">
-            <xsl:attribute name="rdf:about"
+        <xsl:for-each
+            select="
+                $generatedNextFilename/
+                pb:inputs/
+                pb:parsedDAVIDTitle/@DAVIDTitle">
+            <xsl:variable name="DAVIDTitle" select="."/>
+            <xsl:variable name="System:FileName"
                 select="
-                    concat(
-                    $System:Directory, '/', $System:FileName)"/>
-            <xsl:namespace name="ExifTool" select="'http://ns.exiftool.ca/ExifTool/1.0/'"/>
-            <xsl:namespace name="et" select="'http://ns.exiftool.ca/1.0/'"/>
-            <xsl:attribute name="et:toolkit" select="'Image::ExifTool 10.82'"/>
-            <xsl:namespace name="System" select="'http://ns.exiftool.ca/File/System/1.0/'"/>
-            <xsl:namespace name="File" select="'http://ns.exiftool.ca/File/1.0/'"/>
-            <xsl:namespace name="RIFF" select="'http://ns.exiftool.ca/RIFF/RIFF/1.0/'"/>
-            <xsl:namespace name="XMP-x" select="'http://ns.exiftool.ca/XMP/XMP-x/1.0/'"/>
-            <xsl:namespace name="XMP-xmp" select="'http://ns.exiftool.ca/XMP/XMP-xmp/1.0/'"/>
-            <xsl:namespace name="XMP-xmpDM" select="'http://ns.exiftool.ca/XMP/XMP-xmpDM/1.0/'"/>
-            <xsl:namespace name="XMP-xmpMM" select="'http://ns.exiftool.ca/XMP/XMP-xmpMM/1.0/'"/>
-            <xsl:namespace name="XMP-dc" select="'http://ns.exiftool.ca/XMP/XMP-dc/1.0/'"/>
-            <xsl:namespace name="XMP-plus" select="'http://ns.exiftool.ca/XMP/XMP-plus/1.0/'"/>
-            <xsl:namespace name="XML" select="'http://ns.exiftool.ca/XML/XML/1.0/'"/>
-            <xsl:namespace name="Composite" select="'http://ns.exiftool.ca/Composite/1.0/'"/>
-            <xsl:comment>
+                concat(
+                $DAVIDTitle, '.', $File:FileTypeExtension)"/>
+            <xsl:element name="rdf:Description">
+                <xsl:attribute name="rdf:about"
+                    select="
+                        concat(
+                        $System:Directory, '/', $System:FileName)"/>
+                <xsl:namespace name="ExifTool" select="'http://ns.exiftool.ca/ExifTool/1.0/'"/>
+                <xsl:namespace name="et" select="'http://ns.exiftool.ca/1.0/'"/>
+                <xsl:attribute name="et:toolkit" select="'Image::ExifTool 10.82'"/>
+                <xsl:namespace name="System" select="'http://ns.exiftool.ca/File/System/1.0/'"/>
+                <xsl:namespace name="File" select="'http://ns.exiftool.ca/File/1.0/'"/>
+                <xsl:namespace name="RIFF" select="'http://ns.exiftool.ca/RIFF/RIFF/1.0/'"/>
+                <xsl:namespace name="XMP-x" select="'http://ns.exiftool.ca/XMP/XMP-x/1.0/'"/>
+                <xsl:namespace name="XMP-xmp" select="'http://ns.exiftool.ca/XMP/XMP-xmp/1.0/'"/>
+                <xsl:namespace name="XMP-xmpDM" select="'http://ns.exiftool.ca/XMP/XMP-xmpDM/1.0/'"/>
+                <xsl:namespace name="XMP-xmpMM" select="'http://ns.exiftool.ca/XMP/XMP-xmpMM/1.0/'"/>
+                <xsl:namespace name="XMP-dc" select="'http://ns.exiftool.ca/XMP/XMP-dc/1.0/'"/>
+                <xsl:namespace name="XMP-plus" select="'http://ns.exiftool.ca/XMP/XMP-plus/1.0/'"/>
+                <xsl:namespace name="XML" select="'http://ns.exiftool.ca/XML/XML/1.0/'"/>
+                <xsl:namespace name="Composite" select="'http://ns.exiftool.ca/Composite/1.0/'"/>
+                <xsl:comment>
                 ************************************************
                 A NON-EXISTENT FILE FOR PROCESSING PURPOSES ONLY
                 ************************************************
             </xsl:comment>
-            <ExifTool:ExifToolVersion>1.0 (FAKE VERSION)</ExifTool:ExifToolVersion>
-            <System:FileName>
-                <xsl:value-of select="$System:FileName"/>
-            </System:FileName>
-            <System:Directory>
-                <xsl:value-of select="$System:Directory"/>
-            </System:Directory>
-            <System:FileSize>
-                <xsl:value-of select="$System:FileSize"/>
-            </System:FileSize>
-            <xsl:comment>Date of metadata creation, actually</xsl:comment>
-            <System:FileCreateDate>
-                <xsl:value-of select="$System:FileCreateDate"/>
-            </System:FileCreateDate>
-            <System:FilePermissions>rw-rw-rw-</System:FilePermissions>
-            <File:FileType>
-                <xsl:value-of select="$File:FileType"/>
-            </File:FileType>
-            <File:FileTypeExtension>
-                <xsl:value-of select="$File:FileTypeExtension"/>
-            </File:FileTypeExtension>
-            <File:MIMEType>audio/x-wav</File:MIMEType>
-            <RIFF:Encoding>
-                <xsl:value-of select="$RIFF:Encoding"/>
-            </RIFF:Encoding>
-            <RIFF:NumChannels>
-                <xsl:value-of select="$RIFF:NumChannels"/>
-            </RIFF:NumChannels>
-            <RIFF:SampleRate>
-                <xsl:value-of select="$RIFF:SampleRate"/>
-            </RIFF:SampleRate>
-            <RIFF:AvgBytesPerSec>
-                <xsl:value-of select="$RIFF:AvgBytesPerSec"/>
-            </RIFF:AvgBytesPerSec>
-            <RIFF:BitsPerSample>
-                <xsl:value-of select="$RIFF:BitsPerSample"/>
-            </RIFF:BitsPerSample>
-            <RIFF:Description>
-                <xsl:value-of select="$DAVIDTitle"/>
-            </RIFF:Description>
-            <RIFF:Originator>
-                <xsl:value-of select="$vendorName"/>
-            </RIFF:Originator>            
-            <RIFF:Medium>
-                <xsl:copy-of select="$RIFF:Medium"/>
-            </RIFF:Medium>
-            <RIFF:Product>
-                <xsl:copy-of select="$RIFF:Product"/>
-            </RIFF:Product>
-        </xsl:element>
-
+                <ExifTool:ExifToolVersion>****************1.0 (FAKE
+                    VERSION)******************</ExifTool:ExifToolVersion>
+                <System:FileName>
+                    <xsl:value-of select="$System:FileName"/>
+                </System:FileName>
+                <System:Directory>
+                    <xsl:value-of select="$System:Directory"/>
+                </System:Directory>
+                <System:FileSize>
+                    <xsl:value-of select="$System:FileSize"/>
+                </System:FileSize>
+                <xsl:comment>Date of metadata creation, actually</xsl:comment>
+                <System:FileCreateDate>
+                    <xsl:value-of select="$System:FileCreateDate"/>
+                </System:FileCreateDate>
+                <System:FilePermissions>rw-rw-rw-</System:FilePermissions>
+                <File:FileType>
+                    <xsl:value-of select="$File:FileType"/>
+                </File:FileType>
+                <File:FileTypeExtension>
+                    <xsl:value-of select="$File:FileTypeExtension"/>
+                </File:FileTypeExtension>
+                <File:MIMEType>audio/x-wav</File:MIMEType>
+                <RIFF:Encoding>
+                    <xsl:value-of select="$RIFF:Encoding"/>
+                </RIFF:Encoding>
+                <RIFF:NumChannels>
+                    <xsl:value-of select="$RIFF:NumChannels"/>
+                </RIFF:NumChannels>
+                <RIFF:SampleRate>
+                    <xsl:value-of select="$RIFF:SampleRate"/>
+                </RIFF:SampleRate>
+                <RIFF:AvgBytesPerSec>
+                    <xsl:value-of select="$RIFF:AvgBytesPerSec"/>
+                </RIFF:AvgBytesPerSec>
+                <RIFF:BitsPerSample>
+                    <xsl:value-of select="$RIFF:BitsPerSample"/>
+                </RIFF:BitsPerSample>
+                <RIFF:Description>
+                    <xsl:value-of select="$DAVIDTitle"/>
+                </RIFF:Description>
+                <RIFF:Originator>
+                    <xsl:value-of select="$vendorName"/>
+                </RIFF:Originator>
+                <RIFF:Medium>
+                    <xsl:copy-of select="$RIFF:Medium"/>
+                </RIFF:Medium>
+                <RIFF:Product>
+                    <xsl:copy-of select="$RIFF:Product"/>
+                </RIFF:Product>
+            </xsl:element>
+        </xsl:for-each>
     </xsl:template>
 </xsl:stylesheet>

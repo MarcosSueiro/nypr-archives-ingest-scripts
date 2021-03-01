@@ -34,6 +34,7 @@ the source xml document would be:
     
 
     <xsl:import href="cavafyStrictQC.xsl"/>
+    <xsl:import href="parseDAVIDTitle.xsl"/>
 
     <xsl:template match="seriesList">
         <xsl:apply-templates/>

@@ -108,8 +108,8 @@ https://www.url-encode-decode.com/
             <xsl:value-of
                 select="
                     'Generate search string for text _', $textToSearch,
-                    '_ in fields ',
-                    $field1ToSearch, $field2ToSearch"
+                    '_ in field(s) ',
+                    string-join(($field1ToSearch[. != ''], $field2ToSearch[. != '']), ', ')"
             />
         </xsl:param>
 
@@ -127,16 +127,17 @@ https://www.url-encode-decode.com/
         <xsl:param name="facetsSearchMessage">
             <xsl:value-of
                 select="
-                    'Generate search string',
-                    'for a search in cavafy',
-                    'with the following parameters: ',
-                    '- relations is part of: ', $isPartOf[. != ''],
-                    '- series: ', $series,
-                    '- subject: ', $subject,
-                    '- genre: ', $genre,
-                    '- coverage: ', $coverage,
-                    '- contributor: ', $contributor,
-                    '- location: ', $location"
+                    'Append a cavafy search string',                    
+                    'with the following facets: '"/>
+            <xsl:value-of
+                select="
+                    ('- relations is part of: ', $isPartOf)[$isPartOf != ''],
+                    ('- series: ', $series)[$series != ''],
+                    ('- subject: ', $subject)[$subject != ''],
+                    ('- genre: ', $genre)[$genre != ''],
+                    ('- coverage: ', $coverage)[$coverage != ''],
+                    ('- contributor: ', $contributor)[$contributor != ''],
+                    ('- location: ', $location)[$location != '']"
             />
         </xsl:param>
 
@@ -276,7 +277,7 @@ https://www.url-encode-decode.com/
         <xsl:variable name="resultsMessage"
             select="
                 concat(
-                $totalResults, ' results',
+                $totalResults, ' result(s)',
                 ' from search string ', $searchString, '.',
                 ' Allowed range: ', $minResults, '-', $maxResults,
                 'Items Per Page: ', $itemsPerPage,
@@ -437,7 +438,7 @@ https://www.url-encode-decode.com/
             <xsl:value-of select="
                 'Find between', $minResults, ' and ', $maxResults,
                 'cavafy XMLs'"/>
-            <xsl:value-of select="' with parameters ',
+            <xsl:value-of select="' with facets ',
                 $textToSearch, $series, $subject, $contributor, 
                 $genre, $isPartOf, $location"/>
             <xsl:value-of select="
@@ -606,7 +607,7 @@ https://www.url-encode-decode.com/
         <xsl:message
             select="
                 'Search for records with specific Asset ID ',
-                string($assetID), ' (which should be unique)'"/>
+                string($assetID), '(which should be unique)'"/>
 
         <!-- Initial cavafy search -->
         <xsl:variable name="foundAssets">
@@ -731,16 +732,17 @@ https://www.url-encode-decode.com/
         <xsl:param name="seriesName"/>        
         <xsl:param name="searchString">
             <xsl:call-template name="generateSearchString">
-                <xsl:with-param name="textToSearch" select="concat('SRSLST+', $seriesName)"/>
+                <xsl:with-param name="textToSearch" select="
+                    concat('SRSLST+', encode-for-uri($seriesName[1]))"/>
                 <xsl:with-param name="field1ToSearch" select="'title'"/>
                 <xsl:with-param name="field2ToSearch" select="'relation'"/>
-                <xsl:with-param name="series" select="$seriesName"/>
+                <xsl:with-param name="series" select="encode-for-uri($seriesName[1])"/>
             </xsl:call-template>
         </xsl:param>
         <xsl:param name="message"
             select="concat(
             'Find the series info in cavafy ',
-            'from the series name ', $seriesName,
+            'from the series name ', $seriesName[1],
             ' using search string ', $searchString)"/>
         <xsl:message select="$message"/>
         <xsl:call-template name="findCavafyXMLs">
@@ -759,8 +761,9 @@ https://www.url-encode-decode.com/
         mode="generateNextFilename">
         <xsl:param name="instantiationID" select="."/>        
         <xsl:param name="instantiationIDParsed">
-            <xsl:apply-templates select="
-                $instantiationID" mode="parseInstantiationID"/>
+            <xsl:call-template name="parseInstantiationID">
+                <xsl:with-param name="instantiationID" select="$instantiationID"/>
+            </xsl:call-template>
         </xsl:param>
         <xsl:param name="assetID" select="
             $instantiationIDParsed/instantiationIDParsed/assetID"/>  
@@ -772,7 +775,16 @@ https://www.url-encode-decode.com/
             instantiationSegmentSuffix"/>
         <xsl:param name="instantiationIDwOutSuffixSegment" select="
             $instantiationIDParsed/instantiationIDParsed/
-            instantiationIDwOutSuffixSegment"/>        
+            instantiationIDwOutSuffixSegment"/> 
+        <xsl:param name="instantiationSuffixMT" select="
+            $instantiationIDParsed/instantiationIDParsed/
+            instantiationSuffixMT"/>
+        <xsl:param name="instantiationFirstTrack" select="
+            $instantiationIDParsed/instantiationIDParsed/
+            instantiationFirstTrack[matches(., '\d')]" as="xs:integer*"/>
+        <xsl:param name="instantiationLastTrack"
+            select="$instantiationIDParsed/instantiationIDParsed/
+            instantiationLastTrack[matches(., '\d')]" as="xs:integer*"/>
         <xsl:param name="precedingSiblings">
             <!-- Preceding instantiations
             from same asset in this document -->
@@ -797,7 +809,7 @@ https://www.url-encode-decode.com/
                     $precedingSiblings//instantiationID/
                     analyze-string(
                     ., '[a-zA-Z]'
-                    )/*:non-match))"
+                    )/*:non-match[1]))"
             />
         </xsl:param>        
         <xsl:param name="foundAsset">
@@ -837,8 +849,8 @@ https://www.url-encode-decode.com/
                     $foundAsset/pb:pbcoreDescriptionDocument"/>
             </xsl:call-template>
         </xsl:param>
-        <xsl:param name="nextInstantiationID">
-            <xsl:call-template name="nextInstantiationID">
+        <xsl:param name="nextInstantiationSuffixDigit">
+            <xsl:call-template name="nextInstantiationSuffixDigit">
                 <xsl:with-param name="instantiationID"
                     select="
                         $instantiationID"/>
@@ -885,60 +897,91 @@ https://www.url-encode-decode.com/
             />
         </xsl:param>
         <xsl:message select="
-            'PREVIOUS INSTANTIATION LEVELS FOR', 
+            'Previous instantiation levels in this document for', 
             $instantiationID, ':', 
             $precedingSiblingLevelsCount"/>
-        <xsl:variable name="nextFilenameNoFreeText">
-            <xsl:value-of
-                select="
-                    concat(
-                    $collection, '-',
-                    $seriesAcronym, '-',
-                    $filenameDate, '-',
-                    $assetID, '.',
-                    $nextInstantiationID,
-                    $instantiationSegmentSuffix,
-                    ' SEGMENT'[$instantiationSegmentSuffix != ''])"
-            />
-        </xsl:variable>
-        <xsl:variable name="newFreeText">
-            <xsl:call-template name="abbreviateText">
-                <xsl:with-param name="maxTitleLength"
-                    select="
-                        80 - string-length($nextFilenameNoFreeText)"/>
-                <xsl:with-param name="text" select="$freeTextComplete"/>
-            </xsl:call-template>
-        </xsl:variable>
-        <xsl:message select="'New Free text:', $newFreeText"/>
-        <xsl:variable name="newFilename">
-            <xsl:value-of
-                select="
-                    string-join(
-                    ($nextFilenameNoFreeText,
-                    $newFreeText/abbreviatedText), ' ')"
-            />
-        </xsl:variable>
-        <xsl:message select="'NEW FILENAME:', $newFilename"/>
-        <inputs>
-            <originalInstantiationID>
-                <xsl:value-of select="$instantiationID"/>
-            </originalInstantiationID>
-            <cavafyEntry>
-                <xsl:copy-of select="$foundAsset"/>
-            </cavafyEntry>
-            <parsedDAVIDTitle>
-                <xsl:attribute name="DAVIDTitle" select="$newFilename"/>
-                <parsedElements>
-                    <seriesData>
-                        <xsl:copy-of select="$seriesXML"/>
-                    </seriesData>
-                    <xsl:copy-of select="$foundInstantiation"/>
-                </parsedElements>
-            </parsedDAVIDTitle>
-        </inputs>
+        <!-- If instantiation is multitrack, generate one filename per track -->
+        <xsl:choose>
+            <xsl:when test="
+                $instantiationLastTrack gt $instantiationFirstTrack">
+                <xsl:for-each select="$instantiationFirstTrack to $instantiationLastTrack">
+                    <xsl:call-template name="generateNextFilename">
+                        <xsl:with-param name="instantiationID" select="
+                                concat(substring-before($instantiationID, '_TK'), '_TK', .)"/>                        
+                        <xsl:with-param name="assetID" select="$assetID"/>
+                        <xsl:with-param name="filenameDate" select="$filenameDate"/>
+                        <xsl:with-param name="instantiationSuffixMT" select="."/>
+                        <xsl:with-param name="instantiationFirstTrack" select="."/>                        
+                        <xsl:with-param name="instantiationLastTrack" select="."/>
+                        <xsl:with-param name="foundAsset" select="$foundAsset"/>
+                        <xsl:with-param name="foundInstantiation" select="$foundInstantiation"/>
+                        <xsl:with-param name="collection" select="$collection"/>
+                        <xsl:with-param name="seriesAcronym" select="$seriesAcronym"/>
+                        <xsl:with-param name="seriesXML" select="$seriesXML"/>
+                        <xsl:with-param name="precedingSiblings" select="$precedingSiblings"/>
+                        <xsl:with-param name="precedingSiblingLevelsCount" select="$precedingSiblingLevelsCount"/>
+                        <xsl:with-param name="freeTextComplete" select="$freeTextComplete"/>                    </xsl:call-template>
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="nextFilenameNoFreeText">
+                    <xsl:value-of
+                        select="
+                        concat(
+                        $collection, '-',
+                        $seriesAcronym, '-',
+                        $filenameDate, '-',
+                        $assetID, '.',
+                        $nextInstantiationSuffixDigit,
+                        $instantiationSegmentSuffix,
+                        (concat('_TK', $instantiationFirstTrack))[$instantiationFirstTrack gt 0],
+                        ' SEGMENT'[$instantiationSegmentSuffix != ''])"
+                    />
+                </xsl:variable>
+                <xsl:variable name="newFreeText">
+                    <xsl:call-template name="abbreviateText">
+                        <xsl:with-param name="maxTitleLength"
+                            select="
+                            80 - string-length($nextFilenameNoFreeText)"/>
+                        <xsl:with-param name="text" select="$freeTextComplete[1]"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                <xsl:message select="concat(
+                    'New Free text: ', $newFreeText//abbreviatedText)"/>
+                <xsl:variable name="newFilename">
+                    <xsl:value-of
+                        select="
+                        string-join(
+                        ($nextFilenameNoFreeText,
+                        $newFreeText/abbreviatedText), ' ')"
+                    />
+                </xsl:variable>
+                <xsl:message select="'NEW FILENAME: ', $newFilename"/>
+                <inputs>
+                    <originalInstantiationID>
+                        <xsl:value-of select="$instantiationID"/>
+                    </originalInstantiationID>
+                    <cavafyEntry>
+                        <xsl:copy-of select="$foundAsset"/>
+                    </cavafyEntry>
+                    <parsedDAVIDTitle>
+                        <xsl:attribute name="DAVIDTitle" select="$newFilename"/>
+                        <parsedElements>
+                            <seriesData>
+                                <xsl:copy-of select="$seriesXML"/>
+                            </seriesData>
+                            <xsl:copy-of select="$foundInstantiation"/>
+                        </parsedElements>
+                    </parsedDAVIDTitle>
+                </inputs>
+                
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
 
-    <xsl:template name="findInstantiation" match="instantiationID" mode="processInstantiation">
+    <xsl:template name="findInstantiation" match="instantiationID" mode="
+        processInstantiation">
         <!-- Find a specific instantiationID in cavafy -->
         <!-- NOTE: mode "processInstantiation"
         is part of a set
@@ -962,12 +1005,10 @@ https://www.url-encode-decode.com/
                     'BWF'
                 else
                     $format"/>
-        <xsl:message
-            select="
-                concat(
-                'Find instantiation info for ', $instantiationID,
-                ' of format ', $translatedFormat
-                )"/>
+        <xsl:message>
+            <xsl:value-of select="'Find instantiation info for ', $instantiationID"/>
+            <xsl:value-of select="(' of format ', $translatedFormat)[$translatedFormat !='']"/>
+        </xsl:message>
         <xsl:variable name="matchedInstantiation"
             select="
                 $cavafyEntry
@@ -1103,10 +1144,12 @@ https://www.url-encode-decode.com/
         <xsl:value-of select="$filenameDate"/>
     </xsl:template>
 
-    <xsl:template name="nextInstantiationID" match="
-        instantiationID | 
-        pb:instantiationIdentifier
-        [@source = 'WNYC Media Archive Label']" mode="processInstantiation">
+    <xsl:template name="nextInstantiationSuffixDigit"
+        match="
+            instantiationID |
+            pb:instantiationIdentifier
+            [@source = 'WNYC Media Archive Label']"
+        mode="processInstantiation">
         <!-- Generate the next instantiation ID
             in an asset.
         This is used for generating filenames. -->
@@ -1117,11 +1160,13 @@ https://www.url-encode-decode.com/
         <xsl:param name="instantiationID" select="."/>
         <xsl:param name="instantiationIDOffset" select="0"/>
         <xsl:param name="instantiationIDParsed">
-            <xsl:apply-templates select="$instantiationID" mode="
+            <xsl:apply-templates select="$instantiationID"
+                mode="
                 parseInstantiationID"/>
         </xsl:param>
-        <xsl:param name="assetID" select="
-            $instantiationIDParsed/instantiationIDParsed/assetID"/>        
+        <xsl:param name="assetID"
+            select="
+                $instantiationIDParsed/instantiationIDParsed/assetID"/>
         <xsl:param name="foundAsset">
             <xsl:call-template name="findSpecificCavafyAssetXML">
                 <xsl:with-param name="assetID"
@@ -1129,26 +1174,45 @@ https://www.url-encode-decode.com/
                         substring-before($instantiationID, '.')"/>
             </xsl:call-template>
         </xsl:param>
-        <xsl:message select="concat(
-                'Find next instantiation ID for ', $instantiationID, 
+        <xsl:message
+            select="
+                concat(
+                'Find next instantiation suffix digit for ', $instantiationID,
                 ' in asset ', $assetID,
                 ' with offset of ', $instantiationIDOffset)"/>
         <xsl:variable name="cavafyInstantiationIDsParsed">
-            <xsl:apply-templates select="$foundAsset
-                /pb:pbcoreDescriptionDocument
-                /pb:pbcoreInstantiation
-                /pb:instantiationIdentifier
-                [@source = 'WNYC Media Archive Label']" mode="
+            <xsl:apply-templates
+                select="
+                    $foundAsset
+                    /pb:pbcoreDescriptionDocument
+                    /pb:pbcoreInstantiation
+                    /pb:instantiationIdentifier
+                    [@source = 'WNYC Media Archive Label']"
+                mode="
                 parseInstantiationID"/>
         </xsl:variable>
-        <xsl:message select="'CavafyIDs parsed', $cavafyInstantiationIDsParsed"></xsl:message>
-    <xsl:variable name="maxCavafyInstantiationID" select="max
-            (
-            $cavafyInstantiationIDsParsed/instantiationIDParsed/instantiationSuffixDigit
-            )"/>
-        <xsl:value-of
-            select="$maxCavafyInstantiationID  + $instantiationIDOffset + 1"
-        />
+        <xsl:variable name="maxinstantiationSuffixDigit"
+            select="
+                max
+                (
+                $cavafyInstantiationIDsParsed/instantiationIDParsed/instantiationSuffixDigit
+                )"/>
+        <xsl:variable name="nextInstantiationSuffixDigit">
+            <xsl:value-of select="$maxinstantiationSuffixDigit + $instantiationIDOffset + 1"/>
+        </xsl:variable>
+        <xsl:message>
+            <xsl:value-of select="
+                'Highest instantiation suffix digit in asset', 
+                $assetID, 
+                'is', $maxinstantiationSuffixDigit, '.'"/>
+            <xsl:value-of select="
+                ' The offset is', 
+                $instantiationIDOffset, '.'"/>
+            <xsl:value-of select="
+                ' So the next instantiation suffix digit should be', 
+                $nextInstantiationSuffixDigit, '.'"/>
+        </xsl:message>
+        <xsl:value-of select="$nextInstantiationSuffixDigit"/>
     </xsl:template>
 
     <xsl:template name="anniversaries" match="." mode="anniversaries">

@@ -40,7 +40,7 @@
         select="substring(translate(string(current-time()), ':', ''), 1, 4)"/>
     <xsl:variable name="pbcorePhysicalInstantiations"
         select="doc('pbcore_instantiationphysicalaudio_vocabulary.xml')"/>
-    <xsl:variable name="archiveAuthors" select="doc('archivesAuthors.xml')"/>
+    <xsl:variable name="archivesAuthors" select="doc('archivesAuthors.xml')"/>
 
     <xsl:template match="/">
         <xsl:message
@@ -261,9 +261,9 @@
                         $DAVIDWavInstantiations
                         /DAVIDWavInstantiations
                         /DAVIDWavInstantiation
-                        [AUTHOR = $archiveAuthors/ARCHIVEAUTHORS/AUTHOR
+                        [AUTHOR = $archivesAuthors/ARCHIVEAUTHORS/AUTHOR
                         or
-                        CREATOR = $archiveAuthors/ARCHIVEAUTHORS/AUTHOR]"
+                        CREATOR = $archivesAuthors/ARCHIVEAUTHORS/AUTHOR]"
                 />
             </DAVIDWavInstantiationsFromArchives>
         </xsl:variable>
@@ -297,9 +297,9 @@
                         /DAVIDWavInstantiations
                         /DAVIDWavInstantiation
                         [not(MOTIVE)]
-                        [not(AUTHOR = $archiveAuthors/ARCHIVEAUTHORS/AUTHOR
+                        [not(AUTHOR = $archivesAuthors/ARCHIVEAUTHORS/AUTHOR
                         or
-                        CREATOR = $archiveAuthors/ARCHIVEAUTHORS/AUTHOR)]"
+                        CREATOR = $archivesAuthors/ARCHIVEAUTHORS/AUTHOR)]"
                 />
             </DAVIDWavInstantiationsWNoThemeNotFromArchives>
         </xsl:variable>
@@ -346,7 +346,14 @@
                 />
             </archivesINGESTWavResults>
         </xsl:variable>
-        <xsl:message select="'Archives INGEST wav Instantiations:' , $archivesINGESTWavInstantiations/archivesINGESTWavInstantiations/rdf:Description"></xsl:message>
+        <xsl:message select="
+            'Archives INGEST wav Instantiations:' , 
+            $archivesINGESTWavInstantiations/
+            archivesINGESTWavInstantiations/
+            rdf:Description"/>
+        <xsl:message select="
+            'Archives INGEST wav Results:' , 
+            $archivesINGESTWavResults"/>
         <xsl:variable name="DAVIDWavInstantiationsFromArchivesResults">
             <DAVIDWavInstantiationsFromArchivesResults>
                 <xsl:apply-templates

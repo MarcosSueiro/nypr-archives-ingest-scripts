@@ -23,7 +23,7 @@ and output an html error doc -->
         select="substring(translate(string(current-time()), ':', ''), 1, 4)"/>
     <xsl:variable name="pbcorePhysicalInstantiations"
         select="doc('pbcore_instantiationphysicalaudio_vocabulary.xml')"/>
-    <xsl:variable name="archiveAuthors" select="doc('archivesAuthors.xml')"/>
+    <xsl:variable name="archivesAuthors" select="doc('archivesAuthors.xml')"/>
     
     <xsl:template name="generateErrorLog">        
         <xsl:param name="completeLog"/>

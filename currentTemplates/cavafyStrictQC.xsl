@@ -500,7 +500,7 @@
             concat(
             pb:pbcoreTitle[@titleType = 'Episode'],
             ' on ',
-            pb:pbcoreTitle[@titleType = 'Series'],
+            pb:pbcoreTitle[@titleType = 'Series'][1],
             ' on ')"/>
         <xsl:variable name="assetContributors">
             <xsl:value-of select="
