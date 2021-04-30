@@ -545,7 +545,9 @@ https://www.url-encode-decode.com/
             WNYC:splitParseValidate(
             $url, $separatingToken, $cavafyValidatingString
             )"/>        
-
+        <xsl:message select="
+            'Generate a pbcore description document', 
+            ' from URL', $url"/>
         <!-- Reject non-cavafy URLs -->
         <xsl:for-each
             select="$parsedURL/invalid">
@@ -556,11 +558,21 @@ https://www.url-encode-decode.com/
         </xsl:for-each>
         <xsl:for-each
             select="$parsedURL/valid[ends-with(., '.xml')]">
-            <xsl:copy-of select="document(.)"/>
+            <xsl:variable name="pbcoreDocument" select="document(.)"/>
+            <xsl:copy-of select="$pbcoreDocument"/>
+            <xsl:message>
+                <xsl:value-of select="'pbcoreDocument from url', $url, ': '"/>
+                <xsl:copy-of select="$pbcoreDocument"/>
+            </xsl:message>
         </xsl:for-each>
         <xsl:for-each
             select="$parsedURL/valid[not(ends-with(., '.xml'))]">
-            <xsl:copy-of select="document(concat(., '.xml'))"/>
+            <xsl:variable name="pbcoreDocument" select="document(concat(., '.xml'))"/>
+            <xsl:copy-of select="$pbcoreDocument"/>
+            <xsl:message>
+                <xsl:value-of select="'pbcoreDocument from url', $url, ': '"/>
+                <xsl:copy-of select="$pbcoreDocument"/>
+            </xsl:message>
         </xsl:for-each>
     </xsl:template>
 
@@ -668,7 +680,9 @@ https://www.url-encode-decode.com/
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy-of select="$matchingAssets"/>
+                <xsl:message select="'Final cavafy entry:', $matchingAssets"/>
             </xsl:otherwise>
+            
         </xsl:choose>
     </xsl:template>
 
@@ -721,7 +735,7 @@ https://www.url-encode-decode.com/
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template name="findSeriesXMLFromName" match="seriesName" mode="findSeriesXMLFromName">
+    <xsl:template name="findSeriesXMLFromName" match="seriesName|pb:pbcoreTitle[@titleType='Series']" mode="findSeriesXMLFromName">
         <!-- Find the series info in cavafy
         from the series name -->
         <!-- Series information is stored in cavafy
@@ -759,7 +773,14 @@ https://www.url-encode-decode.com/
         pb:instantiationIdentifier
         [@source = 'WNYC Media Archive Label']"
         mode="generateNextFilename">
-        <xsl:param name="instantiationID" select="."/>        
+        <!-- Generate the name of the derivative file
+        according to the NYPR naming convention:
+        COLL-SERI-YYYY-MM-DD-1234.5 [Free text] -->
+        <xsl:param name="instantiationID">
+            <xsl:copy-of select="."/>
+            <xsl:message select="
+                'Generate the derivative filename for instantiation', ."/>
+        </xsl:param>  
         <xsl:param name="instantiationIDParsed">
             <xsl:call-template name="parseInstantiationID">
                 <xsl:with-param name="instantiationID" select="$instantiationID"/>
@@ -849,6 +870,8 @@ https://www.url-encode-decode.com/
                     $foundAsset/pb:pbcoreDescriptionDocument"/>
             </xsl:call-template>
         </xsl:param>
+        <xsl:param name="instantiationIDOffset" select="
+            number($precedingSiblingLevelsCount)"/>
         <xsl:param name="nextInstantiationSuffixDigit">
             <xsl:call-template name="nextInstantiationSuffixDigit">
                 <xsl:with-param name="instantiationID"
@@ -857,7 +880,7 @@ https://www.url-encode-decode.com/
                 <xsl:with-param name="foundAsset" select="
                         $foundAsset"/>
             <xsl:with-param name="instantiationIDOffset" select="
-                    number($precedingSiblingLevelsCount)"/>
+                    $instantiationIDOffset"/>
             </xsl:call-template>
         </xsl:param>
         <xsl:param name="freeTextInsert"/>
@@ -974,7 +997,6 @@ https://www.url-encode-decode.com/
                         </parsedElements>
                     </parsedDAVIDTitle>
                 </inputs>
-                
             </xsl:otherwise>
         </xsl:choose>
         
@@ -1011,9 +1033,8 @@ https://www.url-encode-decode.com/
         </xsl:message>
         <xsl:variable name="matchedInstantiation"
             select="
-                $cavafyEntry
-                /*:pbcoreDescriptionDocument
-                /*:pbcoreInstantiation
+                $cavafyEntry//
+                *:pbcoreInstantiation
                 [*:instantiationIdentifier = $instantiationID]"/>
         <xsl:variable name="matchedInstantiationID"
             select="

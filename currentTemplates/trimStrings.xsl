@@ -147,8 +147,8 @@
             <xsl:value-of
                 select="
                 analyze-string(
-                $replaceDashes, '[ A-Za-z0-9]')/*:match"
-                separator=""/>
+                $replaceDashes, '\w+')/*:match"
+                separator=" "/>
         </xsl:variable>
         <xsl:variable name="separatedWords">
             <xsl:copy-of select="
@@ -157,18 +157,19 @@
         <xsl:variable name="minWordsOnly">
             <xsl:value-of
                 select="
-                    $separatedWords/
-                    fn:analyze-string-result/
-                    fn:non-match
-                    [string-length(.) ge $minWordLength]"
+                $separatedWords/
+                fn:analyze-string-result/
+                fn:non-match
+                [string-length(.) ge $minWordLength]"
                 separator=" "/>
         </xsl:variable>
         <xsl:variable name="abbreviatedText">
+            <xsl:value-of select="$minWordsOnly[string-length(.) le $maxTitleLength]"/>
             <xsl:call-template name="substring-before-last">
                 <xsl:with-param name="input"
                     select="
                     substring(
-                    $minWordsOnly, 1, $maxTitleLength
+                    $minWordsOnly[string-length(.) gt $maxTitleLength], 1, $maxTitleLength
                     )"/>
                 <xsl:with-param name="substr" select="' '"/>
             </xsl:call-template>

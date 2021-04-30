@@ -6,6 +6,7 @@ and output an html error doc -->
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:System="http://ns.exiftool.ca/File/System/1.0/"
+    xmlns:WNYC="http://www.wnyc.org"
     exclude-result-prefixes="xs"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     version="2.0">
@@ -29,7 +30,11 @@ and output an html error doc -->
         <xsl:param name="completeLog"/>
         <xsl:param name="duplicateInstantiations" select="
             dummyNode"/>
-        <xsl:param name="WARNINGS"/>
+        <xsl:param name="unacceptableFiles" select="
+            $completeLog/completeLog/unacceptableFiles"/>
+        <xsl:param name="WARNINGS">
+            <xsl:copy-of select="$completeLog/completeLog/*/result/newExif/rdf:Description/*[@warning]"/>
+        </xsl:param>
         <xsl:param name="seriesName" select="
             $completeLog/completeLog/seriesName"/>
         <xsl:param name="seriesNameNoSpace" select="
@@ -56,6 +61,13 @@ and output an html error doc -->
                 <br/>
             </xsl:for-each>
         </xsl:variable>
+        <xsl:variable name="unacceptableFilesMessage">
+            <b>
+                <xsl:value-of
+                    select="$unacceptableFiles/error"
+                />
+            </b>
+        </xsl:variable>
         
         <xsl:variable name="duplicateInstantiationMessage">
             <b>
@@ -78,7 +90,7 @@ and output an html error doc -->
             count(
             $completeLog
             //result
-            [.//*[local-name() = 'warning']]
+            [//*[@warning]]
             )"/>
         <xsl:variable name="totalCount" select="
             count(
@@ -115,13 +127,14 @@ and output an html error doc -->
             <xsl:for-each
                 select="
                 $completeLog//result
-                [.//*[local-name() = 'warning']]">
+                [.//*[@warning]]">
                 <xsl:value-of select="./@filename"/>
                 <br/>
             </xsl:for-each>                
         </xsl:variable>
         
-        <xsl:message select="$errorFreeMessage"/>        
+        <xsl:message select="$errorFreeMessage"/>
+        <xsl:message select="$unacceptableFilesMessage"/>
         <xsl:message select="$duplicateInstantiationMessage"/>
         <xsl:message select="$errorMessage"/>
         <xsl:message select="$warningMessage"/>
@@ -173,6 +186,9 @@ and output an html error doc -->
                     mode="cavafyBasicsHtml"/></p>                    
                     <xsl:copy-of select="
                         $errorFreeMessage"/>
+                    <p> ******************* </p>
+                    <xsl:copy-of select="
+                        $unacceptableFilesMessage"/>
                     <p> ******************* </p>
                     <xsl:copy-of select="
                         $duplicateInstantiationMessage"/>
@@ -232,7 +248,7 @@ and output an html error doc -->
                                 <p>
                                     <xsl:for-each select=".//*:error">
                                         <xsl:value-of select="@type, ': '"/>
-                                        <xsl:value-of select="."/>
+                                        <xsl:value-of select="WNYC:stripNonASCII(.)"/>
                                         <br/>
                                     </xsl:for-each>
                                 </p>
@@ -252,7 +268,7 @@ and output an html error doc -->
                     <xsl:for-each
                         select="
                         $completeLog//result
-                        [.//*[local-name() = 'warning']]">
+                        [.//*[@warning]]">
                         <xsl:variable name="justFilename">
                             <xsl:value-of
                                 select="
@@ -287,8 +303,9 @@ and output an html error doc -->
                                     <xsl:value-of select="$justFilename"/></a>: </b>
                                 <br/>
                                 <p>
-                                    <xsl:for-each select=".//*:warning">
-                                        <xsl:value-of select="@type, ': '"/>
+                                    <xsl:for-each select="newExif/rdf:Description/*[@warning]">
+                                        
+                                        <xsl:value-of select="'WARNING:', @warning, ': '"/>
                                         <xsl:value-of select="."/>
                                         <br/>
                                     </xsl:for-each>
@@ -306,9 +323,7 @@ and output an html error doc -->
                         </div>
                     </xsl:for-each>
                     
-                    <xsl:element name="warnings">
-                        <xsl:copy-of select="$WARNINGS"/>
-                    </xsl:element>
+                    
                 </body>
             </html>
         </xsl:result-document>

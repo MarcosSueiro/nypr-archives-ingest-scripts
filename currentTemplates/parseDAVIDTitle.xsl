@@ -29,7 +29,7 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
     <!-- Optional elements -->
     <xsl:variable name="instSegmentRegex" select="'[a-z]{0,2}'"/>
     <xsl:variable name="multitrackRegex" select="'((_TK)?[0-9]{1,2}(-[0-9]{1,2})*)*'"/>
-    <xsl:variable name="freeTextRegex" select="' [\w ]*'"/>
+    <xsl:variable name="freeTextRegex" select="'( [\w ])*'"/>
     
     <!-- Combined elements -->
     <xsl:variable name="instIDRegex">
@@ -83,7 +83,112 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
     the audio file is from a multitrack -->
     <xsl:param name="multitrackFlag" select="
         '[0-9a-z]_TK[0-9]'"/>
-
+    
+    <xsl:template name="splitDAVIDTitle" 
+        match="DAVIDTitle" mode="splitDAVIDTitle">
+        <!-- Split a valid DAVID Title into its components -->
+        <xsl:param name="titleToSplit" select="."/>
+        <xsl:message select="
+            concat('Split title ', $titleToSplit)"/>
+        <xsl:variable name="checkedDAVIDTitle">
+            <xsl:call-template name="checkDAVIDTitle">
+                <xsl:with-param name="DAVIDTitleToCheck" select="$titleToSplit"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:copy-of select="$checkedDAVIDTitle"/>
+        <xsl:variable name="DAVIDTitleBeforeSpace" select="
+            $checkedDAVIDTitle//DAVIDTitleBeforeSpace"/>
+        <xsl:variable name="DAVIDTitleTokenized"
+            select="
+            fn:tokenize(
+            $DAVIDTitleBeforeSpace, '-'
+            )
+            [$checkedDAVIDTitle//@DAVIDTitleComplies = 'true']"
+        />
+        <xsl:message select="
+            'DAVID Title tokenized:', $DAVIDTitleTokenized"/>
+        <xsl:variable name="parsedYear" select="
+            $DAVIDTitleTokenized[3]"/>
+        <xsl:variable name="parsedMonth" select="
+            $DAVIDTitleTokenized[4]"/>
+        <xsl:variable name="parsedDay" select="
+            $DAVIDTitleTokenized[5]"/>
+        <xsl:variable name="instantiationID" select="
+            $DAVIDTitleTokenized[6]"/>
+        <xsl:variable name="instantiationIDParsed">
+            <xsl:call-template name="parseInstantiationID">
+                <xsl:with-param name="instantiationID" select="
+                    normalize-space($instantiationID)"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="DAVIDTitleSplit">
+            <DAVIDTitleBeforeSpace>
+                <xsl:value-of select="$DAVIDTitleBeforeSpace"/>
+            </DAVIDTitleBeforeSpace>
+            <collectionAcronym>
+                <xsl:value-of select="$DAVIDTitleTokenized[1]"/>
+            </collectionAcronym>
+            <seriesAcronym>
+                <xsl:value-of select="$DAVIDTitleTokenized[2]"/>
+            </seriesAcronym>
+            <parsedYear>
+                <xsl:value-of select="$parsedYear"/>
+            </parsedYear>
+            <parsedMonth>
+                <xsl:value-of select="$parsedMonth"/>
+            </parsedMonth>
+            <parsedDay>
+                <xsl:value-of select="$parsedDay"/>
+            </parsedDay>
+            <DAVIDTitleDate>
+                <xsl:value-of
+                    select="
+                    string-join(
+                    ($parsedYear, $parsedMonth, $parsedDay)
+                    , '-')"
+                />
+            </DAVIDTitleDate>
+            <instantiationID>
+                <xsl:value-of select="$instantiationID"/>
+            </instantiationID>
+            <xsl:copy-of select="$instantiationIDParsed"/>
+            <assetID>
+                <xsl:value-of
+                    select="
+                    $instantiationIDParsed/instantiationIDParsed/
+                    assetID"
+                />
+            </assetID>
+            <instantiationSuffixComplete>
+                <xsl:value-of
+                    select="
+                    $instantiationIDParsed/instantiationIDParsed/
+                    instantiationSuffixComplete"/>
+            </instantiationSuffixComplete>
+            <instantiationSuffix>
+                <xsl:value-of
+                    select="
+                    $instantiationIDParsed/instantiationIDParsed/
+                    instantiationSuffix"/>
+            </instantiationSuffix>
+            <instantiationSegmentSuffix>
+                <xsl:value-of
+                    select="$instantiationIDParsed/instantiationIDParsed/
+                    instantiationSegmentSuffix"/>
+            </instantiationSegmentSuffix>
+            <freeText>
+                <xsl:value-of
+                    select="
+                    substring-after(
+                    $titleToSplit, $DAVIDTitleBeforeSpace
+                    )"
+                />
+            </freeText>
+        </xsl:variable>
+        <xsl:message select="'DAVID Title split:', $DAVIDTitleSplit"/>
+        <xsl:copy-of select="$DAVIDTitleSplit"/>
+    </xsl:template>
+    
     <xsl:template name="checkDAVIDTitle" 
         match="System:FileName" mode="checkDAVIDTitle">
         <!--    
@@ -127,27 +232,27 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
         <xsl:param name="DAVIDTitleBeforeSpace" select="
             tokenize($DAVIDTitleToCheck, ' ')[1]"/>
         <xsl:param name="maxCharacters" select="$maxCharacters"/>
-        <xsl:variable name="checkTitleLength">          
+        <xsl:param name="checkTitleLength">          
             <xsl:call-template name="checkTextLength">
                 <xsl:with-param name="text" select="$DAVIDTitleToCheck"/>
                 <xsl:with-param name="fieldName" select="'DAVIDTitle'"/>
             </xsl:call-template>
-        </xsl:variable>        
-        <xsl:variable name="titleTooLong" select="
+        </xsl:param>        
+        <xsl:param name="titleTooLong" select="
             boolean($checkTitleLength//error)"/>
-        <xsl:variable name="funnyDates" select="
+        <xsl:param name="funnyDates" select="
             contains($DAVIDTitleBeforeSpace, '-00-')"/>
-        <xsl:variable name="namingConventionViolation" select="
+        <xsl:param name="namingConventionViolation" select="
             not(matches($DAVIDTitleToCheck, $nyprNamingConvention))"/>
-        <xsl:variable name="illegalName" select="
+        <xsl:param name="illegalName" select="
             $titleTooLong or $funnyDates or $namingConventionViolation"/>
-        <xsl:variable name="titleTooLongMessage" select="
+        <xsl:param name="titleTooLongMessage" select="
             ($DAVIDTitleToCheck, 'is too long')
             [$titleTooLong]"/>
-        <xsl:variable name="funnyDateMessage" select="
+        <xsl:param name="funnyDateMessage" select="
             ('Funny dates in', $DAVIDTitleBeforeSpace)
             [$funnyDates]"/>
-        <xsl:variable name="namingConventionViolationMessage" select="
+        <xsl:param name="namingConventionViolationMessage" select="
             ($DAVIDTitleToCheck,
             '_ does not conform to the NYPR Archives naming convention.')
             [$namingConventionViolation]"/>
@@ -168,25 +273,25 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
             <xsl:element name="DAVIDTitleBeforeSpace">
                 <xsl:value-of select="$DAVIDTitleBeforeSpace"/>
             </xsl:element>
-            <xsl:copy-of select="$titleTooLong"/>
-            <xsl:apply-templates select="
-                $DAVIDTitleToCheck[$funnyDates]" mode="generateError">
-                <xsl:with-param name="errorType" select="'funnyDate'"/>
-                <xsl:with-param name="fieldName" select="'DAVIDTitle'"/>
-                <xsl:with-param name="errorMessage" select="$funnyDateMessage"/>
-            </xsl:apply-templates>
-            <xsl:apply-templates
-                select="
-                    $DAVIDTitleToCheck[$namingConventionViolation]"
-                mode="
-                generateError">
-                <xsl:with-param name="errorType" select="
-                    'namingConventionViolation'"/>
-                <xsl:with-param name="fieldName" select="
-                    'DAVIDTitle'"/>
-                <xsl:with-param name="errorMessage" select="
-                    $namingConventionViolationMessage"/>
-            </xsl:apply-templates>            
+            <xsl:copy-of select="$checkTitleLength//error"/>
+            <xsl:if test="$funnyDates">
+                <xsl:call-template name="generateError">
+                    <xsl:with-param name="errorType" select="'funnyDate'"/>
+                    <xsl:with-param name="fieldName" select="'DAVIDTitle'"/>
+                    <xsl:with-param name="errorMessage" select="$funnyDateMessage"/>
+                </xsl:call-template>
+            </xsl:if>            
+            <xsl:if test="$namingConventionViolation">
+                <xsl:call-template name="
+                    generateError">
+                    <xsl:with-param name="errorType" select="
+                        'namingConventionViolation'"/>
+                    <xsl:with-param name="fieldName" select="
+                        'DAVIDTitle'"/>
+                    <xsl:with-param name="errorMessage" select="
+                        $namingConventionViolationMessage"/>
+                </xsl:call-template>  
+            </xsl:if>
         </xsl:variable>
         <xsl:message select="
             'Tested DAVID Title:', $testedDAVIDTitle"/>
@@ -203,111 +308,6 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
         </xsl:variable>
         <xsl:message select="'Checked DAVID Title:', $checkedDAVIDTitle"/>
         <xsl:copy-of select="$checkedDAVIDTitle"/>
-    </xsl:template>
-
-    <xsl:template name="splitDAVIDTitle" 
-        match="DAVIDTitle" mode="splitDAVIDTitle">
-        <!-- Split a valid DAVID Title into its components -->
-        <xsl:param name="titleToSplit" select="."/>
-        <xsl:message select="
-            concat('Split title ', $titleToSplit)"/>
-        <xsl:variable name="checkedDAVIDTitle">
-            <xsl:call-template name="checkDAVIDTitle">
-                <xsl:with-param name="DAVIDTitleToCheck" select="$titleToSplit"/>
-            </xsl:call-template>
-        </xsl:variable>
-        <xsl:copy-of select="$checkedDAVIDTitle"/>
-        <xsl:variable name="DAVIDTitleBeforeSpace" select="
-            $checkedDAVIDTitle//DAVIDTitleBeforeSpace"/>
-        <xsl:variable name="DAVIDTitleTokenized"
-            select="
-                fn:tokenize(
-                $DAVIDTitleBeforeSpace, '-'
-                )
-                [$checkedDAVIDTitle//@DAVIDTitleComplies = 'true']"
-        />
-        <xsl:message select="
-            'DAVID Title tokenized:', $DAVIDTitleTokenized"/>
-        <xsl:variable name="parsedYear" select="
-            $DAVIDTitleTokenized[3]"/>
-        <xsl:variable name="parsedMonth" select="
-            $DAVIDTitleTokenized[4]"/>
-        <xsl:variable name="parsedDay" select="
-            $DAVIDTitleTokenized[5]"/>
-        <xsl:variable name="instantiationID" select="
-            $DAVIDTitleTokenized[6]"/>
-        <xsl:variable name="instantiationIDParsed">
-            <xsl:call-template name="parseInstantiationID">
-                <xsl:with-param name="instantiationID" select="
-                    normalize-space($instantiationID)"/>
-            </xsl:call-template>
-        </xsl:variable>
-        <xsl:variable name="DAVIDTitleSplit">
-            <DAVIDTitleBeforeSpace>
-                <xsl:value-of select="$DAVIDTitleBeforeSpace"/>
-            </DAVIDTitleBeforeSpace>
-            <collectionAcronym>
-                <xsl:value-of select="$DAVIDTitleTokenized[1]"/>
-            </collectionAcronym>
-            <seriesAcronym>
-                <xsl:value-of select="$DAVIDTitleTokenized[2]"/>
-            </seriesAcronym>
-            <parsedYear>
-                <xsl:value-of select="$parsedYear"/>
-            </parsedYear>
-            <parsedMonth>
-                <xsl:value-of select="$parsedMonth"/>
-            </parsedMonth>
-            <parsedDay>
-                <xsl:value-of select="$parsedDay"/>
-            </parsedDay>
-            <DAVIDTitleDate>
-                <xsl:value-of
-                    select="
-                        string-join(
-                        ($parsedYear, $parsedMonth, $parsedDay)
-                        , '-')"
-                />
-            </DAVIDTitleDate>
-            <instantiationID>
-                <xsl:value-of select="$instantiationID"/>
-            </instantiationID>
-            <xsl:copy-of select="$instantiationIDParsed"/>
-            <assetID>
-                <xsl:value-of
-                    select="
-                        $instantiationIDParsed/instantiationIDParsed/
-                        assetID"
-                />
-            </assetID>
-            <instantiationSuffixComplete>
-                <xsl:value-of
-                    select="
-                    $instantiationIDParsed/instantiationIDParsed/
-                    instantiationSuffixComplete"/>
-            </instantiationSuffixComplete>
-            <instantiationSuffix>
-                <xsl:value-of
-                    select="
-                    $instantiationIDParsed/instantiationIDParsed/
-                    instantiationSuffix"/>
-            </instantiationSuffix>
-            <instantiationSegmentSuffix>
-                <xsl:value-of
-                    select="$instantiationIDParsed/instantiationIDParsed/
-                    instantiationSegmentSuffix"/>
-            </instantiationSegmentSuffix>
-            <freeText>
-                <xsl:value-of
-                    select="
-                        substring-after(
-                        $titleToSplit, $DAVIDTitleBeforeSpace
-                        )"
-                />
-            </freeText>
-        </xsl:variable>
-        <xsl:message select="'DAVID Title split:', $DAVIDTitleSplit"/>
-        <xsl:copy-of select="$DAVIDTitleSplit"/>
     </xsl:template>
 
     <xsl:template name="determineGeneration">
@@ -337,6 +337,7 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
         <xsl:param name="instantiationSuffixMT" select="''"/>
         <xsl:param name="instantiationFirstTrack" select="0"/>
         <xsl:param name="instantiationLastTrack" select="0"/>
+        <xsl:variable name="parsedGeneration">
         <parsedGeneration>
             <xsl:choose>
                 <xsl:when
@@ -369,55 +370,61 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
                 <xsl:value-of select="concat(' stream ', $instantiationSuffixMT)"/>
             </xsl:if>
         </parsedGeneration>
+        </xsl:variable>
+        <xsl:copy-of select="$parsedGeneration"/>
+        <xsl:message select="'Parsed generation: ', $parsedGeneration"/>
     </xsl:template>
 
-    <xsl:template name="extractMUNINumber" 
-        match="DAVIDTitle[starts-with(., 'MUNI-')]"
+    <xsl:template name="extractMUNINumber" match="DAVIDTitle[starts-with(., 'MUNI-')]"
         mode="extractMUNINumber">
         <!--determine MUNI number -->
         <xsl:param name="DAVIDTitle" select="."/>
         <xsl:param name="freeText" select="
-            substring-after($DAVIDTitle, ' ')"/>
+                substring-after($DAVIDTitle, ' ')"/>
         <xsl:message select="'Find MUNI number in', $freeText"/>
-        <muniNumber>
-            <xsl:variable name="muniPattern">
-                <xsl:analyze-string select="$freeText" regex="\s+(L*T\d+)\s*">
-                    <xsl:matching-substring>
-                        <xsl:value-of select="regex-group(1)"/>
-                    </xsl:matching-substring>
-                </xsl:analyze-string>
-            </xsl:variable>            
-            <xsl:message select="
-                'MUNI pattern found: ', $muniPattern"/>            
-            <xsl:choose>
-                <xsl:when test="normalize-space($muniPattern) = ''">
-                    <xsl:variable name="errorMessage"
-                        select="
-                            'MUNI filename ', $DAVIDTitle,
-                            ' is missing its MUNI T/LT number.'"/>
-                    <xsl:message>
-                        <xsl:value-of select="$errorMessage"/>
-                    </xsl:message>
-                    <xsl:element name="error">
-                        <xsl:attribute name="type" select="'missing_MUNI_number'"/>
-                        <xsl:value-of select="$errorMessage"/>
-                    </xsl:element>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$muniPattern"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </muniNumber>
-        <rTapeNumber>
-            <xsl:variable name="rTapeNumber">
-                <xsl:analyze-string select="$freeText" regex="\s+(R*\d+)\s*">
-                    <xsl:matching-substring>
-                        <xsl:value-of select="regex-group(1)"/>
-                    </xsl:matching-substring>
-                </xsl:analyze-string>
-            </xsl:variable>
-            <xsl:value-of select="$rTapeNumber"/>
-        </rTapeNumber>
+        <xsl:variable name="muniNumbers">
+            <muniNumber>
+                <xsl:variable name="muniPattern">
+                    <xsl:analyze-string select="$freeText" regex="\s+(L*T\d+)\s*">
+                        <xsl:matching-substring>
+                            <xsl:value-of select="regex-group(1)"/>
+                        </xsl:matching-substring>
+                    </xsl:analyze-string>
+                </xsl:variable>
+                <xsl:message select="
+                        'MUNI pattern found: ', $muniPattern"/>
+                <xsl:choose>
+                    <xsl:when test="normalize-space($muniPattern) = ''">
+                        <xsl:variable name="errorMessage"
+                            select="
+                                'MUNI filename ', $DAVIDTitle,
+                                ' is missing its MUNI T/LT number.'"/>
+                        <xsl:message>
+                            <xsl:value-of select="$errorMessage"/>
+                        </xsl:message>
+                        <xsl:element name="error">
+                            <xsl:attribute name="type" select="'missing_MUNI_number'"/>
+                            <xsl:value-of select="$errorMessage"/>
+                        </xsl:element>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$muniPattern"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </muniNumber>
+            <rTapeNumber>
+                <xsl:variable name="rTapeNumber">
+                    <xsl:analyze-string select="$freeText" regex="\s+(R*\d+)\s*">
+                        <xsl:matching-substring>
+                            <xsl:value-of select="regex-group(1)"/>
+                        </xsl:matching-substring>
+                    </xsl:analyze-string>
+                </xsl:variable>
+                <xsl:value-of select="$rTapeNumber"/>
+            </rTapeNumber>
+        </xsl:variable>
+        <xsl:copy-of select="$muniNumbers"/>
+        <xsl:message select="'MUNI numbers:', $muniNumbers"/>
     </xsl:template>
 
     <xsl:template name="parseDAVIDTitle" 
@@ -440,81 +447,85 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
 
         <!--        First: Is the DAVID title OK?-->
         <xsl:param name="filenameToParse" select="."/>
-
+        <xsl:param name="filenameToParseMessage">
+            <xsl:message select="
+                concat('Filename to parse: ', $filenameToParse)"/>
+        </xsl:param>
         <xsl:param name="checkedDAVIDTitle">
             <xsl:call-template name="checkDAVIDTitle">
                 <xsl:with-param name="filenameToCheck" select="
                     $filenameToParse"/>
             </xsl:call-template>
         </xsl:param>
+                
         <!-- If file is OK, parse -->
         <xsl:param name="titleToParse"
             select="
                 $checkedDAVIDTitle
                 [not(//error)]
                 /checkedDAVIDTitle/DAVIDTitle"/>
+        <xsl:param name="titleToParseMessage">
+            <xsl:message select="
+                concat('Title to parse: ', $titleToParse)"/>
+        </xsl:param>
         <xsl:param name="DAVIDTitleBeforeSpace"
             select="
                 $checkedDAVIDTitle
                 [not(//error)]
                 /checkedDAVIDTitle/DAVIDTitleBeforeSpace"/>
-        <xsl:message select="
-            concat('Filename to parse: ', $filenameToParse)"/>
-        <xsl:message select="
-            concat('Title to parse: ', $titleToParse)"/>
+        
         <!--        Parse the DAVID Title -->
-        <xsl:variable name="splitDAVIDTitle">
+        <xsl:param name="splitDAVIDTitle">
             <xsl:apply-templates
                 select="
                     $checkedDAVIDTitle
                     [not(//error)]
                     /checkedDAVIDTitle/DAVIDTitle"
                 mode="splitDAVIDTitle"/>
-        </xsl:variable>
+        </xsl:param>
         <!--        First, the tokenized title -->
-        <xsl:variable name="collectionAcronym" select="$splitDAVIDTitle/collectionAcronym"/>
-        <xsl:variable name="seriesAcronym" select="$splitDAVIDTitle/seriesAcronym"/>
-        <xsl:variable name="parsedYear" select="$splitDAVIDTitle/parsedYear"/>
-        <xsl:variable name="parsedMonth" select="$splitDAVIDTitle/parsedMonth"/>
-        <xsl:variable name="parsedDay" select="$splitDAVIDTitle/parsedDay"/>
-        <xsl:variable name="DAVIDTitleDate" select="$splitDAVIDTitle/DAVIDTitleDate"/>
-        <xsl:variable name="instantiationID" select="$splitDAVIDTitle/instantiationID"/>
-        <xsl:variable name="assetID" select="$splitDAVIDTitle/assetID"/>
-        <xsl:variable name="instantiationSuffixComplete" select="
+        <xsl:param name="collectionAcronym" select="$splitDAVIDTitle/collectionAcronym"/>
+        <xsl:param name="seriesAcronym" select="$splitDAVIDTitle/seriesAcronym"/>
+        <xsl:param name="parsedYear" select="$splitDAVIDTitle/parsedYear"/>
+        <xsl:param name="parsedMonth" select="$splitDAVIDTitle/parsedMonth"/>
+        <xsl:param name="parsedDay" select="$splitDAVIDTitle/parsedDay"/>
+        <xsl:param name="DAVIDTitleDate" select="$splitDAVIDTitle/DAVIDTitleDate"/>
+        <xsl:param name="instantiationID" select="$splitDAVIDTitle/instantiationID"/>
+        <xsl:param name="assetID" select="$splitDAVIDTitle/assetID"/>
+        <xsl:param name="instantiationSuffixComplete" select="
             $splitDAVIDTitle/instantiationIDParsed/
             instantiationSuffixComplete"/>
-        <xsl:variable name="instantiationSuffix" select="$splitDAVIDTitle/instantiationSuffix"/>
-        <xsl:variable name="instantiationSegmentSuffix" select="$splitDAVIDTitle/instantiationSegmentSuffix"/>
-        <xsl:variable name="instantiationSuffixMT" select="
+        <xsl:param name="instantiationSuffix" select="$splitDAVIDTitle/instantiationSuffix"/>
+        <xsl:param name="instantiationSegmentSuffix" select="$splitDAVIDTitle/instantiationSegmentSuffix"/>
+        <xsl:param name="instantiationSuffixMT" select="
             $splitDAVIDTitle/instantiationIDParsed/
             instantiationSuffixMT"/>
-        <xsl:variable name="instantiationFirstTrack" select="
+        <xsl:param name="instantiationFirstTrack" select="
             $splitDAVIDTitle/instantiationIDParsed/
             instantiationFirstTrack[matches(., '^\d+$')]" as="xs:integer?"/>
-        <xsl:variable name="instantiationLastTrack" select="
+        <xsl:param name="instantiationLastTrack" select="
             $splitDAVIDTitle/instantiationIDParsed/
             instantiationLastTrack[matches(., '^\d+$')]" as="xs:integer?"/>        
-        <xsl:variable name="freeText" select="$splitDAVIDTitle/freeText"/>
+        <xsl:param name="freeText" select="$splitDAVIDTitle/freeText"/>
 
         <!--        Now for the more involved parameters -->
 
         <!--        Collection info -->
-        <xsl:variable name="collectionInfo">
+        <xsl:param name="collectionInfo">
             <xsl:call-template name="processCollection">
                 <xsl:with-param name="collectionAcronym" select="
                     $collectionAcronym[. !='']"/>
             </xsl:call-template>
-        </xsl:variable>
-        <xsl:message select="$collectionInfo"/>
+        </xsl:param>        
 
-        <xsl:variable name="finalSeriesEntry">
+        <xsl:param name="finalSeriesEntry">
             <xsl:call-template name="findSeriesXML">
                 <xsl:with-param name="seriesAcronym" select="
                     $seriesAcronym"/>
             </xsl:call-template>
-        </xsl:variable>
+        </xsl:param>
 
-        <xsl:variable name="seriesName"
+        <xsl:param name="seriesName"
             select="
             $finalSeriesEntry[not(//error)]
             //pb:pbcoreTitle[@titleType = 'Series']"/>
@@ -523,7 +534,7 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
 
         <!-- Translate 'uu' (unknowns)
         to earliest date in possible range -->
-        <xsl:variable name="DAVIDTitleDateTranslated"
+        <xsl:param name="DAVIDTitleDateTranslated"
             select="
                 concat(
                 translate(
@@ -544,7 +555,7 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
                 )"/>
 
         <!--        Find the corresponding cavafy asset entry -->
-        <xsl:variable name="finalCavafyEntry">
+        <xsl:param name="finalCavafyEntry">
             <xsl:choose>
                 <xsl:when test="$checkedDAVIDTitle/checkedDAVIDTitle/filenameExtension = 'NEWASSET'">
                     <!-- This means that we are dealing with an asset,
@@ -561,18 +572,14 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
                     </xsl:call-template>
                 </xsl:otherwise>
             </xsl:choose>
-        </xsl:variable>
-
-        <xsl:message select="
-            'Final cavafy entry', 
-            $finalCavafyEntry"/>
+        </xsl:param>        
         
-        <xsl:variable name="filenameExtension" select="
+        <xsl:param name="filenameExtension" select="
             $checkedDAVIDTitle
             /checkedDAVIDTitle
             /filenameExtension"/>
         
-        <xsl:variable name="format" select="
+        <xsl:param name="format" select="
             if 
             (upper-case($filenameExtension) = 'WAV')
             then 'BWF'
@@ -580,7 +587,7 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
             $filenameExtension"/>
 
         <!--            Find a matching instantiation -->
-        <xsl:variable name="instantiationData">
+        <xsl:param name="instantiationData">
             <xsl:call-template name="findInstantiation">
                 <xsl:with-param name="instantiationID" select="
                     $instantiationID"/>
@@ -589,14 +596,14 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
                 <xsl:with-param name="format" select="
                     $format"/>
             </xsl:call-template>
-        </xsl:variable>
+        </xsl:param>
 
         <!--        Info from free text -->
-        <xsl:variable name="freeTextNormalized">
+        <xsl:param name="freeTextNormalized">
             <xsl:value-of select="normalize-space($splitDAVIDTitle/freeText)"/>
-        </xsl:variable>
+        </xsl:param>
 
-        <xsl:variable name="parsedGeneration">
+        <xsl:param name="parsedGeneration">
             <xsl:call-template name="determineGeneration">
                 <xsl:with-param name="instantiationSuffix" select="$instantiationSuffix"/>
                 <xsl:with-param name="freeText" select="$freeText"/>
@@ -604,16 +611,13 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
                 <xsl:with-param name="instantiationFirstTrack" select="$instantiationFirstTrack[. gt 0]"/>
                 <xsl:with-param name="instantiationLastTrack" select="$instantiationLastTrack[. gt 0]"/>
             </xsl:call-template>
-        </xsl:variable>
-        
-        <xsl:message select="'Parsed generation:', $parsedGeneration"/>
-        
-        <xsl:variable name="segmentFlag">
+        </xsl:param>        
+        <xsl:param name="segmentFlag">
             <xsl:value-of select="
                 analyze-string($freeText, $segmentFlags)/fn:match"/>
-        </xsl:variable>
+        </xsl:param>
 
-        <xsl:variable name="muniNumber">
+        <xsl:param name="muniNumber">
             <xsl:apply-templates
                 select="
                     $checkedDAVIDTitle
@@ -621,15 +625,12 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
                 mode="extractMUNINumber">
                 <xsl:with-param name="freeText" select="$freeText"/>
             </xsl:apply-templates>
-        </xsl:variable>
+        </xsl:param>
         
-        <xsl:message select="
-            'MUNI Number:', $muniNumber"/>
-
         <!--determine MUNI original format 
             based on T or LT 
             (R: tape (dub), T: tape, LT: disc)-->
-        <xsl:variable name="MUNIMedium"
+        <xsl:param name="MUNIMedium"
             select="
                 if (starts-with($muniNumber/rTapeNumber, 'R'))
                 then
@@ -645,13 +646,16 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
                         else
                             ''"
         />
-        <xsl:message select="'MUNI Medium: ', $MUNIMedium"/>
+        <xsl:param name="MUNIMediumMessage">
+            <xsl:message select="'MUNI Medium: ', $MUNIMedium"/>
+        </xsl:param>
+        
         
         <!--        The 'theme' field 
             is derived from the asset number 
             and is used by DAVID to publish audio -->
-        <xsl:variable name="theme" select="concat('archive_import', $assetID)"/>
-        <xsl:variable name="mp3URL"
+        <xsl:param name="theme" select="concat('archive_import', $assetID)"/>
+        <xsl:param name="mp3URL"
             select="
                 concat(
                 'http://audio.wnyc.org/archive_import/',
@@ -667,7 +671,7 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
             <xsl:attribute name="isSegment" select="matches($titleToParse, $segmentFlags)"/>
             <xsl:attribute name="isMultiTrack" select="matches($titleToParse, $multitrackFlag)"/>            
             <parsedElements>
-                <xsl:copy-of select="$checkedDAVIDTitle[//error]"/>
+                <xsl:copy-of select="$checkedDAVIDTitle"/>
                 <xsl:element name="filenameExtension">
                     <xsl:value-of select="$filenameExtension"/>
                 </xsl:element>

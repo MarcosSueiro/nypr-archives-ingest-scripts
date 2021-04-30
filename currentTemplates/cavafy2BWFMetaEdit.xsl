@@ -113,6 +113,8 @@
                 [contains(pb:contributorRole, 'ngineer')]
                 /pb:contributor" separator="{$separatingTokenLong}"/>
         </xsl:param>
+        <xsl:param name="multipleGenres" select="
+            count(pb:pbcoreGenre) gt 1"></xsl:param>
         <xsl:param name="RIFF:Genre">
             <IGNR>
                 <xsl:value-of select="
@@ -199,6 +201,7 @@
                     pb:pbcoreTitle[@titleType='Collection'], ' ', 
                     $RIFF:Medium, ' ', 
                     $generation, ' from ', $assetID)"/>
+                <xsl:with-param name="fieldName" select="'SourceForm'"/>
             </xsl:call-template>
             <xsl:value-of select="concat($RIFF:Medium, ' from ', pb:pbcoreIdentifier[@source='WNYC Archive Catalog'])"/>
         </xsl:param>

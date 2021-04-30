@@ -34,6 +34,7 @@
         <!--    Exactly one instantiation ID with @source = 'WNYC Archive Catalog' -->
         <!--    Exactly one Format, Format Location, Media Type and Generation -->
         <!--    At most one essence track -->
+        
         <xsl:param name="minAssetIDCount" select="1"/>
         <xsl:param name="maxAssetIDCount" select="1"/>
         <xsl:param name="minAssetDateCount" select="1"/>
@@ -292,7 +293,9 @@
             <xsl:apply-templates select="pb:pbcoreInstantiation" mode="instantiationQC"/>
         </xsl:variable>
 
+        <xsl:message select="'CAVAFY WARNINGS for ', ."/>
         <xsl:variable name="cavafyWarnings">
+            
             <xsl:apply-templates select="." mode="defaultValuesWarning"/>
         </xsl:variable>
 

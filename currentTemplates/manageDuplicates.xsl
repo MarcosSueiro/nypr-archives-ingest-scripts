@@ -35,6 +35,8 @@ from different sources -->
         select="
         '###===###'"/>
     
+    
+    
     <xsl:template name="checkConflicts" 
         match="inputs" 
         mode="checkConflicts">        
@@ -45,23 +47,22 @@ from different sources -->
         <xsl:param name="field4"/>
         <xsl:param name="field5"/>
         <xsl:param name="fieldName" select="name($field1(. != '')[1])"/>
-        <xsl:param name="filename" select=".//System:FileName"/>
-        <xsl:param name="validatingString" select="''"/>
+        <xsl:param name="filename"/>
+        <xsl:param name="validatingString" select="'\w'"/><!-- Needs a word string -->
         <xsl:param name="separatingToken" select="$separatingToken"/>
         <xsl:param name="defaultValue">
             <xsl:element name="error">
                 <xsl:attribute name="type" select="
-                        'no_field_entry'"/>
+                    'no_field_entry'"/>
                 <xsl:value-of select="$fieldName[1]"/>
             </xsl:element>
         </xsl:param>
         <xsl:param name="normalize" select="true()"/>
-        <xsl:message select="'
-            Check for conflicts among values for ', $fieldName[1], ': ', 
+        <xsl:message select="'Check for conflicts among values for ', $fieldName[1], ': ', 
             string-join(
             ($field1, $field2, $field3, $field4, $field5), 
             $separatingToken)"/>
-
+        
         <xsl:variable name="distinctFields">
             <xsl:call-template name="splitParseValidate">
                 <xsl:with-param name="input">
@@ -72,28 +73,52 @@ from different sources -->
                 <xsl:with-param name="separatingToken" select="$separatingToken"/>
                 <xsl:with-param name="validatingString" select="
                     $validatingString"/>
-            <xsl:with-param name="normalize" select="$normalize"/>
+                <xsl:with-param name="normalize" select="$normalize"/>
             </xsl:call-template>
         </xsl:variable>
+        <xsl:variable name="distinctFound" select="
+            $distinctFields/inputParsed/valid"/>
         <xsl:variable name="distinctFoundCount" select="
-            count($distinctFields/inputParsed/valid)"/>
+            count($distinctFound)"/>
         <xsl:message>
             <xsl:value-of select="
                 $distinctFoundCount, ' distinct values for ',
                 $fieldName, ' found: '"/>
             <xsl:value-of select="
-                $distinctFields/inputParsed/valid" separator="
+                $distinctFound" separator="
                 {$separatingToken}"/>
         </xsl:message>
+        <xsl:variable name="distinctFoundSorted">
+            <xsl:for-each select="distinct-values($distinctFound)">
+                <xsl:sort select="."/>
+                <valid>
+                    <xsl:copy-of select="."/>
+                </valid>
+            </xsl:for-each>
+        </xsl:variable>
+        <!-- Check for basic matching -->
+        <!-- See collation info at 
+        https://saxonica.com/html/documentation/extensibility/config-extend/collation/ -->
+        <xsl:variable name="basicCheck">
+            <xsl:for-each select="$distinctFound[position() != last()]">
+                <xsl:variable name="nextField" select="following-sibling::*[1]"/>
+                <xsl:element name="compare">
+                    <xsl:attribute name="field" select="."/>
+                    <xsl:attribute name="nextField" select="$nextField"/>
+                    <xsl:value-of select="
+                        compare(., $nextField
+                        , 
+                        'http://www.w3.org/2013/collation/UCA?strength=primary'
+                        )"/>
+                </xsl:element>
+            </xsl:for-each>
+        </xsl:variable>
+        
         <xsl:variable name="checkConflictResult">
-        <xsl:choose>
-            <xsl:when test="$distinctFoundCount eq 1">                
-                <xsl:value-of select="$distinctFields/inputParsed/valid"/>
-            </xsl:when>
-            <xsl:when test="$distinctFoundCount lt 1">                
-                <xsl:value-of select="$defaultValue"/>
-            </xsl:when>            
-            <xsl:when test="$distinctFoundCount gt 1">
+            <!-- Generate error for 
+            fields that do not match 
+            at their most basic -->
+            <xsl:for-each select="$basicCheck/compare[. != 0]">
                 <xsl:element name="error">
                     <xsl:attribute name="type"
                         select="'conflicting_values'"/>
@@ -101,11 +126,22 @@ from different sources -->
                         $fieldName, 
                         ' in ', $filename, ': '"/>
                     <xsl:value-of select="
-                        $distinctFields/inputParsed/valid" separator="
+                        @field|@nextField" separator="
                         {$separatingToken}"/>
                 </xsl:element>
-            </xsl:when>
-        </xsl:choose>
+            </xsl:for-each>
+            
+            <xsl:choose>
+                <!-- Only one distinct value; pass-through -->
+                <xsl:when test="$distinctFoundCount lt 1">                
+                    <xsl:value-of select="$defaultValue"/>
+                </xsl:when>
+                <!-- Output the data-richest field -->
+                <!-- E.g. prefer Le Carré to Le Carre -->
+                <xsl:otherwise>
+                    <xsl:value-of select="$distinctFoundSorted/valid[last()]"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:variable>
         <xsl:copy-of select="$checkConflictResult"/>
         <xsl:message select="'Chosen value:', $checkConflictResult"/>

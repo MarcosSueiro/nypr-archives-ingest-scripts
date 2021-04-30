@@ -37,16 +37,21 @@ the source xml document would be:
     <xsl:import href="parseDAVIDTitle.xsl"/>
 
     <xsl:template match="seriesList">
-        <xsl:apply-templates/>
+        <xsl:message>
+            <xsl:value-of select="'QC for the following list of series: '"/>
+            <xsl:value-of select="series/seriesName" separator="{$separatingTokenLong}"/>
+        </xsl:message>
+        <xsl:apply-templates select="series"/>
     </xsl:template>
 
     <xsl:template match="series">
-        <xsl:variable name="seriesEntry">
+        <xsl:param name="seriesEntry">
             <xsl:call-template name="findSeriesXMLFromName">
                 <xsl:with-param name="seriesName" select="seriesName"/>
             </xsl:call-template>
-        </xsl:variable>
-        <xsl:variable name="seriesAssetsXMLs">
+            <xsl:message select="'QC for series', seriesName"/>
+        </xsl:param>        
+        <xsl:param name="seriesAssetsXMLs">
             <xsl:choose>
                 <xsl:when test="contains(searchString, 'https://cavafy.wnyc.org/')">
                     <xsl:call-template name="findCavafyXMLs">
@@ -73,9 +78,8 @@ the source xml document would be:
                     </xsl:call-template>
                 </xsl:otherwise>
             </xsl:choose>
-        </xsl:variable>
-
-        <xsl:variable name="completeLog">
+        </xsl:param>
+        <xsl:param name="completeLog">
             <completeLog>
                 <seriesName>
                     <xsl:value-of select="seriesName"/>
@@ -101,7 +105,7 @@ the source xml document would be:
                         $seriesAssetsXMLs/pb:pbcoreCollection"
                     mode="cavafyStrictQC"/>
             </completeLog>
-        </xsl:variable>
+        </xsl:param>
         <xsl:call-template name="generateErrorLog">
             <xsl:with-param name="completeLog" select="$completeLog"/>
         </xsl:call-template>

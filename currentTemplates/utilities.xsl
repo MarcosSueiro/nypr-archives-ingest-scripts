@@ -11,6 +11,10 @@
     <xsl:mode on-no-match="deep-skip"/>
 
     <xsl:output method="html" version="4.0" indent="yes"/>
+    
+    <xsl:variable name="ISODatePattern" select="
+        '^([0-9]{4})-?(1[0-2]|0[1-9])-?(3[01]|0[1-9]|[12][0-9])$'"/>
+    <xsl:variable name="CMSShowList" select="doc('Shows.xml')"/>
 
     <xsl:variable name="separatingToken" select="';'"/>
     <xsl:variable name="validatingKeywordString" select="'id.loc.gov/authorities/subjects/'"/>
@@ -55,7 +59,8 @@
         </xsl:call-template>
     </xsl:function>
 
-    <xsl:template match="node()" name="splitParseValidate" mode="splitParseValidate">
+    <xsl:template match="node()" name="splitParseValidate" mode="
+        splitParseValidate">
         <!-- Parse a token-separated string into unique, 
             non-empty components;
         validate (or not) each component 
@@ -84,7 +89,10 @@
         <inputParsed>
             <xsl:for-each
                 select="
-                    distinct-values($inputTokenized/tokenized)[. != ''][matches(., $validatingString)]">
+                    distinct-values(
+                    $inputTokenized/tokenized)
+                    [. != '']
+                    [matches(., $validatingString)]">
                 <valid>
                     <xsl:value-of select="."/>
                 </valid>
@@ -456,7 +464,6 @@
         />
     </xsl:function>
 
-
     <xsl:function name="WNYC:trimFinalPeriod">
         <!-- Trim a final period -->
         <xsl:param name="text"/>
@@ -503,8 +510,6 @@
         <xsl:param name="fileTooLong" select="
             $excessCharacterCount gt 0"/>
         <xsl:param name="generateError" select="true()"/>
-
-        <xsl:copy-of select="$fileTooLong"/>
         <xsl:variable name="excessCharacters" select="
             substring($text, $maxCharacters)"/>
         <xsl:variable name="errorMessage"
@@ -512,17 +517,16 @@
                 $fieldName, $text,
                 '_ is', $excessCharacterCount, ' characters too long!',
                 'Remove string _', $excessCharacters, '_'"/>
-        <xsl:apply-templates
-            select="
-                $text[$excessCharacterCount gt 0]
-                [$generateError]"
-            mode="
-            generateError">
-            <xsl:with-param name="errorType" select="'textTooLong'"/>
-            <xsl:with-param name="errorMessage" select="
-                $errorMessage"/>
-            <xsl:with-param name="fieldName" select="'DAVIDTitle'"/>
-        </xsl:apply-templates>
+        <xsl:if test="$excessCharacterCount gt 0 and $generateError">
+            <xsl:message select="$errorMessage"/>
+            <xsl:call-template name="
+                generateError">
+                <xsl:with-param name="errorType" select="'textTooLong'"/>
+                <xsl:with-param name="errorMessage" select="
+                    $errorMessage"/>
+                <xsl:with-param name="fieldName" select="'DAVIDTitle'"/>
+            </xsl:call-template>
+        </xsl:if>        
     </xsl:template>
 
     <xsl:template name="generateError" match="node()" mode="generateError">
@@ -535,5 +539,66 @@
         </xsl:element>
         <xsl:message select="$errorMessage"/>
     </xsl:template>
-
+    
+    <xsl:function name="WNYC:reverseArticle">
+        <xsl:param name="text" as="xs:string"/>
+        <xsl:variable name="analyzedText" select="
+            analyze-string(
+            normalize-space(
+            $text
+            ), 
+            ', (The|A|a|the)$'
+            )"/>        
+        <xsl:variable name="reversedText">
+            <xsl:value-of select="
+                $analyzedText/
+                fn:match/
+                fn:group[@nr=1]"/>
+            <xsl:value-of select="' '[$analyzedText/fn:match !='']"/>
+            <xsl:value-of select="$analyzedText/fn:non-match"/>
+        </xsl:variable>
+        <xsl:value-of select="
+            WNYC:Capitalize(
+            normalize-space(
+            $reversedText
+            ), 1
+            )"/>
+    </xsl:function>
+    
+    <xsl:template name="mp3builder" match="
+        pb:pbcoreDescriptionDocument" mode="mp3builder">
+        <xsl:param name="showName" select="
+            pb:pbcoreTitle[@titleType = 'Series']"/>
+        <xsl:param name="bcastDateAsText" select="pb:pbcoreAssetDate
+            [@dateType = 'broadcast']
+            /normalize-space(.)
+            [matches(., $ISODatePattern)]"/>
+        <xsl:param name="date"
+            select="
+            xs:date(min($bcastDateAsText)        
+            )"
+        />
+        <xsl:param name="exactMatch" select="false()"/>
+        <xsl:param name="articledShowName" select="
+            WNYC:reverseArticle($showName)"/>
+        <xsl:param name="cmsDate" select="
+            fn:format-date($date, '[M01][D01][Y01]')"/>
+        <xsl:param name="cmsShowInfo">
+            <xsl:copy-of
+                select="
+                $CMSShowList/JSON/
+                data[type = 'show']/
+                attributes[title = $showName]"
+            />
+        </xsl:param>
+        <xsl:param name="slug" select="
+            $cmsShowInfo/attributes/slug"/>
+        <xsl:message select="'Generate MP3 for show', $showName, 'on date', $date"/>        
+        <xsl:if test="matches($slug, '\w')">
+            <xsl:value-of select="$slug"/>
+            <xsl:value-of select="$cmsDate"/>
+            <xsl:value-of select="'.mp3'[$exactMatch]"/>
+        </xsl:if>
+    </xsl:template>
+    
 </xsl:stylesheet>

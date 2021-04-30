@@ -3,7 +3,8 @@
         Identify the type of xml, 
         and create separate documents.-->
 
-<!-- You will probably need to first log into cavafy.wnyc.org -->
+<!-- Make sure you are logged into 
+    cavafy.wnyc.org -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions"
@@ -29,6 +30,8 @@
     <xsl:output name="cavafy" encoding="UTF-8" method="xml" version="1.0" indent="yes"/>
     <xsl:output name="DAVID" encoding="ISO-8859-1" method="xml" version="1.0" indent="yes"/>
     <xsl:output name="email" encoding="UTF-8" method="xml" version="1.0" indent="yes"/>
+    
+    
 
     <xsl:variable name="baseURI" select="base-uri()"/>
     <xsl:variable name="parsedBaseURI" select="analyze-string($baseURI, '/')"/>

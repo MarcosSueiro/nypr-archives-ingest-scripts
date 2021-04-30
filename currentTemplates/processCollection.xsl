@@ -43,57 +43,70 @@
         and output 
         collectionInfo/collectionLOCName -->
         <xsl:param name="collectionAcronym" select="."/>
-        <xsl:message select="
-            'Process collection ', $collectionAcronym"/>
+        <xsl:param name="collectionAcronymMessage">
+            <xsl:message
+                select="
+                    concat('Process collection ', $collectionAcronym)"/>
+        </xsl:param>
+
         <!-- Collection found -->
-        <xsl:variable name="collectionConcordanceInfo"
+        <xsl:param name="collectionConcordanceInfo"
             select="
                 $collectionConcordance/collections
                 /collection[collAcro = $collectionAcronym]/*"/>
-        <xsl:variable name="collectionLOCData">
+        <xsl:param name="collectionLOCData">
             <xsl:apply-templates
                 select="
                     $collectionConcordance/collections
                     /collection[collAcro = $collectionAcronym]
                     /collURL[contains(., 'id.loc.gov')]"
                 mode="getLOCData"/>
-        </xsl:variable>
-        
-        <collectionInfo>
-            <xsl:attribute name="collectionAcronym" select="$collectionAcronym"/>
-            <!-- Collection not Found -->
-            <xsl:apply-templates
-                select="
-                    $collectionConcordance/collections
-                    [not(collection/collAcro = $collectionAcronym)]"
-                mode="collectionNotFound">
-                <xsl:with-param name="
-                    collectionAcronym"
-                    select="$collectionAcronym"/>
-            </xsl:apply-templates>
-            <xsl:copy-of select="$collectionConcordanceInfo"/>
-            <collLOCName>
-                <xsl:value-of
+        </xsl:param>
+        <xsl:param name="collectionInfo">
+            <collectionInfo>
+                <xsl:attribute name="collectionAcronym" select="$collectionAcronym"/>
+                <!-- Collection not Found -->
+                <xsl:apply-templates
                     select="
-                        $collectionLOCData/rdf:RDF
-                        /madsrdf:*/madsrdf:authoritativeLabel"
-                />
-            </collLOCName>
-            <xsl:copy-of select="$collectionLOCData"/>
-        </collectionInfo>
+                        $collectionConcordance/collections
+                        [not(collection/collAcro = $collectionAcronym)]"
+                    mode="collectionNotFound">
+                    <xsl:with-param name="
+                    collectionAcronym"
+                        select="$collectionAcronym"/>
+                </xsl:apply-templates>
+                <xsl:copy-of select="$collectionConcordanceInfo"/>
+                <collLOCName>
+                    <xsl:value-of
+                        select="
+                            $collectionLOCData/rdf:RDF
+                            /madsrdf:*/madsrdf:authoritativeLabel"
+                    />
+                </collLOCName>
+                <!--            <xsl:copy-of select="$collectionLOCData"/>-->
+            </collectionInfo>
+        </xsl:param>
+        <xsl:copy-of select="$collectionInfo"/>
+        <xsl:message select="$collectionInfo"/>
     </xsl:template>
 
     <xsl:template match="collections" mode="collectionNotFound">
         <!-- Output error for collections not found -->
         <xsl:param name="collectionAcronym"/>
+        <xsl:param name="collectionNotFoundMessage">
+            <xsl:value-of
+                select="
+                'Collection', $collectionAcronym,
+                'not found in CollectionConcordance.xml'"
+            />
+        </xsl:param>
         <xsl:element name="error">
             <xsl:attribute name="type" select="'collection_not_found'"/>
             <xsl:value-of
-                select="
-                    'Collection', $collectionAcronym,
-                    'not found in CollectionConcordance.xml'"
+                select="$collectionNotFoundMessage"
             />
         </xsl:element>
+        <xsl:message select="$collectionNotFoundMessage"/>
     </xsl:template>
 
     <xsl:template name="getCollectionLoCName" 

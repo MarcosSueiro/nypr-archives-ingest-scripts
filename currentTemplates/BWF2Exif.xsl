@@ -35,6 +35,7 @@
 
     <xsl:template match="File" mode="BWFMetaEdit">
         <!-- Transform each WAVE file to exiftool -->
+        <xsl:param name="input" select="."/>
         <xsl:param name="fullFilename" select="@name"/>
         <xsl:param name="fullFilenameTranslated" select="
             translate(@name, '\', '/')"/>
@@ -44,7 +45,7 @@
             $parsedFullFilename/fn:non-match[last()]"/>
         <xsl:param name="token" select="'.'"/>
         <xsl:param name="directory" select="
-            substring-before($fullFilenameTranslated, $filename)"/>
+            substring-before($fullFilenameTranslated, $filename)" tunnel="yes"/>
         <xsl:param name="filenameNoExtensionRaw"
             select="
                 if ($token)
@@ -62,6 +63,7 @@
                 substring-after($filename, $filenameNoExtensionRaw),
                 $token)"/>
         <xsl:message select="'Convert BWF MetaEdit Core metadata from', @name"/>
+        
         <rdf:Description>
             <xsl:attribute name="rdf:about">
                 <xsl:value-of select="$fullFilenameTranslated"/>

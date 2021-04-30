@@ -41,134 +41,153 @@
                 cavafyStrictQC"/>        
     </xsl:template>
 
-    <xsl:template match="pb:pbcoreDescriptionDocument
-        [not (pb:pbcoreRelation/pb:pbcoreRelationIdentifier = 'SRSLST')]" mode="cavafyStrictQC">
+    <xsl:template
+        match="
+            pb:pbcoreDescriptionDocument
+            [not(
+            pb:pbcoreRelation/pb:pbcoreRelationIdentifier = 'SRSLST'
+            )]"
+        mode="
+        cavafyStrictQC">
         <!-- Test whether each cavafy entry has any errors -->
-        
+
         <xsl:param name="cavafyURL"
             select="
-            concat(
-            'https://cavafy.wnyc.org/assets/', 
-            pb:pbcoreIdentifier
-            [@source = 'pbcore XML database UUID'][1]
-            )"/>
+                concat(
+                'https://cavafy.wnyc.org/assets/',
+                pb:pbcoreIdentifier
+                [@source = 'pbcore XML database UUID']
+                )"/>
         <xsl:param name="cavafyxml" select="concat($cavafyURL, '.xml')"/>
-        <xsl:param name="datePattern" select="
-            '^[12u][0123456789u]{3}-[01u][0123456789u]-[0123u][0123456789u]$'"/>
-        <xsl:message select="
-            'Test whether the cavafy entry ',
-            $cavafyURL,
-            ' has any errors'
-            "/>
+        <xsl:param name="datePattern"
+            select="
+                '^[12u][0123456789u]{3}-[01u][0123456789u]-[0123u][0123456789u]$'"/>
+        <xsl:message
+            select="
+                'Test whether the cavafy entry ',
+                $cavafyURL,
+                ' has any errors'
+                "/>
         <xsl:variable name="cavafyWarnings">
             <xsl:apply-templates select="." mode="defaultValuesWarning"/>
         </xsl:variable>
-      
-        <xsl:variable name="cavafyErrors">            
+
+        <xsl:variable name="cavafyErrors">
             <xsl:variable name="assetIDCount"
                 select="
                     count(
                     pb:pbcoreIdentifier
                     [@source = 'WNYC Archive Catalog']
                     )"/>
-            <xsl:apply-templates select="
-                .[$assetIDCount ne 1]
-                " 
-                mode="generateError">
+            <xsl:message select="$assetIDCount, 'asset ID(s)'"/>
+            <xsl:apply-templates
+                select="
+                    .[$assetIDCount ne 1]
+                    "
+                mode="generateQuantityError">
                 <xsl:with-param name="nodeName" select="
-                    'cavafyID'"/>
+                        'cavafyID'"/>
                 <xsl:with-param name="nodeCount" select="$assetIDCount"/>
                 <xsl:with-param name="minCount" select="1"/>
                 <xsl:with-param name="maxCount" select="1"/>
                 <xsl:with-param name="cavafyxml" select="
-                    $cavafyxml"/>
+                        $cavafyxml"/>
             </xsl:apply-templates>
-            <xsl:variable name="dateCount"  select="
-                count(
-                pb:pbcoreAssetDate
-                [matches(., $datePattern)]
-                )"/>         
+            <xsl:variable name="dateCount"
+                select="
+                    count(
+                    pb:pbcoreAssetDate
+                    [matches(., $datePattern)]
+                    )"/>
+            <xsl:message select="$dateCount, 'date(s)'"/>
             <xsl:apply-templates select="
-                .[$dateCount lt 1]" mode="generateError">
+                    .[$dateCount lt 1]"
+                    mode="generateQuantityError">
                 <xsl:with-param name="nodeName" select="
-                    'assetDate'"/>
+                        'assetDate'"/>
                 <xsl:with-param name="nodeCount" select="
-                    $dateCount"/>
+                        $dateCount"/>
                 <xsl:with-param name="minCount" select="1"/>
                 <xsl:with-param name="cavafyxml" select="
-                    $cavafyxml"/>
+                        $cavafyxml"/>
             </xsl:apply-templates>
-            
+
             <xsl:variable name="collectionCount"
                 select="
                     count(
                     pb:pbcoreTitle[@titleType = 'Collection']
                     )"/>
-            <xsl:apply-templates select="
-                .
-                [$collectionCount ne 1]
-                " 
-                mode="generateError">
+            <xsl:message select="$collectionCount, 'collection(s)'"/>
+            <xsl:apply-templates
+                select="
+                    .
+                    [$collectionCount ne 1]
+                    "
+                    mode="generateQuantityError">
                 <xsl:with-param name="nodeName" select="
-                    'collection'"/>
+                        'collection'"/>
                 <xsl:with-param name="nodeCount" select="$collectionCount"/>
                 <xsl:with-param name="minCount" select="1"/>
                 <xsl:with-param name="maxCount" select="1"/>
                 <xsl:with-param name="cavafyxml" select="
-                    $cavafyxml"/>
+                        $cavafyxml"/>
             </xsl:apply-templates>
-          
+
             <xsl:variable name="seriesCount"
                 select="
                     count(
                     pb:pbcoreTitle[@titleType = 'Series']
                     )"/>
-            <xsl:apply-templates select="
-                .[$seriesCount ne 1]
-                " 
-                mode="generateError">
+            <xsl:message select="$seriesCount, 'series'"/>
+            <xsl:apply-templates
+                select="
+                    .[$seriesCount ne 1]
+                    "
+                    mode="generateQuantityError">
                 <xsl:with-param name="nodeName" select="
-                    'series'"/>
+                        'series'"/>
                 <xsl:with-param name="nodeCount" select="$seriesCount"/>
                 <xsl:with-param name="minCount" select="1"/>
                 <xsl:with-param name="maxCount" select="1"/>
                 <xsl:with-param name="cavafyxml" select="
-                    $cavafyxml"/>
+                        $cavafyxml"/>
             </xsl:apply-templates>
-            
+
             <xsl:variable name="episodeCount"
                 select="
                     count(
                     pb:pbcoreTitle[@titleType = 'Episode']
                     )"/>
+            <xsl:message select="$episodeCount, 'episode title(s)'"/>
             <xsl:apply-templates select="
-                .[$episodeCount ne 1]" 
-                mode="generateError">
+                    .[$episodeCount ne 1]"
+                    mode="generateQuantityError">
                 <xsl:with-param name="nodeName" select="
-                    'episodeTitle'"/>
+                        'episodeTitle'"/>
                 <xsl:with-param name="nodeCount" select="$episodeCount"/>
                 <xsl:with-param name="minCount" select="1"/>
                 <xsl:with-param name="maxCount" select="1"/>
                 <xsl:with-param name="cavafyxml" select="
-                    $cavafyxml"/>
+                        $cavafyxml"/>
             </xsl:apply-templates>
-             
+
             <xsl:variable name="abstractCount"
                 select="
                     count(pb:pbcoreDescription
                     [@descriptionType = 'Abstract'])"/>
+            <xsl:message select="$abstractCount, 'abstract(s)'"/>
             <xsl:apply-templates select="
-                .[$abstractCount ne 1]" 
-                mode="generateError">
+                    .[$abstractCount ne 1]"
+                    mode="generateQuantityError">
                 <xsl:with-param name="nodeName" select="
-                    'abstract'"/>
+                        'abstract'"/>
                 <xsl:with-param name="nodeCount" select="$abstractCount"/>
                 <xsl:with-param name="minCount" select="1"/>
                 <xsl:with-param name="maxCount" select="1"/>
                 <xsl:with-param name="cavafyxml" select="
-                    $cavafyxml"/>
+                        $cavafyxml"/>
             </xsl:apply-templates>
-            
+
             <xsl:if
                 test="pb:pbcoreDescription[@descriptionType = 'Abstract'][contains(., 'No description available')]">
                 <xsl:message terminate="no" select="'ATTENTION: Useless abstract in ', $cavafyxml"/>
@@ -183,111 +202,128 @@
                 <xsl:message terminate="no"
                     select="'ATTENTION: Very short abstract in ', $cavafyxml"/>
                 <xsl:element name="error">
-                    <xsl:attribute name="type"
-                        select="'short_abstract'"/>
+                    <xsl:attribute name="type" select="'short_abstract'"/>
                     <xsl:value-of select="'ATTENTION: Very short abstract in ', $cavafyxml, ': '"/>
-                    <xsl:copy-of select="pb:pbcoreDescription[@descriptionType = 'Abstract'][string-length(.) lt 20]"/>
+                    <xsl:copy-of
+                        select="pb:pbcoreDescription[@descriptionType = 'Abstract'][string-length(.) lt 20]"
+                    />
                 </xsl:element>
             </xsl:if>
             <xsl:variable name="genreCount" select="count(pb:pbcoreGenre)"/>
+            <xsl:message select="$genreCount, 'genre(s)'"/>
             <xsl:apply-templates select="
-                .[$genreCount ne 1]" 
-                mode="generateError">
+                    .[$genreCount ne 1]"
+                    mode="generateQuantityError">
                 <xsl:with-param name="nodeName" select="
-                    'genre'"/>
+                        'genre'"/>
                 <xsl:with-param name="nodeCount" select="$genreCount"/>
                 <xsl:with-param name="minCount" select="1"/>
                 <xsl:with-param name="maxCount" select="1"/>
                 <xsl:with-param name="cavafyxml" select="
-                    $cavafyxml"/>
+                        $cavafyxml"/>
             </xsl:apply-templates>
-            
-            <xsl:variable name="subjectHeadingCount" select="
-                count(pb:pbcoreSubject[contains(@ref, 'id.loc.gov/authorities/')])"/>
+
+            <xsl:variable name="subjectHeadingCount"
+                select="
+                    count(
+                    pb:pbcoreSubject
+                    [contains(@ref, 'id.loc.gov/authorities/')]
+                    )"
+            />
+            <xsl:message select="$subjectHeadingCount, 'subject heading(s)'"/>
             <xsl:apply-templates select="
-                .[$subjectHeadingCount lt 1]" 
-                mode="generateError">
+                    .[$subjectHeadingCount lt 1]"
+                    mode="generateQuantityError">
                 <xsl:with-param name="nodeName" select="
-                    'subjectHeading'"/>
+                        'subjectHeading'"/>
                 <xsl:with-param name="nodeCount" select="$subjectHeadingCount"/>
                 <xsl:with-param name="minCount" select="1"/>
                 <xsl:with-param name="cavafyxml" select="
-                    $cavafyxml"/>
+                        $cavafyxml"/>
             </xsl:apply-templates>
-            
-            <xsl:variable name="creatorPublisherCount" select="
-                count(
-                pb:pbcoreCreator[contains(pb:creator/@ref, 'id.loc.gov/authorities/')]
-                |
-                pb:pbcorePublisher[contains(pb:publisher/@ref, 'id.loc.gov/authorities/')]
-                )"/>
+
+            <xsl:variable name="creatorPublisherCount"
+                select="
+                    count(
+                    pb:pbcoreCreator[contains(pb:creator/@ref, 'id.loc.gov/authorities/')]
+                    |
+                    pb:pbcorePublisher[contains(pb:publisher/@ref, 'id.loc.gov/authorities/')]
+                    )"/>
+            <xsl:message select="$creatorPublisherCount, 'creator(s)/publisher(s)'"/>
             <xsl:apply-templates select="
-                .[$creatorPublisherCount lt 1]" 
-                mode="generateError">
+                    .[$creatorPublisherCount lt 1]"
+                    mode="generateQuantityError">
                 <xsl:with-param name="nodeName" select="
-                    'creatorPublisher'"/>
+                        'creatorPublisher'"/>
                 <xsl:with-param name="nodeCount" select="$creatorPublisherCount"/>
                 <xsl:with-param name="minCount" select="1"/>
                 <xsl:with-param name="cavafyxml" select="
-                    $cavafyxml"/>
+                        $cavafyxml"/>
             </xsl:apply-templates>
-            
-            <xsl:variable name="contributorCount" select="
-                count(pb:pbcoreContributor[contains(pb:contributor/@ref, 'id.loc.gov/authorities/')])"/>
+
+            <xsl:variable name="contributorCount"
+                select="
+                    count(pb:pbcoreContributor[contains(pb:contributor/@ref, 'id.loc.gov/authorities/')])"/>
+            <xsl:message select="$contributorCount, 'contributor(s)'"/>
             <xsl:apply-templates select="
-                .[$contributorCount lt 1]" 
-                mode="generateError">
+                    .[$contributorCount lt 1]"
+                    mode="generateQuantityError">
                 <xsl:with-param name="nodeName" select="
-                    'contributor'"/>
+                        'contributor'"/>
                 <xsl:with-param name="nodeCount" select="$contributorCount"/>
                 <xsl:with-param name="minCount" select="1"/>
                 <xsl:with-param name="cavafyxml" select="
-                    $cavafyxml"/>
+                        $cavafyxml"/>
             </xsl:apply-templates>
-            
+
             <xsl:variable name="cmsImageIDCount"
                 select="
                     count(
-                   pb:pbcoreAnnotation
+                    pb:pbcoreAnnotation
                     [@annotationType = 'CMS Image']
                     )"/>
+            <xsl:message select="$cmsImageIDCount, 'image ID(s)'"/>
             <xsl:apply-templates select="
-                .[$cmsImageIDCount gt 1]" 
-                mode="generateError">
+                    .[$cmsImageIDCount gt 1]"
+                    mode="generateQuantityError">
                 <xsl:with-param name="nodeName" select="
-                    'cmsImage'"/>
+                        'cmsImage'"/>
                 <xsl:with-param name="nodeCount" select="$cmsImageIDCount"/>
                 <xsl:with-param name="maxCount" select="1"/>
                 <xsl:with-param name="cavafyxml" select="
-                    $cavafyxml"/>
+                        $cavafyxml"/>
             </xsl:apply-templates>
-            
+
             <xsl:variable name="copyrightCount" select="count(pb:pbcoreRightsSummary)"/>
+            <xsl:message select="$copyrightCount, 'copyright notice(s)'"/>
             <xsl:apply-templates select="
-                .[$copyrightCount ne 1]" 
-                mode="generateError">
+                    .[$copyrightCount ne 1]"
+                    mode="generateQuantityError">
                 <xsl:with-param name="nodeName" select="
-                    'copyrightNotice'"/>
+                        'copyrightNotice'"/>
                 <xsl:with-param name="nodeCount" select="$copyrightCount"/>
                 <xsl:with-param name="minCount" select="1"/>
                 <xsl:with-param name="maxCount" select="1"/>
                 <xsl:with-param name="cavafyxml" select="
-                    $cavafyxml"/>
+                        $cavafyxml"/>
             </xsl:apply-templates>
-            
+
             <xsl:apply-templates select="pb:pbcoreInstantiation" mode="instantiationStrictQC">
                 <xsl:with-param name="cavafyxml" select="$cavafyxml"/>
-                <xsl:with-param name="cavafyAssetID" select="
-                    pb:pbcoreIdentifier
-                    [@source = 'WNYC Archive Catalog']"/>
+                <xsl:with-param name="cavafyAssetID"
+                    select="
+                        pb:pbcoreIdentifier
+                        [@source = 'WNYC Archive Catalog']"
+                />
             </xsl:apply-templates>
         </xsl:variable>
-        
+
         <result>
             <xsl:attribute name="filename" select="$cavafyURL"/>
-                    <xsl:copy-of select="$cavafyErrors"/>
+            <xsl:copy-of select="$cavafyErrors"/>
             <xsl:copy-of select="$cavafyWarnings"/>
-            <xsl:message select="$cavafyWarnings"/>
+            <xsl:message select="'Cavafy errors: ', $cavafyErrors"/>
+            <xsl:message select="'Cavafy warnings: ', $cavafyWarnings"/>
         </result>
     </xsl:template>
 
@@ -313,9 +349,10 @@
                 [@source = 'WNYC Media Archive Label']
                 [matches(., $instantiationIDPattern)]
                 )"/>
+        <xsl:message select="$instantiationIDCount, 'instantiation ID(s)'"/>
         <xsl:apply-templates select="
             .[$instantiationIDCount ne 1]" 
-            mode="generateError">
+            mode="generateQuantityError">
             <xsl:with-param name="nodeName" select="
                 'instantiationID'"/>
             <xsl:with-param name="nodeCount" select="$instantiationIDCount"/>
@@ -330,9 +367,10 @@
             count(
             (pb:instantiationPhysical | pb:instantiationDigital)            
             )"/>
+        <xsl:message select="$instantiationFormatCount, 'format(s)'"/>
         <xsl:apply-templates select="
             .[$instantiationFormatCount ne 1]" 
-            mode="generateError">
+            mode="generateQuantityError">
             <xsl:with-param name="nodeName" select="
                 'format'"/>
             <xsl:with-param name="nodeCount" select="$instantiationFormatCount"/>
@@ -348,9 +386,11 @@
             pb:instantiationLocation
             [normalize-space(.) != '']
             )"/>
+        <xsl:message select="$instantiationLocationCount, 
+            'instantiation location(s)'"/>
         <xsl:apply-templates select="
             .[$instantiationLocationCount ne 1]" 
-            mode="generateError">
+            mode="generateQuantityError">
             <xsl:with-param name="nodeName" select="
                 'instantiationLocation'"/>
             <xsl:with-param name="nodeCount" select="$instantiationLocationCount"/>
@@ -365,9 +405,10 @@
             count(
             pb:instantiationMediaType            
             )"/>
+        <xsl:message select="$instantiationMediaTypeCount, 'media type(s)'"/>
         <xsl:apply-templates select="
             .[$instantiationMediaTypeCount ne 1]" 
-            mode="generateError">
+            mode="generateQuantityError">
             <xsl:with-param name="nodeName" select="
                 'mediaType'"/>
             <xsl:with-param name="nodeCount" select="$instantiationMediaTypeCount"/>
@@ -382,9 +423,10 @@
             count(
             pb:instantiationGenerations
             )"/>
+        <xsl:message select="$instantiationGenerationsCount, 'generation(s)'"/>
         <xsl:apply-templates select="
             .[$instantiationGenerationsCount gt 1]" 
-            mode="generateError">
+            mode="generateQuantityError">
             <xsl:with-param name="nodeName" select="
                 'instantiationGenerations'"/>
             <xsl:with-param name="nodeCount" select="$instantiationGenerationsCount"/>
@@ -399,9 +441,10 @@
                 count(
                 pb:instantiationEssenceTrack
                 )"/>
+        <xsl:message select="$essenceTrackCount, 'essence track(s)'"/>
         <xsl:apply-templates select="
             .[$essenceTrackCount gt 1]" 
-            mode="generateError">
+            mode="generateQuantityError">
             <xsl:with-param name="nodeName" select="
                 'essenceTrack'"/>
             <xsl:with-param name="nodeCount" select="$essenceTrackCount"/>            
@@ -411,7 +454,7 @@
         </xsl:apply-templates>        
     </xsl:template>
     
-    <xsl:template name="generateError" match="node()" mode="generateError">
+    <xsl:template name="generateQuantityError" match="node()" mode="generateQuantityError">
         <xsl:param name="nodeName" select="local-name(.)"/>
         <xsl:param name="nodeCount"/>
         <xsl:param name="minCount"/>
@@ -465,8 +508,10 @@
                     pb:pbcoreTitle[@titleType = 'Collection']"/>
             </xsl:call-template>
         </xsl:variable>        
-        <xsl:variable name="collectionurl" select="$collectionInfo/collectionInfo/collURL"/>        
-        <xsl:variable name="seriesName" select="pb:pbcoreTitle[@titleType = 'Series']"/>
+        <xsl:variable name="collectionurl" select="
+            $collectionInfo/collectionInfo/collURL"/>        
+        <xsl:variable name="seriesName" select="
+            pb:pbcoreTitle[@titleType = 'Series']"/>
         <xsl:variable name="seriesData">
             <xsl:call-template name="findSeriesXMLFromName">
                 <xsl:with-param name="seriesName" select="$seriesName"/>
@@ -498,7 +543,7 @@
         <xsl:variable name="defaultAbstractStart"
             select="
             concat(
-            pb:pbcoreTitle[@titleType = 'Episode'],
+            pb:pbcoreTitle[@titleType = 'Episode'][1],
             ' on ',
             pb:pbcoreTitle[@titleType = 'Series'][1],
             ' on ')"/>
@@ -529,7 +574,7 @@
             mode="generateWarning">
             <xsl:with-param name="fieldName" select="'abstract'"/>
         </xsl:apply-templates>
-        <xsl:message select="'assetContributors', $assetContributors"/>
+        <xsl:message select="'assetContributors: ', $assetContributors"/>
         <xsl:if test="$assetContributors[. != ''] = $collectionurl[. != '']">
             <xsl:call-template name="generateWarning">
                 <xsl:with-param name="fieldName" select="'contributors'"/>

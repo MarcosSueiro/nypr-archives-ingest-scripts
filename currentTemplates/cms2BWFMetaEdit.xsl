@@ -9,12 +9,17 @@ and output its data in BWF MetaEdit Core format -->
     xmlns:XMP-xmp="http://ns.exiftool.ca/XMP/XMP-xmp/1.0/"
     xmlns:XMP-xmpDM="http://ns.exiftool.ca/XMP/XMP-xmpDM/1.0/"
     xmlns:XMP-xmpMM="http://ns.exiftool.ca/XMP/XMP-xmpMM/1.0/"
-    xmlns:XMP-dc="http://ns.exiftool.ca/XMP/XMP-dc/1.0/" 
-    xmlns:fn="http://www.w3.org/2005/xpath-functions"    
-    exclude-result-prefixes="#all"
+    xmlns:XMP-dc="http://ns.exiftool.ca/XMP/XMP-dc/1.0/"
+    xmlns:fn="http://www.w3.org/2005/xpath-functions"
+    xmlns:pb="http://www.pbcore.org/PBCore/PBCoreNamespace.html" exclude-result-prefixes="#all"
     version="3.0">
 
     <xsl:mode on-no-match="text-only-copy"/>
+
+    <xsl:param name="ISODatePattern"
+        select="
+            '^([0-9]{4})-?(1[0-2]|0[1-9])-?(3[01]|0[1-9]|[12][0-9])$'"/>
+    <xsl:param name="showList" select="doc('Shows.xml')"/>
 
     <xsl:template match="MOTIVE" mode="getCMSData" name="getCMSData">
         <!-- Input: 'motive/theme' field
@@ -22,47 +27,53 @@ and output its data in BWF MetaEdit Core format -->
             as xml
         -->
         <xsl:param name="theme" select="."/>
-        <xsl:param name="queryURL" 
+        <xsl:param name="exactMatch" select="true()"/>
+        <xsl:param name="queryURL">
+            <xsl:value-of select="'https://api.wnyc.org/api/v3/story/?audio_file=/'"/>
+            <xsl:value-of select="$theme"/>
+            <xsl:value-of select="'.mp3'[$exactMatch]"/>
+        </xsl:param>
+        <xsl:param name="minRecords" select="1"/>
+        <xsl:param name="maxRecords" select="1"/>
+        <xsl:message
             select="
-            concat(
-            'https://api.wnyc.org/api/v3/story/?audio_file=/',
-            $theme, '.mp3'
-            )"/>
-        <xsl:message select="concat(
-            'Search WNYC CMS for entry with MP3 ', $theme,
-            ' using search string ', $queryURL
-            )"/>
+                concat(
+                'Search WNYC CMS for entry with MP3 ', $theme,
+                ' using search string ', $queryURL
+                )"/>
         <xsl:variable name="searchResultJson">
             <searchResultJson>
-                <xsl:copy-of 
-                    select="unparsed-text($queryURL)"
-                    copy-namespaces="no"/>
+                <xsl:copy-of select="unparsed-text($queryURL)" copy-namespaces="no"/>
             </searchResultJson>
         </xsl:variable>
-        
-        <xsl:variable name="searchResultXml" 
-            select="json-to-xml($searchResultJson)/*"/>
-        <xsl:message 
-            select="'xml search data: ', 
-            $searchResultXml"/>
+
+        <xsl:variable name="searchResultXml" select="json-to-xml($searchResultJson)/*"/>
+        <xsl:message select="
+                'xml search data: ',
+                $searchResultXml"/>
         <xsl:variable name="cmsRecordsFoundCount"
-            select="$searchResultXml
-            /fn:map[@key='meta']
-            /fn:map[@key='pagination']
-            /fn:number[@key='count']"/>
+            select="
+                $searchResultXml
+                /fn:map[@key = 'meta']
+                /fn:map[@key = 'pagination']
+                /fn:number[@key = 'count']"/>
         <xsl:variable name="cmsRecordsFoundMessage"
-            select="concat($cmsRecordsFoundCount, 
-            ' entries for ', 
-            $theme,
-            ' with query ',
-            $queryURL)"/>
+            select="
+                concat($cmsRecordsFoundCount,
+                ' entries for ',
+                $theme,
+                ' with query ',
+                $queryURL)"/>
         <xsl:message select="$cmsRecordsFoundMessage"/>
         <xsl:choose>
-            <xsl:when test="$cmsRecordsFoundCount = 1">
+            <xsl:when
+                test="
+                    number($cmsRecordsFoundCount) ge $minRecords
+                    and
+                    number($cmsRecordsFoundCount) le $maxRecords">
                 <xsl:variable name="cmsData">
                     <cmsData>
-                        <xsl:apply-templates 
-                            select="$searchResultXml/*[@key]" mode="mapToElement"/>
+                        <xsl:apply-templates select="$searchResultXml/*[@key]" mode="mapToElement"/>
                     </cmsData>
                 </xsl:variable>
                 <xsl:message select="'CMS DATA:'"/>
@@ -73,20 +84,20 @@ and output its data in BWF MetaEdit Core format -->
                 <xsl:element name="error">
                     <xsl:attribute name="type" select="'cms_records_found_count'"/>
                     <xsl:value-of select="
-                        $cmsRecordsFoundMessage"/>
+                            $cmsRecordsFoundMessage"/>
                 </xsl:element>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
-    <xsl:template match="*[@key]" 
-        xpath-default-namespace="http://www.w3.org/2005/xpath-functions" mode="mapToElement">        
+
+    <xsl:template match="*[@key]" xpath-default-namespace="http://www.w3.org/2005/xpath-functions"
+        mode="mapToElement">
         <!-- Convert @keys to elements -->
         <xsl:element name="{@key}">
             <xsl:apply-templates mode="mapToElement"/>
         </xsl:element>
     </xsl:template>
- 
+
     <xsl:template name="exifFiller">
         <!-- Map cms data as xml
         to a bwf metaEdit kind of output -->
@@ -192,15 +203,19 @@ and output its data in BWF MetaEdit Core format -->
                 <xsl:text> ; </xsl:text>
             </xsl:if>
             <xsl:call-template name="strip-tags">
-                <xsl:with-param name="text" select="concat('Story published at ', $cmsData//data/attributes/url, ' on ', $cmsData//data/attributes/newsdate)"/>
+                <xsl:with-param name="text"
+                    select="concat('Story published at ', $cmsData//data/attributes/url, ' on ', $cmsData//data/attributes/newsdate)"
+                />
             </xsl:call-template>
             <xsl:call-template name="strip-tags">
-                <xsl:with-param name="text" select="concat('. mp3 available at ', $cmsData//data/attributes/audio, ' as of ', current-date())"/>
+                <xsl:with-param name="text"
+                    select="concat('. mp3 available at ', $cmsData//data/attributes/audio, ' as of ', current-date())"
+                />
             </xsl:call-template>
             <!--<xsl:value-of
                 select="concat('Story published at ', $xmlData//data/attributes/url, ' on ', $xmlData//data/attributes/newsdate)"/>-->
-            
-<!--            <xsl:value-of
+
+            <!--            <xsl:value-of
                 select="concat('. mp3 available at ', $xmlData//data/attributes/audio, ' as of ', current-date())"/>-->
             <!--<xsl:text>&#013;</xsl:text>-->
         </ICMT>
@@ -276,21 +291,26 @@ and output its data in BWF MetaEdit Core format -->
             <xsl:choose>
                 <xsl:when test="normalize-space($cmsData//data/attributes/title)">
                     <xsl:call-template name="strip-tags">
-                        <xsl:with-param name="text" select="translate($cmsData//data/attributes/title, $illegalCharacters, $legalCharacters)"/>
+                        <xsl:with-param name="text"
+                            select="translate($cmsData//data/attributes/title, $illegalCharacters, $legalCharacters)"
+                        />
                     </xsl:call-template>
-<!--                    <xsl:value-of
+                    <!--                    <xsl:value-of
                         select="translate($xmlData//data/attributes/title, $illegalCharacters, $legalCharacters)"
                     />-->
                 </xsl:when>
                 <xsl:when test="normalize-space($cmsData//data/attributes/twitter-headline)">
                     <xsl:call-template name="strip-tags">
-                        <xsl:with-param name="text" select="$cmsData//data/attributes/twitter-headline"/>
+                        <xsl:with-param name="text"
+                            select="$cmsData//data/attributes/twitter-headline"/>
                     </xsl:call-template>
-<!--                    <xsl:value-of select="$xmlData//data/attributes/twitter-headline"/>-->
+                    <!--                    <xsl:value-of select="$xmlData//data/attributes/twitter-headline"/>-->
                 </xsl:when>
                 <xsl:when test="normalize-space($cmsData//data/attributes/tease)">
                     <xsl:call-template name="strip-tags">
-                        <xsl:with-param name="text" select="translate($cmsData//data/attributes/tease, $illegalCharacters, $legalCharacters)"/>
+                        <xsl:with-param name="text"
+                            select="translate($cmsData//data/attributes/tease, $illegalCharacters, $legalCharacters)"
+                        />
                     </xsl:call-template>
                     <!--<xsl:value-of
                         select="translate($xmlData//data/attributes/tease, $illegalCharacters, $legalCharacters)"
@@ -300,7 +320,7 @@ and output its data in BWF MetaEdit Core format -->
                     <xsl:call-template name="strip-tags">
                         <xsl:with-param name="text" select="$cmsData//data/attributes/slug"/>
                     </xsl:call-template>
-<!--                    <xsl:value-of select="$xmlData//data/attributes/slug"/>-->
+                    <!--                    <xsl:value-of select="$xmlData//data/attributes/slug"/>-->
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:text>&#013;</xsl:text>
@@ -330,7 +350,9 @@ and output its data in BWF MetaEdit Core format -->
         </IPRD>
         <ISBJ>
             <xsl:call-template name="strip-tags">
-                <xsl:with-param name="text" select="translate($cmsData//data/attributes/body, $illegalCharacters, $legalCharacters)"/>
+                <xsl:with-param name="text"
+                    select="translate($cmsData//data/attributes/body, $illegalCharacters, $legalCharacters)"
+                />
             </xsl:call-template>
 
             <!--<xsl:value-of
@@ -384,7 +406,7 @@ and output its data in BWF MetaEdit Core format -->
 
     </xsl:template>
 
-<xsl:template match="*[@key]">
+    <xsl:template match="*[@key]">
         <xsl:choose>
             <xsl:when test="@key = 'tags'">
                 <xsl:element name="keywords">
@@ -401,94 +423,23 @@ and output its data in BWF MetaEdit Core format -->
         </xsl:choose>
 
     </xsl:template>
-    
-    
-    <!--    <xsl:template match="fn:map/fn:array[@key='tags']" >
-        <xsl:message select="'exiftool'"/>
-        <exiftool>
-            <keywords>
-                <xsl:apply-templates 
-                    select="fn:string" mode="locSearch"/>
-            </keywords>
-        </exiftool>
-    </xsl:template>-->
-    
-    <!--    <xsl:template match="fn:array[@key='tags']/fn:string" mode="locSearch">
-        <xsl:param name="keyword" select="translate(., '_', ' ')"/>
-        <xsl:param name="locKeyword">            
-        </xsl:param>
-    </xsl:template>-->
-    
-    <!--<xsl:template match="File">
-                
-        <xsl:param name="dbxURL"/>
-        <xsl:param name="dbxURI">
-            <xsl:value-of select="concat(substring-before($dbxURL, '.'), '.DBX')"/>
-        </xsl:param>
-        <xsl:param name="dbxData">
-            <xsl:copy-of select="doc($dbxURI)"/>
-        </xsl:param>
-        <xsl:param name="waveFile" select="concat(substring-before($dbxURI, '.DBX'), '.WAV')"/>
-        <xsl:message select="'DATA!'"/>
-        <xsl:variable name="dbxTitle">
-            <xsl:choose>
-                <xsl:when test="$dbxData/ENTRIES/ENTRY/TITLE != ''">
-                    <xsl:value-of
-                        select="translate($dbxData/ENTRIES/ENTRY/TITLE, $illegalCharacters, $legalCharacters)"
-                    />
-                </xsl:when>
-                <xsl:otherwise>[NO TITLE]</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        
-        <xsl:message>
-            <xsl:value-of
-                select="concat('File ', $waveFile, ' has a DAVID Title _', $dbxTitle, '_ in its DBX.')"
-            />
-        </xsl:message>
 
-        <xsl:variable name="keyData" select="json-to-xml(.,map{'liberal': true()})/*"/>
-            
-        
-        <xsl:variable name="keyDataNoNamespace">
-            
-            <xsl:copy-of select="$keyData/*" copy-namespaces="no"/>
-            
-        </xsl:variable>
-        <xsl:variable name="keyDataNoURLs">
-            <xsl:call-template name="strip-tags">
-                <xsl:with-param name="text" select="$keyData"/>
-            </xsl:call-template>
-        </xsl:variable>
-        <xsl:message select="'keyData:', $keyDataNoNamespace"/>
-        <xsl:choose>
-            <xsl:when test="$keyData//*[@key = 'count' and . = '1']">
-                <xsl:variable name="xmlData">
-                    <xsl:copy>
-                        <xsl:apply-templates
-                            select="json-to-xml($keyData,map{'liberal': true()})/*">
-                            <xsl:with-param name="dbxURL" select="$dbxURL"/>
-                        </xsl:apply-templates>
-                    </xsl:copy>
-                </xsl:variable>
-                <xsl:message select="'xmlData:', $xmlData"/>
-            </xsl:when>
-<!-\-            <xsl:when test="$keyData//*[@key = 'count' and . = '0']">
-                <xsl:variable name="filenameDAVID44k24"
-                    select="concat(substring-before($baseURI, '.'), '-44k24.DBX')"/>
-                <xsl:result-document format="DAVID" href="{$filenameDAVID44k24}">
-                    <ENTRIES>
-                        <xsl:apply-templates select="rdf:Description" mode="DAVID"/>
-                    </ENTRIES>
-                </xsl:result-document>
-            </xsl:when>-\->
-            <xsl:otherwise>
-<!-\-                <xsl:result-document href="{$baseURI}"/>-\->
-                <xsl:message
-                    select="concat($keyData//*[@key = 'count'], ' HITS for DAVID Title ', $dbxTitle)"
-                />
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>-->
+
+
+
+    <xsl:template match="cmsData" mode="sortCMSResults">
+        <xsl:copy>
+            <xsl:copy-of select="links"/>
+            <xsl:copy select="data">
+                <xsl:for-each select="id">
+                    <xsl:sort select="."/>
+                    <xsl:copy-of select="preceding-sibling::type[1]"/>
+                    <xsl:copy-of select="."/>
+                    <xsl:copy-of select="following-sibling::attributes[1]"/>
+                </xsl:for-each>
+            </xsl:copy>
+            <xsl:copy-of select="meta"/>
+        </xsl:copy>
+    </xsl:template>
 
 </xsl:stylesheet>
