@@ -12,9 +12,10 @@
     xmlns:RIFF="http://ns.exiftool.ca/RIFF/RIFF/1.0/"
     xmlns:System="http://ns.exiftool.ca/File/System/1.0/"
     xmlns:File="http://ns.exiftool.ca/File/1.0/" xmlns:XMP="http://ns.exiftool.ca/XMP/XMP/1.0/"
-    xmlns:dc="http://purl.org/dc/elements/1.1/"
-    xmlns:pb="http://www.pbcore.org/PBCore/PBCoreNamespace.html" version="3.0"
-    exclude-result-prefixes="#all">
+    xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ExifTool="http://ns.exiftool.ca/ExifTool/1.0/"
+    xmlns:WNYC="http://www.wnyc.org" xmlns:pb="http://www.pbcore.org/PBCore/PBCoreNamespace.html"
+    default-collation="http://www.w3.org/2013/collation/UCA?ignore-symbols=yes;strength=primary"
+    version="3.0" exclude-result-prefixes="#all">
 
     <xsl:import href="exif2NewExif.xsl"/>
     <xsl:import href="Exif2html.xsl"/>
@@ -23,27 +24,72 @@
     <xsl:import href="errorLog.xsl"/>
     <xsl:import href="instantiationID2Exif.xsl"/>
 
-    <xsl:output name="log" method="html" version="4.0" indent="yes"/>
+
     <xsl:output name="logXml" method="xml" version="1.0" indent="yes"/>
     <xsl:output name="Exif" encoding="UTF-8" method="xml" version="1.0" indent="yes"/>
     <xsl:output name="FADGI" encoding="US-ASCII" method="xml" version="1.0" indent="yes"/>
     <xsl:output name="cavafy" encoding="UTF-8" method="xml" version="1.0" indent="yes"/>
     <xsl:output name="DAVID" encoding="ISO-8859-1" method="xml" version="1.0" indent="yes"/>
     <xsl:output name="email" encoding="UTF-8" method="xml" version="1.0" indent="yes"/>
-    
-    
 
-    <xsl:variable name="baseURI" select="base-uri()"/>
-    <xsl:variable name="parsedBaseURI" select="analyze-string($baseURI, '/')"/>
-    <xsl:variable name="docFilename" select="$parsedBaseURI/fn:non-match[last()]"/>
-    <xsl:variable name="docFilenameNoExtension" select="substring-before($docFilename, '.')"/>
-    <xsl:variable name="baseFolder" select="substring-before($baseURI, $docFilename)"/>
-    <xsl:variable name="logFolder" select="concat($baseFolder, 'instantiationUploadLOGS/')"/>
+    <xsl:param name="outputFADGI" select="true()"/>
+    <xsl:param name="outputCavafy" select="true()"/>
+    <xsl:param name="outputDAVID" select="true()"/>
+    <xsl:param name="outputEmail" select="true()"/>
+    <xsl:param name="outputSlack" select="true()"/>
+
+    <xsl:variable name="baseURI" select="
+            base-uri()"/>
+    <xsl:variable name="parsedBaseURI" select="
+            analyze-string($baseURI, '/')"/>
+    <xsl:variable name="masterDocFilename">
+        <xsl:value-of select="
+                $parsedBaseURI/
+                fn:non-match[last()]"
+        />
+    </xsl:variable>
+    <xsl:variable name="masterDocFilenameNoExtension">
+        <xsl:value-of
+            select="
+                WNYC:substring-before-last(
+                $masterDocFilename, '.'
+                )"
+        />
+    </xsl:variable>
+    <xsl:variable name="baseFolder"
+        select="
+            substring-before(
+            $baseURI,
+            $masterDocFilename
+            )"/>
+    <xsl:variable name="logFolder"
+        select="
+            concat(
+            $baseFolder,
+            'instantiationUploadLOGS/'
+            )"/>
+    <xsl:variable name="currentDate"
+        select="
+            format-date(current-date(),
+            '[Y0001][M01][D01]')"/>
     <xsl:variable name="currentTime"
-        select="substring(translate(string(current-time()), ':', ''), 1, 4)"/>
+        select="
+            substring(
+            translate(
+            string(
+            current-time()),
+            ':', ''), 1, 4)
+            "/>
     <xsl:variable name="pbcorePhysicalInstantiations"
-        select="doc('pbcore_instantiationphysicalaudio_vocabulary.xml')"/>
-    <xsl:variable name="archivesAuthors" select="doc('archivesAuthors.xml')"/>
+        select="
+            doc(
+            'pbcore_instantiationphysicalaudio_vocabulary.xml'
+            )"/>
+    <xsl:variable name="archivesAuthors"
+        select="
+            doc(
+            'archivesAuthors.xml'
+            )"/>
 
     <xsl:template match="/">
         <xsl:message
@@ -52,13 +98,12 @@
                 ' on this fine day of ', current-dateTime()"/>
         <xsl:message>
             <xsl:value-of select="
-                'This', local-name(*), 'document contains'"/>
-        <xsl:for-each-group select="*/*"
-                group-by="local-name()">
+                    'This', local-name(*), 'document contains'"/>
+            <xsl:for-each-group select="*/*" group-by="local-name()">
                 <xsl:value-of
                     select="
-                    '&#10;', count(current-group()), 
-                    current-grouping-key(), 'elements.'"
+                        '&#10;', count(current-group()),
+                        current-grouping-key(), 'elements.'"
                 />
             </xsl:for-each-group>
             <xsl:for-each-group select="*"
@@ -66,7 +111,7 @@
                     rdf:Description/File:FileType">
                 <xsl:value-of
                     select="
-                        '&#10;', count(*), 
+                        '&#10;', count(*),
                         current-grouping-key(), 'files.'"
                 />
             </xsl:for-each-group>
@@ -87,7 +132,7 @@
         </xsl:variable>
         <xsl:copy-of select="$exifFromFADGI"/>
         <xsl:message select="'Exif from BWF MetaEdit', $exifFromFADGI"/>
-    <xsl:apply-templates select="$exifFromFADGI/rdf:RDF"/>
+        <xsl:apply-templates select="$exifFromFADGI/rdf:RDF[rdf:Description]"/>
     </xsl:template>
 
     <xsl:template name="DAVIDdbx" match="ENTRIES">
@@ -99,7 +144,7 @@
         <xsl:apply-templates select="ENTRY"/>
     </xsl:template>
 
-    <xsl:template name="exiftool" match="rdf:RDF">
+    <xsl:template name="exiftool" match="rdf:RDF[rdf:Description]">
         <!-- Accept an exiftool kind of xml document
         as output from the command 
            exiftool -X -a -ext wav [directoryWithFiles]
@@ -107,9 +152,18 @@
 
         <!-- Basic info: type of document, number of instantiations -->
         <xsl:param name="input" select="."/>
+        
+        <xsl:param name="outputFADGI" select="$outputFADGI"/>
+        <xsl:param name="outputCavafy" select="$outputCavafy"/>
+        <xsl:param name="outputDAVID" select="$outputDAVID"/>
+        <xsl:param name="outputEmail" select="$outputEmail"/>
+        <xsl:param name="outputSlack" select="$outputSlack"/>
+        
+        <xsl:param name="
+            stopIfErrors" select="true()" tunnel="true"/>
         <xsl:message
             select="
-                'Process', local-name(), 'document',
+                'Process ', $masterDocFilenameNoExtension, ', a ', local-name(), ' document, ',
                 'with', count(*), 'elements.'"/>
 
         <!-- Sort according to what type of instantiation 
@@ -132,14 +186,14 @@
         <!-- Message with format count -->
         <xsl:for-each-group
             select="
-            $input/rdf:Description
-            [upper-case(RIFF:Source) = 'NEW']"
+                $input/rdf:Description
+                [upper-case(RIFF:Source) = 'NEW']"
             group-by="File:FileType">
             <xsl:message
                 select="
-                count(current-group()),
-                current-grouping-key(),
-                'with no existing asset.'"
+                    count(current-group()),
+                    current-grouping-key(),
+                    'with no existing asset.'"
             />
         </xsl:for-each-group>
 
@@ -226,7 +280,7 @@
                 />
             </archivesINGESTWavInstantiations>
         </xsl:variable>
-        
+
         <xsl:variable name="DAVIDWavInstantiations">
             <DAVIDWavInstantiations>
                 <xsl:for-each
@@ -243,8 +297,7 @@
                     <xsl:variable name="dbxTheme" select="$dbxData/ENTRIES/ENTRY/MOTIVE"/>
                     <xsl:variable name="dbxAuthor" select="$dbxData/ENTRIES/ENTRY/AUTHOR"/>
                     <xsl:variable name="dbxCreator" select="$dbxData/ENTRIES/ENTRY/CREATOR"/>
-                    <xsl:variable name="dbxDeleted"
-                        select="$dbxData/ENTRIES/ENTRY/SOFTDELETED"/>
+                    <xsl:variable name="dbxDeleted" select="$dbxData/ENTRIES/ENTRY/SOFTDELETED"/>
                     <DAVIDWavInstantiation>
                         <xsl:copy-of select="."/>
                         <xsl:copy-of select="$dbxURL"/>
@@ -345,18 +398,11 @@
                     select="
                         $archivesINGESTWavInstantiations
                         /archivesINGESTWavInstantiations
-                        /rdf:Description"
+                        /rdf:Description[System:FileName]"
                 />
             </archivesINGESTWavResults>
         </xsl:variable>
-        <xsl:message select="
-            'Archives INGEST wav Instantiations:' , 
-            $archivesINGESTWavInstantiations/
-            archivesINGESTWavInstantiations/
-            rdf:Description"/>
-        <xsl:message select="
-            'Archives INGEST wav Results:' , 
-            $archivesINGESTWavResults"/>
+
         <xsl:variable name="DAVIDWavInstantiationsFromArchivesResults">
             <DAVIDWavInstantiationsFromArchivesResults>
                 <xsl:apply-templates
@@ -364,7 +410,7 @@
                         $DAVIDWavInstantiationsFromArchives
                         /DAVIDWavInstantiationsFromArchives
                         /DAVIDWavInstantiation
-                        /rdf:Description"
+                        /rdf:Description[System:FileName]"
                 />
             </DAVIDWavInstantiationsFromArchivesResults>
         </xsl:variable>
@@ -375,7 +421,7 @@
                         $DAVIDWavInstantiationsWCMSTheme
                         /DAVIDWavInstantiationsWCMSTheme
                         /DAVIDWavInstantiation
-                        /rdf:Description"
+                        /rdf:Description[System:FileName]"
                 />
             </DAVIDWavInstantiationsWCMSThemeResults>
         </xsl:variable>
@@ -386,20 +432,18 @@
                         $DAVIDWavInstantiationsLatestNewscast
                         /DAVIDWavInstantiationsLatestNewscast
                         /DAVIDWavInstantiation
-                        /rdf:Description"
+                        /rdf:Description[System:FileName]"
                 />
             </DAVIDWavInstantiationsLatestNewscast>
         </xsl:variable>
         <xsl:variable name="DAVIDWavInstantiationsWNoThemeNotFromArchivesResults">
-            
-                <xsl:apply-templates
-                    select="
-                        $DAVIDWavInstantiationsWNoThemeNotFromArchives
-                        /DAVIDWavInstantiationsWNoThemeNotFromArchives
-                        /DAVIDWavInstantiation
-                        /rdf:Description"
-                />
-            
+            <xsl:apply-templates
+                select="
+                    $DAVIDWavInstantiationsWNoThemeNotFromArchives
+                    /DAVIDWavInstantiationsWNoThemeNotFromArchives
+                    /DAVIDWavInstantiation
+                    /rdf:Description[System:FileName]"
+            />
         </xsl:variable>
 
         <!--        Check for duplicate instantiations -->
@@ -408,7 +452,7 @@
                 <xsl:copy-of
                     select="
                         (
-                        ($newAssetResults/newAssetResults) | 
+                        ($newAssetResults/newAssetResults) |
                         ($physicalInstantiationResults/physicalInstantiationResults) |
                         ($DAVIDWavInstantiationsFromArchivesResults/DAVIDWavInstantiationsFromArchivesResults) |
                         ($archivesINGESTWavResults/archivesINGESTWavResults)
@@ -416,21 +460,23 @@
                         /result
                         /inputs
                         /parsedDAVIDTitle
-                        /parsedElements"/>
+                        /parsedElements"
+                />
             </allParsedElements>
         </xsl:variable>
 
         <xsl:variable name="duplicateInstantiations">
-            <xsl:apply-templates select="
-                $allParsedElements
-                /allParsedElements"
+            <xsl:apply-templates
+                select="
+                    $allParsedElements
+                    /allParsedElements"
                 mode="duplicateInstantiations"/>
         </xsl:variable>
 
         <!--        All errors -->
         <xsl:variable name="ERRORS">
             <xsl:copy-of select="
-                $duplicateInstantiations"/>
+                    $duplicateInstantiations"/>
             <xsl:copy-of
                 select="
                     $unacceptableFiles
@@ -458,7 +504,7 @@
                     $archivesINGESTWavResults
                     /archivesINGESTWavResults
                     /result
-                    //*[local-name() = 'error']/.."/>            
+                    //*[local-name() = 'error']/.."/>
             <xsl:for-each
                 select="
                     $newAssetResults
@@ -621,12 +667,12 @@
             </xsl:element>
         </xsl:variable>
 
-<!--        Output 0.1: Complete Result Log -->
+        <!--        Output 0.1: Complete Result Log -->
         <xsl:variable name="filenameLog"
             select="
                 concat(
                 $logFolder,
-                $docFilenameNoExtension,
+                $masterDocFilenameNoExtension,
                 '_LOG', format-date(current-date(),
                 '[Y0001][M01][D01]'), '_T',
                 $currentTime,
@@ -660,8 +706,8 @@
 
         <xsl:variable name="filenameHtml"
             select="
-                concat(
-                substring-before($baseURI, '.'),
+                concat($baseFolder,
+                $masterDocFilenameNoExtension,
                 format-date(current-date(),
                 '[Y0001][M01][D01]'),
                 '.html'
@@ -669,257 +715,359 @@
         <xsl:result-document format="email" href="
             {$filenameHtml}">
             <xsl:apply-templates select="
-                    $newExifOutput/rdf:RDF" mode="html"/>
+                    $newExifOutput/rdf:RDF[$outputEmail]"
+                mode="html"/>
         </xsl:result-document>
 
-       <!-- Output 0.3: Error log
+        <!-- Output 0.3: Error log
        (stop if errors)-->
-        
+
         <xsl:call-template name="generateErrorLog">
             <xsl:with-param name="completeLog" select="$completeLog"/>
             <xsl:with-param name="duplicateInstantiations" select="$duplicateInstantiations"/>
             <xsl:with-param name="WARNINGS" select="$WARNINGS"/>
         </xsl:call-template>
-        
+
         <!-- If errors, stop right here -->
-        <xsl:if
-            test="
-            $completeLog//*[local-name() = 'error']
-            ">
+        <xsl:if test="$stopIfErrors and 
+                $completeLog//*[local-name() = 'error']
+                ">
             <xsl:message terminate="yes">
                 <xsl:value-of select="'Errors found.'"/>
-                <xsl:copy-of select="$completeLog//*[local-name() = 'error']"/>
+                <xsl:copy-of select="$completeLog//
+                    *[local-name() = 'error']"/>
             </xsl:message>
         </xsl:if>
-        
+
         <!-- If no errors, all other outputs -->
 
         <!--        Output 1: New ExifTool -->
         <xsl:variable name="filenameExif"
-            select="concat(substring-before($baseURI, '.'), '_NewExif', format-date(current-date(), '[Y0001][M01][D01]'), '.xml')"/>
+            select="
+                concat($baseFolder,
+                $masterDocFilenameNoExtension,
+                '_NewExif',
+                $currentDate,
+                '.xml'
+                )"/>
         <xsl:result-document format="Exif" href="{$filenameExif}">
             <xsl:copy-of select="$newExifOutput"/>
         </xsl:result-document>
 
         <!--        Output 2: FADGI -->
-        <xsl:variable name="filenameFADGI"
-            select="concat(substring-before($baseURI, '.'), '_ForFADGI', format-date(current-date(), '[Y0001][M01][D01]'), '.xml')"/>
-        <xsl:result-document format="FADGI" href="{$filenameFADGI}">
-            <xsl:apply-templates select="$newExifOutput/rdf:RDF" mode="ixmlFiller"/>
-        </xsl:result-document>
+        <xsl:if test="$outputFADGI">
+            <xsl:variable name="filenameFADGI"
+                select="
+                    concat($baseFolder,
+                    $masterDocFilenameNoExtension,
+                    '_ForFADGI',
+                    $currentDate,
+                    '.xml')"/>
+            <xsl:result-document format="FADGI" href="{$filenameFADGI}">
+                <xsl:apply-templates
+                    select="
+                        $newExifOutput/rdf:RDF[$outputFADGI]"
+                    mode="BWFCoreFiller"/>
+            </xsl:result-document>
+        </xsl:if>
 
-        <!--        Output 3: cavafy -->
+        <!--        Output 3: cavafy -->       
         <xsl:variable name="cavafyOutput">
-            <xsl:apply-templates select="$newExifOutput/rdf:RDF" mode="cavafy"/>
+            <xsl:apply-templates select="
+                    $newExifOutput/rdf:RDF[$outputCavafy]"
+                mode="cavafy"/>
         </xsl:variable>
 
         <!-- Needs to be split into bite-size chunks of about 40 assets -->
         <xsl:variable name="cavafyAssetsCount"
-            select="count($cavafyOutput/pb:pbcoreCollection/pb:pbcoreDescriptionDocument)"/>
-        <xsl:variable name="maxCavafyAssets" select="20" as="xs:integer"/>
+            select="
+                count(
+                $cavafyOutput/
+                pb:pbcoreCollection/
+                pb:pbcoreDescriptionDocument)"/>
+        <xsl:variable name="maxCavafyAssets" select="200" as="xs:integer"/>
         <xsl:comment select="'total instances', count(*)"/>
 
-        <xsl:apply-templates select="$cavafyOutput/pb:pbcoreCollection" mode="breakItUp">
-            <xsl:with-param name="maxOccurrences" select="$maxCavafyAssets"/>
+        <xsl:apply-templates
+            select="
+                $cavafyOutput/
+                pb:pbcoreCollection[$outputCavafy]"
+            mode="
+            breakItUp">
+            <xsl:with-param name="filename"
+                select="
+                    concat($baseFolder,
+                    $masterDocFilenameNoExtension)"/>
+            <xsl:with-param name="maxOccurrences" select="
+                    $maxCavafyAssets"/>
         </xsl:apply-templates>
 
         <!--        Output 4: DAVID -->
-        <!-- Output 4.1: MUNI -->
+        <xsl:if test="$outputDAVID">
+            <!-- Output 4.1: MUNI -->
 
-        <xsl:if
-            test="
-                $newExifOutput/rdf:RDF/rdf:Description/RIFF:Description
-                [starts-with(., 'MUNI-')]
-                ">
-            <xsl:variable name="filenameDAVIDMuni"
-                select="concat(substring-before($baseURI, '.'), '-MUNI_', format-date(current-date(), '[Y0001][M01][D01]'), '.DBX')"/>
-            <xsl:result-document format="DAVID" href="{$filenameDAVIDMuni}">
-                <ENTRIES>
-                    <xsl:apply-templates
-                        select="
-                            $newExifOutput/rdf:RDF/rdf:Description
-                            [starts-with(RIFF:Description, 'MUNI-')]"
-                        mode="DAVID"/>
-                </ENTRIES>
-            </xsl:result-document>
-        </xsl:if>
-        <!-- Output 4.2: WQXR -->
-        <xsl:if
-            test="
-                $newExifOutput/rdf:RDF/rdf:Description/RIFF:Description
-                [starts-with(., 'WQXR-')]
-                ">
-            <xsl:variable name="filenameDAVIDWQXR"
-                select="concat(substring-before($baseURI, '.'), '-WQXR_', format-date(current-date(), '[Y0001][M01][D01]'), '.DBX')"/>
-            <xsl:result-document format="DAVID" href="{$filenameDAVIDWQXR}">
-                <ENTRIES>
-                    <xsl:apply-templates
-                        select="
-                            $newExifOutput/rdf:RDF/rdf:Description
-                            [starts-with(RIFF:Description, 'WQXR-')]
-                            "
-                        mode="DAVID"/>
-                </ENTRIES>
-            </xsl:result-document>
-        </xsl:if>
-        <!-- Output 4.3: On the Media -->
-        <xsl:if
-            test="
-                $newExifOutput/rdf:RDF/rdf:Description/RIFF:Description
-                [contains(., '-OTM-')]
-                ">
-            <xsl:variable name="filenameDAVIDOTM"
-                select="concat(substring-before($baseURI, '.'), '-OTM_', format-date(current-date(), '[Y0001][M01][D01]'), '.DBX')"/>
-            <xsl:result-document format="DAVID" href="{$filenameDAVIDOTM}">
-                <ENTRIES>
-                    <xsl:apply-templates
-                        select="
-                            $newExifOutput/rdf:RDF/rdf:Description
-                            [contains(RIFF:Description, '-OTM-')]"
-                        mode="DAVID"/>
-                </ENTRIES>
-            </xsl:result-document>
-        </xsl:if>
-        <!-- Output 4.4: 96kHz / 24 bit files -->
-        <xsl:if
-            test="
-                $newExifOutput/rdf:RDF/rdf:Description
-                [RIFF:SampleRate = '96000']
-                [not(starts-with(RIFF:Description, 'MUNI-'))]
-                [not(starts-with(RIFF:Description, 'WQXR-'))]
-                [not(starts-with(RIFF:Description, 'WQXR-'))]
-                [not(contains(RIFF:Description, '-OTM-'))]
-                ">
-            <xsl:variable name="filenameDAVID96k24"
-                select="concat(substring-before($baseURI, '.'), '-96k24_', format-date(current-date(), '[Y0001][M01][D01]'), '.DBX')"/>
-            <xsl:result-document format="DAVID" href="{$filenameDAVID96k24}">
-                <ENTRIES>
-                    <xsl:apply-templates
-                        select="
-                            $newExifOutput/rdf:RDF/rdf:Description
-                            [RIFF:SampleRate = '96000']
-                            [not(starts-with(RIFF:Description, 'MUNI-'))]
-                            [not(starts-with(RIFF:Description, 'WQXR-'))]
-                            [not(starts-with(RIFF:Description, 'WQXR-'))]
-                            [not(contains(RIFF:Description, '-OTM-'))]"
-                        mode="DAVID"/>
-                </ENTRIES>
-            </xsl:result-document>
-        </xsl:if>
-        <!-- Output 4.5: 48kHz -->
-        <xsl:if
-            test="
-                $newExifOutput/rdf:RDF/rdf:Description
-                [RIFF:SampleRate = '48000']
-                [not(starts-with(RIFF:Description, 'MUNI-'))]
-                [not(starts-with(RIFF:Description, 'WQXR-'))]
-                [not(starts-with(RIFF:Description, 'WQXR-'))]
-                [not(contains(RIFF:Description, '-OTM-'))]
-                ">
-            <xsl:variable name="filenameDAVID48k"
-                select="concat(substring-before($baseURI, '.'), '-48k_', format-date(current-date(), '[Y0001][M01][D01]'), '.DBX')"/>
-            <xsl:result-document format="DAVID" href="{$filenameDAVID48k}">
-                <ENTRIES>
-                    <xsl:apply-templates
-                        select="
-                            $newExifOutput/rdf:RDF/rdf:Description
-                            [RIFF:SampleRate = '48000']
-                            [not(starts-with(RIFF:Description, 'MUNI-'))]
-                            [not(starts-with(RIFF:Description, 'WQXR-'))]
-                            [not(contains(RIFF:Description, '-OTM-'))]"
-                        mode="DAVID"/>
-                </ENTRIES>
-            </xsl:result-document>
-        </xsl:if>
-        <!-- Output 4.6: 44.1kHz, 16 bit -->
-        <xsl:if
-            test="
-                $newExifOutput/rdf:RDF/rdf:Description
-                [RIFF:SampleRate = '44100']
-                [RIFF:BitsPerSample = '16']
-                [not(starts-with(RIFF:Description, 'MUNI-'))]
-                [not(starts-with(RIFF:Description, 'WQXR-'))]
-                [not(contains(RIFF:Description, '-OTM-'))]">
-            <xsl:variable name="filenameDAVID44k16"
-                select="concat(substring-before($baseURI, '.'), '-44k16_', format-date(current-date(), '[Y0001][M01][D01]'), '.DBX')"/>
-            <xsl:result-document format="DAVID" href="{$filenameDAVID44k16}">
-                <ENTRIES>
-                    <xsl:apply-templates
-                        select="
-                            $newExifOutput/rdf:RDF/rdf:Description
-                            [RIFF:SampleRate = '44100']
-                            [RIFF:BitsPerSample = '16']
-                            [not(starts-with(RIFF:Description, 'MUNI-'))]
-                            [not(starts-with(RIFF:Description, 'WQXR-'))]
-                            [not(contains(RIFF:Description, '-OTM-'))]"
-                        mode="DAVID"/>
-                </ENTRIES>
-            </xsl:result-document>
-        </xsl:if>
-        <!-- Output 4.7: 44.1 kHz, 24 bit -->
-        <xsl:if
-            test="
-                $newExifOutput/rdf:RDF/rdf:Description
-                [RIFF:SampleRate = '44100']
-                [RIFF:BitsPerSample = '24']
-                [not(starts-with(RIFF:Description, 'MUNI-'))]
-                [not(starts-with(RIFF:Description, 'WQXR-'))]
-                [not(contains(RIFF:Description, '-OTM-'))]">
-            <xsl:variable name="filenameDAVID44k24"
-                select="concat(substring-before($baseURI, '.'), '-44k24_', format-date(current-date(), '[Y0001][M01][D01]'), '.DBX')"/>
-            <xsl:result-document format="DAVID" href="{$filenameDAVID44k24}">
-                <ENTRIES>
-                    <xsl:apply-templates
-                        select="
-                            $newExifOutput/rdf:RDF/rdf:Description
-                            [RIFF:SampleRate = '44100']
-                            [RIFF:BitsPerSample = '24']
-                            [not(starts-with(RIFF:Description, 'MUNI-'))]
-                            [not(starts-with(RIFF:Description, 'WQXR-'))]
-                            [not(contains(RIFF:Description, '-OTM-'))]"
-                        mode="DAVID"/>
-                </ENTRIES>
-            </xsl:result-document>
-        </xsl:if>
-        <!-- Output 4.8: To Web for Automatic Upload -->
-        <xsl:if
-            test="
-                $newExifOutput/rdf:RDF/rdf:Description/RIFF:Description
-                [contains(., 'WEB EDIT')]">
-            <xsl:variable name="filenameDAVIDUploadToWeb"
-                select="concat(substring-before($baseURI, '.'), '-WebEdit_', format-date(current-date(), '[Y0001][M01][D01]'), '.DBX')"/>
-            <xsl:result-document format="DAVID" href="{$filenameDAVIDUploadToWeb}">
-                <ENTRIES>
-                    <xsl:apply-templates
-                        select="
-                            $newExifOutput/rdf:RDF/rdf:Description
-                            [contains(RIFF:Description, 'WEB EDIT')]"
-                        mode="DAVID"/>
-                </ENTRIES>
-            </xsl:result-document>
+            <xsl:if
+                test="
+                    $newExifOutput/rdf:RDF/
+                    rdf:Description/
+                    RIFF:Description
+                    [starts-with(., 'MUNI-')]
+                    ">
+                <xsl:variable name="filenameDAVIDMuni"
+                    select="
+                        concat($baseFolder,
+                        $masterDocFilenameNoExtension,
+                        '-MUNI_',
+                        $currentDate, '.DBX')"/>
+                <xsl:result-document format="DAVID" href="{$filenameDAVIDMuni}">
+                    <ENTRIES>
+                        <xsl:apply-templates
+                            select="
+                                $newExifOutput/rdf:RDF/
+                                rdf:Description
+                                [starts-with(RIFF:Description, 'MUNI-')]"
+                            mode="DAVID"/>
+                    </ENTRIES>
+                </xsl:result-document>
+            </xsl:if>
+            <!-- Output 4.2: WQXR -->
+            <xsl:if
+                test="
+                    $newExifOutput/rdf:RDF/
+                    rdf:Description/RIFF:Description
+                    [starts-with(., 'WQXR-')]
+                    ">
+                <xsl:variable name="filenameDAVIDWQXR"
+                    select="
+                        concat(
+                        $baseFolder,
+                        $masterDocFilenameNoExtension,
+                        '-WQXR_',
+                        $currentDate,
+                        '.DBX'
+                        )"/>
+                <xsl:result-document format="DAVID" href="
+                    {$filenameDAVIDWQXR}">
+                    <ENTRIES>
+                        <xsl:apply-templates
+                            select="
+                                $newExifOutput/rdf:RDF/
+                                rdf:Description
+                                [starts-with(RIFF:Description, 'WQXR-')]
+                                "
+                            mode="DAVID"/>
+                    </ENTRIES>
+                </xsl:result-document>
+            </xsl:if>
+            <!-- Output 4.3: On the Media -->
+            <xsl:if
+                test="
+                    $newExifOutput/rdf:RDF/
+                    rdf:Description/
+                    RIFF:Description
+                    [contains(., '-OTM-')]
+                    ">
+                <xsl:variable name="filenameDAVIDOTM"
+                    select="
+                        concat(
+                        $baseFolder,
+                        $masterDocFilenameNoExtension,
+                        '-OTM_',
+                        $currentDate, '.DBX')"/>
+                <xsl:result-document format="DAVID" href="{$filenameDAVIDOTM}">
+                    <ENTRIES>
+                        <xsl:apply-templates
+                            select="
+                                $newExifOutput/rdf:RDF/
+                                rdf:Description
+                                [contains(RIFF:Description, '-OTM-')]"
+                            mode="DAVID"/>
+                    </ENTRIES>
+                </xsl:result-document>
+            </xsl:if>
+            <!-- Output 4.4: 96kHz / 24 bit files -->
+            <xsl:if
+                test="
+                    $newExifOutput/rdf:RDF/rdf:Description
+                    [RIFF:SampleRate = '96000']
+                    [not(starts-with(RIFF:Description, 'MUNI-'))]
+                    [not(starts-with(RIFF:Description, 'WQXR-'))]
+                    [not(starts-with(RIFF:Description, 'WQXR-'))]
+                    [not(contains(RIFF:Description, '-OTM-'))]
+                    ">
+                <xsl:variable name="filenameDAVID96k24"
+                    select="
+                        concat(
+                        $baseFolder,
+                        $masterDocFilenameNoExtension,
+                        '-96k24_',
+                        $currentDate,
+                        '.DBX'
+                        )"/>
+                <xsl:result-document format="DAVID" href="{$filenameDAVID96k24}">
+                    <ENTRIES>
+                        <xsl:apply-templates
+                            select="
+                                $newExifOutput/rdf:RDF/rdf:Description
+                                [RIFF:SampleRate = '96000']
+                                [not(starts-with(RIFF:Description, 'MUNI-'))]
+                                [not(starts-with(RIFF:Description, 'WQXR-'))]
+                                [not(starts-with(RIFF:Description, 'WQXR-'))]
+                                [not(contains(RIFF:Description, '-OTM-'))]"
+                            mode="DAVID"/>
+                    </ENTRIES>
+                </xsl:result-document>
+            </xsl:if>
+            <!-- Output 4.5: 48kHz -->
+            <xsl:if
+                test="
+                    $newExifOutput/rdf:RDF/rdf:Description
+                    [RIFF:SampleRate = '48000']
+                    [not(starts-with(RIFF:Description, 'MUNI-'))]
+                    [not(starts-with(RIFF:Description, 'WQXR-'))]
+                    [not(starts-with(RIFF:Description, 'WQXR-'))]
+                    [not(contains(RIFF:Description, '-OTM-'))]
+                    ">
+                <xsl:variable name="filenameDAVID48k"
+                    select="
+                        concat(
+                        $baseFolder,
+                        $masterDocFilenameNoExtension,
+                        '-48k_',
+                        $currentDate,
+                        '.DBX'
+                        )"/>
+                <xsl:result-document format="DAVID" href="{$filenameDAVID48k}">
+                    <ENTRIES>
+                        <xsl:apply-templates
+                            select="
+                                $newExifOutput/rdf:RDF/rdf:Description
+                                [RIFF:SampleRate = '48000']
+                                [not(starts-with(RIFF:Description, 'MUNI-'))]
+                                [not(starts-with(RIFF:Description, 'WQXR-'))]
+                                [not(contains(RIFF:Description, '-OTM-'))]"
+                            mode="DAVID"/>
+                    </ENTRIES>
+                </xsl:result-document>
+            </xsl:if>
+            <!-- Output 4.6: 44.1kHz, 16 bit -->
+            <xsl:if
+                test="
+                    $newExifOutput/rdf:RDF/
+                    rdf:Description
+                    [RIFF:SampleRate = '44100']
+                    [RIFF:BitsPerSample = '16']
+                    [not(starts-with(RIFF:Description, 'MUNI-'))]
+                    [not(starts-with(RIFF:Description, 'WQXR-'))]
+                    [not(contains(RIFF:Description, '-OTM-'))]">
+                <xsl:variable name="filenameDAVID44k16"
+                    select="
+                        concat(
+                        $baseFolder,
+                        $masterDocFilenameNoExtension,
+                        '-44k16_',
+                        $currentDate,
+                        '.DBX'
+                        )"/>
+                <xsl:result-document format="DAVID" href="{$filenameDAVID44k16}">
+                    <ENTRIES>
+                        <xsl:apply-templates
+                            select="
+                                $newExifOutput/rdf:RDF/rdf:Description
+                                [RIFF:SampleRate = '44100']
+                                [RIFF:BitsPerSample = '16']
+                                [not(starts-with(RIFF:Description, 'MUNI-'))]
+                                [not(starts-with(RIFF:Description, 'WQXR-'))]
+                                [not(contains(RIFF:Description, '-OTM-'))]"
+                            mode="DAVID"/>
+                    </ENTRIES>
+                </xsl:result-document>
+            </xsl:if>
+            <!-- Output 4.7: 44.1 kHz, 24 bit -->
+            <xsl:if
+                test="
+                    $newExifOutput/rdf:RDF/rdf:Description
+                    [RIFF:SampleRate = '44100']
+                    [RIFF:BitsPerSample = '24']
+                    [not(starts-with(RIFF:Description, 'MUNI-'))]
+                    [not(starts-with(RIFF:Description, 'WQXR-'))]
+                    [not(contains(RIFF:Description, '-OTM-'))]">
+                <xsl:variable name="filenameDAVID44k24"
+                    select="
+                        concat(
+                        $baseFolder,
+                        $masterDocFilenameNoExtension,
+                        '-44k24_',
+                        $currentDate,
+                        '.DBX'
+                        )"/>
+                <xsl:result-document format="DAVID" href="{$filenameDAVID44k24}">
+                    <ENTRIES>
+                        <xsl:apply-templates
+                            select="
+                                $newExifOutput/rdf:RDF/rdf:Description
+                                [RIFF:SampleRate = '44100']
+                                [RIFF:BitsPerSample = '24']
+                                [not(starts-with(RIFF:Description, 'MUNI-'))]
+                                [not(starts-with(RIFF:Description, 'WQXR-'))]
+                                [not(contains(RIFF:Description, '-OTM-'))]"
+                            mode="DAVID"/>
+                    </ENTRIES>
+                </xsl:result-document>
+            </xsl:if>
+            <!-- Output 4.8: To Web for Automatic Upload -->
+            <xsl:if
+                test="
+                    $newExifOutput/rdf:RDF/rdf:Description/RIFF:Description
+                    [contains(., 'WEB EDIT')]">
+                <xsl:variable name="filenameDAVIDUploadToWeb"
+                    select="
+                        concat(
+                        $baseFolder,
+                        $masterDocFilenameNoExtension,
+                        '-WebEdit_',
+                        $currentDate,
+                        '.DBX'
+                        )"/>
+                <xsl:result-document format="DAVID" href="{$filenameDAVIDUploadToWeb}">
+                    <ENTRIES>
+                        <xsl:apply-templates
+                            select="
+                                $newExifOutput/rdf:RDF/rdf:Description
+                                [contains(RIFF:Description, 'WEB EDIT')]"
+                            mode="DAVID"/>
+                    </ENTRIES>
+                </xsl:result-document>
+            </xsl:if>
+
         </xsl:if>
 
         <!-- Output 5: Slack -->
-        <xsl:apply-templates select="
-            $newExifOutput
-            /rdf:RDF
-            [not(//error)]" 
+        <xsl:apply-templates
+            select="
+                $newExifOutput
+                /rdf:RDF
+                [not(//error)]
+                [$outputSlack]"
             mode="slack"/>
 
     </xsl:template>
 
     <xsl:template name="duplicateInstantiations" match="
-        allParsedElements" mode="
+            allParsedElements"
+        mode="
         duplicateInstantiations">
         <!-- Check for duplicate instantiations 
             within the document -->
         <xsl:message>
-            <xsl:value-of select="
-                'Check for duplicate instantiations ',
-                'in values '"/>
-            <xsl:value-of select="
-                parsedElements
-                /instantiationID" 
+            <xsl:value-of
+                select="
+                    'Check for duplicate instantiations ',
+                    'in values '"/>
+            <xsl:value-of
+                select="
+                    parsedElements
+                    /instantiationID"
                 separator=", "/>
         </xsl:message>
         <xsl:for-each
@@ -929,19 +1077,22 @@
                 ./following-sibling::parsedElements
                 /instantiationID]">
             <xsl:variable name="errorMessage">
-                <xsl:value-of select="
-                    concat(
-                    'ATTENTION!! ',
-                    'duplicate instantiation: ',
-                    ./instantiationID, ' within ',
-                    DAVIDTitle
-                    )"/>
+                <xsl:value-of
+                    select="
+                        concat(
+                        'ATTENTION!! ',
+                        'duplicate instantiation: ',
+                        ./instantiationID, ' within ',
+                        DAVIDTitle
+                        )"
+                />
             </xsl:variable>
-                
+
             <xsl:message select="$errorMessage"/>
             <xsl:element name="error">
-                <xsl:attribute name="type" select="
-                    'duplicate_instantiation'"/>
+                <xsl:attribute name="type"
+                    select="
+                        'duplicate_instantiation'"/>
                 <xsl:attribute name="instantiationID" select="instantiationID"/>
                 <xsl:attribute name="DAVIDTitle" select="DAVIDTitle"/>
                 <xsl:copy-of select="$errorMessage"/>
@@ -949,23 +1100,26 @@
         </xsl:for-each>
         <xsl:for-each
             select="
-            parsedElements
-            [./instantiationID[. != ''] =
-            ./preceding-sibling::parsedElements
-            /instantiationID]">
+                parsedElements
+                [./instantiationID[. != ''] =
+                ./preceding-sibling::parsedElements
+                /instantiationID]">
             <xsl:variable name="errorMessage">
-                <xsl:value-of select="
-                concat(
-                'ATTENTION!! ',
-                'duplicate instantiation: ',
-                ./instantiationID, ' within ',
-                DAVIDTitle
-                )"/>
+                <xsl:value-of
+                    select="
+                        concat(
+                        'ATTENTION!! ',
+                        'duplicate instantiation: ',
+                        ./instantiationID, ' within ',
+                        DAVIDTitle
+                        )"
+                />
             </xsl:variable>
             <xsl:message select="$errorMessage"/>
             <xsl:element name="error">
-                <xsl:attribute name="type" select="
-                    'duplicate_instantiation'"/>
+                <xsl:attribute name="type"
+                    select="
+                        'duplicate_instantiation'"/>
                 <xsl:attribute name="instantiationID" select="instantiationID"/>
                 <xsl:attribute name="DAVIDTitle" select="DAVIDTitle"/>
                 <xsl:copy-of select="$errorMessage"/>
@@ -980,32 +1134,32 @@
         <xsl:param name="baseURI" select="$baseURI"/>
         <xsl:param name="filename" select="document-uri()"/>
         <xsl:param name="filenameSuffix" select="'_ForCAVAFY'"/>
-        <xsl:param name="currentDate"
-            select="
-            format-date(current-date(), '[Y0001][M01][D01]')"/>
+        <xsl:param name="currentDate" select="$currentDate"/>
         <xsl:param name="assetName" select="name(child::*[1])"/>
-        
-        <xsl:message select="
-            'Break up document into ', 
-            $maxOccurrences, '-size pieces'"/>
-        
+
+        <xsl:message
+            select="
+                'Break up document into ',
+                $maxOccurrences, '-size pieces'"/>
+
         <xsl:variable name="lastPosition"
             select="
-            count(
-            *[position() ge $firstOccurrence]
-            [position() le $maxOccurrences])"/>
+                count(
+                *[position() ge $firstOccurrence]
+                [position() le $maxOccurrences])"/>
         <xsl:variable name="filenameCavafy"
             select="
-            concat(
-            substring-before(
-            $baseURI, '.'),
-            $filenameSuffix,
-            $currentDate,
-            '_', $assetName,
-            $firstOccurrence, '-',
-            ($firstOccurrence + $lastPosition - 1),
-            '.xml'
-            )"/>
+                concat(
+                substring-before(
+                $baseURI, '.'),
+                $filename,
+                $filenameSuffix,
+                $currentDate,
+                '_', $assetName,
+                $firstOccurrence, '-',
+                ($firstOccurrence + $lastPosition - 1),
+                '.xml'
+                )"/>
         <xsl:result-document href="{$filenameCavafy}">
             <xsl:copy>
                 <xsl:comment select="$assetName, $firstOccurrence, 'to', ($firstOccurrence + $lastPosition - 1), 'from a total of', $total"/>
@@ -1014,18 +1168,24 @@
                 />
             </xsl:copy>
         </xsl:result-document>
-        <xsl:if test="
-            ($firstOccurrence + $maxOccurrences) 
-            le $total">            
+        <xsl:if
+            test="
+                ($firstOccurrence + $maxOccurrences)
+                le $total">
             <xsl:call-template name="breakItUp">
-                <xsl:with-param name="firstOccurrence" select="
-                    $firstOccurrence + $maxOccurrences"/>
-                <xsl:with-param name="maxOccurrences" select="
-                    $maxOccurrences"/>
+                <xsl:with-param name="firstOccurrence"
+                    select="
+                        $firstOccurrence + $maxOccurrences"/>
+                <xsl:with-param name="maxOccurrences"
+                    select="
+                        $maxOccurrences"/>
                 <xsl:with-param name="assetName" select="
-                    $assetName"/>
+                        $assetName"/>
+                <xsl:with-param name="baseURI" select="$baseURI"/>
+                <xsl:with-param name="filename" select="$filename"/>
+                <xsl:with-param name="filenameSuffix" select="$filenameSuffix"/>
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
 
-    </xsl:stylesheet>
+</xsl:stylesheet>

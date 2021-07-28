@@ -31,12 +31,7 @@ Edited file timings:
     <xsl:mode on-no-match="deep-skip"/>
     <!-- Format XMP markers into text -->
 
-    <xsl:template match="rdf:RDF">
-        <xsl:apply-templates/>
-    </xsl:template>
-    <xsl:template match="rdf:Description">
-        <xsl:apply-templates/>
-    </xsl:template>
+    
     
     <xsl:template name="hoursInSeconds">
         <xsl:param name="timeSec"/>

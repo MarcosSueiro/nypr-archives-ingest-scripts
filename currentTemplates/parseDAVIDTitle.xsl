@@ -185,7 +185,7 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
                 />
             </freeText>
         </xsl:variable>
-        <xsl:message select="'DAVID Title split:', $DAVIDTitleSplit"/>
+        <xsl:message select="'DAVID Title split: ', $DAVIDTitleBeforeSpace"/>
         <xsl:copy-of select="$DAVIDTitleSplit"/>
     </xsl:template>
     
@@ -294,7 +294,7 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
             </xsl:if>
         </xsl:variable>
         <xsl:message select="
-            'Tested DAVID Title:', $testedDAVIDTitle"/>
+            'Tested DAVID Title:', $testedDAVIDTitle/filenameToCheck"/>
 
         <!-- Output -->
         <xsl:variable name="checkedDAVIDTitle">
@@ -306,7 +306,9 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
                 <xsl:copy-of select="$testedDAVIDTitle"/>
             </checkedDAVIDTitle>
         </xsl:variable>
-        <xsl:message select="'Checked DAVID Title:', $checkedDAVIDTitle"/>
+        <xsl:message select="'Checked DAVID Title:', 
+            $checkedDAVIDTitle/checkedDAVIDTitle/
+            DAVIDTitle"/>
         <xsl:copy-of select="$checkedDAVIDTitle"/>
     </xsl:template>
 
@@ -586,19 +588,21 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
             else
             $filenameExtension"/>
 
-        <!--            Find a matching instantiation -->
+        <!-- Find a matching instantiation -->
         <xsl:param name="instantiationData">
             <xsl:call-template name="findInstantiation">
-                <xsl:with-param name="instantiationID" select="
-                    $instantiationID"/>
-                <xsl:with-param name="cavafyEntry" select="
-                    $finalCavafyEntry"/>
+                <xsl:with-param name="instantiationID"
+                    select="
+                        $instantiationID"/>
+                <xsl:with-param name="cavafyEntry"
+                    select="
+                        $finalCavafyEntry"/>
                 <xsl:with-param name="format" select="
-                    $format"/>
+                        $format"/>
             </xsl:call-template>
         </xsl:param>
 
-        <!--        Info from free text -->
+        <!-- Info from free text -->
         <xsl:param name="freeTextNormalized">
             <xsl:value-of select="normalize-space($splitDAVIDTitle/freeText)"/>
         </xsl:param>
@@ -770,6 +774,7 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
     <xsl:template name="parseInstantiationID"
         match="
             instantiationID |
+            newInstantiationID |
             pb:instantiationIdentifier
             [@source = 'WNYC Media Archive Label']"
         mode="parseInstantiationID">
@@ -844,6 +849,9 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
                     </xsl:with-param>
                 </xsl:apply-templates>
                 <instantiationID>
+                    <xsl:attribute name="format" select="@format"/>
+                    <xsl:attribute name="location" select="@location"/>
+                    <xsl:attribute name="otherIDs" select="@otherIDs"/>
                     <xsl:value-of
                         select="
                             normalize-space($instantiationID[$validated])"
@@ -894,9 +902,10 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
                 </instantiationLastTrack>
             </instantiationIDParsed>
         </xsl:variable>
-        <xsl:message select="
-            'Instantiation ID', $instantiationID, 
-            'parsed: ', $instantiationIDParsed"/>
+        <xsl:message>
+            <xsl:value-of select="'Instantiation ID', $instantiationID, ' parsed. '"/>
+<!--            <xsl:copy-of select="$instantiationIDParsed"/>-->
+        </xsl:message>
         <xsl:copy-of select="$instantiationIDParsed"/>
     </xsl:template>
 

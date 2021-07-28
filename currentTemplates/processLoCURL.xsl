@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Various templates 
-    dealing with the Library of Congress 
-    subject and names APIs:
-    
-    1. Obtain data such as names, occupations and fields of activity
-    2. Recursively find broader subjects
-    3. Find only simple, narrowest subjects
-    $. Search LoC authorities for names, subjects or both -->
+
     
 <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xsi:schemaLocation="http://www.pbcore.org/PBCore/PBCoreNamespace.html 
@@ -14,24 +7,24 @@
     xmlns:pb="http://www.pbcore.org/PBCore/PBCoreNamespace.html"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions"
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:et="http://ns.exiftool.ca/1.0/"
-    et:toolkit="Image::ExifTool 9.46" xmlns:ExifTool="http://ns.exiftool.ca/ExifTool/1.0/"
-    xmlns:System="http://ns.exiftool.ca/File/System/1.0/"
-    xmlns:File="http://ns.exiftool.ca/File/1.0/" xmlns:RIFF="http://ns.exiftool.ca/RIFF/RIFF/1.0/"
-    xmlns:XMP-x="http://ns.exiftool.ca/XMP/XMP-x/1.0/"
-    xmlns:XMP-xmp="http://ns.exiftool.ca/XMP/XMP-xmp/1.0/"
-    xmlns:XMP-xmpDM="http://ns.exiftool.ca/XMP/XMP-xmpDM/1.0/"
-    xmlns:XMP-xmpMM="http://ns.exiftool.ca/XMP/XMP-xmpMM/1.0/"
-    xmlns:XMP-dc="http://ns.exiftool.ca/XMP/XMP-dc/1.0/"
-    xmlns:XMP-WNYCSchema="http://ns.exiftool.ca/XMP/XMP-WNYCSchema/1.0/"
-    xmlns:Composite="http://ns.exiftool.ca/Composite/1.0/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+    xmlns:RIFF="http://ns.exiftool.ca/RIFF/RIFF/1.0/"    
     xmlns:skos="http://www.w3.org/2009/08/skos-reference/skos.html"
     xmlns:mads="http://www.loc.gov/mads/v2" xmlns:madsrdf="http://www.loc.gov/mads/rdf/v1#"
     xmlns:zs="http://docs.oasis-open.org/ns/search-ws/sruResponse" xmlns:WNYC="http://www.wnyc.org"
-    xmlns:pma="http://www.phpmyadmin.net/some_doc_url/" xmlns:functx="http://www.functx.com"
+    xmlns:pma="http://www.phpmyadmin.net/some_doc_url/"
     xmlns:skosCore="http://www.w3.org/2004/02/skos/core#"
     xmlns:ASCII="https://www.ecma-international.org/publications/standards/Ecma-094.htm"
     exclude-result-prefixes="#all">
+
+    <!-- Various templates 
+    dealing with the Library of Congress 
+    subject and names APIs:
+    
+    1. Obtain data such as names, occupations and fields of activity
+    2. Recursively find broader subjects
+    3. Find only simple, narrowest subjects
+    $. Search LoC authorities for names, subjects or both -->
 
     <xsl:import href="manageDuplicates.xsl"/>
 
@@ -48,20 +41,20 @@
         select="
             string-join(($validatingKeywordString, $validatingNameString), '|')"/>
 
-    <xsl:template match="rdf:RDF">
+    <xsl:template match="rdf:RDF[madsrdf:*]">
         <xsl:apply-templates/>
     </xsl:template>
     
-    <xsl:template match="rdf:Description">
+    <!--<xsl:template match="rdf:Description">
         <xsl:apply-templates/>
-    </xsl:template>
+    </xsl:template>-->
     
-    <xsl:template match="RIFF:Keywords">
+    <xsl:template match="RIFF:Keywords" name="getKeywordData">
         <xsl:param name="keywords" select="."/>
         <xsl:copy-of select="WNYC:splitParseValidate($keywords, $separatingToken, 'id.loc.gov')//valid/WNYC:getLOCData(.)"/>
     </xsl:template>
     
-    <xsl:template match="RIFF:Artist">
+    <xsl:template match="RIFF:Artist" name="getArtistData">
         <xsl:param name="artist" select="."/>
         <xsl:copy-of select="WNYC:splitParseValidate($artist, $separatingToken, 'id.loc.gov')//valid/WNYC:getLOCData(.)"/>
     </xsl:template>
@@ -73,7 +66,8 @@
             'Generate LoCRDF from ', $LOCURL
             )"/>
         <xsl:variable name="LOCRDF">
-            <!-- Create a proper rdf in with all the proper elements -->
+            <!-- Create a proper rdf 
+                with all the proper elements -->
             <!-- Strip http protocol
             in case it is entered as https -->
             <xsl:variable name="nothttp">
@@ -113,7 +107,7 @@
         
         <xsl:if test="not($LOCRDFAvailable)">
             <rdf:RDF>
-            <error errorType='LOCSH Not found'>
+            <error type='LOCSH Not found'>
                 <xsl:value-of select="$LOCURL, 'cannot be found online'"/>
             </error>
             </rdf:RDF>
@@ -134,7 +128,7 @@
         <!-- Find LOC occupations
         and fields of activity
         for a URL -->
-        <xsl:param name="artists"/>
+        <xsl:param name="artists" select="."/>
         <xsl:param name="LOCURLs"
             select="
                 WNYC:splitParseValidate(
@@ -278,6 +272,68 @@
         </xsl:for-each>
     </xsl:template>
 
+    <xsl:template name="processSubjects" match="RIFF:Keywords" mode="
+        processSubjects" expand-text="yes">
+        <!-- Input: keywords separated by a token.        
+        Output: original keyword + 
+        simple keywords with an accepted URL
+        and LOC occupations, etc.
+        
+        (In progress) For each keyword *without* an accepted URL,
+        search LOC's SRU API 
+        (https://www.loc.gov/standards/sru/companionSpecs/srw.html)
+        and proceed as above
+    -->
+        <xsl:param name="subjectsProcessed"/>
+        <xsl:param name="subjectsToProcess" select="."/>
+        <xsl:param name="separatingToken" select="$separatingToken"/>
+        <xsl:param name="separatingTokenLong" select="concat(' ', $separatingToken, ' ')"/>
+        <xsl:param name="validatingKeywordString" select="$validatingKeywordString"/>
+        <xsl:param name="validatingNameString" select="$validatingNameString"/>
+        <xsl:param name="combinedValidatingStrings" select="$combinedValidatingStrings"/>
+        
+        <xsl:variable name="subjectsToProcessParsed"
+            select="
+            WNYC:splitParseValidate(
+            $subjectsToProcess,
+            $separatingToken,
+            $combinedValidatingStrings)"/>
+        
+        <xsl:variable name="subjectsToProcessValid"
+            select="
+            $subjectsToProcessParsed/valid"/>
+        <xsl:message>
+            <xsl:value-of select="$subjectsToProcessValid" separator="{$separatingTokenLong}"/>
+        </xsl:message>
+        <xsl:variable name="subjectsToProcessInvalid"
+            select="
+            $subjectsToProcessParsed/invalid"/>
+        <xsl:variable name="
+            allTopicsActivitiesOccupationsComponents">
+            <allTopics>
+                <xsl:apply-templates select="
+                    $subjectsToProcessValid" mode="processSubject"/>
+            </allTopics>
+        </xsl:variable>
+        <xsl:message>
+            <xsl:value-of select="'All valid topics: '"/>
+            <xsl:value-of select="
+                $allTopicsActivitiesOccupationsComponents/
+                allTopics/madsrdf:*" separator="{$separatingTokenLong}"/>
+        </xsl:message>
+        <xsl:variable name="distinctAllTopics">
+            <xsl:for-each-group
+                select="
+                $allTopicsActivitiesOccupationsComponents
+                /allTopics/madsrdf:*"
+                group-by="@rdf:about[matches(., $combinedValidatingStrings)]">
+                <xsl:copy-of select="."/>
+            </xsl:for-each-group>
+        </xsl:variable>
+        <xsl:copy-of select="$distinctAllTopics"/>
+    </xsl:template>
+    
+    
     <xsl:template match="RIFF:Keywords" mode="
         broaderSubjects" expand-text="yes">
         <!--Input: keywords separated by a token
@@ -355,14 +411,123 @@
             </xsl:for-each-group>
         </xsl:variable>
         <xsl:copy-of select="$distinctAllTopics"/>
-        
     </xsl:template>
 
+    <xsl:template name="processSubject" match="
+        ." mode="processSubject"
+        xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+        <!-- 
+            Take ONE keyword with an accepted URL 
+        (e.g., it contains 'id.loc.gov')
+        and break into component parts,
+        'fields of activity' and occupations.
+        This creates a virtual taxonomy in each record.
+        
+        Output unique results for each list in the format below 
+        
+        <madsrdf:* xmlns:madsrdf="http://www.loc.gov/mads/rdf/v1#"
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            rdf:about="http://id.loc.gov/authorities/childrensSubjects/sj96005799">
+            <madsrdf:authoritativeLabel xml:lang="en">Journalism</madsrdf:authoritativeLabel>
+            </madsrdf:Topic>
+            -->
+        <xsl:param name="LOCURL" select="."/>
+        <xsl:param name="LOCData" select="WNYC:getLOCData($LOCURL)"/>
+        <xsl:param name="LOCURI" select="$LOCData/rdf:RDF
+            /madsrdf:*/@rdf:about"/>
+        <xsl:param name="LOCLabel" select="
+            $LOCData/rdf:RDF/
+            madsrdf:*/
+            madsrdf:authoritativeLabel[@xml:lang='en' or not(@xml:lang)]"/> 
+        
+        <xsl:message
+            select="concat(
+            'Validate topic ',
+            $LOCLabel)"/>        
+        
+        <!-- Copy the original -->
+        <xsl:copy select="
+            $LOCData/rdf:RDF/madsrdf:*">
+            <xsl:copy-of
+                select="$LOCURI"/>
+            <xsl:copy-of
+                select="$LOCLabel"
+            />
+        </xsl:copy>
+        
+        <!-- Process component topics 
+        with a valid URI -->
+        <xsl:apply-templates
+            select="
+            $LOCData
+            /rdf:RDF/madsrdf:ComplexSubject
+            /madsrdf:componentList
+            /madsrdf:*
+            /@rdf:about
+            [matches(., $combinedValidatingStrings)]"
+            mode="processSubject"/>
+        <!-- Process fields of activity -->
+        <xsl:apply-templates
+            select="
+            $LOCData
+            /rdf:RDF/madsrdf:*
+            /madsrdf:identifiesRWO
+            /madsrdf:RWO
+            /madsrdf:fieldOfActivity
+            /skos:Concept/@rdf:about
+            "
+            mode="processSubject"/>
+        <!-- Process occupations -->
+        <xsl:apply-templates
+            select="
+            $LOCData
+            /rdf:RDF/madsrdf:*
+            /madsrdf:identifiesRWO
+            /madsrdf:RWO
+            /madsrdf:occupation/madsrdf:Occupation/@rdf:about"
+            mode="processSubject"/>
+        <!-- Process name part of nameTitle -->
+        <xsl:variable name="nameInNameTitle">
+            <xsl:apply-templates
+                select="
+                $LOCData/rdf:RDF
+                /madsrdf:NameTitle"
+                mode="nameInNameTitle"/>
+        </xsl:variable>
+        <xsl:apply-templates
+            select="
+            $nameInNameTitle[. != '']
+            /rdf:RDF/madsrdf:*
+            /@rdf:about"
+            mode="processSubject"/>
+        <!-- Process geographic part 
+            of subject-place complex subject -->
+        <xsl:variable name="placeInSubjectPlace">            
+            <xsl:apply-templates
+                select="
+                $LOCData/rdf:RDF/
+                madsrdf:ComplexSubject
+                [madsrdf:componentList/madsrdf:Geographic]"
+                mode="placeInSubjectPlace"/>            
+        </xsl:variable>
+        
+            <xsl:copy-of select="
+                $placeInSubjectPlace"/>
+        
+        
+        <xsl:apply-templates
+            select="
+            $placeInSubjectPlace/
+            rdf:RDF/madsrdf:Geographic/
+            @rdf:about"
+            mode="processSubject"/>
+    </xsl:template>
+    
     <xsl:template name="broaderSubjects" match="
             ." mode="broaderSubjects"
         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
         <!-- 
-            Take a keyword with an accepted URL 
+            Take ONE keyword with an accepted URL 
         (e.g., it contains 'id.loc.gov')
         and recursively climb up its broader topics, component parts,
         'fields of activity' and occupations.
@@ -487,10 +652,10 @@
     <xsl:template name="narrowSubjects" match="
             ." mode="narrowSubjects"
         expand-text="yes">
-        <!-- Accept a bunch of keywords; 
+        <!-- Accept a bunch of LoC URLs; 
             parse out only the narrowest
             or most specific.        
-        This template is the opposite of "broaderSubjects"-->
+        This template is the opposite of "broaderSubjects" -->
         <xsl:param name="subjectsProcessed"/>
         <xsl:param name="subjectsToProcess" select="."/>
         <xsl:param name="separatingToken" select="
@@ -505,21 +670,29 @@
         <xsl:param name="combinedValidatingStrings"
             select="
                 $combinedValidatingStrings"/>
-        <xsl:message
-            select="
-                'Find narrowest subjects for: ', $subjectsToProcess,
-                ' matching validating strings ', $combinedValidatingStrings"/>
+        <xsl:message>
+            <xsl:value-of select="'Find narrowest subjects for: '"/>
+            <xsl:value-of select="$subjectsToProcess"
+                separator="
+                {$separatingTokenLong}"/>
+            <xsl:value-of
+                select="
+                    ' with matching validating strings ',
+                    $combinedValidatingStrings"
+            />
+        </xsl:message>
+        
         <xsl:variable name="subjectsToProcessParsed"
             select="
                 WNYC:splitParseValidate(
-                $subjectsToProcess,
+                replace($subjectsToProcess, 'https:', 'http:'),
                 $separatingToken,
                 $combinedValidatingStrings
                 )"/>
-        <xsl:message
-            select="
-                'Subjects parsed:',
-                $subjectsToProcessParsed"/>
+        <xsl:message>
+            <xsl:value-of select="'Subjects parsed: '"/>
+            <xsl:value-of select="$subjectsToProcessParsed" separator="{$separatingTokenLong}"/>
+        </xsl:message>
         <xsl:variable name="subjectsToProcessValid"
             select="
                 $subjectsToProcessParsed/valid"/>
@@ -549,8 +722,8 @@
                     select="
                         concat('Extract components or names from ',
                         $LOCLabel)"/>
+                
                 <!-- Extract name from name/title entry -->
-
                 <xsl:variable name="nameInNameTitle">
                     <xsl:apply-templates
                         select="
@@ -558,7 +731,6 @@
                             /madsrdf:NameTitle"
                         mode="nameInNameTitle"/>
                 </xsl:variable>
-
                 <xsl:variable name="nameInNameTitleURL"
                     select="
                         $nameInNameTitle
@@ -577,8 +749,7 @@
                         $LOCLabel, ': ',
                         $nameInNameTitleLabel"/>
                 
-                <!-- Extract place from subjeect/place complex entry -->
-                
+                <!-- Extract place from subject/place complex entry -->                
                 <xsl:variable name="placeInSubjectPlace">
                     <xsl:apply-templates
                         select="
@@ -693,12 +864,12 @@
                     count($narrowerTopics),
                     'narrower topic(s) found for',
                     $subjectName"/>
-            <xsl:message
-                select="
-                    'See if narrower topics ',
-                    $narrowerTopics/madsrdf:Authority/@rdf:about,
-                    ' are already in ', $subjectsToProcessValid
-                    "/>
+            <xsl:message>
+                <xsl:value-of select="'See if narrower topics '"/>
+                <xsl:value-of select="$narrowerTopics/madsrdf:Authority/@rdf:about" separator=" ; "/>
+                <xsl:value-of select="' are already in '"/>
+                <xsl:value-of select="$subjectsToProcessValid" separator=" ; "/>
+            </xsl:message>
             <xsl:message>
                 <xsl:value-of
                     select="
@@ -1225,7 +1396,8 @@
             madsrdf:CorporateName |
             madsrdf:Title |
             madsrdf:PersonalName |
-            madsrdf:ConferenceName"
+            madsrdf:ConferenceName |
+            madsrdf:ComplexSubject"
         mode="LOCtoPBCore" xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
         <!-- Convert an LOC entry
         to a pbcoreSubject -->

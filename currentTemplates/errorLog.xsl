@@ -7,11 +7,12 @@ and output an html error doc -->
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:System="http://ns.exiftool.ca/File/System/1.0/"
     xmlns:WNYC="http://www.wnyc.org"
-    exclude-result-prefixes="xs"
+    xmlns:pb="http://www.pbcore.org/PBCore/PBCoreNamespace.html"
+    exclude-result-prefixes="#all"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     version="2.0">
     
-    <xsl:output name="log" method="html" version="4.0" indent="yes"/>
+    <xsl:output name="log" method="html" version="4.0" indent="no" media-type="text/html"/>
     <xsl:output name="csv" method="text" indent="yes"/>
     
     <xsl:variable name="baseURI" select="base-uri()"/>
@@ -32,8 +33,11 @@ and output an html error doc -->
             dummyNode"/>
         <xsl:param name="unacceptableFiles" select="
             $completeLog/completeLog/unacceptableFiles"/>
+        <xsl:param name="potentialDupes" select="
+            $completeLog/completeLog/potentialDupes"/>
         <xsl:param name="WARNINGS">
-            <xsl:copy-of select="$completeLog/completeLog/*/result/newExif/rdf:Description/*[@warning]"/>
+            <xsl:copy-of select="$completeLog/completeLog/*/
+                result/newExif/rdf:Description/*[@warning]"/>
         </xsl:param>
         <xsl:param name="seriesName" select="
             $completeLog/completeLog/seriesName"/>
@@ -101,9 +105,9 @@ and output an html error doc -->
             unacceptableFiles/error
             )"/>
         <xsl:variable name="errorPercent" select="format-number(
-            $errorCount div $totalCount, '##%')"/>
+            $errorCount div ($totalCount + 0.01), '##%')"/> <!-- To avoid division by zero -->
         <xsl:variable name="warningPercent" select="format-number(
-            $warningCount div $totalCount, '##%')"/>
+            $warningCount div ($totalCount + 0.01), '##%')"/> <!-- To avoid division by zero -->
         <xsl:variable name="errorMessage">
             <xsl:value-of select="$errorCount"/>
             <xsl:value-of select="' files ('"/>
@@ -246,9 +250,10 @@ and output an html error doc -->
                                     <xsl:value-of select="$justFilename"/></a>: </b>
                                 <br/>
                                 <p>
+                                    <xsl:variable name="paragraphMark"><p/></xsl:variable>
                                     <xsl:for-each select=".//*:error">
                                         <xsl:value-of select="@type, ': '"/>
-                                        <xsl:value-of select="WNYC:stripNonASCII(.)"/>
+                                        <xsl:copy-of select="replace(WNYC:stripNonASCII(.), '&#xD;', $paragraphMark)"/>
                                         <br/>
                                     </xsl:for-each>
                                 </p>
@@ -261,6 +266,94 @@ and output an html error doc -->
                                         target" select="
                                         '_blank'"/>cavafy entry
                                     (if found) </a>
+                            </p>
+                        </div>
+                    </xsl:for-each>
+                    
+                    <xsl:for-each
+                        select="
+                        $completeLog//result
+                        [inputs/potentialDupes/likelyDupes/pb:pbcoreDescriptionDocument]">
+                        
+                        <!-- Link to the file -->
+                        
+                        
+                        <div>
+                            <p>
+                                <b> LIKELY DUPES of asset <a>
+                                    <xsl:attribute name="href">
+                                        <xsl:value-of
+                                            select="./inputs/parsedDAVIDTitle/parsedElements/finalCavafyURL"
+                                        /> </xsl:attribute>
+                                    <xsl:attribute name="
+                                        target" select="
+                                        '_blank'"/>
+                                <xsl:value-of select="inputs/*:cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreTitle[@titleType='Episode']"/>
+                                    <xsl:value-of select="concat(' (',inputs/*:cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreIdentifier[@source='WNYC Archive Catalog'], ')')"/>
+                                </a>: </b>
+                                <br/>
+                                <p>
+                                    <xsl:for-each select="
+                                        inputs/potentialDupes/likelyDupes/pb:pbcoreDescriptionDocument">
+                                        <a>
+                                            <xsl:attribute name="href">
+                                                <xsl:value-of
+                                                    select="concat('https://cavafy.wnyc.org/assets/', pb:pbcoreIdentifier[@source='pbcore XML database UUID'])"
+                                                /> </xsl:attribute>
+                                            <xsl:attribute name="
+                                                target" select="
+                                                '_blank'"/>
+                                            <xsl:value-of select="pb:pbcoreTitle[@titleType='Episode']"/>
+                                            <xsl:value-of select="concat(' (', pb:pbcoreIdentifier[@source='WNYC Archive Catalog'], ')')"/>
+                                        </a>
+                                        <br/>
+                                    </xsl:for-each>
+                                </p>
+                                
+                            </p>
+                        </div>
+                    </xsl:for-each>
+                    
+                    <xsl:for-each
+                        select="
+                        $completeLog//result
+                        [inputs/potentialDupes/possibleDupes/pb:pbcoreDescriptionDocument]">
+                        
+                        <!-- Link to the file -->
+                        
+                        
+                        <div>
+                            <p>
+                                <b> Possible dupes of asset <a>
+                                    <xsl:attribute name="href">
+                                        <xsl:value-of
+                                            select="./inputs/parsedDAVIDTitle/parsedElements/finalCavafyURL"
+                                        /> </xsl:attribute>
+                                    <xsl:attribute name="
+                                        target" select="
+                                        '_blank'"/>
+                                    <xsl:value-of select="inputs/*:cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreTitle[@titleType='Episode']"/>
+                                    <xsl:value-of select="concat(' (',inputs/*:cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreIdentifier[@source='WNYC Archive Catalog'], ')')"/>
+                                </a>: </b>
+                                <br/>
+                                <p>
+                                    <xsl:for-each select="
+                                        inputs/potentialDupes/possibleDupes/pb:pbcoreDescriptionDocument">
+                                        <a>
+                                            <xsl:attribute name="href">
+                                                <xsl:value-of
+                                                    select="concat('https://cavafy.wnyc.org/assets/', pb:pbcoreIdentifier[@source='pbcore XML database UUID'])"
+                                                /> </xsl:attribute>
+                                            <xsl:attribute name="
+                                                target" select="
+                                                '_blank'"/>
+                                            <xsl:value-of select="pb:pbcoreTitle[@titleType='Episode']"/>
+                                            <xsl:value-of select="concat(' (', pb:pbcoreIdentifier[@source='WNYC Archive Catalog'], ')')"/>
+                                        </a>
+                                        <br/>
+                                    </xsl:for-each>
+                                </p>
+                                
                             </p>
                         </div>
                     </xsl:for-each>
@@ -346,8 +439,7 @@ and output an html error doc -->
                     )"/>
             <xsl:for-each
                 select="
-                    $completeLog//result
-                    [.//*[local-name() = 'error']]">
+                    $completeLog//result">
                 <xsl:variable name="justFilename">
                     <!-- Extract just the filename -->
                     <xsl:value-of

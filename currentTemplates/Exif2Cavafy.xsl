@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!-- Convert output from exiftool
 to a pbcore cavafy entry -->
 
@@ -31,6 +32,18 @@ to a pbcore cavafy entry -->
     <xsl:import href="parseContributors.xsl"/>
 
     <xsl:param name="exifInput"/>
+    
+    <xsl:variable name="cavafyFormats" select="
+        doc('cavafyFormats.xml')"/>
+    <xsl:variable name="EBUCodingAlgorithm" select="
+        'ANALOG|ANALOGUE|PCM|MPEG1L1|MPEG1L2|MPEG1L3|MPEG2L1|MPEG2L2|MPEG2L3'"/>
+    <xsl:variable name="EBUSamplingFrequency" select="
+        '11000|22050|24000|32000|44100|48000|96000|176400|192000|384000|768000'"/>
+    <xsl:variable name="EBUWordLength" select="
+        '8|12|14|16|18|20|22|24|32'"/>
+    <xsl:variable name="EBUMode" select="
+        'mono|stereo|dual-mono|joint-stereo|multitrack|multichannel|surround'"/>
+    <xsl:variable name="EBUText" select="'^[^,]+$'"/>
     
     <xsl:template match="rdf:RDF" mode="cavafy">
         <!-- Wrap all entries as a 'pbcoreCollection' -->
@@ -222,8 +235,8 @@ to a pbcore cavafy entry -->
 
                 <!-- Dates -->
                 <xsl:choose>
-                    <!-- To ensure things get published to the web, 
-                        which needs a broadcast date -->
+                    <!-- Assets published to the web 
+                        need a broadcast date -->
                     <xsl:when
                         test="
                         contains(RIFF:Description, 'WEB EDIT') 
@@ -506,6 +519,7 @@ to a pbcore cavafy entry -->
                         /pb:pbcoreRelationIdentifier"
                     />
                 </xsl:variable>
+                
                 <xsl:if
                     test="
                     normalize-space($aapbURL) 
@@ -518,6 +532,8 @@ to a pbcore cavafy entry -->
                         </pbcoreRelationIdentifier>
                     </pbcoreRelation>
                 </xsl:if>
+                
+                
                 
                 <!-- Location of recording -->
                 <xsl:variable name="coverageAlreadyInCavafy">
@@ -601,16 +617,15 @@ to a pbcore cavafy entry -->
                         $subjectsAlreadyInCavafy"/>
 
 
-                <xsl:variable name="broaderSubjects">
+                <xsl:variable name="locSubjects">
                     <xsl:apply-templates 
-                        select="RIFF:Keywords" 
-                        mode="broaderSubjects"/>
+                        select="RIFF:Keywords"/>
                 </xsl:variable>
 
-                <xsl:message select="'BROADER SUBJECTS', $broaderSubjects"/>
+                <xsl:message select="'Subjects:', $locSubjects"/>
                 
                 <xsl:apply-templates 
-                    select="$broaderSubjects/
+                    select="$locSubjects/rdf:RDF/
                     (
                     madsrdf:Topic |
                     madsrdf:NameTitle |
@@ -622,8 +637,7 @@ to a pbcore cavafy entry -->
                     madsrdf:PersonalName |
                     madsrdf:ConferenceName | 
                     madsrdf:ComplexSubject
-                    )" 
-                    mode="LOCtoPBCore"/>
+                    )" mode="LOCtoPBCore"/>
                 
                 <xsl:variable name="genreAlreadyInCavafy">
                     <xsl:value-of select="
@@ -727,6 +741,11 @@ to a pbcore cavafy entry -->
                                 "/>
                         </pbcoreAnnotation>
                     </xsl:when>
+                    <!-- Indicates fake Exif instantiation -->
+                    <xsl:when test="
+                        RIFF:NumChannels = '0' or 
+                        RIFF:SampleRate = '1000' or 
+                        RIFF:BitsPerSample = '8'"/>
                     <xsl:otherwise>
 
                         <!-- instantiations -->
@@ -788,9 +807,9 @@ to a pbcore cavafy entry -->
                             <instantiationChannelConfiguration>
                                 <xsl:choose>
                                     <xsl:when 
-                                        test="RIFF:NumChannels = 1">Mono</xsl:when>
+                                        test="RIFF:NumChannels = '1'">Mono</xsl:when>
                                     <xsl:when 
-                                        test="RIFF:NumChannels = 2">Stereo</xsl:when>
+                                        test="RIFF:NumChannels = '2'">Stereo</xsl:when>
                                 <xsl:otherwise>
                                         <xsl:value-of select="RIFF:NumChannels"/>
                                     </xsl:otherwise>
@@ -808,44 +827,9 @@ to a pbcore cavafy entry -->
                                         select="normalize-space(RIFF:Subject)"/>
                                 </instantiationAnnotation>
                             </xsl:if>
-
-                            <xsl:if
-                                test="RIFF:CodingHistory ne '' 
-                                and 
-                                not(
-                                contains(RIFF:CodingHistory, 'D.A.V.I.D.'
-                                ))">
-                                <instantiationAnnotation annotationType="Encoding_Notes">
-                                    <xsl:value-of 
-                                        select="normalize-space(RIFF:CodingHistory)"/>
-                                </instantiationAnnotation>
-                            </xsl:if>
-
-                            <xsl:if test="contains(RIFF:CodingHistory, '[TO]')">
-                                <instantiationAnnotation annotationType="LF_turnover">
-                                    <xsl:value-of
-                                        select="
-                                        substring-before(
-                                        substring-after(
-                                        RIFF:CodingHistory, 
-                                        '[TO]'
-                                        ), 
-                                        '[RO]'
-                                        )"
-                                    />
-                                </instantiationAnnotation>
-                            </xsl:if>
-
-                            <xsl:if test="contains(RIFF:CodingHistory, '[RO]')">
-                                <instantiationAnnotation annotationType="10kHz_att">
-                                    <xsl:value-of
-                                        select="
-                                        substring-after(
-                                        RIFF:CodingHistory, '[RO]'
-                                        )"/>
-                                </instantiationAnnotation>
-                            </xsl:if>
-
+                            <xsl:apply-templates
+                                select="RIFF:CodingHistory[not(contains(., 'D.A.V.I.D.'))]"/>
+                            
                             <instantiationAnnotation annotationType="Provenance">
                                 <xsl:value-of 
                                     select="normalize-space(RIFF:SourceForm)"/>
@@ -881,6 +865,17 @@ to a pbcore cavafy entry -->
                                     <xsl:value-of select="concat(RIFF:BitsPerSample, ' bit')"/>
                                 </essenceTrackBitDepth>
                             </instantiationEssenceTrack>
+                            <xsl:if
+                                test="
+                                    contains(RIFF:Medium, $cavafyFormats/cavafyFormats/cavafyFormat) and
+                                    not($cavafyEntry/pb:pbcoreDescriptionDocument/pbcoreRelation[pbcoreRelationType = 'Is Dub Of'])">
+                                <instantiationRelation>
+                                    <instantiationRelationType>Is Dub Of</instantiationRelationType>
+                                    <instantiationRelationIdentifier>
+                                        <xsl:value-of select="RIFF:Medium"/>
+                                    </instantiationRelationIdentifier>
+                                </instantiationRelation>
+                            </xsl:if>
                         </pbcoreInstantiation>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -890,4 +885,183 @@ to a pbcore cavafy entry -->
         <xsl:copy-of select="$cavafyOutput"/>
 
     </xsl:template>
+    
+    <xsl:template match="RIFF:CodingHistory">
+        <xsl:call-template name="generateInstantiationAnnotation">
+            <xsl:with-param name="annotationType" select="'codingHistory'"/>
+            <xsl:with-param name="value" select="."/>
+        </xsl:call-template>
+        <xsl:variable name="processSteps" select="
+            tokenize(., '\n')[matches(., '\w')]"/>
+        <xsl:variable name="numberOfProcessSteps" select="count($processSteps)"/>
+        
+        <xsl:for-each select="$processSteps">
+            <xsl:variable name="codingProcessStepNo" select="position()"/>
+            <xsl:apply-templates select="." mode="parseCodingHistoryStep">
+                <xsl:with-param name="codingProcessStepNo" select="
+                    $codingProcessStepNo"/>
+            </xsl:apply-templates>
+        </xsl:for-each>
+        
+    </xsl:template>
+    
+    <xsl:template match="." mode="parseCodingHistoryStep">
+        <xsl:param name="codingProcessStepNo"/>
+        
+        <xsl:param name="codingProcessStep" select="concat('codingProcessStep', $codingProcessStepNo)"/>
+        <xsl:call-template name="generateInstantiationAnnotation">
+            <xsl:with-param name="annotationType" select="$codingProcessStep"/>
+            <xsl:with-param name="value" select="normalize-space(.)"/>
+        </xsl:call-template>
+        
+        <xsl:for-each select="analyze-string(., 
+            '[AFWBMT]=')/fn:non-match">
+            
+            <xsl:variable name="subelementCode">
+                <xsl:value-of select="./preceding-sibling::fn:match[1]/substring-before(., '=')"/>
+            </xsl:variable> 
+            <xsl:variable name="subelementValue">
+                <xsl:value-of select="tokenize(., ',')[1]"/>
+            </xsl:variable> 
+            <xsl:apply-templates select="." mode="parseCodingHistorySubelement">
+                <xsl:with-param name="subelementCode" select="$subelementCode"/>
+                <xsl:with-param name="subelementValue" select="$subelementValue"/>
+                <xsl:with-param name="codingProcessStepNo" select="$codingProcessStepNo"/>
+            </xsl:apply-templates>
+        </xsl:for-each>
+    </xsl:template>
+    
+    <xsl:template match="." mode="parseCodingHistorySubelement">
+        <xsl:param name="codingHistorySubelement" select="."/>
+        <xsl:param name="codingProcessStepNo"/>
+        <xsl:param name="codingHistorySubelementParsed" select="tokenize($codingHistorySubelement, '=')"/>
+        <xsl:param name="subelementCode" select="$codingHistorySubelementParsed[1]"/>
+        <xsl:param name="subelementValue" select="$codingHistorySubelementParsed[2]"/>
+        <xsl:variable name="annotationType">
+            <xsl:value-of select="
+                'codingAlgorithm'[$subelementCode = 'A'],
+                'samplingFrequency'[$subelementCode = 'F'],
+                'bitRate'[$subelementCode = 'B'],
+                'wordLength_bitDepth'[$subelementCode = 'W'],
+                'mode_soundField'[$subelementCode = 'M'],
+                'freeASCIITextString'[$subelementCode = 'T']"/>
+            <xsl:value-of select="$codingProcessStepNo"/>
+        </xsl:variable>
+        <xsl:variable name="isValidEBU" select="
+            $subelementCode = 'A' and matches($subelementValue, $EBUCodingAlgorithm)
+            or 
+            $subelementCode = 'F' and matches($subelementValue, $EBUSamplingFrequency)
+            or
+            $subelementCode = 'B'
+            or
+            $subelementCode = 'W' and matches($subelementValue, $EBUWordLength)
+            or
+            $subelementCode = 'M' and matches($subelementValue, $EBUMode)
+            or
+            $subelementCode = 'T' and not(contains($subelementValue, ','))
+            "/>
+        <xsl:for-each select=".[$isValidEBU]">
+            <xsl:call-template name="generateInstantiationAnnotation">
+                <xsl:with-param name="annotationType" select="$annotationType"/>
+                <xsl:with-param name="value">
+                    <xsl:choose>
+                        <xsl:when test="$subelementCode = 'A' and matches($subelementValue, $EBUCodingAlgorithm)">
+                            <xsl:value-of select="normalize-space($subelementValue)"/>
+                        </xsl:when>
+                        <xsl:when test="$subelementCode = 'F' and matches($subelementValue, $EBUSamplingFrequency)">
+                            <xsl:value-of select="normalize-space($subelementValue)"/>
+                        </xsl:when>
+                        <xsl:when test="$subelementCode = 'B'">
+                            <xsl:value-of select="normalize-space($subelementValue)"/>
+                        </xsl:when>
+                        <xsl:when test="$subelementCode = 'W' and matches($subelementValue, $EBUWordLength)">
+                            <xsl:value-of select="normalize-space($subelementValue)"/>
+                        </xsl:when>
+                        <xsl:when test="$subelementCode = 'M' and matches($subelementValue, $EBUMode)">
+                            <xsl:value-of select="normalize-space($subelementValue)"/>
+                        </xsl:when>
+                        <xsl:when test="$subelementCode = 'T' and not(contains($subelementValue, ','))">
+                            <xsl:value-of select="normalize-space($subelementValue)"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:message select="'Invalid value for:', $annotationType, $subelementValue"/>
+                        </xsl:otherwise> 
+                    </xsl:choose>
+                </xsl:with-param>
+            </xsl:call-template>
+        </xsl:for-each>
+        <xsl:apply-templates select="$subelementValue[$subelementCode = 'T'][matches(., '\[(St|RF|TO|RO|Ca|EQ|NR|Sp)\]')]" mode="parseCodingHistoryFreeText"/>
+    </xsl:template>
+    
+    
+    
+    <xsl:template name="parseCodingHistoryFreeText" match="." mode="
+        parseCodingHistoryFreeText">
+        <xsl:param name="codingHistoryFreeText" select="."/>
+        <xsl:param name="codingHistoryTech" select="
+            tokenize($codingHistoryFreeText, ';')
+            [matches(., '\[(St|RF|TO|RO|Ca|EQ|NR|Sp)\]')]"/>
+        <xsl:param name="codingHistoryNotes" select="
+            tokenize($codingHistoryFreeText, ';')
+            [not(matches(., '\[(St|RF|TO|RO|Ca|EQ|NR|Sp)\]'))]"/>
+        <xsl:param name="format"/>
+        
+        <xsl:for-each select="$codingHistoryTech">
+            <xsl:call-template name="parseCodingHistoryTech">
+                <xsl:with-param name="codingHistoryTech" select="."/>
+            </xsl:call-template>
+        </xsl:for-each>
+        <xsl:for-each select="$codingHistoryNotes">
+            <xsl:call-template name="generateInstantiationAnnotation">
+                <xsl:with-param name="annotationType" select="'Engineer_notes'"/>
+                <xsl:with-param name="value" select="normalize-space(.)"/>
+            </xsl:call-template>
+        </xsl:for-each>
+    </xsl:template>
+    
+    <xsl:template name="parseCodingHistoryTech" match="
+        text()[matches(., '\[(St|RF|TO|RO|Ca|EQ|NR|Sp)\]')]" mode="
+        parseCodingHistoryTech">
+        <xsl:param name="codingHistoryTech" select="."/>
+        <xsl:param name="codingHistoryTechParsed" select="
+            analyze-string(
+            $codingHistoryTech, '\[(St|RF|TO|RO|Ca|EQ|NR|Sp)\]'
+            )"/>
+        <xsl:apply-templates select="
+            $codingHistoryTechParsed/*:match" mode="codingHistoryTechAnnotation"/>
+    </xsl:template>
+    
+    <xsl:template name="codingHistoryTechAnnotation" match="
+        *:match" mode="codingHistoryTechAnnotation">
+        <xsl:param name="typeCode" select="."/>
+        <xsl:element name="instantiationAnnotation">
+            <xsl:attribute name="annotationType">
+                <xsl:value-of select="'Stylus_size'[$typeCode = '[St]']"/>
+                <xsl:value-of select="'Rumble_filter'[$typeCode = '[RF]']"/>
+                <xsl:value-of select="'LF_turnover'[$typeCode = '[TO]']"/>
+                <xsl:value-of select="'10kHz_att'[$typeCode = '[RO]']"/>
+                <xsl:value-of select="'Calibration'[$typeCode = '[Ca]']"/>
+                <xsl:value-of select="'playback_EQ'[$typeCode = '[EQ]']"/>
+                <xsl:value-of select="'Noise_reduction'[$typeCode = '[NR]']"/>
+                <xsl:value-of select="'Playback_speed'[$typeCode = '[Sp]']"/>
+            </xsl:attribute>
+            <xsl:value-of select="normalize-space(following-sibling::*:non-match[1])"/>
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template name="generateInstantiationAnnotation">
+        <xsl:param name="value" select="normalize-space(.)"/>
+        <xsl:param name="annotationType"/>
+        <xsl:param name="annotation"/>
+        <xsl:element name="instantiationAnnotation">
+            <xsl:if test="matches($annotationType, '\w')">
+                <xsl:attribute name="annotationType" select="$annotationType"/>
+            </xsl:if>
+            <xsl:if test="matches($annotation, '\w')">
+                <xsl:attribute name="annotation" select="$annotation"/>
+            </xsl:if>
+            <xsl:value-of select="$value"/>
+        </xsl:element>
+    </xsl:template>
+    
 </xsl:stylesheet>

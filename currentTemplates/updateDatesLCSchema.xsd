@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="updateAssets">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="updateAsset"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="updateAsset">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="url"/>
+        <xs:element ref="assetID"/>
+        <xs:element ref="collection"/>
+        <xs:element ref="instantiationID"/>
+        <xs:element ref="recordedDate"/>
+        <xs:element ref="bcastDate"/>
+        <xs:element ref="contributors"/>
+        <xs:element ref="subjects"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="url">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="assetID">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="collection">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="instantiationID">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="recordedDate">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="bcastDate">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="contributors">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="subjects">
+    <xs:complexType/>
+  </xs:element>
+</xs:schema>

@@ -156,32 +156,27 @@
             
             <div style="text-indent:50px; font-family:Open Sans; font-weight:book; color:#000000; margin-top:-15px;">
                 <xsl:value-of select="ASCII:ASCIIFier(RIFF:Subject)"/>
-                <div style="text-indent:50px">
-                    <xsl:choose>
-                        <xsl:when test="
-                            contains(
-                            RIFF:Comment, 'Date is approximate'
-                            )">
-                            <xsl:value-of select="'Approximate date: '"/>
-                            <a>
-                                <xsl:value-of select="RIFF:DateCreated"/>
-                            </a>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <i>
+                <xsl:if
+                    test="
+                        not(
+                        contains(
+                        RIFF:Comment, 'Date is approximate'
+                        ))">
+                    <div style="text-indent:50px">
+
+                        <i>
                             <xsl:value-of select="'Date: '"/>
-                            </i>
-                            <a
-                                href="{concat(
+                        </i>
+                        <a
+                            href="{concat(
                                 'https://cavafy.wnyc.org/assets?q=', 
                                 RIFF:DateCreated, 
                                 '&amp;search_fields%5B%5D=date'
                                 )}">
-                                <xsl:value-of select="RIFF:DateCreated"/>
-                            </a>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </div>
+                            <xsl:value-of select="RIFF:DateCreated"/>
+                        </a>
+                    </div>
+                </xsl:if>
                
                 <xsl:variable name="parsedArtists" select="
                     analyze-string(

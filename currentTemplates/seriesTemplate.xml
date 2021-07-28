@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- List of series to be QC'd with template 
+file:/T:/02%20CATALOGING/Instantiation%20uploads/InstantiationUploadTEMPLATES/currentTemplates/seriesQC.xsl
+
+Enter the series name under <seriesName>
+and any further refinements under <searchString>.
+
+For example, to QC the series 'Central Park Summerstage' and
+assets without a cassette instantiation
+from 'Memoirs of the Movies',
+enter:
+
+<seriesList>
+    <series>
+        <seriesName>Central Park SummerStage</seriesName>
+        <searchString></searchString>
+    </series>
+</seriesList>
+<seriesList>
+    <series>
+        <seriesName>Memoirs of the Movies</seriesName>
+        <searchString>https://cavafy.wnyc.org/?facet_Series+Title%5B%5D=Memoirs+of+the+Movies&amp;q=%22memoirs+of+the+movies%22+-cassette</searchString>
+    </series>
+</seriesList>
+
+-->
+
+<seriesList>
+    <series>
+        <seriesName>Central Park SummerStage</seriesName>
+        <format>Beta PCM F-1</format>
+        <searchString>https://cavafy.wnyc.org/?facet_Series+Title%5B%5D=Central+Park+Summerstage&amp;q=%22central+park+summerstage%22+%22Beta+PCM+F-1%22</searchString>
+    </series>
+</seriesList>

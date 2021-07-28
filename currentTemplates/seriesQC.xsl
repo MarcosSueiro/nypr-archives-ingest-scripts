@@ -49,7 +49,7 @@ the source xml document would be:
             <xsl:call-template name="findSeriesXMLFromName">
                 <xsl:with-param name="seriesName" select="seriesName"/>
             </xsl:call-template>
-            <xsl:message select="'QC for series', seriesName"/>
+            <xsl:message select="'QC for series ', seriesName"/>
         </xsl:param>        
         <xsl:param name="seriesAssetsXMLs">
             <xsl:choose>

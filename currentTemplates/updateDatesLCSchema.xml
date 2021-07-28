@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<updateAssets>
+    <updateAsset>
+        <url></url>
+        <assetID></assetID>
+        <collection></collection>
+        <instantiationID></instantiationID>        
+        <recordedDate></recordedDate>
+        <bcastDate></bcastDate>
+        <contributors></contributors>
+        <subjects></subjects>
+    </updateAsset>
+    <updateAsset>
+        <url></url>
+        <assetID></assetID>
+        <collection></collection>
+        <instantiationID></instantiationID>        
+        <recordedDate></recordedDate>
+        <bcastDate></bcastDate>
+        <contributors></contributors>
+        <subjects></subjects>
+    </updateAsset>
+</updateAssets>

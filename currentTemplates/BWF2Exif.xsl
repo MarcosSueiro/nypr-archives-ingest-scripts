@@ -62,7 +62,7 @@
                 substring-after(
                 substring-after($filename, $filenameNoExtensionRaw),
                 $token)"/>
-        <xsl:message select="'Convert BWF MetaEdit Core metadata from', @name"/>
+        <xsl:message select="concat('Convert BWF MetaEdit Core metadata from ', @name)"/>
         
         <rdf:Description>
             <xsl:attribute name="rdf:about">
@@ -72,6 +72,7 @@
                 <xsl:value-of select="'Image::ExifTool 11.69'"/>
             </xsl:attribute>
             <xsl:comment select="'A new exiftool xml generated from', $filename"/>
+            <ExifTool:ExifToolVersion>11.69</ExifTool:ExifToolVersion>
             <System:FileName>
                 <xsl:value-of select="$filename"/>
             </System:FileName>

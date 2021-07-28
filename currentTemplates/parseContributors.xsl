@@ -4,68 +4,74 @@ their occupations and their fields of activity
 and output pbcoreCreator / pbcoreContributor -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
-    xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html" 
+    xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:madsrdf="http://www.loc.gov/mads/rdf/v1#"
-    xmlns:WNYC="http://www.wnyc.org"
+    xmlns:madsrdf="http://www.loc.gov/mads/rdf/v1#" xmlns:WNYC="http://www.wnyc.org"
     exclude-result-prefixes="#all">
 
     <xsl:template name="parseContributors">
         <xsl:param name="contributorsToProcess"/>
-        <xsl:param name="token" select="';'"/>
-        <xsl:param name="longToken" select="concat(' ',$token,' ')"/>
+        <xsl:param name="token" select="$separatingToken"/>
+        <xsl:param name="longToken" select="$separatingTokenLong"/>
         <xsl:param name="contributorsAlreadyInCavafy"/>
-        <xsl:param name="role" select="contributor"/>
+        <xsl:param name="role" select="'contributor'"/>
         <xsl:param name="validatingString" select="'id.loc.gov'"/>
-        <xsl:param name="validatedSource" select="'Library of Congress'[$validatingString = 'id.loc.gov']"/>
+        <xsl:param name="validatedSource"
+            select="'Library of Congress'[$validatingString = 'id.loc.gov']"/>
 
-        <xsl:variable name="capsRole" 
-            select="WNYC:Capitalize($role, 1)"/>
+        <xsl:variable name="capsRole" select="WNYC:Capitalize($role, 1)"/>
 
-        <xsl:message select="concat(
-            'Parse ', $capsRole,'s ', 
-            $contributorsToProcess)"/>
+        <xsl:message
+            select="
+                concat(
+                'Parse ', $capsRole, 's ',
+                $contributorsToProcess)"/>
 
-        <xsl:message select="
-            $capsRole,'s', 'already in cavafy: ', 
-            $contributorsAlreadyInCavafy"/>
+        <xsl:message
+            select="
+                $capsRole, 's', 'already in cavafy: ',
+                $contributorsAlreadyInCavafy"/>
 
-        <xsl:if 
+        <xsl:if
             test="
-            $role != 'contributor' 
-            and 
-            $role != 'creator'">
+                $role != 'contributor'
+                and
+                $role != 'creator'">
             <xsl:message terminate="yes"
-                select="concat(
-                'Role must be ', 
-                '_creator_ or _contributor_ (lowercase). ',
-                'You entered ', $role)"
+                select="
+                    concat(
+                    'Role must be ',
+                    '_creator_ or _contributor_ (lowercase). ',
+                    'You entered ', $role)"
             />
         </xsl:if>
         <xsl:variable name="pbcoreRole" select="concat('pbcore', $capsRole)"/>
 
-        <xsl:variable name="contributorsToProcessParsed" select="
-            WNYC:splitParseValidate(
-            $contributorsToProcess, $longToken, $validatingString)"/>
-    <xsl:variable name="contributorsAlreadyInCavafyParsed" select="
-            WNYC:splitParseValidate(
-            $contributorsAlreadyInCavafy, $longToken, $validatingString)"/>
-        <xsl:for-each select="
-            $contributorsToProcessParsed/valid
-            [not(. = $contributorsAlreadyInCavafyParsed/valid)]">            
-            
-            <xsl:variable name="currentContributorxml"
-                select="concat(., '.rdf')"/>
+        <xsl:variable name="contributorsToProcessParsed"
+            select="
+                WNYC:splitParseValidate(
+                $contributorsToProcess, $longToken, $validatingString)[matches($contributorsToProcess, '\w')]"/>
+        <xsl:variable name="contributorsAlreadyInCavafyParsed"
+            select="
+                WNYC:splitParseValidate(
+                $contributorsAlreadyInCavafy, $longToken, $validatingString)"/>
+        <xsl:for-each
+            select="
+                $contributorsToProcessParsed/valid
+                [not(. = $contributorsAlreadyInCavafyParsed/valid)]">
+
+            <xsl:variable name="currentContributorxml" select="concat(., '.rdf')"/>
             <xsl:variable name="currentContributorName"
                 select="
-                WNYC:getLOCData(.)
-                //rdf:RDF
-                /*
-                /madsrdf:authoritativeLabel
-                "/>
-            <xsl:message select="
-                concat(
-                $currentContributorName, ' not already in cavafy.')"/>
+                    WNYC:getLOCData(.)
+                    //rdf:RDF
+                    /*
+                    /madsrdf:authoritativeLabel
+                    "/>
+            <xsl:message
+                select="
+                    concat(
+                    $currentContributorName, ' not already in cavafy.')"/>
             <xsl:element name="{$pbcoreRole}">
                 <xsl:element name="{$role}">
                     <xsl:attribute name="ref" select="."/>
@@ -88,10 +94,10 @@ and output pbcoreCreator / pbcoreContributor -->
             <xsl:when test="contains($contributorsToProcess, $token)">
                 <xsl:variable name="currentContributor"
                     select="
-                    normalize-space(
-                    substring-before(
-                    $contributorsToProcess, $token
-                    ))"/>
+                        normalize-space(
+                        substring-before(
+                        $contributorsToProcess, $token
+                        ))"/>
                 <xsl:choose>
                     <!-- Valid LOC contributor: add occupations -->
                     <xsl:when test="contains($currentContributor, $validatingString)">
@@ -99,31 +105,31 @@ and output pbcoreCreator / pbcoreContributor -->
                             select="concat($currentContributor, '.rdf')"/>
                         <xsl:variable name="currentContributorName"
                             select="
-                            doc($currentContributorxml)
-                            //rdf:RDF
-                            /*
-                            /madsrdf:authoritativeLabel"/>
-                        <xsl:variable name="currentContributorOccupations">
-                            <xsl:value-of 
-                                select="
                                 doc($currentContributorxml)
-                                //madsrdf:occupation
-                                /madsrdf:Occupation
-                                /@rdf:about[contains(.,$validatingString)]" 
-                                separator="{$longToken}"/>                                
+                                //rdf:RDF
+                                /*
+                                /madsrdf:authoritativeLabel"/>
+                        <xsl:variable name="currentContributorOccupations">
+                            <xsl:value-of
+                                select="
+                                    doc($currentContributorxml)
+                                    //madsrdf:occupation
+                                    /madsrdf:Occupation
+                                    /@rdf:about[contains(., $validatingString)]"
+                                separator="{$longToken}"/>
                         </xsl:variable>
                         <xsl:call-template name="parseContributorOccupations">
                             <xsl:with-param name="contributorsToProcess"
                                 select="
-                                normalize-space(
-                                substring-after($contributorsToProcess, $token
-                                ))"/>
+                                    normalize-space(
+                                    substring-after($contributorsToProcess, $token
+                                    ))"/>
                             <xsl:with-param name="occupations"
                                 select="
-                                string-join(
-                                ($occupations, $currentContributorOccupations),
-                                $longToken
-                                )"
+                                    string-join(
+                                    ($occupations, $currentContributorOccupations),
+                                    $longToken
+                                    )"
                             />
                         </xsl:call-template>
                     </xsl:when>
@@ -132,9 +138,9 @@ and output pbcoreCreator / pbcoreContributor -->
                         <xsl:call-template name="parseContributorOccupations">
                             <xsl:with-param name="contributorsToProcess"
                                 select="
-                                normalize-space(
-                                substring-after($contributorsToProcess, $token
-                                ))"/>
+                                    normalize-space(
+                                    substring-after($contributorsToProcess, $token
+                                    ))"/>
                             <xsl:with-param name="occupations" select="$occupations"/>
                         </xsl:call-template>
                     </xsl:otherwise>
@@ -144,7 +150,7 @@ and output pbcoreCreator / pbcoreContributor -->
             <xsl:otherwise>
                 <xsl:variable name="currentContributor"
                     select="normalize-space($contributorsToProcess)"/>
-                
+
                 <xsl:choose>
                     <!-- Valid LOC contributor; add Occupations -->
                     <xsl:when test="contains($currentContributor, $validatingString)">
@@ -152,26 +158,26 @@ and output pbcoreCreator / pbcoreContributor -->
                             select="concat($currentContributor, '.rdf')"/>
                         <xsl:variable name="currentContributorName"
                             select="
-                            doc($currentContributorxml)
-                            //rdf:RDF
-                            /*
-                            /madsrdf:authoritativeLabel
-                            "/>
-                        <xsl:variable name="currentContributorOccupations">
-                            <xsl:value-of 
-                                select="
                                 doc($currentContributorxml)
-                                //madsrdf:occupation
-                                /madsrdf:Occupation
-                                /@rdf:about[contains(.,$validatingString)]" 
-                                separator="{$longToken}"/>                                
+                                //rdf:RDF
+                                /*
+                                /madsrdf:authoritativeLabel
+                                "/>
+                        <xsl:variable name="currentContributorOccupations">
+                            <xsl:value-of
+                                select="
+                                    doc($currentContributorxml)
+                                    //madsrdf:occupation
+                                    /madsrdf:Occupation
+                                    /@rdf:about[contains(., $validatingString)]"
+                                separator="{$longToken}"/>
                         </xsl:variable>
                         <xsl:value-of
                             select="
-                            string-join(
-                            ($occupations, $currentContributorOccupations), 
-                            $longToken
-                            )"
+                                string-join(
+                                ($occupations, $currentContributorOccupations),
+                                $longToken
+                                )"
                         />
                     </xsl:when>
                     <!-- Not a valid LOC contributor -->
@@ -203,34 +209,33 @@ and output pbcoreCreator / pbcoreContributor -->
                             select="concat($currentContributor, '.rdf')"/>
                         <xsl:variable name="currentContributorName"
                             select="
-                            doc($currentContributorxml)
-                            //rdf:RDF
-                            /*
-                            /madsrdf:authoritativeLabel
-                            "/>
+                                doc($currentContributorxml)
+                                //rdf:RDF
+                                /*
+                                /madsrdf:authoritativeLabel
+                                "/>
                         <xsl:variable name="currentContributorFieldsOfActivity">
                             <xsl:value-of
                                 select="
-                                doc($currentContributorxml)
-                                //madsrdf:fieldOfActivity
-                                /madsrdf:Concept
-                                /@rdf:about[contains(.,$validatingString)]" 
-                                separator="{$longToken}"
-                                />
+                                    doc($currentContributorxml)
+                                    //madsrdf:fieldOfActivity
+                                    /madsrdf:Concept
+                                    /@rdf:about[contains(., $validatingString)]"
+                                separator="{$longToken}"/>
                         </xsl:variable>
                         <xsl:call-template name="parseContributorFieldsOfActivity">
                             <xsl:with-param name="contributorsToProcess"
                                 select="
-                                normalize-space(
-                                substring-after(
-                                $contributorsToProcess, $token
-                                ))"/>
+                                    normalize-space(
+                                    substring-after(
+                                    $contributorsToProcess, $token
+                                    ))"/>
                             <xsl:with-param name="fieldsOfActivity"
                                 select="
-                                string-join(
-                                ($fieldsOfActivity,$currentContributorFieldsOfActivity), 
-                                $longToken
-                                )"
+                                    string-join(
+                                    ($fieldsOfActivity, $currentContributorFieldsOfActivity),
+                                    $longToken
+                                    )"
                             />
                         </xsl:call-template>
                     </xsl:when>
@@ -238,11 +243,11 @@ and output pbcoreCreator / pbcoreContributor -->
                         <xsl:call-template name="parseContributorFieldsOfActivity">
                             <xsl:with-param name="contributorsToProcess"
                                 select="
-                                normalize-space(
-                                substring-after(
-                                $contributorsToProcess, 
-                                $token
-                                ))"/>
+                                    normalize-space(
+                                    substring-after(
+                                    $contributorsToProcess,
+                                    $token
+                                    ))"/>
                             <xsl:with-param name="fieldsOfActivity" select="$fieldsOfActivity"/>
                         </xsl:call-template>
                     </xsl:otherwise>
@@ -258,24 +263,27 @@ and output pbcoreCreator / pbcoreContributor -->
                         <xsl:variable name="currentContributorxml"
                             select="concat($currentContributor, '.rdf')"/>
                         <xsl:variable name="currentContributorName"
-                            select="doc($currentContributorxml)
-                            //rdf:RDF
-                            /*
-                            /madsrdf:authoritativeLabel"/>
+                            select="
+                                doc($currentContributorxml)
+                                //rdf:RDF
+                                /*
+                                /madsrdf:authoritativeLabel"/>
                         <xsl:variable name="currentContributorFieldsOfActivity">
                             <xsl:value-of
-                                    select="
+                                select="
                                     doc($currentContributorxml)
                                     //madsrdf:occupation
                                     /madsrdf:Occupation
                                     /@rdf:about"
-                                    separator="{$longToken}"/>
+                                separator="{$longToken}"/>
                         </xsl:variable>
                         <xsl:value-of
-                            select="string-join(
-                            ($fieldsOfActivity, $currentContributorFieldsOfActivity), 
-                            $longToken
-                            )"/>
+                            select="
+                                string-join(
+                                ($fieldsOfActivity, $currentContributorFieldsOfActivity),
+                                $longToken
+                                )"
+                        />
                     </xsl:when>
                     <!--Not valid LOC contributor -->
                     <xsl:otherwise>

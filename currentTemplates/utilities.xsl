@@ -6,19 +6,30 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:WNYC="http://www.wnyc.org" xmlns:functx="http://www.functx.com"
     xmlns:ASCII="https://www.ecma-international.org/publications/standards/Ecma-094.htm"
-    xmlns:pb="http://www.pbcore.org/PBCore/PBCoreNamespace.html" exclude-result-prefixes="#all">
+    xmlns:pb="http://www.pbcore.org/PBCore/PBCoreNamespace.html"
+    default-collation="http://www.w3.org/2013/collation/UCA?ignore-symbols=yes;strength=primary"
+    exclude-result-prefixes="#all">
 
     <xsl:mode on-no-match="deep-skip"/>
 
     <xsl:output method="html" version="4.0" indent="yes"/>
-    
-    <xsl:variable name="ISODatePattern" select="
-        '^([0-9]{4})-?(1[0-2]|0[1-9])-?(3[01]|0[1-9]|[12][0-9])$'"/>
+
+    <xsl:variable name="ISODatePattern"
+        select="
+            '^([0-9]{4})-?(1[0-2]|0[1-9])-?(3[01]|0[1-9]|[12][0-9])$'"/>
     <xsl:variable name="CMSShowList" select="doc('Shows.xml')"/>
 
     <xsl:variable name="separatingToken" select="';'"/>
+    <xsl:variable name="separatingTokenLong"
+        select="
+            concat(' ', $separatingToken, ' ')"/>
+    <!-- To avoid semicolons separating a single field -->
+    <xsl:variable name="separatingTokenForFreeTextFields" select="
+            '###===###'"/>
     <xsl:variable name="validatingKeywordString" select="'id.loc.gov/authorities/subjects/'"/>
     <xsl:variable name="validatingNameString" select="'id.loc.gov/authorities/names/'"/>
+
+
 
     <xsl:function name="WNYC:Capitalize">
         <!-- Capitalize 
@@ -81,11 +92,15 @@
                 </tokenized>
             </xsl:for-each>
         </xsl:param>
-        <xsl:message
-            select="
-                'Split parse and validate string ', $input,
-                'separated by', $separatingToken,
-                'with validating string', $validatingString"/>
+        <xsl:param name="inputLength" select="string-length($input)"/>
+        <xsl:param name="inputIsLong" select="$inputLength gt 100"/>
+        <xsl:message>
+            <xsl:value-of select="'Split parse and validate string '"/>
+            <xsl:value-of select="substring($input, 1, 100)"/>
+            <xsl:value-of select="'. . . '[$inputIsLong]"/>
+            <xsl:value-of select="' separated by ', $separatingToken"/>
+            <xsl:value-of select="'with validating string', $validatingString"/>
+        </xsl:message>
         <inputParsed>
             <xsl:for-each
                 select="
@@ -120,12 +135,19 @@
                 $text,
                 '&lt;/*p&gt;|&lt;/*br&gt;|&lt;/*div&gt;',
                 '&#x0A;')"/>
+        <!-- Delete javascript tags and content -->
+        <xsl:variable name="noJava"
+            select="
+                replace(
+                $newLines,
+                '&lt;script.*?&gt;.*?&lt;/script&gt;',
+                '&#x0A;')"/>
         <!-- Then, delete all other tags: 
             identified as text inside two carets < and > -->
         <xsl:variable name="noHtml"
             select="
                 replace(
-                $newLines,
+                $noJava,
                 '&lt;[^&gt;]+&gt;', '')"/>
         <!-- Get rid of weird spaces -->
         <xsl:variable name="normalizeSpaces"
@@ -135,7 +157,45 @@
         <xsl:value-of
             select="
                 replace($normalizeSpaces,
-                '&#x0A;{3,}', '&#x0A;&#x0A;')"
+                '[\r|\n]{2,}', '&#x0A;&#x0A;')"
+        />
+    </xsl:template>
+
+
+    <xsl:template name="strip-links" match="text()" mode="strip-links">
+        <!-- Strip all hyperlinks -->
+        <!-- Both the text and the link -->
+        <!-- Do not use on descriptions that have 
+        embedded hyperlinks in the text flow -->
+        <xsl:param name="text" select="."/>
+        <xsl:message select="'Get rid of html links'"/>
+        <xsl:value-of
+            select="
+                analyze-string(
+                ., '&lt;a.*?a&gt;')/
+                fn:non-match
+                "
+        />
+    </xsl:template>
+
+
+    <xsl:template name="strip-final-link" match="text()" mode="strip-final-link">
+        <!-- Strip only final link -->
+        <!-- This is helpful when a description has a final, 
+        'hanging' link without context -->
+        <xsl:param name="text" select="."/>
+        <xsl:message
+            select="
+                'Get rid of final, hanging html links without context'"/>
+        <xsl:value-of
+            select="
+                analyze-string(
+                ., '&lt;a.*&gt;')/
+                *[not(
+                self::fn:match
+                [not(
+                following-sibling::fn:non-match[matches(., '\w')]
+                )])]"
         />
     </xsl:template>
 
@@ -150,6 +210,19 @@
         <!-- Strip non-ASCII characters -->
         <xsl:param name="inputText"/>
         <xsl:value-of select="replace($inputText, '[^ -~]', '')"/>
+    </xsl:function>
+
+    <xsl:function name="WNYC:justASCIILetters" expand-text="yes">
+        <!-- Strip characters that are not ASCII letters -->
+        <!-- a-z or A-Z -->
+        <xsl:param name="inputText"/>
+        <xsl:value-of select="replace($inputText, '[^(a-z|A-Z)]', '')"/>
+    </xsl:function>
+
+    <xsl:function name="WNYC:justLetters" expand-text="yes">
+        <!-- Strip characters that are not letters -->
+        <xsl:param name="inputText"/>
+        <xsl:value-of select="replace($inputText, '\P{L}', '')"/>
     </xsl:function>
 
     <xsl:template name="ASCIIFy" match="node()" mode="ASCIIFy">
@@ -508,10 +581,11 @@
             select="
                 $characterCount - $maxCharacters"/>
         <xsl:param name="fileTooLong" select="
-            $excessCharacterCount gt 0"/>
+                $excessCharacterCount gt 0"/>
         <xsl:param name="generateError" select="true()"/>
-        <xsl:variable name="excessCharacters" select="
-            substring($text, $maxCharacters)"/>
+        <xsl:variable name="excessCharacters"
+            select="
+                substring($text, $maxCharacters)"/>
         <xsl:variable name="errorMessage"
             select="
                 $fieldName, $text,
@@ -523,15 +597,15 @@
                 generateError">
                 <xsl:with-param name="errorType" select="'textTooLong'"/>
                 <xsl:with-param name="errorMessage" select="
-                    $errorMessage"/>
+                        $errorMessage"/>
                 <xsl:with-param name="fieldName" select="'DAVIDTitle'"/>
             </xsl:call-template>
-        </xsl:if>        
+        </xsl:if>
     </xsl:template>
 
     <xsl:template name="generateError" match="node()" mode="generateError">
         <xsl:param name="fieldName" select="local-name(.)"/>
-        <xsl:param name="errorType" select="concat($fieldName, '_Error')"/>        
+        <xsl:param name="errorType" select="concat($fieldName, '_Error')"/>
         <xsl:param name="errorMessage" select="$errorType, 'in field', $fieldName"/>
         <xsl:element name="error">
             <xsl:attribute name="type" select="$errorType"/>
@@ -539,66 +613,156 @@
         </xsl:element>
         <xsl:message select="$errorMessage"/>
     </xsl:template>
-    
+
     <xsl:function name="WNYC:reverseArticle">
         <xsl:param name="text" as="xs:string"/>
-        <xsl:variable name="analyzedText" select="
-            analyze-string(
-            normalize-space(
-            $text
-            ), 
-            ', (The|A|a|the)$'
-            )"/>        
+        <xsl:variable name="analyzedText"
+            select="
+                analyze-string(
+                normalize-space(
+                $text
+                ),
+                ', (The|A|a|the)$'
+                )"/>
         <xsl:variable name="reversedText">
-            <xsl:value-of select="
-                $analyzedText/
-                fn:match/
-                fn:group[@nr=1]"/>
-            <xsl:value-of select="' '[$analyzedText/fn:match !='']"/>
+            <xsl:value-of
+                select="
+                    $analyzedText/
+                    fn:match/
+                    fn:group[@nr = 1]"/>
+            <xsl:value-of select="' '[$analyzedText/fn:match != '']"/>
             <xsl:value-of select="$analyzedText/fn:non-match"/>
         </xsl:variable>
-        <xsl:value-of select="
-            WNYC:Capitalize(
-            normalize-space(
-            $reversedText
-            ), 1
-            )"/>
+        <xsl:value-of
+            select="
+                WNYC:Capitalize(
+                normalize-space(
+                $reversedText
+                ), 1
+                )"
+        />
     </xsl:function>
-    
+
     <xsl:template name="mp3builder" match="
-        pb:pbcoreDescriptionDocument" mode="mp3builder">
+            pb:pbcoreDescriptionDocument"
+        mode="mp3builder">
         <xsl:param name="showName" select="
-            pb:pbcoreTitle[@titleType = 'Series']"/>
-        <xsl:param name="bcastDateAsText" select="pb:pbcoreAssetDate
-            [@dateType = 'broadcast']
-            /normalize-space(.)
-            [matches(., $ISODatePattern)]"/>
+                pb:pbcoreTitle[@titleType = 'Series']"/>
+        <xsl:param name="bcastDateAsText"
+            select="
+                pb:pbcoreAssetDate
+                [@dateType = 'broadcast']
+                /normalize-space(.)
+                [matches(., $ISODatePattern)]"/>
         <xsl:param name="date"
             select="
-            xs:date(min($bcastDateAsText)        
-            )"
-        />
+                xs:date(min($bcastDateAsText)
+                )"/>
         <xsl:param name="exactMatch" select="false()"/>
         <xsl:param name="articledShowName" select="
-            WNYC:reverseArticle($showName)"/>
+                WNYC:reverseArticle($showName)"/>
         <xsl:param name="cmsDate" select="
-            fn:format-date($date, '[M01][D01][Y01]')"/>
+                fn:format-date($date, '[M01][D01][Y01]')"/>
         <xsl:param name="cmsShowInfo">
             <xsl:copy-of
                 select="
-                $CMSShowList/JSON/
-                data[type = 'show']/
-                attributes[title = $showName]"
+                    $CMSShowList/JSON/
+                    data[type = 'show']/
+                    attributes[title = $showName]"
             />
         </xsl:param>
         <xsl:param name="slug" select="
-            $cmsShowInfo/attributes/slug"/>
-        <xsl:message select="'Generate MP3 for show', $showName, 'on date', $date"/>        
+                $cmsShowInfo/attributes/slug"/>
+        <xsl:message select="'Generate MP3 for show', $showName, 'on date', $date"/>
         <xsl:if test="matches($slug, '\w')">
             <xsl:value-of select="$slug"/>
             <xsl:value-of select="$cmsDate"/>
             <xsl:value-of select="'.mp3'[$exactMatch]"/>
         </xsl:if>
     </xsl:template>
-    
+
+    <xsl:template name="titleCase">
+        <!-- Generate title case -->
+        <!-- Lifted from 
+            https://stackoverflow.com/questions/62193225/how-can-i-convert-all-heading-text-to-title-case-with-xslt -->
+        <xsl:param name="inputTitle"/>
+
+        <xsl:param name="alwaysLC"
+            select="'*a*,*an*,*the*,*and*,*but*,*for*,*nor*,*or*,*so*,*yet*,*as*,*at*,*by*,*if*,*in*,*of*,*on*,*to*,*with*,*when*,*where*'"/>
+        <xsl:param name="alwaysUC"
+            select="'\\.[A-Z]|^A\\/H$|^ABC$|^AIDS$|^AM$|^AP$|^ASCAP$|^BBC$|^CBGB$|^CBS$|^CD$|^CMNY$|^CNN$|^CPB$|^DAT$|^DNC$|^DIY$|^EPA$|^FDNY$|^FM$|^GOP$|^HSA$|^HUAC$|^JFK$|^LMDC$|^M\\/H$|^NATO$|^NBC$|^NPR$|^NS$|^NW$|^NWU$|^NY$|^NY1$|^NYC$|^NYPD$|^NYS$|^P\.M\.$|^PAL$|^PBS$|^PCB$|^PM$|^PS$|^RNC$|^SFX$|^TAL$|^TB$|^UN$|^US$|^USA$|^USAF$|^TV$|^V\-E$|^VD$|^VE$|^VP$|^WNBA$|^WQXR$|^WNYC$|^WW1$|^WW2$'"/>
+
+        <xsl:param name="cleanInput" select="normalize-space($inputTitle)"/>
+        <xsl:param name="elements" select="tokenize($cleanInput, ' ')"/>
+        <xsl:for-each select="$elements">
+            <xsl:variable name="lcElement" select="lower-case(.)"/>
+            <xsl:choose>
+                <!-- Leave some words uppercase -->
+                <xsl:when test="matches(., $alwaysUC)">
+                    <xsl:value-of select="."/>
+                    <xsl:if test="position() != last()">
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
+                </xsl:when>
+                <!-- The first letter of the first word of a title is always Uppercase -->
+                <xsl:when test="position() = 1">
+                    <xsl:value-of select="upper-case(substring($lcElement, 1, 1))"/>
+                    <xsl:value-of select="substring($lcElement, 2)"/>
+                    <xsl:if test="position() != last()">
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:choose>
+                        <!-- Leave some words uppercase -->
+                        <xsl:when test="matches(., $alwaysUC)">
+                            <xsl:value-of select="."/>
+                        </xsl:when>
+                        <!-- If the word is contained in $words, leave it Lowercase -->
+                        <xsl:when test="contains($alwaysLC, concat('*', $lcElement, '*'))">
+                            <xsl:value-of select="$lcElement"/>
+                            <xsl:if test="position() != last()">
+                                <xsl:text> </xsl:text>
+                            </xsl:if>
+                        </xsl:when>
+
+                        <!-- If not, first letter is Uppercase -->
+                        <xsl:otherwise>
+                            <xsl:value-of select="upper-case(substring($lcElement, 1, 1))"/>
+                            <xsl:value-of select="substring($lcElement, 2)"/>
+                            <xsl:if test="position() != last()">
+                                <xsl:text> </xsl:text>
+                            </xsl:if>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:for-each>
+
+    </xsl:template>
+
+    <xsl:function name="WNYC:titleCase">
+        <xsl:param name="inputTitle"/>
+        <xsl:call-template name="titleCase">
+            <xsl:with-param name="inputTitle"/>
+        </xsl:call-template>
+    </xsl:function>
+
+    <xsl:template name="RIFFDate">
+        <xsl:param name="inputDate"/>
+        <xsl:param name="inputDateISO" select="translate($inputDate, ':', '-')"/>
+        <xsl:param name="inputDateParsed" select="tokenize($inputDateISO, '-')"/>
+        <xsl:param name="year">
+            <xsl:value-of select="$inputDateParsed[1][not(contains(., 'u'))]"/>
+            <xsl:value-of select="'0000'[(contains($inputDateParsed[1], 'u'))]"/>
+        </xsl:param>
+        <xsl:param name="month" select="
+                $inputDateParsed[2][not(contains(., 'u'))]"/>
+        <xsl:param name="day"
+            select="
+                $inputDateParsed[3][not(contains(., 'u'))][$month != '']"/>
+
+        <xsl:value-of select="$year, $month, $day" separator="-"/>
+    </xsl:template>
+
 </xsl:stylesheet>

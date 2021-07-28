@@ -18,7 +18,9 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="pb:pbcoreDescriptionDocument" mode="cavafyQC">
+    <xsl:template match="
+        pb:pbcoreDescriptionDocument" mode="
+        cavafyQC">
         <!-- Test whether the cavafy entry has any errors, with the following defaults: -->
 
         <!-- ASSET LEVEL: -->
@@ -293,10 +295,12 @@
             <xsl:apply-templates select="pb:pbcoreInstantiation" mode="instantiationQC"/>
         </xsl:variable>
 
-        <xsl:message select="'CAVAFY WARNINGS for ', ."/>
-        <xsl:variable name="cavafyWarnings">
-            
-            <xsl:apply-templates select="." mode="defaultValuesWarning"/>
+        <xsl:message select="'CAVAFY WARNINGS for ',
+            pb:pbcoreIdentifier
+            [@source='WNYC Archive Catalog']"/>
+        <xsl:variable name="cavafyWarnings">            
+            <xsl:apply-templates select="." mode="
+                defaultValuesWarning"/>
         </xsl:variable>
 
         <cavafyEntry>

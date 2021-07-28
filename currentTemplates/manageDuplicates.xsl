@@ -4,24 +4,9 @@ from different sources -->
 
 <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:fn="http://www.w3.org/2005/xpath-functions"
-    xmlns:System="http://ns.exiftool.ca/File/System/1.0/"
-    xmlns:File="http://ns.exiftool.ca/File/1.0/" xmlns:RIFF="http://ns.exiftool.ca/RIFF/RIFF/1.0/"
-    xmlns:XMP-x="http://ns.exiftool.ca/XMP/XMP-x/1.0/"
-    xmlns:XMP-xmp="http://ns.exiftool.ca/XMP/XMP-xmp/1.0/"
-    xmlns:XMP-xmpDM="http://ns.exiftool.ca/XMP/XMP-xmpDM/1.0/"
-    xmlns:XMP-xmpMM="http://ns.exiftool.ca/XMP/XMP-xmpMM/1.0/"
-    xmlns:XMP-dc="http://ns.exiftool.ca/XMP/XMP-dc/1.0/"
+    xmlns:fn="http://www.w3.org/2005/xpath-functions"    
     xmlns:XMP-WNYCSchema="http://ns.exiftool.ca/XMP/XMP-WNYCSchema/1.0/"
-    xmlns:XMP-exif="http://ns.exiftool.ca/XMP/XMP-exif/1.0/" xmlns:lc="http://www.loc.gov/"
-    xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:pb="http://www.pbcore.org/PBCore/PBCoreNamespace.html"
-    xmlns:et="http://ns.exiftool.ca/1.0/" et:toolkit="Image::ExifTool 10.82"
-    xmlns:ExifTool="http://ns.exiftool.ca/ExifTool/1.0/"
-    xmlns:Composite="http://ns.exiftool.ca/Composite/1.0/"
-    xmlns:XMP-plus="http://ns.exiftool.ca/XMP/XMP-plus/1.0/"
-    xmlns:XML="http://ns.exiftool.ca/XML/XML/1.0/" xmlns:WNYC="http://www.wnyc.org"
+    xmlns:XML="http://ns.exiftool.ca/XML/XML/1.0/" xmlns:WNYC="http://www.wnyc.org" default-collation="http://www.w3.org/2013/collation/UCA?ignore-symbols=yes;strength=primary"
     exclude-result-prefixes="#all">
 
     <xsl:import href="trimStrings.xsl"/>
@@ -40,7 +25,7 @@ from different sources -->
     <xsl:template name="checkConflicts" 
         match="inputs" 
         mode="checkConflicts">        
-        <!-- Check for data inconsistencies -->        
+        <!-- Check for text (letters only) inconsistencies -->        
         <xsl:param name="field1"/>
         <xsl:param name="field2"/>
         <xsl:param name="field3"/>
@@ -58,10 +43,19 @@ from different sources -->
             </xsl:element>
         </xsl:param>
         <xsl:param name="normalize" select="true()"/>
-        <xsl:message select="'Check for conflicts among values for ', $fieldName[1], ': ', 
-            string-join(
-            ($field1, $field2, $field3, $field4, $field5), 
-            $separatingToken)"/>
+        <xsl:message
+            select="
+                'Check for conflicts among values for ', $fieldName[1], ': ',
+                string-join(
+                (
+                substring($field1[1], 1, 100),
+                substring($field2[1], 1, 100),
+                substring($field3[1], 1, 100),
+                substring($field4[1], 1, 100),
+                substring($field5[1], 1, 100)
+                ),
+                $separatingToken)"
+        />
         
         <xsl:variable name="distinctFields">
             <xsl:call-template name="splitParseValidate">
@@ -85,7 +79,7 @@ from different sources -->
                 $distinctFoundCount, ' distinct values for ',
                 $fieldName, ' found: '"/>
             <xsl:value-of select="
-                $distinctFound" separator="
+                $distinctFound/substring(., 1, 100)" separator="
                 {$separatingToken}"/>
         </xsl:message>
         <xsl:variable name="distinctFoundSorted">
@@ -96,7 +90,9 @@ from different sources -->
                 </valid>
             </xsl:for-each>
         </xsl:variable>
-        <!-- Check for basic matching -->
+        <!-- Check for basic matching of just letters -->
+        <!-- Disregard upper and lowercase -->
+        <!-- Disregard accents, umlauts and other modifiers -->
         <!-- See collation info at 
         https://saxonica.com/html/documentation/extensibility/config-extend/collation/ -->
         <xsl:variable name="basicCheck">
@@ -105,10 +101,11 @@ from different sources -->
                 <xsl:element name="compare">
                     <xsl:attribute name="field" select="."/>
                     <xsl:attribute name="nextField" select="$nextField"/>
+                    <!-- We compare just letters -->
                     <xsl:value-of select="
-                        compare(., $nextField
+                        compare(WNYC:justLetters(.), WNYC:justLetters($nextField)
                         , 
-                        'http://www.w3.org/2013/collation/UCA?strength=primary'
+                        'http://www.w3.org/2013/collation/UCA?ignore-symbols=yes;strength=primary'
                         )"/>
                 </xsl:element>
             </xsl:for-each>
@@ -133,8 +130,8 @@ from different sources -->
             
             <xsl:choose>
                 <!-- Only one distinct value; pass-through -->
-                <xsl:when test="$distinctFoundCount lt 1">                
-                    <xsl:value-of select="$defaultValue"/>
+                <xsl:when test="$distinctFoundCount lt 1">                    
+                    <xsl:copy-of select="$defaultValue"/>
                 </xsl:when>
                 <!-- Output the data-richest field -->
                 <!-- E.g. prefer Le Carré to Le Carre -->
@@ -144,7 +141,12 @@ from different sources -->
             </xsl:choose>
         </xsl:variable>
         <xsl:copy-of select="$checkConflictResult"/>
-        <xsl:message select="'Chosen value:', $checkConflictResult"/>
+        <xsl:variable name="checkConflictResultLength" select="string-length($checkConflictResult)"/>
+        <xsl:variable name="checkConflictResultIsLong" select="$checkConflictResultLength gt 100"/>
+        <xsl:message>
+            <xsl:value-of select="'Chosen value:', substring($checkConflictResult, 1, 100)"/>
+            <xsl:value-of select="' . . .'[$checkConflictResultIsLong]"/>
+        </xsl:message>
     </xsl:template>
 
     <xsl:template name="mergeData" 
@@ -231,39 +233,46 @@ from different sources -->
         </xsl:if>
     </xsl:template>
 
-    <xsl:template name="field1MustContainField2" 
-        match="/" mode="field1MustContainField2">
-        <!-- Terminate if field1
+    <xsl:template name="field1MustContainField2">
+        <!-- Generate error if field1
         does not contain field2 -->
         <xsl:param name="field1"/>
-        <xsl:param name="field2"/>        
-
-        <xsl:if test="not(contains($field1, $field2))">
-            <xsl:variable name="errorMessage" select="
-                concat(
-                'ERROR: ', 
-                $field1, ' does not contain ', $field2
-                )"/>
-            <xsl:value-of select="$errorMessage"/>
-            <xsl:message terminate="yes" select="$errorMessage"/>                
-        </xsl:if>
-    </xsl:template>
-
-    <xsl:template name="field1MustNotContainField2" 
-        match="/" mode="field1MustNotContainField2">
-        <!-- Terminate if field 1
-        contains field 2-->
-        <xsl:param name="field1"/>
         <xsl:param name="field2"/>
-
-        <xsl:if test="contains($field1, $field2)">
-            <xsl:variable name="errorMessage" select="
-                concat(
-                'ERROR: ', 
-                $field1, ' contains ', $field2
-                )"/>
-            <xsl:value-of select="$errorMessage"/>
-            <xsl:message terminate="yes" select="$errorMessage"/>
+        <xsl:param name="field1Name" select="local-name($field1)"/>
+        <xsl:param name="field2Name" select="local-name($field2)"/>
+        <xsl:param name="normalizedField1" select="
+            normalize-space(
+            WNYC:stripNonASCII(
+            $field1
+            ))"/>
+        <xsl:param name="normalizedField2" select="
+            normalize-space(
+            WNYC:stripNonASCII(
+            ($field2)
+            ))"/>
+        <xsl:if test="
+            not(
+            contains(
+            $normalizedField1, $normalizedField2
+            ))">
+            <xsl:variable name="errorMessage">
+                <xsl:value-of select="concat(
+                    '&#10;&#13;',
+                    'ERROR: ',
+                    '&#10;&#13;')"/>
+                <xsl:copy-of select="$field1"/>
+                <xsl:value-of select="$separatingTokenForFreeTextFields"/>
+                <xsl:value-of select="'&#10;&#13;**** DOES NOT CONTAIN ****&#10;&#13;'"/>
+                <xsl:copy-of select="$field2"/>
+            </xsl:variable>
+                
+            <xsl:element name="error">
+                <xsl:attribute name="type">
+                    <xsl:value-of select="concat($field1Name, 'NotContains', $field2Name)"/>
+                </xsl:attribute>
+                <xsl:copy-of select="$errorMessage"/>
+            </xsl:element>
+            <xsl:message terminate="no" select="$errorMessage"/>
         </xsl:if>
     </xsl:template>
 
