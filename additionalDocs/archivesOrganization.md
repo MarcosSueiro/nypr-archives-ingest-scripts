@@ -1,4 +1,4 @@
-# Archives Organization #
+# Organization of items in the NYPR Archives #
 
 This document outlines how NYPR Archival materials are organized.
 
@@ -7,7 +7,7 @@ This document outlines how NYPR Archival materials are organized.
 * Series contain conceptual **Assets**, 
 * whose physical (1/4 inch audio tape, DAT) or digital (WAVE files) manifestations are called **Instantiations**.
 
-The pbcore standard [defines](https://pbcore.org/glossary) **asset** as 
+The NYPR catalogue uses the pbcore schema, which [defines](https://pbcore.org/glossary) **asset** as 
 > A single piece of content, such as a program, clip, or episode. 
 > One asset may exist in many different forms (for example, on DVD, on a U-matic tape in English, and on a VHS tape in French). 
 > If the content is the same, those would all be considered instantiations of the same asset" 
@@ -20,31 +20,36 @@ The NYPR Archives' interpretation of what consitutes the *same* intellectual con
 
 The Archives [ingest scripts](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts) flag perceived inconsistencies between instantiation-level (i.e., embedded) and asset-level metadata. The following table summarizes the rules followed by the scripts:
 
-pbcore metadata | Relationship | Embedded MD | Notes
+Asset metadata | Relationship | Embedded metadata | Notes
 --------------- | ------------ | ----------- | -----
 pbcoreTitle[@titleType='Collection'] | MUST MATCH | Archival Location (IARL) | Including country, e.g. "US, WNYC"
-pbcoreContributor/@ref | MUST INCLUDE | Artists (IART) | As URL, e.g. https://id.loc.gov/authorities/names/n50080187
+pbcoreContributor/@ref | MUST INCLUDE | Artists (IART) | As URLs, e.g. https://id.loc.gov/authorities/names/n50080187
 pbcoreCreator/pbcorePublisher/@ref | MUST INCLUDE | Commissioned by (ICMS) | As URL, e.g. https://id.loc.gov/authorities/names/n50080187
-instantiationAnnotation[@annotationType='Embedded_Comments'] | MUST MATCH | Comments (ICMT)
 rightsSummary | MUST MATCH | Copyright (ICOP)
 pbcoreAssetDate | MUST INCLUDE | Create Date (ICRD)
 pbcoreContributor[Role='Engineer']/contributor | MUST INCLUDE | Engineer (IENG)
 pbcoreGenre | MUST MATCH | Genre (IGNR)
 pbcoreSubject/@ref | MUST INCLUDE | Keywords (IKEY)
-instantiationRelation[instantiationRelationType='Is Dub Of']/instantiationRelationIdentifier | MUST MATCH | Original Medium (IMED)
 pbcoreTitle[@titleType='Episode'] | MUST MATCH | Title (INAM) | For full-length instantiations
-instantiationAnnotation[@annotationType='Embedded Title'] | MUST MATCH | Title (INAM) | For partial instantiations
 pbcoreTitle[@titleType='Series'] | MUST MATCH | Product (IPRD)
 pbcoreDescription[@descriptionType='Abstract'] | MUST MATCH | Subject (ISBJ) | For full-length instantiations
+pbcoreIdentifier[@source='pbcore XML database UUID'] | MUST MATCH | Source (ISRC) | As URL, e.g. https://cavafy.wnyc.org/assets/4a483b27-3959-472b-827e-0825c5165176
+
+This table shows that seven fields must match between the asset and instantiation levels, while five asset-level fields function as containers ('MUST INCLUDE') for instantiation-level metadata. Thus, an asset cannot contain two instantiations from two different shows, and the genre must be applied uniformly to all instantiations. 
+
+On the other hand, in order to better describe an instantiation that only encompasses part of an asset (e.g. "Hour 1"), such an instantiation may only include the contributors relevant to that segment. Thus, if an artist appears during the first half of a show but not the second, we may choose to embed their URL only in the instantiation that covers that half, and give it a specific title as well. However, as indicated above, *all* artists in the instantiations will be included at the asset level; and, as we will see below, the title is included at the instantiation level.
+
+Partial instantiations pose a particular challenge with a one-to-many cataloging schema such as pbcore (as opposed to Dublin Core, which is one-to-one). The advantage of being able to describe several items at once is often [counterbalanced by lack of granularity and vague hyerarchical relations](https://www.oclc.org/research/activities/frbr/clinker.html). An alternative approach is to apply metadata to physical and digital items and establish relations among them, without necessarily having an umbrella, conceptual element.
+
+Additional embedded metadata is mapped at the instantiation level as per the following table:
+
+Instantiation metadata | Relationship | Embedded metadata | Notes
+--------------- | ------------ | ----------- | -----
+instantiationAnnotation[@annotationType='Embedded_Comments'] | MUST MATCH | Comments (ICMT)
+instantiationRelation[instantiationRelationType='Is Dub Of']/instantiationRelationIdentifier | MUST MATCH | Original Medium (IMED)
+instantiationAnnotation[@annotationType='Embedded Title'] | MUST MATCH | Title (INAM) | For partial instantiations
 instantiationAnnotation[@annotationType='Embedded Description'] | MUST MATCH | Subject (ISBJ) | For partial instantiations
  || not captured | Software (ISFT)
-pbcoreIdentifier[@source='pbcore XML database UUID'] | MUST MATCH | Source (ISRC)
 instantiationAnnotation[@annotationType='Provenance'] | MUST MATCH | Source reference (ISRF)
 instantiationAnnotation[@annotationType='Transfer_Technician'] | MUST MATCH | Technician (ITCH)
 instantiationAnnotation[@annotationType='codingHistory'] | MUST MATCH | CodingHistory | Parsed additionally by step and parameter
-
-This table shows that some fields must match between the asset and instantiation levels, while other asset-level fields function as containers ('MUST INCLUDE') for instantiation-level metadata. Thus, an asset cannot contain two instantiations from two different shows, and the genre must be applied uniformly to all instantiations. 
-
-On the other hand, in order to better describe an instantiation that only encompasses part of an asset (e.g. "Hour 1"), such an instantiation may only include the contributors relevant to that segment. Thus, if an artist appears during the first half of a show but not the second, we may choose to embed their URL only in the instantiation that covers that half, and give it a specific title as well. However, as indicated above, *all* artists in the instantiations will be included at the asset level.
-
-Partial instantiations pose a particular challenge with a one-to-many cataloging schema such as pbcore (as opposed to Dublin Core, which is one-to-one). The advantage of being able to describe several items at once is often [counterbalanced by lack of granularity and vague hyerarchical relations](https://www.oclc.org/research/activities/frbr/clinker.html). An alternative approach is to apply metadata to physical and digital items and establish relations among them, without necessarily having an umbrella, conceptual element.
