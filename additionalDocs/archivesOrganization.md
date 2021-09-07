@@ -7,13 +7,18 @@ This document outlines how NYPR Archival materials are organized.
 * Series contain conceptual **Assets**, 
 * whose physical (1/4 inch audio tape, DAT) or digital (WAVE files) manifestations are called **Instantiations**.
 
-The pbcore standard [defines](https://pbcore.org/glossary) asset as "A single piece of content, such as a program, clip, or episode. One asset may exist in many different forms (for example, on DVD, on a U-matic tape in English, and on a VHS tape in French). If the content is the same, those would all be considered instantiations of the same asset" and instantiation as "A manifestation of an asset that is embodied in physical or digital form, such as a tape, DVD, or digital file. One asset can have many instantiations, but generally, each instantiation holds the same intellectual content." 
+The pbcore standard [defines](https://pbcore.org/glossary) **asset** as 
+> A single piece of content, such as a program, clip, or episode. 
+> One asset may exist in many different forms (for example, on DVD, on a U-matic tape in English, and on a VHS tape in French). 
+> If the content is the same, those would all be considered instantiations of the same asset" 
 
-The NYPR Archives' interpretation of what consitutes the *same* intellectual content varies widely. Generally, the catalog adheres to the pbcore concepts above: thus, an original 1/4 inch tape of a show and a Beta PCM F-1 recording of its aircheck will be grouped under the same asset (even if the latter includes the top-of-the-hour news). But the catalog includes plenty of examples deviating in both directions: some complex assets include multitracks, safety copies, and several versions of mixes; while, on the other hand, two tapes with content from the first and second hour of a broadcast may be cataloged as different assets.
+and **instantiation** as 
+> A manifestation of an asset that is embodied in physical or digital form, such as a tape, DVD, or digital file.
+> One asset can have many instantiations, but generally, each instantiation holds the same intellectual content." 
 
-Regarding these inconsistencies, the Archives' efforts to improve data quality for reformatted materials focus on the latter --that is, on grouping together instantiations that should be under one asset. But we have yet to define a strict asset-instantiation relationship, and pbcore definitions are vague as to what constitutes "same intellectual content".
+The NYPR Archives' interpretation of what consitutes the *same* intellectual content varies widely. Generally, the catalog adheres to the pbcore concepts above: thus, an original 1/4 inch tape of a broadcast and a Beta PCM F-1 recording of its aircheck will be grouped under the same asset (even if the latter includes, say, the top-of-the-hour news). But the catalog includes plenty of examples deviating in both directions: some complex assets include multitracks, safety copies, and several versions of mixes; while, on the other hand, two tapes with content from the first and second hour of a broadcast may be cataloged as different assets. Current efforts to improve data quality for reformatted materials focus on the latter --that is, on grouping together instantiations that should be under one asset.
 
-However, our [ingest scripts](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts) flag inconsistencies between instantiation-level (i.e., embedded) and asset-level metadata. The following table summarizes the rules followed by the scripts:
+The Archives [ingest scripts](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts) flag perceived inconsistencies between instantiation-level (i.e., embedded) and asset-level metadata. The following table summarizes the rules followed by the scripts:
 
 pbcore metadata | Relationship | Embedded MD | Notes
 --------------- | ------------ | ----------- | -----
@@ -38,6 +43,8 @@ instantiationAnnotation[@annotationType='Provenance'] | MUST MATCH | Source refe
 instantiationAnnotation[@annotationType='Transfer_Technician'] | MUST MATCH | Technician (ITCH)
 instantiationAnnotation[@annotationType='codingHistory'] | MUST MATCH | CodingHistory | Parsed additionally by step and parameter
 
-This table shows that an asset, for example, cannot contain two instantiations from two different shows or collections, and that the genre must be applied uniformly to all instantiations. However, in order to better describe instantiations that only encompass part of an asset (e.g. "Hour 1", "Hour 2"), partial contributors or keywords may be embedded in an instantiation. Thus, if an artist appears during the first half of a show but not the second, we may only embed their URL in the instantiation that covers that half. However, as indicated above, *all* artists in the instantiations will be included at the asset level.
+This table shows that some fields must match between the asset and instantiation levels, while other asset-level fields function as containers ('MUST INCLUDE') for instantiation-level metadata. Thus, an asset cannot contain two instantiations from two different shows, and the genre must be applied uniformly to all instantiations. 
 
-Partial instantiations pose a particular challenge with a one-to-many cataloging schema such as pbcore (as opposed to Dublin Core, which is one-to-one). The advantage of being able to describe several items at once is often counterbalanced by lack of granularity and vague hyerarchical relations. An alternative approach is to apply metadata to physical and digital items and establish relations among them, without necessarily having an umbrella conceptual element.
+On the other hand, in order to better describe an instantiation that only encompasses part of an asset (e.g. "Hour 1"), such an instantiation may only include the contributors relevant to that segment. Thus, if an artist appears during the first half of a show but not the second, we may choose to embed their URL only in the instantiation that covers that half, and give it a specific title as well. However, as indicated above, *all* artists in the instantiations will be included at the asset level.
+
+Partial instantiations pose a particular challenge with a one-to-many cataloging schema such as pbcore (as opposed to Dublin Core, which is one-to-one). The advantage of being able to describe several items at once is often [counterbalanced by lack of granularity and vague hyerarchical relations](https://www.oclc.org/research/activities/frbr/clinker.html). An alternative approach is to apply metadata to physical and digital items and establish relations among them, without necessarily having an umbrella, conceptual element.
