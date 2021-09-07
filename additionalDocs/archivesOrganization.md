@@ -39,9 +39,9 @@ This table shows that seven fields must match between the asset and instantiatio
 
 On the other hand, in order to better describe an instantiation that only encompasses part of an asset (e.g. "Hour 1"), such an instantiation may only include the contributors relevant to that segment. Thus, if an artist appears during the first half of a show but not the second, we may choose to embed their URL only in the instantiation that covers that half, and give it a specific title as well. However, as indicated above, *all* artists in the instantiations will be included at the asset level; and, as we will see below, the title is included at the instantiation level.
 
-Partial instantiations pose a particular challenge with a one-to-many cataloging schema such as pbcore (as opposed to Dublin Core, which is one-to-one). The advantage of being able to describe several items at once is often [counterbalanced by lack of granularity and vague hyerarchical relations](https://www.oclc.org/research/activities/frbr/clinker.html). An alternative approach is to apply metadata to physical and digital items and establish relations among them, without necessarily having an umbrella, conceptual element.
+Partial instantiations pose a particular challenge with a one-to-many cataloging schema such as pbcore (as opposed to Dublin Core, which is one-to-one). The advantage of being able to describe several items at once is often [counterbalanced by lack of granularity and vague hyerarchical relations](https://www.oclc.org/research/activities/frbr/clinker.html). An alternative approach is to apply metadata to physical and digital items and establish [relations](https://pbcore.org/pbcore-controlled-vocabularies/pbcorerelationtype-vocabulary/) among them, without necessarily having an umbrella, conceptual element.
 
-Additional embedded metadata is mapped at the instantiation level as per the following table:
+Additional embedded metadata is mapped at the instantiation level as per the table below. Note that the relationship is always 'MUST MATCH':
 
 Instantiation metadata | Relationship | Embedded metadata | Notes
 --------------- | ------------ | ----------- | -----
