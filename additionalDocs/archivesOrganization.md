@@ -18,7 +18,7 @@ and **instantiation** as
 
 The NYPR Archives' interpretation of what consitutes the *same* intellectual content varies widely. Generally, the catalog adheres to the pbcore concepts above: thus, an original 1/4 inch tape of a broadcast and a Beta PCM F-1 recording of its aircheck will be grouped under the same asset (even if the latter includes, say, the top-of-the-hour news). But the catalog includes plenty of examples deviating in both directions: some complex assets include multitracks, safety copies, and several versions of mixes; while, on the other hand, two tapes with content from the first and second hour of a broadcast may be cataloged as different assets. Current efforts to improve data quality for reformatted materials focus on the latter --that is, on grouping together instantiations that should be under one asset.
 
-The Archives [ingest scripts](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts) flag perceived inconsistencies between instantiation-level (i.e., embedded) and asset-level metadata. The following table summarizes the rules followed by the scripts:
+Despite the wide range of asset-instantiation relationships, the Archives [ingest scripts](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts) detect inconsistencies between instantiation-level (i.e., embedded) and asset-level metadata. The following table summarizes the rules followed by the scripts:
 
 Asset metadata | Relationship | Embedded metadata | Notes
 --------------- | ------------ | ----------- | -----
