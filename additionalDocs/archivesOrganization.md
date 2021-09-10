@@ -1,4 +1,4 @@
-# Classification of items in the NYPR Archives #
+# Classification of NYPR Archives materials #
 
 This document outlines how NYPR Archival materials are classified.
 
