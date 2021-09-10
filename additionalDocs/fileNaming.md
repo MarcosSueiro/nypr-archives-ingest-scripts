@@ -42,3 +42,11 @@ The instantiation suffix is unique within an asset for each instantiation. In th
 The instantiation suffix is always a number, but:
 * An additional letter (e.g. "4a") denotes a partial rendering (e.g. "Part a of several")
 * An aditional "\_TK" suffix plus a number indicates the file is part of a multitrack recording (e.g. ".4\_TK2")
+
+## Free text
+After a space, there may be additional text, which may include
+* Part of the asset's title
+* Additional IDs (e.g. "LT435")
+* Generation indicators (e.g. "WEB EDIT")
+
+The Archives [ingest scripts](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/tree/master/currentTemplates) parse and react to some of these indicators.
