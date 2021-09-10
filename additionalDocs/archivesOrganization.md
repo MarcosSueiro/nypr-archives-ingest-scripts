@@ -1,11 +1,11 @@
-# Organization of items in the NYPR Archives #
+# Classification of items in the NYPR Archives #
 
-This document outlines how NYPR Archival materials are organized.
+This document outlines how NYPR Archival materials are classified.
 
-* NYPR materials are organized into **Collections**, which represent either the material's original creator (WNYC, WQXR) or its current archival steward (NARA, MUNI).
-* Collections are divided into **Series**, which often reflect the material's original show (Brian Lehrer Show, New Sounds). 
-* Series contain conceptual **Assets**, 
-* whose physical (1/4 inch audio tape, DAT) or digital (WAVE files) manifestations are called **Instantiations**.
+*  NYPR materials are organized into **Collections**, which represent either the material's original creator (WNYC, WQXR) or its current archival steward (NARA, MUNI).
+    *  Collections are divided into **Series**, which often reflect the material's original show (Brian Lehrer Show, New Sounds). 
+       * Series contain conceptual **Assets**, 
+         * whose physical (1/4 inch audio tape, DAT) or digital (WAVE files) manifestations are called **Instantiations**.
 
 The NYPR catalogue uses the pbcore schema, which [defines](https://pbcore.org/glossary) **asset** as 
 > A single piece of content, such as a program, clip, or episode. 
@@ -16,12 +16,12 @@ and **instantiation** as
 > A manifestation of an asset that is embodied in physical or digital form, such as a tape, DVD, or digital file.
 > One asset can have many instantiations, but generally, each instantiation holds the same intellectual content." 
 
-The NYPR Archives' interpretation of what consitutes the *same* intellectual content varies widely. Generally, the catalog adheres to the pbcore concepts above: thus, an original 1/4 inch tape of a broadcast and a Beta PCM F-1 recording of its aircheck will be grouped under the same asset (even if the latter includes, say, the top-of-the-hour news). But the catalog includes plenty of examples deviating in both directions: some complex assets include multitracks, safety copies, and several versions of mixes; while, on the other hand, two tapes with content from the first and second hour of a broadcast may be cataloged as different assets. Current efforts to improve data quality for reformatted materials focus on the latter --that is, on grouping together instantiations that should be under one asset.
+The NYPR Archives' interpretation of what consitutes the *same* intellectual content has historically varied widely. Generally, the catalog adheres to the pbcore concepts above: thus, an original 1/4 inch tape of a broadcast and a Beta PCM F-1 recording of its aircheck will be grouped under the same asset (even if the latter includes, say, the top-of-the-hour news). But the catalog includes plenty of examples deviating in both directions: some complex assets include multitracks, safety copies, and several versions of mixes; while, on the other hand, two tapes with content from the first and second hour of a broadcast may be cataloged as different assets. Current efforts to improve data quality for reformatted materials focus on the latter --that is, on grouping together instantiations that should be under one asset.
 
 Despite the wide range of asset-instantiation relationships, the Archives [ingest scripts](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts) detect inconsistencies between instantiation-level (i.e., embedded) and asset-level metadata. The following table summarizes the rules followed by the scripts:
 
 Asset metadata | Relationship | Embedded metadata | Notes
---------------- | ------------ | ----------- | -----
+-------------- | ------------ | ----------------- | -----
 pbcoreTitle[@titleType='Collection'] | MUST MATCH | Archival Location (IARL) | Including country, e.g. "US, WNYC"
 pbcoreContributor/@ref | MUST INCLUDE | Artists (IART) | As URLs, e.g. https://id.loc.gov/authorities/names/n50080187
 pbcoreCreator/pbcorePublisher/@ref | MUST INCLUDE | Commissioned by (ICMS) | As URL, e.g. https://id.loc.gov/authorities/names/n50080187
