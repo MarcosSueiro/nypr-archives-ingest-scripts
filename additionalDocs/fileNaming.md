@@ -10,7 +10,7 @@ For example, a filename such as
 breaks down as follows:
 
 <p align="center">
-          <img src="http://www.plantuml.com/plantuml/png/NP1DQuD048Rl-ok6xSKUX0GCIMv9OmeUqa8LGYazRFLL5ZOhx8x1KFhVkzhceBUPvvtzc6VdMJdkBaQe1fRf_F9-e0TzRTtjdxmMfocGo-rs7IyNyM8bINboCBWgowbYp2OtoMQzaZEOpC4Rwgu1F8MYTHSuJoTKMb5UkewrlT7v-4J7D2l6zse75EZvVejHNp0aOqdxdAgMXKF9oZO69BNreMIjMBUMibJIjn3Htdjmw1ufZcdyeuYooMJUrRNknpmHFoASERJ6e1p2aNuCeZv5bCDf-3yKJ0KoQ1ZwYHSXecS74AFdCRml8NQmLT3_2m00"/>
+          <img src="http://www.plantuml.com/plantuml/png/NP11Qy9048Nlyok6z98U0WefwitMMCZ15fg0bDB34b_2Gjp0x4IKql_UJQg7U9lvtcFtpLjxDQBziINJm2dltput_61FdLokvBtSJK4qNwqMoNoMp9uYDfu5BKx6QMOKTyvbkbm4qnIcz-03TTy0diFGoH7YUOU3DLnKqgjr5zvlNtYRvUNuNor0YRFUNY51fSOrBJYopeTHhL7RESwpY7yeVlOU6fP7JX8U8r6SJun5NzVsFEef_H9HlEdQ5jKWZlHhwEMRuW9YuVzHA2QGuUfXdzH0yQi0h27bgDqYqnhk4Ch-0m00"/>
           </p>
           
 Let's analyze each section.
