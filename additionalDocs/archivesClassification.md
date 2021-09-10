@@ -7,6 +7,11 @@ This document outlines how NYPR Archival materials are classified.
        * Series contain conceptual **Assets**, 
          * whose physical (1/4 inch audio tape, DAT) or digital (WAVE files) manifestations are called **Instantiations**.
 
+<p align="center">
+  <img src="http://www.plantuml.com/plantuml/png/SoWkIImgAStDuShBJqbLSCxFoKbDBidCpuFmWrEBCbEB8Mp7ukBK4WZJCm-eBQyaCn6iaWkXIo5VLnUc2KA1HA1QmII8ZwRV8JKl1UW20000">
+</p>
+
+
 The NYPR catalogue uses the pbcore schema, which [defines](https://pbcore.org/glossary) **asset** as 
 > A single piece of content, such as a program, clip, or episode. 
 > One asset may exist in many different forms (for example, on DVD, on a U-matic tape in English, and on a VHS tape in French). 
