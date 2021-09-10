@@ -24,7 +24,7 @@ Asset metadata | Relationship | Embedded metadata | Notes
 -------------- | ------------ | ----------------- | -----
 pbcoreTitle[@titleType='Collection'] | MUST MATCH | Archival Location (IARL) | Including country, e.g. "US, WNYC"
 pbcoreContributor/@ref | MUST INCLUDE | Artists (IART) | As URLs, e.g. https://id.loc.gov/authorities/names/n50080187
-pbcoreCreator/pbcorePublisher/@ref | MUST INCLUDE | Commissioned by (ICMS) | As URL, e.g. https://id.loc.gov/authorities/names/n50080187
+pbcoreCreator/@ref, pbcorePublisher/@ref | MUST INCLUDE | Commissioned by (ICMS) | As URL, e.g. https://id.loc.gov/authorities/names/n50080187
 rightsSummary | MUST MATCH | Copyright (ICOP)
 pbcoreAssetDate | MUST INCLUDE | Create Date (ICRD)
 pbcoreContributor[Role='Engineer']/contributor | MUST INCLUDE | Engineer (IENG)
