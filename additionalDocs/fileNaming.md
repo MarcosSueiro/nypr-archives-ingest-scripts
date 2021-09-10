@@ -49,4 +49,4 @@ After a space, there may be additional text, which may include
 * Additional IDs (e.g. "LT435")
 * Generation indicators (e.g. "WEB EDIT")
 
-The Archives [ingest scripts](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/tree/master/currentTemplates) parse and react to some of these indicators.
+The Archives [ingest scripts](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/tree/master/currentTemplates) parse and react to some of these indicators. For example, the protocol requires that filenames from the MUNI collection [include their "T" or "LT" identifiers](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/314a4c5eb6816d7fce01247040485fa122af629a/currentTemplates/parseDAVIDTitle.xsl#L398), and the "WEB EDIT" keywords [indicate that the file is a derivative](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/314a4c5eb6816d7fce01247040485fa122af629a/currentTemplates/parseDAVIDTitle.xsl#L77).
