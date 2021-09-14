@@ -21,7 +21,7 @@ NYPR materials are organized into 121 Collections, which represent either the ma
 The filename reflects the collection's three- or four-character acronym.
 
 ## Series
-Collections are divided into about 600 Series, which often reflect the material's original show (Brian Lehrer Show, New Sounds). Details about the collections are stored in special assets in cavafy with a relation of type "other" and value "SRSLST". You can see an updated list [here](https://cavafy.wnyc.org/assets?q=SRSLST&x=0&y=0&search_fields%5B%5D=relation), and a less-maintained version [here](https://wiki.nypr.digital/display/AR/NYPR+Series+Titles). The Archives ingest scripts use data from these special "Series" assets as default data for assets tat are part of that series.
+Collections are divided into about 600 Series, which often reflect the material's original show (Brian Lehrer Show, New Sounds). Details about the Series are stored in special assets in cavafy with a relation of type "other" and value "SRSLST" (for "series list"). You can see an updated list [here](https://cavafy.wnyc.org/assets?q=SRSLST&x=0&y=0&search_fields%5B%5D=relation), and a less-maintained version [here](https://wiki.nypr.digital/display/AR/NYPR+Series+Titles). (The Archives [ingest scripts](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/tree/master/currentTemplates) often use data from these special "Series" documents as default data for assets that are part of that series: for example, it will use the Series' listed host if an asset omits that information)
 
 The filename reflects the series' three- or four-character acronym. 
 
