@@ -58,3 +58,5 @@ instantiationAnnotation[@annotationType='Embedded Description'] | MUST MATCH | S
 instantiationAnnotation[@annotationType='Provenance'] | MUST MATCH | Source reference (ISRF)
 instantiationAnnotation[@annotationType='Transfer_Technician'] | MUST MATCH | Technician (ITCH)
 instantiationAnnotation[@annotationType='codingHistory'] | MUST MATCH | CodingHistory | Parsed additionally by step and parameter
+
+The NYPR Archives [file naming convention](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/master/additionalDocs/fileNaming.md) in many ways reflects this classification system.
