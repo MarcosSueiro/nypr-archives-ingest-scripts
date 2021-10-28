@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- LOC broad subjects that are not particularly useful
+for New York Public Radio materials -->
+<pbcoreSubjects>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85029027">Communication</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85026423">Civilization</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85010480">Auxiliary sciences of history</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85075529">Learning and scholarship</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85067165">Intellectual life</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85031658">Control theory</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85040316">Dynamics</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85082768">Mechanics, Analytic</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85082139">Mathematics</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85118553">Science</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85079341">Machine theory</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85078115">Logic, Symbolic and mathematical</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85003487">Algorithms</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85003425">Algebra</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85112014">Recursive functions</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85112012">Recursion theory</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85093222">Number theory</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85042383">Electronics</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh89005705">Physical sciences</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85041666">Electrical engineering</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85043176">Engineering</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85133147">Technology</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/names/no98002580">Liberty</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85090244">Natural law</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85065889">Industrial management</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85080336">Management</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85033827">Creation (Literary, artistic, etc.)</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85100821">Philology</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85066719">Inspiration</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85033833">Creative ability</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85000155">Ability</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85064466">Imagination</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85062843">Human biology</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85014203">Biology</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85076841">Life sciences</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85125350">Soul</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85100845">Philosophical anthropology</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85076807">Life</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85094833">Ontology</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85080322">Theological anthropology</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85052611">Future life</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85044785">Eschatology</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85112735">Religious thought</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85134686">Theology, Doctrinal</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85134665">Theology</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85112599">Religions</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85067157">Intellect</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85040505">Earthwork</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85017935">Bulk solids handling</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85082091">Materials handling</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85102739">Plant engineering</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85046854">Factory management</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85102758">Plant layout</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85107212">Production engineering</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85082757">Mechanical engineering</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85065864">Industrial engineering</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85121576">Shipment of goods</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85101515">Physical distribution of goods</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85018306">Business logistics</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85078128">Logistics</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh2013000289">Geotechnical engineering</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85043221">Engineering geology</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85054085">Geology, Economic</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85101560">Physical geology</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh00006446">Locomotion</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85030624">Concessions</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85019929">Capital</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85102696">Planning</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85095521">Organization</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85046278">Executive ability</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85026255">City and town life</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85124233">Sociology, Urban</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85077672">Litterateurs</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85100820">Philologists</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85029027">Communication</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85035046">Cybernetics</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh96009544">Amniotes</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh86005489">Panthera</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85047696">Felidae</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85020383">Carnivora</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh2003007697">Organisms</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85076810">Life (Biology)</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85080259">Mammals</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85142902">Vertebrates</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85024735">Chordata</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh2011005559">Bilateria</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85084304">Metazoa</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85005941">Apes</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85106668">Primates</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85083510">Men</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85080292">Human beings</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85113628">Rhetoric</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85010030">Authorship</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85077507">Literature</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85100821">Philology</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85086790">Money</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85141930">Value</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85046224">Exchange</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85028901">Commerce</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85040766">Economic anthropology</pbcoreSubject>
+<pbcoreSubject source="Library of Congress" ref="http://id.loc.gov/authorities/subjects/sh85045198">Ethnology</pbcoreSubject>
+</pbcoreSubjects>
+

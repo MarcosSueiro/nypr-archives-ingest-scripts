@@ -18,15 +18,12 @@ and output pbcoreCreator / pbcoreContributor -->
         <xsl:param name="validatingString" select="'id.loc.gov'"/>
         <xsl:param name="validatedSource"
             select="'Library of Congress'[$validatingString = 'id.loc.gov']"/>
-
         <xsl:variable name="capsRole" select="WNYC:Capitalize($role, 1)"/>
-
         <xsl:message
             select="
                 concat(
                 'Parse ', $capsRole, 's ',
                 $contributorsToProcess)"/>
-
         <xsl:message
             select="
                 $capsRole, 's', 'already in cavafy: ',

@@ -33,7 +33,7 @@ from different sources -->
         <xsl:param name="field5"/>
         <xsl:param name="fieldName" select="name($field1(. != '')[1])"/>
         <xsl:param name="filename"/>
-        <xsl:param name="validatingString" select="'\w'"/><!-- Needs a word string -->
+        <xsl:param name="validatingString" select="'\w'"/><!-- Needs a 'word' string -->
         <xsl:param name="separatingToken" select="$separatingToken"/>
         <xsl:param name="defaultValue">
             <xsl:element name="error">

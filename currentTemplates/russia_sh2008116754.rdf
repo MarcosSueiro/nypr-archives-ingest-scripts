@@ -1,0 +1,575 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:bf="http://id.loc.gov/ontologies/bibframe/" xmlns:bflc="http://id.loc.gov/ontologies/bflc/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:cc="http://creativecommons.org/ns#" xmlns:foaf="http://xmlns.com/foaf/0.1/">
+  <madsrdf:ComplexSubject rdf:about="http://id.loc.gov/authorities/subjects/sh2008116754" xmlns:madsrdf="http://www.loc.gov/mads/rdf/v1#">
+    <rdf:type rdf:resource="http://www.loc.gov/mads/rdf/v1#Authority"/>
+    <madsrdf:authoritativeLabel xml:lang="en">Russia (Federation)--Description and travel</madsrdf:authoritativeLabel>
+    <madsrdf:componentList rdf:parseType="Collection">
+      <madsrdf:Geographic>
+	<rdf:type rdf:resource="http://www.loc.gov/mads/rdf/v1#Authority"/>
+	<madsrdf:authoritativeLabel xml:lang="en">Russia (Federation)</madsrdf:authoritativeLabel>
+	<madsrdf:elementList rdf:parseType="Collection">
+	  <madsrdf:GeographicElement>
+	    <madsrdf:elementValue xml:lang="en">Russia (Federation)</madsrdf:elementValue>
+	  </madsrdf:GeographicElement>
+	</madsrdf:elementList>
+      </madsrdf:Geographic>
+      <madsrdf:Topic rdf:about="http://id.loc.gov/authorities/subjects/sh99001278">
+	<rdf:type rdf:resource="http://www.loc.gov/mads/rdf/v1#Authority"/>
+	<madsrdf:authoritativeLabel xml:lang="en">Description and travel</madsrdf:authoritativeLabel>
+	<madsrdf:elementList rdf:parseType="Collection">
+	  <madsrdf:TopicElement>
+	    <madsrdf:elementValue xml:lang="en">Description and travel</madsrdf:elementValue>
+	  </madsrdf:TopicElement>
+	</madsrdf:elementList>
+      </madsrdf:Topic>
+    </madsrdf:componentList>
+    <madsrdf:isMemberOfMADSCollection rdf:resource="http://id.loc.gov/authorities/subjects/collection_LCSHAuthorizedHeadings"/>
+    <madsrdf:isMemberOfMADSCollection rdf:resource="http://id.loc.gov/authorities/subjects/collection_LCSH_General"/>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/16312388">
+	<bflc:aap>Antonov, Boris. Russia</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/12992091">
+	<bflc:aap>Bengis, Ingrid. Metro stop Dostoevsky : travels in Russian time</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/18044260">
+	<bflc:aap>Bobrov, Aleksandr, Vse reki, naberezhnye i mosty Moskvy Все реки, набережные и мосты Москвы</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/15580558">
+	<bflc:aap>Boose, Johan de, 1962- geluk van Rusland : reis naar het eenzaamste volk op aarde</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/15228735">
+	<bflc:aap>Brandt Corstius, Jelle, 1978- Rusland voor gevorderden : berichten van een overlever</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/16259463">
+	<bflc:aap>Bromberger, Dominique, 1944- C'est ça la Russie : la pays d'un grand rêve évanoui</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/13321818">
+	<bflc:aap>Brouwer, Anna, 1946- Land van gebroken beloftes : dochters van Rusland</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/17958913">
+	<bflc:aap>Brysacz, Piotr, 1976- Patrząc na Wschód : przestrzeń, człowiek, mistycyzm</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/17896432">
+	<bflc:aap>Buĭnov, R. P. (Roman Petrovich), Obruchennye s Severom : po sledam dvykh kapitanov Обрученные с Севером : по следам двых капитанов</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/12679797">
+	<bflc:aap>Butkov, P. N. (Pavel Nikolaevich) Za Rossii︠u︡ : russkie "belye" v borʹbe protiv russkikh "krasnykh", stalinskogo terrora, nat︠s︡izma i kommunizma, 1917-1994</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/12397568">
+	<bflc:aap>Chʻae, Su-dong. Han oegyogwan ŭi Rŏsia chʻuŏk 한　외교관　의　러시아　추억　</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/17947157">
+	<bflc:aap>Chisti︠a︡kov, Georgiĭ, Putevoĭ bloknot Путевой блокнот</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/12526860">
+	<bflc:aap>Cidylo, Lori. All the clean ones are married : and other everyday calamities in Moscow</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/15070904">
+	<bflc:aap>Collins, Naomi F. Through dark days and white nights : four decades observing a changing Russia : impressions and reflections</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/15893346">
+	<bflc:aap>Decker, Clinton A. (Clinton Augustine) Mission to Russia : an American journal</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/123361">
+	<bflc:aap>Diószegi Edina, Csilla, 1976- Csitri naplója : a megismételt honfoglalás 1995</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/13730231">
+	<bflc:aap>Distefano, Francesco, 1950- Incontri nella Russia d'oggi : dal Baltico alla Siberia</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/16046420">
+	<bflc:aap>Druzhbaĭ z'i︠a︡dnany my nazaŭzhdy</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/1578806">
+	<bflc:aap>Durden-Smith, Jo, 1941-2007. Russia : a long-shot romance</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/13278203">
+	<bflc:aap>Elizondo Griest, Stephanie, 1974- Around the bloc : my life in Moscow, Beijing, and Havana</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/13421806">
+	<bflc:aap>Feng, Jicai. Qing ting Eluosi 倾听俄罗斯</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/17194094">
+	<bflc:aap>Fernandez, Dominique. Transsibérien</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/13440333">
+	<bflc:aap>Ganichev, V. N. (Valeriĭ Nikolaevich) Pravoslavnyĭ dorozhnik</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/12350081">
+	<bflc:aap>Gauthier, Yves, 1960- centaure de l'Arctique : récit</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/12823049">
+	<bflc:aap>Gleason, C. David. Why Russia? : a nostalgic Old World adventure</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/11930223">
+	<bflc:aap>Glushkov, A. I︠A︡. I vse ėto--Rossii︠a︡ : [putevoditelʹ po zheleznym dorogam strany]</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/17518195">
+	<bflc:aap>Gouraud, Jean-Louis. pérégrin émerveillé : Paris-Moscou et retour(s)</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/1619916">
+	<bflc:aap>Granö, J. G. (Johannes Gabriel), 1882-1956. Altai : vaellusvuosina nähtyä ja elettyä</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/18279356">
+	<bflc:aap>Greene, David, 1976- Midnight in Siberia : a train journey into the heart of Russia</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/13842924">
+	<bflc:aap>Grigorʹev, Al. A. (Alekseĭ Alekseevich), Svi︠a︡tyni Rossii</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/14604359">
+	<bflc:aap>Hofmann, Otto, 1907-1996. Otto Hofmann : Malerbriefe aus Russland, 1941-1944</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/14070794">
+	<bflc:aap>ʻAbd al-Majīd, Ibrāhīm. Ayna tadhhabu ṭuyūr al-muḥīṭ? : min al-Iskandarīyah ilá Mūskū ‏أين تذهب طيور المحيط؟ :‏ ‏من الإسكندرية إلى موسكو /‏</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/15046088">
+	<bflc:aap>ʻAbd al-Tawwāb, Yāsir. Wa-inhāra al-dubb al-aḥmar : mushāhadāt zāʼir lil-Ittiḥād al-Sūfiyittī baʻda al-suqūṭ وانهار الدب الأحمر : مشاهدات زائر للاتحاد السوفيتي بعد السقوط</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/15749161">
+	<bflc:aap>Ivanov, B. I︠U︡. Subʺekty Rossiĭskoĭ Federat︠s︡ii : ėnt︠s︡iklopedicheskiĭ slovarʹ</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/126679">
+	<bflc:aap>Jensen, Carsten, 1952- Jeg har set verden begynde</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/12417887">
+	<bflc:aap>Kang, In-chʻŏl, 1945- Kŭraedo Koryŏin ŭn sara itta = Eshchë zhivët russko-koreet︠s︡ 그래도　고려인　은　살아　있다 = Eshchë zhivët russko-koreet︠s︡</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/11789943">
+	<bflc:aap>Kang, Man-gil. Hoesang ŭi yŏlchʻa rŭl tʻago : Koryŏin kangje iju kŭ tʻonghan ŭi kil ŭl kada : Kang Man-gil yŏksa kihaeng. 회상 의 열차 를 타고 : 고려인 강제 이주 그 통한 의 길 을 가다 : 강 만길 역사 기행</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/17039400">
+	<bflc:aap>Kobak, A. V. (Aleksandr V.) Petrovskie pami︠a︡tniki Rossii : svod istoricheskikh i memorialʹnykh pami︠a︡tnikov Rossiiskoĭ Federat︠s︡ii petrovskogo vremeni Петровские памятники России : свод исторических и мемориальных памятников Россииской Федерации петровского времени</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/16681436">
+	<bflc:aap>Korea (South). Kukka Pohunch'ŏ. Kugoe tongnip undong sajŏkchi silt'ae chosa pogosŏ. 8, [Yŏnhaeju chiyŏk, Rŏsia chiyŏk, K'ajahŭsŭt'an chiyŏk, Ujŭbek'isŭt'an chiyŏk, Hŭngnyonggang-sŏng chiyŏk]. 국외 독립 운동 사적지 실태 조사 보고서. 8, [연해주 지역, 러시아 지역, 카자흐스탄 지역, 우즈베키스탄 지역, 흑룡강성 지역]</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/17112374">
+	<bflc:aap>Krotov, Anton, Avtostopom i na ėlektrichkakh po Rossii : gody 1991-2002 Автостопом и на электричках по России : годы 1991-2002</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/1192041">
+	<bflc:aap>Krotov, Anton. Vperëd, k Magadanu!</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/12765315">
+	<bflc:aap>Kurczab-Redlich, Krystyna. Pandrioszka</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/16099874">
+	<bflc:aap>Lazarev, V. V. (Vitaliĭ Vladimirovich) Nat︠s︡ionalʹnoe prostranstvo Национальное пространство</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/10975724">
+	<bflc:aap>Leningrad. Geografo-ėkonomicheskiĭ nauchno-issledovatelʹskiĭ institut. Sbornik</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/15551959">
+	<bflc:aap>Liu, Rongrong. Xiang bei xiang xi : liang wei Zhongguo ji zhe zai "Zhong E you yi zhi lü" de xing zou gu shi 向北向西 : 两位中国记者在"中俄友谊之旅"的行走故事</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/16830271">
+	<bflc:aap>Llorens, Ignacio de, 1957- último verano soviético</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/16668895">
+	<bflc:aap>Manevich, Ilʹi︠a︡ Aleksandrovich. Samye znamenitye chudesa Rossii Самые знаменитые чудеса России</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/15942983">
+	<bflc:aap>Margolina, Olʹga. Zhenshchina i plotina Женщина и плотина</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/18014320">
+	<bflc:aap>Marsden, Simon. Russia : a world apart</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/14936777">
+	<bflc:aap>Marsheva, I. V. Skazanʹi︠a︡ kamennykh bogatyreĭ : rossiĭskiĭ kremlʹ</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/13063391">
+	<bflc:aap>Matías López, Luis, 1948- huella roja : historia de la Rusia postsoviética en el cambio de milenio</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/13127166">
+	<bflc:aap>Meier, Andrew. Black earth : a journey through Russia after the fall</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/1411120">
+	<bflc:aap>Mikhaĭlov, N. N. (Nikolaĭ Nikolaevich) Kniga o Rossii : v soi︠u︡ze ravnykh : vpechatlenii︠a︡, opisanii︠a︡, pami︠a︡tnoe</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/16251185">
+	<bflc:aap>Monastyrskiĭ, S., Illi︠u︡strirovanyĭ sputnik po Volgi︠e︡</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/13587689">
+	<bflc:aap>Mongnan Pideo (Firm) Great leader comrade Kim Jong Il paid unofficial visits to Russian cities, from July 26 to August 18, 2001</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/12425436">
+	<bflc:aap>Montaigne, Fen. Hooked : fly-fishing through Russia</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/16048218">
+	<bflc:aap>Moskva--Gorʹkiĭ--Moskva</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/12571659">
+	<bflc:aap>Mossé, Claude. Transsibérien : un train dans l'histoire : récit</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/13562293">
+	<bflc:aap>Nienhuis, Bert. Russisch landschap nu</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/12649692">
+	<bflc:aap>Nikula, Karl Henrik. Brodskys staket</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/1677737">
+	<bflc:aap>Nivat, Georges Michel, 1935- Regards sur la Russie de l'an VI : considérations sur la difficulté de se libérer du despotisme</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/14614271">
+	<bflc:aap>Nosov, Nikolaĭ. Doroga na Kilimandzharo : puteshestvie po Moskovskomu meridianu</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/16156472">
+	<bflc:aap>Notatki z kraju przyjaciol</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/12446515">
+	<bflc:aap>Pak, Chong-su. Rŏsia wa Han'guk, irŏ pŏrin paengnyŏn ŭi kiŏk ŭl ch'ajasŏ 러시아　와　한국, 잃어 버린　백년　의　기억　을　찾아서　</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/15454003">
+	<bflc:aap>Pak, Hwan, 1958- Pak Hwan Kyosu ŭi Rŏsia Hanin yujŏk tapsagi. 박 환 교수 의 러시아 한인 유적 답사기</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/12827345">
+	<bflc:aap>Pak, Hwan, 1958- Pak Hwan ŭi hangil yujŏk kwa hamkke hanŭn Rŏsia kihaeng. 박　환　의　항일　유적　과　함께　하는　러시아　기행</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/16258142">
+	<bflc:aap>Polonsky, Rachel. Molotov's magic lantern : a journey in Russian history</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/16278306">
+	<bflc:aap>Polonsky, Rachel. Molotov's magic lantern : travels in Russian history</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/12974164">
+	<bflc:aap>Pulikovskiĭ, Konstantin, 1948- Vostochnyĭ ėkspress : po Rossii s Kim Chen Irom</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/15200925">
+	<bflc:aap>Putevoditelʹ po tainstvennym i zagadochnym mestam Rossii</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/18300938">
+	<bflc:aap>Radvanyi, Jean. Retour d'une autre Russie : une plongée dans le pays de Poutine</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/124338">
+	<bflc:aap>Randolph, Eleanor. Waking the tempests : ordinary life in the new Russia</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/1632671">
+	<bflc:aap>Randolph, Eleanor. Waking the tempests : ordinary life in the new Russia</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/17492630">
+	<bflc:aap>Revenko, Evgeniĭ, Planeta ChU... : Putevye ocherki Планета ЧУ... : Путевые очерки</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/16145855">
+	<bflc:aap>Richards, Susan, 1948- Lost and found in Russia : lives in a post-soviet landscape</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/13212181">
+	<bflc:aap>Roth, Thomas, 1951- Russisches Tagebuch : von den Tschuktschen bis zum Roten Platz</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/16527719">
+	<bflc:aap>Salmá Aʻvān, 1943- Rūs kī ek jhalak : safarnāmah = Otrazhenie Rassiĭ ‏روس کى ايک جھلک :‏ ‏سفرنامه /‏</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/14188350">
+	<bflc:aap>Schenkel, Elmar, 1953- sibirische Pendel : Reisen in Russland</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/17911058">
+	<bflc:aap>Sdobni︠a︡kov, Valeriĭ, Sroki : i nastupit vremi︠a︡ pravdy Сроки : и наступит время правды</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/16820859">
+	<bflc:aap>Sheets, Lawrence Scott. Eight pieces of empire : a 20-year journey through the Soviet collapse</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/16515968">
+	<bflc:aap>Shevt︠s︡ov, Nikita. Ot vashego spet︠s︡ialʹnogo korrespondenta От вашего специального корреспондента</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/18309291">
+	<bflc:aap>Si, Yuening. Lü e man ji 旅俄漫记</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/15478902">
+	<bflc:aap>Sim, Kŏn-sŏp, 1954- Chʻinʼgu! chamsi shwiŏ kasena! : Rŏsia, Puk Yurŏp yŏhaenggi 친구! 잠시 쉬어 가세나! : 러시아, 북 유럽 여행기</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/17532572">
+	<bflc:aap>Simonov, V. N. (Vladimir Nikolaevich), 1000 kilometrov mechty pod parusom 1000 километров мечты под парусом</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/15514925">
+	<bflc:aap>Smarandache, Florentin. Mama vitregă Rusia : note de călătorie</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/13038841">
+	<bflc:aap>Smolar, Piotr. Gloubinka : promenades au coeur de la Russie</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/14791448">
+	<bflc:aap>Solovʹev, Sergeĭ. Chelovek i Sever = Man and the North</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/16080639">
+	<bflc:aap>Stojanović, Sreten, 1898-1960. Impresije iz Rusije</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/14713827">
+	<bflc:aap>Suprunenko, I︠U︡. P. (I︠U︡riĭ Pavlovich) Zemli︠a︡ zagadochnai︠a︡ : mesta sily na karte Rossii</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/11929836">
+	<bflc:aap>Svinarenko, Igorʹ. Takai︠a︡ strana : puteshestvie iz Moskvy v Rossii︠u︡ Такая страна : путешествие из Москвы в Россию</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/17035190">
+	<bflc:aap>Terekhin, Aleksandr Sergeevich. Puteshestvie v Rossii︠u︡ Путешествие в Россию</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/17649645">
+	<bflc:aap>Tharrett, Stephen J., 1953- Surviving Russia = Vyzhitʹ v Rossii : an American's tale of living and working in Russia</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/14713642">
+	<bflc:aap>Tuĭsk, I︠U︡riĭ. Krasoty Rossii</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/1374776">
+	<bflc:aap>Vagner, G. K. (Georgiĭ Karlovich) Po Oke ot Kolomny do Muroma</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/15203698">
+	<bflc:aap>Vogt, Carl Emil. Nansens kamp mot hungersnøden i Russland, 1921-23</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/18312108">
+	<bflc:aap>Wang, Dandi. Eluosi san ji 俄罗斯散记</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/12161501">
+	<bflc:aap>Waterdrinker, Pieter, 1961- Kaviaar en ander leed : notities uit Rusland</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/12886994">
+	<bflc:aap>Wen, Ganjun. You yu de Eluosi zai fan si 忧郁的俄罗斯在反思</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/15075910">
+	<bflc:aap>Wen, Yi, 1937- Zou chu bei Gaojiasuo = Zouchu beigaojiasuo 走出北高加索 = Zouchu beigaojiasuo</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <bflc:subjectOf>
+      <bf:Work rdf:about="http://id.loc.gov/resources/works/13299240">
+	<bflc:aap>Yamashita, Tsuneo, 1939- Daikokuya Kōdayū shiryōshū 大黒屋光太夫史料集</bflc:aap>
+      </bf:Work>
+    </bflc:subjectOf>
+    <madsrdf:isMemberOfMADSScheme rdf:resource="http://id.loc.gov/authorities/subjects"/>
+    <madsrdf:editorialNote>[Record generated for validation purposes.]</madsrdf:editorialNote>
+    <identifiers:lccn xmlns:identifiers="http://id.loc.gov/vocabulary/identifiers/">sh2008116754</identifiers:lccn>
+    <owl:sameAs rdf:resource="info:lc/authorities/sh2008116754"/>
+    <owl:sameAs rdf:resource="http://id.loc.gov/authorities/sh2008116754#concept"/>
+    <madsrdf:hasSource>
+      <madsrdf:Source>
+	<madsrdf:citationSource>Work cat.: Le centaure de l'Arctique, c2001</madsrdf:citationSource>
+	<madsrdf:citationStatus>found</madsrdf:citationStatus>
+      </madsrdf:Source>
+    </madsrdf:hasSource>
+    <madsrdf:adminMetadata>
+      <ri:RecordInfo xmlns:ri="http://id.loc.gov/ontologies/RecordInfo#">
+	<ri:recordChangeDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-03-18T00:00:00</ri:recordChangeDate>
+	<ri:recordStatus rdf:datatype="http://www.w3.org/2001/XMLSchema#string">new</ri:recordStatus>
+	<ri:recordContentSource rdf:resource="http://id.loc.gov/vocabulary/organizations/dlc"/>
+	<ri:languageOfCataloging rdf:resource="http://id.loc.gov/vocabulary/iso639-2/eng"/>
+      </ri:RecordInfo>
+    </madsrdf:adminMetadata>
+    <madsrdf:adminMetadata>
+      <ri:RecordInfo xmlns:ri="http://id.loc.gov/ontologies/RecordInfo#">
+	<ri:recordChangeDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-03-19T08:12:59</ri:recordChangeDate>
+	<ri:recordStatus rdf:datatype="http://www.w3.org/2001/XMLSchema#string">revised</ri:recordStatus>
+	<ri:recordContentSource rdf:resource="http://id.loc.gov/vocabulary/organizations/dlc"/>
+	<ri:languageOfCataloging rdf:resource="http://id.loc.gov/vocabulary/iso639-2/eng"/>
+      </ri:RecordInfo>
+    </madsrdf:adminMetadata>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:prefLabel xml:lang="en">Russia (Federation)--Description and travel</skos:prefLabel>
+    <skos:editorial>[Record generated for validation purposes.]</skos:editorial>
+    <skos:inScheme rdf:resource="http://id.loc.gov/authorities/subjects"/>
+    <skos:changeNote>
+      <cs:ChangeSet xmlns:cs="http://purl.org/vocab/changeset/schema#">
+	<cs:subjectOfChange rdf:resource="http://id.loc.gov/authorities/subjects/sh2008116754"/>
+	<cs:creatorName rdf:resource="http://id.loc.gov/vocabulary/organizations/dlc"/>
+	<cs:createdDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-03-18T00:00:00</cs:createdDate>
+	<cs:changeReason rdf:datatype="http://www.w3.org/2001/XMLSchema#string">new</cs:changeReason>
+      </cs:ChangeSet>
+    </skos:changeNote>
+    <skos:changeNote>
+      <cs:ChangeSet xmlns:cs="http://purl.org/vocab/changeset/schema#">
+	<cs:subjectOfChange rdf:resource="http://id.loc.gov/authorities/subjects/sh2008116754"/>
+	<cs:creatorName rdf:resource="http://id.loc.gov/vocabulary/organizations/dlc"/>
+	<cs:createdDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-03-19T08:12:59</cs:createdDate>
+	<cs:changeReason rdf:datatype="http://www.w3.org/2001/XMLSchema#string">revised</cs:changeReason>
+      </cs:ChangeSet>
+    </skos:changeNote>
+  </madsrdf:ComplexSubject>
+</rdf:RDF>

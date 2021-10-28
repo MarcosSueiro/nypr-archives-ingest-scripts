@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" 
     xmlns:WNYC="http://www.wnyc.org"
+    xmlns:RIFF="http://ns.exiftool.ca/RIFF/RIFF/1.0/"
     xmlns:pb="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
     <xsl:import href="masterRouter.xsl" exclude-result-prefixes="#all"/>
     
@@ -53,15 +54,18 @@
             <xsl:element name="
             pbcoreCollection"
                 namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
-                <xsl:apply-templates/>
+                <xsl:apply-templates select="updateAsset
+                    [recordedDate | bcastDate | contributors | subjects]"/>
             </xsl:element>
         </xsl:param>
-        <xsl:apply-templates select="$fullDoc/pb:pbcoreCollection" mode="breakItUp">            
+        <xsl:apply-templates select="$fullDoc/pb:pbcoreCollection" mode="breakItUp">
+<xsl:with-param name="maxOccurrences" select="200"/>            
             <xsl:with-param name="filename" select="WNYC:substring-before-last(base-uri(), '.')"/>
         </xsl:apply-templates>
     </xsl:template>
     
-    <xsl:template match="updateAsset">
+    <xsl:template match="updateAsset
+        ">
         <xsl:param name="url" select="url"/>
         <xsl:param name="cavafyEntry" select="doc(concat($url, '.xml'))"/>
         <xsl:param name="collection"
@@ -79,12 +83,16 @@
         <xsl:param name="recordedDate">
             <xsl:element name="pbcoreAssetDate"
                 namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
-                <xsl:attribute name="dateType">broadcast</xsl:attribute>
+                <xsl:attribute name="dateType">created</xsl:attribute>
                 <xsl:value-of select="recordedDate
                     [not(. = '1900-01-00')]"/>
             </xsl:element>
         </xsl:param>
-        <xsl:param name="subjects" select="subjects[matches(., $combinedValidatingStrings)]"/>
+        <xsl:param name="subjects">
+            <RIFF:Keywords>
+                <xsl:value-of select="subjects[matches(., $combinedValidatingStrings)]"/>
+            </RIFF:Keywords>
+        </xsl:param> 
         <xsl:param name="contributors" select="contributors[matches(., $validatingNameString)]"/>
         <xsl:param name="subjectsAlreadyInCavafy"
             select="
@@ -132,10 +140,10 @@
                 [not(. = $createDatesAlreadyInCavafy)]
                 "/>
             <xsl:variable name="locSubjects">
-                <xsl:call-template name="processSubjects">
-                    <xsl:with-param name="subjectsToProcess" select="$subjects"/>
+                <xsl:apply-templates select="$subjects" mode="
+                    processSubjects">
                     <xsl:with-param name="subjectsProcessed" select="$subjectsAlreadyInCavafy"/>
-                </xsl:call-template>
+                </xsl:apply-templates>
             </xsl:variable>
             <xsl:apply-templates select="
                     $locSubjects" mode="LOCtoPBCore"/>

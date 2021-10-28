@@ -147,7 +147,9 @@
     <xsl:template name="exiftool" match="rdf:RDF[rdf:Description]">
         <!-- Accept an exiftool kind of xml document
         as output from the command 
-           exiftool -X -a -ext wav [directoryWithFiles]
+        
+        exiftool -X -a -ext wav -struct -charset riff=utf8 "fileDirectory" > "output.xml"
+        
         or something similar to this -->
 
         <!-- Basic info: type of document, number of instantiations -->
@@ -159,8 +161,8 @@
         <xsl:param name="outputEmail" select="$outputEmail"/>
         <xsl:param name="outputSlack" select="$outputSlack"/>
         
-        <xsl:param name="
-            stopIfErrors" select="true()" tunnel="true"/>
+        <xsl:param name="stopIfErrors" select="true()" tunnel="true"/>
+        <xsl:param name="filenameAddendum" tunnel="yes"/>
         <xsl:message
             select="
                 'Process ', $masterDocFilenameNoExtension, ', a ', local-name(), ' document, ',
@@ -238,10 +240,7 @@
                     select="
                         $input/rdf:Description
                         [File:FileType =
-                        $pbcorePhysicalInstantiations
-                        /pbcoreInstantiationPhysicalAudioVocabulary
-                        /pbcoreInstantiationPhysicalAudioTerm
-                        /term]"
+                        'DAT']"
                 />
             </physicalInstantiations>
         </xsl:variable>
@@ -386,9 +385,7 @@
             <physicalInstantiationResults>
                 <xsl:apply-templates
                     select="
-                        $physicalInstantiations
-                        /physicalInstantiations
-                        /rdf:Description"
+                    $physicalInstantiations/physicalInstantiations/rdf:Description"
                 />
             </physicalInstantiationResults>
         </xsl:variable>
@@ -615,7 +612,9 @@
         </xsl:variable>
 
 
-        <!--        ALL OUTPUTS -->
+        <!--  ALL OUTPUTS -->
+        
+        <!-- NEW EXIF -->
         <xsl:variable name="newExifOutput">
             <xsl:element name="rdf:RDF">
                 <xsl:namespace name="rdf"
@@ -635,10 +634,7 @@
                         /rdf:Description"/>
                 <xsl:copy-of
                     select="
-                        $physicalInstantiationResults
-                        /result
-                        /newExif
-                        /rdf:Description"/>
+                        $physicalInstantiationResults"/>
                 <xsl:copy-of
                     select="
                         $archivesINGESTWavResults
@@ -672,10 +668,11 @@
             select="
                 concat(
                 $logFolder,
-                $masterDocFilenameNoExtension,
+                $masterDocFilenameNoExtension,                
                 '_LOG', format-date(current-date(),
                 '[Y0001][M01][D01]'), '_T',
                 $currentTime,
+                $filenameAddendum,
                 '.xml'
                 )"/>
         <xsl:variable name="completeLog">
@@ -710,8 +707,9 @@
                 $masterDocFilenameNoExtension,
                 format-date(current-date(),
                 '[Y0001][M01][D01]'),
+                $filenameAddendum,
                 '.html'
-                )"/>
+                )"></xsl:variable>
         <xsl:result-document format="email" href="
             {$filenameHtml}">
             <xsl:apply-templates select="
@@ -725,7 +723,7 @@
         <xsl:call-template name="generateErrorLog">
             <xsl:with-param name="completeLog" select="$completeLog"/>
             <xsl:with-param name="duplicateInstantiations" select="$duplicateInstantiations"/>
-            <xsl:with-param name="WARNINGS" select="$WARNINGS"/>
+            <xsl:with-param name="WARNINGS" select="$WARNINGS"/>            
         </xsl:call-template>
 
         <!-- If errors, stop right here -->
@@ -748,6 +746,7 @@
                 $masterDocFilenameNoExtension,
                 '_NewExif',
                 $currentDate,
+                $filenameAddendum,
                 '.xml'
                 )"/>
         <xsl:result-document format="Exif" href="{$filenameExif}">
@@ -1129,7 +1128,7 @@
 
     <xsl:template match="node()" name="breakItUp" mode="breakItUp">
         <xsl:param name="firstOccurrence" select="1"/>
-        <xsl:param name="maxOccurrences" select="20"/>
+        <xsl:param name="maxOccurrences" select="200"/>
         <xsl:param name="total" select="count(child::*)"/>
         <xsl:param name="baseURI" select="$baseURI"/>
         <xsl:param name="filename" select="document-uri()"/>

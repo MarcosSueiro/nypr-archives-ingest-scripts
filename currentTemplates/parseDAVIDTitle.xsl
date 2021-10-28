@@ -781,6 +781,9 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
         <!-- Parse cavafy instantiation ID -->
         <xsl:param name="instantiationID" select="
             normalize-space(.)"/>
+        <xsl:param name="message">
+            <xsl:message select="'Parse instantiation ID', $instantiationID"/>
+        </xsl:param>
         <xsl:param name="validated"
             select="
                 matches(normalize-space($instantiationID),
@@ -808,7 +811,7 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
             />
         </xsl:param>
         <!-- Capture just the letter part 
-      (aka segment suffix) 
+      ( (aka segment suffix) 
         of the instantiation suffix 
         and make it lowercase -->
         <xsl:param name="instantiationSegmentSuffix">
@@ -823,7 +826,8 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
         </xsl:param>
         
         <!-- instantiationID 'level', 
-            i.e. sans suffix or multitrack segment -->
+            i.e. sans segment suffix 
+            or multitrack flag -->
         <xsl:param name="instantiationIDwOutSuffixSegment">
             <xsl:value-of select="
                 concat(
@@ -849,9 +853,7 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
                     </xsl:with-param>
                 </xsl:apply-templates>
                 <instantiationID>
-                    <xsl:attribute name="format" select="@format"/>
-                    <xsl:attribute name="location" select="@location"/>
-                    <xsl:attribute name="otherIDs" select="@otherIDs"/>
+                    <xsl:copy-of select="@*"/>
                     <xsl:value-of
                         select="
                             normalize-space($instantiationID[$validated])"

@@ -113,6 +113,12 @@
 		<collURL>http://id.loc.gov/authorities/names/n79132010</collURL>
 	</collection>
 	<collection>
+		<collAcro>NYSA</collAcro>
+		<collName>New York State Archives</collName>
+		<collLocation>US</collLocation>
+		<collURL>https://id.loc.gov/authorities/names/n86077315</collURL>
+	</collection>
+	<collection>
 		<collAcro>PALY</collAcro>
 		<collName>Paley Center for Media</collName>
 		<collLocation>US</collLocation>

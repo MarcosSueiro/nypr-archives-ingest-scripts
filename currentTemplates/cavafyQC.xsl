@@ -244,7 +244,7 @@
                 </xsl:element>
             </xsl:if>
             <xsl:if
-                test="pb:pbcoreDescription[@descriptionType = 'Abstract'][string-length(.) lt 20]">
+                test="pb:pbcoreDescription[@descriptionType = 'Abstract'][string-length(.) lt 15]">
                 <xsl:message terminate="no"
                     select="'ATTENTION: Very short abstract in ', $cavafyxml"/>
                 <xsl:element name="error">

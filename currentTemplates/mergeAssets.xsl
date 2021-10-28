@@ -78,7 +78,7 @@
             <mergeAssets>
                 <sourceInstantiationID>250437.1</sourceInstantiationID>
                 <destinationAssetID>250702</destinationAssetID>
-                <newInstantiationID>250437.6</newInstantiationID>
+                <newInstantiationID>250702.6</newInstantiationID>
                 <newTitle></newTitle>
                 <newAbstract>The poet Jessica Care Moore and the actor and director Roger Guenveur Smith live at Central Park SummerStage.</newAbstract>
                 <newGenre>Reading</newGenre>
@@ -87,7 +87,7 @@
             <mergeAssets>
                 <sourceInstantiationID>250437.1</sourceInstantiationID>
                 <destinationAssetID>250702</destinationAssetID>
-                <newInstantiationID>250437.6</newInstantiationID>
+                <newInstantiationID>250702.7</newInstantiationID>
                 <newTitle></newTitle>
                 <newAbstract>The poet Jessica Care Moore and the actor and director Roger Guenveur Smith live at Central Park SummerStage.</newAbstract>
                 <newGenre>Reading</newGenre>
@@ -167,16 +167,18 @@
             $baseFolder,
             $masterDocFilenameNoExtension,
             '_MERGED', format-date(current-date(),
-            '[Y0001][M01][D01]'), '_T',
-            $currentTime,
+            '[Y0001][M01][D01]'),
             '.xml'
             )"/>
 
     <xsl:template match="mergeAllAssets">
         <xsl:param name="instIDsToDelete" select="
-            mergeAssets/sourceInstantiationID"/>
+            mergeAssets[newInstantiationID]
+            [newInstantiationID != sourceInstantiationID]/
+            sourceInstantiationID"/>
         <xsl:param name="newInstantiationIDs" select="
-            mergeAssets/newInstantiationID"/>
+            mergeAssets[newInstantiationID]
+            [newInstantiationID != sourceInstantiationID]/newInstantiationID"/>
         <xsl:param name="dupNewInstIDs">
             <xsl:copy-of select="
                 $newInstantiationIDs
@@ -184,6 +186,8 @@
                 [matches(., $instIDRegex)]"/>
         </xsl:param>
         <xsl:param name="mergeAssets">
+            <!-- Mark as errors
+                repeated destination IDs -->
             <xsl:for-each select="$dupNewInstIDs/newInstantiationID">
                 <error type="duplicateNewInstantiationID">
                     <xsl:value-of
@@ -193,7 +197,9 @@
                     />
                 </error>
             </xsl:for-each>
-            <xsl:for-each-group select="mergeAssets" group-by="
+            <xsl:for-each-group select="
+                mergeAssets[newInstantiationID]
+                [newInstantiationID != sourceInstantiationID]" group-by="
                 destinationAssetID">
                 <xsl:variable name="destinationAssetXML">
                     <xsl:call-template name="findSpecificCavafyAssetXML">
@@ -281,8 +287,7 @@
                         />
                     </xsl:call-template>                    
                 </xsl:variable>
-                
-                
+               
                 <xsl:variable name="sourceInstantiationData">
                     <xsl:for-each select="fn:current-group()">
                         <xsl:message select="'POSITION: ', position()"/>
@@ -355,8 +360,8 @@
                                 <xsl:choose>
                                     <xsl:when
                                         test="
-                                            contains(newInstantiationID,
-                                            concat($destinationAssetID, '.'))">
+                                            matches(newInstantiationID,
+                                            concat($destinationAssetID, '\.[0-9]'))">
                                         <xsl:value-of select="newInstantiationID"/>
                                     </xsl:when>
                                     <xsl:otherwise>
@@ -435,7 +440,7 @@
                         <!-- Create / check new titles -->
                         <!-- Episode -->
                         <xsl:choose>
-                            <xsl:when test="matches($newTitle, '\w')">
+                            <xsl:when test="matches($newTitle, '[A-Z]')">
                                 <xsl:element name="pbcoreTitle"
                                     namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
                                     <xsl:attribute name="titleType" select="'Episode'"/>
@@ -493,7 +498,7 @@
 
                         <!-- Create new abstract -->
                         <xsl:choose>
-                            <xsl:when test="matches($newAbstract, '\w')">
+                            <xsl:when test="matches($newAbstract, '[A-Z]')">
                                 <xsl:element name="pbcoreDescription"
                                     namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
                                     <xsl:attribute name="descriptionType"
@@ -643,8 +648,9 @@
                         
                         
 
-                        <!-- Do not allow instantiation numbers 
-                            that would erase destination asset instantiations -->
+                        <!-- Do not allow new instantiation numbers 
+                            that would overwrite 
+                            destination asset instantiations -->
                         <xsl:variable name="dupInstIDs"
                             select="
                                 $destinationAssetXML/
@@ -659,7 +665,7 @@
                                 <xsl:value-of
                                     select="
                                         'ERROR: ', .,
-                                        'would erase an instantiation in the destination asset'"
+                                        'would overwrite an instantiation in the destination asset'"
                                 />
                             </error>
                         </xsl:for-each>
@@ -680,7 +686,7 @@
                         <xsl:apply-templates
                             select="
                                 $sourceInstantiationData/instantiationToAdd"
-                            mode="addInstantiation"> </xsl:apply-templates>
+                            mode="addInstantiation"/> 
                     </xsl:copy>
                     
                     <!-- Original assets minus removed instantiations -->                    
@@ -787,7 +793,8 @@
                             <p>
                                 <b> ERRORS when trying to merge instantiation(s) <xsl:value-of
                                         select="
-                                            distinct-values(pb:pbcoreInstantiation/pb:instantiationIdentifier)[. = $instIDsToDelete]"
+                                            distinct-values(pb:pbcoreInstantiation/pb:instantiationIdentifier)
+                                            [. = $instIDsToDelete]"
                                         separator=" and "/> INTO <a>
                                         <xsl:attribute name="href">
                                             <xsl:value-of select="$destinationURL"/>
@@ -822,21 +829,26 @@
         <xsl:result-document format="
             cavafy" href="
             {$filenameMerged}">
-            <xsl:element name="pbcoreCollection"
-                namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
-                <xsl:apply-templates
-                    select="
-                        $mergeAssets/mergeDoc[not(//error)]"
-                    mode="
-                importReady"/>                
-            </xsl:element>
-        </xsl:result-document>
+            <xsl:variable name="completeMergeDoc">
+                <xsl:element name="pbcoreCollection"
+                    namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
 
+                    <xsl:apply-templates
+                        select="
+                            $mergeAssets/mergeDoc[not(//error)]"
+                        mode="
+                importReady"/>
+                </xsl:element>
+            </xsl:variable>
+            <xsl:copy-of select="$completeMergeDoc"/>
+            <xsl:apply-templates select="$completeMergeDoc" mode="
+                breakItUp">
+                <xsl:with-param name="baseURI" select="base-uri()"/>
+                <xsl:with-param name="filename" select="substring-before($filenameMerged, '.xml')"/>
+            </xsl:apply-templates>
+        </xsl:result-document>
     </xsl:template>
     
-    
-    
-
     <xsl:template name="addInstantiation" match="
         instantiationToAdd" mode="addInstantiation">
         <xsl:param name="instantiationData" select="pb:instantiationData"/>

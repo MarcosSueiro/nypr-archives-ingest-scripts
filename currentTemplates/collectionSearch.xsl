@@ -4,11 +4,14 @@
     exclude-result-prefixes="#all"
     version="3.0">
     
-    <!--Collection list concordance -->
-    <xsl:template name="collectionSearch">
+    <!-- Find collection info
+        from the Collection list concordance -->
+    <xsl:template name="collectionSearch" match="/">
         <xsl:param name="collectionAcronym" select="'WNYC'"/>
         <xsl:param name="collectionURL"
-            select="document('CollectionConcordance.xml')//*[CollAcro = $collectionAcronym]/CollURL"/>        
+            select="document('CollectionConcordance.xml')//*[collAcro = $collectionAcronym]/collURL"
+        />   
+        
         <collectionxml>
             <xsl:choose>               
                 <!-- Collections without a specific Library of Congress entry -->
@@ -32,6 +35,5 @@
                 </xsl:otherwise>
             </xsl:choose>
         </collectionxml>
-    
     </xsl:template>
 </xsl:stylesheet>

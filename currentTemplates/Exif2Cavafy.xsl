@@ -117,14 +117,32 @@ to a pbcore cavafy entry -->
                 /parsedElements/instantiationID"
             />
         </xsl:variable>
-
-        <!-- Generation -->
-        <xsl:variable name="generation">
+        
+        <xsl:variable name="instantiationData">
             <xsl:copy-of 
+                select="
+                $cavafyEntry/pb:pbcoreDescriptionDocument
+                /pb:pbcoreInstantiation[instantiationIdentifier[@source='WNYC Media Archive Label'] = $instantiationID]"/>
+        </xsl:variable>
+        
+        <!-- Generation -->
+        <xsl:variable name="parsedGeneration">
+            <xsl:value-of 
                 select="
                 $parsedDAVIDTitle/parsedDAVIDTitle
                 /parsedElements/parsedGeneration"
             />
+        </xsl:variable>
+        <xsl:variable name="cavafyGeneration">
+            <xsl:value-of select="$instantiationData/pb:instantiationGenerations"/>
+        </xsl:variable>
+        <xsl:variable name="generation">
+            <xsl:call-template name="checkConflicts">
+                <xsl:with-param name="field1" select="$parsedGeneration"/>
+                <xsl:with-param name="field2" select="$cavafyGeneration"/>
+                <xsl:with-param name="defaultValue" select="$parsedGeneration"/>
+                <xsl:with-param name="fieldName" select="'Generation'"/>
+            </xsl:call-template>
         </xsl:variable>
 
         <xsl:variable name="CMSTeaseAlreadyInCavafy">
@@ -189,7 +207,7 @@ to a pbcore cavafy entry -->
                 <!-- Identifiers -->
                 <!-- The identifier of type 'WNYC Archive Catalog', 
                     along with the collection name,
-                    are necessary to import assets into cavafy -->
+                    are required to import assets into cavafy -->
                 <pbcoreIdentifier source="WNYC Archive Catalog">
                     <xsl:value-of select="$assetID"/>
                 </pbcoreIdentifier>
@@ -598,8 +616,6 @@ to a pbcore cavafy entry -->
                 </xsl:if>
 
                 <!-- Subject headings -->
-                <!-- The template 'Broader Subjects' 
-                    travels up the LOC hierarchy -->
 
                 <xsl:variable name="subjectsAlreadyInCavafy">
                     <xsl:copy-of
@@ -741,11 +757,27 @@ to a pbcore cavafy entry -->
                                 "/>
                         </pbcoreAnnotation>
                     </xsl:when>
+                    
                     <!-- Indicates fake Exif instantiation -->
+                    
                     <xsl:when test="
                         RIFF:NumChannels = '0' or 
                         RIFF:SampleRate = '1000' or 
-                        RIFF:BitsPerSample = '8'"/>
+                        RIFF:BitsPerSample = '8'">
+                        <!--<pbcoreInstantiation>
+                            <instantiationIdentifier source="WNYC Media Archive Label">
+                                <xsl:value-of select="substring-after(normalize-space(RIFF:Medium), ' ')"/>
+                            </instantiationIdentifier>
+                            <instantiationLocation>
+                                <xsl:call-template name="checkConflicts">
+                                    <xsl:with-param name="field1" select="
+                                        normalize-space(System:Directory[contains(., 'Levy')])"/>
+                                    <xsl:with-param name="defaultValue" select="'DAVID'"/>
+                                    <xsl:with-param name="fieldName" select="'instantiationLocation'"/>
+                                </xsl:call-template>
+                            </instantiationLocation>
+                        </pbcoreInstantiation>-->
+                    </xsl:when>
                     <xsl:otherwise>
 
                         <!-- instantiations -->
@@ -755,7 +787,8 @@ to a pbcore cavafy entry -->
                                 <xsl:value-of select="$instantiationID"/>
                             </instantiationIdentifier>
                             <instantiationIdentifier source="DAVID Title">
-                                <xsl:value-of select="normalize-space(RIFF:Description)"/>
+                                <xsl:value-of select="
+                                    normalize-space(RIFF:Description)"/>
                             </instantiationIdentifier>
                             <instantiationDate dateType="Created">
                                 <xsl:value-of
@@ -828,11 +861,13 @@ to a pbcore cavafy entry -->
                                 </instantiationAnnotation>
                             </xsl:if>
                             <xsl:apply-templates
-                                select="RIFF:CodingHistory[not(contains(., 'D.A.V.I.D.'))]"/>
+                                select="RIFF:CodingHistory
+                                [not(contains(., 'D.A.V.I.D.'))]"/>
                             
                             <instantiationAnnotation annotationType="Provenance">
                                 <xsl:value-of 
-                                    select="normalize-space(RIFF:SourceForm)"/>
+                                    select="normalize-space(
+                                    RIFF:SourceForm)"/>
                             </instantiationAnnotation>
                             <instantiationAnnotation annotationType="Embedded_Comments">
                                 <xsl:value-of select="normalize-space(RIFF:Comment)"/>
@@ -867,8 +902,15 @@ to a pbcore cavafy entry -->
                             </instantiationEssenceTrack>
                             <xsl:if
                                 test="
-                                    contains(RIFF:Medium, $cavafyFormats/cavafyFormats/cavafyFormat) and
-                                    not($cavafyEntry/pb:pbcoreDescriptionDocument/pbcoreRelation[pbcoreRelationType = 'Is Dub Of'])">
+                                    contains(
+                                    RIFF:Medium, 
+                                    $cavafyFormats/cavafyFormats/cavafyFormat
+                                    ) and
+                                    not(
+                                    $cavafyEntry/
+                                    pb:pbcoreDescriptionDocument/
+                                    pbcoreRelation
+                                    [pbcoreRelationType = 'Is Dub Of'])">
                                 <instantiationRelation>
                                     <instantiationRelationType>Is Dub Of</instantiationRelationType>
                                     <instantiationRelationIdentifier>

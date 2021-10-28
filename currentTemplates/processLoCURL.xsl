@@ -10,10 +10,12 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
     xmlns:RIFF="http://ns.exiftool.ca/RIFF/RIFF/1.0/"    
     xmlns:skos="http://www.w3.org/2009/08/skos-reference/skos.html"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:mads="http://www.loc.gov/mads/v2" xmlns:madsrdf="http://www.loc.gov/mads/rdf/v1#"
     xmlns:zs="http://docs.oasis-open.org/ns/search-ws/sruResponse" xmlns:WNYC="http://www.wnyc.org"
     xmlns:pma="http://www.phpmyadmin.net/some_doc_url/"
     xmlns:skosCore="http://www.w3.org/2004/02/skos/core#"
+    xmlns:bf="http://id.loc.gov/ontologies/bibframe/"
     xmlns:ASCII="https://www.ecma-international.org/publications/standards/Ecma-094.htm"
     exclude-result-prefixes="#all">
 
@@ -241,8 +243,9 @@
                 $input//
                 madsrdf:componentList/
                 madsrdf:Geographic">
-            <xsl:variable name="placeInSubjectPlace" select="
-                madsrdf:authoritativeLabel"/>
+            <xsl:variable name="placeInSubjectPlace"
+                select="
+                    madsrdf:authoritativeLabel"/>
             <xsl:message
                 select="
                     concat
@@ -292,16 +295,26 @@
         <xsl:param name="validatingNameString" select="$validatingNameString"/>
         <xsl:param name="combinedValidatingStrings" select="$combinedValidatingStrings"/>
         
-        <xsl:variable name="subjectsToProcessParsed"
+        <xsl:param name="subjectsToProcessParsed"
             select="
             WNYC:splitParseValidate(
             $subjectsToProcess,
             $separatingToken,
             $combinedValidatingStrings)"/>
         
-        <xsl:variable name="subjectsToProcessValid"
+        <xsl:param name="subjectsToProcessValid"
             select="
             $subjectsToProcessParsed/valid"/>
+        <xsl:param name="subjectsProcessedParsed"
+            select="
+            WNYC:splitParseValidate(
+            $subjectsProcessed,
+            $separatingToken,
+            $combinedValidatingStrings)"/>
+        
+        <xsl:param name="subjectsProcessedValid"
+            select="
+            $subjectsProcessedParsed/valid"/>
         <xsl:message>
             <xsl:value-of select="$subjectsToProcessValid" separator="{$separatingTokenLong}"/>
         </xsl:message>
@@ -312,7 +325,7 @@
             allTopicsActivitiesOccupationsComponents">
             <allTopics>
                 <xsl:apply-templates select="
-                    $subjectsToProcessValid" mode="processSubject"/>
+                    $subjectsToProcessValid[not (. = $subjectsProcessedValid)]" mode="processSubject"/>
             </allTopics>
         </xsl:variable>
         <xsl:message>
@@ -923,13 +936,23 @@
                 ' using search string ',
                 $nameSearchString
                 "/>
-        <xsl:copy-of
-            select="
-                doc(
-                $nameSearchString
-                [unparsed-text-available(.)]
-                )"
-        />        
+        <xsl:choose>
+            <xsl:when test="$termToSearch = 'Russia (Federation)'">
+                <!-- For some reason Russia trips up the script often -->
+                <xsl:copy-of select="doc('russia_sh2008116754.rdf')"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of
+                    select="
+                    doc(
+                    $nameSearchString
+                    [unparsed-text-available(.)]
+                    )"
+                />
+            </xsl:otherwise>
+        </xsl:choose>
+            
+        
     </xsl:template>
 
     <xsl:template name="directLOCSubjectSearch" match="
@@ -937,10 +960,18 @@
         <!-- Search for an exact subject in LOC
         for a string -->
         <xsl:param name="termToSearch" select="."/>
+        <xsl:param name="endsWithPeriod" select="ends-with($termToSearch, '.')"/>
+        <xsl:param name="noFinalPeriod"
+            select="
+                if ($endsWithPeriod)
+                then
+                    WNYC:trimFinalPeriod($termToSearch)
+                else
+                    $termToSearch"/>
         <xsl:param name="termToSearchClean"
             select="
                 WNYC:Capitalize(
-                WNYC:trimFinalPeriod($termToSearch),
+                $noFinalPeriod,
                 1)
                 "/>
         <xsl:variable name="searchTermURL"
@@ -956,16 +987,18 @@
             select="
                 'Search LoC subject headings directly for the term ',
                 $termToSearchClean,
-                'using search string',
+                ' using search string ',
                 $subjectSearchString
                 "/>
-        <xsl:copy-of
-            select="
-                doc(
-                $subjectSearchString
-                [unparsed-text-available(.)]
-                )"
-        />
+        <xsl:if test="unparsed-text-available($subjectSearchString)">
+            <xsl:copy-of
+                select="
+                    doc(
+                    $subjectSearchString
+                    [unparsed-text-available(.)]
+                    )"
+            />
+        </xsl:if>
     </xsl:template>
 
     <xsl:template name="directLOCSearch" match="
@@ -1199,6 +1232,7 @@
                 )"/>
         <xsl:param name="mustFind" as="xs:boolean" select="false()"/>
         <xsl:param name="maximumRetrievals" select="5"/>
+       
         <xsl:param name="basicURL" select="
                 'http://lx2.loc.gov:210/'"/>
         <xsl:param name="database" select="
@@ -1386,6 +1420,28 @@
         <xsl:copy-of select="$subjectSearchResults"/>
     </xsl:template>
 
+    <xsl:template name="LOCNameSuggestSearch" match="pb:contributor|pb:creator" mode="LOCNameSuggestSearch">
+        <!-- Find LoC URL from a name -->
+        
+        <xsl:param name="database" select="'https://id.loc.gov/'"/>
+        <xsl:param name="scheme" select="'authorities/names/'"/>
+        <xsl:param name="service" select="'suggest2'"/>
+        <xsl:param name="searchTerm"/>
+        <xsl:param name="searchType" select="'keyword'"/>
+        <xsl:param name="rdfType" select="'PersonalName'"/>
+        <xsl:param name="MIMEType" select="'xml'"/>        
+        
+        <xsl:param name="APICall">
+            <xsl:value-of select="concat(
+            $database, $scheme, $service)"/>
+            <xsl:value-of select="concat('?q=', $searchTerm)"/>
+            <xsl:value-of select="concat('&amp;', 'searchtype=', $searchType)[$searchType !='']"/>
+            <xsl:value-of select="concat('&amp;', 'rdftype=', $rdfType)[$rdfType !='']"/>
+            <xsl:value-of select="concat('&amp;', 'mime=', $MIMEType)[$MIMEType !='']"/>            
+        </xsl:param>
+        
+    </xsl:template>
+    
     <xsl:template name="LOCtoPBCore"
         match="
             madsrdf:Topic |
@@ -1880,5 +1936,130 @@
         </xsl:element>
     </xsl:template>
 
+    <xsl:template name="searchLoC">
+        <!-- Search LoC, see https://id.loc.gov/techcenter/searching.html -->
+        
+        <xsl:param name="searchTerms"/>
+        
+        <xsl:param name="baseLoCURI" select="'https://id.loc.gov'"/>
+        <xsl:param name="database" select="'/resources/works'"/>
+        <xsl:param name="service" select="'/suggest2'"/>
+        <xsl:param name="memberOf"/>
+        <xsl:param name="rdftype"/>
+        <xsl:param name="searchType" select="
+            'keyword'"/>
+        <xsl:param name="count" select="'50'"/><!-- Max hits -->
+        <xsl:param name="offset" select="'1'"/>
+        <xsl:param name="mime" select="'xml'"/>
+        <xsl:param name="searchTermsURIEncoded"
+            select="
+                encode-for-uri(
+                replace($searchTerms, '\W', ' ')
+                )"
+        />
+            
+        
+        <xsl:param name="directory"/>
+        
+        
+        
+        <xsl:param name="fullAPICall">
+            <xsl:value-of select="$baseLoCURI"/>
+            <xsl:value-of select="$database"/>
+            <xsl:value-of select="$service"/>
+            <xsl:value-of select="concat('&amp;memberOf=', $memberOf)[$memberOf !='']"/>
+            <xsl:value-of select="'?q='"/>
+            <xsl:value-of select="$searchTermsURIEncoded"/>
+            <xsl:value-of select="concat('&amp;searchtype=', $searchType)[$searchType !='']"/>
+            <xsl:value-of select="concat('&amp;rdftype=', $rdftype)[$rdftype !='']"/>
+            <xsl:value-of select="concat('&amp;count=', $count)"/>
+            <xsl:value-of select="concat('&amp;offset=', $offset)[$offset !='']"/>
+            <xsl:value-of select="concat('&amp;mime=', $mime)"/>
+        </xsl:param>
+        
+        <xsl:param name="searchResults" select="doc($fullAPICall)"/>
+        <xsl:message select="
+            'Search LoC suggest for term ', 
+            $searchTerms, 
+            ' using search string ', 
+            $fullAPICall"/>
+        <xsl:copy-of select="$searchResults"/>        
+    </xsl:template>
+    
+    <xsl:template name="workNAF_LCSH" match="
+            text()[contains(., 'id.loc.gov')]"
+        mode="
+        workNAF_LCSH">
+        <!-- Process an LoC _work_ -->
+        <!-- Extract author and subject headings -->
+        <!-- Optional: Limit the authors extracted
+        to a specific one -->
+        <xsl:param name="workURI" select="."/>
+        <xsl:param name="authorToMatch"/>
+        <xsl:param name="authorToMatchClean" select="replace($authorToMatch[matches(., '\w')], '\W', ' ')"/>
+        <xsl:param name="authorToMatchTokenized" select="
+            tokenize($authorToMatchClean, ' ')"/>        
+        <xsl:message select="'Find work ', $workURI"/>
+        <xsl:variable name="work" select="
+                doc(concat($workURI, '.rdf'))"/>        
+            <xsl:variable name="authors"
+                select="
+                $work/rdf:RDF/bf:Work/
+                bf:contribution/bf:Contribution/
+                bf:agent/bf:Agent"/>
+            <xsl:variable name="authorMatched"
+                select="
+                $authors
+                [matches(rdfs:label, $authorToMatchTokenized[1], 'i')][matches($authorToMatch, '\w')]
+                [matches(rdfs:label, $authorToMatchTokenized[last()], 'i')][matches($authorToMatch, '\w')]"/>
+            <xsl:variable name="authorURI" select="$authorMatched/
+                madsrdf:isIdentifiedByAuthority/
+                @rdf:resource"/>
+            <xsl:variable name="subjects"
+                select="
+                $work/rdf:RDF/bf:Work/bf:subject"/>
+        <work>  
+            <xsl:attribute name='workURI' select="$workURI"/>
+        <locAuthor>                
+                <authorURI>
+                    <xsl:value-of
+                        select="$authorURI"
+                    />
+                </authorURI>
+                <authorName>
+                    <xsl:value-of select="$authorMatched/rdfs:label"/>
+                </authorName>
+            </locAuthor>
+            <subjects>                
+                <xsl:for-each select="$subjects/
+                    bf:*
+                    [matches(@rdf:about, $combinedValidatingStrings)]
+                    [not(@rdf:about = $authorURI)]">
+                    <subject>
+                        <subjectURL>
+                            <xsl:value-of select="@rdf:about"/>
+                        </subjectURL>
+                        <subjectLabel>
+                            <xsl:value-of select="madsrdf:authoritativeLabel"/>
+                        </subjectLabel>
+                    </subject>
+                </xsl:for-each>
+                <!-- People ("agents") as subjects -->
+                <xsl:for-each select="$subjects/
+                    bf:*
+                    [matches(madsrdf:isIdentifiedByAuthority/@rdf:resource, $combinedValidatingStrings)]
+                    [not(@rdf:about = $authorURI)]">
+                    <subject>
+                        <subjectURL>
+                            <xsl:value-of select="madsrdf:isIdentifiedByAuthority/@rdf:resource"/>
+                        </subjectURL>
+                        <subjectLabel>
+                            <xsl:value-of select="madsrdf:authoritativeLabel"/>
+                        </subjectLabel>
+                    </subject>
+                </xsl:for-each>
+            </subjects>
+        </work>
+    </xsl:template>
     
 </xsl:stylesheet>

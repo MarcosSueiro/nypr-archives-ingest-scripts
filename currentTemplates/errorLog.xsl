@@ -45,7 +45,7 @@ and output an html error doc -->
             replace($seriesName, '\P{L}', '')"/>
         <xsl:param name="seriesEntry" select="
             $completeLog/completeLog/seriesEntry"/>
-        
+        <xsl:param name="filenameAddendum" tunnel="yes"/>
         <xsl:message select="'Generate error log'"/>
         
         <xsl:variable name="errorFreeMessage">
@@ -154,6 +154,7 @@ and output an html error doc -->
             format-date(current-date(), 
             '[Y0001][M01][D01]'),
             '_T', $currentTime,
+            $filenameAddendum,
             '.html')"/>
         <xsl:variable name="filenameErrorCSV"
             select="
@@ -162,6 +163,7 @@ and output an html error doc -->
             $docFilenameNoExtension,
             '_ERRORLOG',
             $seriesNameNoSpace,
+            $filenameAddendum,
             '.csv')"/>
         <xsl:result-document format="log" href="
             {$filenameErrorLog}">

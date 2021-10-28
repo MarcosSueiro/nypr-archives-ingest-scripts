@@ -236,7 +236,8 @@ Subject headings / IKEY
                 matches($dbxData/ENTRIES/ENTRY/AUTHOR, $archivesAuthors) or
                 matches($dbxData/ENTRIES/ENTRY/CREATOR, $archivesAuthors) or
                 starts-with($dbxData/ENTRIES/ENTRY/MOTIVE, 'archive_import') or
-                matches($originalExif/rdf:Description/System:FileName, 'ARCH-DAW')"
+                matches($originalExif/rdf:Description/System:FileName, 'ARCH-DAW') or
+                contains($originalExif/rdf:Description/RIFF:Source, 'cavafy')"
             as="xs:boolean"/>
 
         <xsl:param name="checkedDAVIDTitle">
@@ -510,8 +511,8 @@ Subject headings / IKEY
                     'WRONG EXIFTOOL OUTPUT: ',
                     'Field', '_', $localName, '_',
                     'suggests that exiftool is not outputting structured XMP.',
-                    ' Please make sure your exiftool paramaters are: ',
-                    'exiftool -X -a -struct'"
+                    ' Please make sure your exiftool parameters are: ',
+                    '    exiftool -X -a -ext wav -struct -charset riff=utf8'"
             />
         </xsl:if>
     </xsl:template>
@@ -1206,7 +1207,7 @@ Subject headings / IKEY
             </RIFF:Product>
         </xsl:variable>
 
-        <!--Description as RIFF:Subject -->
+        <!-- Description as RIFF:Subject -->
         <xsl:variable name="exifSubject"
             select="
                 $originalExif/rdf:Description/
@@ -1217,7 +1218,6 @@ Subject headings / IKEY
                 /pb:pbcoreDescriptionDocument
                 /pb:pbcoreDescription
                 [@descriptionType = 'Abstract'][1]"/>
-
         <xsl:variable name="dbxAudioRemark"
             select="
                 $dbxData/ENTRIES/ENTRY[CLASS = 'Audio']/REMARK"/>
@@ -1398,7 +1398,8 @@ Subject headings / IKEY
             <xsl:call-template name="checkConflicts">
                 <xsl:with-param name="field1"
                     select="
-                        $exifSubject[not(. = $defaultDescription)]"/>
+                        $exifSubject
+                        [not(. = $defaultDescription)]"/>
                 <xsl:with-param name="field2"
                     select="
                         $cavafyAbstract
@@ -1421,6 +1422,7 @@ Subject headings / IKEY
                 <xsl:with-param name="fieldName"
                     select="
                         'assetDescription'"/>
+                <xsl:with-param name="normalize" select="fn:false()"/>
             </xsl:call-template>
         </xsl:variable>
 
@@ -1583,7 +1585,7 @@ Subject headings / IKEY
                             WNYC:stripNonASCII(.)"/>
                     <xsl:with-param name="defaultValue" select="$defaultCopyright"/>
                     <xsl:with-param name="fieldName" select="'Copyright'"/>
-
+                    <xsl:with-param name="normalize" select="fn:false()"/>
                     <!-- To avoid semicolons separating a single field -->
                     <xsl:with-param name="separatingToken"
                         select="$separatingTokenForFreeTextFields"/>
@@ -2153,11 +2155,12 @@ Subject headings / IKEY
         <xsl:variable name="cavafyInstantiationComments">
             <xsl:value-of
                 select="
-                    normalize-space(
+                    (
                     $instantiationData
                     /pb:pbcoreInstantiation
-                    /pb:instantiationAnnotation[not(@annotationType)])
-                    [not(contains($exifComment, .))]"
+                    /pb:instantiationAnnotation
+                    [not(@annotationType)])
+                    [not(contains($exifComment, .))]/normalize-space()"
                 separator="
                 {$separatingTokenLong}"/>
         </xsl:variable>
@@ -2230,25 +2233,24 @@ Subject headings / IKEY
                     select="
                         $exifComment[. != ''],
                         $multitrackWarning
-                        [not(contains($exifComment, $multitrackWarning))],
+                        [not(contains($exifComment,
+                        $multitrackWarning))],
                         $cavafyURLComment
                         [not(
                         contains(
-                        $exifComment, 'For additional details see https://cavafy.')
+                        $exifComment,
+                        'For additional details see https://cavafy.')
                         )],
-                        
                         $approximateDateComment
                         [not(
                         contains(
                         $exifComment, 'Date is approximate')
                         )],
-                        
                         $aapbURLInSource
                         [not(
                         contains(
                         $exifComment, 'American Archive catalog entry available at: ')
                         )],
-                        
                         $aapbTranscriptURLInComment
                         [not(
                         contains(
@@ -2258,18 +2260,31 @@ Subject headings / IKEY
             </RIFF:Comment>
         </xsl:variable>
 
-        <!--                Originator field; not to be trusted much in DAVID -->
+        <!-- Originator field; not to be trusted much in DAVID -->
         <xsl:variable name="RIFF:Originator">
             <RIFF:Originator>
                 <xsl:call-template name="checkConflicts">
-                    <xsl:with-param name="field1"
-                        select="$dbxData/ENTRIES/
-                        ENTRY/AUTHOR[not(. = $RIFF:Technician)]"/>
-                    <xsl:with-param name="field2"
-                        select="$originalExif/rdf:Description/
-                        RIFF:Originator[not(. = $RIFF:Technician)]"/>
-                    <xsl:with-param name="defaultValue" select="$RIFF:Technician"/>
-                    <xsl:with-param name="fieldName" select="'RIFF:Originator'"/>
+                    <xsl:with-param name="field1">
+                        <xsl:value-of
+                            select="
+                                $dbxData/ENTRIES/
+                                ENTRY/AUTHOR
+                                [not(. = $RIFF:Technician)]"
+                        />
+                    </xsl:with-param>
+                    <xsl:with-param name="field2">
+                        <xsl:value-of
+                            select="
+                                $originalExif/rdf:Description/
+                                RIFF:Originator
+                                [not(. = $RIFF:Technician)]"
+                        />
+                    </xsl:with-param>
+                    <xsl:with-param name="defaultValue">
+                        <xsl:value-of select="$RIFF:Technician"/>
+                    </xsl:with-param> 
+                    <xsl:with-param name="fieldName" select="
+                        'RIFF:Originator'"/>
                 </xsl:call-template>
                 <xsl:text>&#013;</xsl:text>
             </RIFF:Originator>
@@ -2671,10 +2686,12 @@ Subject headings / IKEY
                 </System:FileSize>
                 <System:FileModifyDate>
                     <xsl:call-template name="checkConflicts">
-                        <xsl:with-param name="field1"
-                            select="$DAVIDFileModifyDateTime[. ne ' -5:00'][. ne ' -4:00']"/>
-                        <xsl:with-param name="defaultValue"
-                            select="$originalExif/rdf:Description/System:FileModifyDate"/>
+                        <xsl:with-param name="field1">
+                            <xsl:value-of select="$DAVIDFileModifyDateTime[. ne ' -5:00'][. ne ' -4:00']"/>
+                        </xsl:with-param>                            
+                        <xsl:with-param name="defaultValue">
+                            <xsl:value-of select="$originalExif/rdf:Description/System:FileModifyDate"/>
+                        </xsl:with-param>                            
                         <xsl:with-param name="fieldName" select="'FileModifyDate'"/>
                     </xsl:call-template>
                 </System:FileModifyDate>

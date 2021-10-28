@@ -37,12 +37,10 @@
     <xsl:param name="vendorName" select="'George Blood'"/>
     <!-- Generic filepath for future files -->
     <xsl:param name="System:Directory" select="concat('W:/ARCHIVESNAS1/INGEST/', $vendorName)"/>
-    <!-- Type of files -->
+    <!-- Type of future files -->
     <xsl:param name="File:FileType" select="'WAV'"/>
     
-    <!--<xsl:template match="/">
-        <xsl:apply-templates select="instantiationIDs"/>
-    </xsl:template>-->
+
     
     <xsl:template match="instantiationIDs">
         <xsl:param name="instantiationIDs" select="."/>
@@ -91,7 +89,7 @@
         <xsl:copy-of select="$instantiationIDsSorted"/>
     </xsl:template>
 
-    <xsl:template match="instantiationIDs" mode="generateExif">
+    <xsl:template match="instantiationIDs" mode="generateExif">        
         <xsl:message
             select="
                 'Generate a fake Exif document from',
@@ -124,8 +122,15 @@
                 mode="
                 generateNextFilename"/>
         </xsl:param>
-        <xsl:param name="reportedSourceFormat" select="
-            $instantiationID/@format"/>
+        <xsl:param name="reportedSourceFormat">
+            <xsl:value-of select="@format"/>
+        </xsl:param>
+        <xsl:param name="reportedLocation">
+            <xsl:value-of select="@location"/>
+        </xsl:param>
+        <xsl:param name="reportedGeneration">
+            <xsl:value-of select="@generation"/>
+        </xsl:param>
         <xsl:param name="cavafySourceFormat"
  select="
             $generatedNextFilename/pb:inputs/
@@ -281,4 +286,6 @@
             </xsl:element>
         </xsl:for-each>
     </xsl:template>
+    
+    
 </xsl:stylesheet>

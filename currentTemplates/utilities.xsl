@@ -690,7 +690,7 @@
         <xsl:param name="alwaysLC"
             select="'*a*,*an*,*the*,*and*,*but*,*for*,*nor*,*or*,*so*,*yet*,*as*,*at*,*by*,*if*,*in*,*of*,*on*,*to*,*with*,*when*,*where*'"/>
         <xsl:param name="alwaysUC"
-            select="'\\.[A-Z]|^A\\/H$|^ABC$|^AIDS$|^AM$|^AP$|^ASCAP$|^BBC$|^CBGB$|^CBS$|^CD$|^CMNY$|^CNN$|^CPB$|^DAT$|^DNC$|^DIY$|^EPA$|^FDNY$|^FM$|^GOP$|^HSA$|^HUAC$|^JFK$|^LMDC$|^M\\/H$|^NATO$|^NBC$|^NPR$|^NS$|^NW$|^NWU$|^NY$|^NY1$|^NYC$|^NYPD$|^NYS$|^P\.M\.$|^PAL$|^PBS$|^PCB$|^PM$|^PS$|^RNC$|^SFX$|^TAL$|^TB$|^UN$|^US$|^USA$|^USAF$|^TV$|^V\-E$|^VD$|^VE$|^VP$|^WNBA$|^WQXR$|^WNYC$|^WW1$|^WW2$'"/>
+            select="'\\.[A-Z]|^A\\/H$|^ABC$|^AIDS$|^AM$|^AP$|^ASCAP$|^BBC$|^CBGB$|^CBS$|^CD$|^CMNY$|^CNN$|^CPB$|^DAT$|^DNC$|^DIY$|^EPA$|^FDNY$|^FM$|^GOP$|^HSA$|^HUAC$|^II$|^III$|^IV$|^IX$|^JFK$|^LMDC$|^M\\/H$|^NATO$|^NBC$|^NPR$|^NS$|^NW$|^NWU$|^NY$|^NY1$|^NYC$|^NYPD$|^NYS$|^P\.M\.$|^PAL$|^PBS$|^PCB$|^PM$|^PS$|^RNC$|^SFX$|^TAL$|^TB$|^UN$|^US$|^USA$|^USAF$|^TV$|^V\-E$|^VD$|^VE$|^VI$^VII$||^VP$|^WNBA$|^WQXR$|^WNYC$|^WW1$|^WW2$|^XI$|^XII$'"/>
 
         <xsl:param name="cleanInput" select="normalize-space($inputTitle)"/>
         <xsl:param name="elements" select="tokenize($cleanInput, ' ')"/>

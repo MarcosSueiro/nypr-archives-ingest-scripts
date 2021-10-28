@@ -21,7 +21,7 @@
     <xsl:output method="xml" version="1.0" indent="yes" encoding="ASCII"/>
 
     <xsl:import href="processLoCURL.xsl"/>
-    <xsl:import href="parseDAVIDTitle.xsl"/>
+    <xsl:import href="cavafySearch.xsl"/>
 
     <xsl:param name="cavafyValidatingString" 
         select="'https://cavafy.wnyc.org/assets/'"/>
@@ -32,13 +32,13 @@
     <xsl:param name="todaysDate" 
         select="xs:date(current-date())"/>
     
-    <xsl:template match="pb:pbcoreCollection">
+    <xsl:template match="pb:pbcoreCollection" mode="generateBWFME">
         <conformance_point_document>
-            <xsl:apply-templates/>
+            <xsl:apply-templates mode="generateBWFME"/>
         </conformance_point_document>
     </xsl:template>
     
-    <xsl:template match="pb:pbcoreDescriptionDocument">
+    <xsl:template match="pb:pbcoreDescriptionDocument" mode="generateBWFME">
         <xsl:param name="cavafyxml" select="."/>
         <xsl:param name="filename" select="concat('Filename', position() div 2, '.wav')"/>
         <xsl:param name="parsedDAVIDTitle">
@@ -47,36 +47,34 @@
             </xsl:call-template>
         </xsl:param>
         <xsl:param name="generation" select="
-            $parsedDAVIDTitle/parsedElements/parsedGeneration"/>        
+            $parsedDAVIDTitle/parsedDAVIDTitle/parsedElements/parsedGeneration"/>        
         <xsl:param name="assetID" select="
-            $parsedDAVIDTitle/parsedElements/assetID"/>
+            $parsedDAVIDTitle/parsedDAVIDTitle/parsedElements/assetID"/>
+        <xsl:param name="collection" select="
+            pb:pbcoreTitle[@titleType='Collection']"/>
         <xsl:param name="RIFF:ArchivalLocation">
             <xsl:variable name="multipleCollections" select="count(pb:pbcoreTitle
                 [@titleType='Collection']) gt 1"/>
                 <xsl:value-of select="
                     'MULTIPLE COLLECTIONS'[$multipleCollections]"/>
-                <xsl:value-of select="
-                    concat(
-                    'US, ', 
-                    pb:pbcoreTitle
-                    [@titleType='Collection']
-                    )"/>            
+                <xsl:value-of select="WNYC:generateIARL($collection)"/>            
         </xsl:param>
         <xsl:param name="RIFF:Artist">
-            <xsl:value-of select="
+            <xsl:value-of
+                select="
                     pb:pbcoreContributor
                     /pb:contributor
                     /@ref
-                    [matches(., $validatingNameString)]" separator="
-                    {$separatingTokenLong}"/>
+                    [matches(., $validatingNameString)]"
+                separator="{$separatingTokenLong}"/>
         </xsl:param>
         <xsl:param name="RIFF:CommissionedBy">
             <xsl:value-of select="
                     pb:pbcoreCreator
-                    /pb:Creator
+                    /pb:creator
                     /@ref
-                    [matches(., $validatingNameString)]" separator="
-                    {$separatingTokenLong}"/>
+                    [matches(., $validatingNameString)]" 
+                    separator="{$separatingTokenLong}"/>
         </xsl:param>
         <xsl:param name="RIFF:Comment">
             <xsl:value-of select="
@@ -88,24 +86,9 @@
                     pb:pbcoreRightsSummary/pb:rightsSummary"/>
         </xsl:param>
         <xsl:param name="RIFF:CreateDate">
-            <xsl:variable name="chosenAssetDate">
-                    <xsl:variable name="earliestAssetDate" select="
-                        min(
-                        pb:pbcoreAssetDate
-                        [not(contains(., 'u'))]/xs:date(.)
-                        )"/>
-                    <xsl:variable name="approxAssetDates" select="
-                        pb:pbcoreAssetDate[contains(., 'u')]"/>
-                    <xsl:value-of select="
-                        if(
-                        $earliestAssetDate gt xs:date('1000-01-01')
-                        )
-                        then $earliestAssetDate
-                        else if (min($approxAssetDates/pb:pbcoreAssetDate) !='')
-                        then min($approxAssetDates/pb:pbcoreAssetDate)
-                        else 'uuuu-uu-uu'"/>
-                </xsl:variable>
-                <xsl:value-of select="$chosenAssetDate"/>
+            <xsl:call-template name="earliestDate">
+                <xsl:with-param name="cavafyXML" select="."/>
+            </xsl:call-template>
         </xsl:param>
         <xsl:param name="RIFF:Engineer">
             <xsl:value-of select="
@@ -116,11 +99,9 @@
         <xsl:param name="multipleGenres" select="
             count(pb:pbcoreGenre) gt 1"></xsl:param>
         <xsl:param name="RIFF:Genre">
-            <IGNR>
-                <xsl:value-of select="
+            <xsl:value-of select="
                     'MULTIPLE GENRES'[$multipleGenres]"/>
-                <xsl:value-of select="pb:pbcoreGenre"/>
-            </IGNR>
+            <xsl:value-of select="pb:pbcoreGenre"/>
         </xsl:param>
         <xsl:param name="RIFF:Keywords">
             <xsl:variable name="narrowSubjects">
@@ -131,8 +112,7 @@
                                 pb:pbcoreSubject
                                 /@ref
                                 [matches(., $combinedValidatingStrings)]"
-                                separator="
-                                {$separatingTokenLong}"
+                                separator="{$separatingTokenLong}"
                             />
                         </xsl:with-param>
                     </xsl:call-template>
@@ -140,8 +120,8 @@
                 <xsl:value-of select="
                     $narrowSubjects
                     /madsrdf:*
-                    /@rdf:about" separator="
-                    {$separatingTokenLong}"/>
+                    /@rdf:about" 
+                    separator="{$separatingTokenLong}"/>
         </xsl:param>
         <xsl:param name="RIFF:Medium">            
             <xsl:variable name="possibleMediums">
@@ -198,13 +178,19 @@
                     [@annotationType = 'Provenance']"/>
                 <xsl:with-param name="defaultValue" select="
                     concat(
-                    pb:pbcoreTitle[@titleType='Collection'], ' ', 
+                    $collection, ' ', 
                     $RIFF:Medium, ' ', 
                     $generation, ' from ', $assetID)"/>
                 <xsl:with-param name="fieldName" select="'SourceForm'"/>
             </xsl:call-template>
-            <xsl:value-of select="concat($RIFF:Medium, ' from ', pb:pbcoreIdentifier[@source='WNYC Archive Catalog'])"/>
+            
         </xsl:param>
+        
+        <!-- Extra descriptors -->
+        <xsl:param name="location"/>
+        <xsl:param name="physicalLabel"/>                    
+        <xsl:param name="mergeID"/>
+        
         <xsl:element name="File">
             <xsl:attribute name="name" select="$filename"/>
                 <Core>
@@ -223,6 +209,9 @@
                     <ICMT>
                         <xsl:value-of select="$RIFF:Comment"/>
                     </ICMT>
+                    <ICOP>
+                        <xsl:value-of select="$RIFF:Copyright"/>
+                    </ICOP>
                     <ICRD>
                         <xsl:value-of select="$RIFF:CreateDate"/>
                     </ICRD>

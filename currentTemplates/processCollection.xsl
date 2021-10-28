@@ -12,6 +12,7 @@
     'CollectionConcordance.xml' -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:WNYC="http://www.wnyc.org"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:pb="http://www.pbcore.org/PBCore/PBCoreNamespace.html"
     xmlns:madsrdf="http://www.loc.gov/mads/rdf/v1#" exclude-result-prefixes="#all" version="3.0">
 
     <xsl:import href="processLoCURL.xsl"/>    
@@ -38,10 +39,19 @@
         </xsl:for-each>
     </xsl:template>
 
-    <xsl:template name="processCollection" match="collectionAcronym" mode="processCollection">
+    <xsl:template name="processCollection" match="
+        collectionAcronym | pb:pbcoreTitle[@titleType='Collection']" mode="processCollection">
         <!-- Process a single collection 
         and output 
-        collectionInfo/collectionLOCName -->
+        collection info, e.g.:
+            <collectionInfo collectionAcronym="WNYC">
+                <collAcro>WNYC</collAcro>
+                <collName>WNYC Radio</collName>
+                <collLocation>US</collLocation>
+                <collURL>http://id.loc.gov/authorities/names/n81047053</collURL>
+                <collLOCName>WNYC (Radio station : New York, N.Y.)</collLOCName>
+            </collectionInfo>
+        -->
         <xsl:param name="collectionAcronym" select="."/>
         <xsl:param name="collectionAcronymMessage">
             <xsl:message
@@ -64,12 +74,14 @@
         </xsl:param>
         <xsl:param name="collectionInfo">
             <collectionInfo>
-                <xsl:attribute name="collectionAcronym" select="$collectionAcronym"/>
+                <xsl:attribute name="collectionAcronym" select="
+                    $collectionAcronym"/>
                 <!-- Collection not Found -->
                 <xsl:apply-templates
                     select="
                         $collectionConcordance/collections
-                        [not(collection/collAcro = $collectionAcronym)]"
+                        [not(collection/collAcro = 
+                        $collectionAcronym)]"
                     mode="collectionNotFound">
                     <xsl:with-param name="
                     collectionAcronym"
@@ -116,5 +128,22 @@
             <xsl:with-param name="url" select="."/>
         </xsl:call-template>
     </xsl:template>
-
+    
+    <xsl:function name="WNYC:generateIARL">
+        <!-- Generate a 'US, IARL' string
+            (i.e. coutry of location, 
+            comma,
+            collection acronym)
+        from a collection acronym -->
+        <xsl:param name="collectionAcronym"/>
+        <xsl:variable name="collectionInfo">
+            <xsl:call-template name="processCollection">
+                <xsl:with-param name="collectionAcronym" select="$collectionAcronym"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:value-of select="$collectionInfo/collectionInfo/collLocation"/>
+        <xsl:value-of select="', '"/>
+        <xsl:value-of select="$collectionAcronym"/>        
+    </xsl:function>
+    
 </xsl:stylesheet>

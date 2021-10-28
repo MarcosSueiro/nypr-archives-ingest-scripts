@@ -7,13 +7,26 @@
     
     <xsl:param name="searchString"
         select="
-        'https://cavafy.wnyc.org/?facet_Series+Title%5B%5D=On+the+Media&amp;q=9278'"/>
+        'https://cavafy.wnyc.org/assets?q=36647'"/>
+    
+    
+    
+    <xsl:template match="/">
+        <xsl:param name="urls">
+            <urls>
+                <xsl:call-template name="pageResults">
+                    <xsl:with-param name="searchString" select="$searchString"/>
+                </xsl:call-template>
+            </urls>
+        </xsl:param>
+        <xsl:apply-templates select="$urls" mode="narrowizeSubjects"/>
+    </xsl:template>
 
-    <xsl:template match="urls">
+    <xsl:template match="urls" mode="narrowizeSubjects">
         <xsl:variable name="pbcoreCollection">
             <xsl:call-template name="generatePbCoreCollection">
                 <xsl:with-param name="urls">
-                    <xsl:value-of select="url" separator=" ; "/>
+                    <xsl:value-of select="*:url" separator=" ; "/>
                 </xsl:with-param> 
             </xsl:call-template>
         </xsl:variable>

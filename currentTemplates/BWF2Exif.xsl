@@ -62,6 +62,8 @@
                 substring-after(
                 substring-after($filename, $filenameNoExtensionRaw),
                 $token)"/>
+        
+        
         <xsl:message select="concat('Convert BWF MetaEdit Core metadata from ', @name)"/>
         
         <rdf:Description>
