@@ -44,23 +44,23 @@ The "Archived at" date in the .htm document is the date of the newscast. Because
 
 Each newscast is divided into stories. The script parses each story out and extracts data about its writer, slug, editor, and additional files. This is all reflected in the generated log. The log also registers the number of original matches, and flags files shorter than 120 seconds. It also flags stories marked as weather in NewsBoss.
 
-## Embedding the NewsBoss matadata
+## Embedding NewsBoss metadata
 The script generates a "Core" type file to embed metadata using [BWF MetaEdit](https://mediaarea.net/BWFMetaEdit). All newscasts from 2012 to 2020 for which the script found a match in the NewsBoss data now have the following embedded information:
 
-Archival Location: 'US, WNYC'
-Artists (a.k.a. contributors): All story editors ('subs'), separated by semicolons
-CommissionedBy (a.k.a. Creators): All story writers, separated by semicolons
-Comment: All related files' ('cuts') filenames and titles, separated by semicolons
-Copyright: 'Terms of Use and Reproduction: WNYC Radio. Additional copyright may apply to musical selections.'
-Date: Newscast date, in [ISO 8601 format](https://www.iso.org/iso-8601-date-and-time-format.html)
-Engineer: 'Unknown engineer'
-Genre: 'News'
-Keywords: 'https://id.loc.gov/authorities/subjects/sh85034883' (and 'http://id.loc.gov/authorities/subjects/sh85145856' if there are weather stories)
-Medium: 'Aircheck'
-Name: Newscast name, e.g. 'Newscast Archive NEWSCASTS.Weekdays.Midday.1:04 pm'
-Product: 'News'
-Subject: NewsBoss script, stripped of potentially bothersome characters
-Software: Whatever DAVID lists as the generator, e.g. 'MultiCoder3'
-Source: 'https://www.wnyc.org/story/latest-newscast/'
-SourceReference [a.k.a. provenance]: 'WNYC Radio Aircheck'
-Technician: DAVID Author / Creator (e.g. 'SVCCSX')
+* Archival Location: 'US, WNYC'
+* Artists (a.k.a. contributors): All story editors ('subs'), separated by semicolons
+* CommissionedBy (a.k.a. creators): All story writers, separated by semicolons
+* Comment: All related files' ('cuts') filenames and titles, separated by semicolons
+* Copyright: 'Terms of Use and Reproduction: WNYC Radio. Additional copyright may apply to musical selections.'
+* Date: Newscast date, in [ISO 8601 format](https://www.iso.org/iso-8601-date-and-time-format.html)
+* Engineer: 'Unknown engineer'
+* Genre: 'News'
+* Keywords: 'https://id.loc.gov/authorities/subjects/sh85034883' (and 'http://id.loc.gov/authorities/subjects/sh85145856' if there are weather stories)
+* Medium: 'Aircheck'
+* Name: Newscast name, e.g. 'Newscast Archive NEWSCASTS.Weekdays.Midday.1:04 pm'
+* Product: 'News'
+* Subject: NewsBoss script, stripped of potentially bothersome characters
+* Software: Whatever DAVID lists as the generator, e.g. 'MultiCoder3'
+* Source: 'https://www.wnyc.org/story/latest-newscast/'
+* SourceReference (a.k.a. provenance): 'WNYC Radio Aircheck'
+* Technician: DAVID Author / Creator (e.g. 'SVCCSX')
