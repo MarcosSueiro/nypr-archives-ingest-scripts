@@ -28,8 +28,8 @@ Here are the steps:
   * Clean everything else until you have a well-formed html
 8. Parse out the broadcast date. (This makes for more efficient text-matching later) 
   * Make two replacements:
-    ```"<br/>Archived at"``` with ```"<br/><archiveDate>Archived at"```
-    ```"by NewsBoss Wires<br/>-------"``` with ```"by NewsBoss Wires</archiveDate><br/>-------"```
+    * ```"<br/>Archived at"``` with ```"<br/><archiveDate>Archived at"``` and 
+    * ```"by NewsBoss Wires<br/>-------"``` with ```"by NewsBoss Wires</archiveDate><br/>-------"```
     
 ## Generating DAVID titles
 Generate an xml list of appropriate DAVID titles. For example, you can use this exiftool command:
