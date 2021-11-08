@@ -60,7 +60,7 @@ The script generates a "Core" type file to embed metadata using [BWF MetaEdit](h
 * Name: Newscast name, e.g. 'Newscast Archive NEWSCASTS.Weekdays.Midday.1:04 pm'
 * Product: 'News'
 * Subject: Text of NewsBoss script, stripped of potentially bothersome characters
-* Software: Whatever DAVID lists as the generator, e.g. 'MultiCoder3'
+* Software: DAVID Generator (e.g. 'MultiCoder3')
 * Source: 'https://www.wnyc.org/story/latest-newscast/'
 * SourceReference (a.k.a. provenance): 'WNYC Radio Aircheck'
 * Technician: DAVID Author / Creator (e.g. 'SVCCSX')
