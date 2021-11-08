@@ -9,14 +9,14 @@ On the other hand, the station's newsroom automation system, NewsBoss, stores th
 This project matched the original WAVE files to the NewsBoss descriptions and embedded the metadata in the files for easier ingest and better discoverability.
 
 ## Preparing NewsBoss data
-NewsBoss can export its data as an .htm file. But the data needs to be manipulated slightly in order to be usable more easily.
+NewsBoss can export its data as an .htm file. But the data needs to be manipulated slightly in order to render it more usable.
 
 Here are the steps:
 1. Log in to NewsBoss
 2. Find the newscasts in NewsBoss:
-  * Search NewsBoss 'Acrhive' for the text ":04" in slugs. 
-  * Limit to one year (this may no longer be strictly necessary)
-  * Limit results to Newscasts, not stories
+  * Search NewsBoss 'Acrhive' for the text ":04" *in slugs*...
+  * ...limiting the search to one year (this may no longer be strictly necessary, but it likely has beefits later on with regards to managing large files, etc.)
+  * ...limiting results to Newscasts, not stories
 4. Select all results
 5. Retrieve to your queue
 6. Select your entire queue and export as an .htm file with the following name: '[YYYY]newscasts.htm' (e.g. '2015newscasts.htm')
