@@ -2,6 +2,48 @@
 ## Introduction
 Since 2012, New York Public Radio automatically records a selection of hourly WNYC local newscasts per day. At a rate of between eight and seventeen recordings per day, this translates to about 52,000 full-resolution WAVE files stored in the station's production system, DAVID.
 
-The DAVID script automatically starts the recording at :04 after the hour, which is when the local newscast is broadcast. It assigns a unique filename and a 'title' following the following pattern: 'WNYC-NWSC-[YYYY-MM-DD hhmm]m', for example 'WNYC-NWSC-2021-11-07 19h11m'. This pinpoints which hourly broadcast is recorded (the part indicating the minutes after the hour seems to vary).
+The DAVID process automatically starts the recording at :04 after the hour, which is when the local newscast is broadcast. It assigns a unique filename and a 'title' following the following pattern: 'WNYC-NWSC-[YYYY-MM-DD hhmm]m', for example 'WNYC-NWSC-2021-11-07 19h11m'. This pinpoints which hourly broadcast is recorded (the part indicating the minutes after the hour seems to vary). each recording is always less than five minutes long.
 
-On the other hand, 
+On the other hand, the station's newsroom automation system, NewsBoss, stores the text that the station's host reads during the local newscasts, as well as additional information such as additional audio files to play and the names of the writers and editors of each news piece.
+
+This project matched the original WAVE files to the NewsBoss descriptions and embedded the metadata in the files for easier ingest and better discoverability.
+
+## Preparing NewsBoss data
+NewsBoss can export its data as an .htm file. But the data needs to be manipulated slightly in order to be usable more easily.
+
+Here are the steps:
+1. Log in to NewsBoss
+2. Find the newscasts in NewsBoss:
+  * Search NewsBoss 'Acrhive' for the text ":04" in slugs. 
+  * Limit to one year (this may no longer be strictly necessary)
+  * Limit results to Newscasts, not stories
+4. Select all results
+5. Retrieve to your queue
+6. Select your entire queue and export as an .htm file with the following name: '[YYYY]newscasts.htm' (e.g. '2015newscasts.htm')
+7. Clean up htm file in oXygen: 
+  * Fix ```<meta>``` tag (replace ```'charset=utf-8">'```  with   ```'charset=utf-8"/>'```)
+  * Replace ```</A><HR></TD>``` with ```</A><HR/></TD>```
+  * clean up all ```'&nbsp;'```   * Clean up control-code Unicodes, e.g. 0x1f, 0x1a (regex ```"\u001F"``` and ```"\u001A"```)
+  * Etc. until you have a well-formed html
+8. Parse out the broadcast date. (This makes for more efficient text-matching later) 
+  * Make two replacements:
+    ```"<br/>Archived at"``` with ```"<br/><archiveDate>Archived at"```
+    ```"by NewsBoss Wires<br/>-------"``` with ```"by NewsBoss Wires</archiveDate><br/>-------"```
+    
+## Generating DAVID titles
+Generate an xml list of appropriate DAVID titles. For example, you can use this exiftool command:
+```exiftool -ext dbx -m -if "$EntriesEntryTitle =~ /NWSC/i" -EntriesEntryTitle -X "[sourceDirectory]" >"[destinationFile].xml"```
+
+## Matching the scripts to the files
+The [xslt stylesheet](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/master/currentTemplates/NewsBossExiftoolDBX2ixml.xsl) that matches the files works as follows:
+
+You must enter a year after 2011 in ["year to process"](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/1941c7c0247f85e18c5ed13b14be284fefa0d304/currentTemplates/NewsBossExiftoolDBX2ixml.xsl#L24). The script then only focuses on that year.
+
+The "Archived at" date is the date of the newscast. Because newscasts are often revised, the scripts favors the one archived automatically by NewsBoss at :40 past the hour (so Archived at 7:40 for the 7:04 newscast). If that is not found, it finds the last version available.
+
+Creates a log
+
+
+
+4. When multiple matches, use those which have later time in the "archiveDate" field (usually 7:40 for a 7:04 newscast)
+5. Export DAVID Newscasts using 
