@@ -45,7 +45,7 @@ The "Archived at" date in the .htm document is the date of the newscast. Because
 Each newscast is divided into stories. The script parses each story out and extracts data about its writer, slug, editor, and additional files. This is all reflected in the generated log. The log also registers the number of original matches, and flags files shorter than 120 seconds. It also flags stories marked as weather in NewsBoss.
 
 ## Embedding NewsBoss metadata
-The script generates a "Core" type file to embed metadata using [BWF MetaEdit](https://mediaarea.net/BWFMetaEdit). All newscasts from 2012 to 2020 for which the script found a match in the NewsBoss data now have the following embedded information:
+The script generates a "Core" type file to embed metadata using [BWF MetaEdit](https://mediaarea.net/BWFMetaEdit). All newscasts from 2011 to 2020 for which the script found a match in the NewsBoss data now have the following embedded information:
 
 * Archival Location: 'US, WNYC'
 * Artists (a.k.a. contributors): All story editors ('subs'), separated by semicolons
