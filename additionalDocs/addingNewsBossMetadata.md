@@ -57,7 +57,7 @@ The script generates a "Core" type file to embed metadata using [BWF MetaEdit](h
 * Genre: 'News'
 * Keywords: 'https://id.loc.gov/authorities/subjects/sh85034883' (and 'http://id.loc.gov/authorities/subjects/sh85145856' if there are weather stories)
 * Medium: 'Aircheck'
-* Name: Newscast name, e.g. 'Newscast Archive NEWSCASTS.Weekdays.Midday.1:04 pm'
+* Name: Newscast name (e.g. 'Newscast Archive NEWSCASTS.Weekdays.Midday.1:04 pm')
 * Product: 'News'
 * Subject: Text of NewsBoss script, stripped of potentially bothersome characters
 * Software: DAVID Generator (e.g. 'MultiCoder3')
