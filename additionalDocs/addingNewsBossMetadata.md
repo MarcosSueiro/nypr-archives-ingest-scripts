@@ -2,11 +2,11 @@
 ## Introduction
 Since 2012, New York Public Radio automatically records a selection of hourly WNYC local newscasts per day. At a rate of between eight and seventeen recordings per day, this translates to about 52,000 full-resolution WAVE files stored in the station's production system, DAVID.
 
-The DAVID process automatically starts the recording at :04 after the hour, which is when the local newscast is broadcast. It assigns a unique filename and a 'title' following the following pattern: 'WNYC-NWSC-[YYYY-MM-DD hhmm]m', for example 'WNYC-NWSC-2021-11-07 19h11m'. This pinpoints which hourly broadcast is recorded (the part indicating the minutes after the hour seems to vary). each recording is always less than five minutes long.
+The DAVID process automatically starts the recording at :04 after the hour, which is when the local newscast is broadcast. It assigns a unique filename and a 'title' following the following pattern: 'WNYC-NWSC-[YYYY-MM-DD hhmm]m', for example 'WNYC-NWSC-2021-11-07 19h11m'. This pinpoints which hourly broadcast is recorded (the part indicating the minutes after the hour seems to vary). Each recording is always less than five minutes long.
 
-On the other hand, the station's newsroom automation system, NewsBoss, stores the text that the station's host reads during the local newscasts, as well as additional information such as additional audio files to play and the names of the writers and editors of each news piece.
+On the other hand, the station's newsroom automation system, NewsBoss, stores the text that the station's host reads during the local newscasts, as well as additional information such as other audio files to play and the names of the writers and editors of each news story.
 
-This project matched the original WAVE files to the NewsBoss descriptions and embedded the metadata in the files for easier ingest and better discoverability.
+This procedure matches the original WAVE files to the NewsBoss descriptions and embedded the metadata in the files for easier ingest and better discoverability.
 
 ## Preparing NewsBoss data
 NewsBoss can export its data as an .htm file. But the data needs to be manipulated slightly in order to render it more usable.
