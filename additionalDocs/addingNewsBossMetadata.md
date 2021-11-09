@@ -6,7 +6,7 @@ The DAVID recording process automatically starts the recording at :04 after the 
 
 On the other hand, the station's newsroom automation system, [NewsBoss](https://www.newsboss.com/), stores the text that the station's host reads during the local newscasts, as well as additional information such as other audio files to play and the names of the writers and editors of each news story.
 
-This document describes a project in the Fall of 2021 that matched the original WAVE files to the NewsBoss descriptions. We then embedded the NewsBoss metadata in the WAVE files for easier ingest into the station's DAMS, and for better discoverability.
+This document describes an [NYPR Archives](https://www.wnyc.org/series/archives-preservation) project in the Fall of 2021 that matched the original WAVE files to the NewsBoss descriptions. We then embedded the NewsBoss metadata in the WAVE files for easier ingest into the station's DAMS, and for better discoverability.
 
 ## Preparing NewsBoss data
 NewsBoss can export its data as an .htm file. But the data needs to be manipulated slightly in order to render it more usable.
