@@ -14,22 +14,22 @@ NewsBoss can export its data as an .htm file. But the data needs to be manipulat
 Here are the steps:
 1. Log in to NewsBoss
 2. Find the newscasts in NewsBoss:
-  * Search NewsBoss 'Archive' for the text ":04" *in slugs*...
+   * Search NewsBoss 'Archive' for the text ":04" *in slugs*...
      * ...limiting the search to one year (this may no longer be strictly necessary, but it likely has beefits later on with regards to managing large files, etc.)
      * ...limiting results to Newscasts, not stories
 3. Select all results
 4. Retrieve to your queue
 5. Select your entire queue and export as an .htm file with the following name: '[YYYY]newscasts.htm' (e.g. '2015newscasts.htm')
 6. Clean up htm file in a text editor: 
-  * Fix ```<meta>``` tag: replace ```'charset=utf-8">'```  with   ```'charset=utf-8"/>'```
-  * Replace ```</A><HR></TD>``` with ```</A><HR/></TD>```
-  * Clean up all ```'&nbsp;'```   
-  * Clean up control-code Unicodes, e.g. 0x1f, 0x1a (regex ```"\u001F"``` and ```"\u001A"```)
-  * Clean everything else until you have a [well-formed html](https://validator.w3.org/)
+   * Fix ```<meta>``` tag: replace ```'charset=utf-8">'```  with   ```'charset=utf-8"/>'```
+   * Replace ```</A><HR></TD>``` with ```</A><HR/></TD>```
+   * Clean up all ```'&nbsp;'```   
+   * Clean up control-code Unicodes, e.g. 0x1f, 0x1a (regex ```"\u001F"``` and ```"\u001A"```)
+   * Clean everything else until you have a [well-formed html](https://validator.w3.org/)
 7. Parse out the broadcast date. (This makes for more efficient text-matching later) 
-  * Make two replacements:
-    * ```"<br/>Archived at"``` with ```"<br/><archiveDate>Archived at"``` and 
-    * ```"by NewsBoss Wires<br/>-------"``` with ```"by NewsBoss Wires</archiveDate><br/>-------"```
+   * Make two replacements:
+     * ```"<br/>Archived at"``` with ```"<br/><archiveDate>Archived at"``` and 
+     * ```"by NewsBoss Wires<br/>-------"``` with ```"by NewsBoss Wires</archiveDate><br/>-------"```
     
 ## Generating DAVID titles
 Generate an xml list of appropriate DAVID titles. For example, you can use this exiftool command:
