@@ -25,7 +25,7 @@ Here are the steps:
   * Replace ```</A><HR></TD>``` with ```</A><HR/></TD>```
   * Clean up all ```'&nbsp;'```   
   * Clean up control-code Unicodes, e.g. 0x1f, 0x1a (regex ```"\u001F"``` and ```"\u001A"```)
-  * Clean everything else until you have a well-formed html
+  * Clean everything else until you have a [well-formed html](https://validator.w3.org/)
 7. Parse out the broadcast date. (This makes for more efficient text-matching later) 
   * Make two replacements:
     * ```"<br/>Archived at"``` with ```"<br/><archiveDate>Archived at"``` and 
