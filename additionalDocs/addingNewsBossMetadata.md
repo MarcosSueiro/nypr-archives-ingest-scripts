@@ -42,7 +42,7 @@ First, you enter a year after 2010 in ["year to process"](https://github.com/Mar
 
 The "Archived at" date in the .htm document is the date of the newscast. Because newscasts are often revised, the scripts favors the one archived automatically by NewsBoss at :40 past the hour (e.g. Archived at 7:40 for the 7:04 newscast). If that is not found, it finds the last version available.
 
-Each newscast is divided into stories. The script parses each story out and extracts data about its writer, slug, editor, and additional files. This is all reflected in the generated log. The log also registers the number of original matches, and flags files shorter than 120 seconds. It also flags stories marked as weather in NewsBoss.
+Each newscast is divided into stories. The script parses each story out and extracts data about its writer, slug, editor, and additional files. This is all reflected in the generated log. The log also registers the number of original matches; flags files shorter than 120 seconds; and flags stories marked as weather in NewsBoss.
 
 ## Embedding NewsBoss metadata
 The script generates a "Core" type file to embed metadata using [BWF MetaEdit](https://mediaarea.net/BWFMetaEdit). All newscasts from 2011 to 2020 for which the script found a match in the NewsBoss data now have the following embedded information:
@@ -89,6 +89,8 @@ A 50-file sample of files (see below) shows that, aside from the weather stories
 *	The occasional short file
 *	The occasional file recorded at the wrong time
 
+*Table: Comparing stories in audio files vs in NewsBoss scripts. 
+w = weather; A' = variation of A; x = no match; \[NPR\] = content other than newscast*
 | File                        | Audio stories | NewsBoss stories |
 | --------------------------- | ------------- | ---------------- |
 | WNYC-NWSC-2020-10-02 18h10m | ABCw          | ABCw             |
