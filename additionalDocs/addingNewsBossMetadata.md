@@ -141,7 +141,7 @@ w = weather; A' = variation of A; x = no match; \[NPR\] = content other than new
 | WNYC-NWSC-2020-05-02 20h05m |               | x                |
 | WNYC-NWSC-2020-06-26 17h06m | ABC           | ABCw             |
 | WNYC-NWSC-2020-03-05 15h03m | ABw           | ABw              |
-| WNYC-NWSC-2020-01-07 15h01m | ABw           | Abw              |
+| WNYC-NWSC-2020-01-07 15h01m | ABw           | ABw              |
 
 ## Future work
 *	NYPR Archives still has 5,116 newscast files with no descriptive metadata. Given the iterative nature of hourly newscasts, it may not be a huge deal
