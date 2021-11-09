@@ -14,7 +14,7 @@ NewsBoss can export its data as an .htm file. But the data needs to be manipulat
 Here are the steps:
 1. Log in to NewsBoss
 2. Find the newscasts in NewsBoss:
-  * Search NewsBoss 'Acrhive' for the text ":04" *in slugs*...
+  * Search NewsBoss 'Archive' for the text ":04" *in slugs*...
      * ...limiting the search to one year (this may no longer be strictly necessary, but it likely has beefits later on with regards to managing large files, etc.)
      * ...limiting results to Newscasts, not stories
 3. Select all results
