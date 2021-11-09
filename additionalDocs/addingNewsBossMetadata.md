@@ -17,16 +17,16 @@ Here are the steps:
   * Search NewsBoss 'Acrhive' for the text ":04" *in slugs*...
      * ...limiting the search to one year (this may no longer be strictly necessary, but it likely has beefits later on with regards to managing large files, etc.)
      * ...limiting results to Newscasts, not stories
-4. Select all results
-5. Retrieve to your queue
-6. Select your entire queue and export as an .htm file with the following name: '[YYYY]newscasts.htm' (e.g. '2015newscasts.htm')
-7. Clean up htm file in a text editor: 
+3. Select all results
+4. Retrieve to your queue
+5. Select your entire queue and export as an .htm file with the following name: '[YYYY]newscasts.htm' (e.g. '2015newscasts.htm')
+6. Clean up htm file in a text editor: 
   * Fix ```<meta>``` tag: replace ```'charset=utf-8">'```  with   ```'charset=utf-8"/>'```
   * Replace ```</A><HR></TD>``` with ```</A><HR/></TD>```
   * Clean up all ```'&nbsp;'```   
   * Clean up control-code Unicodes, e.g. 0x1f, 0x1a (regex ```"\u001F"``` and ```"\u001A"```)
   * Clean everything else until you have a well-formed html
-8. Parse out the broadcast date. (This makes for more efficient text-matching later) 
+7. Parse out the broadcast date. (This makes for more efficient text-matching later) 
   * Make two replacements:
     * ```"<br/>Archived at"``` with ```"<br/><archiveDate>Archived at"``` and 
     * ```"by NewsBoss Wires<br/>-------"``` with ```"by NewsBoss Wires</archiveDate><br/>-------"```
