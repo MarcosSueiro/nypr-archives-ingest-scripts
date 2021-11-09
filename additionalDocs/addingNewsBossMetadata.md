@@ -38,7 +38,7 @@ Generate an xml list of appropriate DAVID titles. For example, you can use this 
 ## Matching the scripts to the files
 The [xslt stylesheet](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/master/currentTemplates/NewsBossExiftoolDBX2ixml.xsl) that matches the files works as follows:
 
-You must enter a year after 2010 in ["year to process"](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/1941c7c0247f85e18c5ed13b14be284fefa0d304/currentTemplates/NewsBossExiftoolDBX2ixml.xsl#L24). The script then only focuses on that year.
+First, you enter a year after 2010 in ["year to process"](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/1941c7c0247f85e18c5ed13b14be284fefa0d304/currentTemplates/NewsBossExiftoolDBX2ixml.xsl#L24). The script then only focuses on that year.
 
 The "Archived at" date in the .htm document is the date of the newscast. Because newscasts are often revised, the scripts favors the one archived automatically by NewsBoss at :40 past the hour (e.g. Archived at 7:40 for the 7:04 newscast). If that is not found, it finds the last version available.
 
