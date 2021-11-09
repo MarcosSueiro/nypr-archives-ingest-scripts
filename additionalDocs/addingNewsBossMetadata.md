@@ -63,4 +63,84 @@ The script generates a "Core" type file to embed metadata using [BWF MetaEdit](h
 * Software: DAVID Generator (e.g. 'MultiCoder3')
 * Source: 'https://www.wnyc.org/story/latest-newscast/'
 * SourceReference (a.k.a. provenance): 'WNYC Radio Aircheck'
-* Technician: DAVID Author / Creator (e.g. 'SVCCSX')
+* Technician: DAVID Author / Creator (e.g. 'SVCCSX'),
+
+## Results
+
+The project matched 42,063 WAVE files with NewsBoss scripts out of a total 47,179 files, a success rate of 89%. Files more recent than 2014 fared consideraby better:
+
+| Year   | Total  | Successful | Failed | Percent |
+| ------ | ------ | ---------- | ------ | ------- |
+| 2020   | 4,160  | 3,954      | 206    | 95.05   |
+| 2019   | 5,037  | 4,679      | 358    | 92.89   |
+| 2018   | 4,965  | 4,543      | 422    | 91.50   |
+| 2017   | 4,555  | 4,371      | 184    | 95.96   |
+| 2016   | 4,554  | 4,396      | 158    | 96.53   |
+| 2015   | 4,834  | 4,698      | 136    | 97.19   |
+| 2014   | 5,007  | 4,092      | 915    | 81.73   |
+| 2013   | 5,321  | 4,271      | 1,050  | 80.27   |
+| 2012   | 5,334  | 4,210      | 1,124  | 78.93   |
+| 2011   | 3,412  | 2,849      | 563    | 83.50   |
+| **TOTALS** | **47,179** | **42,063**     | **5,116**  | **89.35**   |
+
+A 50-file sample of files (see below) shows that, aside from the weather stories (often used to precisely adjust the length of the newscast), the matched NewsBoss script sometimes (12%) shows more, but never fewer, stories than its corresponding audio file. This may be due to:
+*	The somewhat improvisatory nature of the newscast, where announcers need to fill the time exactly
+*	The occasional special broadcast
+*	The occasional short file
+*	The occasional file recorded at the wrong time
+
+| File                        | Audio stories | NewsBoss stories |
+| --------------------------- | ------------- | ---------------- |
+| WNYC-NWSC-2020-10-02 18h10m | ABCw          | ABCw             |
+| WNYC-NWSC-2020-08-21 15h08m | ABCw          | ABCw             |
+| WNYC-NWSC-2020-06-08 07h06m | ABCw          | A'BCDEw          |
+| WNYC-NWSC-2020-04-22 18h04m | ABCw          | ABCw             |
+| WNYC-NWSC-2020-02-06 18h02m | ABCw          | ABCw             |
+| WNYC-NWSC-2020-02-23 17h02m | ABCw          | ABC              |
+| WNYC-NWSC-2020-09-07 06h09m | ABCw          | ABC              |
+| WNYC-NWSC-2020-04-24 21h04m | ABw           | AB               |
+| WNYC-NWSC-2020-09-29 09h09m | ABCw          | ABC              |
+| WNYC-NWSC-2020-09-16 08h09m | ABCw          | ABCw             |
+| WNYC-NWSC-2020-04-03 15h04m | ABw           | ABw              |
+| WNYC-NWSC-2020-07-23 15h07m | ABw           | ABw              |
+| WNYC-NWSC-2020-03-14 13h03m | ABCw          | ABCDE            |
+| WNYC-NWSC-2020-11-18 15h11m |               | x                |
+| WNYC-NWSC-2020-11-29 10h11m | \[NPR\]       | AB               |
+| WNYC-NWSC-2020-01-26 19h01m | ABw           | AB               |
+| WNYC-NWSC-2020-03-12 20h03m | ABCw          | ABC              |
+| WNYC-NWSC-2020-04-24 17h04m | ABCw          | ABCw             |
+| WNYC-NWSC-2020-06-07 19h06m | ABw           | AB               |
+| WNYC-NWSC-2020-08-24 15h08m |               | x                |
+| WNYC-NWSC-2020-10-17 18h10m |               | x                |
+| WNYC-NWSC-2020-04-14 21h04m | ABw           | AB               |
+| WNYC-NWSC-2020-07-22 15h07m | ABw           | ABw              |
+| WNYC-NWSC-2020-03-05 22h03m | ABw           | AB               |
+| WNYC-NWSC-2020-06-25 22h06m | ABw           | AB               |
+| WNYC-NWSC-2020-02-13 13h02m | ABw           | ABw              |
+| WNYC-NWSC-2020-10-23 15h10m | ABC           | ABC              |
+| WNYC-NWSC-2020-04-08 15h04m | ABw           | ABw              |
+| WNYC-NWSC-2020-12-18 18h12m | ABCw          | ABC              |
+| WNYC-NWSC-2020-08-04 20h08m | \[:08\]       | AB               |
+| WNYC-NWSC-2020-08-20 07h08m | ABCDw         | ABCD             |
+| WNYC-NWSC-2020-05-19 09h05m | ABCw          | ABCw             |
+| WNYC-NWSC-2020-06-23 16h06m | ABCw          | ABCw             |
+| WNYC-NWSC-2020-06-24 16h06m | ABCw          | ABC              |
+| WNYC-NWSC-2020-12-01 08h12m | ABCDw         | ABCDw            |
+| WNYC-NWSC-2020-11-23 22h11m | ABC           | ABC              |
+| WNYC-NWSC-2020-03-12 15h03m | ABw           | ABwC             |
+| WNYC-NWSC-2020-08-11 22h08m | ABw           | AB               |
+| WNYC-NWSC-2020-12-15 22h12m | ABw           | AB               |
+| WNYC-NWSC-2020-04-07 06h04m | ABCw          | ABC              |
+| WNYC-NWSC-2020-06-10 19h06m | ABC           | ABCwDE           |
+| WNYC-NWSC-2020-12-08 12h12m | ABw           | ABw              |
+| WNYC-NWSC-2020-01-16 15h01m | ABw           | ABw              |
+| WNYC-NWSC-2020-04-18 21h04m |               | x                |
+| WNYC-NWSC-2020-04-13 20h04m | ABw           | AB               |
+| WNYC-NWSC-2020-05-02 20h05m |               | x                |
+| WNYC-NWSC-2020-06-26 17h06m | ABC           | ABCw             |
+| WNYC-NWSC-2020-03-05 15h03m | ABw           | ABw              |
+| WNYC-NWSC-2020-01-07 15h01m | ABw           | Abw              |
+
+## Future work
+*	NYPR Archives still has 5,116 newscast files with no descriptive metadata. Given the iterative nature of hourly newscasts, it may not be a huge deal
+* With the additional metadata, these newscasts are probably prime candidates for additional “aboutness” parsing.
