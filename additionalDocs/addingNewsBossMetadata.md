@@ -32,8 +32,14 @@ Here are the steps:
      * ```"by NewsBoss Wires<br/>-------"``` with ```"by NewsBoss Wires</archiveDate><br/>-------"```
     
 ## Generating DAVID titles
-Generate an xml list of appropriate DAVID titles. For example, you can use this exiftool command:
+Generate an RDF list of appropriate DAVID titles. For example, you can use this exiftool command:
 ```exiftool -ext dbx -m -if "$EntriesEntryTitle =~ /NWSC/i" -EntriesEntryTitle -X "[sourceDirectory]" >"[destinationFile].xml"```
+The script needs the following schema:
+```
+<rdf:RDF>
+   <rdf:Description about="[filename]">
+      <XMP:EntriesEntryMediumFileTitle>
+```
 
 ## Matching the scripts to the files
 The [xslt stylesheet](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/master/currentTemplates/NewsBossExiftoolDBX2ixml.xsl) that matches the files works as follows:
@@ -145,4 +151,5 @@ w = weather; A' = variation of A; x = no match; \[NPR\] = content other than new
 
 ## Future work
 *	NYPR Archives still has 5,116 newscast files with no descriptive metadata. Given the iterative nature of hourly newscasts, it may not be a huge deal
-* With the additional metadata, these newscasts are probably prime candidates for additional “aboutness” parsing.
+* With the additional metadata, these newscasts are probably prime candidates for additional “aboutness” parsing
+* It may be good to add the original files listed in ICMT and the log to the same record, as they will likely have better audio
