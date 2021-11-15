@@ -175,11 +175,7 @@ from different sources -->
             <xsl:call-template name="splitParseValidate">
                 <xsl:with-param name="input">
                     <xsl:value-of select="
-                        $field1 | 
-                        $field2 | 
-                        $field3 | 
-                        $field4 | 
-                        $field5" 
+                        $field1, $field2, $field3, $field4, $field5" 
                         separator="{$separatingToken}"/>
                 </xsl:with-param>
                 <xsl:with-param name="separatingToken" select="$separatingToken"/>

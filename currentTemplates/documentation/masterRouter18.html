@@ -3,49 +3,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <title>Stylesheet documentation for: trimStrings.xsl</title>
-      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
-         <!--
+      <title>Stylesheet documentation for: manageDuplicates.xsl</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
         
-        var parametersBoxes= new Array('prs_T_substring-before-last-regexS_trimStrings.xsl', 
-				'prs_T_substring-before-lastS_trimStrings.xsl', 
-				'prs_T_substring-after-lastS_trimStrings.xsl', 
-				'prs_T_recursive-in-trimS_trimStrings.xsl', 
-				'prs_T_recursive-out-trimS_trimStrings.xsl', 
-				'prs_T_trimStringsS_trimStrings.xsl', 
-				'prs_T_abbreviateTextS_trimStrings.xsl', 
-				'prs_F_substring-before-lastS_trimStrings.xsl');
+        var parametersBoxes= new Array('prs_T_checkConflictsS_manageDuplicates.xsl', 
+				'prs_T_mergeDataS_manageDuplicates.xsl', 
+				'prs_T_checkFieldsS_manageDuplicates.xsl', 
+				'prs_T_field1MustContainField2S_manageDuplicates.xsl');
 
         
-        var usedByBoxes= new Array('uB_T_substring-before-lastS_trimStrings.xsl', 
-				'uB_T_recursive-in-trimS_trimStrings.xsl', 
-				'uB_T_recursive-out-trimS_trimStrings.xsl', 
-				'uB_T_abbreviateTextS_trimStrings.xsl', 
-				'uB_F_substring-before-lastS_trimStrings.xsl');
+        var usedByBoxes= new Array('uB_T_checkConflictsS_manageDuplicates.xsl', 
+				'uB_T_mergeDataS_manageDuplicates.xsl', 
+				'uB_V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl');
 
-        var docBoxes= new Array('dS_trimStrings.xsl');
+        var docBoxes= new Array('dS_manageDuplicates.xsl', 
+				'dS_V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl');
 
-        var sourceBoxes= new Array('src_T_substring-before-last-regexS_trimStrings.xsl', 
-				'src_T_substring-before-lastS_trimStrings.xsl', 
-				'src_T_substring-after-lastS_trimStrings.xsl', 
-				'src_T_recursive-in-trimS_trimStrings.xsl', 
-				'src_T_recursive-out-trimS_trimStrings.xsl', 
-				'src_T_trimStringsS_trimStrings.xsl', 
-				'src_T_abbreviateTextS_trimStrings.xsl', 
-				'src_F_substring-before-lastS_trimStrings.xsl');
+        var sourceBoxes= new Array('src_T_checkConflictsS_manageDuplicates.xsl', 
+				'src_T_mergeDataS_manageDuplicates.xsl', 
+				'src_T_checkFieldsS_manageDuplicates.xsl', 
+				'src_T_field1MustContainField2S_manageDuplicates.xsl', 
+				'src_V_separatingTokenS_manageDuplicates.xsl', 
+				'src_V_separatingTokenLongS_manageDuplicates.xsl', 
+				'src_V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl');
+
+        var supersedesBoxes= new Array('sps_V_separatingTokenS_manageDuplicates.xsl', 
+				'sps_V_separatingTokenLongS_manageDuplicates.xsl', 
+				'sps_V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl');
+
+        var overridingBoxes= new Array('ovr_V_separatingTokenS_manageDuplicates.xsl', 
+				'ovr_V_separatingTokenLongS_manageDuplicates.xsl');
+
+        var referencesBoxes= new Array('refs_T_checkConflictsS_manageDuplicates.xsl', 
+				'refs_T_mergeDataS_manageDuplicates.xsl', 
+				'refs_T_field1MustContainField2S_manageDuplicates.xsl', 
+				'refs_V_separatingTokenLongS_manageDuplicates.xsl');
+
+        var importsBoxes= new Array('ip_manageDuplicates.xsl');
 
         
-        
-        var referencesBoxes= new Array('refs_T_substring-before-lastS_trimStrings.xsl', 
-				'refs_T_recursive-in-trimS_trimStrings.xsl', 
-				'refs_T_recursive-out-trimS_trimStrings.xsl', 
-				'refs_T_trimStringsS_trimStrings.xsl', 
-				'refs_T_abbreviateTextS_trimStrings.xsl', 
-				'refs_F_substring-before-lastS_trimStrings.xsl');
-
-        
-        
-        var importedFromBoxes= new Array('ipF_trimStrings.xsl');
+        var importedFromBoxes= new Array('ipF_manageDuplicates.xsl');
 
         
         var button_prefix = 'bt_';
@@ -356,6 +353,16 @@
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, referencesBoxes);" class="control" /></span><span class="globalControlName">References </span></td>
                      </tr>
                      <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, supersedesBoxes);" class="control" /></span><span class="globalControlName">Supersedes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, overridingBoxes);" class="control" /></span><span class="globalControlName">Overriding </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, importsBoxes);" class="control" /></span><span class="globalControlName">Imported modules
+                              </span></td>
+                     </tr>
+                     <tr>
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, importedFromBoxes);" class="control" /></span><span class="globalControlName">Imported from
                               </span></td>
                      </tr>
@@ -373,8 +380,8 @@
                <td class="rt_cBR"></td>
             </tr>
          </table>
-      </div><a id="trimStrings.xsl"></a><div class="cmpT">Stylesheet
-         <span class="qname">trimStrings.xsl</span></div>
+      </div><a id="manageDuplicates.xsl"></a><div class="cmpT">Stylesheet
+         <span class="qname">manageDuplicates.xsl</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -389,27 +396,51 @@
                      <tr>
                         <td class="fCol">
                            <div class="flL">Documentation</div>
-                           <div class="flR"><input id="bt_dS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_trimStrings.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_dS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_manageDuplicates.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="dS_trimStrings.xsl" style="display:block">
+                           <div id="dS_manageDuplicates.xsl" style="display:block">
                               <div>
-                                 <h3>Description</h3><pre> Trim strings </pre></div>
+                                 <h3>Description</h3>
+                                 <pre> Merge or check for conflicts 
+from different sources </pre>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Imported modules</div>
+                           <div class="flR"><input id="bt_ip_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ip_manageDuplicates.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="ip_manageDuplicates.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter19.html#trimStrings.xsl" target="_self" title="No namespace" onclick="updPT('trimStrings.xsl')">trimStrings.xsl</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter20.html#utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">utilities.xsl</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
                            </div>
                         </td>
                      </tr>
                      <tr>
                         <td class="fCol">
                            <div class="flL">Imported from</div>
-                           <div class="flR"><input id="bt_ipF_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ipF_trimStrings.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_ipF_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ipF_manageDuplicates.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="ipF_trimStrings.xsl" style="display:block">
+                           <div id="ipF_manageDuplicates.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter17.html#manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')">manageDuplicates.xsl</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter16.html#cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">cavafySearch.xsl</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter17.html#processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">processLoCURL.xsl</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -431,705 +462,8 @@
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="T_substring-before-last-regexS_trimStrings.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateName">substring-before-last-regex</span></div>
-      <table class="rt">
-         <tr>
-            <td class="rt_cTL"></td>
-            <td class="rt_lT"></td>
-            <td class="rt_cTR"></td>
-         </tr>
-         <tr>
-            <td class="rt_lL"></td>
-            <td class="rt_cnt">
-               <table class="component">
-                  <tbody>
-                     <tr>
-                        <td class="fCol">Namespace</td>
-                        <td>No namespace</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Parameters</div>
-                           <div class="flR"><input id="bt_prs_T_substring-before-last-regexS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_T_substring-before-last-regexS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="prs_T_substring-before-last-regexS_trimStrings.xsl" style="display:block">
-                              <table class="attsT">
-                                 <thead>
-                                    <tr>
-                                       <th>QName</th>
-                                       <th>Namespace</th>
-                                    </tr>
-                                 </thead>
-                                 <tr>
-                                    <td class="fCol">input</td>
-                                    <td>No namespace</td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">substr</td>
-                                    <td>No namespace</td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Import precedence</td>
-                        <td>29</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_T_substring-before-last-regexS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_substring-before-last-regexS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="src_T_substring-before-last-regexS_trimStrings.xsl" style="display:block">
-                              <table class="pWCont">
-                                 <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"substring-before-last-regex"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- substring-before-last, or entire string otherwise --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"substr"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$input[not(matches(., $substr))]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"             analyze-string($input, $substr)             /fn:match[last()]             /preceding-sibling::*"</span><span class="tAN"> separator=</span><span class="tAV">""</span><span class="tXSLEl">/&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-            </td>
-            <td class="rt_lR"></td>
-         </tr>
-         <tr>
-            <td class="rt_cBL"></td>
-            <td class="rt_lB"></td>
-            <td class="rt_cBR"></td>
-         </tr>
-      </table><a id="T_substring-before-lastS_trimStrings.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateName">substring-before-last</span></div>
-      <table class="rt">
-         <tr>
-            <td class="rt_cTL"></td>
-            <td class="rt_lT"></td>
-            <td class="rt_cTR"></td>
-         </tr>
-         <tr>
-            <td class="rt_lL"></td>
-            <td class="rt_cnt">
-               <table class="component">
-                  <tbody>
-                     <tr>
-                        <td class="fCol">Namespace</td>
-                        <td>No namespace</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Used by</div>
-                           <div class="flR"><input id="bt_uB_T_substring-before-lastS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_T_substring-before-lastS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="uB_T_substring-before-lastS_trimStrings.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Templates</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_abbreviateTextS_trimStrings.xsl" target="_self" title="No namespace" onclick="updPT('trimStrings.xsl')"><span class="nRf">abbreviateText</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_recursive-out-trimS_trimStrings.xsl" target="_self" title="No namespace" onclick="updPT('trimStrings.xsl')"><span class="nRf">recursive-out-trim</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter20.html#T_shortenTitleS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="nRf">shortenTitle</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_substring-before-lastS_trimStrings.xsl" target="_self" title="No namespace" onclick="updPT('trimStrings.xsl')"><span class="nRf">substring-before-last</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_trimStringsS_trimStrings.xsl" target="_self" title="No namespace" onclick="updPT('trimStrings.xsl')"><span class="nRf">trimStrings</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter9.html#M_rdfDescriptionM_DAVIDS_Exif2Dbx.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Dbx.xsl')"><span class="mRf">rdf:Description</span><span class="mdRf">DAVID</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">Function</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#F_substring-before-lastS_trimStrings.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('trimStrings.xsl')"><span>WNYC:substring-before-last (</span><span class="fParams">input, substr</span><span>)</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">References</div>
-                           <div class="flR"><input id="bt_refs_T_substring-before-lastS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_T_substring-before-lastS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="refs_T_substring-before-lastS_trimStrings.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Template</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_substring-before-lastS_trimStrings.xsl" target="_self" title="No namespace" onclick="updPT('trimStrings.xsl')"><span class="nRf">substring-before-last</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Parameters</div>
-                           <div class="flR"><input id="bt_prs_T_substring-before-lastS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_T_substring-before-lastS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="prs_T_substring-before-lastS_trimStrings.xsl" style="display:block">
-                              <table class="attsT">
-                                 <thead>
-                                    <tr>
-                                       <th>QName</th>
-                                       <th>Namespace</th>
-                                    </tr>
-                                 </thead>
-                                 <tr>
-                                    <td class="fCol">input</td>
-                                    <td>No namespace</td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">substr</td>
-                                    <td>No namespace</td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Import precedence</td>
-                        <td>29</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_T_substring-before-lastS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_substring-before-lastS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="src_T_substring-before-lastS_trimStrings.xsl" style="display:block">
-                              <table class="pWCont">
-                                 <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"substring-before-last"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"substr"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$substr and contains($input, $substr)"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"temp"</span><span class="tAN"> select=</span><span class="tAV">"substring-after($input, $substr)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"substring-before($input, $substr)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"contains($temp, $substr)"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$substr"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"substring-before-last"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tAN"> select=</span><span class="tAV">"$temp"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"substr"</span><span class="tAN"> select=</span><span class="tAV">"$substr"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$input"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-            </td>
-            <td class="rt_lR"></td>
-         </tr>
-         <tr>
-            <td class="rt_cBL"></td>
-            <td class="rt_lB"></td>
-            <td class="rt_cBR"></td>
-         </tr>
-      </table><a id="T_substring-after-lastS_trimStrings.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateName">substring-after-last</span></div>
-      <table class="rt">
-         <tr>
-            <td class="rt_cTL"></td>
-            <td class="rt_lT"></td>
-            <td class="rt_cTR"></td>
-         </tr>
-         <tr>
-            <td class="rt_lL"></td>
-            <td class="rt_cnt">
-               <table class="component">
-                  <tbody>
-                     <tr>
-                        <td class="fCol">Namespace</td>
-                        <td>No namespace</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Parameters</div>
-                           <div class="flR"><input id="bt_prs_T_substring-after-lastS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_T_substring-after-lastS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="prs_T_substring-after-lastS_trimStrings.xsl" style="display:block">
-                              <table class="attsT">
-                                 <thead>
-                                    <tr>
-                                       <th>QName</th>
-                                       <th>Namespace</th>
-                                    </tr>
-                                 </thead>
-                                 <tr>
-                                    <td class="fCol">input</td>
-                                    <td>No namespace</td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">substr</td>
-                                    <td>No namespace</td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Import precedence</td>
-                        <td>29</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_T_substring-after-lastS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_substring-after-lastS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="src_T_substring-after-lastS_trimStrings.xsl" style="display:block">
-                              <table class="pWCont">
-                                 <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"substring-after-last"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- substring-before-last, or entire string otherwise --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"substr"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$input[not(contains(., $substr))]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"             analyze-string($input, $substr)             /fn:match[last()]             /following-sibling::*"</span><span class="tAN"> separator=</span><span class="tAV">""</span><span class="tXSLEl">/&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-            </td>
-            <td class="rt_lR"></td>
-         </tr>
-         <tr>
-            <td class="rt_cBL"></td>
-            <td class="rt_lB"></td>
-            <td class="rt_cBR"></td>
-         </tr>
-      </table><a id="T_recursive-in-trimS_trimStrings.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateName">recursive-in-trim</span></div>
-      <table class="rt">
-         <tr>
-            <td class="rt_cTL"></td>
-            <td class="rt_lT"></td>
-            <td class="rt_cTR"></td>
-         </tr>
-         <tr>
-            <td class="rt_lL"></td>
-            <td class="rt_cnt">
-               <table class="component">
-                  <tbody>
-                     <tr>
-                        <td class="fCol">Namespace</td>
-                        <td>No namespace</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Used by</div>
-                           <div class="flR"><input id="bt_uB_T_recursive-in-trimS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_T_recursive-in-trimS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="uB_T_recursive-in-trimS_trimStrings.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Template</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_recursive-in-trimS_trimStrings.xsl" target="_self" title="No namespace" onclick="updPT('trimStrings.xsl')"><span class="nRf">recursive-in-trim</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">References</div>
-                           <div class="flR"><input id="bt_refs_T_recursive-in-trimS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_T_recursive-in-trimS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="refs_T_recursive-in-trimS_trimStrings.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Template</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_recursive-in-trimS_trimStrings.xsl" target="_self" title="No namespace" onclick="updPT('trimStrings.xsl')"><span class="nRf">recursive-in-trim</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Parameters</div>
-                           <div class="flR"><input id="bt_prs_T_recursive-in-trimS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_T_recursive-in-trimS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="prs_T_recursive-in-trimS_trimStrings.xsl" style="display:block">
-                              <table class="attsT">
-                                 <thead>
-                                    <tr>
-                                       <th>QName</th>
-                                       <th>Namespace</th>
-                                       <th>Select</th>
-                                    </tr>
-                                 </thead>
-                                 <tr>
-                                    <td class="fCol">input</td>
-                                    <td>No namespace</td>
-                                    <td></td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">startStr</td>
-                                    <td>No namespace</td>
-                                    <td>';'</td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Import precedence</td>
-                        <td>29</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_T_recursive-in-trimS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_recursive-in-trimS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="src_T_recursive-in-trimS_trimStrings.xsl" style="display:block">
-                              <table class="pWCont">
-                                 <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"recursive-in-trim"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Recursively trim a specific substring
-            from the beginning of string  --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"startStr"</span><span class="tAN"> select=</span><span class="tAV">"';'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"starts-with(normalize-space($input), $startStr)"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"recursive-in-trim"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tAN"> select=</span><span class="tAV">"substring-after($input, $startStr)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"startStr"</span><span class="tAN"> select=</span><span class="tAV">"$startStr"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$input"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-            </td>
-            <td class="rt_lR"></td>
-         </tr>
-         <tr>
-            <td class="rt_cBL"></td>
-            <td class="rt_lB"></td>
-            <td class="rt_cBR"></td>
-         </tr>
-      </table><a id="T_recursive-out-trimS_trimStrings.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateName">recursive-out-trim</span></div>
-      <table class="rt">
-         <tr>
-            <td class="rt_cTL"></td>
-            <td class="rt_lT"></td>
-            <td class="rt_cTR"></td>
-         </tr>
-         <tr>
-            <td class="rt_lL"></td>
-            <td class="rt_cnt">
-               <table class="component">
-                  <tbody>
-                     <tr>
-                        <td class="fCol">Namespace</td>
-                        <td>No namespace</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Used by</div>
-                           <div class="flR"><input id="bt_uB_T_recursive-out-trimS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_T_recursive-out-trimS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="uB_T_recursive-out-trimS_trimStrings.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Template</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_recursive-out-trimS_trimStrings.xsl" target="_self" title="No namespace" onclick="updPT('trimStrings.xsl')"><span class="nRf">recursive-out-trim</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">References</div>
-                           <div class="flR"><input id="bt_refs_T_recursive-out-trimS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_T_recursive-out-trimS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="refs_T_recursive-out-trimS_trimStrings.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Templates</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_recursive-out-trimS_trimStrings.xsl" target="_self" title="No namespace" onclick="updPT('trimStrings.xsl')"><span class="nRf">recursive-out-trim</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_substring-before-lastS_trimStrings.xsl" target="_self" title="No namespace" onclick="updPT('trimStrings.xsl')"><span class="nRf">substring-before-last</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Parameters</div>
-                           <div class="flR"><input id="bt_prs_T_recursive-out-trimS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_T_recursive-out-trimS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="prs_T_recursive-out-trimS_trimStrings.xsl" style="display:block">
-                              <table class="attsT">
-                                 <thead>
-                                    <tr>
-                                       <th>QName</th>
-                                       <th>Namespace</th>
-                                       <th>Select</th>
-                                    </tr>
-                                 </thead>
-                                 <tr>
-                                    <td class="fCol">endStr</td>
-                                    <td>No namespace</td>
-                                    <td>';'</td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">input</td>
-                                    <td>No namespace</td>
-                                    <td></td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Import precedence</td>
-                        <td>29</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_T_recursive-out-trimS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_recursive-out-trimS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="src_T_recursive-out-trimS_trimStrings.xsl" style="display:block">
-                              <table class="pWCont">
-                                 <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"recursive-out-trim"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Recursively trim a specific substring
-            from the end of string --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"endStr"</span><span class="tAN"> select=</span><span class="tAV">"';'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"ends-with(normalize-space($input), $endStr)"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"recursive-out-trim"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"substring-before-last"</span><span class="tXSLEl">&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tAN"> select=</span><span class="tAV">"$input"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-            </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"substr"</span><span class="tAN"> select=</span><span class="tAV">"$endStr"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:with-param&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"endStr"</span><span class="tAN"> select=</span><span class="tAV">"$endStr"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$input"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-            </td>
-            <td class="rt_lR"></td>
-         </tr>
-         <tr>
-            <td class="rt_cBL"></td>
-            <td class="rt_lB"></td>
-            <td class="rt_cBR"></td>
-         </tr>
-      </table><a id="T_trimStringsS_trimStrings.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateName">trimStrings</span></div>
-      <table class="rt">
-         <tr>
-            <td class="rt_cTL"></td>
-            <td class="rt_lT"></td>
-            <td class="rt_cTR"></td>
-         </tr>
-         <tr>
-            <td class="rt_lL"></td>
-            <td class="rt_cnt">
-               <table class="component">
-                  <tbody>
-                     <tr>
-                        <td class="fCol">Namespace</td>
-                        <td>No namespace</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">References</div>
-                           <div class="flR"><input id="bt_refs_T_trimStringsS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_T_trimStringsS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="refs_T_trimStringsS_trimStrings.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Template</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_substring-before-lastS_trimStrings.xsl" target="_self" title="No namespace" onclick="updPT('trimStrings.xsl')"><span class="nRf">substring-before-last</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Parameters</div>
-                           <div class="flR"><input id="bt_prs_T_trimStringsS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_T_trimStringsS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="prs_T_trimStringsS_trimStrings.xsl" style="display:block">
-                              <table class="attsT">
-                                 <thead>
-                                    <tr>
-                                       <th>QName</th>
-                                       <th>Namespace</th>
-                                       <th>Select</th>
-                                    </tr>
-                                 </thead>
-                                 <tr>
-                                    <td class="fCol">breakCharacter</td>
-                                    <td>No namespace</td>
-                                    <td>';'</td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">charLimit</td>
-                                    <td>No namespace</td>
-                                    <td>100</td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">input</td>
-                                    <td>No namespace</td>
-                                    <td></td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Import precedence</td>
-                        <td>29</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_T_trimStringsS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_trimStringsS_trimStrings.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="src_T_trimStringsS_trimStrings.xsl" style="display:block">
-                              <table class="pWCont">
-                                 <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"trimStrings"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Trim a string 
-        to the last occurrence
-        of a 'break character'
-        (which can be more than one)
-        up to a specific length.
-        This is useful e.g.
-        if you want to trim a long paragraph
-        up to a period. 
-        --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"breakCharacter"</span><span class="tAN"> select=</span><span class="tAV">"';'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"charLimit"</span><span class="tAN"> select=</span><span class="tAV">"100"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tC">&lt;!-- string is within limit anyway --&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"string-length($input) &lt; $charLimit + 1"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$input"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"firstTrim"</span><span class="tAN"> select=</span><span class="tAV">"substring($input,1,$charLimit)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"finalTrim"</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"substring-before-last"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tAN"> select=</span><span class="tAV">"$firstTrim"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"substr"</span><span class="tAN"> select=</span><span class="tAV">"$breakCharacter"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space($finalTrim)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-            </td>
-            <td class="rt_lR"></td>
-         </tr>
-         <tr>
-            <td class="rt_cBL"></td>
-            <td class="rt_lB"></td>
-            <td class="rt_cBR"></td>
-         </tr>
-      </table><a id="T_abbreviateTextS_trimStrings.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">text()</span><span class="titleTemplateName">abbreviateText</span><span class="titleTemplateMode">abbreviateText</span></div>
+      </table><a id="T_checkConflictsS_manageDuplicates.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">inputs</span><span class="titleTemplateName">checkConflicts</span><span class="titleTemplateMode">checkConflicts</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -1147,26 +481,27 @@
                      </tr>
                      <tr>
                         <td class="fCol">Match</td>
-                        <td>text()</td>
+                        <td>inputs</td>
                      </tr>
                      <tr>
                         <td class="fCol">Mode</td>
-                        <td>abbreviateText</td>
+                        <td>checkConflicts</td>
                      </tr>
                      <tr>
                         <td class="fCol">
                            <div class="flL">Used by</div>
-                           <div class="flR"><input id="bt_uB_T_abbreviateTextS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_T_abbreviateTextS_trimStrings.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_uB_T_checkConflictsS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_T_checkConflictsS_manageDuplicates.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="uB_T_abbreviateTextS_trimStrings.xsl" style="display:block">
+                           <div id="uB_T_checkConflictsS_manageDuplicates.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
                                     <td class="fCol">Templates</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter20.html#T_generateNextFilenameS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="nRf">generateNextFilename</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter20.html#T_shortenTitleS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')"><span class="nRf">shortenTitle</span></a></div>
+                                          <div class="refItemBlock"><a href="masterRouter1.html#T_newExifS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')"><span class="nRf">newExif</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter8.html#M_rdfDescriptionM_cavafyS_Exif2Cavafy.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Cavafy.xsl')"><span class="mRf">rdf:Description</span><span class="mdRf">cavafy</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter6.html#M_instantiationIDM_generateExifS_instantiationID2Exif.xsl" target="_self" title="No namespace" onclick="updPT('instantiationID2Exif.xsl')"><span class="mRf">instantiationID</span><span class="mdRf">generateExif</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1177,16 +512,24 @@
                      <tr>
                         <td class="fCol">
                            <div class="flL">References</div>
-                           <div class="flR"><input id="bt_refs_T_abbreviateTextS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_T_abbreviateTextS_trimStrings.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_refs_T_checkConflictsS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_T_checkConflictsS_manageDuplicates.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="refs_T_abbreviateTextS_trimStrings.xsl" style="display:block">
+                           <div id="refs_T_checkConflictsS_manageDuplicates.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
                                     <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_substring-before-lastS_trimStrings.xsl" target="_self" title="No namespace" onclick="updPT('trimStrings.xsl')"><span class="nRf">substring-before-last</span></a></div>
+                                          <div class="refItemBlock"><a href="masterRouter20.html#T_splitParseValidateS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')"><span class="nRf">splitParseValidate</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">Function</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter20.html#F_justLettersS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>justLetters (</span><span class="fParams">inputText</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1197,10 +540,10 @@
                      <tr>
                         <td class="fCol">
                            <div class="flL">Parameters</div>
-                           <div class="flR"><input id="bt_prs_T_abbreviateTextS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_T_abbreviateTextS_trimStrings.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_prs_T_checkConflictsS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_T_checkConflictsS_manageDuplicates.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="prs_T_abbreviateTextS_trimStrings.xsl" style="display:block">
+                           <div id="prs_T_checkConflictsS_manageDuplicates.xsl" style="display:block">
                               <table class="attsT">
                                  <thead>
                                     <tr>
@@ -1210,34 +553,59 @@
                                     </tr>
                                  </thead>
                                  <tr>
-                                    <td class="fCol">deleteShortWords</td>
+                                    <td class="fCol">defaultValue</td>
                                     <td>No namespace</td>
-                                    <td>             replace($text, $regexMatch, ' ')</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
-                                    <td class="fCol">maxTitleLength</td>
+                                    <td class="fCol">field1</td>
                                     <td>No namespace</td>
-                                    <td>30</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
-                                    <td class="fCol">minWordLength</td>
+                                    <td class="fCol">field2</td>
                                     <td>No namespace</td>
-                                    <td>4</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
-                                    <td class="fCol">regexMatch</td>
+                                    <td class="fCol">field3</td>
                                     <td>No namespace</td>
-                                    <td>concat(             ' \w{1,', $minWordLength - 1, '} ')</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
-                                    <td class="fCol">replaceDashes</td>
+                                    <td class="fCol">field4</td>
                                     <td>No namespace</td>
-                                    <td>             replace($deleteShortWords, '-', ' ')</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
-                                    <td class="fCol">text</td>
+                                    <td class="fCol">field5</td>
                                     <td>No namespace</td>
-                                    <td>.</td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">fieldName</td>
+                                    <td>No namespace</td>
+                                    <td>name($field1(. != '')[1])</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">filename</td>
+                                    <td>No namespace</td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">normalize</td>
+                                    <td>No namespace</td>
+                                    <td>true()</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">separatingToken</td>
+                                    <td>No namespace</td>
+                                    <td>$separatingToken</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">validatingString</td>
+                                    <td>No namespace</td>
+                                    <td>'\w'</td>
                                  </tr>
                               </table>
                            </div>
@@ -1245,40 +613,110 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>29</td>
+                        <td>46</td>
                      </tr>
                      <tr>
                         <td class="fCol">
                            <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_T_abbreviateTextS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_abbreviateTextS_trimStrings.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_src_T_checkConflictsS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_checkConflictsS_manageDuplicates.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_T_abbreviateTextS_trimStrings.xsl" style="display:block">
+                           <div id="src_T_checkConflictsS_manageDuplicates.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"text()"</span><span class="tAN"> name=</span><span class="tAV">"abbreviateText"</span><span class="tAN"> mode=</span><span class="tAV">"         abbreviateText"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Get rid of words shorter than a certain minimum --&gt;</span><span class="tI">
-  </span><span class="tC">&lt;!-- Also, get rid of non-letter and non-number characters --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"text"</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"maxTitleLength"</span><span class="tAN"> select=</span><span class="tAV">"30"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"minWordLength"</span><span class="tAN"> select=</span><span class="tAV">"4"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"regexMatch"</span><span class="tAN"> select=</span><span class="tAV">"concat(             ' \w{1,', $minWordLength - 1, '} ')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"deleteShortWords"</span><span class="tAN"> select=</span><span class="tAV">"             replace($text, $regexMatch, ' ')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"replaceDashes"</span><span class="tAN"> select=</span><span class="tAV">"             replace($deleteShortWords, '-', ' ')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"cleanEntry"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"analyze-string(                 $replaceDashes, '[ A-Za-z0-9]')/*:match"</span><span class="tAN"> separator=</span><span class="tAV">""</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"matches('hello ', '\w{5,} ')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;originalText</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$text"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/originalText&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;abbreviatedText</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"substring-before-last"</span><span class="tXSLEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tAN"> select=</span><span class="tAV">"                     replace($cleanEntry, ' {2,}', ' ')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"substr"</span><span class="tAN"> select=</span><span class="tAV">"' '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"checkConflicts"</span><span class="tAN"> match=</span><span class="tAV">"inputs"</span><span class="tAN"> mode=</span><span class="tAV">"checkConflicts"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Check for text (letters only) inconsistencies --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field3"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field4"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field5"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"name($field1(. != '')[1])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"filename"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"validatingString"</span><span class="tAN"> select=</span><span class="tAV">"'\w'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Needs a 'word' string --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"separatingToken"</span><span class="tAN"> select=</span><span class="tAV">"$separatingToken"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"                     'no_field_entry'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$fieldName[1]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"normalize"</span><span class="tAN"> select=</span><span class="tAV">"true()"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                 'Check for conflicts among values for ', $fieldName[1], ': ',                 string-join(                 (                 substring($field1[1], 1, 100),                 substring($field2[1], 1, 100),                 substring($field3[1], 1, 100),                 substring($field4[1], 1, 100),                 substring($field5[1], 1, 100)                 ),                 $separatingToken)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"distinctFields"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"splitParseValidate"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"string-join(                         ($field1, $field2, $field3, $field4, $field5),                          $separatingToken)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:with-param&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"separatingToken"</span><span class="tAN"> select=</span><span class="tAV">"$separatingToken"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"validatingString"</span><span class="tAN"> select=</span><span class="tAV">"                     $validatingString"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"normalize"</span><span class="tAN"> select=</span><span class="tAV">"$normalize"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-  </span><span class="tEl">&lt;/abbreviatedText&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"distinctFound"</span><span class="tAN"> select=</span><span class="tAV">"             $distinctFields/inputParsed/valid"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"distinctFoundCount"</span><span class="tAN"> select=</span><span class="tAV">"             count($distinctFound)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                 $distinctFoundCount, ' distinct values for ',                 $fieldName, ' found: '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                 $distinctFound/substring(., 1, 100)"</span><span class="tAN"> separator=</span><span class="tAV">"                 {$separatingToken}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:message&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"distinctFoundSorted"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"distinct-values($distinctFound)"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:sort</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;valid</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/valid&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Check for basic matching of just letters --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Disregard upper and lowercase --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Disregard accents, umlauts and other modifiers --&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- See collation info at 
+        https://saxonica.com/html/documentation/extensibility/config-extend/collation/ --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"basicCheck"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"$distinctFound[position() != last()]"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"nextField"</span><span class="tAN"> select=</span><span class="tAV">"following-sibling::*[1]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"compare"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"field"</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"nextField"</span><span class="tAN"> select=</span><span class="tAV">"$nextField"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tC">&lt;!-- We compare just letters --&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         compare(WNYC:justLetters(.), WNYC:justLetters($nextField)                         ,                          'http://www.w3.org/2013/collation/UCA?ignore-symbols=yes;strength=primary'                         )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"checkConflictResult"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tC">&lt;!-- Generate error for 
+            fields that do not match 
+            at their most basic --&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"$basicCheck/compare[. != 0]"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"'conflicting_values'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'conflicting values for',                          $fieldName,                          ' in ', $filename, ': '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         @field|@nextField"</span><span class="tAN"> separator=</span><span class="tAV">"                         {$separatingToken}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tC">&lt;!-- Only one distinct value; pass-through --&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$distinctFoundCount lt 1"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$defaultValue"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+      </span><span class="tC">&lt;!-- Output the data-richest field --&gt;</span><span class="tI">
+      </span><span class="tC">&lt;!-- E.g. prefer Le Carré to Le Carre --&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$distinctFoundSorted/valid[last()]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$checkConflictResult"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"checkConflictResultLength"</span><span class="tAN"> select=</span><span class="tAV">"string-length($checkConflictResult)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"checkConflictResultIsLong"</span><span class="tAN"> select=</span><span class="tAV">"$checkConflictResultLength gt 100"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'Chosen value:', substring($checkConflictResult, 1, 100)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' . . .'[$checkConflictResultIsLong]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:message&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -1294,8 +732,8 @@
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="F_substring-before-lastS_trimStrings.xsl"></a><div class="cmpT">Function
-         <span class="qname">WNYC:substring-before-last (<span class="fParams">input, substr</span>)</span></div>
+      </table><a id="T_mergeDataS_manageDuplicates.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">inputs</span><span class="titleTemplateName">mergeData</span><span class="titleTemplateMode">mergeData</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -1309,22 +747,29 @@
                   <tbody>
                      <tr>
                         <td class="fCol">Namespace</td>
-                        <td>http://www.wnyc.org</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Match</td>
+                        <td>inputs</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Mode</td>
+                        <td>mergeData</td>
                      </tr>
                      <tr>
                         <td class="fCol">
                            <div class="flL">Used by</div>
-                           <div class="flR"><input id="bt_uB_F_substring-before-lastS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_F_substring-before-lastS_trimStrings.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_uB_T_mergeDataS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_T_mergeDataS_manageDuplicates.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="uB_F_substring-before-lastS_trimStrings.xsl" style="display:block">
+                           <div id="uB_T_mergeDataS_manageDuplicates.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
-                                    <td class="fCol">Templates</td>
+                                    <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter1.html#T_DAVIDdbxS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')"><span class="nRf">DAVIDdbx</span></a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter1.html#M_rdfDescriptionS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')"><span class="mRf">rdf:Description</span></a></div>
+                                          <div class="refItemBlock"><a href="masterRouter1.html#T_newExifS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')"><span class="nRf">newExif</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1335,16 +780,24 @@
                      <tr>
                         <td class="fCol">
                            <div class="flL">References</div>
-                           <div class="flR"><input id="bt_refs_F_substring-before-lastS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_F_substring-before-lastS_trimStrings.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_refs_T_mergeDataS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_T_mergeDataS_manageDuplicates.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="refs_F_substring-before-lastS_trimStrings.xsl" style="display:block">
+                           <div id="refs_T_mergeDataS_manageDuplicates.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
                                     <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_substring-before-lastS_trimStrings.xsl" target="_self" title="No namespace" onclick="updPT('trimStrings.xsl')"><span class="nRf">substring-before-last</span></a></div>
+                                          <div class="refItemBlock"><a href="masterRouter20.html#T_splitParseValidateS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')"><span class="nRf">splitParseValidate</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">Parameter</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter16.html#P_separatingTokenLongS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">separatingTokenLong</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1355,10 +808,166 @@
                      <tr>
                         <td class="fCol">
                            <div class="flL">Parameters</div>
-                           <div class="flR"><input id="bt_prs_F_substring-before-lastS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_F_substring-before-lastS_trimStrings.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_prs_T_mergeDataS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_T_mergeDataS_manageDuplicates.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="prs_F_substring-before-lastS_trimStrings.xsl" style="display:block">
+                           <div id="prs_T_mergeDataS_manageDuplicates.xsl" style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th>Namespace</th>
+                                       <th>Select</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="fCol">defaultValue</td>
+                                    <td>No namespace</td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">field1</td>
+                                    <td>No namespace</td>
+                                    <td>dummyNode</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">field2</td>
+                                    <td>No namespace</td>
+                                    <td>dummyNode</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">field3</td>
+                                    <td>No namespace</td>
+                                    <td>dummyNode</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">field4</td>
+                                    <td>No namespace</td>
+                                    <td>dummyNode</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">field5</td>
+                                    <td>No namespace</td>
+                                    <td>dummyNode</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">fieldName</td>
+                                    <td>No namespace</td>
+                                    <td>name($field1(.!='')[1])</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">separatingToken</td>
+                                    <td>No namespace</td>
+                                    <td>$separatingToken</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">validatingString</td>
+                                    <td>No namespace</td>
+                                    <td>''</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>46</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_T_mergeDataS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_mergeDataS_manageDuplicates.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_T_mergeDataS_manageDuplicates.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"mergeData"</span><span class="tAN"> match=</span><span class="tAV">"inputs"</span><span class="tAN"> mode=</span><span class="tAV">"mergeData"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Check for data inconsistencies --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"dummyNode"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tAN"> select=</span><span class="tAV">"dummyNode"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field3"</span><span class="tAN"> select=</span><span class="tAV">"dummyNode"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field4"</span><span class="tAN"> select=</span><span class="tAV">"dummyNode"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field5"</span><span class="tAN"> select=</span><span class="tAV">"dummyNode"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"fieldName"</span><span class="tAN"> select=</span><span class="tAV">"name($field1(.!='')[1])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"validatingString"</span><span class="tAN"> select=</span><span class="tAV">"''"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"separatingToken"</span><span class="tAN"> select=</span><span class="tAV">"$separatingToken"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"defaultValue"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> select=</span><span class="tAV">"                     'no_field_entry'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$fieldName[1]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"distinctFields"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"splitParseValidate"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                         $field1, $field2, $field3, $field4, $field5"</span><span class="tAN"> separator=</span><span class="tAV">"{$separatingToken}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:with-param&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"separatingToken"</span><span class="tAN"> select=</span><span class="tAV">"$separatingToken"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"validatingString"</span><span class="tAN"> select=</span><span class="tAV">"                     $validatingString"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"distinctValid"</span><span class="tAN"> select=</span><span class="tAV">"             $distinctFields/inputParsed/valid[. ne '']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"distinctValidCount"</span><span class="tAN"> select=</span><span class="tAV">"             count($distinctValid)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"             'Merge ',             $distinctValidCount, ' distinct valid values for ',             $fieldName, ': ',              $distinctValid"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$distinctValidCount gt 0"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$distinctValid"</span><span class="tAN"> separator=</span><span class="tAV">"{$separatingTokenLong}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$defaultValue"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="T_checkFieldsS_manageDuplicates.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">.</span><span class="titleTemplateName">checkFields</span><span class="titleTemplateMode">exactMatch</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Match</td>
+                        <td>.</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Mode</td>
+                        <td>exactMatch</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Parameters</div>
+                           <div class="flR"><input id="bt_prs_T_checkFieldsS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_T_checkFieldsS_manageDuplicates.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="prs_T_checkFieldsS_manageDuplicates.xsl" style="display:block">
                               <table class="attsT">
                                  <thead>
                                     <tr>
@@ -1367,11 +976,11 @@
                                     </tr>
                                  </thead>
                                  <tr>
-                                    <td class="fCol">input</td>
+                                    <td class="fCol">field1</td>
                                     <td>No namespace</td>
                                  </tr>
                                  <tr>
-                                    <td class="fCol">substr</td>
+                                    <td class="fCol">field2</td>
                                     <td>No namespace</td>
                                  </tr>
                               </table>
@@ -1380,25 +989,490 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>29</td>
+                        <td>46</td>
                      </tr>
                      <tr>
                         <td class="fCol">
                            <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_F_substring-before-lastS_trimStrings.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_F_substring-before-lastS_trimStrings.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_src_T_checkFieldsS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_checkFieldsS_manageDuplicates.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_F_substring-before-lastS_trimStrings.xsl" style="display:block">
+                           <div id="src_T_checkFieldsS_manageDuplicates.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:function</span><span class="tAN"> name=</span><span class="tAV">"WNYC:substring-before-last"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"substr"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"substring-before-last"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tAN"> select=</span><span class="tAV">"$input"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"substr"</span><span class="tAN"> select=</span><span class="tAV">"$substr"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:function&gt;</span></pre></td>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"checkFields"</span><span class="tAN"> mode=</span><span class="tAV">"exactMatch"</span><span class="tAN"> match=</span><span class="tAV">"."</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Terminate if two normalised fields 
+            are not identical --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"not(             normalize-space($field1)              eq normalize-space($field2)             )"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"errorMessage"</span><span class="tAN"> select=</span><span class="tAV">"                 concat(                 'ERROR: ',                  $field1, ' and ', $field2,                  ' are not equal.'                 )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$errorMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> terminate=</span><span class="tAV">"yes"</span><span class="tAN"> select=</span><span class="tAV">"$errorMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="T_field1MustContainField2S_manageDuplicates.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateName">field1MustContainField2</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">References</div>
+                           <div class="flR"><input id="bt_refs_T_field1MustContainField2S_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_T_field1MustContainField2S_manageDuplicates.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="refs_T_field1MustContainField2S_manageDuplicates.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Function</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter20.html#F_stripNonASCIIS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>stripNonASCII (</span><span class="fParams">inputText</span><span>)</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">Variable</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter18.html#V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')">separatingTokenForFreeTextFields</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Parameters</div>
+                           <div class="flR"><input id="bt_prs_T_field1MustContainField2S_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_T_field1MustContainField2S_manageDuplicates.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="prs_T_field1MustContainField2S_manageDuplicates.xsl" style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th>Namespace</th>
+                                       <th>Select</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="fCol">field1</td>
+                                    <td>No namespace</td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">field1Name</td>
+                                    <td>No namespace</td>
+                                    <td>local-name($field1)</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">field2</td>
+                                    <td>No namespace</td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">field2Name</td>
+                                    <td>No namespace</td>
+                                    <td>local-name($field2)</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">normalizedField1</td>
+                                    <td>No namespace</td>
+                                    <td>             normalize-space(             WNYC:stripNonASCII(             $field1
+                                       ))</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">normalizedField2</td>
+                                    <td>No namespace</td>
+                                    <td>             normalize-space(             WNYC:stripNonASCII(             ($field2)
+                                       ))</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>46</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_T_field1MustContainField2S_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_field1MustContainField2S_manageDuplicates.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_T_field1MustContainField2S_manageDuplicates.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"field1MustContainField2"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Generate error if field1
+        does not contain field2 --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field2"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field1Name"</span><span class="tAN"> select=</span><span class="tAV">"local-name($field1)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"field2Name"</span><span class="tAN"> select=</span><span class="tAV">"local-name($field2)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"normalizedField1"</span><span class="tAN"> select=</span><span class="tAV">"             normalize-space(             WNYC:stripNonASCII(             $field1             ))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"normalizedField2"</span><span class="tAN"> select=</span><span class="tAV">"             normalize-space(             WNYC:stripNonASCII(             ($field2)             ))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:if</span><span class="tAN"> test=</span><span class="tAV">"             not(             contains(             $normalizedField1, $normalizedField2             ))"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"errorMessage"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat(                     '
+
+',                     'ERROR: ',                     '
+
+')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$field1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$separatingTokenForFreeTextFields"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'
+
+**** DOES NOT CONTAIN ****
+
+'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$field2"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"error"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat($field1Name, 'NotContains', $field2Name)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:attribute&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$errorMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> terminate=</span><span class="tAV">"no"</span><span class="tAN"> select=</span><span class="tAV">"$errorMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:if&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="V_separatingTokenS_manageDuplicates.xsl"></a><div class="cmpT">Variable
+         <span class="qname">separatingToken</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Select</td>
+                        <td>';'</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Supersedes</div>
+                           <div class="flR"><input id="bt_sps_V_separatingTokenS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_separatingTokenS_manageDuplicates.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="sps_V_separatingTokenS_manageDuplicates.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Variable</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter20.html#V_separatingTokenS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">separatingToken</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Overriding</div>
+                           <div class="flR"><input id="bt_ovr_V_separatingTokenS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_separatingTokenS_manageDuplicates.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="ovr_V_separatingTokenS_manageDuplicates.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Variable</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter17.html#V_separatingTokenS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">separatingToken</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_V_separatingTokenS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_V_separatingTokenS_manageDuplicates.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_V_separatingTokenS_manageDuplicates.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"separatingToken"</span><span class="tAN"> select=</span><span class="tAV">"';'"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="V_separatingTokenLongS_manageDuplicates.xsl"></a><div class="cmpT">Variable
+         <span class="qname">separatingTokenLong</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Select</td>
+                        <td>         concat(' ', $separatingToken, ' ')</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">References</div>
+                           <div class="flR"><input id="bt_refs_V_separatingTokenLongS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_V_separatingTokenLongS_manageDuplicates.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="refs_V_separatingTokenLongS_manageDuplicates.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Parameter</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter16.html#P_separatingTokenS_cavafySearch.xsl" target="_self" title="No namespace" onclick="updPT('cavafySearch.xsl')">separatingToken</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Supersedes</div>
+                           <div class="flR"><input id="bt_sps_V_separatingTokenLongS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_separatingTokenLongS_manageDuplicates.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="sps_V_separatingTokenLongS_manageDuplicates.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Variable</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter20.html#V_separatingTokenLongS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">separatingTokenLong</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Overriding</div>
+                           <div class="flR"><input id="bt_ovr_V_separatingTokenLongS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_separatingTokenLongS_manageDuplicates.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="ovr_V_separatingTokenLongS_manageDuplicates.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Variable</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter17.html#V_separatingTokenLongS_processLoCURL.xsl" target="_self" title="No namespace" onclick="updPT('processLoCURL.xsl')">separatingTokenLong</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_V_separatingTokenLongS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_V_separatingTokenLongS_manageDuplicates.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_V_separatingTokenLongS_manageDuplicates.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"separatingTokenLong"</span><span class="tAN"> select=</span><span class="tAV">"         concat(' ', $separatingToken, ' ')"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl"></a><div class="cmpT">Variable
+         <span class="qname">separatingTokenForFreeTextFields</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Documentation</div>
+                           <div class="flR"><input id="bt_dS_V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="dS_V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl" style="display:block">
+                              <div>
+                                 <h3>Description</h3>
+                                 <pre> To avoid semicolons separating a single field </pre>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Select</td>
+                        <td>         '###===###'</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Templates</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter18.html#T_field1MustContainField2S_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')"><span class="nRf">field1MustContainField2</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter1.html#T_newExifS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')"><span class="nRf">newExif</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter8.html#M_rdfDescriptionM_cavafyS_Exif2Cavafy.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Cavafy.xsl')"><span class="mRf">rdf:Description</span><span class="mdRf">cavafy</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Supersedes</div>
+                           <div class="flR"><input id="bt_sps_V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="sps_V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Variable</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter20.html#V_separatingTokenForFreeTextFieldsS_utilities.xsl" target="_self" title="No namespace" onclick="updPT('utilities.xsl')">separatingTokenForFreeTextFields</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_V_separatingTokenForFreeTextFieldsS_manageDuplicates.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"separatingTokenForFreeTextFields"</span><span class="tAN"> select=</span><span class="tAV">"         '###===###'"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -1417,10 +1491,8 @@
       </table>
       <div class="footer">
          <hr />
-         <div align="center">Stylesheet documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
-         </div>
-      </div><script type="text/javascript">
-         <!--
+         <div align="center">Stylesheet documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
                     // The namespace is the selected option in the TOC combo.
                     
                     // The corresponding div is already visible conf. to its style attr.                     

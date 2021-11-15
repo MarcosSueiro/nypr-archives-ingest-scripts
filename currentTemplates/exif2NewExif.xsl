@@ -859,13 +859,15 @@ Subject headings / IKEY
         <!-- 3. Contributors as RIFF:Artist -->
         <xsl:variable name="exiftoolArtists"
             select="
-                $originalExif/rdf:Description/RIFF:Artist"/>
+            $originalExif/rdf:Description/RIFF:Artist/
+            replace(., 'https://id.loc.', 'http://id.loc.')"/>
         <xsl:variable name="cavafyContributors">
             <xsl:value-of
                 select="
                     $cavafyEntry/pb:pbcoreDescriptionDocument
                     /pb:pbcoreContributor/pb:contributor
-                    /@ref[matches(., $validatingNameString)]"
+                    /@ref[matches(., $validatingNameString)]/
+                    replace(., 'https://id.loc.', 'http://id.loc.')"
                 separator="{$separatingTokenLong}"/>
         </xsl:variable>
         <xsl:variable name="cmsContributors"
@@ -907,7 +909,7 @@ Subject headings / IKEY
                 select="
                     $seriesData/pb:pbcoreDescriptionDocument
                     /pb:pbcoreContributor/pb:contributor
-                    /@ref[matches(., $validatingNameString)]"
+                    /@ref[matches(., $validatingNameString)]/replace(., 'https://id.loc.', 'http://id.loc.')"
                 separator="{$separatingTokenLong}"/>
         </xsl:variable>
         <xsl:variable name="defaultArtists">
@@ -1069,7 +1071,7 @@ Subject headings / IKEY
         <xsl:variable name="checkedTitle">
             <xsl:apply-templates select="." mode="checkConflicts">
                 <xsl:with-param name="field1" select="
-                    $exifTitle[not(. = $cavafyTitle)]"/>
+                    $exifTitle"/>
                 <xsl:with-param name="field2"
                     select="
                         $cavafyTitle
@@ -1124,11 +1126,11 @@ Subject headings / IKEY
                 when audio is a segment 
             or a multitrack-->
             <RIFF:Title>
-                <xsl:copy-of select="$checkedTitle"/>
+                <xsl:value-of select="$checkedTitle"/>
                 <!-- If the file does not have an embedded title, 
                     add the segment and multitrack bits -->
-                <xsl:value-of select="$segmentTitleSuffix[$exifTitle = '']"/>
-                <xsl:value-of select="$multitrackTitleSuffix[$exifTitle = '']"/>
+                <xsl:value-of select="$segmentTitleSuffix[not(matches($checkedTitle, $segmentTitleSuffix))]"/>
+                <xsl:value-of select="$multitrackTitleSuffix[not(matches($exifTitle, $multitrackTitleSuffix))]"/>
             </RIFF:Title>
         </xsl:variable>
         <!--Medium -->

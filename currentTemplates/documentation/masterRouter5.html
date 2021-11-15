@@ -4,13 +4,16 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       <title>Stylesheet documentation for: errorLog.xsl</title>
-      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
-         <!--
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
         
         var parametersBoxes= new Array('prs_T_generateErrorLogS_errorLog.xsl');
 
         
-        var usedByBoxes= new Array('uB_T_generateErrorLogS_errorLog.xsl');
+        var usedByBoxes= new Array('uB_T_generateErrorLogS_errorLog.xsl', 
+				'uB_V_docFilenameS_errorLog.xsl', 
+				'uB_V_docFilenameNoExtensionS_errorLog.xsl', 
+				'uB_O_logS_errorLog.xsl', 
+				'uB_O_csvS_errorLog.xsl');
 
         var docBoxes= new Array('dS_errorLog.xsl');
 
@@ -23,8 +26,9 @@
 				'src_V_logFolderS_errorLog.xsl', 
 				'src_V_currentTimeS_errorLog.xsl', 
 				'src_V_pbcorePhysicalInstantiationsS_errorLog.xsl', 
-				'src_V_archiveAuthorsS_errorLog.xsl', 
-				'src_O_logS_errorLog.xsl');
+				'src_V_archivesAuthorsS_errorLog.xsl', 
+				'src_O_logS_errorLog.xsl', 
+				'src_O_csvS_errorLog.xsl');
 
         var supersedesBoxes= new Array('sps_V_baseURIS_errorLog.xsl', 
 				'sps_V_parsedBaseURIS_errorLog.xsl', 
@@ -32,17 +36,16 @@
 				'sps_V_docFilenameNoExtensionS_errorLog.xsl', 
 				'sps_V_baseFolderS_errorLog.xsl', 
 				'sps_V_logFolderS_errorLog.xsl', 
-				'sps_V_currentTimeS_errorLog.xsl');
+				'sps_V_currentTimeS_errorLog.xsl', 
+				'sps_V_archivesAuthorsS_errorLog.xsl');
 
         var overridingBoxes= new Array('ovr_V_baseURIS_errorLog.xsl', 
 				'ovr_V_parsedBaseURIS_errorLog.xsl', 
-				'ovr_V_docFilenameS_errorLog.xsl', 
-				'ovr_V_docFilenameNoExtensionS_errorLog.xsl', 
 				'ovr_V_baseFolderS_errorLog.xsl', 
 				'ovr_V_logFolderS_errorLog.xsl', 
 				'ovr_V_currentTimeS_errorLog.xsl', 
 				'ovr_V_pbcorePhysicalInstantiationsS_errorLog.xsl', 
-				'ovr_V_archiveAuthorsS_errorLog.xsl');
+				'ovr_V_archivesAuthorsS_errorLog.xsl');
 
         var referencesBoxes= new Array('refs_T_generateErrorLogS_errorLog.xsl', 
 				'refs_V_parsedBaseURIS_errorLog.xsl', 
@@ -408,8 +411,10 @@
                         <td>
                            <div id="dS_errorLog.xsl" style="display:block">
                               <div>
-                                 <h3>Description</h3><pre> Accept an error log in xml
-and output an html error doc </pre></div>
+                                 <h3>Description</h3>
+                                 <pre> Accept an error log in xml
+and output an html error doc </pre>
+                              </div>
                            </div>
                         </td>
                      </tr>
@@ -496,16 +501,25 @@ and output an html error doc </pre></div>
                                     <td>
                                        <div class="listGrouping">
                                           <div class="refItemBlock"><a href="masterRouter0.html#V_currentTimeS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">currentTime</a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_docFilenameNoExtensionS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">docFilenameNoExtension</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter5.html#V_docFilenameNoExtensionS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">docFilenameNoExtension</a><span class="refItemSep">;</span></div>
                                           <div class="refItemBlock"><a href="masterRouter0.html#V_logFolderS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">logFolder</a></div>
                                        </div>
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td class="fCol">Output</td>
+                                    <td class="fCol">Outputs</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#O_logS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">log</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter5.html#O_csvS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">csv</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter5.html#O_logS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">log</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">Function</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter20.html#F_stripNonASCIIS_utilities.xsl" target="_self" title="http://www.wnyc.org" onclick="updPT('utilities.xsl')"><span>stripNonASCII (</span><span class="fParams">inputText</span><span>)</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -526,37 +540,62 @@ and output an html error doc </pre></div>
                                        <th>QName</th>
                                        <th>Namespace</th>
                                        <th>Select</th>
+                                       <th>Tunnel</th>
                                     </tr>
                                  </thead>
                                  <tr>
                                     <td class="fCol">WARNINGS</td>
                                     <td>No namespace</td>
                                     <td></td>
+                                    <td></td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">completeLog</td>
                                     <td>No namespace</td>
+                                    <td></td>
                                     <td></td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">duplicateInstantiations</td>
                                     <td>No namespace</td>
                                     <td>             dummyNode</td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">filenameAddendum</td>
+                                    <td>No namespace</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">potentialDupes</td>
+                                    <td>No namespace</td>
+                                    <td>             $completeLog/completeLog/potentialDupes</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">seriesEntry</td>
                                     <td>No namespace</td>
                                     <td>             $completeLog/completeLog/seriesEntry</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">seriesName</td>
                                     <td>No namespace</td>
                                     <td>             $completeLog/completeLog/seriesName</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">seriesNameNoSpace</td>
                                     <td>No namespace</td>
                                     <td>             replace($seriesName, '\P{L}', '')</td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">unacceptableFiles</td>
+                                    <td>No namespace</td>
+                                    <td>             $completeLog/completeLog/unacceptableFiles</td>
+                                    <td></td>
                                  </tr>
                               </table>
                            </div>
@@ -564,7 +603,7 @@ and output an html error doc </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>34</td>
+                        <td>52</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -575,13 +614,19 @@ and output an html error doc </pre></div>
                            <div id="src_T_generateErrorLogS_errorLog.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"generateErrorLog"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> name=</span><span class="tAV">"generateErrorLog"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"completeLog"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"duplicateInstantiations"</span><span class="tAN"> select=</span><span class="tAV">"             dummyNode"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"WARNINGS"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"unacceptableFiles"</span><span class="tAN"> select=</span><span class="tAV">"             $completeLog/completeLog/unacceptableFiles"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"potentialDupes"</span><span class="tAN"> select=</span><span class="tAV">"             $completeLog/completeLog/potentialDupes"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"WARNINGS"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$completeLog/completeLog/*/                 result/newExif/rdf:Description/*[@warning]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"seriesName"</span><span class="tAN"> select=</span><span class="tAV">"             $completeLog/completeLog/seriesName"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"seriesNameNoSpace"</span><span class="tAN"> select=</span><span class="tAV">"             replace($seriesName, '\P{L}', '')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"seriesEntry"</span><span class="tAN"> select=</span><span class="tAV">"             $completeLog/completeLog/seriesEntry"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"filenameAddendum"</span><span class="tAN"> tunnel=</span><span class="tAV">"yes"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'Generate error log'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"errorFreeMessage"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                 count(                 $completeLog//result                 [not(.//*[local-name() = 'error'])]                 )"</span><span class="tXSLEl">/&gt;</span><span class="tT" style="white-space:normal">files are all right:</span><span class="tI">
@@ -590,6 +635,11 @@ and output an html error doc </pre></div>
       </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                     ./@filename"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"unacceptableFilesMessage"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;b</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$unacceptableFiles/error"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/b&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"duplicateInstantiationMessage"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tEl">&lt;b</span><span class="tEl">&gt;</span><span class="tI">
@@ -600,18 +650,20 @@ and output an html error doc </pre></div>
       </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/b&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"errorCount"</span><span class="tAN"> select=</span><span class="tAV">"             count(             $completeLog//result[//*[local-name() = 'error']]             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"warningCount"</span><span class="tAN"> select=</span><span class="tAV">"             count(             $completeLog             //result             [.//*[local-name() = 'warning']]             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"errorCount"</span><span class="tAN"> select=</span><span class="tAV">"             count(             $completeLog//result[.//*[local-name() = 'error']]             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"warningCount"</span><span class="tAN"> select=</span><span class="tAV">"             count(             $completeLog             //result             [//*[@warning]]             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"totalCount"</span><span class="tAN"> select=</span><span class="tAV">"             count(             $completeLog//             result             ) + count(             $completeLog/completeLog/             unacceptableFiles/error             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"errorPercent"</span><span class="tAN"> select=</span><span class="tAV">"format-number(             $errorCount div $totalCount, '##%')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"warningPercent"</span><span class="tAN"> select=</span><span class="tAV">"format-number(             $warningCount div $totalCount, '##%')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"errorPercent"</span><span class="tAN"> select=</span><span class="tAV">"format-number(             $errorCount div ($totalCount + 0.01), '##%')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- To avoid division by zero --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"warningPercent"</span><span class="tAN"> select=</span><span class="tAV">"format-number(             $warningCount div ($totalCount + 0.01), '##%')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- To avoid division by zero --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"errorMessage"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$errorCount"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' files ('"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$errorPercent"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"') have errors: '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                 $completeLog//result                 [//*[local-name() = 'error']]"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                 $completeLog//result                 [.//*[local-name() = 'error']]"</span><span class="tXSLEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"@filename"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
@@ -622,17 +674,19 @@ and output an html error doc </pre></div>
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$warningPercent"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"') have warnings: '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                 $completeLog                 //result                 [.//*[local-name() = 'warning']]"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                 $completeLog//result                 [.//*[@warning]]"</span><span class="tXSLEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"./@filename"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"$errorFreeMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"$unacceptableFilesMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"$duplicateInstantiationMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"$errorMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"$warningMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tC">&lt;!--    Error Log --&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"filenameErrorLog"</span><span class="tAN"> select=</span><span class="tAV">"             concat(             $logFolder,             $docFilenameNoExtension,             '_ERRORLOG',             $seriesNameNoSpace,             format-date(current-date(),              '[Y0001][M01][D01]'),             '_T', $currentTime,             '.html')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"filenameErrorLog"</span><span class="tAN"> select=</span><span class="tAV">"             concat(             $logFolder,             $docFilenameNoExtension,             '_ERRORLOG',             $seriesNameNoSpace,             format-date(current-date(),              '[Y0001][M01][D01]'),             '_T', $currentTime,             $filenameAddendum,             '.html')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"filenameErrorCSV"</span><span class="tAN"> select=</span><span class="tAV">"             concat(             $logFolder,             $docFilenameNoExtension,             '_ERRORLOG',             $seriesNameNoSpace,             $filenameAddendum,             '.csv')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:result-document</span><span class="tAN"> format=</span><span class="tAV">"log"</span><span class="tAN"> href=</span><span class="tAV">"             {$filenameErrorLog}"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tEl">&lt;html</span><span class="tEl">&gt;</span><span class="tI">
       </span><span class="tEl">&lt;head</span><span class="tEl">&gt;</span><span class="tI">
@@ -652,6 +706,8 @@ and output an html error doc </pre></div>
           </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"                         $seriesEntry                         /*:pbcoreCollection                         /*:pbcoreDescriptionDocument"</span><span class="tAN"> mode=</span><span class="tAV">"cavafyBasicsHtml"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tEl">&lt;/p&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"                         $errorFreeMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT"> ******************* </span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"                         $unacceptableFilesMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT"> ******************* </span><span class="tEl">&lt;/p&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"                         $duplicateInstantiationMessage"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT"> ******************* </span><span class="tEl">&lt;/p&gt;</span><span class="tI">
@@ -686,9 +742,13 @@ and output an html error doc </pre></div>
                 </span><span class="tEl">&lt;/a&gt;</span><span class="tT">: </span><span class="tEl">&lt;/b&gt;</span><span class="tI">
               </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
               </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tI">
+                </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"paragraphMark"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                  </span><span class="tEl">&lt;p</span><span class="tEl">/&gt;</span><span class="tI">
+                </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
                 </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">".//*:error"</span><span class="tXSLEl">&gt;</span><span class="tI">
                   </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"@type, ': '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                  </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"replace(WNYC:stripNonASCII(.), '
+', $paragraphMark)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
                   </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
                 </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
               </span><span class="tEl">&lt;/p&gt;</span><span class="tI">
@@ -701,7 +761,65 @@ and output an html error doc </pre></div>
             </span><span class="tEl">&lt;/p&gt;</span><span class="tI">
           </span><span class="tEl">&lt;/div&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                         $completeLog//result                         [.//*[local-name() = 'warning']]"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                         $completeLog//result                         [inputs/potentialDupes/likelyDupes/pb:pbcoreDescriptionDocument]"</span><span class="tXSLEl">&gt;</span><span class="tI">
+          </span><span class="tC">&lt;!-- Link to the file --&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;b</span><span class="tEl">&gt;</span><span class="tT"> LIKELY DUPES of asset </span><span class="tEl">&lt;a</span><span class="tEl">&gt;</span><span class="tI">
+                  </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"href"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"./inputs/parsedDAVIDTitle/parsedElements/finalCavafyURL"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                  </span><span class="tXSLEl">&lt;/xsl:attribute&gt;</span><span class="tI">
+                  </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"                                         target"</span><span class="tAN"> select=</span><span class="tAV">"                                         '_blank'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"inputs/*:cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreTitle[@titleType='Episode']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat(' (',inputs/*:cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreIdentifier[@source='WNYC Archive Catalog'], ')')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                </span><span class="tEl">&lt;/a&gt;</span><span class="tT">: </span><span class="tEl">&lt;/b&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tI">
+                </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                                         inputs/potentialDupes/likelyDupes/pb:pbcoreDescriptionDocument"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                  </span><span class="tEl">&lt;a</span><span class="tEl">&gt;</span><span class="tI">
+                    </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"href"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat('https://cavafy.wnyc.org/assets/', pb:pbcoreIdentifier[@source='pbcore XML database UUID'])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                    </span><span class="tXSLEl">&lt;/xsl:attribute&gt;</span><span class="tI">
+                    </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"                                                 target"</span><span class="tAN"> select=</span><span class="tAV">"                                                 '_blank'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"pb:pbcoreTitle[@titleType='Episode']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat(' (', pb:pbcoreIdentifier[@source='WNYC Archive Catalog'], ')')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                  </span><span class="tEl">&lt;/a&gt;</span><span class="tI">
+                  </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
+                </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                         $completeLog//result                         [inputs/potentialDupes/possibleDupes/pb:pbcoreDescriptionDocument]"</span><span class="tXSLEl">&gt;</span><span class="tI">
+          </span><span class="tC">&lt;!-- Link to the file --&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;b</span><span class="tEl">&gt;</span><span class="tT"> Possible dupes of asset </span><span class="tEl">&lt;a</span><span class="tEl">&gt;</span><span class="tI">
+                  </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"href"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"./inputs/parsedDAVIDTitle/parsedElements/finalCavafyURL"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                  </span><span class="tXSLEl">&lt;/xsl:attribute&gt;</span><span class="tI">
+                  </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"                                         target"</span><span class="tAN"> select=</span><span class="tAV">"                                         '_blank'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"inputs/*:cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreTitle[@titleType='Episode']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat(' (',inputs/*:cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreIdentifier[@source='WNYC Archive Catalog'], ')')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                </span><span class="tEl">&lt;/a&gt;</span><span class="tT">: </span><span class="tEl">&lt;/b&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tI">
+                </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                                         inputs/potentialDupes/possibleDupes/pb:pbcoreDescriptionDocument"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                  </span><span class="tEl">&lt;a</span><span class="tEl">&gt;</span><span class="tI">
+                    </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"href"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat('https://cavafy.wnyc.org/assets/', pb:pbcoreIdentifier[@source='pbcore XML database UUID'])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                    </span><span class="tXSLEl">&lt;/xsl:attribute&gt;</span><span class="tI">
+                    </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"                                                 target"</span><span class="tAN"> select=</span><span class="tAV">"                                                 '_blank'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"pb:pbcoreTitle[@titleType='Episode']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"concat(' (', pb:pbcoreIdentifier[@source='WNYC Archive Catalog'], ')')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                  </span><span class="tEl">&lt;/a&gt;</span><span class="tI">
+                  </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
+                </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                         $completeLog//result                         [.//*[@warning]]"</span><span class="tXSLEl">&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"justFilename"</span><span class="tXSLEl">&gt;</span><span class="tI">
             </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                                 tokenize(                                 translate(                                 @filename[not(contains(., 'cavafy'))], '\', '/'), '/')                                 [last()]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
             </span><span class="tC">&lt;!-- Extract just the filename --&gt;</span><span class="tI">
@@ -720,8 +838,8 @@ and output an html error doc </pre></div>
                 </span><span class="tEl">&lt;/a&gt;</span><span class="tT">: </span><span class="tEl">&lt;/b&gt;</span><span class="tI">
               </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
               </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tI">
-                </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">".//*:warning"</span><span class="tXSLEl">&gt;</span><span class="tI">
-                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"@type, ': '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+                </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"newExif/rdf:Description/*[@warning]"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'WARNING:', @warning, ': '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
                   </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
                   </span><span class="tEl">&lt;br</span><span class="tEl">/&gt;</span><span class="tI">
                 </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
@@ -735,13 +853,64 @@ and output an html error doc </pre></div>
             </span><span class="tEl">&lt;/p&gt;</span><span class="tI">
           </span><span class="tEl">&lt;/div&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"warnings"</span><span class="tXSLEl">&gt;</span><span class="tI">
-          </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$WARNINGS"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
       </span><span class="tEl">&lt;/body&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/html&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:result-document&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+  </span><span class="tXSLEl">&lt;xsl:result-document</span><span class="tAN"> format=</span><span class="tAV">"csv"</span><span class="tAN"> href=</span><span class="tAV">"             {$filenameErrorCSV}"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                 string-join(                     ('filename', 'assetID[1]', 'assetDate[1+]' ,                     'Collection[1]', 'Series[1]', 'Episode[1]',                     'LoCSH[1+]',                     'Abstract[1]', 'Genre[1]',                     'Creators[1+]', 'Contributors[1+]',                     'CMSImage[0-1]', 'Copyright[1]',                     'instID[1]', 'Format[1]',                     'formatLocation[1]', 'mediaType[1]',                     'Generation[0-1]', 'EssenceTrack[0-1]'                     ),                     ','                     )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                     $completeLog//result"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"justFilename"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tC">&lt;!-- Extract just the filename --&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                             tokenize(                             translate(                             @filename[not(contains(., 'cavafy'))], '\', '/'), '/')                             [last()]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tC">&lt;!--Or the cavafy link --&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"@filename[contains(., 'cavafy')]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+      </span><span class="tC">&lt;!-- Link to the file --&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"href"</span><span class="tAN"> select=</span><span class="tAV">"                         if                         (contains(@filename, 'cavafy'))                         then                             @filename                         else                             concat('file:///',                             inputs/originalExif                             /rdf:Description                             /System:Directory,                             '/',                             $justFilename[. != ''])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'
+'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$justFilename"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'cavafyID')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'assetDate')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'collection')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'series')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'episode')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'subjectHeading')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'abstract')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'genre')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'creatorPublisher')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'contributor')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'cmsImage')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'copyright')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'instantiationID')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'format')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'location')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'media')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'eneration')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"count(.//*:error/@type[contains(., 'essence')])"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:result-document&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -827,7 +996,9 @@ and output an html error doc </pre></div>
                            <div id="src_V_baseURIS_errorLog.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"baseURI"</span><span class="tAN"> select=</span><span class="tAV">"base-uri()"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"baseURI"</span><span class="tAN"> select=</span><span class="tAV">"base-uri()"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -933,7 +1104,9 @@ and output an html error doc </pre></div>
                            <div id="src_V_parsedBaseURIS_errorLog.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"parsedBaseURI"</span><span class="tAN"> select=</span><span class="tAV">"analyze-string($baseURI, '/')"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"parsedBaseURI"</span><span class="tAN"> select=</span><span class="tAV">"analyze-string($baseURI, '/')"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -969,6 +1142,35 @@ and output an html error doc </pre></div>
                      <tr>
                         <td class="fCol">Select</td>
                         <td>$parsedBaseURI/fn:non-match[last()]</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_V_docFilenameS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_V_docFilenameS_errorLog.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_V_docFilenameS_errorLog.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Parameter</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter4.html#P_docFilenameNoExtensionS_Exif2Slack.xsl" target="_self" title="No namespace" onclick="updPT('Exif2Slack.xsl')">docFilenameNoExtension</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">Variables</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter5.html#V_baseFolderS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">baseFolder</a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="masterRouter5.html#V_docFilenameNoExtensionS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">docFilenameNoExtension</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -1012,26 +1214,6 @@ and output an html error doc </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_V_docFilenameS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_docFilenameS_errorLog.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="ovr_V_docFilenameS_errorLog.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Variable</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_docFilenameS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">docFilename</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
                            <div class="flL">Source</div>
                            <div class="flR"><input id="bt_src_V_docFilenameS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_V_docFilenameS_errorLog.xsl');" class="control" /></div>
                         </td>
@@ -1039,7 +1221,9 @@ and output an html error doc </pre></div>
                            <div id="src_V_docFilenameS_errorLog.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"docFilename"</span><span class="tAN"> select=</span><span class="tAV">"$parsedBaseURI/fn:non-match[last()]"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"docFilename"</span><span class="tAN"> select=</span><span class="tAV">"$parsedBaseURI/fn:non-match[last()]"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -1078,6 +1262,26 @@ and output an html error doc </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_V_docFilenameNoExtensionS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_V_docFilenameNoExtensionS_errorLog.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_V_docFilenameNoExtensionS_errorLog.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Template</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter5.html#T_generateErrorLogS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')"><span class="nRf">generateErrorLog</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
                            <div class="flL">References</div>
                            <div class="flR"><input id="bt_refs_V_docFilenameNoExtensionS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('refs_V_docFilenameNoExtensionS_errorLog.xsl');" class="control" /></div>
                         </td>
@@ -1088,7 +1292,7 @@ and output an html error doc </pre></div>
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_docFilenameS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">docFilename</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter5.html#V_docFilenameS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">docFilename</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1118,26 +1322,6 @@ and output an html error doc </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_V_docFilenameNoExtensionS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_docFilenameNoExtensionS_errorLog.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="ovr_V_docFilenameNoExtensionS_errorLog.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Variable</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_docFilenameNoExtensionS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">docFilenameNoExtension</a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
                            <div class="flL">Source</div>
                            <div class="flR"><input id="bt_src_V_docFilenameNoExtensionS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_V_docFilenameNoExtensionS_errorLog.xsl');" class="control" /></div>
                         </td>
@@ -1145,7 +1329,9 @@ and output an html error doc </pre></div>
                            <div id="src_V_docFilenameNoExtensionS_errorLog.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"docFilenameNoExtension"</span><span class="tAN"> select=</span><span class="tAV">"substring-before($docFilename, '.')"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"docFilenameNoExtension"</span><span class="tAN"> select=</span><span class="tAV">"substring-before($docFilename, '.')"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -1195,7 +1381,7 @@ and output an html error doc </pre></div>
                                     <td>
                                        <div class="listGrouping">
                                           <div class="refItemBlock"><a href="masterRouter0.html#V_baseURIS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">baseURI</a><span class="refItemSep">;</span></div>
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_docFilenameS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">docFilename</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter5.html#V_docFilenameS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')">docFilename</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1252,7 +1438,9 @@ and output an html error doc </pre></div>
                            <div id="src_V_baseFolderS_errorLog.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"baseFolder"</span><span class="tAN"> select=</span><span class="tAV">"substring-before($baseURI, $docFilename)"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"baseFolder"</span><span class="tAN"> select=</span><span class="tAV">"substring-before($baseURI, $docFilename)"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -1358,7 +1546,9 @@ and output an html error doc </pre></div>
                            <div id="src_V_logFolderS_errorLog.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"logFolder"</span><span class="tAN"> select=</span><span class="tAV">"concat($baseFolder, 'instantiationUploadLOGS/')"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"logFolder"</span><span class="tAN"> select=</span><span class="tAV">"concat($baseFolder, 'instantiationUploadLOGS/')"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -1444,7 +1634,9 @@ and output an html error doc </pre></div>
                            <div id="src_V_currentTimeS_errorLog.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"currentTime"</span><span class="tAN"> select=</span><span class="tAV">"substring(translate(string(current-time()), ':', ''), 1, 4)"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"currentTime"</span><span class="tAN"> select=</span><span class="tAV">"substring(translate(string(current-time()), ':', ''), 1, 4)"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -1510,7 +1702,9 @@ and output an html error doc </pre></div>
                            <div id="src_V_pbcorePhysicalInstantiationsS_errorLog.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"pbcorePhysicalInstantiations"</span><span class="tAN"> select=</span><span class="tAV">"doc('pbcore_instantiationphysicalaudio_vocabulary.xml')"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"pbcorePhysicalInstantiations"</span><span class="tAN"> select=</span><span class="tAV">"doc('pbcore_instantiationphysicalaudio_vocabulary.xml')"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -1526,8 +1720,8 @@ and output an html error doc </pre></div>
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="V_archiveAuthorsS_errorLog.xsl"></a><div class="cmpT">Variable
-         <span class="qname">archiveAuthors</span></div>
+      </table><a id="V_archivesAuthorsS_errorLog.xsl"></a><div class="cmpT">Variable
+         <span class="qname">archivesAuthors</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -1549,17 +1743,37 @@ and output an html error doc </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_V_archiveAuthorsS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_archiveAuthorsS_errorLog.xsl');" class="control" /></div>
+                           <div class="flL">Supersedes</div>
+                           <div class="flR"><input id="bt_sps_V_archivesAuthorsS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('sps_V_archivesAuthorsS_errorLog.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="ovr_V_archiveAuthorsS_errorLog.xsl" style="display:block">
+                           <div id="sps_V_archivesAuthorsS_errorLog.xsl" style="display:block">
                               <table class="uBT">
                                  <tr>
                                     <td class="fCol">Variable</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#V_archiveAuthorsS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">archiveAuthors</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter1.html#V_archivesAuthorsS_exif2NewExif.xsl" target="_self" title="No namespace" onclick="updPT('exif2NewExif.xsl')">archivesAuthors</a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Overriding</div>
+                           <div class="flR"><input id="bt_ovr_V_archivesAuthorsS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_V_archivesAuthorsS_errorLog.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="ovr_V_archivesAuthorsS_errorLog.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Variable</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter0.html#V_archivesAuthorsS_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')">archivesAuthors</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -1570,13 +1784,15 @@ and output an html error doc </pre></div>
                      <tr>
                         <td class="fCol">
                            <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_V_archiveAuthorsS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_V_archiveAuthorsS_errorLog.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_src_V_archivesAuthorsS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_V_archivesAuthorsS_errorLog.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_V_archiveAuthorsS_errorLog.xsl" style="display:block">
+                           <div id="src_V_archivesAuthorsS_errorLog.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"archiveAuthors"</span><span class="tAN"> select=</span><span class="tAV">"doc('archivesAuthors.xml')"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"archivesAuthors"</span><span class="tAN"> select=</span><span class="tAV">"doc('archivesAuthors.xml')"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -1611,6 +1827,26 @@ and output an html error doc </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_O_logS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_O_logS_errorLog.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_O_logS_errorLog.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Template</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter5.html#T_generateErrorLogS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')"><span class="nRf">generateErrorLog</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
                            <div class="flL">Output properties</div>
                            <div class="flR"><input id="bt_o_" type="image" src="img/btM.gif" value="-" onclick="switchState('o_');" class="control" /></div>
                         </td>
@@ -1621,11 +1857,13 @@ and output an html error doc </pre></div>
                                     <tr>
                                        <th>method</th>
                                        <th>indent</th>
+                                       <th>media-type</th>
                                     </tr>
                                  </thead>
                                  <tr>
-                                    <td></td>
-                                    <td>yes</td>
+                                    <td>html</td>
+                                    <td>no</td>
+                                    <td>text/html</td>
                                  </tr>
                               </table>
                            </div>
@@ -1640,7 +1878,95 @@ and output an html error doc </pre></div>
                            <div id="src_O_logS_errorLog.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:output</span><span class="tAN"> name=</span><span class="tAV">"log"</span><span class="tAN"> method=</span><span class="tAV">"html"</span><span class="tAN"> version=</span><span class="tAV">"4.0"</span><span class="tAN"> indent=</span><span class="tAV">"yes"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:output</span><span class="tAN"> name=</span><span class="tAV">"log"</span><span class="tAN"> method=</span><span class="tAV">"html"</span><span class="tAN"> version=</span><span class="tAV">"4.0"</span><span class="tAN"> indent=</span><span class="tAV">"no"</span><span class="tAN"> media-type=</span><span class="tAV">"text/html"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="O_csvS_errorLog.xsl"></a><div class="cmpT">Output
+         <span class="qname">csv</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_O_csvS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('uB_O_csvS_errorLog.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_O_csvS_errorLog.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Template</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="masterRouter5.html#T_generateErrorLogS_errorLog.xsl" target="_self" title="No namespace" onclick="updPT('errorLog.xsl')"><span class="nRf">generateErrorLog</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Output properties</div>
+                           <div class="flR"><input id="bt_o_" type="image" src="img/btM.gif" value="-" onclick="switchState('o_');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="o_" style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>method</th>
+                                       <th>indent</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td>text</td>
+                                    <td>yes</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_O_csvS_errorLog.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_O_csvS_errorLog.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_O_csvS_errorLog.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:output</span><span class="tAN"> name=</span><span class="tAV">"csv"</span><span class="tAN"> method=</span><span class="tAV">"text"</span><span class="tAN"> indent=</span><span class="tAV">"yes"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -1659,10 +1985,8 @@ and output an html error doc </pre></div>
       </table>
       <div class="footer">
          <hr />
-         <div align="center">Stylesheet documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
-         </div>
-      </div><script type="text/javascript">
-         <!--
+         <div align="center">Stylesheet documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
                     // The namespace is the selected option in the TOC combo.
                     
                     // The corresponding div is already visible conf. to its style attr.                     

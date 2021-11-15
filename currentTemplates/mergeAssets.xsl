@@ -45,7 +45,8 @@
         (DOCUMENT 1)
         1. Add the source instantiation 
         to the destination asset 
-        using the next instantiation ID available
+        using the next instantiation ID 
+        available in that asset
         (and note the original instantiation ID)
         2. Delete the source instantiation 
         from the source asset

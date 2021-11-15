@@ -25,9 +25,9 @@
     <xsl:param name="allCapsGuest" select='
         "([A-Z\-’&#39;\.]{2,})"'/>    
     <xsl:param name="allCapsGuestNew" select='
-        "(([A-Z]([A-Z\-’&#39;\.]|[A-Z ,])+){2,}){2,}"'/>
+        "(([A-Z]([A-Z\-’&#39;\.ce]|[A-Z ,])+){2,}){2,}"'/>
     <xsl:param name="professions" select="'(writer|author|actor|editor|senator|director|playwright|scientist|journalist|star|adviser|poet|artist|filmmaker|photographer|analyst|astrophysicist|speaker of the house|novelist|designer|engineer|critic|curator|musician|player|restaurateur|historian|violinist|actress|dr\.|doctor|diva|singer|etymologist|punster|dancer|choreographer|chef|rabbi|surgeon|cartoonist|baritone|comedian|gourmand|correspondent|biographer|fighter)'"/>
-    <xsl:param name="role" select="'(who curated|creator( of)?|shares|: h.. new|and h..|discusses|on h..|on the|star of|who edited|author( of)?|(former )?editor-in-chief|co-authors( of)?|who wrote|with h..|(former )?editor( of)?)'"/>
+    <xsl:param name="role" select="'(as told in|who curated|creator( of)?|shares|: h.. new|and h..|discusses|on h..|on the|star of|who edited|author( of)?|(former )?editor-in-chief|co-authors( of)?|who wrote|with h..|(former )?editor( of)?)'"/>
     <xsl:param name="workType" select="'(exhibit|memoir|novel|book|movie|best-seller|play|collection|essays|latest|autobiography|biography( of)?|stories|film|history)'"/>
     <xsl:param name="authorBookDivider" select="concat($role, '(.*', $workType, ')?')"/>
     <xsl:param name="professionSuffixes" select="
@@ -54,11 +54,12 @@ JOIN assets a ON d.asset_id = a.id
 WHERE `description` REGEXP '^\\*[A-Z][A-z]+ [A-z].*\\*' -->
 
 
-<xsl:param name="completeData">
-    <pbcoreCollection xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <xsl:apply-templates select="database"/>
-        </pbcoreCollection>
-</xsl:param>
+        <xsl:param name="completeData">
+            <pbcoreCollection xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <xsl:apply-templates select="database"/>
+            </pbcoreCollection>
+        </xsl:param>
         <xsl:apply-templates select="$completeData" mode="breakItUp">
             <xsl:with-param name="baseURI" select="base-uri()"/>
             <xsl:with-param name="filename" select="'NYACLoC'"/>

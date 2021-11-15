@@ -1219,7 +1219,12 @@ https://www.url-encode-decode.com/
         because numbers come before 'u' -->
         <xsl:variable name="mostSpecificUnknownDate"
             select="
-                min($cavafyXML/pb:pbcoreAssetDate[contains(., 'u')]/xs:string(.))"/>
+                min(
+                $cavafyXML/pb:pbcoreAssetDate
+                [contains(., 'u')]/
+                xs:string(.)
+                )"
+        />
         <xsl:variable name="filenameDate"
             select="
                 if ($mostSpecificUnknownDate)
@@ -1689,205 +1694,130 @@ https://www.url-encode-decode.com/
         
     </xsl:template>
     
-    <!--<xsl:template match="pb:pbcoreInstantiation" mode="
-        generateSourceExif">
-        <!-\- Generate an rdf document
-        from a current instantiation -\->
-        <xsl:param name="instantiatonData" select="."/>
-        <xsl:param name="instantiationID" select="
-            pb:instantiationIdentifier
-            [@source='WNYC Media Archive Label']"/>
-        <xsl:param name="message">
-            <xsl:message
-                select="'Generate an rdf document',
-                'from current instantiation ', $instantiationID"
-            />
+    <xsl:template match="addInstantiations">
+        <xsl:param name="instantiationsToAddLog">
+            <xsl:element name="pbcoreCollection">
+                <xsl:namespace name="xsi" select="'http://www.w3.org/2001/XMLSchema-instance'"/>
+                <xsl:attribute name="xsi:schemaLocation"
+                    select="'http://pbcore.org/PBCore/PBCoreNamespace.html http://pbcore.org/xsd/pbcore-2.0.xsd'"/>
+                <xsl:apply-templates
+                    select="addInstantiation[Notes = 'change and add new instantiation']"/>
+            </xsl:element>
         </xsl:param>
-        <xsl:param name="instantiationIDParsed">
-            <xsl:call-template name="parseInstantiationID">
-                <xsl:with-param name="instantiationID" select="$instantiationID"/>
-            </xsl:call-template>
+        <xsl:param name="instantiationsToAddOriginalData">
+            <xsl:copy select="$instantiationsToAddLog/pb:pbcoreCollection">
+                <xsl:apply-templates select="pb:originalData/pb:pbcoreDescriptionDocument" mode="importReady"/>
+            </xsl:copy>
         </xsl:param>
-        <xsl:param name="instantiationSuffixComplete">
-            <xsl:value-of select="$instantiationIDParsed/
-                instantiationIDParsed/
-                instantiationSuffixComplete"/>
+        <xsl:param name="instantiationsToAdd">
+            <xsl:copy select="$instantiationsToAddLog/pb:pbcoreCollection">
+                <xsl:copy-of select="pb:newData/pb:pbcoreDescriptionDocument"/>
+            </xsl:copy>
         </xsl:param>
-        <xsl:param name="cavafyEntry">
-            <xsl:message select="
-                'Parent document of ', 
-                $instantiationID, ' is ',
-                parent::pb:pbcoreDescriptionDocument/
-                *[position() lt 6],
-                ', etc.'"/>
-            <xsl:copy-of select="
-                parent::pb:pbcoreDescriptionDocument"/>
-        </xsl:param> 
         
-        <xsl:param name="generatedCurrentFilename">
-            <xsl:apply-templates
-                select="
-                $instantiationID[matches(., '[0-9]{4,6}\.[0-9]')]"
-                mode="
-                generateNextFilename">
-                <xsl:with-param name="instantiationIDParsed" select="$instantiationIDParsed"/>
-                <xsl:with-param name="foundAsset" select="$cavafyEntry"/>
-                <xsl:with-param name="nextInstantiationSuffixDigit" select="
-                    $instantiationSuffixComplete"/>
-            </xsl:apply-templates>
-        </xsl:param>
-        <xsl:param name="format">
-            <xsl:value-of select="
-                pb:instantiationDigital | 
-                pb:instantiationPhysical"/>
-        </xsl:param>
-        <xsl:param name="compactFormat" select="
-            replace($format, '\W', '')"/>
-        <xsl:param name="location" select="
-            pb:instantiationLocation"/> 
-        <xsl:param name="offsiteBox" select="
-            pb:instantiationIdentifier[@source='WNYC Archive Offsite ID']"/>
-        <xsl:param name="collectionAcronym" select="
-                parent::pb:pbcoreTitle
-                [@titleType='Collection']"/>
-        <xsl:param name="RIFF:ArchivalLocation" select="
-            WNYC:generateIARL($collectionAcronym)"/>
-        <xsl:param name="generation" select="
-            pb:instantiationGenerations"/>
-        <xsl:param name="missing"
+        <xsl:apply-templates select="$instantiationsToAddLog" mode="breakItUp">
+            <xsl:with-param name="baseURI" select="'file:/T:/02%20CATALOGING/SeriesCataloging/'"/>
+            <xsl:with-param name="filename" select="'NYACinstToAdd'"/>
+            <xsl:with-param name="filenameSuffix" select="'LOG'"/>
+            <xsl:with-param name="maxOccurrences" select="100000"/>
+        </xsl:apply-templates>
+        <xsl:apply-templates select="$instantiationsToAdd" mode="breakItUp">
+            <xsl:with-param name="baseURI" select="'file:/T:/02%20CATALOGING/SeriesCataloging/'"/>
+            <xsl:with-param name="filename" select="'NYACinstToAdd'"/>
+        </xsl:apply-templates>
+        <xsl:apply-templates select="$instantiationsToAddOriginalData" mode="breakItUp">
+            <xsl:with-param name="baseURI" select="'file:/T:/02%20CATALOGING/SeriesCataloging/'"/>
+            <xsl:with-param name="filename" select="'NYACinstToAddOriginalData'"/>
+            <xsl:with-param name="filenameSuffix" select="'ORIGINAL_DATA'"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xsl:template match="addInstantiation">
+        <xsl:param name="cavafyData" select="doc(concat(URL, '.xml'))/pb:pbcoreDescriptionDocument"/>
+       <xsl:param name="idToMatch" select="lower-case(Scan1)"/>
+        <xsl:param name="newInstID" select="lower-case(Scan2)"/>
+        
+        <originalData>
+            <xsl:copy-of select="$cavafyData"/>
+        </originalData>
+        <newData>
+        <xsl:copy select="$cavafyData">            
+            <xsl:copy-of select="$cavafyData/pb:pbcoreIdentifier[@source='WNYC Archive Catalog']"/>
+            <xsl:copy-of select="$cavafyData/pb:pbcoreTitle[@titleType='Collection']"/>
+            <xsl:variable name="matchedInstantiation" select="$cavafyData/pb:pbcoreInstantiation[pb:instantiationIdentifier[@source='WNYC Media Archive Label'] = $idToMatch]"/>
+            <xsl:copy select="$matchedInstantiation">
+                <instantiationIdentifier source="WNYC Media Archive Label">
+                    <xsl:value-of select="$newInstID"/>
+                </instantiationIdentifier>
+                <xsl:copy-of select="pb:instantiationDate"/>
+                <xsl:copy-of select="pb:instantiationPhysical"/>
+                <xsl:copy-of select="pb:instantiationLocation"/>
+                <xsl:copy-of select="pb:instantiationMediaType"/>
+                <xsl:copy-of select="pb:instantiationGenerations"/>
+            </xsl:copy>
+        </xsl:copy>
+        </newData>
+    </xsl:template>
+
+    <!--<xsl:template match="node()" mode="breakItUp">
+        <xsl:param name="firstOccurrence" select="1"/>
+        <xsl:param name="maxOccurrences" select="200"/>
+        <xsl:param name="total" select="count(child::*)"/>
+        <xsl:param name="baseURI"/>
+        <xsl:param name="filename" select="document-uri()"/>
+        <xsl:param name="filenameSuffix" select="'_ForCAVAFY'"/>
+        <xsl:param name="currentDate" select="format-date(current-date(), '[Y0001][M01][D01]')"/>
+        <xsl:param name="assetName" select="name(child::*[1])"/>
+        
+        <xsl:message
             select="
-            contains($location, 'MISSING')
-            or
-            contains($location, 'NOT FOUND')"
-        />
+            'Break up document into ',
+            $maxOccurrences, '-size pieces'"/>
         
-        <xsl:param name="cavafySeriesTitle" select="
-            parent::pb:pbcoreDescriptionDocument/
-            pb:pbcoreTitle[@titleType = 'Series']"
-        />
-        
-        <xsl:param name="System:Directory">
-            <xsl:value-of select="$location, $offsiteBox" separator="\"/>
-        </xsl:param>
-        <xsl:param name="System:FileName" select="
+        <xsl:variable name="lastPosition"
+            select="
+            count(
+            *[position() ge $firstOccurrence]
+            [position() le $maxOccurrences])"/>
+        <xsl:variable name="filenameCavafy"
+            select="
             concat(
-            $generatedCurrentFilename, 
-            '.', 
-            $compactFormat)"/>
-        <xsl:param name="System:FileSize" select="
-            pb:instantiationFileSize"/>     
-        <xsl:param name="System:FileCreateDate"
-            select="pb:instantiationDate
-            [@dateType='Created'][1]"/>
-        <xsl:param name="File:FileType" select="$format"/>
-        <xsl:param name="File:FileTypeExtension" select="
-            $compactFormat"/>        
-        <xsl:param name="RIFF:Encoding" select="pb:instantiationEssenceTrack/
-            pb:essenceTrackStandard"/>
-        <xsl:param name="RIFF:NumChannels" select="pb:instantiationChannelConfiguration"/>
-        <xsl:param name="RIFF:SampleRate" select="pb:instantiationEssenceTrack/
-            pb:essenceTrackSamplingRate"/>
-        <xsl:param name="RIFF:AvgBytesPerSec" select="pb:instantiationEssenceTrack/
-            pb:essenceTrackDataRate"/>
-        <xsl:param name="RIFF:BitsPerSample" select="pb:instantiationEssenceTrack/
-            pb:essenceTrackBitDepth"/>        
-        <xsl:param name="RIFF:Medium" select="$format"/>
-        <xsl:param name="RIFF:Product" select="parent::pb:pbcoreDescriptionDocument/
-            pb:pbcoreTitle[@titleType='Series']"/>
-        
-        <!-\- Generate physical exif -\->
-        
-        <xsl:element name="rdf:Description">
-            <xsl:attribute name="rdf:about"
-                select="
-                concat(
-                $System:Directory, '/', $System:FileName)"/>
-            <xsl:namespace name="ExifTool" select="'http://ns.exiftool.ca/ExifTool/1.0/'"/>
-            <xsl:namespace name="et" select="'http://ns.exiftool.ca/1.0/'"/>
-            <xsl:attribute name="et:toolkit" select="'Image::ExifTool 10.82'"/>
-            <xsl:namespace name="System" select="'http://ns.exiftool.ca/File/System/1.0/'"/>
-            <xsl:namespace name="File" select="'http://ns.exiftool.ca/File/1.0/'"/>
-            <xsl:namespace name="RIFF" select="'http://ns.exiftool.ca/RIFF/RIFF/1.0/'"/>
-            <xsl:namespace name="XMP-x" select="'http://ns.exiftool.ca/XMP/XMP-x/1.0/'"/>
-            <xsl:namespace name="XMP-xmp" select="'http://ns.exiftool.ca/XMP/XMP-xmp/1.0/'"/>
-            <xsl:namespace name="XMP-xmpDM" select="'http://ns.exiftool.ca/XMP/XMP-xmpDM/1.0/'"/>
-            <xsl:namespace name="XMP-xmpMM" select="'http://ns.exiftool.ca/XMP/XMP-xmpMM/1.0/'"/>
-            <xsl:namespace name="XMP-dc" select="'http://ns.exiftool.ca/XMP/XMP-dc/1.0/'"/>
-            <xsl:namespace name="XMP-plus" select="'http://ns.exiftool.ca/XMP/XMP-plus/1.0/'"/>
-            <xsl:namespace name="XML" select="'http://ns.exiftool.ca/XML/XML/1.0/'"/>
-            <xsl:namespace name="Composite" select="'http://ns.exiftool.ca/Composite/1.0/'"/>
-            <xsl:comment>
-                *************************************************
-                AN RDF REPRESENTATION OF A PHYSICAL INSTANTIATION 
-                *************************************************
-            </xsl:comment>
-            <ExifTool:ExifToolVersion>****************0.0 (FAKE
-                VERSION)******************</ExifTool:ExifToolVersion>
-            <System:FileName>
-                <xsl:value-of select="$System:FileName"/>
-            </System:FileName>
-            <System:Directory>
-                <xsl:value-of select="$System:Directory"/>
-            </System:Directory>
-            <System:FileSize>
-                <xsl:value-of select="$System:FileSize"/>
-            </System:FileSize>
-            <System:FileCreateDate>
-                <xsl:value-of select="$System:FileCreateDate"/>
-            </System:FileCreateDate>
-            <System:FilePermissions>rw-rw-rw-</System:FilePermissions>
-            <File:FileType>
-                <xsl:value-of select="$File:FileType"/>
-            </File:FileType>
-            <File:FileTypeExtension>
-                <xsl:value-of select="$File:FileTypeExtension"/>
-            </File:FileTypeExtension>
-            <RIFF:Encoding>
-                <xsl:value-of select="$RIFF:Encoding"/>
-            </RIFF:Encoding>
-            <RIFF:NumChannels>
-                <xsl:value-of select="$RIFF:NumChannels"/>
-            </RIFF:NumChannels>
-            <RIFF:SampleRate>
-                <xsl:value-of select="$RIFF:SampleRate"/>
-            </RIFF:SampleRate>
-            <RIFF:AvgBytesPerSec>
-                <xsl:value-of select="$RIFF:AvgBytesPerSec"/>
-            </RIFF:AvgBytesPerSec>
-            <RIFF:BitsPerSample>
-                <xsl:value-of select="$RIFF:BitsPerSample"/>
-            </RIFF:BitsPerSample>
-            <RIFF:ArchivalLocation>
-                <xsl:value-of select="$RIFF:ArchivalLocation"/>
-            </RIFF:ArchivalLocation>
-            <RIFF:Artist>http://id.loc.gov/authorities/names/n85210380 ; http://id.loc.gov/authorities/names/n81151642</RIFF:Artist>
-            <RIFF:Commissioned>http://id.loc.gov/authorities/names/n81047053</RIFF:Commissioned>
-            <RIFF:Comment>7/21/2021 SB:Content is the same between WNYC-SSTA-1995-07-20-250472.3 Spiegelman and WNYC-SSTA-1995-07-20-250472.4 Spiegelman.</RIFF:Comment>
-            <RIFF:Copyright>Terms of Use and Reproduction: WNYC Radio. Check individual concert contract. Additional copyright may apply to musical selections.</RIFF:Copyright>
-            <RIFF:DateCreated>7/20/1995</RIFF:DateCreated>
-            <RIFF:Genre>Reading</RIFF:Genre>
-            <RIFF:Keywords>http://id.loc.gov/authorities/subjects/sh85008324; http://id.loc.gov/authorities/subjects/sh85004336; http://id.loc.gov/authorities/subjects/sh85020532; http://id.loc.gov/authorities/subjects/sh85040976; http://id.loc.gov/authorities/subjects/sh2006004207; http://id.loc.gov/authorities/subjects/sh97007702; http://id.loc.gov/authorities/subjects/sh2002001142; http://id.loc.gov/authorities/subjects/sh94008233; http://id.loc.gov/authorities/subjects/sh85061521; http://id.loc.gov/authorities/subjects/sh2016001404; http://id.loc.gov/authorities/subjects/sh97001746; http://id.loc.gov/authorities/subjects/sh2003006553; http://id.loc.gov/authorities/subjects/sh85092863; http://id.loc.gov/authorities/subjects/sh85103733; http://id.loc.gov/authorities/subjects/sh85118942; http://id.loc.gov/authorities/subjects/sh85088067; http://id.loc.gov/authorities/subjects/sh85088030; http://id.loc.gov/authorities/subjects/sh85088064; http://id.loc.gov/authorities/subjects/sh85088104</RIFF:Keywords>
-            <RIFF:Medium>DAT 250472.1</RIFF:Medium>
-            <RIFF:Title>Art Spiegelman and Paul Auster</RIFF:Title>
-            <RIFF:Product>Central Park SummerStage</RIFF:Product>
-            <RIFF:Subject>The cartoonist Art Spiegelman and the author Paul Auster live at Central Park SummerStage.</RIFF:Subject>
-            <RIFF:Software>Reaper v5.11/64 rev 237910</RIFF:Software>
-            <RIFF:Source>https://cavafy.wnyc.org/assets/df62471b-6de7-42af-8b85-f6560dc0082f</RIFF:Source>
-            <RIFF:SourceForm>WNYC Radio DAT 250472.1 Master: preservation from 250472</RIFF:SourceForm>
-            <RIFF:Technician>Jeff Franklin, George Blood L.P.</RIFF:Technician>
-            <RIFF:Description>
-                <xsl:value-of select="$generatedCurrentFilename"/>
-            </RIFF:Description>
-            <RIFF:Originator>
-                <xsl:value-of select="'ARCHIVES'"/>
-            </RIFF:Originator>
-            <RIFF:Medium>
-                <xsl:value-of select="$RIFF:Medium"/>
-            </RIFF:Medium>
-            <RIFF:Product>
-                <xsl:value-of select="$RIFF:Product"/>
-            </RIFF:Product>
-        </xsl:element>
+            substring-before(
+            $baseURI, '.'),
+            $filename,
+            $filenameSuffix,
+            $currentDate,
+            '_', $assetName,
+            $firstOccurrence, '-',
+            ($firstOccurrence + $lastPosition - 1),
+            '.xml'
+            )"/>
+        <xsl:result-document href="{$filenameCavafy}">
+            <xsl:copy>
+                <xsl:comment select="$assetName, $firstOccurrence, 'to', ($firstOccurrence + $lastPosition - 1), 'from a total of', $total"/>
+                <xsl:copy-of
+                    select="child::*[position() ge $firstOccurrence][position() le ($maxOccurrences)]"
+                />
+            </xsl:copy>
+        </xsl:result-document>
+        <xsl:if
+            test="
+            ($firstOccurrence + $maxOccurrences)
+            le $total">
+            <xsl:call-template name="breakItUp">
+                <xsl:with-param name="firstOccurrence"
+                    select="
+                    $firstOccurrence + $maxOccurrences"/>
+                <xsl:with-param name="maxOccurrences"
+                    select="
+                    $maxOccurrences"/>
+                <xsl:with-param name="assetName" select="
+                    $assetName"/>
+                <xsl:with-param name="baseURI" select="$baseURI"/>
+                <xsl:with-param name="filename" select="$filename"/>
+                <xsl:with-param name="filenameSuffix" select="$filenameSuffix"/>
+            </xsl:call-template>
+        </xsl:if>
     </xsl:template>-->
 
 </xsl:stylesheet>

@@ -4,8 +4,7 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       <title>Stylesheet documentation for: Exif2Dbx.xsl</title>
-      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
-         <!--
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
         
         
         
@@ -365,8 +364,10 @@
                         <td>
                            <div id="dS_Exif2Dbx.xsl" style="display:block">
                               <div>
-                                 <h3>Description</h3><pre> Transform an exiftool xml
-into an xml .DBX file suitable for ingest into D.A.V.I.D. </pre></div>
+                                 <h3>Description</h3>
+                                 <pre> Transform an exiftool xml
+into an xml .DBX file suitable for ingest into D.A.V.I.D. </pre>
+                              </div>
                            </div>
                         </td>
                      </tr>
@@ -424,7 +425,9 @@ into an xml .DBX file suitable for ingest into D.A.V.I.D. </pre></div>
                         <td>
                            <div id="dS_M_rdfRDFM_DAVIDS_Exif2Dbx.xsl" style="display:block">
                               <div>
-                                 <h3>Description</h3><pre>Output definitions </pre></div>
+                                 <h3>Description</h3>
+                                 <pre>Output definitions </pre>
+                              </div>
                            </div>
                         </td>
                      </tr>
@@ -442,7 +445,7 @@ into an xml .DBX file suitable for ingest into D.A.V.I.D. </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>20</td>
+                        <td>10</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -453,13 +456,15 @@ into an xml .DBX file suitable for ingest into D.A.V.I.D. </pre></div>
                            <div id="src_M_rdfRDFM_DAVIDS_Exif2Dbx.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:RDF"</span><span class="tAN"> mode=</span><span class="tAV">"DAVID"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:RDF"</span><span class="tAN"> mode=</span><span class="tAV">"DAVID"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Match top element --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'DAVID here we go'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tEl">&lt;ENTRIES</span><span class="tEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"rdf:Description"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tEl">&lt;/ENTRIES&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -512,7 +517,7 @@ into an xml .DBX file suitable for ingest into D.A.V.I.D. </pre></div>
                                     <td class="fCol">Parameter</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter12.html#P_segmentFlagsS_parseDAVIDTitle.xsl" target="_self" title="No namespace" onclick="updPT('parseDAVIDTitle.xsl')">segmentFlags</a></div>
+                                          <div class="refItemBlock"><a href="masterRouter13.html#P_segmentFlagsS_parseDAVIDTitle.xsl" target="_self" title="No namespace" onclick="updPT('parseDAVIDTitle.xsl')">segmentFlags</a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -520,7 +525,7 @@ into an xml .DBX file suitable for ingest into D.A.V.I.D. </pre></div>
                                     <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter18.html#T_substring-before-lastS_trimStrings.xsl" target="_self" title="No namespace" onclick="updPT('trimStrings.xsl')"><span class="nRf">substring-before-last</span></a></div>
+                                          <div class="refItemBlock"><a href="masterRouter19.html#T_substring-before-lastS_trimStrings.xsl" target="_self" title="No namespace" onclick="updPT('trimStrings.xsl')"><span class="nRf">substring-before-last</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -530,7 +535,7 @@ into an xml .DBX file suitable for ingest into D.A.V.I.D. </pre></div>
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>20</td>
+                        <td>10</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -541,7 +546,8 @@ into an xml .DBX file suitable for ingest into D.A.V.I.D. </pre></div>
                            <div id="src_M_rdfDescriptionM_DAVIDS_Exif2Dbx.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:Description"</span><span class="tAN"> mode=</span><span class="tAV">"DAVID"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:Description"</span><span class="tAN"> mode=</span><span class="tAV">"DAVID"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Process a file --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"filename"</span><span class="tAN"> select=</span><span class="tAV">"                 normalize-space(RIFF:Description)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"catalogURL"</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -764,7 +770,8 @@ into an xml .DBX file suitable for ingest into D.A.V.I.D. </pre></div>
       </span><span class="tEl">&lt;/ENTRY&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -783,10 +790,8 @@ into an xml .DBX file suitable for ingest into D.A.V.I.D. </pre></div>
       </table>
       <div class="footer">
          <hr />
-         <div align="center">Stylesheet documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
-         </div>
-      </div><script type="text/javascript">
-         <!--
+         <div align="center">Stylesheet documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
                     // The namespace is the selected option in the TOC combo.
                     
                     // The corresponding div is already visible conf. to its style attr.                     

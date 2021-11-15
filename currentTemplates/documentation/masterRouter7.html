@@ -4,19 +4,21 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       <title>Stylesheet documentation for: Exif2BWF.xsl</title>
-      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
-         <!--
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
         
         
         
         
         var docBoxes= new Array('dS_Exif2BWF.xsl');
 
-        var sourceBoxes= new Array('src_M_rdfRDFM_ixmlFillerS_Exif2BWF.xsl', 
-				'src_T_ixmlFillerS_Exif2BWF.xsl', 
+        var sourceBoxes= new Array('src_M_rdfRDFM_BWFCoreFillerS_Exif2BWF.xsl', 
+				'src_T_BWFCoreFillerS_Exif2BWF.xsl', 
+				'src_M_rdfRDFM_BWFCoreCSVS_Exif2BWF.xsl', 
+				'src_T_BWFCoreCSVS_Exif2BWF.xsl', 
 				'src_V_illegalCharactersS_Exif2BWF.xsl', 
 				'src_V_legalCharactersS_Exif2BWF.xsl', 
-				'src_O_FADGIS_Exif2BWF.xsl');
+				'src_O_FADGIS_Exif2BWF.xsl', 
+				'src_O_S_Exif2BWF.xsl');
 
         
         var overridingBoxes= new Array('ovr_V_illegalCharactersS_Exif2BWF.xsl', 
@@ -368,8 +370,10 @@
                         <td>
                            <div id="dS_Exif2BWF.xsl" style="display:block">
                               <div>
-                                 <h3>Description</h3><pre> Convert Exif to BWF MetaEdit Core document, 
-    suitable for import </pre></div>
+                                 <h3>Description</h3>
+                                 <pre> Convert Exif to BWF MetaEdit Core document, 
+    suitable for import </pre>
+                              </div>
                            </div>
                         </td>
                      </tr>
@@ -406,8 +410,8 @@
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="M_rdfRDFM_ixmlFillerS_Exif2BWF.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">rdf:RDF</span><span class="titleTemplateMode">ixmlFiller</span></div>
+      </table><a id="M_rdfRDFM_BWFCoreFillerS_Exif2BWF.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">rdf:RDF</span><span class="titleTemplateMode">BWFCoreFiller</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -429,7 +433,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Mode</td>
-                        <td>ixmlFiller</td>
+                        <td>BWFCoreFiller</td>
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
@@ -438,18 +442,20 @@
                      <tr>
                         <td class="fCol">
                            <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_M_rdfRDFM_ixmlFillerS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_rdfRDFM_ixmlFillerS_Exif2BWF.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_src_M_rdfRDFM_BWFCoreFillerS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_rdfRDFM_BWFCoreFillerS_Exif2BWF.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_M_rdfRDFM_ixmlFillerS_Exif2BWF.xsl" style="display:block">
+                           <div id="src_M_rdfRDFM_BWFCoreFillerS_Exif2BWF.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:RDF"</span><span class="tAN"> mode=</span><span class="tAV">"ixmlFiller"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:RDF"</span><span class="tAN"> mode=</span><span class="tAV">"BWFCoreFiller"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Match top level element --&gt;</span><span class="tI">
   </span><span class="tEl">&lt;conformance_point_document</span><span class="tEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"rdf:Description"</span><span class="tAN"> mode=</span><span class="tAV">"ixmlFiller"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"rdf:Description"</span><span class="tAN"> mode=</span><span class="tAV">"BWFCoreFiller"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tEl">&lt;/conformance_point_document&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -465,8 +471,8 @@
             <td class="rt_lB"></td>
             <td class="rt_cBR"></td>
          </tr>
-      </table><a id="T_ixmlFillerS_Exif2BWF.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">rdf:Description</span><span class="titleTemplateName">ixmlFiller</span><span class="titleTemplateMode">ixmlFiller</span></div>
+      </table><a id="T_BWFCoreFillerS_Exif2BWF.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">rdf:Description</span><span class="titleTemplateName">BWFCoreFiller</span><span class="titleTemplateMode">BWFCoreFiller</span></div>
       <table class="rt">
          <tr>
             <td class="rt_cTL"></td>
@@ -488,7 +494,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Mode</td>
-                        <td>ixmlFiller</td>
+                        <td>BWFCoreFiller</td>
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
@@ -497,13 +503,14 @@
                      <tr>
                         <td class="fCol">
                            <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_T_ixmlFillerS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_ixmlFillerS_Exif2BWF.xsl');" class="control" /></div>
+                           <div class="flR"><input id="bt_src_T_BWFCoreFillerS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_BWFCoreFillerS_Exif2BWF.xsl');" class="control" /></div>
                         </td>
                         <td>
-                           <div id="src_T_ixmlFillerS_Exif2BWF.xsl" style="display:block">
+                           <div id="src_T_BWFCoreFillerS_Exif2BWF.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:Description"</span><span class="tAN"> name=</span><span class="tAV">"ixmlFiller"</span><span class="tAN"> mode=</span><span class="tAV">"ixmlFiller"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:Description"</span><span class="tAN"> name=</span><span class="tAV">"BWFCoreFiller"</span><span class="tAN"> mode=</span><span class="tAV">"BWFCoreFiller"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Process each WAVE file --&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- CORE OUTPUT --&gt;</span><span class="tI">
   </span><span class="tEl">&lt;File</span><span class="tAN"> name=</span><span class="tAV">"{@rdf:about}"</span><span class="tEl">&gt;</span><span class="tI">
@@ -609,7 +616,268 @@
       </span><span class="tEl">&lt;/ITCH&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/Core&gt;</span><span class="tI">
   </span><span class="tEl">&lt;/File&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="M_rdfRDFM_BWFCoreCSVS_Exif2BWF.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">rdf:RDF</span><span class="titleTemplateMode">BWFCoreCSV</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Match</td>
+                        <td>rdf:RDF</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Mode</td>
+                        <td>BWFCoreCSV</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>0</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_M_rdfRDFM_BWFCoreCSVS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_rdfRDFM_BWFCoreCSVS_Exif2BWF.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_M_rdfRDFM_BWFCoreCSVS_Exif2BWF.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:RDF"</span><span class="tAN"> mode=</span><span class="tAV">"BWFCoreCSV"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Match top level element --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">FileName,Description,Originator,OriginatorReference,OriginationDate,OriginationTime,BextVersion,UMID,CodingHistory,IARL,IART,ICMS,ICMT,ICOP,ICRD,IENG,IGNR,IKEY,IMED,INAM,IPRD,ISBJ,ISFT,ISRC,ISRF,ITCH</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"rdf:Description"</span><span class="tAN"> mode=</span><span class="tAV">"BWFCoreCSV"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="T_BWFCoreCSVS_Exif2BWF.xsl"></a><div class="cmpT">Template
+         <span class="titleTemplateMatch">rdf:Description</span><span class="titleTemplateName">BWFCoreCSV</span><span class="titleTemplateMode">BWFCoreCSV</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Match</td>
+                        <td>rdf:Description</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Mode</td>
+                        <td>BWFCoreCSV</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>0</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_T_BWFCoreCSVS_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_T_BWFCoreCSVS_Exif2BWF.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_T_BWFCoreCSVS_Exif2BWF.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"rdf:Description"</span><span class="tAN"> name=</span><span class="tAV">"BWFCoreCSV"</span><span class="tAN"> mode=</span><span class="tAV">"BWFCoreCSV"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tC">&lt;!-- Process each WAVE file --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"CommentEndsWithParagraph"</span><span class="tAN"> select=</span><span class="tAV">"ends-with(RIFF:Comment, ' ')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"CopyrightEndsWithParagraph"</span><span class="tAN"> select=</span><span class="tAV">"ends-with(RIFF:Copyright, ' ')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"SubjectEndsWithParagraph"</span><span class="tAN"> select=</span><span class="tAV">"ends-with(RIFF:Subject, ' ')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'
+'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"@rdf:about"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Description)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Originator)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:OriginatorReference"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:DateTimeOriginal)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:TimeReference)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:BWFVersion)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:BWF_UMID)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:CodingHistory"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:ArchivalLocation)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Artist)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Commissioned)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:Comment"</span><span class="tAN"> disable-output-escaping=</span><span class="tAV">"true"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' '[not($CommentEndsWithParagraph)]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:Copyright"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' '[not($CopyrightEndsWithParagraph)]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:DateCreated"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' '[not($CopyrightEndsWithParagraph)]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Engineer)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Genre)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Keywords)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Medium)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Title)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Product)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"RIFF:Subject"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' '[not($SubjectEndsWithParagraph)]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Software)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Source)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:SourceForm)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"','"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"normalize-space(RIFF:Technician)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">
+</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -671,10 +939,12 @@
                            <div id="src_V_illegalCharactersS_Exif2BWF.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"illegalCharacters"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"illegalCharacters"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">“” &#x80;&#x93;&#x94;¦—’</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">ÂÃ±â&#x99;&#x9c;&#x9d;</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:variable&gt;</span></pre></td>
+</span><span class="tXSLEl">&lt;/xsl:variable&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -736,9 +1006,11 @@
                            <div id="src_V_legalCharactersS_Exif2BWF.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"legalCharacters"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"legalCharacters"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">"" '——…—'</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:variable&gt;</span></pre></td>
+</span><span class="tXSLEl">&lt;/xsl:variable&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -806,7 +1078,77 @@
                            <div id="src_O_FADGIS_Exif2BWF.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:output</span><span class="tAN"> name=</span><span class="tAV">"FADGI"</span><span class="tAN"> encoding=</span><span class="tAV">"UTF-8"</span><span class="tAN"> method=</span><span class="tAV">"xml"</span><span class="tAN"> version=</span><span class="tAV">"1.0"</span><span class="tAN"> standalone=</span><span class="tAV">"yes"</span><span class="tAN"> indent=</span><span class="tAV">"yes"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:output</span><span class="tAN"> name=</span><span class="tAV">"FADGI"</span><span class="tAN"> encoding=</span><span class="tAV">"UTF-8"</span><span class="tAN"> method=</span><span class="tAV">"xml"</span><span class="tAN"> version=</span><span class="tAV">"1.0"</span><span class="tAN"> standalone=</span><span class="tAV">"yes"</span><span class="tAN"> indent=</span><span class="tAV">"yes"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="O_S_Exif2BWF.xsl"></a><div class="cmpT">Output
+         <span class="qname">(default)</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Output properties</div>
+                           <div class="flR"><input id="bt_o_" type="image" src="img/btM.gif" value="-" onclick="switchState('o_');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="o_" style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>method</th>
+                                       <th>encoding</th>
+                                       <th>indent</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_O_S_Exif2BWF.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_O_S_Exif2BWF.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_O_S_Exif2BWF.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:output</span><span class="tAN"> method=</span><span class="tAV">"text"</span><span class="tAN"> indent=</span><span class="tAV">"yes"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -825,10 +1167,8 @@
       </table>
       <div class="footer">
          <hr />
-         <div align="center">Stylesheet documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
-         </div>
-      </div><script type="text/javascript">
-         <!--
+         <div align="center">Stylesheet documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
                     // The namespace is the selected option in the TOC combo.
                     
                     // The corresponding div is already visible conf. to its style attr.                     

@@ -974,15 +974,16 @@
                 $noFinalPeriod,
                 1)
                 "/>
-        <xsl:variable name="searchTermURL"
+        <xsl:param name="searchTermURL"
             select="
                 encode-for-uri($termToSearchClean)"/>
-        <xsl:variable name="subjectSearchString"
+        <xsl:param name="subjectSearchString"
             select="
                 concat(
                 'http://id.loc.gov/authorities/subjects/label/',
                 $searchTermURL,
                 '.rdf')"/>
+        <xsl:param name="passThrough" select="false()"/>
         <xsl:message
             select="
                 'Search LoC subject headings directly for the term ',
@@ -990,7 +991,29 @@
                 ' using search string ',
                 $subjectSearchString
                 "/>
-        <xsl:if test="unparsed-text-available($subjectSearchString)">
+        <xsl:variable name="successfulSearch" select="unparsed-text-available($subjectSearchString)"/>
+        <xsl:choose>
+            <xsl:when test="$successfulSearch">
+                <xsl:copy-of
+                    select="
+                    doc(
+                    $subjectSearchString
+                    [$successfulSearch]
+                    )"
+                />
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:if test="$passThrough">
+                    <rdf:RDF>
+                        <madsrdf:Topic>
+                            <xsl:attribute name="rdf:about" select="$termToSearch"/>
+                        </madsrdf:Topic>
+                    </rdf:RDF>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+        <!--<xsl:if test="$successfulSearch">
             <xsl:copy-of
                 select="
                     doc(
@@ -998,7 +1021,7 @@
                     [unparsed-text-available(.)]
                     )"
             />
-        </xsl:if>
+        </xsl:if>-->
     </xsl:template>
 
     <xsl:template name="directLOCSearch" match="

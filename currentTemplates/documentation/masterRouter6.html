@@ -4,8 +4,7 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       <title>Stylesheet documentation for: instantiationID2Exif.xsl</title>
-      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
-         <!--
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
         
         var parametersBoxes= new Array('prs_M_instantiationIDsS_instantiationID2Exif.xsl', 
 				'prs_M_instantiationIDsM_sortInstantiationIDsS_instantiationID2Exif.xsl', 
@@ -18,8 +17,7 @@
 				'dS_P_DirectoryS_instantiationID2Exif.xsl', 
 				'dS_P_FileTypeS_instantiationID2Exif.xsl');
 
-        var sourceBoxes= new Array('src_M_S_instantiationID2Exif.xsl', 
-				'src_M_instantiationIDsS_instantiationID2Exif.xsl', 
+        var sourceBoxes= new Array('src_M_instantiationIDsS_instantiationID2Exif.xsl', 
 				'src_M_instantiationIDsM_sortInstantiationIDsS_instantiationID2Exif.xsl', 
 				'src_M_instantiationIDsM_generateExifS_instantiationID2Exif.xsl', 
 				'src_M_instantiationIDM_generateExifS_instantiationID2Exif.xsl', 
@@ -28,8 +26,7 @@
 				'src_P_FileTypeS_instantiationID2Exif.xsl');
 
         
-        var overridingBoxes= new Array('ovr_M_S_instantiationID2Exif.xsl');
-
+        
         var referencesBoxes= new Array('refs_M_instantiationIDM_generateExifS_instantiationID2Exif.xsl', 
 				'refs_P_DirectoryS_instantiationID2Exif.xsl');
 
@@ -346,9 +343,6 @@
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, referencesBoxes);" class="control" /></span><span class="globalControlName">References </span></td>
                      </tr>
                      <tr>
-                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, overridingBoxes);" class="control" /></span><span class="globalControlName">Overriding </span></td>
-                     </tr>
-                     <tr>
                         <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, importedFromBoxes);" class="control" /></span><span class="globalControlName">Imported from
                               </span></td>
                      </tr>
@@ -401,82 +395,6 @@
                      <tr>
                         <td class="fCol">Stylesheet version</td>
                         <td>2.0</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </td>
-            <td class="rt_lR"></td>
-         </tr>
-         <tr>
-            <td class="rt_cBL"></td>
-            <td class="rt_lB"></td>
-            <td class="rt_cBR"></td>
-         </tr>
-      </table><a id="M_S_instantiationID2Exif.xsl"></a><div class="cmpT">Template
-         <span class="titleTemplateMatch">/</span></div>
-      <table class="rt">
-         <tr>
-            <td class="rt_cTL"></td>
-            <td class="rt_lT"></td>
-            <td class="rt_cTR"></td>
-         </tr>
-         <tr>
-            <td class="rt_lL"></td>
-            <td class="rt_cnt">
-               <table class="component">
-                  <tbody>
-                     <tr>
-                        <td class="fCol">Namespace</td>
-                        <td>No namespace</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Match</td>
-                        <td>/</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Mode</td>
-                        <td>#default</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Overriding</div>
-                           <div class="flR"><input id="bt_ovr_M_S_instantiationID2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('ovr_M_S_instantiationID2Exif.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="ovr_M_S_instantiationID2Exif.xsl" style="display:block">
-                              <table class="uBT">
-                                 <tr>
-                                    <td class="fCol">Template</td>
-                                    <td>
-                                       <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter0.html#M_S_masterRouter.xsl" target="_self" title="No namespace" onclick="updPT('masterRouter.xsl')"><span class="mRf">/</span></a></div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">Import precedence</td>
-                        <td>35</td>
-                     </tr>
-                     <tr>
-                        <td class="fCol">
-                           <div class="flL">Source</div>
-                           <div class="flR"><input id="bt_src_M_S_instantiationID2Exif.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_M_S_instantiationID2Exif.xsl');" class="control" /></div>
-                        </td>
-                        <td>
-                           <div id="src_M_S_instantiationID2Exif.xsl" style="display:block">
-                              <table class="pWCont">
-                                 <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"/"</span><span class="tXSLEl">&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"instantiationIDs"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
-                                 </tr>
-                              </table>
-                           </div>
-                        </td>
                      </tr>
                   </tbody>
                </table>
@@ -544,7 +462,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>35</td>
+                        <td>53</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -555,13 +473,15 @@
                            <div id="src_M_instantiationIDsS_instantiationID2Exif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"instantiationIDs"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"instantiationIDs"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"instantiationIDs"</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"instantiationIDsSorted"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"$instantiationIDs"</span><span class="tAN"> mode=</span><span class="tAV">"                 sortInstantiationIDs"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"                 $instantiationIDsSorted"</span><span class="tAN"> mode=</span><span class="tAV">"generateExif"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -638,7 +558,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>35</td>
+                        <td>53</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -649,32 +569,37 @@
                            <div id="src_M_instantiationIDsM_sortInstantiationIDsS_instantiationID2Exif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"instantiationIDs"</span><span class="tAN"> mode=</span><span class="tAV">"sortInstantiationIDs"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"instantiationIDs"</span><span class="tAN"> mode=</span><span class="tAV">"sortInstantiationIDs"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Sort instantiation IDs by asset and then
         by the number part of the instantiation Extension --&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"instantiationIDs"</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"instantiationIDsParsed"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"$instantiationIDs/instantiationID"</span><span class="tAN"> mode=</span><span class="tAV">"parseInstantiationID"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"                     $instantiationIDs/                     instantiationID"</span><span class="tAN"> mode=</span><span class="tAV">"                 parseInstantiationID"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"instantiationIDsSorted"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;instantiationIDs</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:copy</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"@*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"$instantiationIDsParsed//instantiationIDParsed"</span><span class="tXSLEl">&gt;</span><span class="tI">
         </span><span class="tC">&lt;!-- Sort by asset ID --&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:sort</span><span class="tAN"> select=</span><span class="tAV">"assetID"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:sort</span><span class="tAN"> select=</span><span class="tAV">"number(assetID)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tC">&lt;!-- Sort by instantiation suffix --&gt;</span><span class="tI">
-        </span><span class="tXSLEl">&lt;xsl:sort</span><span class="tAN"> select=</span><span class="tAV">"instantiationSuffixDigit"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:sort</span><span class="tAN"> select=</span><span class="tAV">"number(instantiationSuffixDigit)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tC">&lt;!-- Sort by first track in multitrack --&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:sort</span><span class="tAN"> select=</span><span class="tAV">"instantiationFirstTrack"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"instantiationID"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/instantiationIDs&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:copy&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:message</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'Sorted instantiaiton IDs from '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$instantiationIDsParsed//instantiationIDParsed"</span><span class="tAN"> separator=</span><span class="tAV">", "</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' to '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$instantiationIDsParsed//instantiationIDParsed/instantiationID"</span><span class="tAN"> separator=</span><span class="tAV">", "</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"' ...to... '"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$instantiationIDsSorted//instantiationID"</span><span class="tAN"> separator=</span><span class="tAV">", "</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:message&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$instantiationIDsSorted"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -717,7 +642,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>35</td>
+                        <td>53</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -728,16 +653,24 @@
                            <div id="src_M_instantiationIDsM_generateExifS_instantiationID2Exif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"instantiationIDs"</span><span class="tAN"> mode=</span><span class="tAV">"generateExif"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"instantiationIDs"</span><span class="tAN"> mode=</span><span class="tAV">"generateExif"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"                 'Generate a fake Exif document from',                 count(instantiationID), 'instantiationIDs.'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"fakeExif"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"rdf:RDF"</span><span class="tXSLEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"rdf"</span><span class="tAN"> select=</span><span class="tAV">"                         'http://www.w3.org/1999/02/22-rdf-syntax-ns#'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"instantiationID"</span><span class="tAN"> mode=</span><span class="tAV">"generateExif"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"                     instantiationID"</span><span class="tAN"> mode=</span><span class="tAV">"generateExif"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"$fakeExif/rdf:RDF"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+  </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"$fakeExif/rdf:RDF"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"outputEmail"</span><span class="tAN"> select=</span><span class="tAV">"true()"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"outputFADGI"</span><span class="tAN"> select=</span><span class="tAV">"false()"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"outputCavafy"</span><span class="tAN"> select=</span><span class="tAV">"false()"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"outputDAVID"</span><span class="tAN"> select=</span><span class="tAV">"false()"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"outputSlack"</span><span class="tAN"> select=</span><span class="tAV">"false()"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:apply-templates&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -790,7 +723,7 @@
                                     <td class="fCol">Template</td>
                                     <td>
                                        <div class="listGrouping">
-                                          <div class="refItemBlock"><a href="masterRouter17.html#T_checkConflictsS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')"><span class="nRf">checkConflicts</span></a></div>
+                                          <div class="refItemBlock"><a href="masterRouter18.html#T_checkConflictsS_manageDuplicates.xsl" target="_self" title="No namespace" onclick="updPT('manageDuplicates.xsl')"><span class="nRf">checkConflicts</span></a></div>
                                        </div>
                                     </td>
                                  </tr>
@@ -821,11 +754,6 @@
                                        <th>Select</th>
                                     </tr>
                                  </thead>
-                                 <tr>
-                                    <td class="fCol">DAVIDTitle</td>
-                                    <td>No namespace</td>
-                                    <td></td>
-                                 </tr>
                                  <tr>
                                     <td class="fCol">File:FileType</td>
                                     <td>http://ns.exiftool.ca/File/1.0/</td>
@@ -859,7 +787,7 @@
                                  <tr>
                                     <td class="fCol">RIFF:NumChannels</td>
                                     <td>http://ns.exiftool.ca/RIFF/RIFF/1.0/</td>
-                                    <td>'2'</td>
+                                    <td>'0'</td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">RIFF:Product</td>
@@ -874,39 +802,38 @@
                                  <tr>
                                     <td class="fCol">System:Directory</td>
                                     <td>http://ns.exiftool.ca/File/System/1.0/</td>
-                                    <td>             $System:Directory</td>
+                                    <td>$System:Directory</td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">System:FileCreateDate</td>
                                     <td>http://ns.exiftool.ca/File/System/1.0/</td>
                                     <td>                 format-dateTime(             current-dateTime(),              '[Y0001]-[M01]-[D01]
-                                       [H01]:[m01]:[s01][Z]'             )
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td class="fCol">System:FileName</td>
-                                    <td>http://ns.exiftool.ca/File/System/1.0/</td>
-                                    <td>                 concat(             $DAVIDTitle, '.', $File:FileTypeExtension)</td>
+                                       [H01]:[m01]:[s01][Z]'             )</td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">System:FileSize</td>
                                     <td>http://ns.exiftool.ca/File/System/1.0/</td>
-                                    <td>'1 MB'</td>
+                                    <td>'0 MB'</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">cavafyLocation</td>
+                                    <td>No namespace</td>
+                                    <td>             $generatedNextFilename/pb:inputs/             pb:parsedDAVIDTitle/pb:parsedElements/
+                                       pb:instantiationData/pb:pbcoreInstantiation/             pb:instantiationLocation
+                                       </td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">cavafySeriesTitle</td>
                                     <td>No namespace</td>
-                                    <td>$generatedNextFilename/pb:inputs/pb:cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreTitle[@titleType
-                                       = 'Series']
-                                    </td>
+                                    <td>             $generatedNextFilename/pb:inputs/             pb:cavafyEntry/pb:pbcoreDescriptionDocument/
+                                       pb:pbcoreTitle[@titleType = 'Series']</td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">cavafySourceFormat</td>
                                     <td>No namespace</td>
                                     <td>             $generatedNextFilename/pb:inputs/             pb:parsedDAVIDTitle/pb:parsedElements/
                                        pb:instantiationData/pb:pbcoreInstantiation/             (pb:instantiationDigital
-                                       |              pb:instantiationPhysical)
-                                    </td>
+                                       |              pb:instantiationPhysical)</td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">expectedSeries</td>
@@ -924,9 +851,25 @@
                                     <td>.</td>
                                  </tr>
                                  <tr>
+                                    <td class="fCol">missing</td>
+                                    <td>No namespace</td>
+                                    <td>                 contains($cavafyLocation, 'MISSING')                 or         
+                                       contains($cavafyLocation, 'NOT FOUND')</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">reportedGeneration</td>
+                                    <td>No namespace</td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">reportedLocation</td>
+                                    <td>No namespace</td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
                                     <td class="fCol">reportedSourceFormat</td>
                                     <td>No namespace</td>
-                                    <td>             $instantiationID/@format</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">sourceFormat</td>
@@ -939,7 +882,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>35</td>
+                        <td>53</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -950,16 +893,24 @@
                            <div id="src_M_instantiationIDM_generateExifS_instantiationID2Exif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"instantiationID"</span><span class="tAN"> mode=</span><span class="tAV">"         generateExif"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"instantiationID"</span><span class="tAN"> mode=</span><span class="tAV">"         generateExif"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"instantiationID"</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"generatedNextFilename"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"                 $instantiationID[matches(., '[0-9]{4,6}\.[0-9]')]"</span><span class="tAN"> mode=</span><span class="tAV">"                 generateNextFilename"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"DAVIDTitle"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"                 $generatedNextFilename/                 pb:inputs/                 pb:parsedDAVIDTitle/@DAVIDTitle"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"reportedSourceFormat"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"@format"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"reportedSourceFormat"</span><span class="tAN"> select=</span><span class="tAV">"             $instantiationID/@format"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"reportedLocation"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"@location"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"reportedGeneration"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"@generation"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"cavafySourceFormat"</span><span class="tAN"> select=</span><span class="tAV">"             $generatedNextFilename/pb:inputs/             pb:parsedDAVIDTitle/pb:parsedElements/             pb:instantiationData/pb:pbcoreInstantiation/             (pb:instantiationDigital |              pb:instantiationPhysical)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"cavafyLocation"</span><span class="tAN"> select=</span><span class="tAV">"             $generatedNextFilename/pb:inputs/             pb:parsedDAVIDTitle/pb:parsedElements/             pb:instantiationData/pb:pbcoreInstantiation/             pb:instantiationLocation             "</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"missing"</span><span class="tAN"> select=</span><span class="tAV">"                 contains($cavafyLocation, 'MISSING')                 or                 contains($cavafyLocation, 'NOT FOUND')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"sourceFormat"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:call-template</span><span class="tAN"> name=</span><span class="tAV">"checkConflicts"</span><span class="tXSLEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"field1"</span><span class="tAN"> select=</span><span class="tAV">"$reportedSourceFormat"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -969,15 +920,14 @@
     </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"expectedSeries"</span><span class="tAN"> select=</span><span class="tAV">"             parent::instantiationIDs/@series"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"cavafySeriesTitle"</span><span class="tAN"> select=</span><span class="tAV">"$generatedNextFilename/pb:inputs/pb:cavafyEntry/pb:pbcoreDescriptionDocument/pb:pbcoreTitle[@titleType = 'Series']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"System:Directory"</span><span class="tAN"> select=</span><span class="tAV">"             $System:Directory"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"System:FileSize"</span><span class="tAN"> select=</span><span class="tAV">"'1 MB'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"cavafySeriesTitle"</span><span class="tAN"> select=</span><span class="tAV">"             $generatedNextFilename/pb:inputs/             pb:cavafyEntry/pb:pbcoreDescriptionDocument/             pb:pbcoreTitle[@titleType = 'Series']"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"System:Directory"</span><span class="tAN"> select=</span><span class="tAV">"$System:Directory"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"System:FileSize"</span><span class="tAN"> select=</span><span class="tAV">"'0 MB'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"System:FileCreateDate"</span><span class="tAN"> select=</span><span class="tAV">"                 format-dateTime(             current-dateTime(),              '[Y0001]-[M01]-[D01] [H01]:[m01]:[s01][Z]'             )"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"File:FileType"</span><span class="tAN"> select=</span><span class="tAV">"$File:FileType"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"File:FileTypeExtension"</span><span class="tAN"> select=</span><span class="tAV">"$File:FileType"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"System:FileName"</span><span class="tAN"> select=</span><span class="tAV">"                 concat(             $DAVIDTitle, '.', $File:FileTypeExtension)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"RIFF:Encoding"</span><span class="tAN"> select=</span><span class="tAV">"'Microsoft PCM'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"RIFF:NumChannels"</span><span class="tAN"> select=</span><span class="tAV">"'2'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"RIFF:NumChannels"</span><span class="tAN"> select=</span><span class="tAV">"'0'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"RIFF:SampleRate"</span><span class="tAN"> select=</span><span class="tAV">"'1000'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"RIFF:AvgBytesPerSec"</span><span class="tAN"> select=</span><span class="tAV">"'2000'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"RIFF:BitsPerSample"</span><span class="tAN"> select=</span><span class="tAV">"'8'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -993,74 +943,82 @@
       </span><span class="tXSLEl">&lt;xsl:with-param</span><span class="tAN"> name=</span><span class="tAV">"filename"</span><span class="tAN"> select=</span><span class="tAV">"$instantiationID"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:call-template&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:param&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"rdf:Description"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"rdf:about"</span><span class="tAN"> select=</span><span class="tAV">"                     concat(                     $System:Directory, '/', $System:FileName)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"ExifTool"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/ExifTool/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"et"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"et:toolkit"</span><span class="tAN"> select=</span><span class="tAV">"'Image::ExifTool 10.82'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"System"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/File/System/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"File"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/File/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"RIFF"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/RIFF/RIFF/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-x"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-x/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-xmp"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-xmp/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-xmpDM"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-xmpDM/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-xmpMM"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-xmpMM/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-dc"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-dc/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-plus"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-plus/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XML"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XML/XML/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"Composite"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/Composite/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">************************************************ A NON-EXISTENT FILE FOR PROCESSING PURPOSES ONLY ************************************************</span><span class="tXSLEl">&lt;/xsl:comment&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;ExifTool:ExifToolVersion</span><span class="tEl">&gt;</span><span class="tT">1.0 (FAKE VERSION)</span><span class="tEl">&lt;/ExifTool:ExifToolVersion&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;System:FileName</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$System:FileName"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/System:FileName&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;System:Directory</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$System:Directory"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/System:Directory&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;System:FileSize</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$System:FileSize"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/System:FileSize&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">Date of metadata creation, actually</span><span class="tXSLEl">&lt;/xsl:comment&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;System:FileCreateDate</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$System:FileCreateDate"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/System:FileCreateDate&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;System:FilePermissions</span><span class="tEl">&gt;</span><span class="tT">rw-rw-rw-</span><span class="tEl">&lt;/System:FilePermissions&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;File:FileType</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$File:FileType"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/File:FileType&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;File:FileTypeExtension</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$File:FileTypeExtension"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/File:FileTypeExtension&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;File:MIMEType</span><span class="tEl">&gt;</span><span class="tT">audio/x-wav</span><span class="tEl">&lt;/File:MIMEType&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;RIFF:Encoding</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:Encoding"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/RIFF:Encoding&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;RIFF:NumChannels</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:NumChannels"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/RIFF:NumChannels&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;RIFF:SampleRate</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:SampleRate"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/RIFF:SampleRate&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;RIFF:AvgBytesPerSec</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:AvgBytesPerSec"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/RIFF:AvgBytesPerSec&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;RIFF:BitsPerSample</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:BitsPerSample"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/RIFF:BitsPerSample&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;RIFF:Description</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$DAVIDTitle"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/RIFF:Description&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;RIFF:Originator</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$vendorName"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/RIFF:Originator&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;RIFF:Medium</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:Medium"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/RIFF:Medium&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;RIFF:Product</span><span class="tEl">&gt;</span><span class="tI">
-      </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:Product"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-    </span><span class="tEl">&lt;/RIFF:Product&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+  </span><span class="tC">&lt;!-- Generate fake exif --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:for-each</span><span class="tAN"> select=</span><span class="tAV">"                 $generatedNextFilename/                 pb:inputs/                 pb:parsedDAVIDTitle/@DAVIDTitle[not($missing)]"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"DAVIDTitle"</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"System:FileName"</span><span class="tAN"> select=</span><span class="tAV">"                 concat(                 $DAVIDTitle, '.', $File:FileTypeExtension)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tC">&lt;!-- Output exif --&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"rdf:Description"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"rdf:about"</span><span class="tAN"> select=</span><span class="tAV">"                         concat(                         $System:Directory, '/', $System:FileName)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"ExifTool"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/ExifTool/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"et"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"et:toolkit"</span><span class="tAN"> select=</span><span class="tAV">"'Image::ExifTool 10.82'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"System"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/File/System/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"File"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/File/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"RIFF"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/RIFF/RIFF/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-x"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-x/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-xmp"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-xmp/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-xmpDM"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-xmpDM/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-xmpMM"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-xmpMM/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-dc"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-dc/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XMP-plus"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XMP/XMP-plus/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"XML"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/XML/XML/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:namespace</span><span class="tAN"> name=</span><span class="tAV">"Composite"</span><span class="tAN"> select=</span><span class="tAV">"'http://ns.exiftool.ca/Composite/1.0/'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">************************************************ A NON-EXISTENT FILE FOR PROCESSING PURPOSES ONLY ************************************************</span><span class="tXSLEl">&lt;/xsl:comment&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;ExifTool:ExifToolVersion</span><span class="tEl">&gt;</span><span class="tT">****************0.0 (FAKE
+                    VERSION)******************</span><span class="tEl">&lt;/ExifTool:ExifToolVersion&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;System:FileName</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$System:FileName"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/System:FileName&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;System:Directory</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$System:Directory"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/System:Directory&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;System:FileSize</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$System:FileSize"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/System:FileSize&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tXSLEl">&gt;</span><span class="tT" style="white-space:normal">Date of metadata creation, actually</span><span class="tXSLEl">&lt;/xsl:comment&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;System:FileCreateDate</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$System:FileCreateDate"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/System:FileCreateDate&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;System:FilePermissions</span><span class="tEl">&gt;</span><span class="tT">rw-rw-rw-</span><span class="tEl">&lt;/System:FilePermissions&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;File:FileType</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$File:FileType"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/File:FileType&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;File:FileTypeExtension</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$File:FileTypeExtension"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/File:FileTypeExtension&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;File:MIMEType</span><span class="tEl">&gt;</span><span class="tT">audio/x-wav</span><span class="tEl">&lt;/File:MIMEType&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;RIFF:Encoding</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:Encoding"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/RIFF:Encoding&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;RIFF:NumChannels</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:NumChannels"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/RIFF:NumChannels&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;RIFF:SampleRate</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:SampleRate"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/RIFF:SampleRate&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;RIFF:AvgBytesPerSec</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:AvgBytesPerSec"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/RIFF:AvgBytesPerSec&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;RIFF:BitsPerSample</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:BitsPerSample"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/RIFF:BitsPerSample&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;RIFF:Description</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$DAVIDTitle"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/RIFF:Description&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;RIFF:Originator</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$vendorName"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/RIFF:Originator&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;RIFF:Medium</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:Medium"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/RIFF:Medium&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;RIFF:Product</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:copy-of</span><span class="tAN"> select=</span><span class="tAV">"$RIFF:Product"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/RIFF:Product&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:for-each&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -1097,7 +1055,8 @@
                         <td>
                            <div id="dS_P_vendorNameS_instantiationID2Exif.xsl" style="display:block">
                               <div>
-                                 <h3>Description</h3><pre> Generate a set of Archive ingest documents 
+                                 <h3>Description</h3>
+                                 <pre> Generate an Exif document and html 
         from a list of cavafy pbcoreInstantiation IDs. 
         Source document must have the format
         &lt;instantiationIDs&gt;
@@ -1118,11 +1077,12 @@
         &lt;instantiationIDs series="Around New York"&gt;
                 
         (2) If you know it, 
-        you may include a @format attrbute 
+        you may include a @format attribute 
         at the instantiationID level: 
         &lt;instantiationID format="1/4 inch audio tape"&gt;19719.1&lt;/instantiationID&gt;
         
-    </pre></div>
+    </pre>
+                              </div>
                            </div>
                         </td>
                      </tr>
@@ -1132,7 +1092,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Select</td>
-                        <td>'Memnon Archiving'</td>
+                        <td>'George Blood'</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -1171,7 +1131,9 @@
                            <div id="src_P_vendorNameS_instantiationID2Exif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"vendorName"</span><span class="tAN"> select=</span><span class="tAV">"'Memnon Archiving'"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"vendorName"</span><span class="tAN"> select=</span><span class="tAV">"'George Blood'"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -1208,7 +1170,9 @@
                         <td>
                            <div id="dS_P_DirectoryS_instantiationID2Exif.xsl" style="display:block">
                               <div>
-                                 <h3>Description</h3><pre> Generic filepath for future files </pre></div>
+                                 <h3>Description</h3>
+                                 <pre> Generic filepath for future files </pre>
+                              </div>
                            </div>
                         </td>
                      </tr>
@@ -1249,7 +1213,9 @@
                            <div id="src_P_DirectoryS_instantiationID2Exif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"System:Directory"</span><span class="tAN"> select=</span><span class="tAV">"concat('W:/ARCHIVESNAS1/INGEST/', $vendorName)"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"System:Directory"</span><span class="tAN"> select=</span><span class="tAV">"concat('W:/ARCHIVESNAS1/INGEST/', $vendorName)"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -1286,7 +1252,9 @@
                         <td>
                            <div id="dS_P_FileTypeS_instantiationID2Exif.xsl" style="display:block">
                               <div>
-                                 <h3>Description</h3><pre> Type of files </pre></div>
+                                 <h3>Description</h3>
+                                 <pre> Type of future files </pre>
+                              </div>
                            </div>
                         </td>
                      </tr>
@@ -1307,7 +1275,9 @@
                            <div id="src_P_FileTypeS_instantiationID2Exif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"File:FileType"</span><span class="tAN"> select=</span><span class="tAV">"'WAV'"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"File:FileType"</span><span class="tAN"> select=</span><span class="tAV">"'WAV'"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -1326,10 +1296,8 @@
       </table>
       <div class="footer">
          <hr />
-         <div align="center">Stylesheet documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
-         </div>
-      </div><script type="text/javascript">
-         <!--
+         <div align="center">Stylesheet documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
                     // The namespace is the selected option in the TOC combo.
                     
                     // The corresponding div is already visible conf. to its style attr.                     

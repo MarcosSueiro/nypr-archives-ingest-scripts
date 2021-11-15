@@ -17,11 +17,11 @@
     <!-- This stylesheet embeds NewsBoss metadata into DAVID WAV files -->
     <!-- Source: exiftool listing of DBX files, e.g. 
      	exiftool -ext dbx -if "$FileModifyDate ge '2018:09:15'" -EntriesEntryMotive -EntriesEntryMediumFileTitle -X [directory] > [output.xml] 
-         Matches to: NewsBoss .htm exports by year
+         Matches to: NewsBoss .htm exports by year (e.g. newscasts2018.htm)
     -->
     
     <!-- *************ENTER YEAR TO PROCESS HERE****************** -->    
-    <xsl:variable name="yearToProcess" select="2012"/>
+    <xsl:variable name="yearToProcess" select="2020"/>
 
     <xsl:output name="LOG" encoding="UTF-8" method="xml" version="1.0" standalone="yes"
         indent="yes"/>

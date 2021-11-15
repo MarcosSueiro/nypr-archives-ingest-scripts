@@ -240,7 +240,10 @@
                     select="
                         $input/rdf:Description
                         [File:FileType =
-                        'DAT']"
+                        $pbcorePhysicalInstantiations
+                        /pbcoreInstantiationPhysicalAudioVocabulary
+                        /pbcoreInstantiationPhysicalAudioTerm
+                        /term]"
                 />
             </physicalInstantiations>
         </xsl:variable>
@@ -893,6 +896,8 @@
                     [not(starts-with(RIFF:Description, 'WQXR-'))]
                     [not(starts-with(RIFF:Description, 'WQXR-'))]
                     [not(contains(RIFF:Description, '-OTM-'))]
+                    [not(contains(RIFF:Description, '-LLSH-'))]
+                    [not(contains(RIFF:Description, '-BLSH-'))]
                     ">
                 <xsl:variable name="filenameDAVID96k24"
                     select="
@@ -912,7 +917,9 @@
                                 [not(starts-with(RIFF:Description, 'MUNI-'))]
                                 [not(starts-with(RIFF:Description, 'WQXR-'))]
                                 [not(starts-with(RIFF:Description, 'WQXR-'))]
-                                [not(contains(RIFF:Description, '-OTM-'))]"
+                                [not(contains(RIFF:Description, '-OTM-'))]
+                                [not(contains(RIFF:Description, '-LLSH-'))]
+                                [not(contains(RIFF:Description, '-BLSH-'))]"
                             mode="DAVID"/>
                     </ENTRIES>
                 </xsl:result-document>
@@ -926,6 +933,8 @@
                     [not(starts-with(RIFF:Description, 'WQXR-'))]
                     [not(starts-with(RIFF:Description, 'WQXR-'))]
                     [not(contains(RIFF:Description, '-OTM-'))]
+                    [not(contains(RIFF:Description, '-LLSH-'))]
+                    [not(contains(RIFF:Description, '-BLSH-'))]
                     ">
                 <xsl:variable name="filenameDAVID48k"
                     select="
@@ -944,7 +953,9 @@
                                 [RIFF:SampleRate = '48000']
                                 [not(starts-with(RIFF:Description, 'MUNI-'))]
                                 [not(starts-with(RIFF:Description, 'WQXR-'))]
-                                [not(contains(RIFF:Description, '-OTM-'))]"
+                                [not(contains(RIFF:Description, '-OTM-'))]
+                                [not(contains(RIFF:Description, '-LLSH-'))]
+                                [not(contains(RIFF:Description, '-BLSH-'))]"
                             mode="DAVID"/>
                     </ENTRIES>
                 </xsl:result-document>
@@ -958,7 +969,9 @@
                     [RIFF:BitsPerSample = '16']
                     [not(starts-with(RIFF:Description, 'MUNI-'))]
                     [not(starts-with(RIFF:Description, 'WQXR-'))]
-                    [not(contains(RIFF:Description, '-OTM-'))]">
+                    [not(contains(RIFF:Description, '-OTM-'))]
+                    [not(contains(RIFF:Description, '-LLSH-'))]
+                    [not(contains(RIFF:Description, '-BLSH-'))]">
                 <xsl:variable name="filenameDAVID44k16"
                     select="
                         concat(
@@ -977,7 +990,9 @@
                                 [RIFF:BitsPerSample = '16']
                                 [not(starts-with(RIFF:Description, 'MUNI-'))]
                                 [not(starts-with(RIFF:Description, 'WQXR-'))]
-                                [not(contains(RIFF:Description, '-OTM-'))]"
+                                [not(contains(RIFF:Description, '-OTM-'))]
+                                [not(contains(RIFF:Description, '-LLSH-'))]
+                                [not(contains(RIFF:Description, '-BLSH-'))]"
                             mode="DAVID"/>
                     </ENTRIES>
                 </xsl:result-document>
@@ -990,7 +1005,9 @@
                     [RIFF:BitsPerSample = '24']
                     [not(starts-with(RIFF:Description, 'MUNI-'))]
                     [not(starts-with(RIFF:Description, 'WQXR-'))]
-                    [not(contains(RIFF:Description, '-OTM-'))]">
+                    [not(contains(RIFF:Description, '-OTM-'))]
+                    [not(contains(RIFF:Description, '-LLSH-'))]
+                    [not(contains(RIFF:Description, '-BLSH-'))]">
                 <xsl:variable name="filenameDAVID44k24"
                     select="
                         concat(
@@ -1009,7 +1026,9 @@
                                 [RIFF:BitsPerSample = '24']
                                 [not(starts-with(RIFF:Description, 'MUNI-'))]
                                 [not(starts-with(RIFF:Description, 'WQXR-'))]
-                                [not(contains(RIFF:Description, '-OTM-'))]"
+                                [not(contains(RIFF:Description, '-OTM-'))]
+                                [not(contains(RIFF:Description, '-LLSH-'))]
+                                [not(contains(RIFF:Description, '-BLSH-'))]"
                             mode="DAVID"/>
                     </ENTRIES>
                 </xsl:result-document>
@@ -1038,7 +1057,58 @@
                     </ENTRIES>
                 </xsl:result-document>
             </xsl:if>
-
+            <!-- Output 4.9: Leonard lopate -->
+            <xsl:if
+                test="
+                $newExifOutput/rdf:RDF/
+                rdf:Description/
+                RIFF:Description
+                [contains(., '-LLSH-')]
+                ">
+                <xsl:variable name="filenameDAVIDLLSH"
+                    select="
+                    concat(
+                    $baseFolder,
+                    $masterDocFilenameNoExtension,
+                    '-Lopate_',
+                    $currentDate, '.DBX')"/>
+                <xsl:result-document format="DAVID" href="{$filenameDAVIDLLSH}">
+                    <ENTRIES>
+                        <xsl:apply-templates
+                            select="
+                            $newExifOutput/rdf:RDF/
+                            rdf:Description
+                            [contains(RIFF:Description, '-LLSH-')]"
+                            mode="DAVID"/>
+                    </ENTRIES>
+                </xsl:result-document>
+            </xsl:if>
+            <!-- Output 4.9: Leonard lopate -->
+            <xsl:if
+                test="
+                $newExifOutput/rdf:RDF/
+                rdf:Description/
+                RIFF:Description
+                [contains(., '-BLSH-')]
+                ">
+                <xsl:variable name="filenameDAVIDBLSH"
+                    select="
+                    concat(
+                    $baseFolder,
+                    $masterDocFilenameNoExtension,
+                    '-Lehrer_',
+                    $currentDate, '.DBX')"/>
+                <xsl:result-document format="DAVID" href="{$filenameDAVIDBLSH}">
+                    <ENTRIES>
+                        <xsl:apply-templates
+                            select="
+                            $newExifOutput/rdf:RDF/
+                            rdf:Description
+                            [contains(RIFF:Description, '-BLSH-')]"
+                            mode="DAVID"/>
+                    </ENTRIES>
+                </xsl:result-document>
+            </xsl:if>
         </xsl:if>
 
         <!-- Output 5: Slack -->

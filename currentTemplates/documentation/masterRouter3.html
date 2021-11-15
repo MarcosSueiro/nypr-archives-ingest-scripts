@@ -4,8 +4,7 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       <title>Stylesheet documentation for: BWF2Exif.xsl</title>
-      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
-         <!--
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
         
         var parametersBoxes= new Array('prs_M_FileM_BWFMetaEditS_BWF2Exif.xsl');
 
@@ -366,8 +365,10 @@
                         <td>
                            <div id="dS_BWF2Exif.xsl" style="display:block">
                               <div>
-                                 <h3>Description</h3><pre>Transform output from BWF Metaedit
-    and output an exiftool-type xml.</pre></div>
+                                 <h3>Description</h3>
+                                 <pre>Transform output from BWF Metaedit
+    and output an exiftool-type xml.</pre>
+                              </div>
                            </div>
                         </td>
                      </tr>
@@ -431,7 +432,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>28</td>
+                        <td>40</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -442,12 +443,14 @@
                            <div id="src_M_conformance_point_documentM_BWFMetaEditS_BWF2Exif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"conformance_point_document"</span><span class="tAN"> mode=</span><span class="tAV">"BWFMetaEdit"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"conformance_point_document"</span><span class="tAN"> mode=</span><span class="tAV">"BWFMetaEdit"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Transform Core document from BWF MetaEdit --&gt;</span><span class="tI">
   </span><span class="tEl">&lt;rdf:RDF</span><span class="tAN"> namespace=</span><span class="tAV">"http://www.w3.org/1999/02/22-rdf-syntax-ns#"</span><span class="tEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:apply-templates</span><span class="tAN"> select=</span><span class="tAV">"File"</span><span class="tAN"> mode=</span><span class="tAV">"BWFMetaEdit"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tEl">&lt;/rdf:RDF&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -501,24 +504,27 @@
                                        <th>QName</th>
                                        <th>Namespace</th>
                                        <th>Select</th>
+                                       <th>Tunnel</th>
                                     </tr>
                                  </thead>
                                  <tr>
                                     <td class="fCol">directory</td>
                                     <td>No namespace</td>
                                     <td>             substring-before($fullFilenameTranslated, $filename)</td>
+                                    <td>yes</td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">filename</td>
                                     <td>No namespace</td>
                                     <td>             $parsedFullFilename/fn:non-match[last()]</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">filenameExtension</td>
                                     <td>No namespace</td>
                                     <td>                 substring-after(                 substring-after($filename, $filenameNoExtensionRaw),
-                                       $token)
-                                    </td>
+                                       $token)</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">filenameNoExtensionRaw</td>
@@ -526,28 +532,38 @@
                                     <td>                 if ($token)                 then                     if (contains($filename,
                                        $token)) then                         string-join(tokenize($filename, $token, 'q')
                                        [position() ne last()], $token)                     else                         ''
-                                       else                     $filename
-                                    </td>
+                                       else                     $filename</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">fullFilename</td>
                                     <td>No namespace</td>
                                     <td>@name</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">fullFilenameTranslated</td>
                                     <td>No namespace</td>
                                     <td>             translate(@name, '\', '/')</td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">input</td>
+                                    <td>No namespace</td>
+                                    <td>.</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">parsedFullFilename</td>
                                     <td>No namespace</td>
                                     <td>             analyze-string($fullFilenameTranslated, '/')</td>
+                                    <td></td>
                                  </tr>
                                  <tr>
                                     <td class="fCol">token</td>
                                     <td>No namespace</td>
                                     <td>'.'</td>
+                                    <td></td>
                                  </tr>
                               </table>
                            </div>
@@ -555,7 +571,7 @@
                      </tr>
                      <tr>
                         <td class="fCol">Import precedence</td>
-                        <td>28</td>
+                        <td>40</td>
                      </tr>
                      <tr>
                         <td class="fCol">
@@ -566,17 +582,19 @@
                            <div id="src_M_FileM_BWFMetaEditS_BWF2Exif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"File"</span><span class="tAN"> mode=</span><span class="tAV">"BWFMetaEdit"</span><span class="tXSLEl">&gt;</span><span class="tI">
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:template</span><span class="tAN"> match=</span><span class="tAV">"File"</span><span class="tAN"> mode=</span><span class="tAV">"BWFMetaEdit"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tC">&lt;!-- Transform each WAVE file to exiftool --&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"input"</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"fullFilename"</span><span class="tAN"> select=</span><span class="tAV">"@name"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"fullFilenameTranslated"</span><span class="tAN"> select=</span><span class="tAV">"             translate(@name, '\', '/')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"parsedFullFilename"</span><span class="tAN"> select=</span><span class="tAV">"             analyze-string($fullFilenameTranslated, '/')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"filename"</span><span class="tAN"> select=</span><span class="tAV">"             $parsedFullFilename/fn:non-match[last()]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"token"</span><span class="tAN"> select=</span><span class="tAV">"'.'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"directory"</span><span class="tAN"> select=</span><span class="tAV">"             substring-before($fullFilenameTranslated, $filename)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"directory"</span><span class="tAN"> select=</span><span class="tAV">"             substring-before($fullFilenameTranslated, $filename)"</span><span class="tAN"> tunnel=</span><span class="tAV">"yes"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"filenameNoExtensionRaw"</span><span class="tAN"> select=</span><span class="tAV">"                 if ($token)                 then                     if (contains($filename, $token)) then                         string-join(tokenize($filename, $token, 'q')                         [position() ne last()], $token)                     else                         ''                 else                     $filename"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"filenameExtension"</span><span class="tAN"> select=</span><span class="tAV">"                 substring-after(                 substring-after($filename, $filenameNoExtensionRaw),                 $token)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"'Convert BWF MetaEdit Core metadata from', @name"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:message</span><span class="tAN"> select=</span><span class="tAV">"concat('Convert BWF MetaEdit Core metadata from ', @name)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tEl">&lt;rdf:Description</span><span class="tEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:attribute</span><span class="tAN"> name=</span><span class="tAV">"rdf:about"</span><span class="tXSLEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$fullFilenameTranslated"</span><span class="tXSLEl">/&gt;</span><span class="tI">
@@ -585,6 +603,7 @@
       </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"'Image::ExifTool 11.69'"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;/xsl:attribute&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:comment</span><span class="tAN"> select=</span><span class="tAV">"'A new exiftool xml generated from', $filename"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;ExifTool:ExifToolVersion</span><span class="tEl">&gt;</span><span class="tT">11.69</span><span class="tEl">&lt;/ExifTool:ExifToolVersion&gt;</span><span class="tI">
     </span><span class="tEl">&lt;System:FileName</span><span class="tEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"$filename"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/System:FileName&gt;</span><span class="tI">
@@ -731,7 +750,8 @@
       </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tAN"> select=</span><span class="tAV">"Core/CodingHistory"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tEl">&lt;/XML:BwfxmlBextBwfCodingHistory&gt;</span><span class="tI">
   </span><span class="tEl">&lt;/rdf:Description&gt;</span><span class="tI">
-</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre></td>
+</span><span class="tXSLEl">&lt;/xsl:template&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -768,7 +788,9 @@
                         <td>
                            <div id="dS_O_S_BWF2Exif.xsl" style="display:block">
                               <div>
-                                 <h3>Description</h3><pre>Gives line breaks etc </pre></div>
+                                 <h3>Description</h3>
+                                 <pre>Gives line breaks etc </pre>
+                              </div>
                            </div>
                         </td>
                      </tr>
@@ -809,7 +831,9 @@
                            <div id="src_O_S_BWF2Exif.xsl" style="display:block">
                               <table class="pWCont">
                                  <tr>
-                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:output</span><span class="tAN"> encoding=</span><span class="tAV">"UTF-8"</span><span class="tAN"> method=</span><span class="tAV">"xml"</span><span class="tAN"> version=</span><span class="tAV">"1.0"</span><span class="tAN"> indent=</span><span class="tAV">"yes"</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                    <td width="100%">
+                                       <pre><span class="tXSLEl">&lt;xsl:output</span><span class="tAN"> encoding=</span><span class="tAV">"UTF-8"</span><span class="tAN"> method=</span><span class="tAV">"xml"</span><span class="tAN"> version=</span><span class="tAV">"1.0"</span><span class="tAN"> indent=</span><span class="tAV">"yes"</span><span class="tXSLEl">/&gt;</span></pre>
+                                    </td>
                                  </tr>
                               </table>
                            </div>
@@ -828,10 +852,8 @@
       </table>
       <div class="footer">
          <hr />
-         <div align="center">Stylesheet documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
-         </div>
-      </div><script type="text/javascript">
-         <!--
+         <div align="center">Stylesheet documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
                     // The namespace is the selected option in the TOC combo.
                     
                     // The corresponding div is already visible conf. to its style attr.                     
