@@ -1,8 +1,8 @@
 # Adding NewsBoss Metadata
 ## Introduction
-Since noon of April 18, 2011, New York Public Radio automatically records every day several hourly WNYC [local newscasts](https://www.wnyc.org/story/latest-newscast/). There are currently about 52,000 of these recordings as full-resolution WAVE files stored in the station's production system, [DAVID](https://www.davidsystems.com/).
+Since noon of April 18, 2011, New York Public Radio automatically records every day several hourly WNYC [local newscasts](https://www.wnyc.org/story/latest-newscast/). There are currently about 52,000 of these recordings, as full-resolution WAVE files, stored in the station's production system, [DAVID](https://www.davidsystems.com/).
 
-The DAVID recording process automatically starts the recording at :04 after the hour, which is when the local newscast is broadcast. It assigns a unique filename and a 'title' following the following pattern: *'WNYC-NWSC-[YYYY-MM-DD hh]h[mm]m';* for example *'WNYC-NWSC-2021-11-07 19h11m'.* This pinpoints which hourly broadcast is recorded (the part indicating the minutes after the hour seems to vary). Each recording is always less than five minutes long.
+The DAVID recording process automatically starts the recording at :04 after the hour, which is when the local newscast is broadcast. The process assigns a unique filename and a 'title' following the following pattern: *'WNYC-NWSC-[YYYY-MM-DD hh]h[mm]m';* for example *'WNYC-NWSC-2021-11-07 19h11m'.* This pinpoints which hourly broadcast is recorded (the part indicating the minutes after the hour seems to vary). Each recording is always less than five minutes long.
 
 On the other hand, the station's newsroom automation system, [NewsBoss](https://www.newsboss.com/), stores the text that the station's host reads during the local newscasts, as well as additional information such as other audio files to play and the names of the writers and editors of each news story.
 
@@ -18,14 +18,14 @@ Here are the steps:
      * ...limiting the search to one year (this may no longer be strictly necessary, but it likely has beefits later on with regards to managing large files, etc.)
      * ...limiting results to Newscasts, not stories
 3. Select all results
-4. Retrieve to your queue
+4. Retrieve to your 'queue'
 5. Select your entire queue and export as an .htm file with the following name: '[YYYY]newscasts.htm' (e.g. '2015newscasts.htm')
-6. Clean up htm file in a text editor: 
+6. Clean up the htm file in a text editor: 
    * Fix ```<meta>``` tag: replace ```'charset=utf-8">'```  with   ```'charset=utf-8"/>'```
    * Replace ```</A><HR></TD>``` with ```</A><HR/></TD>```
    * Clean up all ```'&nbsp;'```   
    * Clean up control-code Unicodes, e.g. 0x1f, 0x1a (regex ```"\u001F"``` and ```"\u001A"```)
-   * Clean everything else until you have a [well-formed html](https://validator.w3.org/)
+   * Clean everything else (this may vary) until you have a [well-formed html](https://validator.w3.org/)
 7. Parse out the broadcast date. (This makes for more efficient text-matching later) 
    * Make two replacements:
      * ```"<br/>Archived at"``` with ```"<br/><archiveDate>Archived at"``` and 
@@ -150,6 +150,7 @@ w = weather; A' = variation of A; x = no match; \[NPR\] = content other than new
 | WNYC-NWSC-2020-01-07 15h01m | ABw           | ABw              |
 
 ## Future work
-*	NYPR Archives still has 5,116 newscast files with no descriptive metadata. Given the iterative nature of hourly newscasts, it may not be a huge deal
+*	NYPR Archives still has 5,116 newscast files with no descriptive metadata; but, given the iterative nature of hourly newscasts, it may not be a huge deal
 * With the additional metadata, these newscasts are probably prime candidates for additional “aboutness” parsing
 * It may be good to add the original files listed in ICMT and the log to the same record, as they will likely have better audio
+* **NOTE**: The newscast WAVE files have not been checked for file integrity. Some files, for example, appear to have zero length.
