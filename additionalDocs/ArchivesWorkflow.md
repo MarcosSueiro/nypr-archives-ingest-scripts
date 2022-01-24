@@ -35,9 +35,10 @@ From this &quot;master file&quot;, various scripts generate xml documents to use
 2. DAVID (root element: ENTRIES) (file extension: .DBX)
 3. Cavafy (root element: pbcoreCollection)
 4. Html promotional document
-5. BWF MetaEdit (root element: rdf:RDF) (extension: .xmp)(to be implemented)
-6. Complete log
-7. Error log
+5. json / slack documents
+6. BWF MetaEdit (root element: rdf:RDF) (extension: .xmp)(to be implemented)
+7. Complete log
+8. Error log
 
 ![](RackMultipart20210128-4-1s74cd4_html_3fc8c019c89d8b4c.gif)
 
