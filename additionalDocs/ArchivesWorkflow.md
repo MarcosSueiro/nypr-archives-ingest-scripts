@@ -40,56 +40,6 @@ From this &quot;master file&quot;, various scripts generate xml documents to use
 7. Complete log
 8. Error log
 
-![test](https://commons.wikimedia.org/wiki/File:Library_of_Congress_ceiling_columns_Washington_DC.jpg)
-
-INPUTS
-
-![test](http://www.plantuml.com/plantuml/png/RP7Bhjem48RtynHMzkG1gggYN28XWTf2fLOgNKpi0TBQdiXsEF3s9vTmd4JPUVpzcOc_MVg0BbH6mwNG93nNJb9M7_yqjKL3G2OdfKY9rVRtprWTTraMguSf_uB2W3bw4XBlU7c2PAr9XeAj5mhlXOe9Isz-nTwFCXnkv3OiFO3KN2dX0pPaVJZr5vfbUkLxNo6MEGmxD6qtxI29JedIiU6jmQ9_NPbBTjITspy_R0R1aqRvlwjlmUXHNtAEtPwl7hglwpcD9028niHYyUK5n2UHqAEu16PzjgjVsO42RbKH4kZSJCFcUVgnFzk7qGcqggQ1bhoiJU4jDFH3tnH_Mn_RrcTBGQO9HAtYSveEer-_xw1tF8SQuNFtq9HHGRU3cjKpHoWkP0Pssva1_QfgCX0vIiJzrQ5_dks8rdPcviMTzcn9LbL6lmC0)
-
-External MD loc.gov
-
-americanarchive
-
-Embedded MD Filename
-
-LIST
-
-BEXT
-
-Tech MD
-
-xmp
-
-NYPR Data &quot;Cavafy&quot;
-
-D.A.V.I.D.
-
-Publisher (CMS)
-
-NewsBoss
-
-#
-
-# ![](RackMultipart20210128-4-1s74cd4_html_aed858118b524a89.gif) ![](RackMultipart20210128-4-1s74cd4_html_5a9a41f5e10fc247.gif) ![](RackMultipart20210128-4-1s74cd4_html_b94062ef045454e1.gif)
-
-![](RackMultipart20210128-4-1s74cd4_html_6ed188ce3edc0467.gif)
-
-Master RDF Filename
-
-LIST
-
-BEXT
-
-Tech MD
-
-xmp
-
-![](RackMultipart20210128-4-1s74cd4_html_c9fcde530b379f57.gif) ![](RackMultipart20210128-4-1s74cd4_html_5373f917fcfdf652.gif) ![](RackMultipart20210128-4-1s74cd4_html_7d2060d2b1b055b5.gif) ![](RackMultipart20210128-4-1s74cd4_html_d2169ef120f8d2f2.gif) ![](RackMultipart20210128-4-1s74cd4_html_49de46f4be364200.gif) ![](RackMultipart20210128-4-1s74cd4_html_8f24e98e6639e0ec.gif)
-
-![](RackMultipart20210128-4-1s74cd4_html_47a3b8367360377b.gif)
-
- OUTPUTS
-
 # SOFTWARE USED
 
 ## Exiftool
@@ -146,10 +96,14 @@ The following fields will also need to be present either embedded or in cavafy:
 4. Files are uploaded to DAVID through a .DBX file
 5. Files are added to cavafy through a pbcore file
 
+
+
+
+![NYPR Archives Workflow](http://www.plantuml.com/plantuml/png/NLDBR-Cs4BxFhnWubxP0T2ZGIx9Oh1ynO21Et3ZRJQ7uG8bZcJL56YJbs0ZwtykHv59U7unvVFCOVf---I1SQ6eDVg_CGJXHewCo25Dfma_0-7EsCN9gdI67l_y1_q9G8IP7J_I1VrktnrLJQ5NYYv3AujYLEtKa_suMfY8Vy4U4RBNz645gl7XQVNzTuurMrIwSISVqlLQ6CYdyZkGdR5L4UTkuakPiTiZAqHdpByNNSSEZ60ISDg8cUAWBaf8aJXxUNfFtifZFatUg3ni4AO8eX2SinL5iOqk8FKVJrXd1QXAFfVz16p1M4afnLBBVez0DTKMpR9pzbIsoMGOhBSws2UZFFb2zIKCCVVY9zJuTGQQhVkepm8QpjePn4smjWh86rdsVqcfD9OSysh0ZDxDbxFMnKw5VufcZA6COLivMp67LA4diKfphI9FmqQLGPfj889JQDX9zQ2TDbv69WpBx7DPT16DequEqBRFA7l76kiWTvV2e2YVS6UqMfzPKFE625U9Gu4rfdM72oV4xvJ2koQbIc8iqm6ulabcIL683C936y_VNJXiY0eWx39LnZv_31-6tdRN4v92emDdaBQuadCI3ixLzg8NIEQpOvZAXWMuvvZUTq0v5t9dodddas2L5h9pbB8SsiwGWcDTXzxKMvVwwUnkwPewSi-xHLZu7_eVViFJ7-ByBjMPAscbypijitfAw53wGmvRV9XoQm5Qalgd91FZ5oUsl_723R-JszclV06_uIxaFT0ftRE4TZkYaji5Q_MucF-PynuDKOGJz5p2iBNZxM56Vrty-lfjJhKVGgVyQrL0tWIsUq08lOlzv6p8Tk3KPlGiCJu9EUCu-JrzuSjoMDJk2WLI_P4vbgRSKRczPMB8RaFpOPxnQ08io5cbAHGE9fZEkOtrnh_vKFnmQ1TlN9h-l0-YXV5QlePWQFFqGaMHyX_7eOQQJPXyV9fAoOv8VytfcacPC_-Ej6IIJ6Fk-tyZ8fjR_0G00)
+
+
+
 # INPUTS
-
-![NYPR Archives Workflow](http://www.plantuml.com/plantuml/png/RPDBR-Cs4CVlyoa8vLOWEXJePRDOh1ysO21EN3lRtKBsWHB7CckA54ZA3mJzxZkKw4W9ueCnvFy_3sb--kuyjxwf5BYZr3Mtl68M2yzrgP2z0gEVDOqM4sCrMlRdN_0_UEb9J9xmpFurziXMJQvamTPSICD6jZZ84xgjNkWIdMS_oR9Nvfn0NtZnjFhnic5tIfO7VqL5yeEI6bF1tG75A-mbkPnfR85p2gEpj7XbsTVyswW9hO89WgnvXJ2hSXG21HlFVhtqf_LYFkzFbwhUCH3SyvmxP0K_yJsL1AgPJDf30ginFIo-cNQWZK0c-4cAE4Uk6koIfkae_ITTfDCKDfvxQJIh5R-QnZDtTHwhNTzCuzcDZNFzmw3kgZn51KAmDgQ2KUDDrTQ3JQnJ6AMm25UE6Nz0EpK5rJeVf8_3F8TR9kWQLjQKOPTb8mM68r9VYmgveoFw8jtH8g5GfX7CTPDFbhIHMkfZzlOiTBMB9cMAj3GdTcSixH0pU9IvvVRAp9vDZ2v3XvkNypgdKesj5Hb75LfPS7r30oWZ8hD48VaEO836yu-NZWrE1WnlUaZ60tiTleZmJgVjOZBeLy6curyq2hU2rTPKPbPngJ9OXJYaSGLu7-xShWEjpWjZCOkRRxcwIHZ8MKupQ9KbUXxsEQo-KRmulg_UNhtV65fhxACfNGRX7_vWXJlH_y5Ngbq5TMiH2JpVe61mOxsDWXHUrk2xkB__TajYT-7pUF1uyLz2nBwm12zoxurHMpt-EG_3puJq2KJitoNdOMPAgQwRln-t-bAf15hcFzeQx7g4AFHedMziVnm8TUTkms0_-E3l0HucaFmyMRVDjpf0ci20pQ-fbUdGF5ej8A16Yi9UYUJ5CRiukYF47n8Yqp6XYsC2GFHqSqRQIAGHXz80jC_4bgzFX4WNAOFz31q3nCZqdpDwgFPKnThVKOkcKhy1)
-
 
 ## Filename
 
