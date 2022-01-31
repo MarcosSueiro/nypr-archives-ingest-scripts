@@ -46,6 +46,8 @@ INPUTS
 
 ![](RackMultipart20210128-4-1s74cd4_html_def0ae0444eba725.gif) ![](RackMultipart20210128-4-1s74cd4_html_def0ae0444eba725.gif) ![](RackMultipart20210128-4-1s74cd4_html_def0ae0444eba725.gif)
 
+//www.plantuml.com/plantuml/png/RP7Bhjem48RtynHMzkG1gggYN28XWTf2fLOgNKpi0TBQdiXsEF3s9vTmd4JPUVpzcOc_MVg0BbH6mwNG93nNJb9M7_yqjKL3G2OdfKY9rVRtprWTTraMguSf_uB2W3bw4XBlU7c2PAr9XeAj5mhlXOe9Isz-nTwFCXnkv3OiFO3KN2dX0pPaVJZr5vfbUkLxNo6MEGmxD6qtxI29JedIiU6jmQ9_NPbBTjITspy_R0R1aqRvlwjlmUXHNtAEtPwl7hglwpcD9028niHYyUK5n2UHqAEu16PzjgjVsO42RbKH4kZSJCFcUVgnFzk7qGcqggQ1bhoiJU4jDFH3tnH_Mn_RrcTBGQO9HAtYSveEer-_xw1tF8SQuNFtq9HHGRU3cjKpHoWkP0Pssva1_QfgCX0vIiJzrQ5_dks8rdPcviMTzcn9LbL6lmC0
+
 External MD loc.gov
 
 americanarchive
@@ -147,6 +149,9 @@ The following fields will also need to be present either embedded or in cavafy:
 5. Files are added to cavafy through a pbcore file
 
 # INPUTS
+![test image](https://commons.wikimedia.org/wiki/File:Library_of_Congress_ceiling_columns_Washington_DC.jpg)
+![NYPR Archives Workflow](http://www.plantuml.com/plantuml/png/RP71Rjim44Jl-nM4VOu_e2YArB4D18ZHDYxG0dKF5Bcss2ov0adPrjzNj1Y84NJZyWrtf9d74AMFhIKu6K8HkFKAT-cu97EkuzbZ9_uavgH5G5kXrgZ5UllxvpYzFkzsutIppLy1MaPPoO12oOiyTQ2O25Kqx8BGyc9qTgYenL7iy1hM7C9eZ-x3Kuur-WshNd6jJKG0HTng4Q9CWgVzGImRuzxoDR5QdVaYbXqIyJNVIjbKlQpr3I6KwvF_9dqSAEcrQ3nRtbffSZnDfTZZSBx_xdvJ20yarTimrz7IXxteFViNFWSONlS-AMK0A29_UFZo3iGdiS2REKLcEhhrhzqUezng4nSmv3aLs-xmu-NeRfOMCCGx4Tp9UxnJMCT4nsmd-DlJwttrqM5KgmKKONzUhKhfr-_Fa3EVGodukNl8us2SE-XPxrcYef0PEBGp0t9LFIc2B1L5VxteNs1NqjJcZD_OQMQFw7HhwJy0)
+
 
 ## Filename
 
