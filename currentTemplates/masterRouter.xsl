@@ -32,11 +32,13 @@
     <xsl:output name="DAVID" encoding="ISO-8859-1" method="xml" version="1.0" indent="yes"/>
     <xsl:output name="email" encoding="UTF-8" method="xml" version="1.0" indent="yes"/>
 
+    <xsl:param name="outputLog" select="true()"/>
     <xsl:param name="outputFADGI" select="true()"/>
     <xsl:param name="outputCavafy" select="true()"/>
     <xsl:param name="outputDAVID" select="true()"/>
     <xsl:param name="outputEmail" select="true()"/>
     <xsl:param name="outputSlack" select="true()"/>
+    
 
     <xsl:variable name="baseURI" select="
             base-uri()"/>
@@ -90,7 +92,8 @@
             doc(
             'archivesAuthors.xml'
             )"/>
-
+    
+    
     <xsl:template match="/">
         <xsl:message
             select="
@@ -122,14 +125,12 @@
     <xsl:template name="BWFMetaEdit" match="conformance_point_document">
         <!-- Accept a BWF MetaEdit xml document 
             and convert to an exiftool kind of rdf document -->
-        <xsl:message>
-            <xsl:value-of select="'This appears to be a BWF MetaEdit kind of document.'"/>
-        </xsl:message>
-        <xsl:variable name="exifFromFADGI">
+        <xsl:param name="exifFromFADGI">
+            <xsl:message select="'This document appears to come from BWF MetaEdit.'"/>
             <rdf:RDF>
                 <xsl:apply-templates select="File" mode="BWFMetaEdit"/>
             </rdf:RDF>
-        </xsl:variable>
+        </xsl:param>
         <xsl:copy-of select="$exifFromFADGI"/>
         <xsl:message select="'Exif from BWF MetaEdit', $exifFromFADGI"/>
         <xsl:apply-templates select="$exifFromFADGI/rdf:RDF[rdf:Description]"/>
@@ -155,11 +156,13 @@
         <!-- Basic info: type of document, number of instantiations -->
         <xsl:param name="input" select="."/>
         
+        <xsl:param name="outputLog" select="$outputLog"/>
         <xsl:param name="outputFADGI" select="$outputFADGI"/>
         <xsl:param name="outputCavafy" select="$outputCavafy"/>
         <xsl:param name="outputDAVID" select="$outputDAVID"/>
         <xsl:param name="outputEmail" select="$outputEmail"/>
         <xsl:param name="outputSlack" select="$outputSlack"/>
+        
         
         <xsl:param name="stopIfErrors" select="true()" tunnel="true"/>
         <xsl:param name="filenameAddendum" tunnel="yes"/>
@@ -247,6 +250,7 @@
                 />
             </physicalInstantiations>
         </xsl:variable>
+        
         <xsl:variable name="wavInstantiations">
             <wavInstantiations>
                 <xsl:copy-of
@@ -389,7 +393,9 @@
                 <xsl:apply-templates
                     select="
                     $physicalInstantiations/physicalInstantiations/rdf:Description"
-                />
+                >
+                    <xsl:with-param name="archivesProduced" select="true()"/>                    
+                </xsl:apply-templates>
             </physicalInstantiationResults>
         </xsl:variable>
         <xsl:variable name="archivesINGESTWavResults">
@@ -436,7 +442,8 @@
                 />
             </DAVIDWavInstantiationsLatestNewscast>
         </xsl:variable>
-        <xsl:variable name="DAVIDWavInstantiationsWNoThemeNotFromArchivesResults">
+        <xsl:variable name="
+            DAVIDWavInstantiationsWNoThemeNotFromArchivesResults">
             <xsl:apply-templates
                 select="
                     $DAVIDWavInstantiationsWNoThemeNotFromArchives
@@ -472,7 +479,8 @@
                     /allParsedElements"
                 mode="duplicateInstantiations"/>
         </xsl:variable>
-
+        
+        
         <!--        All errors -->
         <xsl:variable name="ERRORS">
             <xsl:copy-of select="
@@ -625,82 +633,100 @@
                         'http://www.w3.org/1999/02/22-rdf-syntax-ns#'"/>
                 <xsl:copy-of
                     select="
-                        $newAssetResults
-                        /result
-                        /newExif
-                        /rdf:Description"/>
+                        $newAssetResults/
+                        result/
+                        newExif/
+                        rdf:Description"/>
                 <xsl:copy-of
                     select="
-                        $updateAssetResults
-                        /result
-                        /newExif
-                        /rdf:Description"/>
+                        $updateAssetResults/
+                        result/
+                        newExif/
+                        rdf:Description"/>
                 <xsl:copy-of
                     select="
-                        $physicalInstantiationResults"/>
+                        $physicalInstantiationResults/
+                        physicalInstantiationResults/
+                        result/
+                        newExif/
+                        rdf:Description"/>
                 <xsl:copy-of
                     select="
-                        $archivesINGESTWavResults
-                        /archivesINGESTWavResults
-                        /result
-                        /newExif
-                        /rdf:Description"/>
+                        $archivesINGESTWavResults/
+                        archivesINGESTWavResults/
+                        result/
+                        newExif/
+                        rdf:Description"/>
                 <xsl:copy-of
                     select="
-                        $DAVIDWavInstantiationsFromArchivesResults
-                        /DAVIDWavInstantiationsFromArchivesResults
-                        /result/newExif/rdf:Description"/>
+                        $DAVIDWavInstantiationsFromArchivesResults/
+                        DAVIDWavInstantiationsFromArchivesResults/
+                        result/
+                        newExif/
+                        rdf:Description"/>
                 <xsl:copy-of
                     select="
-                        $DAVIDWavInstantiationsWCMSThemeResults
-                        /result/newExif/rdf:Description"/>
+                        $DAVIDWavInstantiationsWCMSThemeResults/
+                        DAVIDWavInstantiationsWCMSThemeResults/
+                        result/
+                        newExif/
+                        rdf:Description"/>
                 <xsl:copy-of
                     select="
-                        $DAVIDWavInstantiationsLatestNewscast
-                        /result/newExif/rdf:Description"/>
+                        $DAVIDWavInstantiationsLatestNewscast/
+                        DAVIDWavInstantiationsLatestNewscast/
+                        result/
+                        newExif/
+                        rdf:Description"/>
                 <xsl:copy-of
                     select="
-                        $DAVIDWavInstantiationsWNoThemeNotFromArchivesResults
-                        /result/newExif/rdf:Description"
+                        $DAVIDWavInstantiationsWNoThemeNotFromArchivesResults/
+                        DAVIDWavInstantiationsWNoThemeNotFromArchivesResults/
+                        result/
+                        newExif/
+                        rdf:Description"
                 />
             </xsl:element>
         </xsl:variable>
 
         <!--        Output 0.1: Complete Result Log -->
-        <xsl:variable name="filenameLog"
-            select="
-                concat(
-                $logFolder,
-                $masterDocFilenameNoExtension,                
-                '_LOG', format-date(current-date(),
-                '[Y0001][M01][D01]'), '_T',
-                $currentTime,
-                $filenameAddendum,
-                '.xml'
-                )"/>
-        <xsl:variable name="completeLog">
-            <completeLog>
-                <xsl:copy-of select="$duplicateInstantiations"/>
-                <xsl:copy-of select="$unacceptableFiles"/>
-                <xsl:copy-of select="$newAssetResults"/>
-                <xsl:copy-of select="$updateAssetResults"/>
-                <xsl:copy-of select="$physicalInstantiationResults"/>
-                <xsl:copy-of select="$archivesINGESTWavResults"/>
-                <xsl:copy-of select="$DAVIDWavInstantiationsFromArchivesResults"/>
-                <xsl:copy-of select="$DAVIDWavInstantiationsWCMSThemeResults"/>
-                <xsl:copy-of select="$DAVIDWavInstantiationsLatestNewscast"/>
-                <xsl:copy-of
-                    select="
-                        $DAVIDWavInstantiationsWNoThemeNotFromArchivesResults"
-                />
-            </completeLog>
-        </xsl:variable>
-
-        <xsl:result-document format="
+        
+            <xsl:variable name="filenameLog"
+                select="
+                    concat(
+                    $logFolder,
+                    $masterDocFilenameNoExtension,
+                    '_LOG', format-date(current-date(),
+                    '[Y0001][M01][D01]'), '_T',
+                    $currentTime,
+                    $filenameAddendum,
+                    '.xml'
+                    )"/>
+            <xsl:variable name="completeLog">
+                <completeLog>
+                    <xsl:copy-of select="$duplicateInstantiations"/>
+                    <xsl:copy-of select="$unacceptableFiles"/>
+                    <xsl:copy-of select="$newAssetResults"/>
+                    <xsl:copy-of select="$updateAssetResults"/>
+                    <xsl:copy-of select="$physicalInstantiationResults"/>
+                    <xsl:copy-of select="$archivesINGESTWavResults"/>
+                    <xsl:copy-of select="$DAVIDWavInstantiationsFromArchivesResults"/>
+                    <xsl:copy-of select="$DAVIDWavInstantiationsWCMSThemeResults"/>
+                    <xsl:copy-of select="$DAVIDWavInstantiationsLatestNewscast"/>
+                    <xsl:copy-of
+                        select="
+                            $DAVIDWavInstantiationsWNoThemeNotFromArchivesResults"
+                    />
+                </completeLog>
+            </xsl:variable>
+        
+        <xsl:if test="$outputLog">
+            <xsl:result-document format="
             logXml" href="
             {$filenameLog}">
-            <xsl:copy-of select="$completeLog"/>
-        </xsl:result-document>
+                <xsl:copy-of select="$completeLog"/>
+            </xsl:result-document>
+        </xsl:if>
 
         <!-- Output 0.2: html for email and checking -->
 
@@ -712,7 +738,7 @@
                 '[Y0001][M01][D01]'),
                 $filenameAddendum,
                 '.html'
-                )"></xsl:variable>
+                )"/>
         <xsl:result-document format="email" href="
             {$filenameHtml}">
             <xsl:apply-templates select="
@@ -1195,6 +1221,8 @@
             </xsl:element>
         </xsl:for-each>
     </xsl:template>
+    
+    
 
     <xsl:template match="node()" name="breakItUp" mode="breakItUp">
         <xsl:param name="firstOccurrence" select="1"/>

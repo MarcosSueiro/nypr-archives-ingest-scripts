@@ -24,7 +24,7 @@
     </xsl:template>-->
     
     <xsl:template match="pb:pbcoreInstantiation" mode="
-        generateSourceExif">
+        generateSourceExif" name="generateSourceExif">
 
         <!-- Generate an rdf document
         from a current instantiation -->
@@ -42,7 +42,8 @@
         </xsl:param>
         <xsl:param name="instantiationIDParsed">
             <xsl:call-template name="parseInstantiationID">
-                <xsl:with-param name="instantiationID" select="$instantiationID"/>
+                <xsl:with-param name="instantiationID" select="
+                    $instantiationID"/>
             </xsl:call-template>
         </xsl:param>
         <xsl:param name="instantiationSuffixComplete">
@@ -75,6 +76,10 @@
                 <xsl:with-param name="instantiationIDOffset" select="0"/>
                 <xsl:with-param name="nextInstantiationSuffixDigit"
                     select="$instantiationSuffixComplete"/>
+                <!-- Just generating a source exif, 
+                    so no future WAVE filenames needed -->
+                <xsl:with-param name="isMultitrack" select="false()"/>
+                <xsl:with-param name="instantiationFirstTrack" select="0"/>
                 <!--                    <xsl:with-param name="freeTextComplete" select="''"/>-->
             </xsl:apply-templates>
         </xsl:param>
@@ -87,13 +92,15 @@
         </xsl:param>
         <xsl:param name="compactFormat" select="
                 replace($format, '\W', '')"/>
+        <xsl:param name="parsedDAVIDTitle" select="
+            $generatedFilename/
+            pb:inputs/
+            pb:parsedDAVIDTitle"/>
         <xsl:param name="fullFilename">
             <xsl:value-of
                 select="
                     normalize-space(
-                    $generatedFilename/
-                    pb:inputs/
-                    pb:parsedDAVIDTitle/
+                    $parsedDAVIDTitle/
                     @DAVIDTitle)"/>
             <xsl:value-of select="'.'"/>
             <xsl:value-of select="$compactFormat"/>
@@ -113,6 +120,16 @@
                 WNYC:generateIARL($collectionAcronym)"/>
         <xsl:param name="generation" select="
                 pb:instantiationGenerations"/>
+        <xsl:param name="isSegment" select="
+            contains($generation, 'segment')"/>
+        <xsl:param name="instantiationSegmentSuffix"
+            select="
+            $parsedDAVIDTitle
+            //parsedElements/instantiationSegmentSuffix"/>
+        <xsl:param name="segmentFlag"
+            select="
+            $parsedDAVIDTitle
+            //parsedElements/segmentFlag"/>
         <xsl:param name="missing"
             select="
                 contains($location, 'MISSING')
@@ -168,6 +185,19 @@
                 pb:instantiationAnnotation[
                 @annotationType = 'Provenance']"
         />
+        <xsl:param name="instantiationCreatedDate" select="
+            $foundInstantiation/pb:instantiationDate[@dateType='Created']"/>
+        <xsl:param name="instantiationIssuedDate" select="
+            $foundInstantiation/pb:instantiationDate[@dateType='Issued']"/>
+        <xsl:param name="noTypeInstantiationDates">
+            <xsl:value-of select="$foundInstantiation/pb:instantiationDate[not(@dateType)]" separator=" ; "/>
+        </xsl:param>
+        <xsl:param name="instantiationTitle" select="
+            $foundInstantiation/pb:instantiationAnnotation
+            [@annotationType='instantiation_title']"/>
+        <xsl:param name="instantiationDescription" select="
+            $foundInstantiation/pb:instantiationAnnotation
+            [@annotationType='instantiation_description']"/>
         <xsl:param name="BWFCoreOutput">
             <conformance_point_document>
                 <xsl:apply-templates
@@ -183,6 +213,33 @@
                     />
                     <xsl:with-param name="generation" select="$generation"/>
                     <xsl:with-param name="RIFF:SourceForm" select="$provenance"/>
+                    <xsl:with-param name="RIFF:Title">
+                        <xsl:call-template name="checkConflicts">
+                            <xsl:with-param name="fieldName" select="'instantiationTitle'"/>
+                            <xsl:with-param name="field1" select="
+                                $foundInstantiation/
+                                pb:instantiationAnnotation
+                                [@annotationType='instantiation_title']"/>
+                                <xsl:with-param name="defaultValue">
+                                    <xsl:value-of select="$cavafyEntry/pb:pbcoreDescriptionDocument/
+                                        pb:pbcoreTitle[@titleType = 'Episode']"/>
+                                </xsl:with-param>
+                            <xsl:with-param name="separatingToken" select="$separatingTokenForFreeTextFields"/>
+                        </xsl:call-template>
+                    </xsl:with-param>
+                    <xsl:with-param name="RIFF:Subject">
+                        <xsl:call-template name="checkConflicts">
+                            <xsl:with-param name="fieldName" select="'instantiationDescription'"/>
+                            <xsl:with-param name="field1" select="
+                                $foundInstantiation/
+                                pb:instantiationAnnotation
+                                [@annotationType='instantiation_description']"/>
+                            <xsl:with-param name="defaultValue">
+                                <xsl:value-of select="$cavafyEntry/pb:pbcoreDescriptionDocument/
+                                    pb:pbcoreDescription[@descriptionType = 'Abstract']"/>
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:with-param>
                     <!-- Extra descriptors -->
                     <xsl:with-param name="location" select="$location"/>
                     <xsl:with-param name="physicalLabel" select="

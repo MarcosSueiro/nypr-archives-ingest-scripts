@@ -105,9 +105,9 @@ and output an html error doc -->
             unacceptableFiles/error
             )"/>
         <xsl:variable name="errorPercent" select="format-number(
-            $errorCount div ($totalCount + 0.01), '##%')"/> <!-- To avoid division by zero -->
+            $errorCount div ($totalCount[. gt 0]), '##%')"/>
         <xsl:variable name="warningPercent" select="format-number(
-            $warningCount div ($totalCount + 0.01), '##%')"/> <!-- To avoid division by zero -->
+            $warningCount div ($totalCount[. gt 0]), '##%')"/>
         <xsl:variable name="errorMessage">
             <xsl:value-of select="$errorCount"/>
             <xsl:value-of select="' files ('"/>

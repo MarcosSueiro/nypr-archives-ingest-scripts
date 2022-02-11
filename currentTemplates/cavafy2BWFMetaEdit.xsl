@@ -143,7 +143,7 @@
                             $possibleMediums"
                 />
         </xsl:param>
-        <xsl:param name="RIFF:Name">
+        <xsl:param name="RIFF:Title">
             <xsl:variable name="multipleTitles" select="
                 count(pb:pbcoreTitle[@titleType='Episode']) gt 1"/>
             <xsl:value-of select="'MULTIPLE TITLES'[$multipleTitles]"/>
@@ -228,7 +228,7 @@
                         <xsl:value-of select="$RIFF:Medium"/>
                     </IMED>
                     <INAM>
-                        <xsl:value-of select="$RIFF:Name"/>
+                        <xsl:value-of select="$RIFF:Title"/>
                     </INAM>
                     <IPRD>
                         <xsl:value-of select="$RIFF:Product"/>

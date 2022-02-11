@@ -25,13 +25,13 @@ from different sources -->
     <xsl:template name="checkConflicts" 
         match="inputs" 
         mode="checkConflicts">        
-        <!-- Check for text (letters only) inconsistencies -->        
+        <!-- Check for letters-only inconsistencies -->        
         <xsl:param name="field1"/>
         <xsl:param name="field2"/>
         <xsl:param name="field3"/>
         <xsl:param name="field4"/>
         <xsl:param name="field5"/>
-        <xsl:param name="fieldName" select="name($field1(. != '')[1])"/>
+        <xsl:param name="fieldName" select="name($field1[. != ''][1])"/>
         <xsl:param name="filename"/>
         <xsl:param name="validatingString" select="'\w'"/><!-- Needs a 'word' string -->
         <xsl:param name="separatingToken" select="$separatingToken"/>
@@ -123,7 +123,7 @@ from different sources -->
                         $fieldName, 
                         ' in ', $filename, ': '"/>
                     <xsl:value-of select="
-                        @field|@nextField" separator="
+                        @field, @nextField" separator="
                         {$separatingToken}"/>
                 </xsl:element>
             </xsl:for-each>
@@ -155,12 +155,14 @@ from different sources -->
         
         <!-- Check for data inconsistencies -->
         
-        <xsl:param name="field1" select="dummyNode"/>
-        <xsl:param name="field2" select="dummyNode"/>
-        <xsl:param name="field3" select="dummyNode"/>
-        <xsl:param name="field4" select="dummyNode"/>
-        <xsl:param name="field5" select="dummyNode"/>
-        <xsl:param name="fieldName" select="name($field1(.!='')[1])"/>
+        <xsl:param name="field1"/>
+        <xsl:param name="field2"/>
+        <xsl:param name="field3"/>
+        <xsl:param name="field4"/>
+        <xsl:param name="field5"/>
+        <xsl:param name="fieldName" select="
+            name(($field1, $field2, $field3, $field4, $field5)[. instance of node()][1]), 
+            'noFieldName'[not(. instance of node())]"/>
         <xsl:param name="validatingString" select="''"/>
         <xsl:param name="separatingToken" select="$separatingToken"/>
         <xsl:param name="defaultValue">

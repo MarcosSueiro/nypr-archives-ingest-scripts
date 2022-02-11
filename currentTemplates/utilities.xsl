@@ -12,8 +12,6 @@
 
     <xsl:mode on-no-match="deep-skip"/>
 
-    <xsl:output method="html" version="4.0" indent="yes"/>
-
     <xsl:variable name="ISODatePattern"
         select="
             '^([0-9]{4})-?(1[0-2]|0[1-9])-?(3[01]|0[1-9]|[12][0-9])$'"/>
@@ -29,6 +27,27 @@
     <xsl:variable name="validatingKeywordString" select="'id.loc.gov/authorities/subjects/'"/>
     <xsl:variable name="validatingNameString" select="'id.loc.gov/authorities/names/'"/>
 
+    <xsl:variable name="utilityLists" select="doc('utilityLists.xml')"/>
+    <xsl:variable name="alwaysLC">
+        <xsl:value-of select="
+                $utilityLists/utilityLists/alwaysLC/preposition" separator="|"/>
+    </xsl:variable> 
+    <xsl:variable name="alwaysLCExact">
+        <xsl:value-of select="'^'"/>
+        <xsl:value-of select="
+            $utilityLists/utilityLists/alwaysLC/preposition" separator="$|^"/>
+        <xsl:value-of select="'$'"/>
+    </xsl:variable>
+    <xsl:variable name="alwaysUC">
+        <xsl:value-of select="
+            $utilityLists/utilityLists/alwaysUC/acronym" separator="|"/>
+    </xsl:variable>
+    <xsl:variable name="alwaysUCExact">
+        <xsl:value-of select="'^'"/>
+        <xsl:value-of select="
+            $utilityLists/utilityLists/alwaysUC/acronym" separator="$|^"/>
+        <xsl:value-of select="'$'"/>
+    </xsl:variable>
 
 
     <xsl:function name="WNYC:Capitalize">
@@ -149,10 +168,14 @@
                 replace(
                 $noJava,
                 '&lt;[^&gt;]+&gt;', '')"/>
-        <!-- Get rid of weird spaces -->
+        <!-- Get rid of weird spaces and ampersands -->
         <xsl:variable name="normalizeSpaces"
             select="
-                replace($noHtml, '\p{Zs}', ' ')"/>
+            replace(
+            replace(
+            $noHtml, '\p{Zs}', ' '
+            ), 
+            '&amp;amp;', '&amp;')"/>
         <!-- Finally, change more than two new lines to just two -->
         <xsl:value-of
             select="
@@ -646,6 +669,8 @@
     <xsl:template name="mp3builder" match="
             pb:pbcoreDescriptionDocument"
         mode="mp3builder">
+        <!-- Build the MP3 filename
+        for a specific cavafy record -->
         <xsl:param name="showName" select="
                 pb:pbcoreTitle[@titleType = 'Series']"/>
         <xsl:param name="bcastDateAsText"
@@ -658,7 +683,7 @@
             select="
                 xs:date(min($bcastDateAsText)
                 )"/>
-        <xsl:param name="exactMatch" select="false()"/>
+        <xsl:param name="exactMP3" select="false()"/>
         <xsl:param name="articledShowName" select="
                 WNYC:reverseArticle($showName)"/>
         <xsl:param name="cmsDate" select="
@@ -677,7 +702,7 @@
         <xsl:if test="matches($slug, '\w')">
             <xsl:value-of select="$slug"/>
             <xsl:value-of select="$cmsDate"/>
-            <xsl:value-of select="'.mp3'[$exactMatch]"/>
+            <xsl:value-of select="'.mp3'[$exactMP3]"/>
         </xsl:if>
     </xsl:template>
 
@@ -687,27 +712,23 @@
             https://stackoverflow.com/questions/62193225/how-can-i-convert-all-heading-text-to-title-case-with-xslt -->
         <xsl:param name="inputTitle"/>
 
-        <xsl:param name="alwaysLC"
-            select="'*a*,*an*,*the*,*and*,*but*,*for*,*nor*,*or*,*so*,*yet*,*as*,*at*,*by*,*if*,*in*,*of*,*on*,*to*,*with*,*when*,*where*'"/>
-        <xsl:param name="alwaysUC"
-            select="'\\.[A-Z]|^A\\/H$|^ABC$|^AIDS$|^AM$|^AP$|^ASCAP$|^BBC$|^CBGB$|^CBS$|^CD$|^CMNY$|^CNN$|^CPB$|^DAT$|^DNC$|^DIY$|^EPA$|^FDNY$|^FM$|^GOP$|^HSA$|^HUAC$|^II$|^III$|^IV$|^IX$|^JFK$|^LMDC$|^M\\/H$|^NATO$|^NBC$|^NPR$|^NS$|^NW$|^NWU$|^NY$|^NY1$|^NYC$|^NYPD$|^NYS$|^P\.M\.$|^PAL$|^PBS$|^PCB$|^PM$|^PS$|^RNC$|^SFX$|^TAL$|^TB$|^UN$|^US$|^USA$|^USAF$|^TV$|^V\-E$|^VD$|^VE$|^VI$^VII$||^VP$|^WNBA$|^WQXR$|^WNYC$|^WW1$|^WW2$|^XI$|^XII$'"/>
-
+        
         <xsl:param name="cleanInput" select="normalize-space($inputTitle)"/>
         <xsl:param name="elements" select="tokenize($cleanInput, ' ')"/>
         <xsl:for-each select="$elements">
             <xsl:variable name="lcElement" select="lower-case(.)"/>
             <xsl:choose>
                 <!-- Leave some words uppercase -->
-                <xsl:when test="matches(., $alwaysUC)">
+                <xsl:when test="matches(., $alwaysUCExact)">
                     <xsl:value-of select="."/>
                     <xsl:if test="position() != last()">
                         <xsl:text> </xsl:text>
                     </xsl:if>
                 </xsl:when>
-                <!-- The first letter of the first word of a title is always Uppercase -->
+                <!-- The first letter of the first word of a title 
+                    is always Uppercase -->
                 <xsl:when test="position() = 1">
-                    <xsl:value-of select="upper-case(substring($lcElement, 1, 1))"/>
-                    <xsl:value-of select="substring($lcElement, 2)"/>
+                    <xsl:value-of select="WNYC:Capitalize($lcElement, 1)"/>
                     <xsl:if test="position() != last()">
                         <xsl:text> </xsl:text>
                     </xsl:if>
@@ -715,11 +736,11 @@
                 <xsl:otherwise>
                     <xsl:choose>
                         <!-- Leave some words uppercase -->
-                        <xsl:when test="matches(., $alwaysUC)">
+                        <xsl:when test="matches(., $alwaysUCExact)">
                             <xsl:value-of select="."/>
                         </xsl:when>
-                        <!-- If the word is contained in $words, leave it Lowercase -->
-                        <xsl:when test="contains($alwaysLC, concat('*', $lcElement, '*'))">
+                        <!-- If the word is contained in $alwaysLC, leave it Lowercase -->
+                        <xsl:when test="matches($lcElement, $alwaysLCExact)">
                             <xsl:value-of select="$lcElement"/>
                             <xsl:if test="position() != last()">
                                 <xsl:text> </xsl:text>
@@ -728,8 +749,7 @@
 
                         <!-- If not, first letter is Uppercase -->
                         <xsl:otherwise>
-                            <xsl:value-of select="upper-case(substring($lcElement, 1, 1))"/>
-                            <xsl:value-of select="substring($lcElement, 2)"/>
+                            <xsl:value-of select="WNYC:Capitalize($lcElement, 1)"/>
                             <xsl:if test="position() != last()">
                                 <xsl:text> </xsl:text>
                             </xsl:if>
@@ -738,7 +758,6 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:for-each>
-
     </xsl:template>
 
     <xsl:function name="WNYC:titleCase">
@@ -764,5 +783,27 @@
 
         <xsl:value-of select="$year, $month, $day" separator="-"/>
     </xsl:template>
+    
+    <xsl:template match="*:FileCreateDate" name="dateTimeToISODate" mode="dateTimeToISODate">
+        <xsl:param name="inputDateTime" select="."/>
+        <xsl:value-of
+            select="
+            normalize-space(
+            translate(
+            substring-before(
+            $inputDateTime,
+            ' '),
+            ':',
+            '-'
+            ))"
+        />
+    </xsl:template>
+    
+    <xsl:function name="WNYC:dateTimeToISODate">
+        <xsl:param name="inputDateTime"/>
+        <xsl:call-template name="dateTimeToISODate">
+            <xsl:with-param name="inputDateTime" select="$inputDateTime"/>
+        </xsl:call-template>
+    </xsl:function>
 
 </xsl:stylesheet>

@@ -25,11 +25,12 @@ to a pbcore cavafy entry -->
     xmlns:ns9="http://ns.exiftool.ca/File/System/1.0/"
     xmlns:XMP-plus="http://ns.exiftool.ca/XMP/XMP-plus/1.0/"
     xmlns:madsrdf="http://www.loc.gov/mads/rdf/v1#"
+    xmlns:WNYC="http://www.wnyc.org"
     xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html" exclude-result-prefixes="#all">
 
     <xsl:import href="selectionOrExcerpt.xsl"/>    
     <xsl:import href="parseDAVIDTitle.xsl"/>
-    <xsl:import href="parseContributors.xsl"/>
+    <xsl:import href="processLoCURL.xsl"/>
 
     <xsl:param name="exifInput"/>
     
@@ -67,6 +68,10 @@ to a pbcore cavafy entry -->
         <xsl:param name="cavafyEntry">
             <xsl:copy-of select="document($catalogxml)"/>
         </xsl:param>
+        <xsl:param name="isWAV" select="
+            upper-case(File:FileType) eq 'WAV'"/>       
+        <xsl:param name="isDub" select="not(RIFF:Medium
+             = 'Original')"/>
         <xsl:param name="parsedDAVIDTitle">
             <!-- Parse DAVID title or filename -->
             <xsl:choose>
@@ -75,7 +80,7 @@ to a pbcore cavafy entry -->
                         <xsl:with-param name="filenameToParse" select="System:FileName"/>
                     </xsl:apply-templates>
                 </xsl:when>
-                <xsl:when test="contains(System:Directory, 'ARCHIVESNAS1/INGEST')">
+                <xsl:when test="matches(System:Directory, 'ARCHIVESNAS1/INGEST|Archives|Iron Mountain')">
                     <xsl:apply-templates select="System:FileName" mode="parseDAVIDTitle"/>
                 </xsl:when>
                 <xsl:when test="contains(System:Directory, 'wnycdavidmedia')">
@@ -134,14 +139,15 @@ to a pbcore cavafy entry -->
             />
         </xsl:variable>
         <xsl:variable name="cavafyGeneration">
-            <xsl:value-of select="$instantiationData/pb:instantiationGenerations"/>
+            <xsl:value-of select="$instantiationData/
+                pb:instantiationGenerations"/>
         </xsl:variable>
         <xsl:variable name="generation">
             <xsl:call-template name="checkConflicts">
+                <xsl:with-param name="fieldName" select="'Generation'"/>
                 <xsl:with-param name="field1" select="$parsedGeneration"/>
                 <xsl:with-param name="field2" select="$cavafyGeneration"/>
-                <xsl:with-param name="defaultValue" select="$parsedGeneration"/>
-                <xsl:with-param name="fieldName" select="'Generation'"/>
+                <xsl:with-param name="defaultValue" select="$parsedGeneration"/>                
             </xsl:call-template>
         </xsl:variable>
 
@@ -721,6 +727,11 @@ to a pbcore cavafy entry -->
                     </xsl:with-param>
                     <xsl:with-param name="role" select="'contributor'"/>
                 </xsl:call-template>
+                
+                <!-- Add Engineers -->
+                <xsl:apply-templates select="RIFF:Engineer
+                    [not(matches(., 'Unknown', 'i'))]" mode="pbcore"/>
+                
 
                 <!-- Copyright info -->
                 <xsl:variable name="copyrightAlreadyInCavafy">
@@ -764,19 +775,7 @@ to a pbcore cavafy entry -->
                         RIFF:NumChannels = '0' or 
                         RIFF:SampleRate = '1000' or 
                         RIFF:BitsPerSample = '8'">
-                        <!--<pbcoreInstantiation>
-                            <instantiationIdentifier source="WNYC Media Archive Label">
-                                <xsl:value-of select="substring-after(normalize-space(RIFF:Medium), ' ')"/>
-                            </instantiationIdentifier>
-                            <instantiationLocation>
-                                <xsl:call-template name="checkConflicts">
-                                    <xsl:with-param name="field1" select="
-                                        normalize-space(System:Directory[contains(., 'Levy')])"/>
-                                    <xsl:with-param name="defaultValue" select="'DAVID'"/>
-                                    <xsl:with-param name="fieldName" select="'instantiationLocation'"/>
-                                </xsl:call-template>
-                            </instantiationLocation>
-                        </pbcoreInstantiation>-->
+                        <!-- Do nothing -->                        
                     </xsl:when>
                     <xsl:otherwise>
 
@@ -786,57 +785,65 @@ to a pbcore cavafy entry -->
                             <instantiationIdentifier source="WNYC Media Archive Label">
                                 <xsl:value-of select="$instantiationID"/>
                             </instantiationIdentifier>
-                            <instantiationIdentifier source="DAVID Title">
-                                <xsl:value-of select="
-                                    normalize-space(RIFF:Description)"/>
-                            </instantiationIdentifier>
-                            <instantiationDate dateType="Created">
-                                <xsl:value-of
-                                    select="
-                                    normalize-space(
-                                    translate(
-                                    substring-before(
-                                    System:FileCreateDate, 
-                                    ' '), 
-                                    ':', 
-                                    '-'
-                                    ))"
-                                />
-                            </instantiationDate>
-                            <instantiationDigital>
-                                <xsl:choose>
-                                    <xsl:when test="File:FileType eq 'WAV'">
+                            <!-- DAVID Title -->
+                            <xsl:apply-templates
+                                select="
+                                    RIFF:Description
+                                    [$isWAV]"
+                                mode="pbcore"/>
+                            <xsl:apply-templates select="
+                                System:FileCreateDate[$isWAV]" mode="pbcore"/>                            
+                            <xsl:apply-templates select="
+                                WNYC:instantiation_physical_label" mode="pbcore"/>
+                            <xsl:apply-templates select="
+                                WNYC:instantiation_issued_date" mode="pbcore"/>
+                            <xsl:apply-templates select="
+                                WNYC:instantiation_date" mode="pbcore"/>
+                            <xsl:apply-templates select="
+                                WNYC:instantiation_created_date" mode="pbcore"/>
+                            <xsl:choose>
+                                <xsl:when test="$isWAV">
+                                    <instantiationDigital>
                                         <xsl:value-of select="'BWF'"/>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:element name="error">
-                                            <xsl:attribute name="type" select="'unknown_format'"/>
-                                            <xsl:value-of select="File:FileType"/>
-                                        </xsl:element>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </instantiationDigital>
+                                    </instantiationDigital>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <instantiationPhysical>
+                                        <xsl:value-of select="File:FileType"/>
+                                    </instantiationPhysical>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            
                             <instantiationLocation>
                                 <xsl:call-template name="checkConflicts">
-                                    <xsl:with-param name="field1" select="
-                                        normalize-space(System:Directory[contains(., 'Levy')])"/>
-                                    <xsl:with-param name="defaultValue" select="'DAVID'"/>
-                                    <xsl:with-param name="fieldName" select="'instantiationLocation'"/>
+                                    <xsl:with-param name="fieldName"
+                                        select="
+                                            'instantiationLocation'"/>
+                                    <xsl:with-param name="field1"
+                                        select="
+                                            normalize-space(
+                                            System:Directory
+                                            [contains(., 'Levy')]
+                                            )"/>
+                                    <xsl:with-param name="defaultValue">
+                                        <xsl:value-of select="'DAVID'[$isWAV]"/>
+                                        <xsl:value-of select="'Archives storage'[not($isWAV)]"/>
+                                    </xsl:with-param>
                                 </xsl:call-template>
                             </instantiationLocation>
                             <instantiationMediaType>Sound</instantiationMediaType>
-                            <instantiationGenerations>
-                                <xsl:value-of select="$generation"/>
-                            </instantiationGenerations>
-                            <instantiationFileSize>
-                                <xsl:value-of select="System:FileSize"/>
-                            </instantiationFileSize>
-                            <instantiationDuration>
-                                <xsl:value-of select="Composite:Duration"/>
-                            </instantiationDuration>
-                            <instantiationDataRate>
-                                <xsl:value-of select="RIFF:AvgBytesPerSec"/>
-                            </instantiationDataRate>
+                            <xsl:if test="$isDub">
+                                <instantiationGenerations>
+                                    <xsl:value-of select="$generation"/>
+                                </instantiationGenerations>
+                            </xsl:if>
+                            <xsl:apply-templates select="
+                                System:FileSize[$isWAV]" mode="pbcore"/>
+                            <xsl:apply-templates select="
+                                Composite:Duration" mode="pbcore"/>
+                            <xsl:apply-templates select="
+                                RIFF:AvgBytesPerSec" mode="pbcore"/>
+                            
                             <instantiationChannelConfiguration>
                                 <xsl:choose>
                                     <xsl:when 
@@ -850,74 +857,43 @@ to a pbcore cavafy entry -->
                             </instantiationChannelConfiguration>
 
                             <xsl:if test="contains($generation, 'segment')">
-                                <instantiationAnnotation annotationType="Embedded Title">
+                                <instantiationAnnotation annotationType="instantiation_title">
                                     <xsl:value-of 
                                         select="normalize-space(RIFF:Title)"/>
                                 </instantiationAnnotation>
                                 <instantiationAnnotation 
-                                    annotationType="Embedded Description">
+                                    annotationType="instantiation_description">
                                     <xsl:value-of 
-                                        select="normalize-space(RIFF:Subject)"/>
+                                        select="(RIFF:Subject)"/>
                                 </instantiationAnnotation>
                             </xsl:if>
                             <xsl:apply-templates
                                 select="RIFF:CodingHistory
-                                [not(contains(., 'D.A.V.I.D.'))]"/>
+                                [not(contains(., 'D.A.V.I.D.'))][$isWAV]"/>
+                            <xsl:apply-templates select="RIFF:SourceForm" mode="pbcore"/>
                             
-                            <instantiationAnnotation annotationType="Provenance">
-                                <xsl:value-of 
-                                    select="normalize-space(
-                                    RIFF:SourceForm)"/>
-                            </instantiationAnnotation>
-                            <instantiationAnnotation annotationType="Embedded_Comments">
+                            <instantiationAnnotation annotationType="embedded_comments">
                                 <xsl:value-of select="normalize-space(RIFF:Comment)"/>
                             </instantiationAnnotation>
 
-                            <instantiationAnnotation annotationType="Transfer_Technician">
-                                <xsl:value-of select="normalize-space(RIFF:Technician)"/>
-                            </instantiationAnnotation>
+                            <xsl:apply-templates select="RIFF:Technician" mode="pbcore"/>
+                            
 
                             <!--essence tracks -->
-                            <instantiationEssenceTrack>
-                                <essenceTrackType>audio</essenceTrackType>
-                                <essenceTrackIdentifier source="DAVID Title">
-                                    <xsl:value-of 
-                                        select="normalize-space(RIFF:Description)"/>
-                                </essenceTrackIdentifier>
-                                <essenceTrackStandard>
-                                    <xsl:value-of select="File:FileType"/>
-                                </essenceTrackStandard>
-                                <essenceTrackEncoding>
-                                    <xsl:value-of select="RIFF:Encoding"/>
-                                </essenceTrackEncoding>
-                                <essenceTrackDataRate>
-                                    <xsl:value-of select="RIFF:AvgBytesPerSec"/>
-                                </essenceTrackDataRate>
-                                <essenceTrackSamplingRate>
-                                    <xsl:value-of select="RIFF:SampleRate"/>
-                                </essenceTrackSamplingRate>
-                                <essenceTrackBitDepth>
-                                    <xsl:value-of select="concat(RIFF:BitsPerSample, ' bit')"/>
-                                </essenceTrackBitDepth>
-                            </instantiationEssenceTrack>
-                            <xsl:if
-                                test="
-                                    contains(
-                                    RIFF:Medium, 
-                                    $cavafyFormats/cavafyFormats/cavafyFormat
-                                    ) and
-                                    not(
-                                    $cavafyEntry/
-                                    pb:pbcoreDescriptionDocument/
-                                    pbcoreRelation
-                                    [pbcoreRelationType = 'Is Dub Of'])">
-                                <instantiationRelation>
-                                    <instantiationRelationType>Is Dub Of</instantiationRelationType>
-                                    <instantiationRelationIdentifier>
-                                        <xsl:value-of select="RIFF:Medium"/>
-                                    </instantiationRelationIdentifier>
-                                </instantiationRelation>
-                            </xsl:if>
+                            <xsl:apply-templates select=".[matches($File:FileType, 'WAV|BWF', 'i')]" mode="essenceTrack"/>
+                            
+                            <!-- Is dub of -->
+                            
+                            <xsl:variable name="instIsDubOf" select="$instantiationData/
+                                pb:instantiationRelation
+                                [pb:instantiationRelationType = 'Is Dub Of']/
+                                pb:instantiationRelationIdentifier"/>
+                            <xsl:apply-templates select="
+                                RIFF:Medium
+                                [$isDub]" mode="isDubOf">
+                                <xsl:with-param name="instIsDubOf" select="$instIsDubOf"/>
+                            </xsl:apply-templates> 
+                            
                         </pbcoreInstantiation>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -926,6 +902,133 @@ to a pbcore cavafy entry -->
 
         <xsl:copy-of select="$cavafyOutput"/>
 
+    </xsl:template>
+    
+    <xsl:template match="
+            WNYC:instantiation_physical_label" mode="pbcore">
+        <xsl:for-each select="tokenize(., $separatingToken)">
+            <pbcoreinstantiationIdentifier source="Physical label">
+                <xsl:value-of select="normalize-space(.)"/>
+            </pbcoreinstantiationIdentifier>
+        </xsl:for-each>
+    </xsl:template>
+    <xsl:template match="
+        WNYC:instantiation_issued_date" mode="pbcore">
+        <xsl:for-each select="tokenize(., $separatingToken)">
+            <instantiationDate dateType="Issued">
+                <xsl:value-of select="normalize-space(.)"/>
+            </instantiationDate>
+        </xsl:for-each>
+    </xsl:template>
+    <xsl:template match="
+        WNYC:instantiation_date" mode="pbcore">
+        <xsl:for-each select="tokenize(., $separatingToken)">
+            <instantiationDate>
+                <xsl:value-of select="normalize-space(.)"/>
+            </instantiationDate>
+        </xsl:for-each>
+    </xsl:template>
+    <xsl:template match="
+        WNYC:instantiation_created_date" mode="pbcore">
+        <xsl:for-each select="tokenize(., $separatingToken)">
+            <instantiationDate dateType="Created">
+                <xsl:value-of select="normalize-space(.)"/>
+            </instantiationDate>
+        </xsl:for-each>
+    </xsl:template>
+    
+    <xsl:template match="RIFF:Description" mode="pbcore">
+        <instantiationIdentifier source="DAVID Title">
+            <xsl:value-of select="
+                    normalize-space(.)"/>
+        </instantiationIdentifier>
+    </xsl:template>
+    
+    <xsl:template match="System:FileCreateDate" mode="pbcore">
+        <instantiationDate dateType="Created">
+            <xsl:value-of select="WNYC:dateTimeToISODate(.)"/>
+        </instantiationDate>
+    </xsl:template>
+    
+    <xsl:template match="RIFF:Technician" mode="pbcore">
+        <instantiationAnnotation annotationType="Transfer_Technician">
+            <xsl:value-of select="normalize-space(.)"/>
+        </instantiationAnnotation>
+    </xsl:template>
+    
+    <xsl:template match="RIFF:Engineer" mode="pbcore">
+        <xsl:for-each select="tokenize(., $separatingToken)">
+            <pbcoreContributor>
+                <contributor>
+                    <xsl:value-of select="normalize-space(.)"/>
+                </contributor>
+                <contributorRole>Engineer</contributorRole>
+            </pbcoreContributor>
+        </xsl:for-each>
+    </xsl:template>
+    
+    <xsl:template match="System:FileSize" mode="pbcore">
+        <instantiationFileSize>
+            <xsl:value-of select="."/>
+        </instantiationFileSize>
+    </xsl:template>    
+    <xsl:template match="Composite:Duration" mode="pbcore">
+        <instantiationDuration>
+            <xsl:value-of select="."/>
+        </instantiationDuration>
+    </xsl:template>
+    <xsl:template match="RIFF:AvgBytesPerSec" mode="pbcore">
+        <instantiationDataRate>
+            <xsl:value-of select="."/>
+        </instantiationDataRate>
+    </xsl:template>
+    <xsl:template match="RIFF:SourceForm" mode="pbcore">
+        <instantiationAnnotation annotationType="Provenance">
+            <xsl:value-of select="
+                    normalize-space(
+                    .)"/>
+        </instantiationAnnotation>
+    </xsl:template>
+    
+    <xsl:template match="rdf:Description" mode="essenceTrack">
+        <xsl:param name="isWAV" select="
+            upper-case(File:FileType) eq 'WAV'"/>
+        <instantiationEssenceTrack>
+            <essenceTrackType>audio</essenceTrackType>
+            <xsl:if test="$isWAV">
+                <essenceTrackIdentifier source="DAVID Title">
+                    <xsl:value-of select="normalize-space(RIFF:Description)"/>
+                </essenceTrackIdentifier>
+            </xsl:if>
+            <essenceTrackStandard>
+                <xsl:value-of select="File:FileType"/>
+            </essenceTrackStandard>
+            <essenceTrackEncoding>
+                <xsl:value-of select="RIFF:Encoding"/>
+            </essenceTrackEncoding>
+            <xsl:apply-templates select="
+                RIFF:AvgBytesPerSec|
+                RIFF:SampleRate|
+                RIFF:BitsPerSample" mode="essenceTrack"/>
+        </instantiationEssenceTrack>
+    </xsl:template>
+    
+    <xsl:template match="RIFF:Medium" mode="isDubOf">
+        <xsl:param name="RIFF:Medium" select="."/>
+        <xsl:param name="instIsDubOf"/>
+        <xsl:param name="isDubOf">
+            <xsl:call-template name="checkConflicts">
+                <xsl:with-param name="fieldName" select="isDubOf"/>
+                <xsl:with-param name="field1" select="$RIFF:Medium"/>
+                <xsl:with-param name="field2" select="$instIsDubOf"/>
+            </xsl:call-template>
+        </xsl:param>
+        <instantiationRelation>
+            <instantiationRelationType>Is Dub Of</instantiationRelationType>
+            <instantiationRelationIdentifier>
+                <xsl:value-of select="$isDubOf"/>
+            </instantiationRelationIdentifier>
+        </instantiationRelation>
     </xsl:template>
     
     <xsl:template match="RIFF:CodingHistory">
@@ -945,6 +1048,22 @@ to a pbcore cavafy entry -->
             </xsl:apply-templates>
         </xsl:for-each>
         
+    </xsl:template>
+    
+    <xsl:template match="RIFF:AvgBytesPerSec" mode="essenceTrack">
+        <essenceTrackDataRate>
+            <xsl:value-of select="."/>
+        </essenceTrackDataRate>
+    </xsl:template>
+    <xsl:template match="RIFF:SampleRate" mode="essenceTrack">
+        <essenceTrackSamplingRate>
+            <xsl:value-of select="."/>
+        </essenceTrackSamplingRate>
+    </xsl:template>
+    <xsl:template match="RIFF:BitsPerSample" mode="essenceTrack">
+        <essenceTrackBitDepth>
+            <xsl:value-of select="concat(., ' bit')"/>
+        </essenceTrackBitDepth>
     </xsl:template>
     
     <xsl:template match="." mode="parseCodingHistoryStep">

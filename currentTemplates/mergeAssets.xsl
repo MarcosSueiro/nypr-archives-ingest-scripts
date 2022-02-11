@@ -794,7 +794,8 @@
                             <p>
                                 <b> ERRORS when trying to merge instantiation(s) <xsl:value-of
                                         select="
-                                            distinct-values(pb:pbcoreInstantiation/pb:instantiationIdentifier)
+                                            distinct-values(pb:pbcoreInstantiation/
+                                            pb:instantiationIdentifier)
                                             [. = $instIDsToDelete]"
                                         separator=" and "/> INTO <a>
                                         <xsl:attribute name="href">
@@ -872,7 +873,8 @@
             <!-- Copy other instantiation IDs -->
             <xsl:copy-of
                 select="
-                    $instantiationData/pb:instantiationIdentifier
+                    $instantiationData/pb:pbcoreInstantiation/
+                    pb:instantiationIdentifier
                     [not(@source = 'WNYC Media Archive Label')]
                     [not(@source = 'pbcore XML database UUID')]"/>
             <!-- Copy all other instantiation elements -->

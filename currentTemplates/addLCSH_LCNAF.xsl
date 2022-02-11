@@ -44,7 +44,7 @@
         <xsl:apply-templates select="
             $pbcoreCollection/pb:pbcoreCollection" mode="breakItUp">
             <xsl:with-param name="maxOccurrences" select="200"/>
-            <xsl:with-param name="filename" select="$masterDocFilenameNoExtension"></xsl:with-param>
+            <xsl:with-param name="filename" select="$masterDocFilenameNoExtension"/>
         </xsl:apply-templates>
     </xsl:template>
     

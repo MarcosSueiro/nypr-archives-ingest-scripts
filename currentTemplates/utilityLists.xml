@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<utilityLists>
+    <alwaysUC>
+        <acronym>A/H</acronym>
+        <acronym>ABC</acronym>
+        <acronym>ACLU</acronym>
+        <acronym>AIDS</acronym>
+        <acronym>AOL</acronym>
+        <acronym>AP</acronym>
+        <acronym>ASCAP</acronym>
+        <acronym>A\.M\.</acronym>
+        <acronym>BBC</acronym>
+        <acronym>CBGB</acronym>
+        <acronym>CBS</acronym>
+        <acronym>CD</acronym>
+        <acronym>CEO</acronym>
+        <acronym>CIA</acronym>
+        <acronym>CMNY</acronym>
+        <acronym>CNN</acronym>
+        <acronym>CPB</acronym>
+        <acronym>CT</acronym>
+        <acronym>DAT</acronym>
+        <acronym>DC</acronym>
+        <acronym>DIY</acronym>
+        <acronym>DJ</acronym>
+        <acronym>DNA</acronym>
+        <acronym>DNC</acronym>
+        <acronym>DOA</acronym>
+        <acronym>EMS</acronym>
+        <acronym>EMT</acronym>
+        <acronym>EPA</acronym>
+        <acronym>ESM</acronym>
+        <acronym>EU</acronym>
+        <acronym>FAA</acronym>
+        <acronym>FBI</acronym>
+        <acronym>FDA</acronym>
+        <acronym>FDNY</acronym>
+        <acronym>FDR</acronym>
+        <acronym>FEMA</acronym>
+        <acronym>FM</acronym>
+        <acronym>GOP</acronym>
+        <acronym>HBO</acronym>
+        <acronym>HIV</acronym>
+        <acronym>HSA</acronym>
+        <acronym>HUAC</acronym>
+        <acronym>I</acronym>
+        <acronym>ICP</acronym>
+        <acronym>II</acronym>
+        <acronym>III</acronym>
+        <acronym>IV</acronym>
+        <acronym>IX</acronym>
+        <acronym>JFK</acronym>
+        <acronym>JVC</acronym>
+        <acronym>KGB</acronym>
+        <acronym>KKK</acronym>
+        <acronym>KKR</acronym>
+        <acronym>LAPD</acronym>
+        <acronym>LMDC</acronym>
+        <acronym>M/H</acronym>
+        <acronym>MLK</acronym>
+        <acronym>MSNBC</acronym>
+        <acronym>MTA</acronym>
+        <acronym>MW</acronym>
+        <acronym>NAACP</acronym>
+        <acronym>NASDAQ</acronym>
+        <acronym>NASW</acronym>
+        <acronym>NATO</acronym>
+        <acronym>NBA</acronym>
+        <acronym>NBC</acronym>
+        <acronym>NC</acronym>
+        <acronym>NEA</acronym>
+        <acronym>NEH</acronym>
+        <acronym>NFL</acronym>
+        <acronym>NHL</acronym>
+        <acronym>NPR</acronym>
+        <acronym>NS</acronym>
+        <acronym>NW</acronym>
+        <acronym>NWU</acronym>
+        <acronym>NY</acronym>
+        <acronym>NY1</acronym>
+        <acronym>NYC</acronym>
+        <acronym>NYPD</acronym>
+        <acronym>NYS</acronym>
+        <acronym>NYSE</acronym>
+        <acronym>NYU</acronym>
+        <acronym>PAL</acronym>
+        <acronym>PBA</acronym>
+        <acronym>PBS</acronym>
+        <acronym>PCB</acronym>
+        <acronym>PM</acronym>
+        <acronym>POV</acronym>
+        <acronym>PS</acronym>
+        <acronym>P\.M\.</acronym>
+        <acronym>RNC</acronym>
+        <acronym>SFX</acronym>
+        <acronym>SUV</acronym>
+        <acronym>TB</acronym>
+        <acronym>TV</acronym>
+        <acronym>TWA</acronym>
+        <acronym>UFA</acronym>
+        <acronym>UN</acronym>
+        <acronym>USA</acronym>
+        <acronym>USAF</acronym>
+        <acronym>USS</acronym>
+        <acronym>VD</acronym>
+        <acronym>VE</acronym>
+        <acronym>VI</acronym>
+        <acronym>VII</acronym>
+        <acronym>VP</acronym>
+        <acronym>V\-E</acronym>
+        <acronym>WFUV</acronym>
+        <acronym>WFUW</acronym>
+        <acronym>WNBA</acronym>
+        <acronym>WNYC</acronym>
+        <acronym>WPIX</acronym>
+        <acronym>WQXR</acronym>
+        <acronym>WTC</acronym>
+        <acronym>WW</acronym>
+        <acronym>WW1</acronym>
+        <acronym>WW2</acronym>
+        <acronym>WWI</acronym>
+        <acronym>WWII</acronym>
+        <acronym>XI</acronym>
+        <acronym>XII</acronym>
+        <acronym>XIII</acronym>
+        <acronym>XIV</acronym>
+        <acronym>[A-Z]\.</acronym>
+    </alwaysUC>
+    <alwaysLC>
+        <preposition>a</preposition>
+        <preposition>an</preposition>
+        <preposition>and</preposition>
+        <preposition>as</preposition>
+        <preposition>at</preposition>
+        <preposition>but</preposition>
+        <preposition>by</preposition>
+        <preposition>for</preposition>
+        <preposition>if</preposition>
+        <preposition>in</preposition>
+        <preposition>nor</preposition>
+        <preposition>of</preposition>
+        <preposition>on</preposition>
+        <preposition>or</preposition>
+        <preposition>so</preposition>
+        <preposition>the</preposition>
+        <preposition>to</preposition>
+        <preposition>when</preposition>
+        <preposition>where</preposition>
+        <preposition>with</preposition>
+        <preposition>yet</preposition>
+    </alwaysLC>
+    <roles>
+        <role> (con)?fess(es)?( up)?</role>
+        <role> (re)?examines?</role>
+        <role> analyzes?</role>
+        <role> and (his|her|their)</role>
+        <role> as told in</role>
+        <role> celebrates?</role>
+        <role> compares?</role>
+        <role> considers?</role>
+        <role> critiques?</role>
+        <role> deconstructs?</role>
+        <role> discuss(es)?</role>
+        <role> evaluates?</role>
+        <role> explains?</role>
+        <role> explores?</role>
+        <role> exposes</role>
+        <role> exposes?</role>
+        <role> extols?</role>
+        <role> gives?</role>
+        <role> grapples?</role>
+        <role> highlights?</role>
+        <role> interviews?</role>
+        <role> introduces?</role>
+        <role> listens?</role>
+        <role> looks? back on</role>
+        <role> offers?</role>
+        <role> on (his|her|their|the)?( making of)?</role>
+        <role> performs?</role>
+        <role> picks?</role>
+        <role> plays</role>
+        <role> predicts?</role>
+        <role> previews?</role>
+        <role> pulls?</role>
+        <role> reflects? (on)?</role>
+        <role> relates?</role>
+        <role> relays?</role>
+        <role> relives?</role>
+        <role> remembers?</role>
+        <role> reminisces? (about)?</role>
+        <role> reports? (on)?</role>
+        <role> reviews?</role>
+        <role> revisits?</role>
+        <role> search(es)? (for)?</role>
+        <role> shares?</role>
+        <role> showcases?</role>
+        <role> shows?</role>
+        <role> solves?</role>
+        <role> sorts? (out)?</role>
+        <role> speaks? (with|about)?</role>
+        <role> spills?</role>
+        <role> tackles?</role>
+        <role> takes? us</role>
+        <role> talks? about</role>
+        <role> tells?</role>
+        <role> tells? of</role>
+        <role> tells? why</role>
+        <role> untangles?</role>
+        <role> with( some of)? (his|her|their|the|a|an)?</role>
+        <role>( with)? a history of</role>.
+        <role> who (wrote|edited|curated|stars in)</role>
+        <role>, on the</role>
+        <role>: (his|her|their) (latest|long\-awaited|new)?</role>
+    </roles>
+    <typesOfWork>
+        <typeOfWork>(authorized)? biography( of)?</typeOfWork>
+        <typeOfWork>adventure</typeOfWork>
+        <typeOfWork>album</typeOfWork>
+        <typeOfWork>autobiography</typeOfWork>
+        <typeOfWork>best-seller</typeOfWork>
+        <typeOfWork>book</typeOfWork>
+        <typeOfWork>collection</typeOfWork>
+        <typeOfWork>essays</typeOfWork>
+        <typeOfWork>exhibit</typeOfWork>
+        <typeOfWork>film</typeOfWork>
+        <typeOfWork>history</typeOfWork>
+        <typeOfWork>latest</typeOfWork>
+        <typeOfWork>memoirs?</typeOfWork>
+        <typeOfWork>misadventure</typeOfWork>
+        <typeOfWork>movie</typeOfWork>
+        <typeOfWork>novel</typeOfWork>
+        <typeOfWork>play</typeOfWork>
+        <typeOfWork>project</typeOfWork>
+        <typeOfWork>series</typeOfWork>
+        <typeOfWork>stories</typeOfWork>
+    </typesOfWork>
+    <professions>        
+        <profession>(former)? editor\-in\-chief</profession>
+        <profession>(former)? editor</profession>
+        <profession>(astro)?physicist</profession>
+        <profession>(co\-)?author</profession>
+        <profession>(co\-)?creator</profession>
+        <profession>(co\-)?curators?(\-at\-large)?</profession>
+        <profession>(co\-)?director</profession>
+        <profession>(co\-)?editor</profession>
+        <profession>(co\-)?founder</profession>
+        <profession>(co\-)?guest</profession>
+        <profession>(co\-)?host</profession>
+        <profession>(co\-)?owner</profession>
+        <profession>(co\-)?producer</profession>
+        <profession>(co\-)?publisher</profession>
+        <profession>(co\-)?star</profession>
+        <profession>(co\-)?writers?(\-at\-large)?</profession>
+        <profession>(paleo)?anthropologist</profession>
+        <profession>Admiral</profession>
+        <profession>CEO</profession>
+        <profession>Dr\.</profession>
+        <profession>Kremlinologist</profession>
+        <profession>Lady</profession>
+        <profession>Rev.</profession>
+        <profession>Sir</profession>
+        <profession>activist</profession>
+        <profession>actor</profession>
+        <profession>actresse?</profession>
+        <profession>adviser</profession>
+        <profession>analyst</profession>
+        <profession>anthropologist</profession>
+        <profession>artist</profession>
+        <profession>artistic director</profession>
+        <profession>attorney</profession>
+        <profession>baritone</profession>
+        <profession>bass</profession>
+        <profession>biographer</profession>
+        <profession>bishop</profession>
+        <profession>cartoonist</profession>
+        <profession>chancellor</profession>
+        <profession>chef</profession>
+        <profession>choreographer</profession>
+        <profession>columnist</profession>
+        <profession>comedian</profession>
+        <profession>composer</profession>
+        <profession>conductor</profession>
+        <profession>correspondent</profession>
+        <profession>critic</profession>
+        <profession>dancer</profession>
+        <profession>designer</profession>8 <profession>diva</profession>
+        <profession>doctor</profession>
+        <profession>dramaturg</profession>
+        <profession>economist</profession>
+        <profession>embryologist</profession>
+        <profession>engineer</profession>
+        <profession>entrepreneur</profession>
+        <profession>essayist</profession>
+        <profession>etymologist</profession>
+        <profession>explorer</profession>
+        <profession>farmer</profession>
+        <profession>fighter</profession>
+        <profession>filmmaker</profession>
+        <profession>firefighter</profession>
+        <profession>gourmand</profession>
+        <profession>grammarian</profession>
+        <profession>guitarist</profession>
+        <profession>gurus? of how.?to</profession>
+        <profession>historian</profession>
+        <professiosn>horticulturist</professiosn>
+        <profession>horticulturist</profession>
+        <profession>inventor</profession>
+        <profession>journalist</profession>
+        <profession>lawyer</profession>
+        <profession>lyricist</profession>
+        <profession>maker</profession>
+        <profession>manager</profession>
+        <profession>mayor</profession>
+        <profession>member</profession>
+        <profession>mogul</profession>
+        <profession>musician</profession>
+        <profession>novelist</profession>
+        <profession>one.and.only</profession>
+        <profession>organizer</profession>
+        <profession>performance artist/writer</profession>
+        <profession>photographer</profession>
+        <profession>physician(\-in\-residence)?</profession>
+        <profession>pianist</profession>
+        <profession>player</profession>
+        <profession>playwright</profession>
+        <profession>podiatrist</profession>
+        <profession>poet</profession>
+        <profession>pole vaulter</profession>
+        <profession>president</profession>
+        <profession>professor</profession>
+        <profession>programmer</profession>
+        <profession>proprietor</profession>
+        <profession>psychiatrist</profession>
+        <profession>punster</profession>
+        <profession>rabbi</profession>
+        <profession>reporter</profession>
+        <profession>restaurateur</profession>
+        <profession>scientist</profession>
+        <profession>scriptwriter</profession>
+        <profession>semiotician</profession>
+        <profession>senator</profession>
+        <profession>singer</profession>
+        <profession>soprano</profession>
+        <profession>speakers? of the house</profession>
+        <profession>staff writer</profession>
+        <profession>stockbroker</profession>
+        <profession>studio executive</profession>
+        <profession>surgeon</profession>
+        <profession>tenor</profession>
+        <profession>trader</profession>
+        <profession>trombonist</profession>
+        <profession>violinist</profession>
+        <profession>vocalist</profession>
+        <profession>who curated</profession>
+        <preofession>who edited</preofession>
+        <profession>who made</profession>
+        <profession>who wrote</profession>
+        <profession>winner</profession>
+        <profession>writer</profession>
+    </professions>
+</utilityLists>

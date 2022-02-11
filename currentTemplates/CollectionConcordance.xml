@@ -31,6 +31,12 @@
 		<collURL>http://id.loc.gov/authorities/names/n81024714</collURL>
 	</collection>
 	<collection>
+		<collAcro>CPB</collAcro>
+		<collName>Corporation for Public Broadcasting</collName>
+		<collLocation>US</collLocation>
+		<collURL>http://id.loc.gov/authorities/names/n79032200</collURL>
+	</collection>
+	<collection>
 		<collAcro>COMM</collAcro>
 		<collName>Commercial Recording</collName>
 		<collLocation>US</collLocation>

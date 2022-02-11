@@ -12,13 +12,41 @@
     based on a series name
     and a format -->
 
+    <!-- 
+Enter the series name under <seriesName>
+and any further refinements under <searchString>.
+
+For example, to generate the manifest 
+for the series 'Central Park Summerstage' DBX tapes
+and
+reels without a cassette instantiation
+from 'Memoirs of the Movies',
+enter:
+
+<seriesList>
+    <series>
+        <seriesName>Central Park SummerStage</seriesName>
+        <format>DBX 700 VHS tape</format>
+        <searchString></searchString>
+    </series>
+    <series>
+        <seriesName>Memoirs of the Movies</seriesName>
+        <format>1/4 inch audio tape</format>
+        <searchString>https://cavafy.wnyc.org/?facet_Series+Title%5B%5D=Memoirs+of+the+Movies&amp;q=%22memoirs+of+the+movies%22+-cassette</searchString>
+    </series>
+</seriesList>
+
+-->
+
     <xsl:template match="seriesList">
         <xsl:apply-templates select="
                 series" mode="
             generateManifest"/>
     </xsl:template>
+    
+    
 
-    <xsl:template match="series" mode="generateManifest">
+    <xsl:template name="generateManifest" match="series" mode="generateManifest">
         <!-- Generate an instantiation-level manifest 
         from a series name and a format -->
         <xsl:param name="seriesName">
@@ -62,19 +90,19 @@
             <xsl:call-template name="findCavafyXMLs">
                 <xsl:with-param name="searchString" select="
                         $searchString"/>
-                <xsl:with-param name="maxResults" select="2000"/>
+                <xsl:with-param name="maxResults" select="3000"/>
             </xsl:call-template>
         </xsl:param>
 
         <xsl:param name="filenameAddendum" select="
                 concat('_search', position())"/>
-        <xsl:variable name="compactSeries" select="
+        <xsl:param name="compactSeries" select="
                 replace($seriesName, '\W', '')"/>
-        <xsl:variable name="compactFormat" select="
+        <xsl:param name="compactFormat" select="
                 replace($format, '\W', '')"/>
 
         <!-- This is the list of all the instantiation IDs -->
-        <xsl:variable name="instantiationIDs">
+        <xsl:param name="instantiationIDs">
             <xsl:message
                 select="
                     'Generate a list ',
@@ -93,16 +121,16 @@
                             $format"/>
                 </xsl:apply-templates>
             </xsl:element>
-        </xsl:variable>
+        </xsl:param>
 
         <!-- The same list, sorted -->
-        <xsl:variable name="instantiationIDsSorted">
+        <xsl:param name="instantiationIDsSorted">
             <xsl:apply-templates select="
                     $instantiationIDs/instantiationIDs"
                 mode="sortInstantiationIDs"/>
-        </xsl:variable>
+        </xsl:param>
 
-        <xsl:variable name="filenameInstantiationIDs">
+        <xsl:param name="filenameInstantiationIDs">
             <xsl:value-of
                 select="
                     concat($baseFolder,
@@ -112,7 +140,19 @@
                     $currentDate,
                     $filenameAddendum)"/>
             <xsl:value-of select="'.xml'"/>
-        </xsl:variable>
+        </xsl:param>
+        
+        <xsl:param name="sourceData">
+            <xsl:apply-templates
+                select="
+                $cavafyXMLs/
+                pb:pbcoreCollection/
+                pb:pbcoreDescriptionDocument/
+                pb:pbcoreInstantiation
+                [pb:instantiationPhysical = $format]"
+                mode="
+                generateSourceExif"/> 
+        </xsl:param>
 
         <!-- This is the document
             with all the instantiation IDs 
@@ -137,17 +177,7 @@
             <xsl:value-of select="'.xml'"/>
         </xsl:variable>
 
-        <xsl:variable name="sourceData">
-            <xsl:apply-templates
-                select="
-                    $cavafyXMLs/
-                    pb:pbcoreCollection/
-                    pb:pbcoreDescriptionDocument/
-                    pb:pbcoreInstantiation
-                    [pb:instantiationPhysical = $format]"
-                mode="
-                generateSourceExif"/> 
-        </xsl:variable>
+
 
         <xsl:result-document href="{$filenameSourceExif}">
             <xsl:copy select="$sourceData/rdf:RDF[1]">
@@ -155,9 +185,19 @@
             </xsl:copy>
         </xsl:result-document>
 
-        <!-- Now we generate a 'fake' exif-like document
+        <!-- Now we generate a 'fake' exif-like rdf document
             of future WAVE files
             from the instantiation IDs data -->
+        <!--<xsl:variable name="nextFilenames">
+            <nextFilenames>
+                <xsl:apply-templates
+                    select="
+                        $instantiationIDsSorted//instantiationID"
+                    mode="
+            generateNextFilename"/>
+            </nextFilenames>
+        </xsl:variable>-->
+        
         <xsl:apply-templates select="
                 $instantiationIDsSorted/instantiationIDs"
             mode="
@@ -233,9 +273,36 @@
                     <xsl:value-of select="pb:instantiationGenerations"/>
                 </xsl:attribute>
                 <xsl:attribute name="newCavafyID" select="$cavafyID"/>
+                <xsl:attribute name="instantiationCreatedDate" select="
+                    pb:instantiationDate[@dateType='Created']"/>
+                <xsl:attribute name="instantiationIssuedDate" select="
+                    pb:instantiationDate[@dateType='Issued']"/>
+                <xsl:attribute name="noTypeInstantiationDates">
+                    <xsl:value-of select="pb:instantiationDate[not(@dateType)]" separator=" ; "/>
+                </xsl:attribute>
+                <xsl:attribute name="instantiationTitle" select="
+                    pb:instantiationAnnotation
+                    [@annotationType='instantiation_title']"/>
+                <xsl:attribute name="instantiationDescription" select="
+                    pb:instantiationAnnotation
+                    [@annotationType='instantiation_description']"/>
                 <xsl:value-of select="$cavafyID"/>
             </xsl:element>
         </xsl:for-each>
+    </xsl:template>
+
+    <!-- If you already have
+        a list of instantiations -->
+    <xsl:template match="instantiationIDs">
+        <xsl:apply-templates select="."
+            mode="
+            generateExif">
+            <xsl:with-param name="
+                stopIfError" select="true()" tunnel="yes"/>
+            <xsl:with-param name="filenameAddendum" tunnel="yes"
+                select="
+                '_fromInstIDs_'"/>
+        </xsl:apply-templates>
     </xsl:template>
 
 </xsl:stylesheet>

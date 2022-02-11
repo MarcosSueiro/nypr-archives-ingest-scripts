@@ -23,7 +23,7 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
     <xsl:variable name="yearRegex" select="'[12u][0123456789u]{3}'"/>
     <xsl:variable name="monthRegex" select="'[01u][0123456789u]'"/>
     <xsl:variable name="dayRegex" select="'[0123u][0123456789u]'"/>
-    <xsl:variable name="assetNoRegex" select="'[0-9]{4,}'"/>
+    <xsl:variable name="assetNumRegex" select="'[0-9]{4,}'"/>
     <xsl:variable name="instLevelSuffixRegex" select="'[0-9]+'"/>
     
     <!-- Optional elements -->
@@ -33,7 +33,7 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
     
     <!-- Combined elements -->
     <xsl:variable name="instIDRegex">
-        <xsl:value-of select="$assetNoRegex"/>
+        <xsl:value-of select="$assetNumRegex"/>
         <xsl:value-of select="'\.'"/>
         <xsl:value-of select="$instLevelSuffixRegex"/>
         <xsl:value-of select="$instSegmentRegex"/>
@@ -53,7 +53,7 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
                 $yearRegex,
                 $monthRegex,
                 $dayRegex,
-                $assetNoRegex
+                $assetNumRegex
                 ), '-'
                 )"/>
         <xsl:value-of select="'\.'"/>
@@ -612,8 +612,10 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
                 <xsl:with-param name="instantiationSuffix" select="$instantiationSuffix"/>
                 <xsl:with-param name="freeText" select="$freeText"/>
                 <xsl:with-param name="instantiationSuffixMT" select="$instantiationSuffixMT"/>
-                <xsl:with-param name="instantiationFirstTrack" select="$instantiationFirstTrack[. gt 0]"/>
-                <xsl:with-param name="instantiationLastTrack" select="$instantiationLastTrack[. gt 0]"/>
+                <xsl:with-param name="instantiationFirstTrack"
+                    select="$instantiationFirstTrack[. gt 0]"/>
+                <xsl:with-param name="instantiationLastTrack"
+                    select="$instantiationLastTrack[. gt 0]"/>
             </xsl:call-template>
         </xsl:param>        
         <xsl:param name="segmentFlag">
@@ -779,10 +781,9 @@ using the pattern COLL-SERI-YYYY-MM-DD-12345.6 [generation] [MUNIID] [free text]
             [@source = 'WNYC Media Archive Label']"
         mode="parseInstantiationID">
         <!-- Parse cavafy instantiation ID -->
-        <xsl:param name="instantiationID" select="
-            normalize-space(.)"/>
+        <xsl:param name="instantiationID" select="."/>
         <xsl:param name="message">
-            <xsl:message select="'Parse instantiation ID', $instantiationID"/>
+            <xsl:message select="'Parse instantiation ID ', $instantiationID"/>
         </xsl:param>
         <xsl:param name="validated"
             select="

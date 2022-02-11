@@ -19,8 +19,6 @@ the source xml document would be:
         <seriesName>Central Park SummerStage</seriesName>
         <searchString></searchString>
     </series>
-</seriesList>
-<seriesList>
     <series>
         <seriesName>Memoirs of the Movies</seriesName>
         <searchString>https://cavafy.wnyc.org/?facet_Series+Title%5B%5D=Memoirs+of+the+Movies&amp;q=%22memoirs+of+the+movies%22+-cassette</searchString>

@@ -16,25 +16,105 @@
     <xsl:output method="xml" indent="yes"/>
     <xsl:import
         href="masterRouter.xsl"/>
+    <xsl:import href="parseAuthorsTitlesLOG.xsl"/>
 
     
     <!--   Examples of LoC searches  
         doc('https://id.loc.gov/search/?q=rdftype:Work%20PETER%20CAREY%20Jack%20Maggs&amp;start=1&amp;format=atom')" 
     -->
     
+    <xsl:mode on-no-match="deep-skip"/>
+    
+    
+    
     <xsl:param name="allCapsGuest" select='
-        "([A-Z\-’&#39;\.]{2,})"'/>    
-    <xsl:param name="allCapsGuestNew" select='
-        "(([A-Z]([A-Z\-’&#39;\.ce]|[A-Z ,])+){2,}){2,}"'/>
-    <xsl:param name="professions" select="'(writer|author|actor|editor|senator|director|playwright|scientist|journalist|star|adviser|poet|artist|filmmaker|photographer|analyst|astrophysicist|speaker of the house|novelist|designer|engineer|critic|curator|musician|player|restaurateur|historian|violinist|actress|dr\.|doctor|diva|singer|etymologist|punster|dancer|choreographer|chef|rabbi|surgeon|cartoonist|baritone|comedian|gourmand|correspondent|biographer|fighter)'"/>
-    <xsl:param name="role" select="'(as told in|who curated|creator( of)?|shares|: h.. new|and h..|discusses|on h..|on the|star of|who edited|author( of)?|(former )?editor-in-chief|co-authors( of)?|who wrote|with h..|(former )?editor( of)?)'"/>
-    <xsl:param name="workType" select="'(exhibit|memoir|novel|book|movie|best-seller|play|collection|essays|latest|autobiography|biography( of)?|stories|film|history)'"/>
-    <xsl:param name="authorBookDivider" select="concat($role, '(.*', $workType, ')?')"/>
+        "([A-Z\.\-’]{2,})"'/>
+    <xsl:param name="allCapsGuestExact">
+        <xsl:value-of select="'^'"/>
+        <xsl:value-of select="$allCapsGuest"/>
+        <xsl:value-of select="'$'"/>
+    </xsl:param>
+    <xsl:param name="professions">
+        <xsl:value-of select="
+            $utilityLists/utilityLists/
+            professions/profession" separator="s?|"/>
+        <xsl:value-of select="'s?'"/>
+    </xsl:param>
+    <xsl:param name="professionInCommas">
+        <xsl:value-of select="','"/>
+        <xsl:value-of select="'.*'"/>
+        <xsl:value-of select="'('"/>
+        <xsl:value-of select="$professions"/>
+        <xsl:value-of select="')'"/>
+        <xsl:value-of select="'.+?'"/>
+        <xsl:value-of select="','"/>
+    </xsl:param>
+    <xsl:param name="role">
+        <xsl:value-of select="
+            $utilityLists/utilityLists/
+            roles/role" separator="|"/>
+    </xsl:param>
+    <xsl:param name="typeOfWork">
+        <xsl:value-of select="
+            $utilityLists/utilityLists/
+            typesOfWork/typeOfWork" separator="|"/>
+    </xsl:param>
+    <xsl:param name="guestWorkDivider" select="
+        concat($role, '(.*', $typeOfWork, ')?')"/>
     <xsl:param name="professionSuffixes" select="
         '.+or$|.+wright$|.+er$|.+ess$|.+man$|.+ist$'"/>
     <xsl:param name="workDelimiters" select="
-        '(&quot;.+&quot;|“.+”|\(.+\))'"/>  
+        '(&quot;.+&quot;|“.+”|\(.+\))'"/>
+    <xsl:param name="workSubjectDivider" select="', about | on the '"/>
+    <xsl:param name="replaceRegex">[^A-Za-z0-9'\.’\- ]</xsl:param>
+    <xsl:param name="alwaysUC">
+        <xsl:value-of select="
+            $utilityLists/utilityLists/
+            alwaysUC/acronym
+            [position() gt 1]" separator="|"/>
+    </xsl:param>
+    <xsl:param name="alwaysUCExact">
+        <xsl:value-of select="'^'"/>
+        <xsl:value-of select="replace($alwaysUC, '\|', '\$|^')"/>
+        <xsl:value-of select="'$'"/>
+    </xsl:param>
     
+    <xsl:param name="inParentheses" select="'\(.+?\)'"/>
+    <xsl:param name="inQuotes" select="'&quot;.+?&quot;'"/>
+    <xsl:param name="inApostrophes" select='"&apos;.+?&apos;"'/>
+    <xsl:param name="inParenthesesQuotes" select="'\(&quot;.+?&quot;\)'"/>
+    <xsl:param name="inParenthesesApostrophes" select='"\(&apos;.+?&apos;\)"'/>
+    <xsl:param name="inSmartQuotes">“.+?”</xsl:param>
+    <xsl:param name="inParenthesesSmartQuotes">\(“.+?”\)</xsl:param>
+    <xsl:param name="enclosedTitle">
+        <xsl:value-of select="
+            $inParentheses, 
+            $inQuotes, 
+            $inApostrophes, 
+            $inParenthesesQuotes, 
+            $inParenthesesApostrophes,
+            $inSmartQuotes,
+            $inParenthesesSmartQuotes" 
+            separator="|"/>
+    </xsl:param>
+    
+    <xsl:param name="conjunctions" select="
+        ',| and'"/>
+    <xsl:param name="suffixes" select="' Jr\.| Sr\.'"/>
+    <xsl:param name="peopleDividers" select="
+        concat(
+        '(', $conjunctions, ')', 
+        '|', 
+        '(', $enclosedTitle, ')', 
+        '|', 
+        '(', $suffixes, ')'
+        )"/>
+    <xsl:param name="workQualifiers" select="'new'"/>
+    <xsl:param name="possessives" select="'his |her |their '"/>
+    
+    <xsl:param name="ignoreLineRegex">Open phones|listener call\-ins</xsl:param>
+    
+    <xsl:import href="utilities.xsl"/>
     
     
     <xsl:template match="pma_xml_export">
@@ -55,85 +135,181 @@ WHERE `description` REGEXP '^\\*[A-Z][A-z]+ [A-z].*\\*' -->
 
 
         <xsl:param name="completeData">
-            <pbcoreCollection xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <xsl:apply-templates select="database"/>
-            </pbcoreCollection>
+            <xsl:apply-templates select="database"/>
         </xsl:param>
-        <xsl:apply-templates select="$completeData" mode="breakItUp">
-            <xsl:with-param name="baseURI" select="base-uri()"/>
-            <xsl:with-param name="filename" select="'NYACLoC'"/>
+        <xsl:param name="newData">
+            <xsl:copy select="$completeData/cavafyEntries">
+                <xsl:apply-templates select="pb:pbcoreDescriptionDocument[pb:pbcoreSubject|pb:pbcoreContributor]" mode="onlyNewData"/>
+            </xsl:copy>
+        </xsl:param>
+        <xsl:param name="baseURI" select="base-uri(.)"/>
+        <xsl:param name="parsedBaseURI" select="
+            analyze-string($baseURI, '/')"/>
+        <xsl:param name="docFilename" select="
+            $parsedBaseURI/fn:non-match[last()]"/>
+        <xsl:param name="docFilenameNoExtension" 
+            select="substring-before($docFilename, '.')"/>
+        <xsl:param name="baseFolder" select="
+            substring-before($baseURI, $docFilename)"/>
+        <xsl:param name="logFolder" 
+            select="concat($baseFolder, 'instantiationUploadLOGS/')"/>
+        <xsl:param name="currentTime"
+            select="substring(
+            translate(string(current-time()),
+            ':', ''), 1, 4)"/>
+        <xsl:param name="filenameLog"
+            select="
+            concat(
+            $logFolder,
+            $masterDocFilenameNoExtension,                
+            '_LOG', format-date(current-date(),
+            '[Y0001][M01][D01]'), '_T',
+            $currentTime,
+            '.xml'
+            )"/>
+        <xsl:param name="filename"
+            select="
+            concat($baseFolder,
+            $masterDocFilenameNoExtension
+            )"/>
+        <xsl:result-document href="{$filenameLog}">
+            <xsl:copy-of select="$completeData"/>
+        </xsl:result-document>
+        <xsl:apply-templates select="$newData" mode="breakItUp">
+            <xsl:with-param name="baseURI" select="$baseURI"/>
+            <xsl:with-param name="filename" select="$filename"/>
         </xsl:apply-templates>
     </xsl:template>
     
-    <xsl:template match="database">
-        <!-- disable repeat entries -->
-        <xsl:param name="newLoCs">
-            <xsl:for-each-group select="table" group-by="column[@name='URL']">
-                <xsl:apply-templates select="."/>
-            </xsl:for-each-group>            
-        </xsl:param>
-        <!-- Disable entries with no new data -->
-        <xsl:copy-of
-            select="$newLoCs/pb:pbcoreDescriptionDocument[pb:pbcoreSubject | pb:pbcoreContributor]"
-        />
-    </xsl:template>
+    
     
     <xsl:template match="table">
         <xsl:param name="url" select="column[@name = 'URL']"/>
-        <xsl:param name="cavafyEntry" select="doc(concat($url, '.xml'))"/>
-        <xsl:param name="abstract"
-            select="
-                $cavafyEntry/
-                pb:pbcoreDescriptionDocument/
-                pb:pbcoreDescription
-                [@descriptionType = 'Abstract']"/>
-        <xsl:param name="cavafyID"
-            select="
-                $cavafyEntry/
+        <xsl:param name="abstractProvided" select="
+            column[@name = 'abstract']
+            [not(. = 'NULL')]"/>
+        <xsl:param name="collectionProvided" select="
+            column[@name = 'collection']
+            [not(. = 'NULL')]"/>
+        <xsl:param name="seriesProvided" select="
+            column[@name = 'series']
+            [not(. = 'NULL')]"/>
+        <xsl:param name="locContributorsProvided" select="
+            column[@name = 'locContr']
+            [not(. = 'NULL')]"/>
+        <xsl:param name="otherContProvided" select="
+            column[@name = 'otherCont']
+            [not(. = 'NULL')]"/>
+        <xsl:param name="locSubjectsProvided" select="
+            column[@name = 'locSubj']
+            [not(. = 'NULL')]"/>
+        <xsl:param name="otherSubjectsProvided" select="
+            column[@name = 'otherSubj']
+            [not(. = 'NULL')]"/>
+        <xsl:param name="cavafyIDProvided" select="
+            column[@name = 'cavafyID']
+            [not(. = 'NULL')]"/>
+        <xsl:param name="cavafyDoc" select="doc(concat($url, '.xml'))"/>
+        <xsl:param name="abstract">
+            <xsl:value-of select="
+                    $abstractProvided
+                    [matches(., '\w')]"/>
+            <xsl:value-of select="
+                    $cavafyDoc/
+                    pb:pbcoreDescriptionDocument/
+                    pb:pbcoreDescription
+                    [@descriptionType = 'Abstract']
+                    [not(
+                    matches($abstractProvided, '\w')
+                    )]"/>
+        </xsl:param>
+        <xsl:param name="cavafyID">
+            <xsl:value-of select="
+                $cavafyIDProvided
+                [matches(., '\w')]"/>
+            <xsl:value-of select=" $cavafyDoc/
                 pb:pbcoreDescriptionDocument/
                 pb:pbcoreIdentifier
-                [@source = 'WNYC Archive Catalog']"/>
-        <xsl:param name="collection"
-            select="
-                $cavafyEntry/
+                [@source = 'WNYC Archive Catalog']
+                [not(
+                matches($cavafyIDProvided, '\w')
+                )]"/>
+        </xsl:param>
+        <xsl:param name="collection">
+            <xsl:value-of select="
+                $collectionProvided
+                [matches(., '\w')]"/>
+            <xsl:value-of select="$cavafyDoc/
                 pb:pbcoreDescriptionDocument/
-                pb:pbcoreTitle[@titleType = 'Collection']"/>
+                pb:pbcoreTitle[@titleType = 'Collection']
+                [not(
+                matches($collectionProvided, '\w')
+                )]"/>
+        </xsl:param>
+        <xsl:param name="series">
+            <xsl:value-of select="
+                $seriesProvided
+                [matches(., '\w')]"/>
+            <xsl:value-of select="$cavafyDoc/
+                pb:pbcoreDescriptionDocument/
+                pb:pbcoreTitle[@titleType = 'Series']
+                [not(
+                matches($seriesProvided, '\w')
+                )]"/>
+        </xsl:param>
+        <xsl:param name="abstractParsed">
+            <xsl:call-template name="
+                    lineBreakup">
+                <xsl:with-param name="abstract" select="$abstract"/>
+            </xsl:call-template>
+        </xsl:param>
+        <xsl:param name="linesCount" select="count($abstractParsed/line)"/>
+        <xsl:param name="guestsCount" select="count($abstractParsed/line/guestsDomain/guest)"/>
+        <xsl:param name="worksCount" select="count($abstractParsed/line/workDomain/work)"/>
         <xsl:param name="goodCavafyContributors"
             select="
-                $cavafyEntry/
-                pb:pbcoreDescriptionDocument/
-                pb:pbcoreContributor/
-                pb:contributor
-                [contains(@ref, 'id.loc.gov')]"/>
+            $cavafyDoc/
+            pb:pbcoreDescriptionDocument/
+            pb:pbcoreContributor/
+            pb:contributor
+            [contains(@ref, 'id.loc.gov')]"/>
         <xsl:param name="badCavafyContributors"
             select="
-                $cavafyEntry/
-                pb:pbcoreDescriptionDocument/
-                pb:pbcoreContributor/
-                pb:contributor
-                [not(contains(@ref, 'id.loc.gov'))]"/>
+            $cavafyDoc/
+            pb:pbcoreDescriptionDocument/
+            pb:pbcoreContributor/
+            pb:contributor
+            [not(contains(@ref, 'id.loc.gov'))]"/>
         <xsl:param name="badCavafySubjects" select="
-            $cavafyEntry/
+            $cavafyDoc/
             pb:pbcoreDescriptionDocument/
             pb:pbcoreSubject
             [not(contains(@ref, 'id.loc.gov'))]"/>
         <xsl:param name="goodCavafySubjects" select="
-            $cavafyEntry/
+            $cavafyDoc/
             pb:pbcoreDescriptionDocument/
             pb:pbcoreSubject
             [contains(@ref, 'id.loc.gov')]"/>
-        <xsl:param name="allLoCData">
+        <xsl:param name="cavafyEntry">
             <cavafyEntry>
-                <xsl:attribute name="cavafyID">
-                    <xsl:value-of select="$cavafyID"/>
-                </xsl:attribute>
-                <xsl:attribute name="URL">
-                    <xsl:value-of select="$url"/>
-                </xsl:attribute>
-                <xsl:attribute name="collection">
-                    <xsl:value-of select="$collection"/>
-                </xsl:attribute>
+                <xsl:attribute name="URL" select="column[@name = 'URL']"/>
+                <xsl:attribute name="cavafyID" select="column[@name = 'cavafyID']"/>
+                <xsl:attribute name="series" select="column[@name = 'series']"/>
+                <xsl:attribute name="collection" select="column[@name = 'collection']"/>
+                <abstract>
+                    <xsl:attribute name="lines" select="$linesCount"/>
+                    <xsl:attribute name="guests" select="$guestsCount"/>
+                    <xsl:attribute name="works" select="$worksCount"/>
+                    <xsl:attribute name="abstractText" select="$abstract"/>
+                    <xsl:copy-of select="$abstractParsed"/>
+                </abstract>
+            </cavafyEntry>
+        </xsl:param>
+        <xsl:param name="badLines" select="
+            $cavafyEntry/cavafyEntry/
+            abstract/
+            line[not(guestsDomain/guest/firstName[matches(., '[A-Z]')])]"/>
+        <xsl:param name="allLoCData">
                 <!-- Search LoC with contributors in cavafy -->
                 <cavafyContributors>
                     <xsl:for-each select="$badCavafyContributors">
@@ -141,8 +317,7 @@ WHERE `description` REGEXP '^\\*[A-Z][A-z]+ [A-z].*\\*' -->
                             <xsl:call-template name="searchLoC">
                                 <xsl:with-param name="searchTerms" select="."/>
                                 <xsl:with-param name="database" select="'/authorities/names'"/>
-                                <xsl:with-param name="rdftype" select="'PersonalName'"/>
-                                <xsl:with-param name="count" select="'1'"/>
+                                <xsl:with-param name="rdftype" select="'PersonalName'"/>                                
                             </xsl:call-template>
                         </locContributor>
                     </xsl:for-each>
@@ -159,40 +334,81 @@ WHERE `description` REGEXP '^\\*[A-Z][A-z]+ [A-z].*\\*' -->
                         </cavafySubject>
                     </xsl:for-each>
                 </cavafySubjects>
-                
-                <!-- Parse the cavafy abstract -->
-                <abstract>
-                    <xsl:copy-of select="$abstract"/>
-                    <parsedAbstract>
-                        <xsl:apply-templates
-                            select="
-                                $abstract[matches(., '\*[A-z]')]"
-                            mode="lineAsteriskBreakup"/>
-                    </parsedAbstract>
-                </abstract>
-            </cavafyEntry>
+            <xsl:for-each select="$abstractParsed/
+                line/guestsDomain/guest[matches(firstName, '[A-Z]')]">
+                <xsl:variable name="workTitle" select="../../workDomain/work/workTitle"/>
+                <xsl:variable name="workClean" select="
+                    replace($workTitle, '\W', ' ')"/>
+                <xsl:call-template name="searchLoC">
+                    <xsl:with-param name="searchTerms"
+                        select="
+                        string-join(
+                        (firstName, lastName, $workClean),
+                        ' ')"/>
+                    <xsl:with-param name="count" select="
+                        '5'"/>
+                </xsl:call-template>
+            </xsl:for-each>
         </xsl:param>
         <xsl:param name="cavafyContributorsURLs">
             <xsl:value-of
-                select="$allLoCData/cavafyEntry/cavafyContributors/locContributor/json:json[json:count = '1']/json:hits/json:hit/json:uri"
+                select="$allLoCData/
+                cavafyContributors/
+                locContributor/
+                json:json/
+                json:hits/json:hit/json:uri"
                 separator=" ; "/>
         </xsl:param>
         <xsl:param name="cavafySubjectsURLs" 
-                select="$allLoCData/cavafyEntry/cavafySubjects/cavafySubject/rdf:RDF/madsrdf:*/@rdf:about"
+                select="$allLoCData/
+                cavafySubjects/
+                cavafySubject/
+                rdf:RDF/madsrdf:*/
+                @rdf:about"
                 />
+        <xsl:param name="workParsedFromLine">
+            <xsl:for-each select="$abstractParsed/
+                line/guestsDomain/guest[matches(firstName, '[A-Z]')]">
+                <xsl:variable name="workTitle" select="../../workDomain/work/workTitle"/>
+                <xsl:variable name="workClean" select="
+                    replace($workTitle, '\W', ' ')"/>
+                <xsl:call-template name="searchLoC">
+                    <xsl:with-param name="searchTerms"
+                        select="
+                        string-join(
+                        (firstName, lastName, $workClean),
+                        ' ')"/>
+                    <xsl:with-param name="count" select="
+                        '5'"/>
+                </xsl:call-template>
+            </xsl:for-each>
+        </xsl:param>
         <xsl:param name="cavafyParsedAbstractWorkContributorURLs">
-            <xsl:value-of
-                select="$allLoCData/cavafyEntry/abstract/parsedAbstract/newLine/parsedAuthorTitle[number(searchResult/json:json/json:count) lt 5]/work/locAuthor/authorURI"
-                separator=" ; "/>
+            
+            <!--<xsl:value-of
+                select="$allLoCData/
+                cavafyEntry/
+                abstract/
+                parsedAbstract/
+                newLine[number(searchResult/json:json/json:count) lt 50]/
+                work/locAuthor/authorURI"
+                separator=" ; "/>-->
         </xsl:param>
         <xsl:param name="cavafyParsedAbstractParsedContributorURLs">
             <xsl:value-of
-                select="$allLoCData/cavafyEntry/abstract/parsedAbstract/newLine/parsedAuthorTitle/justGuests/json:json[json:count = '1']/json:hits/json:hit/json:uri"
+                select="$allLoCData/cavafyEntry/
+                abstract/parsedAbstract/
+                newLine/
+                justGuests/json:json/
+                json:hits/json:hit/json:uri"
                 separator=" ; "/>
         </xsl:param>
         <xsl:param name="allContributorURLs">
             <xsl:value-of
-                select="$cavafyContributorsURLs | $cavafyParsedAbstractWorkContributorURLs | $cavafyParsedAbstractParsedContributorURLs"
+                select="
+                $cavafyContributorsURLs, 
+                $cavafyParsedAbstractWorkContributorURLs, 
+                $cavafyParsedAbstractParsedContributorURLs"
                 separator=" ; "/>
         </xsl:param>
         <xsl:param name="LoCSubjects">
@@ -202,7 +418,6 @@ WHERE `description` REGEXP '^\\*[A-Z][A-z]+ [A-z].*\\*' -->
                 abstract/
                 parsedAbstract/
                 newLine/
-                parsedAuthorTitle
                 [number(searchResult/json:json/json:count) lt 5]/
                 work/
                 subjects/
@@ -220,7 +435,10 @@ WHERE `description` REGEXP '^\\*[A-Z][A-z]+ [A-z].*\\*' -->
             </xsl:call-template>
         </xsl:param>
         
-        <xsl:copy select="$cavafyEntry/pb:pbcoreDescriptionDocument">            
+        <xsl:copy-of select="$cavafyEntry"/>
+        <xsl:copy-of select="$allLoCData"></xsl:copy-of>
+        
+        <!--<xsl:copy select="$cavafyDoc/pb:pbcoreDescriptionDocument">
             <xsl:copy-of select="$cavafyID"/>
             <xsl:copy-of select="$collection"/>
             <xsl:apply-templates select="$processedSubjects" mode="LOCtoPBCore"/>
@@ -232,37 +450,31 @@ WHERE `description` REGEXP '^\\*[A-Z][A-z]+ [A-z].*\\*' -->
                         separator=" ; "/>
                 </xsl:with-param>
             </xsl:call-template>
-            <!--            <xsl:copy-of select="$allLoCData"/>-->
-        </xsl:copy>
+            <xsl:copy-of select="$allLoCData"/>
+        </xsl:copy>-->
      
     </xsl:template>
     
-    <xsl:template match="node()" mode="lineAsteriskBreakup">
-        <xsl:param name="line" select="
-            analyze-string(., '\*')/fn:non-match"/>        
-        <xsl:apply-templates select="$line" mode="parseAuthorTitle"/>
-    </xsl:template>
-    
-    <xsl:template name="parseAuthorTitle" match="
+    <!--<xsl:template name="parseAuthorTitle" match="
             text()" mode="parseAuthorTitle">
         <xsl:param name="line" select="."/>
         <xsl:param name="lineNoBrackets">
             <xsl:value-of select="tokenize($line, $workDelimiters)"/>
         </xsl:param>
         <xsl:param name="guestIsInCAPS" select="
-            matches($lineNoBrackets, $allCapsGuestNew)"/>
-        <!-- Extract CAPS guests -->
+            matches($lineNoBrackets, $allCapsGuest)"/>
+        <!-\- Extract CAPS guests -\->
         <xsl:param name="CAPSGuestExtracted">
             <xsl:apply-templates select="
                 $lineNoBrackets[$guestIsInCAPS]"
                 mode="extractCAPSGuest"/>
         </xsl:param>
         
-        <!-- Extract author if author and work
+        <!-\- Extract author if author and work
         are related by strings such as
-        '...who wrote...', '...author of...', etc. -->
+        '...who wrote...', '...author of...', etc. -\->
         <xsl:param name="authorWorkAreRelated" select="
-            matches($line, $authorBookDivider)"/>
+            matches($line, $guestWorkDivider)"/>
         <xsl:param name="relatedAuthorWorkExtracted">
             <xsl:apply-templates select="
                 $line[$authorWorkAreRelated]" 
@@ -273,7 +485,7 @@ WHERE `description` REGEXP '^\\*[A-Z][A-z]+ [A-z].*\\*' -->
                 $relatedAuthorWorkExtracted/author, $workDelimiters)"/>
         </xsl:param>
         
-        <!-- Get rid of profession in parsed author -->
+        <!-\- Get rid of profession in parsed author -\->
         <xsl:param name="authorExtractedTokenized" select="
             tokenize($relatedAuthorExtracted, ' ')"/>
         <xsl:param name="author"
@@ -290,14 +502,14 @@ WHERE `description` REGEXP '^\\*[A-Z][A-z]+ [A-z].*\\*' -->
         <xsl:param name="textAfterLastSurname" select="
             substring-after($line, $lastSurname)"/>
         
-        <!-- Extract work if author and work
+        <!-\- Extract work if author and work
          are related by strings such as
-        '...who wrote...', '...author of...', etc. -->
+        '...who wrote...', '...author of...', etc. -\->
         <xsl:param name="relatedWorkExtracted" select="
             $relatedAuthorWorkExtracted/work"/>
         
-        <!-- Extract the work if it is delimited 
-        by quotation marks, parentheses, etc. -->
+        <!-\- Extract the work if it is delimited 
+        by quotation marks, parentheses, etc. -\->
         <xsl:param name="workIsDelimited" select="
             matches($textAfterLastSurname, $workDelimiters)"/>
         <xsl:param name="workDelimited"
@@ -343,12 +555,10 @@ WHERE `description` REGEXP '^\\*[A-Z][A-z]+ [A-z].*\\*' -->
             <xsl:attribute name="guestIsInCaps" select="$guestIsInCAPS"/>
             <xsl:attribute name="workIsDelimited" select="$workIsDelimited"/>
             <xsl:attribute name="authorWorkAreRelated" select="$authorWorkAreRelated"/>
-            <xsl:value-of select="$line"/>
-            <parsedAuthorTitle>
+            <xsl:value-of select="$line"/>            
                 <guests>
                     <xsl:value-of select="$finalAuthors"/>
-                </guests>
-                
+                </guests>                
                 <work>
                     <xsl:value-of select="$workClean"/>
                 </work>
@@ -375,14 +585,14 @@ WHERE `description` REGEXP '^\\*[A-Z][A-z]+ [A-z].*\\*' -->
                         </xsl:call-template>
                     </justGuests>
                 </xsl:if>
-            </parsedAuthorTitle>
+            
         </newLine>
-    </xsl:template>
+    </xsl:template>-->
     
     <xsl:template match="text()" mode="extractCAPSGuest">
         <!-- Extract the author if it is ALL CAPS -->
         <xsl:param name="text" select="."/>
-        <xsl:param name="parsedCAPSText" select="fn:analyze-string($text, $allCapsGuestNew)"/>
+        <xsl:param name="parsedCAPSText" select="fn:analyze-string($text, $allCapsGuest)"/>
         <xsl:value-of select="
             $parsedCAPSText/fn:match/
             fn:normalize-space(replace(., '\W', ' '))"/>
@@ -390,11 +600,15 @@ WHERE `description` REGEXP '^\\*[A-Z][A-z]+ [A-z].*\\*' -->
     
     <xsl:template match="text()" mode="extractRelatedAuthorWork">
         <xsl:param name="text" select="."/>
+        <xsl:param name="guestWorkDivider" select="$guestWorkDivider"/>
         <xsl:param name="tokenizedText"
             select="
             tokenize(
             $text,
-            $authorBookDivider)"/>
+            $guestWorkDivider)"/>
+        <xsl:param name="authors" select="
+            fn:normalize-space(translate($tokenizedText[1], ',', ''))"/>
+        <xsl:param name="authorsTokenized" select="tokenize($authors, ', | and ', 'i')"/>
         <author>
             <xsl:value-of
                 select="
@@ -403,8 +617,12 @@ WHERE `description` REGEXP '^\\*[A-Z][A-z]+ [A-z].*\\*' -->
         </author>
         <work>
             <xsl:value-of select="
-                tokenize($tokenizedText[last()], ':')[1]"/>
+                fn:normalize-space(tokenize($tokenizedText[last()], ':')[1])"/>
         </work>
     </xsl:template>
-    
+    <xsl:template match="pb:pbcoreDescriptionDocument" mode="onlyNewData">
+        <xsl:copy>
+            <xsl:copy-of select="*[not(local-name()='cavafyEntry')]"/>
+        </xsl:copy>
+    </xsl:template>
 </xsl:stylesheet>

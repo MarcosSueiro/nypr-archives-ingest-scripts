@@ -62,6 +62,7 @@ Subject headings / IKEY
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:System="http://ns.exiftool.ca/File/System/1.0/"
     xmlns:File="http://ns.exiftool.ca/File/1.0/" xmlns:RIFF="http://ns.exiftool.ca/RIFF/RIFF/1.0/"
+    xmlns:XMP="http://ns.exiftool.ca/XMP/XMP/1.0/"
     xmlns:XMP-x="http://ns.exiftool.ca/XMP/XMP-x/1.0/"
     xmlns:XMP-xmp="http://ns.exiftool.ca/XMP/XMP-xmp/1.0/"
     xmlns:XMP-xmpDM="http://ns.exiftool.ca/XMP/XMP-xmpDM/1.0/"
@@ -90,6 +91,8 @@ Subject headings / IKEY
     <xsl:import href="Exif2Dbx.xsl"/>
     <xsl:import href="cms2BWFMetaEdit.xsl"/>
     <xsl:import href="cavafyQC.xsl"/>
+    
+    <xsl:param name="checkDAVIDForDupes" select="false()"/>
 
     <xsl:variable name="illegalCharacters">
         <xsl:text>&#x201c;&#x201d;&#xa0;&#x80;&#x93;&#x94;&#xa6;&#x2014;&#x2019;&#x2122;&#x2026;&#x201a;</xsl:text>
@@ -106,6 +109,7 @@ Subject headings / IKEY
     <xsl:variable name="CMSRoles" select="doc('file:CMSRoles.xml')"/>
 
     <xsl:variable name="illegalFileTypes" select="'RF64'"/>
+    <xsl:variable name="digitalFormats" select="'Beta PCM F-1|CD-Audio|DAT|DBX 700 VHS tape|DTRS|BWF|WAV'"/>
 
     <xsl:variable name="validatingCatalogString"
         select="
@@ -133,10 +137,10 @@ Subject headings / IKEY
     <xsl:variable name="archivesAuthors"
         select="
             'Adrian Cosentini|ALANSET|AMARIE|ARCHIVES|BHOUTMAN|
-        CARA|MediaPreserve|Commercial Recording|DANIELS|
-        EMILYV|ERIKP|GLBT Historical Society|HALEY|
+        CARA|Commercial Recording|DANIELS|
+        EMILYV|ERIKP|George Blood.*|GLBT Historical Society|HALEY|
         iZotope RX 7 Audio Editor|JPASSMOR|Jean-Hugues Chenot, ina.fr|KCARTER|
-        MediaPreserve|MARCOS|Memnon|MKIDD|MLEVY|NYAM|
+        MediaPreserve.*|MARCOS|Memnon|MKIDD|MLEVY|NYAM|
         NYPL|Paley Center|Seth B. Winner|Stephen Kairys|
         TONY|UCLA technician|University of Maryland|
         University of Wyoming|UNKNOWN TRANSFER TECH|
@@ -150,7 +154,8 @@ Subject headings / IKEY
             concat('^',
             replace(
             $archivesAuthors, '\|', '\$|^'), '$'), ' ', '')"/>
-
+    <xsl:variable name="archive44k1Log" select="
+        doc('file:/T:/02%20CATALOGING/Archives44kWTheme.xml')"/>
 
     <xsl:template match="rdf:RDF[rdf:Description]">
         <xsl:apply-templates select="rdf:Description[System:FileName]"/>
@@ -164,6 +169,9 @@ Subject headings / IKEY
             <xsl:message select="'Process file ', System:FileName"/>
         </xsl:param>
 
+        <xsl:param name="checkDAVIDForDupes" select="
+            $checkDAVIDForDupes"/>
+        
         <!-- Make sure exiftool output 
             is structured xml -->
         <xsl:param name="checkFormat">
@@ -224,7 +232,8 @@ Subject headings / IKEY
                 DAVIDdbx"/>
         </xsl:param>
 
-        <xsl:param name="isDeleted" select="$dbxData//SOFTDELETED eq '1'"/>
+        <xsl:param name="isDeleted" select="
+            $dbxData//SOFTDELETED eq '1'"/>
 
 
         <!-- Is the file produced by the Archives Dept? -->
@@ -262,42 +271,78 @@ Subject headings / IKEY
                 mode="
                 checkDAVIDTitle"/>
         </xsl:param>
-
         <xsl:param name="parsedDAVIDTitle">
-            <xsl:apply-templates
-                select="
-                    $originalExif[$archivesProduced]
-                    [not($isDeleted)]/rdf:Description
-                    [contains(System:Directory, 'wnycdavidmedia')]/
-                    System:FileName"
-                mode="
-                parseDAVIDTitle">
-                <xsl:with-param name="filenameToParse"
-                    select="
+            <xsl:choose>
+                <!-- When file is in DAVID,
+                    parse its title -->
+                <xsl:when
+                    test="
+                    contains(
+                    System:Directory, 'wnycdavidmedia')">
+                    <xsl:message
+                        select="
                         concat(
-                        $originalExif/rdf:Description/RIFF:Description, '.',
-                        $originalExif/rdf:Description/File:FileType)"
-                />
-            </xsl:apply-templates>
-            <!--<xsl:apply-templates
-                select="
-                    $originalExif[$archivesProduced]/
-                    System:FileName"
-                mode="
-                parseDAVIDTitle"/>-->
+                        System:FileName, ' is in DAVID.'
+                        )"/>
+                    <xsl:message
+                        select="
+                        'Use ',
+                        concat(
+                        RIFF:Description, '.', File:FileType
+                        ),
+                        'to parse.'"/>
+                    <xsl:apply-templates
+                        select="
+                        System:FileName"
+                        mode="
+                        parseDAVIDTitle">
+                        <xsl:with-param name="filenameToParse"
+                            select="
+                            concat(
+                            RIFF:Description,
+                            '.',
+                            File:FileType
+                            )"
+                        />
+                    </xsl:apply-templates>
+                </xsl:when>
+                
+                <!-- Otherwise, 
+                    use its filename -->
+                <xsl:otherwise>
+                    <xsl:apply-templates select="System:FileName" mode="parseDAVIDTitle"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:param>
+        
+        <xsl:param name="instantiationFirstTrack" select="
+            $parsedDAVIDTitle//instantiationFirstTrack"/>
+        <xsl:param name="isMultitrack" select="
+            $parsedDAVIDTitle//@isMultiTrack" as="xs:boolean?"/>
+        <!-- Only check CMS every eight tracks -->
+        <!-- Multitrack info 
+            comes in bunches of eight -->
+        <xsl:param name="getCMSData" select="
+            not($isMultitrack) 
+            or 
+            (number($instantiationFirstTrack) 
+            mod 8 = 1)"/>
+        
         <xsl:message>
-            <xsl:value-of select="'Archives produced:', $archivesProduced"/>
-            <xsl:value-of select="'. In DAVID:', contains($originalExif/rdf:Description/System:Directory, 'wnycdavidmedia')"/>
-            <xsl:value-of select="'. Is deleted: ', $isDeleted"/>
-        </xsl:message> 
+            <xsl:value-of select="
+                'Archives produced:', 
+                $archivesProduced"/>
+            <xsl:value-of
+                select="
+                '. In DAVID:', 
+                contains(
+                $originalExif/rdf:Description/
+                System:Directory, 'wnycdavidmedia')"/>
+            <xsl:value-of select="
+                '. Is deleted: ', $isDeleted"/>
+        </xsl:message>
 
-        <xsl:message
-            select="
-                'DONE PARSING DAVID TITLE ',
-                $parsedDAVIDTitle"/>
-
-        <!--        <xsl:message select="$parsedDAVIDTitle"/>-->
+        
 
         <!-- If the file comes from Archives,
         check its naming convention
@@ -306,48 +351,17 @@ Subject headings / IKEY
 
             <!-- Check the WNYC Archives naming convention -->
             <!-- Parse the title or filename -->
-            <xsl:variable name="parsedDAVIDTitle">
-                <xsl:choose>
-                    <!-- When file is in DAVID,
-                    parse its title -->
-                    <xsl:when
-                        test="
-                            contains(
-                            System:Directory, 'wnycdavidmedia')">
-                        <xsl:message
-                            select="
-                                concat(
-                                System:FileName, ' is in DAVID.'
-                                )"/>
-                        <xsl:message
-                            select="
-                                'Use ',
-                                concat(
-                                RIFF:Description, '.', File:FileType
-                                ),
-                                'to parse.'"/>
-                        <xsl:apply-templates
-                            select="
-                                System:FileName"
-                            mode="
-                            parseDAVIDTitle">
-                            <xsl:with-param name="filenameToParse"
-                                select="
-                                    concat(
-                                    RIFF:Description,
-                                    '.',
-                                    File:FileType
-                                    )"
-                            />
-                        </xsl:apply-templates>
-                    </xsl:when>
 
-                    <!-- Otherwise, 
-                    use its filename -->
-                    <xsl:otherwise>
-                        <xsl:apply-templates select="System:FileName" mode="parseDAVIDTitle"/>
-                    </xsl:otherwise>
-                </xsl:choose>
+            <!-- Check that an entry
+            with the same instantiation ID
+            does not already exist in DAVID -->
+            <xsl:variable name="instantiationsAlreadyInDAVID">
+                <xsl:apply-templates
+                    select="
+                        $parsedDAVIDTitle
+                        /parsedDAVIDTitle
+                        /parsedElements[$checkDAVIDForDupes]"
+                    mode="checkDAVIDForDupes"/>
             </xsl:variable>
 
             <!-- The cavafy entry corresponding to the file -->
@@ -363,6 +377,24 @@ Subject headings / IKEY
                     mode="cavafyQC"/>
             </xsl:variable>
             
+            <xsl:variable name="showName" select="
+                $cavafyEntry//
+                pb:pbcoreTitle
+                [@titleType = 'Series']"/>
+            
+            <xsl:variable name="bcastDateAsText" select="
+                min($cavafyEntry//
+                pb:pbcoreAssetDate
+                [@dateType = 'broadcast']
+                /normalize-space(.))"/>
+            <xsl:variable name="date" select="
+                xs:date(min($bcastDateAsText
+                [matches(., $ISODatePattern)])
+                )"/>
+
+            <!-- Potential duplicate assets -->
+            <!-- Defined as 'same series, same date' -->
+            <!-- Except for 'News' and 'Miscelleaneous' -->
             <xsl:variable name="potentialDupes">
                 <xsl:apply-templates
                     select="
@@ -371,12 +403,9 @@ Subject headings / IKEY
                         /parsedElements
                         /finalCavafyEntry
                         /pb:pbcoreDescriptionDocument
-                        [not(
-                        pb:pbcoreTitle
-                        [@titleType = 'Series'] = 'News')]
-                        [not(
-                        pb:pbcoreTitle
-                        [@titleType = 'Series'] = 'Miscellaneous')]"
+                        [not($showName = 'News')]
+                        [not($showName = 'Miscellaneous')]
+                        [matches($bcastDateAsText, $ISODatePattern)]"
                     mode="sameDateAndSeries">
                     <xsl:with-param name="instantiationToMerge"
                         select="
@@ -385,72 +414,75 @@ Subject headings / IKEY
                     />
                 </xsl:apply-templates>
             </xsl:variable>
+            
+            <xsl:variable name="showSlug">
+                <xsl:apply-templates select="
+                    $cavafyEntry//
+                    pb:pbcoreTitle[@titleType='Series']" mode="
+                    generateShowSlug"/>
+            </xsl:variable>
 
             <!-- Obtain CMS web site data via the WNYC API 
         See https://nyprpublisher.docs.apiary.io/# for info -->
             <xsl:variable name="DAVIDTheme"
                 select="
                     $dbxData/ENTRIES/ENTRY/MOTIVE"/>
-            <xsl:variable name="mp3">
-                <xsl:apply-templates
-                    select="
-                        $parsedDAVIDTitle
-                        /parsedDAVIDTitle
-                        /parsedElements
-                        /finalCavafyEntry
-                        /pb:pbcoreDescriptionDocument"
-                    mode="mp3builder">
-                    <xsl:with-param name="exactMatch" select="false()"/>
-                </xsl:apply-templates>
-            </xsl:variable>
-            <xsl:message select="'Generated MP3:', $mp3"/>
             <xsl:variable name="cmsData">
                 <xsl:choose>
-                    <xsl:when
-                        test="
-                            $DAVIDTheme
-                            [not(. = '')]
-                            [not(starts-with(., 'news_latest_newscast'))]
-                            [not(starts-with(., 'archive_import'))]">
-                        <xsl:message
-                            select="
+                    <xsl:when test="
+                            $getCMSData and
+                            matches($showSlug, '\w') and
+                            matches($bcastDateAsText, $ISODatePattern)">
+                        <xsl:message select="
+                                'Get CMS data from slug and date',
+                                $showSlug, $bcastDateAsText"/>
+                        <xsl:call-template name="getCMSData">
+                            <xsl:with-param name="date" select="$date"/>
+                            <xsl:with-param name="showSlug" select="$showSlug"/>
+                            <xsl:with-param name="minRecords" select="0"/>
+                            <xsl:with-param name="maxRecords" select="20"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:when test="
+                            $getCMSData and
+                            matches($DAVIDTheme, '\w')
+                            and
+                            not(starts-with($DAVIDTheme, 'news_latest_newscast'))
+                            and
+                            not(starts-with($DAVIDTheme, 'archive_import'))
+                            ">
+                        <xsl:message select="
                                 'Get CMS data from theme/motive',
                                 $DAVIDTheme"/>
-                        <xsl:apply-templates select="$DAVIDTheme"
-                            mode="
+                        <xsl:apply-templates select="$DAVIDTheme" mode="
                             getCMSData">
                             <xsl:with-param name="minResults" select="1"/>
                             <xsl:with-param name="maxResults" select="1"/>
                         </xsl:apply-templates>
                     </xsl:when>
-                    <xsl:when test="matches($mp3, '\w+\d+')">
+
+                    <!--<xsl:when test="
+                            $getData and
+                            matches($builtMP3, '\w+\d+')">
                         <xsl:call-template name="getCMSData">
-                            <xsl:with-param name="theme" select="$mp3"/>
-                            <xsl:with-param name="exactMatch" select="false()"/>
+                            <xsl:with-param name="theme" select="$builtMP3"/>
+                            <xsl:with-param name="exactMP3" select="false()"/>
                             <xsl:with-param name="minRecords" select="0"/>
                             <xsl:with-param name="maxRecords" select="5"/>
                         </xsl:call-template>
-                    </xsl:when>
+                    </xsl:when>-->
+
                 </xsl:choose>
-
             </xsl:variable>
 
-            <xsl:variable name="cmsDataSorted">
-                <xsl:apply-templates select="
-                        $cmsData/cmsData"
-                    mode="
-                    sortCMSResults"/>
-            </xsl:variable>
-
-
-
-
-            <!--<xsl:message select="
-                    'cavafy entry: ', $cavafyEntry"/>-->
+            
 
             <!-- The corresponding instantiation  -->
             <xsl:variable name="instantiationData">
-                <xsl:apply-templates select="$parsedDAVIDTitle/parsedElements/instantiationData"/>
+                <xsl:apply-templates select="
+                    $parsedDAVIDTitle/
+                    parsedElements/
+                    instantiationData"/>
             </xsl:variable>
 
             <!-- Cavafy series data,
@@ -470,9 +502,10 @@ Subject headings / IKEY
                     <xsl:copy-of select="$parsedDAVIDTitle"/>
                     <xsl:copy-of select="$cavafyEntry"/>
                     <xsl:copy-of select="$potentialDupes"/>
+                    <xsl:copy-of select="$instantiationsAlreadyInDAVID"/>
                     <xsl:copy-of select="$seriesData"/>
                     <xsl:copy-of select="$instantiationData"/>
-                    <xsl:copy-of select="$cmsDataSorted"/>                    
+                    <xsl:copy-of select="$cmsData"/>
                 </inputs>
             </xsl:variable>
             <xsl:variable name="newExif">
@@ -496,14 +529,14 @@ Subject headings / IKEY
         <!-- Make sure exiftool XMP output is structured -->
         <xsl:param name="flagNames" select="'History|DerivedFrom|Tracks|Bwfxml'"/>
         <xsl:param name="localName" select="local-name()"/>
-        <xsl:variable name="flagNamesExact"
+        <xsl:param name="flagNamesExact"
             select="
                 translate(
                 concat('^',
                 replace(
                 $flagNames, '\|', '\$|^'), '$'), ' ', '')"/>
-        <xsl:variable name="includesFlaggedName" select="matches($localName, $flagNames)"/>
-        <xsl:variable name="matchesFlaggedNameExactly" select="matches($localName, $flagNamesExact)"/>
+        <xsl:param name="includesFlaggedName" select="matches($localName, $flagNames)"/>
+        <xsl:param name="matchesFlaggedNameExactly" select="matches($localName, $flagNamesExact)"/>
 
         <xsl:if test="$includesFlaggedName and not($matchesFlaggedNameExactly)">
             <xsl:message terminate="yes"
@@ -525,6 +558,9 @@ Subject headings / IKEY
         <xsl:param name="parsedDAVIDTitle" select="
                 /inputs/parsedDAVIDTitle"/>
         <xsl:param name="inDAVID" select="inDAVID"/>
+        <xsl:param name="isDub" select="
+            not($originalExif/rdf:Description/RIFF:Medium
+            = 'Original')"/>
         <xsl:param name="cavafyEntry"
             select="
                 /inputs
@@ -552,10 +588,61 @@ Subject headings / IKEY
                 $validatingNameString"/>
         <xsl:param name="fileType"
             select="
-                $originalExif/rdf:Description/File:FileType"/>
-
+                $originalExif/
+                rdf:Description/
+                File:FileType"/>
+        <xsl:param name="isDigital" select="
+            matches($fileType, $digitalFormats, 'i')"/>
+        
+        <xsl:param name="instantiationSegmentSuffix"
+            select="
+            $parsedDAVIDTitle//
+            parsedElements/instantiationSegmentSuffix"/>
+        <xsl:param name="segmentFlag"
+            select="
+            $parsedDAVIDTitle//
+            parsedElements/segmentFlag"/>
+        <xsl:param name="instantiationFirstTrack"
+            select="
+            $parsedDAVIDTitle//
+            parsedElements/instantiationFirstTrack[matches(string(.), '^\d+$')]"
+            as="xs:integer?"/>
+        <xsl:param name="instantiationLastTrack"
+            select="
+            $parsedDAVIDTitle//
+            parsedElements/instantiationLastTrack[matches(string(.), '^\d+$')]"
+            as="xs:integer?"/>
+        <xsl:param name="isMultitrack" select="
+            $instantiationFirstTrack gt 0"/>
 
         <xsl:message> ******** GENERATE NEW COMBINED EXIF *********</xsl:message>
+
+        <xsl:variable name="cmsArticle" select="
+            $cmsData/data/
+            attributes[item-type='article']"/>
+        <xsl:variable name="cmsEpisode" select="
+            $cmsData/data/
+            attributes[item-type='episode']"/>
+        <xsl:variable name="cmsIsSegmented" select="
+            boolean(
+            $cmsData/data/
+            attributes/segments[slug])"/>
+        <xsl:variable name="cmsSegments">
+            <!-- Segments in an episode, in order -->
+            <xsl:for-each select="$cmsData//
+                data/attributes/
+                segments/slug">
+                <xsl:sort select="preceding-sibling::segment-number[1]"/>
+                <xsl:variable name="segmentSlug" select="."/>
+                <segment>
+                    <xsl:attribute name="segment-number" select="preceding-sibling::segment-number[1]"/>
+                    <xsl:copy-of select="$cmsData//data/
+                        attributes
+                        [item-type='segment']
+                        [slug=$segmentSlug]"/>
+                </segment>
+            </xsl:for-each>
+        </xsl:variable>
 
         <!-- LET THE MERGING BEGIN -->
 
@@ -612,42 +699,23 @@ Subject headings / IKEY
                 /parsedElements/parsedGeneration"/>
         <xsl:message select="'Parsed generation:', $parsedGeneration"/>
         <xsl:variable name="generation">
-            <xsl:apply-templates select="." mode="checkConflicts">
+            <xsl:call-template name="checkConflicts">
+                <xsl:with-param name="fieldName" select="'Generation'"/>
                 <xsl:with-param name="field1" select="
                         $parsedGeneration"/>
                 <xsl:with-param name="field2"
                     select="
                         $instantiationData
                         /pb:pbcoreInstantiation
-                        /pb:instantiationGenerations"/>
-                <xsl:with-param name="fieldName" select="'Generation'"/>
-            </xsl:apply-templates>
+                        /pb:instantiationGenerations"/>                
+            </xsl:call-template>
         </xsl:variable>
+        
         <xsl:message select="'Generation: ', $generation"/>
         <xsl:variable name="isSegment" select="
-                contains($generation, 'segment')"/>
+            contains($generation, 'segment')"/>
         <xsl:message select="'Is segment: ', $isSegment"/>
-        <xsl:variable name="instantiationSegmentSuffix"
-            select="
-                $parsedDAVIDTitle
-                //parsedElements/instantiationSegmentSuffix"/>
-        <xsl:variable name="segmentFlag"
-            select="
-                $parsedDAVIDTitle
-                //parsedElements/segmentFlag"/>
-        <xsl:variable name="instantiationFirstTrack"
-            select="
-                $parsedDAVIDTitle
-                //parsedElements/instantiationFirstTrack[matches(string(.), '^\d+$')]"
-            as="xs:integer?"/>
-        <xsl:variable name="instantiationLastTrack"
-            select="
-                $parsedDAVIDTitle
-                //parsedElements/instantiationLastTrack[matches(string(.), '^\d+$')]"
-            as="xs:integer?"/>
-        <xsl:variable name="isMultitrack" select="
-                $instantiationFirstTrack gt 0"/>
-        <xsl:message select="'Is multitrack'[$isMultitrack]"/>
+        <xsl:message select="'Is multitrack: ', $isMultitrack"/>
 
         <xsl:variable name="producingOrganizations">
             <!-- Culled from CMS data -->
@@ -721,18 +789,23 @@ Subject headings / IKEY
             select="
                 $collectionInfo
                 /collURL"/>
+        
         <xsl:variable name="collection">
+            <xsl:if test="matches($producingOrganizations, '\w') and matches($exifCollection, '\w')">
+                <xsl:call-template name="field1MustContainField2">
+                    <xsl:with-param name="field1Name" select="'ProducingOrgs'"/>
+                    <xsl:with-param name="field2Name" select="'exifCollection'"/>
+                    <xsl:with-param name="field1" select="$producingOrganizations"/>
+                    <xsl:with-param name="field2" select="$exifCollection"/>
+                </xsl:call-template>
+            </xsl:if>
             <xsl:apply-templates select="." mode="checkConflicts">
+                <xsl:with-param name="fieldName" select="'Collection'"/>
                 <xsl:with-param name="field1" select="
                         $exifCollection"/>
-                <xsl:with-param name="field2"
-                    select="
+                <xsl:with-param name="field2" select="
                         $collectionInfo
                         /collAcro"/>
-                <xsl:with-param name="field3"
-                    select="
-                        $producingOrganizations"/>
-                <xsl:with-param name="fieldName" select="'Collection'"/>
             </xsl:apply-templates>
         </xsl:variable>
 
@@ -745,7 +818,21 @@ Subject headings / IKEY
             <xsl:value-of select="
                     $collectionInfo/collLocation"/>
         </xsl:variable>
-
+        <xsl:variable name="producingOrgsParsed">
+            <xsl:apply-templates select="
+                $producingOrganizations
+                [matches(., '\w')]
+                [matches($collection, '\w')]" mode="
+                splitParseValidate">
+                <xsl:with-param name="validatingString" select="
+                    $collection"/>
+            </xsl:apply-templates>
+        </xsl:variable>
+        <xsl:variable name="additionalProducingOrgs">
+            <xsl:value-of select="
+                $producingOrgsParsed//invalid" separator="
+                {$separatingToken}"/>
+        </xsl:variable> 
         <xsl:variable name="RIFF:ArchivalLocation">
             <RIFF:ArchivalLocation>
                 <xsl:copy-of select="$collection[//error]"/>
@@ -753,7 +840,9 @@ Subject headings / IKEY
                     select="
                         concat(
                         $collectionLocation, ', ',
-                        normalize-space($collection[not(//error)]))"
+                        normalize-space(
+                        $collection[not(//error)])
+                        )"
                 />
             </RIFF:ArchivalLocation>
         </xsl:variable>
@@ -762,7 +851,8 @@ Subject headings / IKEY
             as 'RIFF:Commissioned' -->
         <xsl:variable name="exiftoolCommissioned"
             select="
-                $originalExif/rdf:Description/RIFF:Commissioned"/>
+                $originalExif/rdf:Description/
+                RIFF:Commissioned"/>
         <xsl:variable name="assetCreatorsPublishers">
             <xsl:value-of
                 select="
@@ -779,7 +869,9 @@ Subject headings / IKEY
         <xsl:variable name="cmsCreators">
             <xsl:value-of
                 select="
-                    $cmsPeople/(producers | authors | hosts)/name"
+                    $cmsPeople/
+                    (producers | authors | hosts)/
+                    name"
                 separator="{$separatingTokenLong}"/>
         </xsl:variable>
 
@@ -816,12 +908,12 @@ Subject headings / IKEY
 
         <xsl:variable name="mergedCommissioned">
             <xsl:apply-templates select="." mode="mergeData">
+                <xsl:with-param name="fieldName" select="'Creators'"/>
                 <xsl:with-param name="field1" select="$exiftoolCommissioned"/>
                 <xsl:with-param name="field2" select="$assetCreatorsPublishers"/>
                 <xsl:with-param name="field3" select="$cmsCreators"/>
                 <xsl:with-param name="defaultValue" select="$defaultCreatorsPublishers"/>
-                <xsl:with-param name="validatingString" select="$combinedValidatingStrings"/>
-                <xsl:with-param name="fieldName" select="'Creators'"/>
+                <xsl:with-param name="validatingString" select="$combinedValidatingStrings"/>                
             </xsl:apply-templates>
         </xsl:variable>
 
@@ -845,11 +937,14 @@ Subject headings / IKEY
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:call-template name="mergeData">
-                            <xsl:with-param name="field1" select="$exiftoolCommissioned"/>
-                            <xsl:with-param name="defaultValue" select="$mergedCommissioned"/>
+                            <xsl:with-param name="fieldName" select="
+                                'Creators'"/>
+                            <xsl:with-param name="field1" select="
+                                $exiftoolCommissioned"/>
+                            <xsl:with-param name="defaultValue" select="
+                                $mergedCommissioned"/>
                             <xsl:with-param name="validatingString"
-                                select="$combinedValidatingStrings"/>
-                            <xsl:with-param name="fieldName" select="'Creators'"/>
+                                select="$combinedValidatingStrings"/>                            
                         </xsl:call-template>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -925,12 +1020,18 @@ Subject headings / IKEY
         </xsl:variable>
         <xsl:variable name="mergedArtists">
             <xsl:apply-templates select="." mode="mergeData">
-                <xsl:with-param name="field1" select="$exiftoolArtists"/>
-                <xsl:with-param name="field2" select="$cavafyContributors"/>
-                <xsl:with-param name="field3" select="$cmsAllContributors"/>
-                <xsl:with-param name="defaultValue" select="$defaultArtists"/>
-                <xsl:with-param name="validatingString" select="$validatingNameString"/>
-                <xsl:with-param name="fieldName" select="'Contributors'"/>
+                <xsl:with-param name="field1" select="
+                    $exiftoolArtists"/>
+                <xsl:with-param name="field2" select="
+                    $cavafyContributors"/>
+                <xsl:with-param name="field3" select="
+                    $cmsAllContributors"/>
+                <xsl:with-param name="defaultValue" select="
+                    $defaultArtists"/>
+                <xsl:with-param name="validatingString" select="
+                    $validatingNameString"/>
+                <xsl:with-param name="fieldName" select="
+                    'Contributors'"/>
             </xsl:apply-templates>
         </xsl:variable>
 
@@ -998,7 +1099,7 @@ Subject headings / IKEY
             </RIFF:DateCreated>
         </xsl:variable>
 
-        <xsl:variable name="dateApproximate"
+        <xsl:variable name="DAVIDDateIsApproximate"
             select="
                 contains(
                 $parsedDAVIDTitle/parsedElements/
@@ -1019,44 +1120,47 @@ Subject headings / IKEY
                 <xsl:with-param name="fieldName" select="'defaultSegmentGenre'"/>
             </xsl:call-template>
         </xsl:variable>
+        <xsl:variable name="genre">
+            <xsl:choose>
+                <xsl:when test="not($isSegment)">
+                    <xsl:apply-templates select="." mode="checkConflicts">
+                        <xsl:with-param name="field1"
+                            select="
+                            $originalExif/
+                            rdf:Description/
+                            RIFF:Genre[not(. = $seriesGenre)]"/>
+                        <xsl:with-param name="field2"
+                            select="
+                            $cavafyEntry/
+                            pb:pbcoreDescriptionDocument/
+                            pb:pbcoreGenre[not(. = $seriesGenre)]"/>
+                        <xsl:with-param name="defaultValue" select="$seriesGenre"/>
+                        <xsl:with-param name="fieldName" select="'Genre'"/>
+                    </xsl:apply-templates>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:variable name="segmentGenreWarning"
+                        select="
+                        'Make sure the genre for',
+                        $parsedDAVIDTitle/parsedElements/DAVIDTitle,
+                        'segment is right!'"/>
+                    <xsl:message select="$segmentGenreWarning"/>
+                    <xsl:comment select="$segmentGenreWarning"/>
+                    <xsl:apply-templates select="." mode="checkConflicts">
+                        <xsl:with-param name="field1"
+                            select="$originalExif/
+                            rdf:Description/
+                            RIFF:Genre[not(. = $defaultSegmentGenre)]"/>
+                        <xsl:with-param name="defaultValue" select="$defaultSegmentGenre"/>
+                        <xsl:with-param name="fieldName" select="'Genre'"/>
+                    </xsl:apply-templates>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
 
         <xsl:variable name="RIFF:Genre">
             <RIFF:Genre>
-                <xsl:choose>
-                    <xsl:when test="not($isSegment)">
-                        <xsl:apply-templates select="." mode="checkConflicts">
-                            <xsl:with-param name="field1"
-                                select="
-                                    $originalExif/
-                                    rdf:Description/
-                                    RIFF:Genre[not(. = $seriesGenre)]"/>
-                            <xsl:with-param name="field2"
-                                select="
-                                    $cavafyEntry/
-                                    pb:pbcoreDescriptionDocument/
-                                    pb:pbcoreGenre[not(. = $seriesGenre)]"/>
-                            <xsl:with-param name="defaultValue" select="$seriesGenre"/>
-                            <xsl:with-param name="fieldName" select="'Genre'"/>
-                        </xsl:apply-templates>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:variable name="segmentGenreWarning"
-                            select="
-                                'Make sure the genre for',
-                                $parsedDAVIDTitle/parsedElements/DAVIDTitle,
-                                'segment is right!'"/>
-                        <xsl:message select="$segmentGenreWarning"/>
-                        <xsl:comment select="$segmentGenreWarning"/>
-                        <xsl:apply-templates select="." mode="checkConflicts">
-                            <xsl:with-param name="field1"
-                                select="$originalExif/
-                                rdf:Description/
-                                RIFF:Genre[not(. = $defaultSegmentGenre)]"/>
-                            <xsl:with-param name="defaultValue" select="$defaultSegmentGenre"/>
-                            <xsl:with-param name="fieldName" select="'Genre'"/>
-                        </xsl:apply-templates>
-                    </xsl:otherwise>
-                </xsl:choose>
+                <xsl:value-of select="$genre"/>
             </RIFF:Genre>
         </xsl:variable>
 
@@ -1069,23 +1173,25 @@ Subject headings / IKEY
                 $cavafyEntry/pb:pbcoreDescriptionDocument/
                 pb:pbcoreTitle[@titleType = 'Episode']"/>
         <xsl:variable name="checkedTitle">
-            <xsl:apply-templates select="." mode="checkConflicts">
+            <xsl:call-template name="checkConflicts">
+                <xsl:with-param name="fieldName" select="
+                    'Title'"/>
                 <xsl:with-param name="field1" select="
-                    $exifTitle"/>
+                    $exifTitle
+                    [not($isSegment)]
+                    [not($isMultitrack)]"/>
                 <xsl:with-param name="field2"
                     select="
-                        $cavafyTitle
-                        [not($isSegment)]
-                        [not($isMultitrack)]"/>
-                <xsl:with-param name="defaultValue" select="$cavafyTitle"/>
-                <xsl:with-param name="fieldName" select="
-                        'Title'"/>
+                        $cavafyTitle"/>
+                <xsl:with-param name="defaultValue" select="
+                    $cavafyTitle"/>
+                
                 <!-- To avoid semicolons 
                                 separating a single field -->
                 <xsl:with-param name="separatingToken"
                     select="
                         $separatingTokenForFreeTextFields"/>
-            </xsl:apply-templates>
+            </xsl:call-template>
         </xsl:variable>
         <xsl:variable name="segmentTitleSuffix">
             <!-- The 'part' bit -->
@@ -1126,10 +1232,13 @@ Subject headings / IKEY
                 when audio is a segment 
             or a multitrack-->
             <RIFF:Title>
+                <xsl:copy-of select="$checkedTitle[//error]"/>
                 <xsl:value-of select="$checkedTitle"/>
                 <!-- If the file does not have an embedded title, 
                     add the segment and multitrack bits -->
-                <xsl:value-of select="$segmentTitleSuffix[not(matches($checkedTitle, $segmentTitleSuffix))]"/>
+                <xsl:value-of select="$segmentTitleSuffix
+                    [$checkedTitle = $cavafyTitle]
+                    [not(matches($checkedTitle, $segmentTitleSuffix))]"/>
                 <xsl:value-of select="$multitrackTitleSuffix[not(matches($exifTitle, $multitrackTitleSuffix))]"/>
             </RIFF:Title>
         </xsl:variable>
@@ -1141,7 +1250,7 @@ Subject headings / IKEY
         <xsl:variable name="cavafyFormats" select="
                 doc('cavafyFormats.xml')"/>
         <xsl:variable name="acceptableMediums">
-            <xsl:value-of select="'Audio material|'"/>
+            <xsl:value-of select="'Audio material|Original|'"/>
             <xsl:value-of select="
                     $cavafyFormats/cavafyFormats/format"
                 separator="|"/>
@@ -1230,12 +1339,12 @@ Subject headings / IKEY
                     tokenize($dbxAudioRemark, 'Technical info')[1]"/>
         </xsl:variable>
         <!-- CMS Episode description -->
-        <!-- Not individual segment descriptions -->
+        
         <xsl:variable name="cmsEpisodeDescription">
+            <!-- Description of full episode -->
             <xsl:value-of
                 select="
-                    $cmsData/data/
-                    attributes[not(item-type = 'segment')]/
+                    $cmsEpisode//
                     body/
                     WNYC:strip-tags(
                     tokenize(
@@ -1244,7 +1353,44 @@ Subject headings / IKEY
                     )"
                 separator="&#9;"/>
         </xsl:variable>
-
+        <!-- Individual segment descriptions -->
+        <xsl:variable name="cmsSegmentsTitleBody">
+            <!-- Pick only segments' title and body, 
+                in segment order -->
+            <segmentDescriptions>                
+                <xsl:for-each
+                    select="
+                    $cmsSegments//attributes">
+                    <segment>
+                        <xsl:copy-of select="title"/>
+                        <xsl:copy-of select="body"/>
+                    </segment>
+                </xsl:for-each>
+            </segmentDescriptions>
+        </xsl:variable>        
+        <xsl:variable name="cmsSegmentsTitleBodyFormatted">
+            <!-- Format segment titles and bodies -->
+            <xsl:for-each
+                select="
+                $cmsSegmentsTitleBody/
+                segmentDescriptions/segment">
+                <xsl:value-of select="title"/>
+                <xsl:value-of select="'&#10;&#13;'"/>
+                <xsl:value-of select="
+                    WNYC:strip-tags(body)"/>
+                <xsl:value-of select="'&#10;&#13;'"/>
+                <xsl:value-of select="'&#10;&#13;'"/>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:variable name="cmsCompleteDescription">
+            <xsl:value-of select="
+                $cmsEpisodeDescription"/>
+            <xsl:value-of select="
+                '&#10;&#13;&#10;&#13;&#10;&#13;'
+                [$cmsIsSegmented]"/>          
+            <xsl:value-of select="
+                $cmsSegmentsTitleBodyFormatted"/>
+        </xsl:variable>
         <xsl:variable name="multitrackDescriptionPrefix">
             <!-- Add the multitrack bits -->
             <xsl:if test="$isMultitrack">
@@ -1294,98 +1440,33 @@ Subject headings / IKEY
                     ' on ',
                     $RIFF:Product,
                     ' on ',
-                    $RIFF:DateCreated)"
+                    $parsedDAVIDTitle/parsedElements/DAVIDTitleDate)"
             />
         </xsl:variable>
         <xsl:variable name="defaultDescription">
             <xsl:call-template name="checkConflicts">
+                <xsl:with-param name="fieldName" select="
+                    'Default description'"/>
                 <xsl:with-param name="field1" select="
                     $cavafyAbstract"/>
                 <xsl:with-param name="defaultValue" select="
-                    $boilerplateDescription"/>
-                <xsl:with-param name="fieldName" select="
-                    'Default description'"/>
+                    $boilerplateDescription"/>                
                 <xsl:with-param name="separatingToken" select="
                     $separatingTokenForFreeTextFields"/>
+                <xsl:with-param name="normalize" select="fn:false()"/>
             </xsl:call-template>
         </xsl:variable>
 
-
-        <!-- Make sure all cms segment descriptions 
-        are included in the cavafy abstract -->
-
-        <xsl:variable name="cmsArticleTitleBody">
-            <!-- Pick only segments' title and body, 
-                in segemnt order -->
-            <articleDescriptions>
-                <xsl:copy-of select="title"/>
-                <xsl:copy-of select="tokenize(body, 'WNYC archives id:')[1]"/>
-            </articleDescriptions>
-        </xsl:variable>
-
-        <xsl:variable name="cmsSegmentsTitleBody">
-            <!-- Pick only segments' title and body, 
-                in segemnt order -->
-            <segmentDescriptions>
-                <xsl:for-each
-                    select="
-                        $cmsData/data/attributes[item-type = 'segment']">
-                    <xsl:sort select="audio"/>
-                    <segment>
-                        <xsl:copy-of select="title"/>
-                        <xsl:copy-of select="body"/>
-                    </segment>
-                </xsl:for-each>
-            </segmentDescriptions>
-        </xsl:variable>
-
-        <xsl:variable name="cmsSegmentsTitleBodyFormatted">
-            <!-- Format segment titles and bodies -->
-            <xsl:for-each
-                select="
-                    $cmsSegmentsTitleBody/
-                    segmentDescriptions/segment">
-                <xsl:value-of select="(title)"/>
-                <xsl:value-of select="'&#10;&#13;'"/>
-                <xsl:value-of select="
-                        (WNYC:strip-tags(body))"/>
-                <xsl:value-of select="'&#10;&#13;'"/>
-                <xsl:value-of select="'&#10;&#13;'"/>
-            </xsl:for-each>
-        </xsl:variable>
-
-        <xsl:variable name="cmsSegmentsTitleBodyNoLinks"
-            select="
-                WNYC:strip-tags(
-                $cmsSegmentsTitleBodyFormatted)"/>
-
         <xsl:variable name="assetDescription">
-            <!-- Make sure all cms segment titles and descriptions are included -->
-
-            <!--<xsl:if test="
-                not(
-                contains(
-                WNYC:justASCIILetters($cavafyAbstract), 
-                WNYC:justASCIILetters($cmsSegmentsTitleBodyNoLinks)                 
-                ))">
-                <xsl:element name="error">
-                    <xsl:copy-of select="$cavafyAbstract"/>
-                    <xsl:value-of select="'&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;***********DOES NOT CONTAIN**************&#10;&#13;&#10;&#13;'"/>
-                    <xsl:copy-of select="$cmsSegmentsTitleBodyNoLinks"/>
-                </xsl:element>
-            </xsl:if>-->
-
+            <!-- Cavafy abstract contains DBX REMARK -->
             <xsl:if test="not($isSegment) and not($isMultitrack)">
-                <xsl:if
-                    test="
+                <xsl:if test="
                         not(
-                        contains(
-                        WNYC:justASCIILetters($cavafyAbstract),
-                        WNYC:justASCIILetters($dbxAudioRemarkTrimmed)
-                        ))">
+                        matches($cavafyAbstract, $dbxAudioRemarkTrimmed)
+                        )">
                     <!-- DBX REMARK is limited to 4000 characters -->
-                    <!-- So we can only check that cavafy abstract -->
-                    <!-- contains it -->
+                    <!-- So we can only check that 
+                        the cavafy abstract contains it -->
                     <xsl:element name="error">
                         <xsl:value-of
                             select="'&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;CAVAFY ABSTRACT&#10;&#13;&#10;&#13;'"/>
@@ -1398,57 +1479,67 @@ Subject headings / IKEY
             </xsl:if>
 
             <xsl:call-template name="checkConflicts">
-                <xsl:with-param name="field1"
-                    select="
-                        $exifSubject
-                        [not(. = $defaultDescription)]"/>
-                <xsl:with-param name="field2"
-                    select="
-                        $cavafyAbstract
-                        [not(. = $defaultDescription)]
-                        [. ne 'No Description available']
-                        [not($isSegment)]
-                        [not($isMultitrack)]"/>
-                <xsl:with-param name="field3"
-                    select="
-                        $cmsEpisodeDescription
-                        [not($isSegment)]
-                        [not($isMultitrack)]
-                        [not(. = $defaultDescription)]"/>
-                <xsl:with-param name="defaultValue"
-                    select="
-                        $defaultDescription"/>
-                <xsl:with-param name="separatingToken"
-                    select="
-                        $separatingTokenForFreeTextFields"/>
-                <xsl:with-param name="fieldName"
-                    select="
+                <xsl:with-param name="fieldName" select="
                         'assetDescription'"/>
+                <xsl:with-param name="field1" select="
+                        $cavafyAbstract
+                        [. ne 'No Description available']"/>
+                <xsl:with-param name="field2" select="
+                    $cmsCompleteDescription"/>
+                <xsl:with-param name="defaultValue" select="
+                        $defaultDescription"/>
+                <xsl:with-param name="separatingToken" select="
+                        $separatingTokenForFreeTextFields"/>
                 <xsl:with-param name="normalize" select="fn:false()"/>
             </xsl:call-template>
         </xsl:variable>
 
+        <xsl:variable name="exifDescribesFullAsset"
+            select="
+                contains(
+                normalize-space($exifSubject),
+                normalize-space($assetDescription)
+                )"
+        />
+        <xsl:message select="'Exif', fn:normalize-space($exifSubject), ' describes full asset ', normalize-space($assetDescription), ': ', $exifDescribesFullAsset"/>
+        <xsl:variable name="exifIncludesMTPrefix" select="matches(
+            $exifSubject,
+            $multitrackDescriptionPrefix)"/>
+        <xsl:variable name="exifIncludesSegmentPrefix" select="contains(
+            $exifSubject,
+            $segmentDescriptionPrefix)"/>
+        
         <xsl:variable name="description">
             <!-- Add the multitrack and segment prefixes 
             if not already in description -->
-
             <xsl:value-of
                 select="
                     $multitrackDescriptionPrefix
-                    [not(matches(
-                    $exifSubject,
-                    $multitrackDescriptionPrefix)
-                    )]"/>
-            <xsl:if
-                test="
-                    not(contains(
-                    $exifSubject,
-                    $segmentDescriptionPrefix))">
-                <xsl:value-of select="
-                        $segmentDescriptionPrefix"/>
-            </xsl:if>
+                    [$exifDescribesFullAsset 
+                    or 
+                    not(matches($exifSubject, '\w'))]
+                    [not($exifIncludesMTPrefix)]
+                    "/>
+            <xsl:value-of select="$segmentDescriptionPrefix
+                [$exifDescribesFullAsset 
+                or 
+                not(matches($exifSubject, '\w'))]
+                [not($exifIncludesSegmentPrefix)]"/>            
             <!-- Parsed description -->
-            <xsl:copy-of select="$assetDescription"/>
+            <xsl:call-template name="checkConflicts">
+                <xsl:with-param name="fieldName" select="
+                    'description'"/>
+                <xsl:with-param name="field1" select="
+                    $exifSubject"/>
+                <xsl:with-param name="field2" select="
+                    $assetDescription
+                    [not($isMultitrack)]
+                    [not($isSegment)]"/>
+                <xsl:with-param name="defaultValue" select="
+                    $assetDescription"/>
+                <xsl:with-param name="separatingToken" select="
+                    $separatingTokenForFreeTextFields"/>
+            </xsl:call-template>
         </xsl:variable>
 
         <xsl:variable name="descriptionNoHtml">
@@ -1462,16 +1553,21 @@ Subject headings / IKEY
 
         <xsl:variable name="RIFF:Subject">
             <RIFF:Subject>
+                <!-- Errors -->
                 <xsl:copy-of select="
                         $assetDescription[//error]"/>
-                <!-- Errors -->
-                <xsl:if test="$assetDescription = $boilerplateDescription">
-                    <xsl:attribute name="warning" select="'boilerplateDescription'"/>
+                <xsl:copy-of select="
+                    $description[//error]
+                    [not($assetDescription[//error])]"/>
+                <!-- Warnings -->
+                <xsl:if test="
+                        $assetDescription = $boilerplateDescription">
+                    <xsl:attribute name="warning" select="
+                            'boilerplateDescription'"/>
                 </xsl:if>
-                <xsl:copy-of
-                    select="
-                        $descriptionNoHtml[not($assetDescription//error)]"
-                />
+                <xsl:copy-of select="
+                        $descriptionNoHtml
+                        [not($assetDescription//error)]"/>
             </RIFF:Subject>
         </xsl:variable>
 
@@ -1481,6 +1577,8 @@ Subject headings / IKEY
             in different places -->
         <xsl:variable name="embeddedCatalogURL">
             <xsl:call-template name="checkConflicts">
+                <xsl:with-param name="fieldName" select="
+                    'embeddedURL'"/>
                 <xsl:with-param name="field1"
                     select="
                         $originalExif
@@ -1512,7 +1610,7 @@ Subject headings / IKEY
                             /fn:match[1]"
                     />
                 </xsl:with-param>
-                <xsl:with-param name="fieldName" select="'embeddedURL'"/>
+                
                 <xsl:with-param name="defaultValue" select="''"/>
             </xsl:call-template>
         </xsl:variable>
@@ -1542,32 +1640,27 @@ Subject headings / IKEY
         </xsl:variable>
 
         <!-- Copyright info -->
+        <xsl:variable name="seriesCopyright" select="$seriesData
+            /pb:pbcoreDescriptionDocument
+            /pb:pbcoreRightsSummary
+            /pb:rightsSummary"/>
+        <xsl:variable name="boilerplateCopyright">
+            <xsl:value-of select="'Terms of Use and Reproduction: '"/>
+            <xsl:value-of select="
+                $collectionName, 
+                $additionalProducingOrgs" separator="{$separatingToken}"/>
+            <xsl:value-of
+                select="'. Additional copyright may apply to musical selections.'"
+            />
+        </xsl:variable>
         <xsl:variable name="defaultCopyright">
-            <xsl:choose>
-                <xsl:when
-                    test="
-                        $seriesData
-                        /pb:pbcoreDescriptionDocument
-                        /pb:pbcoreRightsSummary
-                        /pb:rightsSummary != ''">
-                    <xsl:value-of
-                        select="
-                            $seriesData
-                            /pb:pbcoreDescriptionDocument
-                            /pb:pbcoreRightsSummary
-                            /pb:rightsSummary"
-                    />
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of
-                        select="
-                            concat(
-                            'Terms of Use and Reproduction: ',
-                            $parsedDAVIDTitle/parsedElements/collectionName, '.',
-                            ' Additional copyright may apply to musical selections.')"
-                    />
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:call-template name="checkConflicts">
+                <xsl:with-param name="fieldName" select="'defaultCopyright'"/>
+                <xsl:with-param name="field1" select="
+                        $seriesCopyright"/>
+                <xsl:with-param name="defaultValue" select="
+                        $boilerplateCopyright"/>
+            </xsl:call-template>
         </xsl:variable>
         <xsl:variable name="RIFF:Copyright">
             <RIFF:Copyright>
@@ -1677,16 +1770,18 @@ Subject headings / IKEY
         </xsl:variable>
         <xsl:variable name="provenance">
             <xsl:call-template name="checkConflicts">
+                <xsl:with-param name="fieldName" select="
+                    'Provenance'"/>
                 <xsl:with-param name="field1"
-                    select="$instLevelProvenance[not(. = $defaultProvenance)]"/>                                
+                    select="$instLevelProvenance[not(. = $defaultProvenance)]"/>
                 <xsl:with-param name="defaultValue" select="$defaultProvenance"/>
-                <xsl:with-param name="fieldName" select="'Provenance'"/>
             </xsl:call-template>
         </xsl:variable>
 
         <xsl:variable name="RIFF:SourceForm">
             <RIFF:SourceForm>
-                <xsl:value-of select="$provenance"/>
+                <xsl:copy-of select="($assetLevelProvenance, $instLevelProvenance, $defaultProvenance)[//error]"/>
+                <xsl:copy-of select="$provenance"/>
             </RIFF:SourceForm>
         </xsl:variable>
 
@@ -1720,10 +1815,11 @@ Subject headings / IKEY
                 separator="{$separatingTokenLong}"/>
         </xsl:variable>
         <xsl:variable name="engineer">
-            <xsl:apply-templates select="." mode="mergeData">
+            <xsl:call-template name="mergeData">
                 <xsl:with-param name="field1"
                     select="
                         $originalExif/
+                        rdf:Description/
                         RIFF:Engineer
                         [. != $defaultEngineers]"/>
                 <xsl:with-param name="field2">
@@ -1742,7 +1838,7 @@ Subject headings / IKEY
                     select="
                         $defaultEngineers"/>
                 <xsl:with-param name="fieldName" select="'Engineers'"/>
-            </xsl:apply-templates>
+            </xsl:call-template>
         </xsl:variable>
 
         <xsl:variable name="RIFF:Engineer">
@@ -1756,7 +1852,9 @@ Subject headings / IKEY
 
 
         <xsl:variable name="defaultTechnician">
-            <xsl:apply-templates select="." mode="checkConflicts">
+            <xsl:call-template name="checkConflicts">
+                <xsl:with-param name="fieldName" select="
+                    'DefaultTechnician'"/>
                 <xsl:with-param name="field1"
                     select="$originalExif/rdf:Description/
                     RIFF:Originator[not(. = 'ARCHIVES')]"/>
@@ -1764,22 +1862,20 @@ Subject headings / IKEY
                     select="$dbxData/ENTRIES/
                     ENTRY/CREATOR[not(. = 'ARCHIVES')]"/>
                 <xsl:with-param name="defaultValue" select="
-                    'ARCHIVES'"/>
-                <xsl:with-param name="fieldName" select="
-                    'DefaultTechnician'"/>
-            </xsl:apply-templates>
+                    'ARCHIVES'"/>                
+            </xsl:call-template>
         </xsl:variable>
         <xsl:variable name="technician">
-            <xsl:apply-templates select="." mode="checkConflicts">
+            <xsl:call-template name="checkConflicts">
+                <xsl:with-param name="fieldName" select="
+                    'Technician'"/>
                 <xsl:with-param name="field1"
                     select="
                         $originalExif/rdf:Description/
                         RIFF:Technician[not(. = $defaultTechnician)]"/>
                 <xsl:with-param name="defaultValue" select="
                     $defaultTechnician"/>
-                <xsl:with-param name="fieldName" select="
-                    'Technician'"/>
-            </xsl:apply-templates>
+            </xsl:call-template>
         </xsl:variable>
         <xsl:variable name="RIFF:Technician">
             <RIFF:Technician>
@@ -1803,54 +1899,60 @@ Subject headings / IKEY
                 />
             </xsl:variable>
             <xsl:variable name="defaultCodingHistory">
+                <xsl:value-of select="'Transfer from '[$isDub]"/>
+                <xsl:value-of select="$parsedDAVIDTitle/parsedElements/collectionName"/>
                 <xsl:value-of
                     select="
-                        concat(
-                        'Transfer from ',
-                        $parsedDAVIDTitle/parsedElements/collectionName,
-                        ' ', $originalMedium, '.'
-                        )"
-                />
+                        concat(' ', $originalMedium, '.')"/>
             </xsl:variable>
             <RIFF:CodingHistory>
-                <xsl:apply-templates select="." mode="checkConflicts">
+                <xsl:call-template name="checkConflicts">
+                    <xsl:with-param name="fieldName"
+                        select="
+                            'CodingHistory'"/>
                     <xsl:with-param name="field1"
                         select="
-                        $goodExifCodingHistory[not(. = $defaultCodingHistory)]"/>
-                    <xsl:with-param name="defaultValue" select="
-                        $defaultCodingHistory"/>
+                            $goodExifCodingHistory[not(. = $defaultCodingHistory)]"/>
+                    <xsl:with-param name="defaultValue"
+                        select="
+                            $defaultCodingHistory"/>
                     <xsl:with-param name="separatingToken"
                         select="$separatingTokenForFreeTextFields"/>
-                    <xsl:with-param name="fieldName" select="'CodingHistory'"/>
                     <xsl:with-param name="normalize" select="false()"/>
-                </xsl:apply-templates>
+                </xsl:call-template>
                 <xsl:if
                     test="
-                        $originalExif/XMP-WNYCSchema:Stylus_size
+                        $originalExif/rdf:Description/
+                        XMP-WNYCSchema:Stylus_size
                         and
                         not(
-                        contains($originalExif/rdf:Description/RIFF:CodingHistory, 'Stylus size:')
+                        contains(
+                        $originalExif/rdf:Description/
+                        RIFF:CodingHistory, 'Stylus size:')
                         )">
                     <xsl:value-of
                         select="
                             concat(
                             '&#xA;Stylus size: ',
-                            $originalExif/XMP-WNYCSchema:Stylus_size
+                            $originalExif/rdf:Description/
+                            XMP-WNYCSchema:Stylus_size
                             )"
                     />
                 </xsl:if>
                 <xsl:if
                     test="
-                        $originalExif/XMP-WNYCSchema:LF_turnover
+                        $originalExif/rdf:Description/
+                        XMP-WNYCSchema:LF_turnover
                         and
                         not(
-                        contains($originalExif/rdf:Description/RIFF:CodingHistory, 'Turnover:')
+                        contains($originalExif/rdf:Description/
+                        RIFF:CodingHistory, 'Turnover:')
                         )">
                     <xsl:value-of
                         select="
                             concat(
                             '&#xA;Turnover: ',
-                            rdf:Description/XMP-WNYCSchema:LF_turnover, ' Hz'
+                            $originalExif/rdf:Description/XMP-WNYCSchema:LF_turnover, ' Hz'
                             )"
                     />
                 </xsl:if>
@@ -1908,7 +2010,8 @@ Subject headings / IKEY
 
         <!-- Transcript -->
         <xsl:variable name="transcript">
-            <xsl:variable name="exifTranscript" select="$originalExif/XMP-xmpDM:Lyrics"/>
+            <xsl:variable name="exifTranscript" select="
+                $originalExif/rdf:Description/XMP-xmpDM:Lyrics"/>
             <xsl:variable name="cavafyTranscript"
                 select="
                     $cavafyEntry/pb:pbcoreDescriptionDocument/
@@ -2057,6 +2160,8 @@ Subject headings / IKEY
                 'Cavafy subject headings: ', $cavafySubjects"/>
         <xsl:variable name="segmentKeywords">
             <xsl:call-template name="mergeData">
+                <xsl:with-param name="fieldName" select="
+                        'segmentKeywords'"/>
                 <xsl:with-param name="field1">
                     <xsl:value-of
                         select="
@@ -2065,9 +2170,7 @@ Subject headings / IKEY
                     />
                 </xsl:with-param>
                 <xsl:with-param name="defaultValue" select="
-                        $assetKeywords"/>
-                <xsl:with-param name="fieldName" select="
-                        'segmentKeywords'"
+                        $assetKeywords"
                 />
             </xsl:call-template>
         </xsl:variable>
@@ -2104,7 +2207,7 @@ Subject headings / IKEY
                     </RIFF:Keywords>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:variable name="message"
+                    <xsl:variable name="keywordMessage"
                         select="
                             concat(
                             'Make sure the keywords for ',
@@ -2113,8 +2216,8 @@ Subject headings / IKEY
                             /DAVIDTitle,
                             ' segment are right!'
                             )"/>
-                    <xsl:message select="$message"/>
-                    <xsl:comment select="$message"/>
+                    <xsl:message select="$keywordMessage"/>
+                    <xsl:comment select="$keywordMessage"/>
                     <RIFF:Keywords>
                         <xsl:value-of select="
                                 $segmentKeywords"/>
@@ -2180,7 +2283,7 @@ Subject headings / IKEY
                 $parsedDAVIDTitle/parsedElements/
                 DAVIDTitleDate, '.')
                 )
-                [$dateApproximate]
+                [$DAVIDDateIsApproximate]
                 "/>
         <!-- AAPB Additions -->
         <xsl:variable name="aapbURLInSource"
@@ -2207,7 +2310,7 @@ Subject headings / IKEY
                         contains(
                         $exifComment, 'Date is approximate.')
                         and
-                        not($dateApproximate)">
+                        not($DAVIDDateIsApproximate)">
                     <xsl:variable name="dateNotApproximateMessage"
                         select="
                             'ATTENTION!',
@@ -2594,7 +2697,7 @@ Subject headings / IKEY
                 <xsl:namespace name="XML" select="'http://ns.exiftool.ca/XML/XML/1.0/'"/>
                 <xsl:namespace name="Composite" select="'http://ns.exiftool.ca/Composite/1.0/'"/>
 
-                <xsl:copy-of select="$originalExif/rdf:Description/ExifTool:ExifToolVersion"/>
+                <xsl:copy-of select="$originalExif/rdf:Description/ExifTool:ExifToolVersion" copy-namespaces="0"/>
 
                 <System:FileName>
                     <xsl:choose>
@@ -2613,7 +2716,7 @@ Subject headings / IKEY
                     </xsl:choose>
                 </System:FileName>
 
-                <xsl:copy-of select="$originalExif/rdf:Description/System:Directory"/>
+                <xsl:copy-of select="$originalExif/rdf:Description/System:Directory" copy-namespaces="0"/>
 
                 <System:FileSize>
                     <xsl:choose>
@@ -2729,9 +2832,9 @@ Subject headings / IKEY
                 </File:FileType>
                 <xsl:copy-of
                     select="
-                        $originalExif/rdf:Description/File:FileTypeExtension"/>
+                        $originalExif/rdf:Description/File:FileTypeExtension" copy-namespaces="0"/>
                 <xsl:copy-of select="$originalExif/rdf:Description/File:MIMEType"/>
-                <RIFF:Description>
+                <RIFF:Description>                    
                     <xsl:value-of
                         select="
                             $parsedDAVIDTitle/parsedElements/DAVIDTitle"
@@ -2755,81 +2858,127 @@ Subject headings / IKEY
                 <xsl:copy-of select="$RIFF:Title"/>
                 <xsl:copy-of select="$RIFF:Product"/>
                 <xsl:copy-of select="$RIFF:SourceForm"/>
-                <xsl:copy-of select="$RIFF:Technician"/>
+                <xsl:copy-of select="$RIFF:Technician[$RIFF:Medium != 'Original']"/>
                 <xsl:copy-of select="$originalExif/rdf:Description/RIFF:DateTimeOriginal[. != '']"/>
                 <xsl:copy-of select="$originalExif/rdf:Description/RIFF:TimeReference[. != '']"/>
                 <xsl:copy-of select="$originalExif/rdf:Description/RIFF:BWFVersion[. != '']"/>
                 <xsl:copy-of select="$originalExif/rdf:Description/RIFF:BWF_UMID[. != '']"/>
                 <xsl:copy-of select="$RIFF:CodingHistory"/>
                 <xsl:if test="not(contains($fileType, 'ASSET'))">
-                    <RIFF:Encoding>
-                        <xsl:variable name="exifEncoding"
-                            select="
-                                $originalExif/
-                                rdf:Description/
-                                RIFF:Encoding[matches(., '\w')][1]"/>
-                        
-                        <xsl:if
-                            test="
-                                $exifEncoding != 'Microsoft PCM'">
-                            <xsl:call-template name="
-                            generateError">
-                                <xsl:with-param name="fieldName" select="'ExifEncoding'"/>
-                                <xsl:with-param name="errorType" select="'Invalid encoding'"/>
-                            </xsl:call-template>
-                        </xsl:if>
+                    <xsl:variable name="exifEncoding"
+                        select="
+                            $originalExif/
+                            rdf:Description/
+                            RIFF:Encoding[matches(., '\w')][1]"/>
+                    <xsl:variable name="encoding">
                         <xsl:apply-templates select="." mode="checkConflicts">
                             <xsl:with-param name="field1" select="$exifEncoding"/>
                             <xsl:with-param name="field2" select="$DAVIDEncoding"/>
                             <xsl:with-param name="fieldName" select="'Encoding'"/>
                         </xsl:apply-templates>
-                    </RIFF:Encoding>
-                    <RIFF:NumChannels>
-                        <xsl:apply-templates select="." mode="checkConflicts">
-                            <xsl:with-param name="field1"
-                                select="$originalExif/rdf:Description/
-                                RIFF:NumChannels"/>
-                            <xsl:with-param name="field2" select="
-                                $DAVIDNumChannels"/>
-                            <xsl:with-param name="fieldName" select="
-                                'NumChannels'"/>
-                        </xsl:apply-templates>
-                    </RIFF:NumChannels>
-                    <RIFF:SampleRate>
-                        <xsl:apply-templates select="." mode="checkConflicts">
-                            <xsl:with-param name="field1"
-                                select="$originalExif/rdf:Description/
-                                RIFF:SampleRate"/>
-                            <xsl:with-param name="field2" select="
-                                $dbxData/ENTRIES/
-                                ENTRY/SAMPLERATE"/>
-                            <xsl:with-param name="fieldName" select="'SampleRate'"/>
-                        </xsl:apply-templates>
-                    </RIFF:SampleRate>
-                    <RIFF:AvgBytesPerSec>
+                    </xsl:variable>
+                    <xsl:variable name="numChannels">
                         <xsl:call-template name="checkConflicts">
                             <xsl:with-param name="field1"
                                 select="
                                 $originalExif/rdf:Description/
-                                RIFF:AvgBytesPerSec"/>
-                            <xsl:with-param name="field2" select="$DAVIDDataRate"/>
-                            <xsl:with-param name="fieldName" select="'AvgBytesPerSec'"/>
+                                RIFF:NumChannels"/>
+                            <xsl:with-param name="field2"
+                                select="
+                                $DAVIDNumChannels"/>
+                            <xsl:with-param name="fieldName"
+                                select="
+                                'NumChannels'"/>
                         </xsl:call-template>
-                    </RIFF:AvgBytesPerSec>
-                    <xsl:variable name="bitsPerSample">
-                        <xsl:apply-templates select="." mode="checkConflicts">
-                            <xsl:with-param name="field1"
-                                select="$originalExif/rdf:Description/
-                                RIFF:BitsPerSample"/>
-                            <xsl:with-param name="field2" select="
-                                $DAVIDBitDepth"/>
-                            <xsl:with-param name="fieldName" select="
-                                'BitsPerSample'"/>
-                        </xsl:apply-templates>
                     </xsl:variable>
-                    <RIFF:BitsPerSample>
-                        <xsl:value-of select="$bitsPerSample"/>
-                    </RIFF:BitsPerSample>
+                    <!-- Error for WAVE files improperly encoded -->
+                    <xsl:if
+                        test="
+                            upper-case($fileType) = 'WAV' and
+                            $exifEncoding != 'Microsoft PCM'">
+                        <xsl:call-template name="
+                            generateError">
+                            <xsl:with-param name="fieldName" select="'ExifEncoding'"/>
+                            <xsl:with-param name="errorType" select="'Invalid encoding'"/>
+                        </xsl:call-template>
+                    </xsl:if>
+
+                    <RIFF:Encoding>
+                        <xsl:value-of select="$encoding"/>
+                    </RIFF:Encoding>
+                    <RIFF:NumChannels>
+                        <xsl:value-of select="$numChannels"/>
+                    </RIFF:NumChannels>
+                    
+                    <xsl:if test="$isDigital">
+                        <xsl:variable name="sampleRate">
+                            <xsl:call-template name="checkConflicts">
+                                <xsl:with-param name="fieldName" select="
+                                    'SampleRate'"/>
+                                <xsl:with-param name="field1"
+                                    select="
+                                    $originalExif/rdf:Description/
+                                    RIFF:SampleRate"/>
+                                <xsl:with-param name="field2"
+                                    select="
+                                    $dbxData/ENTRIES/
+                                    ENTRY/SAMPLERATE"/>                                
+                            </xsl:call-template>
+                        </xsl:variable>
+                        <xsl:variable name="bitsPerSample">
+                            <xsl:apply-templates select="." mode="checkConflicts">
+                                <xsl:with-param name="fieldName"
+                                    select="
+                                    'BitsPerSample'"
+                                />
+                                <xsl:with-param name="field1"
+                                    select="
+                                    $originalExif/rdf:Description/
+                                    RIFF:BitsPerSample"/>
+                                <xsl:with-param name="field2"
+                                    select="
+                                    $DAVIDBitDepth"/>                                
+                            </xsl:apply-templates>
+                        </xsl:variable>
+                        <xsl:variable name="AvgBytesPerSec">
+                            <xsl:call-template name="checkConflicts">
+                                <xsl:with-param name="fieldName" select="
+                                    'AvgBytesPerSec'"/>
+                                <xsl:with-param name="field1"
+                                    select="
+                                    $originalExif/rdf:Description/
+                                    RIFF:AvgBytesPerSec"/>
+                                <xsl:with-param name="field2" select="$DAVIDDataRate"/>
+                                <!-- Calculate if not provided -->
+                                <xsl:with-param name="defaultValue">
+                                    <xsl:choose>
+                                        <xsl:when test="
+                                            matches($sampleRate, '[0-9]') and 
+                                            matches($bitsPerSample, '[0-9]') and 
+                                            matches($numChannels, '[0-9]')">
+                                            <xsl:value-of select="
+                                                format-number(
+                                                number($sampleRate) * number($bitsPerSample) * number($numChannels) * 0.125, 
+                                                '#')"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="0"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>                                    
+                                </xsl:with-param>                                
+                            </xsl:call-template>
+                        </xsl:variable>
+                        
+                        <RIFF:SampleRate>
+                            <xsl:value-of select="$sampleRate"/>
+                        </RIFF:SampleRate>
+                        <RIFF:AvgBytesPerSec>
+                            <xsl:value-of select="$AvgBytesPerSec"/>
+                        </RIFF:AvgBytesPerSec>                        
+                        <RIFF:BitsPerSample>
+                            <xsl:value-of select="$bitsPerSample"/>
+                        </RIFF:BitsPerSample>
+                    </xsl:if>
                 </xsl:if>
                 <xsl:copy-of select="$originalExif/rdf:Description/RIFF:CuePoints"/>
                 <xsl:copy-of select="$originalExif/rdf:Description/XML:*"/>
@@ -2871,6 +3020,8 @@ Subject headings / IKEY
                     <xsl:value-of select="$cmsImageID"/>
                 </XMP-plus:ImageSupplierImageID>
                 <xsl:copy-of select="$originalExif/rdf:Description/Composite:*"/>
+                <!-- WNYC special fields -->
+                <xsl:copy-of select="$originalExif/rdf:Description/WNYC:*"/>                
             </xsl:element>
         </xsl:variable>
 
@@ -2966,17 +3117,59 @@ Subject headings / IKEY
                     File:FileType"
             />
         </xsl:param>
-        <xsl:param name="errorMessage"
+        <xsl:param name="badFileErrorMessage"
             select="
                 'File', $badFile/@rdf:about,
                 'is of type', $errorType, '(not acceptable)'"/>
-        <xsl:message select="$errorMessage"/>
+        <xsl:message select="$badFileErrorMessage"/>
         <xsl:element name="error">
             <xsl:attribute name="type" select="'badFile'"/>
-            <xsl:value-of select="$errorMessage"/>
+            <xsl:value-of select="$badFileErrorMessage"/>
         </xsl:element>
     </xsl:template>
 
-
+    <xsl:template name="checkDAVIDForDupes" match="
+        parsedElements"
+        mode="
+        checkDAVIDForDupes">
+        <xsl:variable name="parsedElements" select="."/>
+        <!-- Check for duplicate instantiation IDs 
+            in DAVID -->
+        <xsl:message>
+            <xsl:value-of
+                select="
+                'Check for duplicate instantiations ',
+                'in DAVID for '"/>
+            <xsl:value-of
+                select="$parsedElements/instantiationID"/>
+        </xsl:message>
+        <xsl:variable name="instIDRegexPattern" select="replace($parsedElements/instantiationID, '\.', '\\.')"/>
+        <xsl:variable name="matchedDAVIDTitle" select="
+            $archive44k1Log/rdf:RDF/rdf:Description[matches(XMP:EntriesEntryMediumFileTitle[ends-with(., '.wav')][1], $instIDRegexPattern)]"/>
+        <xsl:for-each
+            select="
+            $matchedDAVIDTitle">
+            <xsl:variable name="DAVIDDupeEntryErrorMessage">
+                <xsl:value-of
+                    select="                    
+                    'ATTENTION!! DAVID Title(s) ',
+                    $matchedDAVIDTitle/XMP:EntriesEntryMediumFileTitle[ends-with(., '.wav')][1],
+                    ' match(es) instantiation ID pattern',
+                    $instIDRegex, '. '
+                    "
+                />
+                <xsl:value-of select="'Either change the instantiation ID of this WAVE file, or delete the DAVID entry.'"/>
+            </xsl:variable>
+            <xsl:message select="$DAVIDDupeEntryErrorMessage"/>
+            <xsl:element name="error">
+                <xsl:attribute name="type" select="
+                    'instantiationInDAVID'"/>
+                <xsl:attribute name="instantiationID" select="
+                    instantiationID"/>
+                <xsl:attribute name="titleInDAVID" select="$matchedDAVIDTitle/XMP:EntriesEntryMediumFileTitle"/>
+                <xsl:copy-of select="$DAVIDDupeEntryErrorMessage"/>
+            </xsl:element>
+        </xsl:for-each>
+    </xsl:template>
 
 </xsl:stylesheet>

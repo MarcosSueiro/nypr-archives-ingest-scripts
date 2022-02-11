@@ -22,52 +22,135 @@ and output its data in BWF MetaEdit Core format -->
     <xsl:param name="ISODatePattern"
         select="
             '^([0-9]{4})-?(1[0-2]|0[1-9])-?(3[01]|0[1-9]|[12][0-9])$'"/>
-    <xsl:param name="showList" select="doc('Shows.xml')"/>
+    <xsl:param name="CMSShowList" select="doc('Shows.xml')"/>
+    <xsl:variable name="illegalCharacters">
+        <xsl:text>&#x201c;&#x201d;&#xa0;&#x80;&#x93;&#x94;&#xa6;&#x2014;&#x2019;</xsl:text>
+        <xsl:text>&#xc2;&#xc3;&#xb1;&#xe2;&#x99;&#x9c;&#x9d;</xsl:text>
+    </xsl:variable>
+    <xsl:variable name="legalCharacters">
+        <xsl:text>"" '——…—'</xsl:text>
+    </xsl:variable>
     
+    <xsl:template match="MOTIVE" mode="getCMSData">
+        <xsl:call-template name="getCMSData">
+            <xsl:with-param name="theme" select="."/>
+        </xsl:call-template>
+    </xsl:template>
 
-
-    <xsl:template match="MOTIVE" mode="getCMSData" name="getCMSData">
-        <!-- Input: 'motive/theme' field
-            Output: cms data from the API
-            as xml
-        -->
-        <xsl:param name="theme" select="."/>
-        <xsl:param name="exactMatch" select="true()"/>
+    <xsl:template name="getCMSData" match="pb:pbcoreDescriptionDocument" mode="getCMSData">
+        <!-- Search the station's CMS -->
+        <!-- Output: cms data from the API as xml -->
+        <xsl:param name="cmsID" tunnel="yes"/>
+        <xsl:param name="slug"/>
+        
+        <xsl:param name="theme">
+            <xsl:apply-templates select=".[local-name()= 'pbcoreDescriptionDocument']" mode="mp3builder"/>
+        </xsl:param>
+        <xsl:param name="exactMP3" select="true()"/>
+        <xsl:param name="showSlug"/>
+        <xsl:param name="date" as="xs:date?"/>
+        <xsl:param name="year" select="fn:year-from-date($date)"/>
+        <xsl:param name="month" select="fn:month-from-date($date)"/>
+        <xsl:param name="day" select="fn:day-from-date($date)"/>        
+        <xsl:param name="item_type"/>
+        <xsl:param name="fields"/>
+        <xsl:param name="slugSearch" select="
+            $slug[matches(., '\w')]"/>
+        <xsl:param name="idSearch" select="
+            $cmsID[matches(., '[0-9]+')]"/>
+        <xsl:param name="parameterQuery" select="
+            ($theme, $showSlug, xs:string($date), $item_type)
+            [matches(., '\w')]"/>
         <xsl:param name="queryURL">
-            <xsl:value-of select="'https://api.wnyc.org/api/v3/story/?audio_file=/'"/>
-            <xsl:value-of select="$theme"/>
-            <xsl:value-of select="'.mp3'[$exactMatch]"/>
+            <xsl:value-of select="'https://api.wnyc.org/api/v3/story'"/>
+            <xsl:choose>
+                <xsl:when test="$slugSearch">
+                    <xsl:message select="'Get CMS data for slug', $slug"/>
+                    <xsl:value-of select="'/'"/>
+                    <xsl:value-of select="$slug"/>
+                </xsl:when>
+                <xsl:when test="$idSearch">
+                    <xsl:message select="'Get CMS data for CMS ID', $cmsID"/>
+                    <xsl:value-of select="'-pk'"/>
+                    <xsl:value-of select="'/'"/>
+                    <xsl:value-of select="$cmsID"/>
+                </xsl:when>
+                <xsl:when test="$parameterQuery">
+                    <xsl:value-of select="'/'"/>
+                    <xsl:value-of select="'?'"/>
+                    <xsl:value-of select="concat(
+                        '&amp;audio_file=', 
+                        $theme, 
+                        '.mp3'[$exactMP3]
+                        )[matches($theme, '\w')]"/>
+                    <xsl:value-of select="concat(
+                        '&amp;show=', $showSlug)
+                        [matches($showSlug, '\w')]"/>
+                    <xsl:value-of select="concat(
+                        '&amp;item_type=', $item_type)
+                        [matches(
+                        $item_type, 'segment|episode|article|'
+                        )]"/>
+                    <xsl:value-of select="concat(
+                        '&amp;year=', $year)"/>
+                    <xsl:value-of select="concat(
+                        '&amp;month=', $month)"/>
+                    <xsl:value-of select="concat(
+                        '&amp;day=', $day)"/>
+                    <xsl:value-of select="                        
+                        concat(
+                        '&amp;fields[story]=', 
+                        replace($fields, ' ', '')
+                        )
+                        [matches($fields, '\w')]"/>
+                </xsl:when>
+            </xsl:choose>            
         </xsl:param>
         <xsl:param name="minRecords" select="1"/>
-        <xsl:param name="maxRecords" select="1"/>
-        <xsl:message
-            select="
-                concat(
-                'Search WNYC CMS for entry with MP3 ', $theme,
-                ' using search string ', $queryURL
-                )"/>
-        <xsl:variable name="searchResultJson">
+        <xsl:param name="maxRecords" select="20"/>
+        <xsl:param name="explainMessage">
+            <xsl:message>
+                <xsl:value-of select="'Search WNYC CMS '"/>
+                <xsl:value-of select="'with parameters '"/>
+                <xsl:value-of select="($slug, $cmsID, $theme, $showSlug, string($date), $item_type)
+                    [matches(., '\w')]" separator=", "/>
+                <xsl:value-of select="' using search string '"/>
+                <xsl:value-of select="$queryURL"/>
+            </xsl:message>            
+        </xsl:param>
+        <xsl:param name="storyExists" select="
+            unparsed-text-available($queryURL)"/>
+        <xsl:param name="searchResultJson">
             <searchResultJson>
                 <xsl:copy-of select="unparsed-text($queryURL)" copy-namespaces="no"/>
             </searchResultJson>
-        </xsl:variable>
+        </xsl:param>
 
-        <xsl:variable name="searchResultXml" select="json-to-xml($searchResultJson)/*"/>
+        <xsl:param name="searchResultXml" select="
+            json-to-xml($searchResultJson)/*"/>
+        
+        <xsl:param name="cmsRecordsFoundCount" select="
+                if ($slugSearch 
+                or 
+                $idSearch)
+                then
+                    if ($storyExists)
+                    then
+                        1
+                        else
+                        0
+                else
+                    $searchResultXml
+                    /fn:map[@key = 'meta']
+                    /fn:map[@key = 'pagination']
+                    /fn:number[@key = 'count']"/>
         <xsl:message select="
-                'xml search data: ',
-                $searchResultXml"/>
-        <xsl:variable name="cmsRecordsFoundCount"
-            select="
-                $searchResultXml
-                /fn:map[@key = 'meta']
-                /fn:map[@key = 'pagination']
-                /fn:number[@key = 'count']"/>
+            'xml search data: ',
+            $searchResultXml"/>
         <xsl:variable name="cmsRecordsFoundMessage"
             select="
                 concat($cmsRecordsFoundCount,
-                ' entries for ',
-                $theme,
-                ' with query ',
+                ' entries with query ',
                 $queryURL)"/>
         <xsl:message select="$cmsRecordsFoundMessage"/>
         <xsl:choose>
@@ -539,6 +622,20 @@ and output its data in BWF MetaEdit Core format -->
             </xsl:copy>
             <xsl:copy-of select="meta"/>
         </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="cmsData" name="getEpisodeSegments" mode="getEpisodeSegments">
+        <xsl:param name="cmsData" select="."/>
+        <xsl:param name="fields"/>
+        <segments>
+            <xsl:for-each select="$cmsData/data/attributes/segments/episode-id">
+                <xsl:sort select="following-sibling::segment-number[1]"/>
+                <xsl:call-template name="getCMSData">
+                    <xsl:with-param name="slug" select="following-sibling::slug[1]"/>
+                    <xsl:with-param name="fields" select="$fields"/>
+                </xsl:call-template>
+            </xsl:for-each>
+        </segments>
     </xsl:template>
 
 </xsl:stylesheet>

@@ -518,7 +518,7 @@
         </xsl:result-document>
     </xsl:template>
     
-    <xsl:template match="node()" name="breakItUp" mode="breakItUp">
+    <!--<xsl:template match="node()" name="breakItUp" mode="breakItUp">
         <xsl:param name="firstOccurrence" select="1"/>
         <xsl:param name="maxOccurrences" select="200"/>
         <xsl:param name="total" select="count(child::*)"/>
@@ -580,7 +580,7 @@
                 <xsl:with-param name="filenameSuffix" select="$filenameSuffix"/>
             </xsl:call-template>
         </xsl:if>
-    </xsl:template>
+    </xsl:template>-->
     
     
 </xsl:stylesheet>

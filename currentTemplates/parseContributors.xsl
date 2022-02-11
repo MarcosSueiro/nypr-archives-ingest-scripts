@@ -9,8 +9,8 @@ and output pbcoreCreator / pbcoreContributor -->
     xmlns:madsrdf="http://www.loc.gov/mads/rdf/v1#" xmlns:WNYC="http://www.wnyc.org"
     exclude-result-prefixes="#all">
 
-    <xsl:template name="parseContributors">
-        <xsl:param name="contributorsToProcess"/>
+    <!--<xsl:template name="parseContributors" match="." mode="parseContributors">
+        <xsl:param name="contributorsToProcess" select="."/>
         <xsl:param name="token" select="$separatingToken"/>
         <xsl:param name="longToken" select="$separatingTokenLong"/>
         <xsl:param name="contributorsAlreadyInCavafy"/>
@@ -71,13 +71,13 @@ and output pbcoreCreator / pbcoreContributor -->
                     $currentContributorName, ' not already in cavafy.')"/>
             <xsl:element name="{$pbcoreRole}">
                 <xsl:element name="{$role}">
-                    <xsl:attribute name="ref" select="."/>
+                    <xsl:attribute name="ref" select="replace(., 'https://', 'http://')"/>
                     <xsl:attribute name="source" select="$validatedSource"/>
                     <xsl:value-of select="$currentContributorName"/>
                 </xsl:element>
             </xsl:element>
         </xsl:for-each>
-    </xsl:template>
+    </xsl:template>-->
 
     <xsl:template name="parseContributorOccupations">
         <xsl:param name="contributorsToProcess"/>
