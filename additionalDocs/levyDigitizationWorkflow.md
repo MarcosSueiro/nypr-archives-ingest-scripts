@@ -4,25 +4,22 @@ _INPUT:_ A show and a physical format
 
 _OUTPUT:_ Self-described, compliant Broadcast WAVE Files 
 
-## Choose and describe show
-_Main task:_ Ensure show is properly described 
-
+## Choose and Describe Items
+_Main task:_ Ensure items to ship are properly described 
 1. Choose Shipment: a show restricted by a format (e.g. “Mostly Mozart” “DAT”) 
 2. Gather supporting print and digital documentation for the show (press releases, logs, production notes, program guides, physical containers, etc.); OCR as needed 
-3. Fully describe the show with values for genre, creators, subject headings and copyright; these will become the default values for all the episodes within that show.
+3. Fully describe the overall show with values for genre, creators, subject headings and copyright; these will become the default values for all the episodes within that show.
+4. Make sure each episode has correct values for title, dates, abstract and genre; merge episodes where appropriate.
+5. Add Library of Congress contributors and subject headings
 
-## Describe and ship items within the show
-_Main task:_ Ensure each episode in show is properly described
-1. Make sure each asset has correct values for title, dates, abstract and genre; merge assets where appropriate.
-2. Add Library of Congress contributors and subject headings
-
-## Ship items
+## Ship Items
 _Main task:_ Locate and ship physical items
-1. Create a manifest, and gather physical items from onsite and remote storage 
-2. Print and affix barcodes
-3. Pack and ship items
+1. Create a manifest
+2. Gather physical items from onsite and remote storage 
+3. Print and affix barcodes
+4. Pack and ship items
 
-## Digitize (vendor)
+## Digitize (Done by Vendor)
 _Main task:_ Create compliant, surrogate digital files of the shipped items
 1. Check received items agains manifest
 2. Reformat items according to Statement of Work (SOW)
