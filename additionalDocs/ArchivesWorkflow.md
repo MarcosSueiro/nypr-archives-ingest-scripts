@@ -44,7 +44,8 @@ From this &quot;master file&quot;, various scripts generate xml documents to use
 
 ## Exiftool
 
-Exiftool (https://exiftool.org/) appears to read the most metadata from wav (and many other types of) files. The command we use is:
+Exiftool (https://exiftool.org/) appears to read the most metadata from wav (and many other types of) files into one xml document. 
+The command we use is:
 
 _exiftool -X -a -ext wav -struct -charset riff=utf8 &quot;your drive/directory/files.wav&quot;_
 
