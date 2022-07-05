@@ -4,7 +4,7 @@ _INPUT:_ A show and a physical format
 
 _OUTPUT:_ Self-described, compliant Broadcast WAVE Files 
 
-## Choose and describe series
+## Choose and describe show
 _Main task:_ Ensure show is properly described 
 
 1. Choose Shipment: a show restricted by a format (e.g. “Mostly Mozart” “DAT”) 
