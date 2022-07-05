@@ -1,8 +1,8 @@
 # Digitization Workflow per shipment 
 
-INPUT: A show and a physical format 
+_INPUT:_ A show and a physical format 
 
-OUTPUT: Self-described, compliant Broadcast WAVE Files 
+_OUTPUT:_ Self-described, compliant Broadcast WAVE Files 
 
 ## Choose and describe series
 _Main task:_ Ensure show is properly described 
