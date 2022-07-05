@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"    xmlns:et="http://ns.exiftool.ca/1.0/"
- et:toolkit="Image::ExifTool 11.69"    xmlns:ExifTool="http://ns.exiftool.ca/ExifTool/1.0/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:et="http://ns.exiftool.ca/1.0/"
+    et:toolkit="Image::ExifTool 11.69" xmlns:ExifTool="http://ns.exiftool.ca/ExifTool/1.0/"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:System="http://ns.exiftool.ca/File/System/1.0/"
-    xmlns:File="http://ns.exiftool.ca/File/1.0/"    xmlns:RIFF="http://ns.exiftool.ca/RIFF/RIFF/1.0/"
-    xmlns:pb="http://www.pbcore.org/PBCore/PBCoreNamespace.html"    exclude-result-prefixes="#all"
+    xmlns:File="http://ns.exiftool.ca/File/1.0/" xmlns:RIFF="http://ns.exiftool.ca/RIFF/RIFF/1.0/"
+    xmlns:pb="http://www.pbcore.org/PBCore/PBCoreNamespace.html" exclude-result-prefixes="#all"
     version="2.0">
     <!-- Generate an Exif document and html 
         from a list of cavafy pbcoreInstantiation IDs. 
@@ -33,36 +33,33 @@
         <instantiationID format="1/4 inch audio tape">19719.1</instantiationID>
         
     -->
-    
-    <xsl:param name="vendorName" select="'George Blood'"/>
+
+    <xsl:param name="vendorName"/>
     <!-- Generic filepath for future files -->
     <xsl:param name="System:Directory" select="concat('W:/ARCHIVESNAS1/INGEST/', $vendorName)"/>
     <!-- Type of future files -->
     <xsl:param name="File:FileType" select="'WAV'"/>
-    
 
-    
+
+
     <xsl:template match="instantiationIDs">
         <xsl:param name="instantiationIDs" select="."/>
         <xsl:param name="instantiationIDsSorted">
-            <xsl:apply-templates select="$instantiationIDs"
-                mode="
+            <xsl:apply-templates select="$instantiationIDs" mode="
                 sortInstantiationIDs"/>
         </xsl:param>
         <xsl:apply-templates select="
                 $instantiationIDsSorted" mode="generateExif"/>
     </xsl:template>
-    
+
     <xsl:template match="instantiationIDs" mode="sortInstantiationIDs">
         <!-- Sort instantiation IDs by asset and then
         by the number part of the instantiation Extension -->
         <xsl:param name="instantiationIDs" select="."/>
         <xsl:param name="instantiationIDsParsed">
-            <xsl:apply-templates
-                select="
+            <xsl:apply-templates select="
                     $instantiationIDs/
-                    instantiationID"
-                mode="
+                    instantiationID" mode="
                 parseInstantiationID"/>
         </xsl:param>
         <xsl:param name="instantiationIDsSorted">
@@ -89,32 +86,31 @@
         <xsl:copy-of select="$instantiationIDsSorted"/>
     </xsl:template>
 
-    <xsl:template match="instantiationIDs" mode="generateExif">        
+    <xsl:template match="instantiationIDs" mode="generateExif">
         <xsl:param name="instantiationIDs" select="."/>
         <xsl:param name="location" select="
-            $instantiationIDs/@location[matches(., '\w')]"/>
+                $instantiationIDs/@location[matches(., '\w')]"/>
+        <xsl:param name="filenameAddendum" select="$location" tunnel="yes"/>
         <xsl:param name="generateOutputDocs" select="true()"/>
-        <xsl:message
-            select="
+        <xsl:message select="
                 'Generate a fake Exif document from',
                 count($instantiationIDs/instantiationID), 'instantiationIDs.'"/>
         <xsl:variable name="fakeExif">
             <xsl:element name="rdf:RDF">
-                <xsl:namespace name="rdf"
-                    select="
+                <xsl:namespace name="rdf" select="
                         'http://www.w3.org/1999/02/22-rdf-syntax-ns#'"/>
                 <xsl:apply-templates select="
-                    $instantiationIDs/instantiationID" mode="generateExif"/>
+                        $instantiationIDs/instantiationID" mode="generateExif"/>
             </xsl:element>
         </xsl:variable>
         <xsl:copy-of select="$fakeExif[not($generateOutputDocs)]"/>
-        <xsl:apply-templates select="$fakeExif/rdf:RDF[$generateOutputDocs]">            
-            <xsl:with-param name="filenameAddendum" select="$location" tunnel="yes"/>
-            
+        <xsl:apply-templates select="$fakeExif/rdf:RDF[$generateOutputDocs]">
+            <xsl:with-param name="filenameAddendum" select="$filenameAddendum" tunnel="yes"/>
+
             <xsl:with-param name="outputEmail" select="true()"/>
             <xsl:with-param name="outputFADGI" select="false()"/>
             <xsl:with-param name="outputCavafy" select="false()"/>
-            <xsl:with-param name="outputDAVID" select="false()"/>            
+            <xsl:with-param name="outputDAVID" select="false()"/>
             <xsl:with-param name="outputSlack" select="false()"/>
         </xsl:apply-templates>
     </xsl:template>
@@ -123,10 +119,8 @@
         generateExif">
         <xsl:param name="instantiationID" select="."/>
         <xsl:param name="generatedNextFilename">
-            <xsl:apply-templates
-                select="
-                    $instantiationID[matches(., '[0-9]{4,6}\.[0-9]')]"
-                mode="
+            <xsl:apply-templates select="
+                    $instantiationID[matches(., '[0-9]{4,6}\.[0-9]')]" mode="
                 generateNextFilename"/>
         </xsl:param>
         <xsl:param name="reportedSourceFormat">
@@ -139,44 +133,40 @@
             <xsl:value-of select="$instantiationID/@generation"/>
         </xsl:param>
         <xsl:param name="cavafyEntry" select="
-            $generatedNextFilename/pb:inputs/
-            pb:cavafyEntry/pb:pbcoreDescriptionDocument"/>
+                $generatedNextFilename/pb:inputs/
+                pb:cavafyEntry/pb:pbcoreDescriptionDocument"/>
         <xsl:apply-templates select="
-            $generatedNextFilename/pb:inputs" mode="generateFakeExif">
+                $generatedNextFilename/pb:inputs" mode="generateFakeExif">
             <xsl:with-param name="reportedSourceFormat" select="
-                $reportedSourceFormat"/>
+                    $reportedSourceFormat"/>
             <xsl:with-param name="instantiationID" select="
-                $instantiationID"/>
+                    $instantiationID"/>
             <xsl:with-param name="cavafyEntry" select="
-                $cavafyEntry"/>
+                    $cavafyEntry"/>
         </xsl:apply-templates>
     </xsl:template>
-    
+
     <xsl:template match="pb:inputs" mode="generateFakeExif">
         <xsl:param name="instantiationID"/>
         <xsl:param name="cavafyEntry"/>
-        <xsl:param name="parsedDAVIDTitle" select="            
-            pb:parsedDAVIDTitle"/>
-        <xsl:param name="sourceInstantiation"
-            select="
-            $parsedDAVIDTitle/pb:parsedElements/
-            pb:instantiationData/pb:pbcoreInstantiation"/>
-        <xsl:param name="cavafySourceFormat"
-            select="
-            $sourceInstantiation/
-            (pb:instantiationDigital |
-            pb:instantiationPhysical)"/>
-        <xsl:param name="cavafyLocation"
-            select="
-            $sourceInstantiation/
-            pb:instantiationLocation
-            "/>
+        <xsl:param name="parsedDAVIDTitle" select="
+                pb:parsedDAVIDTitle"/>
+        <xsl:param name="sourceInstantiation" select="
+                $parsedDAVIDTitle/pb:parsedElements/
+                pb:instantiationData/pb:pbcoreInstantiation"/>
+        <xsl:param name="cavafySourceFormat" select="
+                $sourceInstantiation/
+                (pb:instantiationDigital |
+                pb:instantiationPhysical)"/>
+        <xsl:param name="cavafyLocation" select="
+                $sourceInstantiation/
+                pb:instantiationLocation
+                "/>
         <xsl:param name="reportedSourceFormat"/>
-        <xsl:param name="missing"
-            select="
-            contains($cavafyLocation, 'MISSING')
-            or
-            contains($cavafyLocation, 'NOT FOUND')"/>
+        <xsl:param name="missing" select="
+                contains($cavafyLocation, 'MISSING')
+                or
+                contains($cavafyLocation, 'NOT FOUND')"/>
         <xsl:param name="sourceFormat">
             <xsl:call-template name="checkConflicts">
                 <xsl:with-param name="field1" select="$reportedSourceFormat"/>
@@ -186,27 +176,26 @@
             </xsl:call-template>
         </xsl:param>
         <xsl:param name="expectedSeries" select="
-            parent::instantiationIDs/@series"/>
-        <xsl:param name="cavafySeriesTitle"
-            select="$cavafyEntry/
-            pb:pbcoreTitle[@titleType = 'Series']"/>
+                parent::instantiationIDs/@series"/>
+        <xsl:param name="cavafySeriesTitle" select="
+                $cavafyEntry/
+                pb:pbcoreTitle[@titleType = 'Series']"/>
         <xsl:param name="System:Directory" select="$System:Directory"/>
         <xsl:param name="System:FileSize" select="'0 MB'"/>
-        <xsl:param name="System:FileCreateDate"
-            select="
-            format-dateTime(
-            current-dateTime(),
-            '[Y0001]-[M01]-[D01] [H01]:[m01]:[s01][Z]'
-            )"/>
+        <xsl:param name="System:FileCreateDate" select="
+                format-dateTime(
+                current-dateTime(),
+                '[Y0001]-[M01]-[D01] [H01]:[m01]:[s01][Z]'
+                )"/>
         <xsl:param name="File:FileType" select="$File:FileType"/>
         <xsl:param name="File:FileTypeExtension" select="$File:FileType"/>
-        
+
         <xsl:param name="RIFF:Encoding" select="'Microsoft PCM'"/>
         <xsl:param name="RIFF:NumChannels" select="'0'"/>
         <xsl:param name="RIFF:SampleRate" select="'1000'"/>
         <xsl:param name="RIFF:AvgBytesPerSec" select="'2000'"/>
         <xsl:param name="RIFF:BitsPerSample" select="'8'"/>
-        
+
         <xsl:param name="RIFF:Medium">
             <xsl:copy-of select="$sourceFormat[//error]"/>
             <xsl:value-of select="concat($sourceFormat[not(//error)], ' ', $instantiationID)"/>
@@ -223,46 +212,48 @@
             <xsl:call-template name="checkConflicts">
                 <xsl:with-param name="fieldName" select="'RIFFTitle'"/>
                 <xsl:with-param name="field1" select="
-                    $sourceInstantiation/
-                    pb:instantiationAnnotation
-                    [@annotationType='instantiation_title']"/>
+                        $sourceInstantiation/
+                        pb:instantiationAnnotation
+                        [@annotationType = 'instantiation_title']"/>
                 <xsl:with-param name="defaultValue">
-                    <xsl:value-of select="$cavafyEntry/
-                        pb:pbcoreTitle[@titleType = 'Episode']"/>
+                    <xsl:value-of select="
+                            $cavafyEntry/
+                            pb:pbcoreTitle[@titleType = 'Episode']"/>
                 </xsl:with-param>
                 <xsl:with-param name="separatingToken" select="$separatingTokenForFreeTextFields"/>
             </xsl:call-template>
         </xsl:param>
         <xsl:param name="RIFF:Subject">
             <xsl:call-template name="checkConflicts">
-                <xsl:with-param name="fieldName" select="'instantiationDescription'"/>
+                <xsl:with-param name="fieldName" select="
+                    'instantiationDescription'"/>
                 <xsl:with-param name="field1" select="
-                    $sourceInstantiation/
-                    pb:instantiationAnnotation
-                    [@annotationType='instantiation_description']"/>
+                        $sourceInstantiation/
+                        pb:instantiationAnnotation
+                        [@annotationType = 'instantiation_description']"/>
                 <xsl:with-param name="defaultValue">
-                    <xsl:value-of select="$cavafyEntry/pb:pbcoreDescriptionDocument/
-                        pb:pbcoreDescription[@descriptionType = 'Abstract']"/>
+                    <xsl:value-of select="
+                            $cavafyEntry/pb:pbcoreDescriptionDocument/
+                            pb:pbcoreDescription[@descriptionType = 'Abstract']"
+                    />
                 </xsl:with-param>
+                <xsl:with-param name="separatingToken" select="$separatingTokenForFreeTextFields"/>
             </xsl:call-template>
         </xsl:param>
-        
+
         <!-- Generate fake exif -->
-        <xsl:for-each
-            select="
-            $parsedDAVIDTitle/@DAVIDTitle[not($missing)]">
+        <xsl:for-each select="
+                $parsedDAVIDTitle/@DAVIDTitle[not($missing)]">
             <xsl:variable name="DAVIDTitle" select="."/>
-            <xsl:variable name="System:FileName"
-                select="
-                concat(
-                $DAVIDTitle, '.', $File:FileTypeExtension)"/>
-            
+            <xsl:variable name="System:FileName" select="
+                    concat(
+                    $DAVIDTitle, '.', $File:FileTypeExtension)"/>
+
             <!-- Output exif -->
             <xsl:element name="rdf:Description">
-                <xsl:attribute name="rdf:about"
-                    select="
-                    concat(
-                    $System:Directory, '/', $System:FileName)"/>
+                <xsl:attribute name="rdf:about" select="
+                        concat(
+                        $System:Directory, '/', $System:FileName)"/>
                 <xsl:namespace name="ExifTool" select="'http://ns.exiftool.ca/ExifTool/1.0/'"/>
                 <xsl:namespace name="et" select="'http://ns.exiftool.ca/1.0/'"/>
                 <xsl:attribute name="et:toolkit" select="'Image::ExifTool 10.82'"/>
@@ -340,6 +331,6 @@
             </xsl:element>
         </xsl:for-each>
     </xsl:template>
-    
-    
+
+
 </xsl:stylesheet>

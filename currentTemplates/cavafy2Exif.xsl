@@ -238,6 +238,7 @@
                                 <xsl:value-of select="$cavafyEntry/pb:pbcoreDescriptionDocument/
                                     pb:pbcoreDescription[@descriptionType = 'Abstract']"/>
                             </xsl:with-param>
+                            <xsl:with-param name="separatingToken" select="$separatingTokenForFreeTextFields"/>
                         </xsl:call-template>
                     </xsl:with-param>
                     <!-- Extra descriptors -->

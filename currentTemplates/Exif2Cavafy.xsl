@@ -32,10 +32,10 @@ to a pbcore cavafy entry -->
     <xsl:import href="parseDAVIDTitle.xsl"/>
     <xsl:import href="processLoCURL.xsl"/>
 
-    <xsl:param name="exifInput"/>
+    <xsl:param name="utilityLists" select="doc('utilityLists.xml')"/>
+    <xsl:param name="playbackParameters" select="$utilityLists/utilityLists/playbackParameters"/>
     
-    <xsl:variable name="cavafyFormats" select="
-        doc('cavafyFormats.xml')"/>
+    
     <xsl:variable name="EBUCodingAlgorithm" select="
         'ANALOG|ANALOGUE|PCM|MPEG1L1|MPEG1L2|MPEG1L3|MPEG2L1|MPEG2L2|MPEG2L3'"/>
     <xsl:variable name="EBUSamplingFrequency" select="
@@ -48,6 +48,9 @@ to a pbcore cavafy entry -->
     
     <xsl:template match="rdf:RDF" mode="cavafy">
         <!-- Wrap all entries as a 'pbcoreCollection' -->
+        <xsl:param name="message">
+            <xsl:message select="'Generate a pbcore document'"/>
+        </xsl:param>
         <xsl:element name="pbcoreCollection">
             <xsl:namespace name="" select="'http://www.pbcore.org/PBCore/PBCoreNamespace.html'"/>
             <xsl:namespace name="xsi" select="'http://www.w3.org/2001/XMLSchema-instance'"/>
@@ -69,9 +72,10 @@ to a pbcore cavafy entry -->
             <xsl:copy-of select="document($catalogxml)"/>
         </xsl:param>
         <xsl:param name="isWAV" select="
-            upper-case(File:FileType) eq 'WAV'"/>       
-        <xsl:param name="isDub" select="not(RIFF:Medium
-             = 'Original')"/>
+                upper-case(File:FileType) eq 'WAV'"/>
+        <xsl:param name="isDub" select="
+                not(RIFF:Medium
+                = 'Original')"/>
         <xsl:param name="parsedDAVIDTitle">
             <!-- Parse DAVID title or filename -->
             <xsl:choose>
@@ -80,14 +84,15 @@ to a pbcore cavafy entry -->
                         <xsl:with-param name="filenameToParse" select="System:FileName"/>
                     </xsl:apply-templates>
                 </xsl:when>
-                <xsl:when test="matches(System:Directory, 'ARCHIVESNAS1/INGEST|Archives|Iron Mountain')">
+                <xsl:when
+                    test="matches(System:Directory, 'ARCHIVESNAS1/INGEST|Archives|Iron Mountain')">
                     <xsl:apply-templates select="System:FileName" mode="parseDAVIDTitle"/>
                 </xsl:when>
                 <xsl:when test="contains(System:Directory, 'wnycdavidmedia')">
                     <xsl:message select="'DAVID File'"/>
                     <xsl:apply-templates select="System:FileName" mode="parseDAVIDTitle">
                         <xsl:with-param name="filenameToParse"
-                            select="concat(RIFF:Description, '.', File:FileType)"/>
+                            select="concat(RIFF:Description, '.', File:FileTypeExtension)"/>
                     </xsl:apply-templates>
                 </xsl:when>
             </xsl:choose>
@@ -99,104 +104,89 @@ to a pbcore cavafy entry -->
         <!--Embedded collection is of the type 'US, WNYC' 
                     So we look after the comma -->
         <xsl:variable name="collectionAcronym">
-            <xsl:value-of
-                select="
+            <xsl:value-of select="
                     RIFF:ArchivalLocation/
-                    normalize-space(substring-after(., ','))"
-            />
+                    normalize-space(substring-after(., ','))"/>
         </xsl:variable>
 
         <!-- Asset ID -->
         <xsl:variable name="assetID">
-            <xsl:value-of 
-                select="
-                $parsedDAVIDTitle/parsedDAVIDTitle
-                /parsedElements/assetID"/>
+            <xsl:value-of select="
+                    $parsedDAVIDTitle/parsedDAVIDTitle
+                    /parsedElements/assetID"/>
         </xsl:variable>
 
         <!-- Instantiation ID -->
         <xsl:variable name="instantiationID">
-            <xsl:value-of 
-                select="
-                $parsedDAVIDTitle/parsedDAVIDTitle
-                /parsedElements/instantiationID"
+            <xsl:value-of select="
+                    $parsedDAVIDTitle/parsedDAVIDTitle
+                    /parsedElements/instantiationID"/>
+        </xsl:variable>
+
+        <xsl:variable name="instantiationData">
+            <xsl:copy-of select="
+                    $cavafyEntry/pb:pbcoreDescriptionDocument
+                    /pb:pbcoreInstantiation[instantiationIdentifier[@source = 'WNYC Media Archive Label'] = $instantiationID]"
             />
         </xsl:variable>
-        
-        <xsl:variable name="instantiationData">
-            <xsl:copy-of 
-                select="
-                $cavafyEntry/pb:pbcoreDescriptionDocument
-                /pb:pbcoreInstantiation[instantiationIdentifier[@source='WNYC Media Archive Label'] = $instantiationID]"/>
-        </xsl:variable>
-        
+
         <!-- Generation -->
         <xsl:variable name="parsedGeneration">
-            <xsl:value-of 
-                select="
-                $parsedDAVIDTitle/parsedDAVIDTitle
-                /parsedElements/parsedGeneration"
-            />
+            <xsl:value-of select="
+                    $parsedDAVIDTitle/parsedDAVIDTitle
+                    /parsedElements/parsedGeneration"/>
         </xsl:variable>
         <xsl:variable name="cavafyGeneration">
-            <xsl:value-of select="$instantiationData/
-                pb:instantiationGenerations"/>
+            <xsl:value-of select="
+                    $instantiationData/
+                    pb:instantiationGenerations"/>
         </xsl:variable>
         <xsl:variable name="generation">
             <xsl:call-template name="checkConflicts">
                 <xsl:with-param name="fieldName" select="'Generation'"/>
                 <xsl:with-param name="field1" select="$parsedGeneration"/>
                 <xsl:with-param name="field2" select="$cavafyGeneration"/>
-                <xsl:with-param name="defaultValue" select="$parsedGeneration"/>                
+                <xsl:with-param name="defaultValue" select="$parsedGeneration"/>
             </xsl:call-template>
         </xsl:variable>
 
         <xsl:variable name="CMSTeaseAlreadyInCavafy">
-            <xsl:value-of
-                select="
-                $cavafyEntry/pb:pbcoreDescriptionDocument
-                /pb:pbcoreDescription[@descriptionType = 'CMS Tease']"
+            <xsl:value-of select="
+                    $cavafyEntry/pb:pbcoreDescriptionDocument
+                    /pb:pbcoreDescription[@descriptionType = 'CMS Tease']"
                 separator="+++++++++++++++++++++++++++++++++++++++++++"/>
         </xsl:variable>
 
-        <xsl:variable name="DAVIDTitleDate">
-            <xsl:value-of 
-                select="
+        <xsl:variable name="DAVIDTitleDate" select="
                 $parsedDAVIDTitle/parsedDAVIDTitle
-                /parsedElements/DAVIDTitleDate"
-            />
-        </xsl:variable>
+                /parsedElements/DAVIDTitleDate"/>
 
         <!-- American Archive of Public Media variables -->
         <xsl:variable name="aapbURL">
             <xsl:choose>
-                <xsl:when 
-                    test="
-                    starts-with(
-                    RIFF:Source, 
-                    'http://americanarchive.org/catalog/'
-                    )">
+                <xsl:when test="
+                        starts-with(
+                        RIFF:Source,
+                        'http://americanarchive.org/catalog/'
+                        )">
                     <xsl:value-of select="normalize-space(rdf:Source)"/>
                 </xsl:when>
-                <xsl:when 
-                    test="
-                    contains(
-                    RIFF:Comment, 
-                    'http://americanarchive.org/catalog/'
-                    )">
-                    <xsl:value-of
-                        select="
-                        concat(
-                        'http://americanarchive.org/catalog/', 
-                        substring-before(
-                        substring-after(
-                        RIFF:Comment, 
+                <xsl:when test="
+                        contains(
+                        RIFF:Comment,
                         'http://americanarchive.org/catalog/'
-                        ), 
-                        '.pbcore'), 
-                        '.pbcore'
-                        )"
-                    />
+                        )">
+                    <xsl:value-of select="
+                            concat(
+                            'http://americanarchive.org/catalog/',
+                            substring-before(
+                            substring-after(
+                            RIFF:Comment,
+                            'http://americanarchive.org/catalog/'
+                            ),
+                            '.pbcore'),
+                            '.pbcore'
+                            )"/>
                 </xsl:when>
             </xsl:choose>
         </xsl:variable>
@@ -207,7 +197,8 @@ to a pbcore cavafy entry -->
 
 
         <!-- cavafy output -->
-        <xsl:variable name="cavafyOutput">
+        <xsl:variable name="cavafyOutput"
+            default-collation="http://www.w3.org/2013/collation/UCA?ignore-symbols=yes;strength=primary">
             <xsl:element name="pbcoreDescriptionDocument"
                 namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
                 <!-- Identifiers -->
@@ -221,139 +212,118 @@ to a pbcore cavafy entry -->
                 <!-- Additional MUNI ID -->
                 <xsl:if test="starts-with(RIFF:Description, 'MUNI')">
                     <xsl:variable name="MuniIDsAlreadyInCavafy">
-                        <xsl:value-of
-                            select="
-                            $cavafyEntry/pb:pbcoreDescriptionDocument
-                            /pb:pbcoreIdentifier[@source = 'Municipal Archives']"
+                        <xsl:value-of select="
+                                $cavafyEntry/pb:pbcoreDescriptionDocument
+                                /pb:pbcoreIdentifier[@source = 'Municipal Archives']"
                             separator=" ; "/>
                     </xsl:variable>
                     <xsl:variable name="parsedMuniID">
-                        <xsl:value-of
-                            select="
-                            analyze-string(
-                            System:FileName, '\s+L*T+[0-9]{2,5}'
-                            )
-                            //fn:match[1]"
-                        /></xsl:variable>
+                        <xsl:value-of select="
+                                analyze-string(
+                                System:FileName, '\s+L*T+[0-9]{2,5}'
+                                )
+                                //fn:match[1]"/>
+                    </xsl:variable>
 
                     <xsl:if test="
-                        matches(
-                        RIFF:Description, 
-                        '\s+L*T+[0-9]{2,5}'
-                        )">
-                        <xsl:if 
-                            test="
-                            not(
-                            contains(
-                            $MuniIDsAlreadyInCavafy, 
-                            $parsedMuniID
-                            )
+                            matches(
+                            RIFF:Description,
+                            '\s+L*T+[0-9]{2,5}'
                             )">
+                        <xsl:if test="
+                                not(
+                                contains(
+                                $MuniIDsAlreadyInCavafy,
+                                $parsedMuniID
+                                )
+                                )">
                             <pbcoreIdentifier source="Municipal Archives">
-                                <xsl:value-of 
-                                    select="$parsedMuniID"/>
+                                <xsl:value-of select="$parsedMuniID"/>
                             </pbcoreIdentifier>
                         </xsl:if>
                     </xsl:if>
                 </xsl:if>
 
                 <!-- Dates -->
-                <xsl:choose>
-                    <!-- Assets published to the web 
-                        need a broadcast date -->
-                    <xsl:when
-                        test="
-                        contains(RIFF:Description, 'WEB EDIT') 
-                        and 
-                        not(
-                        $DAVIDTitleDate eq 
+                <xsl:variable name="datesAlreadyInCavafy" select="
                         $cavafyEntry
                         /pb:pbcoreDescriptionDocument
-                        /pb:pbcoreDate[@dateType = 'broadcast']
-                        )">
-                        <pbcoreAssetDate dateType="broadcast">
-                            <xsl:value-of select="$DAVIDTitleDate"/>
-                        </pbcoreAssetDate>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:if
-                            test="
-                            not(
-                            $cavafyEntry
-                            /pb:pbcoreDescriptionDocument
-                            /pb:pbcoreAssetDate
-                            [. eq $DAVIDTitleDate]
-                            )">
-                            <pbcoreAssetDate>
-                                <xsl:value-of 
-                                    select="$DAVIDTitleDate"/>
-                            </pbcoreAssetDate>
-                        </xsl:if>
-                    </xsl:otherwise>
-                </xsl:choose>
+                        /pb:pbcoreAssetDate"/>
 
-                <!-- Episode and Collection Titles -->
-                <xsl:if test="normalize-space(RIFF:Title) ne ''">
-                    <xsl:if
-                        test="
-                        normalize-space(
-                        $cavafyEntry
+                <!-- This is a hack when entering physical items: 
+                     We use FileAccessDate as the broadcast date -->
+                <xsl:variable name="exifBcastDate" select="
+                        System:FileAccessDate[matches(., '\d')]
+                        [not($isWAV)]"/>
+                <xsl:apply-templates select="
+                        $exifBcastDate[not(. = $datesAlreadyInCavafy)]"
+                    mode="pbcore"/>
+                <xsl:apply-templates select="
+                        $DAVIDTitleDate[not(. = $datesAlreadyInCavafy)][not(. = $exifBcastDate)]"
+                    mode="pbcore"/>
+
+                <!-- Episode, Series and Collection Titles -->
+                <xsl:variable name="cavafyTitle" select="
+                        normalize-space($cavafyEntry
                         /pb:pbcoreDescriptionDocument
                         /pb:pbcoreTitle
                         [@titleType eq 'Episode']
-                        ) eq ''
-                        ">
-                        <pbcoreTitle titleType="Episode">
-                            <xsl:value-of 
-                                select="normalize-space(RIFF:Title)"/>
-                        </pbcoreTitle>
-                    </xsl:if>
-                </xsl:if>
+                        )
+                        "/>
+                <xsl:variable name="cavafySeries" select="
+                        $cavafyEntry
+                        /pb:pbcoreDescriptionDocument
+                        /pb:pbcoreTitle
+                        [@titleType eq 'Series']
+                        "/>
+                <xsl:apply-templates select="
+                        RIFF:Title[matches(., '\w')]
+                        [not(. = $cavafyTitle)]" mode="pbcore"/>
+                <xsl:apply-templates select="
+                        RIFF:Product
+                        [matches(., '\w')]
+                        [not(. = $cavafySeries)]" mode="pbcore"/>
 
-                <!-- The collection name, 
-                    along with the identifier 
+                <!-- The collection name 
+                    and the identifier 
                     of type 'WNYC Archive Catalog',
                     are necessary to import assets into cavafy -->
                 <pbcoreTitle titleType="Collection">
                     <xsl:value-of select="$collectionAcronym"/>
                 </pbcoreTitle>
 
-                <pbcoreTitle titleType="Series">
-                    <xsl:value-of select="normalize-space(RIFF:Product)"/>
-                </pbcoreTitle>
-                
                 <!-- Apply asset-level fields 
                     to instantiations that are not an excerpt -->
                 <xsl:if test="
-                        not(contains($generation, 'segment'))">
+                        not(contains(
+                        $generation, 'segment')
+                        ) or
+                        not(matches(
+                        File:FileType, 'wav', 'i')
+                        )">
 
                     <!-- CMS Tease (a short description) -->
-                    <xsl:if 
-                        test="
-                        contains(RIFF:Description, 'WEB EDIT')
-                        ">
-                        <xsl:if 
-                            test="
-                            normalize-space($CMSTeaseAlreadyInCavafy) 
-                            eq ''">
+                    <xsl:if test="
+                            contains(RIFF:Description, 'WEB EDIT')
+                            ">
+                        <xsl:if test="
+                                normalize-space($CMSTeaseAlreadyInCavafy)
+                                eq ''">
                             <pbcoreDescription descriptionType="CMS Tease">
                                 <xsl:choose>
-                                    <xsl:when 
-                                        test="
-                                        string-length(RIFF:Subject) &lt; 180">
+                                    <xsl:when test="
+                                            string-length(RIFF:Subject) &lt; 180">
                                         <xsl:value-of select="RIFF:Subject"/>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:value-of
-                                            select="
-                                            concat(
-                                            substring(
-                                            normalize-space(
-                                            RIFF:Subject
-                                            ), 1, 177
-                                            ), 
-                                            '...')"
-                                        />
+                                        <xsl:value-of select="
+                                                concat(
+                                                substring(
+                                                normalize-space(
+                                                RIFF:Subject
+                                                ), 1, 177
+                                                ),
+                                                '...')"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </pbcoreDescription>
@@ -361,101 +331,88 @@ to a pbcore cavafy entry -->
                     </xsl:if>
 
                     <!-- Abstract, a main description -->
-                    <xsl:if
-                        test="
-                        normalize-space(
-                        $cavafyEntry
-                        /pb:pbcoreDescriptionDocument
-                        /pb:pbcoreDescription
-                        [@descriptionType = 'Abstract']
-                        )
-                        eq ''">
-                        <pbcoreDescription descriptionType="Abstract">
-                            <xsl:value-of select="RIFF:Subject"/>
-                        </pbcoreDescription>
-                    </xsl:if>
+                    <xsl:variable name="cavafyAbstract" select="
+                            $cavafyEntry
+                            /pb:pbcoreDescriptionDocument
+                            /pb:pbcoreDescription
+                            [@descriptionType = 'Abstract']"/>
+                    <xsl:apply-templates select="
+                            RIFF:Subject
+                            [not(matches($cavafyAbstract, '\w'))]" mode="pbcore"/>
+
 
                     <!-- Markers as excerpts -->
                     <xsl:variable name="excerptsAlreadyInCavafy">
                         <xsl:for-each select="
-                            $cavafyEntry/pb:pbcoreDescriptionDocument/
-                            pb:pbcoreDescription
-                            [@descriptionType = 'Selection or Excerpt']">
+                                $cavafyEntry/pb:pbcoreDescriptionDocument/
+                                pb:pbcoreDescription
+                                [@descriptionType = 'Selection or Excerpt']">
                             <xsl:value-of select="." separator="
-                                {$separatingTokenForFreeTextFields}"
-                            />
+                                {$separatingTokenForFreeTextFields}"/>
                         </xsl:for-each>
-                        </xsl:variable>
+                    </xsl:variable>
 
                     <xsl:variable name="currentExcerpt">
-                            <xsl:apply-templates select="XMP-xmpDM:Tracks"/>
-                        </xsl:variable>
-                        <xsl:message
-                            select="                            
-                            'Excerpts already in cavafy: ', 
+                        <xsl:apply-templates select="XMP-xmpDM:Tracks" mode="tracksToText"/>
+                    </xsl:variable>
+                    <xsl:message select="
+                            'Excerpts already in cavafy: ',
                             $excerptsAlreadyInCavafy
                             "/>
-                        <xsl:message select="                            
-                            'Excerpt - current:', 
+                    <xsl:message select="
+                            'Excerpt - current:',
                             $currentExcerpt
                             "/>
-                        <xsl:if
-                            test="
+                    <xsl:if test="
                             not(
                             contains(
-                            normalize-space($excerptsAlreadyInCavafy), 
+                            normalize-space($excerptsAlreadyInCavafy),
                             normalize-space($currentExcerpt)
                             ))">
-                            <pbcoreDescription descriptionType="Selection or Excerpt">
-                                <xsl:choose>
-                                    <xsl:when
-                                        test="
+                        <pbcoreDescription descriptionType="Selection or Excerpt">
+                            <xsl:choose>
+                                <xsl:when test="
                                         matches(
-                                        RIFF:Description, 
+                                        RIFF:Description,
                                         'WEB EDIT|MONO EQ|MONO EDIT|RESTORED')
                                         ">
-                                        <xsl:value-of
-                                            select="
+                                    <xsl:value-of select="
                                             concat(
-                                            'Edited file timings:&#013;', 
+                                            'Edited file timings:&#013;',
                                             $currentExcerpt
-                                            )"
-                                        />
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of
-                                            select="
+                                            )"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="
                                             concat(
-                                            'Raw file timings:&#013;', 
+                                            'Raw file timings:&#013;',
                                             $currentExcerpt
-                                            )"
-                                        />
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </pbcoreDescription>
-                        </xsl:if>
-                    
+                                            )"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </pbcoreDescription>
+                    </xsl:if>
+
 
                     <!-- Transcripts -->
                     <xsl:variable name="transcriptAlreadyInCavafy">
-                        <xsl:value-of
-                            select="
-                            $cavafyEntry
-                            /pb:pbcoreDescriptionDocument
-                            /pb:pbcoreDescription
-                            [@descriptionType = 'Transcript']
-                            /normalize-space(.)
-                            "
+                        <xsl:value-of select="
+                                $cavafyEntry
+                                /pb:pbcoreDescriptionDocument
+                                /pb:pbcoreDescription
+                                [@descriptionType = 'Transcript']
+                                /normalize-space(.)
+                                "
                             separator="{$separatingTokenForFreeTextFields}"/>
                     </xsl:variable>
 
                     <xsl:if test="normalize-space(XMP-xmpDM:Lyrics)">
                         <xsl:if test="
-                            not(
-                            contains(
-                            $transcriptAlreadyInCavafy, 
-                            XMP-xmpDM:Lyrics
-                            ))">
+                                not(
+                                contains(
+                                $transcriptAlreadyInCavafy,
+                                XMP-xmpDM:Lyrics
+                                ))">
                             <pbcoreDescription descriptionType="Transcript">
                                 <xsl:value-of select="XMP-xmpDM:Lyrics"/>
                             </pbcoreDescription>
@@ -467,15 +424,14 @@ to a pbcore cavafy entry -->
                 <xsl:if test="contains(RIFF:Description, 'WEB EDIT')">
                     <xsl:choose>
                         <xsl:when test="$collectionAcronym eq 'WQXR'">
-                            <xsl:if
-                                test="
-                                not(
-                                $cavafyEntry
-                                /pb:pbcoreDescriptionDocument
-                                /pb:pbcoreRelation
-                                [pb:pbcoreRelationType eq 'Is Part Of']
-                                /pb:pbcoreRelationIdentifier[. eq 'CMSWQXR']
-                                )">
+                            <xsl:if test="
+                                    not(
+                                    $cavafyEntry
+                                    /pb:pbcoreDescriptionDocument
+                                    /pb:pbcoreRelation
+                                    [pb:pbcoreRelationType eq 'Is Part Of']
+                                    /pb:pbcoreRelationIdentifier[. eq 'CMSWQXR']
+                                    )">
                                 <pbcoreRelation>
                                     <pbcoreRelationType>Is Part Of</pbcoreRelationType>
                                     <pbcoreRelationIdentifier>CMSWQXR</pbcoreRelationIdentifier>
@@ -483,14 +439,13 @@ to a pbcore cavafy entry -->
                             </xsl:if>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:if
-                                test="
-                                not(
-                                $cavafyEntry
-                                /pb:pbcoreDescriptionDocument
-                                /pb:pbcoreRelation
-                                [pb:pbcoreRelationType eq 'Is Part Of']
-                                /pb:pbcoreRelationIdentifier[. eq 'CMS'])">
+                            <xsl:if test="
+                                    not(
+                                    $cavafyEntry
+                                    /pb:pbcoreDescriptionDocument
+                                    /pb:pbcoreRelation
+                                    [pb:pbcoreRelationType eq 'Is Part Of']
+                                    /pb:pbcoreRelationIdentifier[. eq 'CMS'])">
                                 <pbcoreRelation>
                                     <pbcoreRelationType>Is Part Of</pbcoreRelationType>
                                     <pbcoreRelationIdentifier>CMS</pbcoreRelationIdentifier>
@@ -502,31 +457,27 @@ to a pbcore cavafy entry -->
                         <pbcoreRelationType>Website Series</pbcoreRelationType>
                         <pbcoreRelationIdentifier>
                             <xsl:choose>
-                                <xsl:when
-                                    test="
-                                    normalize-space(RIFF:Product) = 'On the Media' 
-                                    and 
-                                    substring-before(RIFF:DateCreated, ':') &lt; '2001'">
+                                <xsl:when test="
+                                        normalize-space(RIFF:Product) = 'On the Media'
+                                        and
+                                        substring-before(RIFF:DateCreated, ':') &lt; '2001'">
                                     <xsl:value-of select="'On the Media, 1993-2000'"/>
                                 </xsl:when>
                                 <xsl:when test="
-                                    ends-with(
-                                    normalize-space(RIFF:Product),
-                                    ', The'
-                                    )">
-                                    <xsl:value-of
-                                        select="
-                                        concat(
-                                        'The ', 
-                                        normalize-space(
-                                        substring-before(
-                                        RIFF:Product, ', The'
-                                        )))"
-                                    />
+                                        ends-with(
+                                        normalize-space(RIFF:Product),
+                                        ', The'
+                                        )">
+                                    <xsl:value-of select="
+                                            concat(
+                                            'The ',
+                                            normalize-space(
+                                            substring-before(
+                                            RIFF:Product, ', The'
+                                            )))"/>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:value-of 
-                                        select="normalize-space(RIFF:Product)"/>
+                                    <xsl:value-of select="normalize-space(RIFF:Product)"/>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </pbcoreRelationIdentifier>
@@ -535,20 +486,17 @@ to a pbcore cavafy entry -->
 
                 <!-- Relations -->
                 <xsl:variable name="relationsAlreadyInCavafy">
-                    <xsl:value-of
-                        select="
-                        $cavafyEntry
-                        /pb:pbcoreDescriptionDocument
-                        /pb:pbcoreRelation
-                        /pb:pbcoreRelationIdentifier"
-                    />
+                    <xsl:value-of select="
+                            $cavafyEntry
+                            /pb:pbcoreDescriptionDocument
+                            /pb:pbcoreRelation
+                            /pb:pbcoreRelationIdentifier"/>
                 </xsl:variable>
-                
-                <xsl:if
-                    test="
-                    normalize-space($aapbURL) 
-                    and 
-                    not(contains($relationsAlreadyInCavafy, $aapbURL))">
+
+                <xsl:if test="
+                        normalize-space($aapbURL)
+                        and
+                        not(contains($relationsAlreadyInCavafy, $aapbURL))">
                     <pbcoreRelation>
                         <pbcoreRelationType>References</pbcoreRelationType>
                         <pbcoreRelationIdentifier>
@@ -556,63 +504,57 @@ to a pbcore cavafy entry -->
                         </pbcoreRelationIdentifier>
                     </pbcoreRelation>
                 </xsl:if>
-                
-                
-                
+
+
+
                 <!-- Location of recording -->
                 <xsl:variable name="coverageAlreadyInCavafy">
-                    <xsl:value-of
-                        select="
-                        normalize-space(
-                        $cavafyEntry
-                        /pb:pbcoreDescriptionDocument
-                        /pb:pbcoreCoverage
-                        [pb:coverageType = 'Spatial']
-                        /coverage
-                        )"
-                    />
+                    <xsl:value-of select="
+                            normalize-space(
+                            $cavafyEntry
+                            /pb:pbcoreDescriptionDocument
+                            /pb:pbcoreCoverage
+                            [pb:coverageType = 'Spatial']
+                            /coverage
+                            )"/>
                 </xsl:variable>
 
                 <xsl:if test="normalize-space(XMP-dc:Coverage) ne ''">
                     <xsl:if test="
-                        not(
-                        contains(
-                        XMP-dc:Coverage, 
-                        $coverageAlreadyInCavafy
-                        ))">
+                            not(
+                            contains(
+                            XMP-dc:Coverage,
+                            $coverageAlreadyInCavafy
+                            ))">
                         <pbcoreCoverage>
                             <coverage>
                                 <xsl:choose>
-                                    <xsl:when
-                                        test="
-                                        contains(
-                                        normalize-space(
-                                        XMP-dc:Coverage
-                                        ),
-                                        'google'
-                                        )">
-                                        <xsl:value-of
-                                            select="
-                                            concat(
-                                            substring-before(
-                                            substring-after(
-                                            XMP-dc:Coverage,
-                                            '@'), 
-                                            ','), 
-                                            ', ', 
-                                            substring-before(
-                                            substring-after(
-                                            substring-after(
-                                            XMP-dc:Coverage, 
-                                            '@'), 
-                                            ','), 
-                                            ','
-                                            ))"
-                                        />
+                                    <xsl:when test="
+                                            contains(
+                                            normalize-space(
+                                            XMP-dc:Coverage
+                                            ),
+                                            'google'
+                                            )">
+                                        <xsl:value-of select="
+                                                concat(
+                                                substring-before(
+                                                substring-after(
+                                                XMP-dc:Coverage,
+                                                '@'),
+                                                ','),
+                                                ', ',
+                                                substring-before(
+                                                substring-after(
+                                                substring-after(
+                                                XMP-dc:Coverage,
+                                                '@'),
+                                                ','),
+                                                ','
+                                                ))"/>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:value-of 
-                                            select="XMP-dc:Coverage"/>
+                                        <xsl:value-of select="XMP-dc:Coverage"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </coverage>
@@ -624,87 +566,78 @@ to a pbcore cavafy entry -->
                 <!-- Subject headings -->
 
                 <xsl:variable name="subjectsAlreadyInCavafy">
-                    <xsl:copy-of
-                        select="
-                        $cavafyEntry
-                        /pb:pbcoreDescriptionDocument
-                        /pb:pbcoreSubject
-                        [contains(@ref, 'id.loc.gov')]"
-                    />
+                    <xsl:copy-of select="
+                            $cavafyEntry
+                            /pb:pbcoreDescriptionDocument
+                            /pb:pbcoreSubject
+                            [contains(@ref, 'id.loc.gov')]"/>
                 </xsl:variable>
 
-                <xsl:message
-                    select="
+                <xsl:message select="
                         'subjects already in cavafy',
                         $subjectsAlreadyInCavafy"/>
 
 
                 <xsl:variable name="locSubjects">
-                    <xsl:apply-templates 
-                        select="RIFF:Keywords"/>
+                    <xsl:apply-templates select="RIFF:Keywords"/>
                 </xsl:variable>
 
                 <xsl:message select="'Subjects:', $locSubjects"/>
-                
-                <xsl:apply-templates 
-                    select="$locSubjects/rdf:RDF/
-                    (
-                    madsrdf:Topic |
-                    madsrdf:NameTitle |
-                    madsrdf:Geographic |
-                    madsrdf:Name |
-                    madsrdf:FamilyName |
-                    madsrdf:CorporateName |
-                    madsrdf:Title |
-                    madsrdf:PersonalName |
-                    madsrdf:ConferenceName | 
-                    madsrdf:ComplexSubject
-                    )" mode="LOCtoPBCore"/>
-                
+
+                <xsl:apply-templates select="
+                        $locSubjects/rdf:RDF/
+                        (
+                        madsrdf:Topic |
+                        madsrdf:NameTitle |
+                        madsrdf:Geographic |
+                        madsrdf:Name |
+                        madsrdf:FamilyName |
+                        madsrdf:CorporateName |
+                        madsrdf:Title |
+                        madsrdf:PersonalName |
+                        madsrdf:ConferenceName |
+                        madsrdf:ComplexSubject
+                        )" mode="LOCtoPBCore"/>
+
                 <xsl:variable name="genreAlreadyInCavafy">
                     <xsl:value-of select="
-                        $cavafyEntry
-                        /pb:pbcoreDescriptionDocument
-                        /pb:pbcoreGenre"
-                    />
+                            $cavafyEntry
+                            /pb:pbcoreDescriptionDocument
+                            /pb:pbcoreGenre"/>
                 </xsl:variable>
                 <xsl:if test="$genreAlreadyInCavafy eq ''">
                     <pbcoreGenre source="PBCore Genre Picklist">
                         <xsl:value-of select="RIFF:Genre"/>
                     </pbcoreGenre>
                 </xsl:if>
-                
+
                 <!-- CMS Image ID -->
                 <xsl:variable name="cmsImageAlreadyInCavafy">
-                    <xsl:value-of
-                        select="$cavafyEntry
-                        /pb:pbcoreDescriptionDocument
-                        /pb:pbcoreAnnotation
-                        [@annotationType = 'CMS Image']"
-                        separator=" ; "/>
+                    <xsl:value-of select="
+                            $cavafyEntry
+                            /pb:pbcoreDescriptionDocument
+                            /pb:pbcoreAnnotation
+                            [@annotationType = 'CMS Image']" separator=" ; "/>
                 </xsl:variable>
                 <xsl:if test="XMP-plus:ImageSupplierImageID ne ''">
                     <xsl:if test="$cmsImageAlreadyInCavafy eq ''">
                         <pbcoreAnnotation annotationType="CMS Image">
-                            <xsl:value-of 
-                                select="XMP-plus:ImageSupplierImageID"/>
+                            <xsl:value-of select="XMP-plus:ImageSupplierImageID"/>
                         </pbcoreAnnotation>
                     </xsl:if>
                 </xsl:if>
 
                 <!--Adding creators -->
                 <xsl:call-template name="parseContributors">
-                    <xsl:with-param name="contributorsToProcess" 
-                        select="RIFF:Commissioned"/>
+                    <xsl:with-param name="contributorsToProcess" select="RIFF:Commissioned"/>
                     <xsl:with-param name="token" select="';'"/>
                     <xsl:with-param name="contributorsAlreadyInCavafy">
-                        <xsl:value-of
-                            select="
-                            $cavafyEntry
-                            /pb:pbcoreDescriptionDocument
-                            /pb:pbcoreCreator
-                            /pb:creator
-                            /@ref[contains(., 'id.loc.gov')]"
+                        <xsl:value-of select="
+                                $cavafyEntry
+                                /pb:pbcoreDescriptionDocument
+                                /pb:pbcoreCreator
+                                /pb:creator
+                                /@ref[contains(., 'id.loc.gov')]"
                             separator=" ; "/>
                     </xsl:with-param>
                     <xsl:with-param name="role" select="'creator'"/>
@@ -712,49 +645,45 @@ to a pbcore cavafy entry -->
 
                 <!-- Adding contributors -->
                 <xsl:call-template name="parseContributors">
-                    <xsl:with-param name="contributorsToProcess" 
-                        select="RIFF:Artist"/>
+                    <xsl:with-param name="contributorsToProcess" select="RIFF:Artist"/>
                     <xsl:with-param name="token" select="';'"/>
                     <xsl:with-param name="contributorsAlreadyInCavafy">
-                        <xsl:value-of
-                            select="
-                            $cavafyEntry
-                            /pb:pbcoreDescriptionDocument
-                            /pb:pbcoreContributor
-                            /pb:contributor
-                            /@ref[contains(., 'id.loc.gov')]"
+                        <xsl:value-of select="
+                                $cavafyEntry
+                                /pb:pbcoreDescriptionDocument
+                                /pb:pbcoreContributor
+                                /pb:contributor
+                                /@ref[contains(., 'id.loc.gov')]"
                             separator=" ; "/>
                     </xsl:with-param>
                     <xsl:with-param name="role" select="'contributor'"/>
                 </xsl:call-template>
-                
+
                 <!-- Add Engineers -->
-                <xsl:apply-templates select="RIFF:Engineer
-                    [not(matches(., 'Unknown', 'i'))]" mode="pbcore"/>
-                
+                <xsl:apply-templates select="
+                        RIFF:Engineer
+                        [not(matches(., 'Unknown', 'i'))]" mode="pbcore"/>
+
 
                 <!-- Copyright info -->
                 <xsl:variable name="copyrightAlreadyInCavafy">
-                    <xsl:value-of
-                        select="
-                        normalize-space(
-                        $cavafyEntry
-                        /pb:pbcoreDescriptionDocument
-                        /pb:pbcoreRightsSummary
-                        /pb:rightsSummary
-                        )"
-                    />
+                    <xsl:value-of select="
+                            normalize-space(
+                            $cavafyEntry
+                            /pb:pbcoreDescriptionDocument
+                            /pb:pbcoreRightsSummary
+                            /pb:rightsSummary
+                            )"/>
                 </xsl:variable>
-                <xsl:message 
-                    select="'Copyright in cavafy: ', 
-                    $copyrightAlreadyInCavafy"/>
+                <xsl:message select="
+                        'Copyright in cavafy: ',
+                        $copyrightAlreadyInCavafy"/>
                 <xsl:if test="$copyrightAlreadyInCavafy = ''">
                     <pbcoreRightsSummary>
                         <rightsSummary>
-                            <xsl:value-of 
-                                select="
-                                normalize-space(RIFF:Copyright)
-                                "/>
+                            <xsl:value-of select="
+                                    normalize-space(RIFF:Copyright)
+                                    "/>
                         </rightsSummary>
                     </pbcoreRightsSummary>
                 </xsl:if>
@@ -762,20 +691,19 @@ to a pbcore cavafy entry -->
                 <xsl:choose>
                     <xsl:when test="File:FileType = 'NEWASSET'">
                         <pbcoreAnnotation annotationType="Provenance">
-                            <xsl:value-of 
-                                select="
-                                normalize-space(RIFF:Comment)
-                                "/>
+                            <xsl:value-of select="
+                                    normalize-space(RIFF:Comment)
+                                    "/>
                         </pbcoreAnnotation>
                     </xsl:when>
-                    
+
                     <!-- Indicates fake Exif instantiation -->
-                    
+
                     <xsl:when test="
-                        RIFF:NumChannels = '0' or 
-                        RIFF:SampleRate = '1000' or 
-                        RIFF:BitsPerSample = '8'">
-                        <!-- Do nothing -->                        
+                            RIFF:NumChannels = '0' or
+                            RIFF:SampleRate = '1000' or
+                            RIFF:BitsPerSample = '8'">
+                        <!-- Do nothing -->
                     </xsl:when>
                     <xsl:otherwise>
 
@@ -786,25 +714,27 @@ to a pbcore cavafy entry -->
                                 <xsl:value-of select="$instantiationID"/>
                             </instantiationIdentifier>
                             <!-- DAVID Title -->
-                            <xsl:apply-templates
-                                select="
+                            <xsl:apply-templates select="
                                     RIFF:Description
-                                    [$isWAV]"
+                                    [$isWAV]" mode="pbcore"/>
+                            <xsl:apply-templates select="
+                                    System:FileCreateDate" mode="pbcore"/>
+                            <xsl:apply-templates select="
+                                    WNYC:instantiation_physical_label | RIFF:BWF_UMID[not($isWAV)]"
                                 mode="pbcore"/>
                             <xsl:apply-templates select="
-                                System:FileCreateDate[$isWAV]" mode="pbcore"/>                            
+                                    WNYC:instantiation_issued_date"
+                                mode="pbcore"/>
                             <xsl:apply-templates select="
-                                WNYC:instantiation_physical_label" mode="pbcore"/>
+                                    WNYC:instantiation_date"
+                                mode="pbcore"/>
                             <xsl:apply-templates select="
-                                WNYC:instantiation_issued_date" mode="pbcore"/>
-                            <xsl:apply-templates select="
-                                WNYC:instantiation_date" mode="pbcore"/>
-                            <xsl:apply-templates select="
-                                WNYC:instantiation_created_date" mode="pbcore"/>
+                                    WNYC:instantiation_created_date"
+                                mode="pbcore"/>
                             <xsl:choose>
                                 <xsl:when test="$isWAV">
                                     <instantiationDigital>
-                                        <xsl:value-of select="'BWF'"/>
+                                        <xsl:value-of select="'wav'"/>
                                     </instantiationDigital>
                                 </xsl:when>
                                 <xsl:otherwise>
@@ -813,14 +743,12 @@ to a pbcore cavafy entry -->
                                     </instantiationPhysical>
                                 </xsl:otherwise>
                             </xsl:choose>
-                            
+
                             <instantiationLocation>
                                 <xsl:call-template name="checkConflicts">
-                                    <xsl:with-param name="fieldName"
-                                        select="
+                                    <xsl:with-param name="fieldName" select="
                                             'instantiationLocation'"/>
-                                    <xsl:with-param name="field1"
-                                        select="
+                                    <xsl:with-param name="field1" select="
                                             normalize-space(
                                             System:Directory
                                             [contains(., 'Levy')]
@@ -838,62 +766,64 @@ to a pbcore cavafy entry -->
                                 </instantiationGenerations>
                             </xsl:if>
                             <xsl:apply-templates select="
-                                System:FileSize[$isWAV]" mode="pbcore"/>
+                                    System:FileSize[$isWAV]"
+                                mode="pbcore"/>
                             <xsl:apply-templates select="
-                                Composite:Duration" mode="pbcore"/>
+                                    Composite:Duration[matches(., '\d')]"
+                                mode="pbcore"/>
                             <xsl:apply-templates select="
-                                RIFF:AvgBytesPerSec" mode="pbcore"/>
-                            
+                                    RIFF:AvgBytesPerSec[number(.) gt 0]"
+                                mode="pbcore"/>
+
                             <instantiationChannelConfiguration>
                                 <xsl:choose>
-                                    <xsl:when 
-                                        test="RIFF:NumChannels = '1'">Mono</xsl:when>
-                                    <xsl:when 
-                                        test="RIFF:NumChannels = '2'">Stereo</xsl:when>
-                                <xsl:otherwise>
+                                    <xsl:when test="RIFF:NumChannels = '1'">Mono</xsl:when>
+                                    <xsl:when test="RIFF:NumChannels = '2'">Stereo</xsl:when>
+                                    <xsl:otherwise>
                                         <xsl:value-of select="RIFF:NumChannels"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </instantiationChannelConfiguration>
 
-                            <xsl:if test="contains($generation, 'segment')">
+                            <xsl:if test="$isWAV and contains($generation, 'segment')">
                                 <instantiationAnnotation annotationType="instantiation_title">
-                                    <xsl:value-of 
-                                        select="normalize-space(RIFF:Title)"/>
+                                    <xsl:value-of select="normalize-space(RIFF:Title)"/>
                                 </instantiationAnnotation>
-                                <instantiationAnnotation 
-                                    annotationType="instantiation_description">
-                                    <xsl:value-of 
-                                        select="(RIFF:Subject)"/>
+                                <instantiationAnnotation annotationType="instantiation_description">
+                                    <xsl:value-of select="(RIFF:Subject)"/>
                                 </instantiationAnnotation>
                             </xsl:if>
-                            <xsl:apply-templates
-                                select="RIFF:CodingHistory
-                                [not(contains(., 'D.A.V.I.D.'))][$isWAV]"/>
+                            <xsl:apply-templates select="
+                                    RIFF:CodingHistory
+                                    [not(contains(., 'D.A.V.I.D.'))]"/>
+
+
                             <xsl:apply-templates select="RIFF:SourceForm" mode="pbcore"/>
-                            
-                            <instantiationAnnotation annotationType="embedded_comments">
+
+                            <instantiationAnnotation annotationType="instantiation_comments">
                                 <xsl:value-of select="normalize-space(RIFF:Comment)"/>
                             </instantiationAnnotation>
 
                             <xsl:apply-templates select="RIFF:Technician" mode="pbcore"/>
-                            
+
 
                             <!--essence tracks -->
-                            <xsl:apply-templates select=".[matches($File:FileType, 'WAV|BWF', 'i')]" mode="essenceTrack"/>
-                            
+                            <xsl:apply-templates select=".[matches($File:FileType, 'WAV', 'i')]"
+                                mode="essenceTrack"/>
+
                             <!-- Is dub of -->
-                            
-                            <xsl:variable name="instIsDubOf" select="$instantiationData/
-                                pb:instantiationRelation
-                                [pb:instantiationRelationType = 'Is Dub Of']/
-                                pb:instantiationRelationIdentifier"/>
+
+                            <xsl:variable name="instIsDubOf" select="
+                                    $instantiationData/
+                                    pb:instantiationRelation
+                                    [pb:instantiationRelationType = 'Is Dub Of']/
+                                    pb:instantiationRelationIdentifier"/>
                             <xsl:apply-templates select="
-                                RIFF:Medium
-                                [$isDub]" mode="isDubOf">
+                                    RIFF:Medium
+                                    [$isDub]" mode="isDubOf">
                                 <xsl:with-param name="instIsDubOf" select="$instIsDubOf"/>
-                            </xsl:apply-templates> 
-                            
+                            </xsl:apply-templates>
+
                         </pbcoreInstantiation>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -905,7 +835,7 @@ to a pbcore cavafy entry -->
     </xsl:template>
     
     <xsl:template match="
-            WNYC:instantiation_physical_label" mode="pbcore">
+        WNYC:instantiation_physical_label|RIFF:BWF_UMID" mode="pbcore">
         <xsl:for-each select="tokenize(., $separatingToken)">
             <pbcoreinstantiationIdentifier source="Physical label">
                 <xsl:value-of select="normalize-space(.)"/>
@@ -1046,10 +976,14 @@ to a pbcore cavafy entry -->
                 <xsl:with-param name="codingProcessStepNo" select="
                     $codingProcessStepNo"/>
             </xsl:apply-templates>
-        </xsl:for-each>
-        
+        </xsl:for-each>        
     </xsl:template>
-    
+    <xsl:template match="RIFF:CodingHistory" mode="pbcore">
+        <xsl:call-template name="generateInstantiationAnnotation">
+            <xsl:with-param name="annotationType" select="'condition'"/>
+            <xsl:with-param name="value" select="normalize-space(.)"/>
+        </xsl:call-template>        
+    </xsl:template>
     <xsl:template match="RIFF:AvgBytesPerSec" mode="essenceTrack">
         <essenceTrackDataRate>
             <xsl:value-of select="."/>
@@ -1223,6 +1157,33 @@ to a pbcore cavafy entry -->
             </xsl:if>
             <xsl:value-of select="$value"/>
         </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="System:FileAccessDate" mode="pbcore">
+        <pbcoreAssetDate dateType="broadcast">
+            <xsl:value-of select="normalize-space(translate(., ':', '-'))"/>
+        </pbcoreAssetDate>
+    </xsl:template>
+    <xsl:template match="DAVIDTitleDate" mode="pbcore">
+        <pbcoreAssetDate>
+            <xsl:value-of select="normalize-space(translate(., ':', '-'))"/>
+        </pbcoreAssetDate>
+    </xsl:template>
+    <xsl:template match="RIFF:Title" mode="pbcore">        
+            <pbcoreTitle titleType="Episode">
+                <xsl:value-of 
+                    select="normalize-space(.)"/>
+            </pbcoreTitle>
+    </xsl:template>
+    <xsl:template match="RIFF:Product" mode="pbcore">
+        <pbcoreTitle titleType="Series">
+            <xsl:value-of select="normalize-space(.)"/>
+        </pbcoreTitle>
+    </xsl:template>
+    <xsl:template match="RIFF:Subject" mode="pbcore">
+        <pbcoreDescription descriptionType="Abstract">
+            <xsl:value-of select="."/>
+        </pbcoreDescription>
     </xsl:template>
     
 </xsl:stylesheet>

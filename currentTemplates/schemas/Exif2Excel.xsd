@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+  targetNamespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:System="http://ns.exiftool.ca/File/System/1.0/"
+  xmlns:XMP-xmpDM="http://ns.exiftool.ca/XMP/XMP-xmpDM/1.0/"
+  xmlns:XMP-plus="http://ns.exiftool.ca/XMP/XMP-plus/1.0/"
+  xmlns:ExifTool="http://ns.exiftool.ca/ExifTool/1.0/" xmlns:et="http://ns.exiftool.ca/1.0/"
+  xmlns:File="http://ns.exiftool.ca/File/1.0/" xmlns:RIFF="http://ns.exiftool.ca/RIFF/RIFF/1.0/"
+  xmlns:XMP-dc="http://ns.exiftool.ca/XMP/XMP-dc/1.0/">
+  <xs:import namespace="http://ns.exiftool.ca/1.0/" schemaLocation="et.xsd"/>
+  <xs:import namespace="http://ns.exiftool.ca/ExifTool/1.0/" schemaLocation="ExifTool.xsd"/>
+  <xs:import namespace="http://ns.exiftool.ca/File/1.0/" schemaLocation="File.xsd"/>
+  <xs:import namespace="http://ns.exiftool.ca/File/System/1.0/" schemaLocation="System.xsd"/>
+  <xs:import namespace="http://ns.exiftool.ca/RIFF/RIFF/1.0/" schemaLocation="RIFF.xsd"/>
+  <xs:import namespace="http://ns.exiftool.ca/XMP/XMP-dc/1.0/" schemaLocation="XMP-dc.xsd"/>
+  <xs:import namespace="http://ns.exiftool.ca/XMP/XMP-plus/1.0/" schemaLocation="XMP-plus.xsd"/>
+  <xs:import namespace="http://ns.exiftool.ca/XMP/XMP-xmpDM/1.0/" schemaLocation="XMP-xmpDM.xsd"/>
+  <xs:element name="RDF">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="rdf:Description"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Description">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ExifTool:ExifToolVersion"/>
+        <xs:element ref="System:FileName"/>
+        <xs:element ref="System:Directory"/>
+        <xs:element ref="System:FileSize"/>
+        <xs:element ref="System:FileModifyDate"/>
+        <xs:element ref="System:FileCreateDate"/>
+        <xs:element ref="System:FilePermissions"/>
+        <xs:element ref="File:FileType"/>
+        <xs:element ref="File:FileTypeExtension"/>
+        <xs:element ref="File:MIMEType"/>
+        <xs:element ref="RIFF:Description"/>
+        <xs:element ref="RIFF:Originator"/>
+        <xs:element ref="RIFF:OriginatorReference"/>
+        <xs:element ref="RIFF:Artist"/>
+        <xs:element ref="RIFF:Commissioned"/>
+        <xs:element ref="RIFF:DateCreated"/>
+        <xs:element ref="RIFF:Keywords"/>
+        <xs:element ref="RIFF:Subject"/>
+        <xs:element ref="RIFF:Software"/>
+        <xs:element ref="RIFF:Source"/>
+        <xs:element ref="RIFF:ArchivalLocation"/>
+        <xs:element ref="RIFF:Comment"/>
+        <xs:element ref="RIFF:Copyright"/>
+        <xs:element ref="RIFF:Engineer"/>
+        <xs:element ref="RIFF:Genre"/>
+        <xs:element ref="RIFF:Medium"/>
+        <xs:element ref="RIFF:Title"/>
+        <xs:element ref="RIFF:Product"/>
+        <xs:element ref="RIFF:SourceForm"/>
+        <xs:element ref="RIFF:Technician"/>
+        <xs:element ref="RIFF:CodingHistory"/>
+        <xs:element ref="RIFF:Encoding"/>
+        <xs:element ref="RIFF:NumChannels"/>
+        <xs:element ref="RIFF:SampleRate"/>
+        <xs:element ref="RIFF:AvgBytesPerSec"/>
+        <xs:element ref="RIFF:BitsPerSample"/>
+        <xs:element ref="XMP-dc:Subject"/>
+        <xs:element ref="XMP-xmpDM:Artist"/>
+        <xs:element ref="XMP-xmpDM:Engineer"/>
+        <xs:element ref="XMP-xmpDM:Genre"/>
+        <xs:element ref="XMP-dc:Rights"/>
+        <xs:element ref="XMP-dc:Source"/>
+        <xs:element ref="XMP-dc:Description"/>
+        <xs:element ref="XMP-plus:ImageSupplierImageID"/>
+      </xs:sequence>
+      <xs:attribute ref="et:toolkit" use="required"/>
+      <xs:attribute name="about" use="required" form="qualified"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="bag">
+    <xs:sequence>
+      <xs:element ref="rdf:bag"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="bag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="rdf:li"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="li" type="xs:anyURI"/>
+</xs:schema>

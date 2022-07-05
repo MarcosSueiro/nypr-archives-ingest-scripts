@@ -22,6 +22,7 @@
     xmlns:wdt="http://www.wikidata.org/prop/direct/"
     xmlns:wdtn="http://www.wikidata.org/prop/direct-normalized/"
     xmlns:json="http://marklogic.com/xdmp/json/basic"
+    xmlns:bflc="http://id.loc.gov/ontologies/bflc/"
     exclude-result-prefixes="#all">
 
     <!-- Various templates 
@@ -78,7 +79,7 @@
         />
     </xsl:template>
 
-    <xsl:template match="RIFF:Artist" name="getArtistData">
+    <xsl:template name="getArtistData" match="RIFF:Artist">
         <xsl:param name="artist" select="."/>
         <xsl:copy-of
             select="WNYC:splitParseValidate($artist, $separatingToken, 'id.loc.gov')//valid/WNYC:getLOCData(.)"
@@ -934,8 +935,9 @@
                 <xsl:value-of
                     select="
                         'See if current URL ', $LOCURL,
-                        ' is in one of components ', $validComponents"/>
-                <xsl:value-of select="$LOCURL = $validComponents/valid"/>
+                        ' is in one of components '"/>
+                <xsl:value-of select="$validComponents" separator="{$separatingTokenLong}"/>
+                <xsl:value-of select="$LOCURL = $validComponents/valid" separator="{$separatingTokenLong}"/>
             </xsl:message>
             <xsl:copy
                 select="
@@ -1037,7 +1039,8 @@
                 ' using search string ',
                 $subjectSearchString
                 "/>
-        <xsl:variable name="successfulSearch" select="unparsed-text-available($subjectSearchString)"/>
+        <xsl:variable name="successfulSearch" select="
+            unparsed-text-available($subjectSearchString)"/>
         <xsl:choose>
             <xsl:when test="$successfulSearch">
                 <xsl:copy-of
@@ -1058,16 +1061,6 @@
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
-
-        <!--<xsl:if test="$successfulSearch">
-            <xsl:copy-of
-                select="
-                    doc(
-                    $subjectSearchString
-                    [unparsed-text-available(.)]
-                    )"
-            />
-        </xsl:if>-->
     </xsl:template>
 
     <xsl:template name="directLOCSearch" match="
@@ -1512,7 +1505,6 @@
             <xsl:value-of select="concat('&amp;', 'rdftype=', $rdfType)[$rdfType !='']"/>
             <xsl:value-of select="concat('&amp;', 'mime=', $MIMEType)[$MIMEType !='']"/>
         </xsl:param>
-
     </xsl:template>
 
     <xsl:template name="LOCtoPBCore"
@@ -1801,6 +1793,7 @@
         without LOC URL entry -->
         <assetsSubjects>
             <xsl:apply-templates select="pma:database[@name = 'pbcore']/table"/>
+            <xsl:apply-templates select="database[@name = 'cavafy-prod']/table"/>
         </assetsSubjects>
     </xsl:template>
 
@@ -1814,8 +1807,7 @@
                 <xsl:element name="{@name}">
                     <xsl:value-of
                         select="
-                            if (. != '') then
-                                .
+                            if (. != '') then .
                             else
                                 'NULL'"
                     />
@@ -1835,61 +1827,31 @@
                             column[@name = 'subject'][. ne '']"/>
                 </xsl:call-template>
             </xsl:variable>
+            <xsl:variable name="exactSubject" select="$directLOCSubjectSearchResult/rdf:RDF/
+                madsrdf:Topic[madsrdf:authoritativeLabel]"/>
+            <xsl:variable name="exactName" select="$directLOCNameSearchResult/rdf:RDF
+                /madsrdf:*[madsrdf:authoritativeLabel]"/>
             <exactSubject>
                 <xsl:value-of
-                    select="
-                        if (
-                        $directLOCSubjectSearchResult/rdf:RDF
-                        /madsrdf:Topic/madsrdf:authoritativeLabel
-                        )
-                        then
-                            $directLOCSubjectSearchResult/rdf:RDF
-                            /madsrdf:Topic/madsrdf:authoritativeLabel
-                        else
-                            'NULL'"
+                    select="($exactSubject/madsrdf:authoritativeLabel, 'NULL')
+                    [matches(., '\w')][1]"
                 />
             </exactSubject>
             <exactSubjectURL>
                 <xsl:value-of
-                    select="
-                        if (
-                        $directLOCSubjectSearchResult/rdf:RDF
-                        /madsrdf:Topic/@rdf:about
-                        )
-                        then
-                            $directLOCSubjectSearchResult/rdf:RDF
-                            /madsrdf:Topic/@rdf:about
-                        else
-                            'NULL'"
-                />
+                    select="($exactSubject/@rdf:about, 'NULL')
+                    [matches(., '\w')][1]"
+                />                
             </exactSubjectURL>
             <exactName>
-                <xsl:value-of
-                    select="
-                        if (
-                        $directLOCNameSearchResult/rdf:RDF
-                        /madsrdf:*/madsrdf:authoritativeLabel
-                        )
-                        then
-                            $directLOCNameSearchResult/rdf:RDF
-                            /madsrdf:*/madsrdf:authoritativeLabel
-                        else
-                            'NULL'"
-                />
+                <xsl:value-of select="
+                    ($exactName/madsrdf:authoritativeLabel, 'NULL')
+                    [matches(., '\w')][1]"/>
             </exactName>
             <exactNameURL>
-                <xsl:value-of
-                    select="
-                        if (
-                        $directLOCNameSearchResult/rdf:RDF
-                        /madsrdf:*/@rdf:about
-                        )
-                        then
-                            $directLOCNameSearchResult/rdf:RDF
-                            /madsrdf:*/@rdf:about
-                        else
-                            'NULL'"
-                />
+                <xsl:value-of select="
+                    ($exactName/@rdf:about, 'NULL')
+                    [matches(., '\w')][1]"/>                
             </exactNameURL>
             <chosenURL>paste URL here</chosenURL>
             <xsl:variable name="wideLOCSubjectSearchResults">
@@ -2009,7 +1971,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template name="searchLoC">
+    <xsl:template name="searchLoC" match="." mode="searchLoC">
         <!-- Search LoC, see https://id.loc.gov/techcenter/searching.html -->
 
         <xsl:param name="searchTerms"/>
@@ -2050,13 +2012,28 @@
         <xsl:param name="searchResults" select="doc($fullAPICall)"/>
         <xsl:message
             select="
-                'Search LoC suggest for term ',
+                'Search LoC candidates for term ',
                 $searchTerms,
                 ' using search string ',
                 $fullAPICall"/>
         <xsl:copy-of select="$searchResults"/>
     </xsl:template>
 
+    <xsl:template name="searchPersonLoC" match="pb:contributor" mode="searchPersonLoC">
+        <xsl:param name="personToSearch"/>
+        <xsl:param name="corporationsArePeople" select="fn:false()"/>
+        <xsl:call-template name="searchLoC">
+            <xsl:with-param name="searchTerms" select="$personToSearch"/>
+            <xsl:with-param name="database" select="'/authorities/names'"/>
+            <xsl:with-param name="rdftype" select="
+                    if ($corporationsArePeople)
+                    then
+                        'Name'
+                    else
+                        'PersonalName'"/>
+        </xsl:call-template>
+    </xsl:template>
+    
     <xsl:template name="workNAF_LCSH" match="
             text()[contains(., 'id.loc.gov')]"
         mode="
@@ -2606,37 +2583,33 @@
         <xsl:param name="validatingString" select="'id.loc.gov'"/>
         <xsl:param name="validatedSource"
             select="'Library of Congress'[$validatingString = 'id.loc.gov']"/>
-        <xsl:variable name="capsRole" select="WNYC:Capitalize($role, 1)"/>
-        <xsl:message
-            select="
-            concat(
-            'Parse ', $capsRole, 's ',
-            $contributorsToProcess)"/>
-        <xsl:message
-            select="
-            $capsRole, 's', 'already in cavafy: ',
-            $contributorsAlreadyInCavafy"/>
-        
-        <xsl:if
-            test="
-            $role != 'contributor'
-            and
-            $role != 'creator'">
-            <xsl:message terminate="yes"
-                select="
-                concat(
-                'Role must be ',
-                '_creator_ or _contributor_ (lowercase). ',
-                'You entered ', $role)"
-            />
-        </xsl:if>
-        <xsl:variable name="pbcoreRole" select="concat('pbcore', $capsRole)"/>
-        
-        <xsl:variable name="contributorsToProcessParsed"
+        <xsl:param name="capsRole" select="WNYC:Capitalize($role, 1)"/>
+        <xsl:param name="message">
+            <xsl:message select="
+                    concat(
+                    'Parse ', $capsRole, 's ',
+                    $contributorsToProcess)"/>
+            <xsl:message select="
+                    $capsRole, 's', 'already in cavafy: ',
+                    $contributorsAlreadyInCavafy"/>
+            <xsl:if test="
+                    $role != 'contributor'
+                    and
+                    $role != 'creator'">
+                <xsl:message terminate="yes" select="
+                        concat(
+                        'Role must be ',
+                        '_creator_ or _contributor_ (lowercase). ',
+                        'You entered ', $role)"/>
+            </xsl:if>
+        </xsl:param>
+        <xsl:param name="pbcoreRole" select="
+            concat('pbcore', $capsRole)"/>        
+        <xsl:param name="contributorsToProcessParsed"
             select="
             WNYC:splitParseValidate(
             $contributorsToProcess, $longToken, $validatingString)[matches($contributorsToProcess, '\w')]"/>
-        <xsl:variable name="contributorsAlreadyInCavafyParsed"
+        <xsl:param name="contributorsAlreadyInCavafyParsed"
             select="
             WNYC:splitParseValidate(
             $contributorsAlreadyInCavafy, $longToken, $validatingString)"/>
@@ -2667,30 +2640,52 @@
         </xsl:for-each>
     </xsl:template>
     
-    <xsl:template match="hit" mode="getPersonBasics" name="getPersonBasics" xmlns="http://marklogic.com/xdmp/json/basic">
-        <xsl:param name="uri" select="uri"/>
+    <xsl:template name="getPersonBasics" match="json:hit" mode="getPersonBasics">
+        <xsl:param name="uri" select="json:uri"/>
         <xsl:param name="uriRdf" select="concat($uri, '.rdf')"/>
-        <xsl:param name="name" select="aLabel"/>
+        <xsl:param name="hitCount" select="../../json:count" as="xs:integer"/>
+        <xsl:param name="name" select="json:aLabel"/>
         <xsl:param name="locData" select="doc($uriRdf)"/>
+        <xsl:param name="locNameData" select="$locData/rdf:RDF/(madsrdf:PersonalName|madsrdf:CorporateName)"/>
         <xsl:param name="professions" select="
-            $locData/
+            $locNameData/madsrdf:identifiesRWO/madsrdf:RWO/
             (madsrdf:fieldOfActivity | madsrdf:occupation)"/>
-        <xsl:param name="sources" select="$locData/madsrdf:hasSource"/>
+        <xsl:param name="sources" select="$locNameData/madsrdf:hasSource"/>
+        <xsl:param name="works" select="
+            $locNameData/madsrdf:identifiesRWO/madsrdf:RWO/bflc:contributorTo/bf:Work[position() lt 6]
+            "/>
+        <xsl:param name="dates" select="
+            $locNameData/madsrdf:identifiesRWO/madsrdf:RWO/
+            (madsrdf:birthDate, madsrdf:deathDate)"/>
+        <xsl:param name="oneHitOnly" select="$hitCount = 1"/>
+        <!-- If you think the only option will be the correct one -->
+        <xsl:param name="trustMyChoice" select="fn:false()"/>
         <person>
+            <xsl:attribute name="choose">
+                <xsl:value-of select="'x'[$oneHitOnly][$trustMyChoice]"/>
+            </xsl:attribute>
+            <xsl:attribute name="uri" select="$uri"/>
             <name>
-                <xsl:value-of select="$name"/>]
+                <xsl:value-of select="$name"/>
             </name>
             <professions>
-                <xsl:value-of select="$professions" separator=" ; "/>
+                <xsl:value-of select="$professions/normalize-space(.)" separator=" ; "/>
             </professions>
+            <dates>
+                <xsl:value-of select="$dates/fn:normalize-space(.)" separator=" -- "/>
+            </dates>
             <sources>
                 <xsl:value-of select="
-                    $sources/madsrdf:Source/madsrdf:citationSource" separator=" ; "/>
+                    $sources/madsrdf:Source/normalize-space(.)" separator=" ; "/>
             </sources>
+            <works>
+                <xsl:value-of select="$works/normalize-space(.)" separator=" ; "/>
+            </works>
         </person>
     </xsl:template>
     
-    <xsl:template match="json:hit" mode="getWorkBasics" name="getWorkBasics" xmlns="http://marklogic.com/xdmp/json/basic"  exclude-result-prefixes="#all">
+    
+    <xsl:template name="getWorkBasics" match="json:hit" mode="getWorkBasics" xmlns="http://marklogic.com/xdmp/json/basic"  exclude-result-prefixes="#all">
         <xsl:param name="hit" select="."/>
         <xsl:param name="hitNumber" select="position()"/>
         <xsl:param name="uri" select="json:uri"/>

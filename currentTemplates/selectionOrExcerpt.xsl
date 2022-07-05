@@ -92,15 +92,16 @@ Edited file timings:
         <xsl:value-of select="concat($hours, ':', $minutes, ':', $seconds)"/>
     </xsl:template>
     
-    <xsl:template match="XMP-xmpDM:Tracks">
+    <xsl:template match="XMP-xmpDM:Tracks" mode="tracksToText">
+        <xsl:param name="xmpTracks" select="."/>
         <xsl:param name="frameRate" select="
             number(
             substring-after(
-            rdf:Bag/rdf:li[@rdf:parseType='Resource'][1]/
+            $xmpTracks/rdf:Bag/rdf:li[@rdf:parseType='Resource'][1]/
             XMP-xmpDM:FrameRate, 'f'))[. &gt; 0][1]"/>
         <xsl:param name="markerCount" select="
             count(
-            rdf:Bag/rdf:li[@rdf:parseType='Resource']/
+            $xmpTracks/rdf:Bag/rdf:li[@rdf:parseType='Resource']/
             XMP-xmpDM:Markers/
             rdf:Bag/rdf:li[@rdf:parseType='Resource']
             )"/>
@@ -109,7 +110,7 @@ Edited file timings:
                 concat($markerCount, ' markers found')"/>
         </xsl:message>
         <xsl:apply-templates select="
-            rdf:Bag/rdf:li[@rdf:parseType='Resource']/
+            $xmpTracks/rdf:Bag/rdf:li[@rdf:parseType='Resource']/
             XMP-xmpDM:Markers">
             <xsl:with-param name="frameRate" select="
                 $frameRate[. &gt; 0]"/>

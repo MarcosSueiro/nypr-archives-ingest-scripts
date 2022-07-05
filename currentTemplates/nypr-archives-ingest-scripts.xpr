@@ -14,31 +14,11 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>masterRouter.xsl</String>
+                                    <String>../../20220629Shipment.xml</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>masterRouter</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioStorageLocations">
-                                    <list>
-                                        <Byte>2</Byte>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>../../../Archives44kWTheme.xml</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>Archives44kWTheme</String>
+                                        <String>generateManifest</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
@@ -74,6 +54,526 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
+                                    <String>../../WTCA20220621.xml</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>masterRouter</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>masterRouter.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>masterRouter</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10177.9%20CD%20363%201220-1420.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/parseTranscripts.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10176.8%20CD%20361%201019-1220.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10175.15%20CD%20360%200820-1020.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10175.14%20CD%20359%200820-1020.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10176.9%20CD%20362%201019-1220.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-NEWS-2001-09-11-10329.7%20Studio%20Reel%202-Giuliani%20PC-Mark-Amy-Beth-Andrea.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-NEWS-2001-09-11-10328.6%20Studio%20Reel%201.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-152538.2%20AM%20Aircheck%201930-2030%20from%20NPR%20Office.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10254.7%20CD%20527.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10254.5%20CD%20528.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10250.1%20CD%20519.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10182.6%20CD%20374.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10182.5%20CD%20373.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10181.5%20CD%20372.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10181.4%20CD%20371.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10180.9%20CD%20370.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10180.8%20CD%20369.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10179.8%20CD%20368%201620-1820.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10179.7%20CD%20367%201620-1820.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10178.7%20CD%20366%201420-1620.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10178.6%20CD%20365%201420-1620.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../SeriesCataloging/WTCA/Transcripts/TimeStampedTranscripts/WNYC-WTCA-2001-09-11-10177.10%20CD%20364%201220-1420.MP3.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>parseTranscripts</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../TESTS/descriptionsToParse.xml</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>descriptionsToParse</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
                                     <String>mergeAssets.xsl</String>
                                 </field>
                                 <field name="scenarioIds">
@@ -94,11 +594,11 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>exif2NewExif.xsl</String>
+                                    <String>../../../Archives44kWTheme.xml</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>exif2NewExif</String>
+                                        <String>Archives44kWTheme</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
@@ -645,6 +1145,89 @@
                                     <null/>
                                 </field>
                                 <field name="name">
+                                    <String>descriptionsToParse</String>
+                                </field>
+                                <field name="baseURL">
+                                    <String></String>
+                                </field>
+                                <field name="footerURL">
+                                    <String></String>
+                                </field>
+                                <field name="fOPMethod">
+                                    <String>pdf</String>
+                                </field>
+                                <field name="fOProcessorName">
+                                    <String>Apache FOP</String>
+                                </field>
+                                <field name="headerURL">
+                                    <String></String>
+                                </field>
+                                <field name="inputXSLURL">
+                                    <String>file:/T:/02%20CATALOGING/Instantiation%20uploads/nypr-archives-ingest-scripts/currentTemplates/parseAuthorsTitles.xsl</String>
+                                </field>
+                                <field name="inputXMLURL">
+                                    <String>${currentFileURL}</String>
+                                </field>
+                                <field name="defaultScenario">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="isFOPPerforming">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="type">
+                                    <String>XSL</String>
+                                </field>
+                                <field name="saveAs">
+                                    <Boolean>true</Boolean>
+                                </field>
+                                <field name="openInBrowser">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="outputResource">
+                                    <null/>
+                                </field>
+                                <field name="openOtherLocationInBrowser">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="locationToOpenInBrowserURL">
+                                    <null/>
+                                </field>
+                                <field name="openInEditor">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInHTMLPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInXMLPane">
+                                    <Boolean>true</Boolean>
+                                </field>
+                                <field name="showInSVGPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInResultSetPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="useXSLTInput">
+                                    <Boolean>true</Boolean>
+                                </field>
+                                <field name="xsltParams">
+                                    <list/>
+                                </field>
+                                <field name="cascadingStylesheets">
+                                    <String-array/>
+                                </field>
+                                <field name="xslTransformer">
+                                    <String>Saxon-PE</String>
+                                </field>
+                                <field name="extensionURLs">
+                                    <String-array/>
+                                </field>
+                            </scenario>
+                            <scenario>
+                                <field name="advancedOptionsMap">
+                                    <null/>
+                                </field>
+                                <field name="name">
                                     <String>exif2NewExif</String>
                                 </field>
                                 <field name="baseURL">
@@ -913,6 +1496,89 @@
                                 </field>
                                 <field name="inputXSLURL">
                                     <String>file:/T:/02%20CATALOGING/Instantiation%20uploads/nypr-archives-ingest-scripts/currentTemplates/mergeAssets.xsl</String>
+                                </field>
+                                <field name="inputXMLURL">
+                                    <String>${currentFileURL}</String>
+                                </field>
+                                <field name="defaultScenario">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="isFOPPerforming">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="type">
+                                    <String>XSL</String>
+                                </field>
+                                <field name="saveAs">
+                                    <Boolean>true</Boolean>
+                                </field>
+                                <field name="openInBrowser">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="outputResource">
+                                    <null/>
+                                </field>
+                                <field name="openOtherLocationInBrowser">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="locationToOpenInBrowserURL">
+                                    <null/>
+                                </field>
+                                <field name="openInEditor">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInHTMLPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInXMLPane">
+                                    <Boolean>true</Boolean>
+                                </field>
+                                <field name="showInSVGPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInResultSetPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="useXSLTInput">
+                                    <Boolean>true</Boolean>
+                                </field>
+                                <field name="xsltParams">
+                                    <list/>
+                                </field>
+                                <field name="cascadingStylesheets">
+                                    <String-array/>
+                                </field>
+                                <field name="xslTransformer">
+                                    <String>Saxon-PE</String>
+                                </field>
+                                <field name="extensionURLs">
+                                    <String-array/>
+                                </field>
+                            </scenario>
+                            <scenario>
+                                <field name="advancedOptionsMap">
+                                    <null/>
+                                </field>
+                                <field name="name">
+                                    <String>parseTranscripts</String>
+                                </field>
+                                <field name="baseURL">
+                                    <String></String>
+                                </field>
+                                <field name="footerURL">
+                                    <String></String>
+                                </field>
+                                <field name="fOPMethod">
+                                    <String>pdf</String>
+                                </field>
+                                <field name="fOProcessorName">
+                                    <String>Apache FOP</String>
+                                </field>
+                                <field name="headerURL">
+                                    <String></String>
+                                </field>
+                                <field name="inputXSLURL">
+                                    <String>file:/T:/02%20CATALOGING/SeriesCataloging/WTCA/Transcripts/parseTranscripts.xsl</String>
                                 </field>
                                 <field name="inputXMLURL">
                                     <String>${currentFileURL}</String>

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
+<!-- Transform an exiftool xml document
+    to a promotional html document suitable for email
+    that includes links to cavafy
+    and links to entries
+    25 and 50 years ago -->
+
 <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:op="https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321"
@@ -23,7 +29,7 @@
 
     <xsl:import href="Exif2html.xsl"/>
     <xsl:import href="parseDAVIDTitle.xsl"/>
-    
+
 
 
     <!--Gives line breaks etc -->
@@ -42,11 +48,10 @@
     <xsl:param name="logFolder" select="concat($baseFolder, 'instantiationUploadLOGS/')"/>
     <xsl:param name="currentTime"
         select="substring(translate(string(current-time()), ':', ''), 1, 4)"/>
-    
+
     <!--Output definitions -->
     <xsl:template match="rdf:RDF">
-        <xsl:variable name="filenameHtml"
-            select="
+        <xsl:variable name="filenameHtml" select="
                 concat(
                 $baseFolder,
                 format-date($publishDate, '[Y0001][M01][D01]'),

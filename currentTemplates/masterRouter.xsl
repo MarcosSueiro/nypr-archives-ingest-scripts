@@ -75,18 +75,19 @@
             format-date(current-date(),
             '[Y0001][M01][D01]')"/>
     <xsl:variable name="currentTime"
-        select="
-            substring(
-            translate(
-            string(
-            current-time()),
-            ':', ''), 1, 4)
-            "/>
+        select="format-time(current-time(), '[h][m][s]')"/>
     <xsl:variable name="pbcorePhysicalInstantiations"
         select="
             doc(
             'pbcore_instantiationphysicalaudio_vocabulary.xml'
             )"/>
+    
+    <xsl:variable name="acceptableMediums">
+        <xsl:value-of select="'Audio material|Original|'"/>
+        <xsl:value-of select="
+            doc('utilityLists.xml')/utilityLists/validFormats/format/formatName"
+            separator="|"/>
+    </xsl:variable>
     <xsl:variable name="archivesAuthors"
         select="
             doc(
@@ -145,7 +146,7 @@
         <xsl:apply-templates select="ENTRY"/>
     </xsl:template>
 
-    <xsl:template name="exiftool" match="rdf:RDF[rdf:Description]">
+    <xsl:template name="exiftool" match="rdf:RDF[rdf:Description]" default-collation="http://www.w3.org/2013/collation/UCA?ignore-symbols=no">
         <!-- Accept an exiftool kind of xml document
         as output from the command 
         
@@ -223,7 +224,7 @@
                 <xsl:copy-of
                     select="
                         $input/rdf:Description
-                        [File:FileType = 'asset'][upper-case(RIFF:Source) = 'NEW']"
+                        [lower-case(File:FileType) = 'asset'][upper-case(RIFF:Source) = 'NEW']"
                 />
             </newAssets>
         </xsl:variable>
@@ -242,11 +243,7 @@
                 <xsl:copy-of
                     select="
                         $input/rdf:Description
-                        [File:FileType =
-                        $pbcorePhysicalInstantiations
-                        /pbcoreInstantiationPhysicalAudioVocabulary
-                        /pbcoreInstantiationPhysicalAudioTerm
-                        /term]"
+                        [matches(File:FileType, $acceptableMediums)]"
                 />
             </physicalInstantiations>
         </xsl:variable>
@@ -277,6 +274,13 @@
                 </xsl:for-each>
             </unacceptableFiles>
         </xsl:variable>
+        <xsl:message>
+            <xsl:value-of select="count($newAssets//rdf:Description), 'new assets. '"/>
+            <xsl:value-of select="count($updateAssets//rdf:Description), 'assets to update. '"/>
+            <xsl:value-of select="count($physicalInstantiations//rdf:Description), 'physical instantiations. '"/>
+            <xsl:value-of select="count($wavInstantiations//rdf:Description), 'WAVE instantiations.'"/>
+        </xsl:message>
+        
         <xsl:variable name="archivesINGESTWavInstantiations">
             <archivesINGESTWavInstantiations>
                 <xsl:copy-of
@@ -759,7 +763,7 @@
         <xsl:if test="$stopIfErrors and 
                 $completeLog//*[local-name() = 'error']
                 ">
-            <xsl:message terminate="yes">
+                <xsl:message terminate="yes">
                 <xsl:value-of select="'Errors found.'"/>
                 <xsl:copy-of select="$completeLog//
                     *[local-name() = 'error']"/>
@@ -806,7 +810,7 @@
                 mode="cavafy"/>
         </xsl:variable>
 
-        <!-- Needs to be split into bite-size chunks of about 40 assets -->
+        <!-- Needs to be split into bite-size chunks of about 200 assets -->
         <xsl:variable name="cavafyAssetsCount"
             select="
                 count(
@@ -818,7 +822,7 @@
 
         <xsl:apply-templates
             select="
-                $cavafyOutput/
+                $cavafyOutput//
                 pb:pbcoreCollection[$outputCavafy]"
             mode="
             breakItUp">
@@ -916,15 +920,15 @@
             <!-- Output 4.4: 96kHz / 24 bit files -->
             <xsl:if
                 test="
-                    $newExifOutput/rdf:RDF/rdf:Description
-                    [RIFF:SampleRate = '96000']
-                    [not(starts-with(RIFF:Description, 'MUNI-'))]
-                    [not(starts-with(RIFF:Description, 'WQXR-'))]
-                    [not(starts-with(RIFF:Description, 'WQXR-'))]
-                    [not(contains(RIFF:Description, '-OTM-'))]
-                    [not(contains(RIFF:Description, '-LLSH-'))]
-                    [not(contains(RIFF:Description, '-BLSH-'))]
-                    ">
+                $newExifOutput/rdf:RDF/rdf:Description
+                [RIFF:SampleRate = '96000']
+                [not(starts-with(RIFF:Description, 'MUNI-'))]
+                [not(starts-with(RIFF:Description, 'WQXR-'))]
+                [not(starts-with(RIFF:Description, 'WQXR-'))]
+                [not(contains(RIFF:Description, '-OTM-'))]
+                [not(contains(RIFF:Description, '-LLSH-'))]
+                [not(contains(RIFF:Description, '-BLSH-'))]
+                ">
                 <xsl:variable name="filenameDAVID96k24"
                     select="
                         concat(
@@ -1109,7 +1113,7 @@
                     </ENTRIES>
                 </xsl:result-document>
             </xsl:if>
-            <!-- Output 4.9: Leonard lopate -->
+            <!-- Output 4.9: Brian Lehrer -->
             <xsl:if
                 test="
                 $newExifOutput/rdf:RDF/
@@ -1228,15 +1232,18 @@
         <xsl:param name="firstOccurrence" select="1"/>
         <xsl:param name="maxOccurrences" select="200"/>
         <xsl:param name="total" select="count(child::*)"/>
-        <xsl:param name="baseURI" select="$baseURI"/>
+        <xsl:param name="breakupDocBaseURI" select="$baseURI"/>
         <xsl:param name="filename" select="document-uri()"/>
         <xsl:param name="filenameSuffix" select="'_ForCAVAFY'"/>
         <xsl:param name="currentDate" select="$currentDate"/>
+        <xsl:param name="currentTime"/>
         <xsl:param name="assetName" select="name(child::*[1])"/>
 
         <xsl:message
             select="
-                'Break up document into ',
+                'Break up document', $breakupDocBaseURI, 
+                'with', $total, $assetName, 'elements',
+                ' into ',
                 $maxOccurrences, '-size pieces'"/>
 
         <xsl:variable name="lastPosition"
@@ -1247,11 +1254,10 @@
         <xsl:variable name="filenameCavafy"
             select="
                 concat(
-                substring-before(
-                $baseURI, '.'),
                 $filename,
                 $filenameSuffix,
                 $currentDate,
+                $currentTime,
                 '_', $assetName,
                 $firstOccurrence, '-',
                 ($firstOccurrence + $lastPosition - 1),
@@ -1278,7 +1284,7 @@
                         $maxOccurrences"/>
                 <xsl:with-param name="assetName" select="
                         $assetName"/>
-                <xsl:with-param name="baseURI" select="$baseURI"/>
+                <xsl:with-param name="breakupDocBaseURI" select="$breakupDocBaseURI"/>
                 <xsl:with-param name="filename" select="$filename"/>
                 <xsl:with-param name="filenameSuffix" select="$filenameSuffix"/>
             </xsl:call-template>

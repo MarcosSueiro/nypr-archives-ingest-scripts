@@ -24,7 +24,7 @@
 
     <xsl:output method="xml" indent="yes"/>
     
-    <xsl:import href="chooseContributor.xsl"/>
+    <xsl:import href="processLoCURL.xsl"/>
     
     <xsl:param name="utilityLists" select="
         doc('utilityLists.xml')"/>
@@ -577,78 +577,26 @@
     
     <xsl:template name="extractName">
         <xsl:param name="text"/>
-        <xsl:param name="message">
+        <xsl:param name="extractNameMessage">
             <xsl:message select="'Extract person names out of ', $text"/>
         </xsl:param>
-        <xsl:param name="eachNameRegex" select="$eachNameRegex"/>
-        <xsl:param name="guestRegex">
-            <xsl:value-of select="'('"/>
-            <xsl:value-of select="$eachNameRegex"/>
-            <xsl:value-of select="'\s?){2,5}'"/>
+        <xsl:param name="textBeforeComma" select="tokenize($text, ',')[1]"/>
+        <xsl:param name="subjectRegex"/>
+        <xsl:param name="guestName">
+            <xsl:choose>
+                <xsl:when test="matches($textBeforeComma, $allCapsGuestRegex)">
+                    <xsl:value-of
+                        select="analyze-string($textBeforeComma, $allCapsGuestRegex)/fn:match"
+                        separator=""/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="
+                            analyze-string($text, $subjectRegex, 'i')/fn:non-match"
+                    />
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:param>
-        <xsl:param name="textNoAcronyms">
-            <xsl:value-of select="
-                analyze-string($text, $alwaysUCRegex)/fn:non-match"/>
-        </xsl:param> 
-        <xsl:param name="guestIsInCAPS" select="
-            matches($textNoAcronyms, $allCapsGuestRegex)"/>
-        <xsl:param name="subjectRegex">
-            <xsl:value-of select="
-                $enclosedTitleRegex,
-                $fullProfessionRegex,
-                $roleRegex,
-                $workTypeRegex,
-                $nationalityRegex
-                " separator="|"/>
-        </xsl:param>
-        <xsl:param name="nonSubjectText">
-            <xsl:value-of select="
-                analyze-string($textNoAcronyms, $subjectRegex, 'i')/fn:non-match"
-            />
-        </xsl:param>
-        <xsl:param name="personsInCAPS" select="
-            (analyze-string(
-            $textNoAcronyms, 
-            $allCapsGuestRegex)/fn:match)
-            [$guestIsInCAPS]"/>
-        <xsl:param name="personsLC" select="
-            (analyze-string(
-            $nonSubjectText, 
-            $guestRegex)/fn:match)
-            [not($guestIsInCAPS)]"/>       
-        <xsl:param name="persons">
-            <persons>
-                <xsl:for-each select="$personsInCAPS, $personsLC">
-                    <person>
-                        <name>
-                            <xsl:value-of select="normalize-space()"/>
-                        </name>
-                        <xsl:call-template name="getContext">
-                            <xsl:with-param name="text" select=".[1]"/>
-                            <xsl:with-param name="domain" select="$text"/>
-                            <xsl:with-param name="match" select=".[1]"/>
-                        </xsl:call-template>
-                    </person>
-                </xsl:for-each>
-            </persons>
-        </xsl:param>
-        <xsl:param name="distinctPersons">
-            <xsl:for-each-group select="$persons/persons/person" group-by="name">
-                <xsl:copy>
-                    <xsl:attribute name="occurrences" select="count(current-group()/name)"/>
-                    <xsl:copy-of select="*"/>
-                </xsl:copy>
-            </xsl:for-each-group>
-        </xsl:param>
-        <xsl:param name="resultsMessage">
-            <xsl:message select="'Found ', count($distinctPersons/person), 'distinct potential persons.'"/>
-        </xsl:param>
-        <xsl:copy>
-            <xsl:for-each select="$distinctPersons/person">
-                <xsl:sort select="number(@occurrences)" order="descending"/>
-                <xsl:copy-of select="."/>
-            </xsl:for-each>
-        </xsl:copy>
+        <xsl:copy-of select="$guestName"/>        
     </xsl:template>
     
     
@@ -658,7 +606,7 @@
             <xsl:value-of select="."/>
         </xsl:param>
         <xsl:param name="message">
-            <xsl:message select="'Analyze name ', $guestName"/>
+            <xsl:message select="'Analyze name', $guestName"/>
         </xsl:param>
         <!-- Take an inserted work out (e.g. Steven ("Jaws") Spielberg) -->
         <xsl:param name="guestNameNoWork">
@@ -821,7 +769,5 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
-    
 
 </xsl:stylesheet>

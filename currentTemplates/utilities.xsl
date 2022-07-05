@@ -790,9 +790,9 @@
             select="
             normalize-space(
             translate(
-            substring-before(
+            tokenize(
             $inputDateTime,
-            ' '),
+            ' ')[1],
             ':',
             '-'
             ))"
@@ -805,5 +805,67 @@
             <xsl:with-param name="inputDateTime" select="$inputDateTime"/>
         </xsl:call-template>
     </xsl:function>
+    
+    <xsl:template match="rdf:Description" mode="parseFilePath" name="parseFilePath" xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+        xmlns:System='http://ns.exiftool.ca/File/System/1.0/'
+        xmlns:File='http://ns.exiftool.ca/File/1.0/'>
+        <!-- Break down a file path into its components -->
+        <!-- Test: https://xsltfiddle.liberty-development.net/eiorv2c/7 -->
+        <xsl:param name="inputFilePath">
+            <xsl:value-of select="@rdf:about"/>
+        </xsl:param>
+        <xsl:param name="message">
+            <xsl:message select="'Parse filepath ', $inputFilePath"/>
+        </xsl:param> 
+        <xsl:param name="protocol" select="tokenize($inputFilePath, '\\{2,}|/{2,}')[1][matches(., 'file|http')]"/>
+        <xsl:param name="fileNoProtocol" select="tokenize($inputFilePath, '\\{2,}|/{2,}')[last()]"/>
+        <xsl:param name="inputFilePathSplit" select="tokenize($fileNoProtocol, '\\|/')"/>
+        <xsl:param name="fileName" select="$inputFilePathSplit[last()]"/>
+        <xsl:param name="fileNameSplit" select="tokenize($fileName, '\.')"/>
+        <xsl:param name="fileNameNoExtension">
+            <xsl:value-of select="$fileNameSplit[not(position() = last())]" separator="."/>
+        </xsl:param> 
+        <xsl:copy copy-namespaces="yes">
+            <xsl:attribute name="rdf:about" select="$inputFilePath"/>
+            <System:Protocol>
+                <xsl:value-of select="$protocol"/>
+            </System:Protocol>
+            <System:Directory>
+                <xsl:value-of select="
+                    $inputFilePathSplit[not(position() = last())]" separator="/"/>                
+            </System:Directory>
+            <System:FileName>
+                <xsl:value-of select="$fileName"/>
+            </System:FileName>
+            <System:FileNameNoExtension>
+                <xsl:value-of select="$fileNameNoExtension"/>
+            </System:FileNameNoExtension>
+            <File:FileTypeExtension>
+                <xsl:value-of select="$fileNameSplit[last()]"/>
+            </File:FileTypeExtension>
+            <System:Drive>
+                <xsl:value-of select="$inputFilePathSplit[1][contains(., ':')]"/>
+            </System:Drive>
+            <System:Folders>
+                <xsl:for-each select="$inputFilePathSplit[position() gt 1][not(position() = last())]">
+                    <System:Folder>
+                        <xsl:attribute name="level" select="position()"/>
+                        <xsl:value-of select="."/>
+                    </System:Folder>
+                </xsl:for-each>
+            </System:Folders>
+        </xsl:copy>
+    </xsl:template>
+    <xsl:template name="timecodeToSeconds">
+        <xsl:param name="timecode" select="'00:00:00'"/>
+    <xsl:param name="timecodeParsed" select="
+        tokenize($timecode, ':')"/>
+        <xsl:param name="hours" select="
+            xs:integer($timecodeParsed[1])" as="xs:integer"/>
+        <xsl:param name="minutes" select="xs:integer($timecodeParsed[2])" as="xs:integer"/>
+        <xsl:param name="seconds" select="xs:integer($timecodeParsed[3])" as="xs:integer"/>
+        <xsl:param name="totalSeconds" select="($hours * 3600) + ($minutes * 60) + $seconds"/>
+        <xsl:value-of select="$totalSeconds"/>
+    </xsl:template>
 
 </xsl:stylesheet>

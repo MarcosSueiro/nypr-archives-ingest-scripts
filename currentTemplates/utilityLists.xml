@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <utilityLists>
+    <!-- Some important lists for the NYPR Archives -->
     <alwaysUC>
+        <!-- Strings that usually are left UPPERCASE -->
         <acronym>A/H</acronym>
         <acronym>ABC</acronym>
         <acronym>ACLU</acronym>
@@ -127,6 +129,7 @@
         <acronym>[A-Z]\.</acronym>
     </alwaysUC>
     <alwaysLC>
+        <!-- Strings that are best left lowercase -->
         <preposition>a</preposition>
         <preposition>an</preposition>
         <preposition>and</preposition>
@@ -149,213 +152,919 @@
         <preposition>with</preposition>
         <preposition>yet</preposition>
     </alwaysLC>
+    <archivesAuthors>
+        <!-- People related to the NYPR Archives -->
+        <archivesAuthor>Adrian Cosentini</archivesAuthor>
+        <archivesAuthor>ALANSET</archivesAuthor>
+        <archivesAuthor>AMARIE</archivesAuthor>
+        <archivesAuthor>ARCHIVES</archivesAuthor>
+        <archivesAuthor>BHOUTMAN</archivesAuthor>
+        <archivesAuthor>CARA</archivesAuthor>
+        <archivesAuthor>Commercial Recording</archivesAuthor>
+        <archivesAuthor>DANIELS</archivesAuthor>
+        <archivesAuthor>EMILYV</archivesAuthor>
+        <archivesAuthor>ERIKP</archivesAuthor>
+        <archivesAuthor>George Blood.*</archivesAuthor>
+        <archivesAuthor>GLBT Historical Society</archivesAuthor>
+        <archivesAuthor>HALEY</archivesAuthor>
+        <archivesAuthor>iZotope RX 7 Audio Editor</archivesAuthor>
+        <archivesAuthor>JPASSMOR</archivesAuthor>
+        <archivesAuthor>Jean-Hugues Chenot, ina.fr</archivesAuthor>
+        <archivesAuthor>KCARTER</archivesAuthor>
+        <archivesAuthor>MediaPreserve.*</archivesAuthor>
+        <archivesAuthor>MARCOS</archivesAuthor>
+        <archivesAuthor>Memnon</archivesAuthor>
+        <archivesAuthor>MKIDD</archivesAuthor>
+        <archivesAuthor>MLEVY</archivesAuthor>
+        <archivesAuthor>NYAM</archivesAuthor>
+        <archivesAuthor>NYPL</archivesAuthor>
+        <archivesAuthor>Paley Center</archivesAuthor>
+        <archivesAuthor>Seth B. Winner</archivesAuthor>
+        <archivesAuthor>Stephen Kairys</archivesAuthor>
+        <archivesAuthor>TONY</archivesAuthor>
+        <archivesAuthor>UCLA technician</archivesAuthor>
+        <archivesAuthor>University of Maryland</archivesAuthor>
+        <archivesAuthor>University of Wyoming</archivesAuthor>
+        <archivesAuthor>UNKNOWN TRANSFER TECH</archivesAuthor>
+        <archivesAuthor>VSMITH</archivesAuthor>
+        <archivesAuthor>WNYC Radio</archivesAuthor>
+        <archivesAuthor>Yale University transfer technician</archivesAuthor>
+    </archivesAuthors>
+    <playbackParameters>
+        <!-- Parameters related to disc playback -->
+        <playbackParameter CodingHistoryCode="[St]">Stylus_size</playbackParameter>
+        <playbackParameter CodingHistoryCode="[RF]">Rumble_filter</playbackParameter>
+        <playbackParameter CodingHistoryCode="[TO]">LF_turnover</playbackParameter>
+        <playbackParameter CodingHistoryCode="[RO]">10kHz_att</playbackParameter>
+        <playbackParameter CodingHistoryCode="[Ca]">Calibration</playbackParameter>
+        <playbackParameter CodingHistoryCode="[EQ]">Playback_EQ</playbackParameter>
+        <playbackParameter CodingHistoryCode="[NR]">Noise_reduction</playbackParameter>
+        <playbackParameter CodingHistoryCode="[Sp]">Playback_speed</playbackParameter>
+    </playbackParameters>
+    <nationalities>
+        <nationality>Afghan</nationality>
+        <nationality>Albanian</nationality>
+        <nationality>Algerian</nationality>
+        <nationality>American</nationality>
+        <nationality>Argentine</nationality>
+        <nationality>Argentinian</nationality>
+        <nationality>Australian</nationality>
+        <nationality>Austrian</nationality>
+        <nationality>Bangladeshi</nationality>
+        <nationality>Belgian</nationality>
+        <nationality>Bolivian</nationality>
+        <nationality>Batswana</nationality>
+        <nationality>Brazilian</nationality>
+        <nationality>British</nationality>
+        <nationality>Bulgarian</nationality>
+        <nationality>Cambodian</nationality>
+        <nationality>Cameroonian</nationality>
+        <nationality>Canadian</nationality>
+        <nationality>Chilean</nationality>
+        <nationality>Chinese</nationality>
+        <nationality>Colombian</nationality>
+        <nationality>Costa Rican</nationality>
+        <nationality>Croatian</nationality>
+        <nationality>Cuban</nationality>
+        <nationality>Czech</nationality>
+        <nationality>Danish</nationality>
+        <nationality>Dominican</nationality>
+        <nationality>Ecuadorian</nationality>
+        <nationality>Egyptian</nationality>
+        <nationality>Emirati</nationality>
+        <nationality>English</nationality>
+        <nationality>Estonian</nationality>
+        <nationality>Ethiopian</nationality>
+        <nationality>Fijian</nationality>
+        <nationality>Finnish</nationality>
+        <nationality>French</nationality>
+        <nationality>German</nationality>
+        <nationality>Ghanaian</nationality>
+        <nationality>Greek</nationality>
+        <nationality>Guatemalan</nationality>
+        <nationality>Haitian</nationality>
+        <nationality>Honduran</nationality>
+        <nationality>Hungarian</nationality>
+        <nationality>Icelandic</nationality>
+        <nationality>Indian</nationality>
+        <nationality>Indonesian</nationality>
+        <nationality>Iranian</nationality>
+        <nationality>Iraqi</nationality>
+        <nationality>Irish</nationality>
+        <nationality>Israeli</nationality>
+        <nationality>Italian</nationality>
+        <nationality>Jamaican</nationality>
+        <nationality>Japanese</nationality>
+        <nationality>Jordanian</nationality>
+        <nationality>Kenyan</nationality>
+        <nationality>Kuwaiti</nationality>
+        <nationality>Lao</nationality>
+        <nationality>Latvian</nationality>
+        <nationality>Lebanese</nationality>
+        <nationality>Libyan</nationality>
+        <nationality>Lithuanian</nationality>
+        <nationality>Malagasy</nationality>
+        <nationality>Malaysian</nationality>
+        <nationality>Malian</nationality>
+        <nationality>Maltese</nationality>
+        <nationality>Mexican</nationality>
+        <nationality>Mongolian</nationality>
+        <nationality>Moroccan</nationality>
+        <nationality>Mozambican</nationality>
+        <nationality>Namibian</nationality>
+        <nationality>Nepalese</nationality>
+        <nationality>Dutch</nationality>
+        <nationality>New Zealand</nationality>
+        <nationality>Nicaraguan</nationality>
+        <nationality>Nigerian</nationality>
+        <nationality>Norwegian</nationality>
+        <nationality>Pakistani</nationality>
+        <nationality>Panamanian</nationality>
+        <nationality>Paraguayan</nationality>
+        <nationality>Peruvian</nationality>
+        <nationality>Philippine</nationality>
+        <nationality>Polish</nationality>
+        <nationality>Portuguese</nationality>
+        <nationality>Romanian</nationality>
+        <nationality>Russian</nationality>
+        <nationality>Salvadorian</nationality>
+        <nationality>Saudi</nationality>
+        <nationality>Scottish</nationality>
+        <nationality>Senegalese</nationality>
+        <nationality>Serbian</nationality>
+        <nationality>Singaporean</nationality>
+        <nationality>Slovak</nationality>
+        <nationality>South African</nationality>
+        <nationality>Korean</nationality>
+        <nationality>Spanish</nationality>
+        <nationality>Sri Lankan</nationality>
+        <nationality>Sudanese</nationality>
+        <nationality>Swedish</nationality>
+        <nationality>Swiss</nationality>
+        <nationality>Syrian</nationality>
+        <nationality>Taiwanese</nationality>
+        <nationality>Tajikistani</nationality>
+        <nationality>Thai</nationality>
+        <nationality>Tongan</nationality>
+        <nationality>Tunisian</nationality>
+        <nationality>Turkish</nationality>
+        <nationality>Ukrainian</nationality>
+        <nationality>Uruguayan</nationality>
+        <nationality>Venezuelan</nationality>
+        <nationality>Vietnamese</nationality>
+        <nationality>Welsh</nationality>
+        <nationality>Zambian</nationality>
+        <nationality>Zimbabwean</nationality>
+    </nationalities>
+    <NYPRProperties>
+        <!-- NYPR-owned 'properties' -->
+        <NYPRProperty>Gothamist</NYPRProperty>
+        <NYPRProperty>GreeneSpace</NYPRProperty>
+        <NYPRProperty>New York Public Radio</NYPRProperty>
+        <NYPRProperty>NJPR</NYPRProperty>
+        <NYPRProperty>NYPR</NYPRProperty>
+        <NYPRProperty>WNYC</NYPRProperty>
+        <NYPRProperty>WNYC Studios</NYPRProperty>
+        <NYPRProperty>WQXR</NYPRProperty>
+    </NYPRProperties>
+    <prepositions>
+        <preposition>aboard</preposition>
+        <preposition>about</preposition>
+        <preposition>above</preposition>
+        <preposition>across</preposition>
+        <preposition>after</preposition>
+        <preposition>against</preposition>
+        <preposition>along</preposition>
+        <preposition>amid</preposition>
+        <preposition>among</preposition>
+        <preposition>anti</preposition>
+        <preposition>around</preposition>
+        <preposition>as</preposition>
+        <preposition>at</preposition>
+        <preposition>before</preposition>
+        <preposition>behind</preposition>
+        <preposition>below</preposition>
+        <preposition>beneath</preposition>
+        <preposition>beside</preposition>
+        <preposition>besides</preposition>
+        <preposition>between</preposition>
+        <preposition>beyond</preposition>
+        <preposition>but</preposition>
+        <preposition>by</preposition>
+        <preposition>concerning</preposition>
+        <preposition>considering</preposition>
+        <preposition>despite</preposition>
+        <preposition>down</preposition>
+        <preposition>during</preposition>
+        <preposition>except</preposition>
+        <preposition>excepting</preposition>
+        <preposition>excluding</preposition>
+        <preposition>following</preposition>
+        <preposition>for</preposition>
+        <preposition>from</preposition>
+        <preposition>in</preposition>
+        <preposition>inside</preposition>
+        <preposition>into</preposition>
+        <preposition>like</preposition>
+        <preposition>minus</preposition>
+        <preposition>near</preposition>
+        <preposition>of</preposition>
+        <preposition>off</preposition>
+        <preposition>on</preposition>
+        <preposition>onto</preposition>
+        <preposition>opposite</preposition>
+        <preposition>outside</preposition>
+        <preposition>over</preposition>
+        <preposition>past</preposition>
+        <preposition>per</preposition>
+        <preposition>plus</preposition>
+        <preposition>regarding</preposition>
+        <preposition>round</preposition>
+        <preposition>save</preposition>
+        <preposition>since</preposition>
+        <preposition>than</preposition>
+        <preposition>through</preposition>
+        <preposition>to</preposition>
+        <preposition>toward</preposition>
+        <preposition>towards</preposition>
+        <preposition>under</preposition>
+        <preposition>underneath</preposition>
+        <preposition>unlike</preposition>
+        <preposition>until</preposition>
+        <preposition>up</preposition>
+        <preposition>upon</preposition>
+        <preposition>versus</preposition>
+        <preposition>via</preposition>
+        <preposition>with</preposition>
+        <preposition>within</preposition>
+        <preposition>without</preposition>
+    </prepositions>
+    <professions>
+        <!-- What people do all day -->
+        <profession>activists?</profession>
+        <profession>actors?</profession>
+        <profession>actress|actresses</profession>
+        <profession>Admirals?</profession>
+        <profession>advisers?</profession>
+        <profession>advisors?</profession>
+        <profession>analysts?</profession>
+        <profession>anthropologists?</profession>
+        <profession>architects?</profession>
+        <profession>artists?</profession>
+        <profession>artistic directors?</profession>
+        <profession>astrophysicists?</profession>
+        <profession>attorneys?</profession>
+        <profession>authors?</profession>
+        <profession>bandleader</profession>
+        <profession>baritones?</profession>
+        <profession>bass|basses</profession>
+        <profession>biographers?</profession>
+        <profession>bishops?</profession>
+        <profession>broadcasters?</profession>
+        <profession>cartoonists?</profession>
+        <profession>CEOs?</profession>
+        <profession>chancellors?</profession>
+        <profession>chefs?</profession>
+        <profession>choreographers?</profession>
+        <profession>clowns?</profession>
+        <profession>columnists?</profession>
+        <profession>comedians?</profession>
+        <profession>composers?</profession>
+        <profession>conductors?</profession>
+        <profession>correspondents?</profession>
+        <profession>creators?</profession>
+        <profession>critics?</profession>
+        <profession>curators?</profession>
+        <profession>dancers?</profession>
+        <profession>designers?</profession>
+        <profession>directors?</profession>
+        <profession>divas?</profession>
+        <profession>doctors?</profession>
+        <profession>Dr\.</profession>
+        <profession>dramaturgs?</profession>
+        <profession>economists?</profession>
+        <profession>editors?</profession>
+        <profession>educators?</profession>
+        <profession>embryologists?</profession>
+        <profession>engineers?</profession>
+        <profession>entrepreneurs?</profession>
+        <profession>essayists?</profession>
+        <profession>etymologists?</profession>
+        <profession>explorers?</profession>
+        <profession>farmers?</profession>
+        <profession>fighters?</profession>
+        <profession>filmmakers?</profession>
+        <profession>financial advisers?</profession>
+        <profession>firefighters?</profession>
+        <profession>from the</profession>
+        <profession>founders? ?o?f? [A-Za-z]+</profession>
+        <profession>gourmands?</profession>
+        <profession>grammarians?</profession>
+        <profession>[A-Za-z]+ group</profession>
+        <profession>guests?</profession>
+        <profession>guitarists?</profession>
+        <profession>gurus? of how.?to</profession>
+        <profession>historians?</profession>
+        <profession>horticulturists?</profession>
+        <profession>hosts?</profession>
+        <profession>illustrators?</profession>
+        <profession>inventors?</profession>
+        <profession>journalists?</profession>
+        <profession>jugglers?</profession>
+        <profession>Kremlinologists?</profession>
+        <profession>Lady</profession>        
+        <profession>lawyers?</profession>
+        <profession>lyricists?</profession>
+        <profession>makers?</profession>
+        <profession>managers?</profession>
+        <profession>man of many words</profession>
+        <profession>mayors?</profession>
+        <profession>members?</profession>
+        <profession>moguls?</profession>
+        <profession>movie star</profession>
+        <profession>musician</profession>
+        <profession>novelists?</profession>
+        <profession>one.and.only</profession>
+        <profession>organizers?</profession>
+        <profession>owners?</profession>
+        <profession>paleoanthropologists?</profession>
+        <profession>performance artist/writer</profession>
+        <profession>photographers?</profession>
+        <profession>physicians?</profession>
+        <profession>physicists?</profession>
+        <profession>pianists?</profession>
+        <profession>[A-Za-z]+ players?</profession>
+        <profession>playwrights?</profession>
+        <profession>podiatrists?</profession>
+        <profession>poets?</profession>
+        <profession>pole vaulters?</profession>
+        <profession>presidents?</profession>
+        <profession>producers?</profession>
+        <profession>professors?</profession>
+        <profession>programmers?</profession>
+        <profession>proprietors?</profession>
+        <profession>psychiatrists?</profession>
+        <profession>publishers?</profession>
+        <profession>punsters?</profession>
+        <profession>rabbis?</profession>
+        <profession>reed man</profession>
+        <profession>reporters?</profession>
+        <profession>restaurateurs?</profession>
+        <profession>Rev\.</profession>
+        <profession>saxophonists?</profession>
+        <profession>scientists?</profession>
+        <profession>scriptwriters?</profession>
+        <profession>semioticians?</profession>
+        <profession>singing duet</profession>        
+        <profession>senators?</profession>
+        <profession>singers?</profession>        
+        <profession>Sir</profession>
+        <profession>sopranos?</profession>
+        <profession>speakers? of the house</profession>
+        <profession>sports figures?</profession>
+        <profession>staff writers?</profession>
+        <profession>stars?</profession>
+        <profession>stockbrokers?</profession>
+        <profession>studio executives?</profession>
+        <profession>surgeons?</profession>
+        <profession>tenors?</profession>
+        <profession>traders?</profession>
+        <profession>trombonists?</profession>        
+        <profession>veterans?</profession>
+        <profession>violinists?</profession>
+        <profession>vocalists?</profession>
+        <profession>who curated</profession>
+        <profession>who edited</profession>
+        <profession>who stars? in</profession>
+        <profession>who wrote</profession>
+        <profession>[A-Za-z]+ winners?</profession>
+        <profession>writers?</profession>
+    </professions>
     <roles>
-        <role> (con)?fess(es)?( up)?</role>
-        <role> (re)?examines?</role>
-        <role> analyzes?</role>
-        <role> and (his|her|their)</role>
-        <role> as told in</role>
-        <role> celebrates?</role>
-        <role> compares?</role>
-        <role> considers?</role>
-        <role> critiques?</role>
-        <role> deconstructs?</role>
-        <role> discuss(es)?</role>
-        <role> evaluates?</role>
-        <role> explains?</role>
-        <role> explores?</role>
-        <role> exposes</role>
-        <role> exposes?</role>
-        <role> extols?</role>
-        <role> gives?</role>
-        <role> grapples?</role>
-        <role> highlights?</role>
-        <role> interviews?</role>
-        <role> introduces?</role>
-        <role> listens?</role>
-        <role> looks? back on</role>
-        <role> offers?</role>
-        <role> on (his|her|their|the)?( making of)?</role>
-        <role> performs?</role>
-        <role> picks?</role>
-        <role> plays</role>
-        <role> predicts?</role>
-        <role> previews?</role>
-        <role> pulls?</role>
-        <role> reflects? (on)?</role>
-        <role> relates?</role>
-        <role> relays?</role>
-        <role> relives?</role>
-        <role> remembers?</role>
-        <role> reminisces? (about)?</role>
-        <role> reports? (on)?</role>
-        <role> reviews?</role>
-        <role> revisits?</role>
-        <role> search(es)? (for)?</role>
-        <role> shares?</role>
-        <role> showcases?</role>
-        <role> shows?</role>
-        <role> solves?</role>
-        <role> sorts? (out)?</role>
-        <role> speaks? (with|about)?</role>
-        <role> spills?</role>
-        <role> tackles?</role>
-        <role> takes? us</role>
-        <role> talks? about</role>
-        <role> tells?</role>
-        <role> tells? of</role>
-        <role> tells? why</role>
-        <role> untangles?</role>
-        <role> with( some of)? (his|her|their|the|a|an)?</role>
-        <role>( with)? a history of</role>.
-        <role> who (wrote|edited|curated|stars in)</role>
-        <role>, on the</role>
-        <role>: (his|her|their) (latest|long\-awaited|new)?</role>
+        <role> who choreographed</role>
+        <role> who co-directed</role>
+        <role> who collaborated</role>
+        <role> who compiled</role>
+        <role> who completed</role>
+        <role> who conducted</role>
+        <role> who contributed</role>
+        <role> who created</role>
+        <role> who curated</role>
+        <role> who designed</role>
+        <role> who detailed</role>
+        <role> who directed</role>
+        <role> who edited</role>
+        <role> who founded</role>
+        <role> who hosted</role>
+        <role> who illustrated</role>
+        <role> who introduced</role>
+        <role> who invented</role>
+        <role> who lived</role>
+        <role> who made</role>
+        <role> who managed</role>
+        <role> who narrated</role>
+        <role> who organized</role>
+        <role> who owns</role>
+        <role> who played</role>
+        <role> who produced</role>
+        <role> who published</role>
+        <role> who reported on</role>
+        <role> who reported about</role>
+        <role> who researched</role>
+        <role> who restored</role>
+        <role> who sang</role>
+        <role> who stars in</role>
+        <role> who stars</role>
+        <role> who translated</role>
+        <role> who wrote</role>
+        <role> from the</role>
     </roles>
     <typesOfWork>
-        <typeOfWork>(authorized)? biography( of)?</typeOfWork>
-        <typeOfWork>adventure</typeOfWork>
-        <typeOfWork>album</typeOfWork>
-        <typeOfWork>autobiography</typeOfWork>
-        <typeOfWork>best-seller</typeOfWork>
-        <typeOfWork>book</typeOfWork>
-        <typeOfWork>collection</typeOfWork>
-        <typeOfWork>essays</typeOfWork>
-        <typeOfWork>exhibit</typeOfWork>
-        <typeOfWork>film</typeOfWork>
-        <typeOfWork>history</typeOfWork>
-        <typeOfWork>latest</typeOfWork>
-        <typeOfWork>memoirs?</typeOfWork>
-        <typeOfWork>misadventure</typeOfWork>
-        <typeOfWork>movie</typeOfWork>
-        <typeOfWork>novel</typeOfWork>
-        <typeOfWork>play</typeOfWork>
-        <typeOfWork>project</typeOfWork>
-        <typeOfWork>series</typeOfWork>
-        <typeOfWork>stories</typeOfWork>
+        <!-- The results of people's work -->
+        <typeOfWork> adventure</typeOfWork>
+        <typeOfWork> album</typeOfWork>
+        <typeOfWork> as told in</typeOfWork>
+        <typeOfWork> autobiography</typeOfWork>
+        <typeOfWork> best\-seller</typeOfWork>
+        <typeOfWork> unauthorized biography of| unauthorized biography| authorized biography of| authorized biography| biography of| biography</typeOfWork>
+        <typeOfWork> book</typeOfWork>
+        <typeOfWork> collected in| collection of essays| collection of poems| collection of stories| collection</typeOfWork>
+        <typeOfWork> essays</typeOfWork>
+        <typeOfWork> exhibit</typeOfWork>
+        <typeOfWork> film</typeOfWork>
+        <typeOfWork> history</typeOfWork>
+        <typeOfWork> latest</typeOfWork>
+        <typeOfWork> memoirs?</typeOfWork>
+        <typeOfWork> misadventure</typeOfWork>
+        <typeOfWork> movie</typeOfWork>
+        <typeOfWork> novel</typeOfWork>
+        <typeOfWork> play</typeOfWork>
+        <typeOfWork> project</typeOfWork>
+        <typeOfWork> retrospective</typeOfWork>
+        <typeOfWork> saga</typeOfWork>
+        <typeOfWork> series</typeOfWork>
+        <typeOfWork> story| stories</typeOfWork>
     </typesOfWork>
-    <professions>        
-        <profession>(former)? editor\-in\-chief</profession>
-        <profession>(former)? editor</profession>
-        <profession>(astro)?physicist</profession>
-        <profession>(co\-)?author</profession>
-        <profession>(co\-)?creator</profession>
-        <profession>(co\-)?curators?(\-at\-large)?</profession>
-        <profession>(co\-)?director</profession>
-        <profession>(co\-)?editor</profession>
-        <profession>(co\-)?founder</profession>
-        <profession>(co\-)?guest</profession>
-        <profession>(co\-)?host</profession>
-        <profession>(co\-)?owner</profession>
-        <profession>(co\-)?producer</profession>
-        <profession>(co\-)?publisher</profession>
-        <profession>(co\-)?star</profession>
-        <profession>(co\-)?writers?(\-at\-large)?</profession>
-        <profession>(paleo)?anthropologist</profession>
-        <profession>Admiral</profession>
-        <profession>CEO</profession>
-        <profession>Dr\.</profession>
-        <profession>Kremlinologist</profession>
-        <profession>Lady</profession>
-        <profession>Rev.</profession>
-        <profession>Sir</profession>
-        <profession>activist</profession>
-        <profession>actor</profession>
-        <profession>actresse?</profession>
-        <profession>adviser</profession>
-        <profession>analyst</profession>
-        <profession>anthropologist</profession>
-        <profession>artist</profession>
-        <profession>artistic director</profession>
-        <profession>attorney</profession>
-        <profession>baritone</profession>
-        <profession>bass</profession>
-        <profession>biographer</profession>
-        <profession>bishop</profession>
-        <profession>cartoonist</profession>
-        <profession>chancellor</profession>
-        <profession>chef</profession>
-        <profession>choreographer</profession>
-        <profession>columnist</profession>
-        <profession>comedian</profession>
-        <profession>composer</profession>
-        <profession>conductor</profession>
-        <profession>correspondent</profession>
-        <profession>critic</profession>
-        <profession>dancer</profession>
-        <profession>designer</profession>8 <profession>diva</profession>
-        <profession>doctor</profession>
-        <profession>dramaturg</profession>
-        <profession>economist</profession>
-        <profession>embryologist</profession>
-        <profession>engineer</profession>
-        <profession>entrepreneur</profession>
-        <profession>essayist</profession>
-        <profession>etymologist</profession>
-        <profession>explorer</profession>
-        <profession>farmer</profession>
-        <profession>fighter</profession>
-        <profession>filmmaker</profession>
-        <profession>firefighter</profession>
-        <profession>gourmand</profession>
-        <profession>grammarian</profession>
-        <profession>guitarist</profession>
-        <profession>gurus? of how.?to</profession>
-        <profession>historian</profession>
-        <professiosn>horticulturist</professiosn>
-        <profession>horticulturist</profession>
-        <profession>inventor</profession>
-        <profession>journalist</profession>
-        <profession>lawyer</profession>
-        <profession>lyricist</profession>
-        <profession>maker</profession>
-        <profession>manager</profession>
-        <profession>mayor</profession>
-        <profession>member</profession>
-        <profession>mogul</profession>
-        <profession>musician</profession>
-        <profession>novelist</profession>
-        <profession>one.and.only</profession>
-        <profession>organizer</profession>
-        <profession>performance artist/writer</profession>
-        <profession>photographer</profession>
-        <profession>physician(\-in\-residence)?</profession>
-        <profession>pianist</profession>
-        <profession>player</profession>
-        <profession>playwright</profession>
-        <profession>podiatrist</profession>
-        <profession>poet</profession>
-        <profession>pole vaulter</profession>
-        <profession>president</profession>
-        <profession>professor</profession>
-        <profession>programmer</profession>
-        <profession>proprietor</profession>
-        <profession>psychiatrist</profession>
-        <profession>punster</profession>
-        <profession>rabbi</profession>
-        <profession>reporter</profession>
-        <profession>restaurateur</profession>
-        <profession>scientist</profession>
-        <profession>scriptwriter</profession>
-        <profession>semiotician</profession>
-        <profession>senator</profession>
-        <profession>singer</profession>
-        <profession>soprano</profession>
-        <profession>speakers? of the house</profession>
-        <profession>staff writer</profession>
-        <profession>stockbroker</profession>
-        <profession>studio executive</profession>
-        <profession>surgeon</profession>
-        <profession>tenor</profession>
-        <profession>trader</profession>
-        <profession>trombonist</profession>
-        <profession>violinist</profession>
-        <profession>vocalist</profession>
-        <profession>who curated</profession>
-        <preofession>who edited</preofession>
-        <profession>who made</profession>
-        <profession>who wrote</profession>
-        <profession>winner</profession>
-        <profession>writer</profession>
-    </professions>
+    <validFormats>
+        <!-- Valid NYPR Archives formats with details -->
+        <format>
+            <cavafyFormatID>86</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>1 inch audio tape</formatName>
+            <essenceTrackType>audio</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Analog</essenceTrackEncoding>
+            <signalCapture>Analog</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>84</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>1/2 inch audio tape</formatName>
+            <essenceTrackType>audio</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Analog</essenceTrackEncoding>
+            <signalCapture>Analog</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>83</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>1/4 inch audio tape</formatName>
+            <essenceTrackType>audio</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Analog</essenceTrackEncoding>
+            <signalCapture>Analog</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>14</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>3/4 inch videotape: U-matic</formatName>
+            <essenceTrackType>video</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Analog</essenceTrackEncoding>
+            <signalCapture>Analog</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>6</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>8mm: Hi8 Video</formatName>
+            <essenceTrackType>video</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Analog</essenceTrackEncoding>
+            <signalCapture>Analog</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>108</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>Art original</formatName>
+            <essenceTrackType>image</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding/>
+        </format>
+        <format>
+            <cavafyFormatID>109</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>Art print</formatName>
+            <essenceTrackType>image</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding/>
+        </format>
+        <format>
+            <cavafyFormatID>110</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>Art reproduction</formatName>
+            <essenceTrackType>image</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding/>
+        </format>
+        <format>
+            <cavafyFormatID>88</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>Audio cart</formatName>
+            <essenceTrackType>audio</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Analog</essenceTrackEncoding>
+            <signalCapture>Analog</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>425</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>Audio cassette</formatName>
+            <essenceTrackType>audio</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Analog</essenceTrackEncoding>
+            <signalCapture>Analog</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>55</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>BD-Videodisc</formatName>
+            <essenceTrackType>video</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Digital</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>438</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>Beta PCM F-1</formatName>
+            <essenceTrackType>audio</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Linear PCM</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>28</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>Betacam</formatName>
+            <essenceTrackType>video</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Analog</essenceTrackEncoding>
+            <signalCapture>Analog</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>30</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>Betacam Digital (Digi Beta)</formatName>
+            <essenceTrackType>video</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Digital</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>29</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>Betacam SP</formatName>
+            <essenceTrackType>video</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Analog</essenceTrackEncoding>
+            <signalCapture>Analog</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>128</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>Book</formatName>
+            <essenceTrackType>text</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding/>
+        </format>
+        <format>
+            <cavafyFormatID>427</cavafyFormatID>
+            <formatType>FormatDigital</formatType>
+            <formatName>wav</formatName>
+            <essenceTrackType>audio</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Linear PCM</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>89</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>CD-Audio</formatName>
+            <essenceTrackType>audio</essenceTrackType>
+            <essenceTrackStandard>CD-DA</essenceTrackStandard>
+            <essenceTrackEncoding>Linear PCM</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>52</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>CD-ROM</formatName>
+            <essenceTrackType/>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Digital</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>92</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>DAT</formatName>
+            <essenceTrackType>audio</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Linear PCM</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>103</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>DBX 700 VHS tape</formatName>
+            <essenceTrackType>audio</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Companded Predictive Delta Modulation</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>455</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>DTRS</formatName>
+            <essenceTrackType>audio</essenceTrackType>
+            <essenceTrackStandard>DTRS</essenceTrackStandard>
+            <essenceTrackEncoding>Linear PCM</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>33</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>DV Mini</formatName>
+            <essenceTrackType>video</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Digital</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>37</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>DVCam: Sony</formatName>
+            <essenceTrackType>video</essenceTrackType>
+            <essenceTrackStandard>SMPTE 292M</essenceTrackStandard>
+            <essenceTrackEncoding>1080i 4:2:2</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>90</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>DVD-Audio</formatName>
+            <essenceTrackType>audio</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Linear PCM</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>58</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>DVD-R</formatName>
+            <essenceTrackType/>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Digital</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>59</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>DVD+R</formatName>
+            <essenceTrackType/>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Digital</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>2</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>Film: 16mm</formatName>
+            <essenceTrackType>video</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Analog</essenceTrackEncoding>
+            <signalCapture>Analog</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>65</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>Hard Drive</formatName>
+            <essenceTrackType/>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Digital</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>47</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>HDCAM</formatName>
+            <essenceTrackType>video</essenceTrackType>
+            <essenceTrackStandard>SMPTE 292M</essenceTrackStandard>
+            <essenceTrackEncoding>1080i 4:2:2</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>278</cavafyFormatID>
+            <formatType>FormatDigital</formatType>
+            <formatName>image/jpeg</formatName>
+            <essenceTrackType>image</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Digital</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>454</cavafyFormatID>
+            <formatType>FormatDigital</formatType>
+            <formatName>image/pdf</formatName>
+            <essenceTrackType>image</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Digital</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>286</cavafyFormatID>
+            <formatType>FormatDigital</formatType>
+            <formatName>image/tiff</formatName>
+            <essenceTrackType>image</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Digital</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>100</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>Lacquer disc</formatName>
+            <essenceTrackType>audio</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Analog</essenceTrackEncoding>
+            <signalCapture>Analog</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>93</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>LP Record</formatName>
+            <essenceTrackType>audio</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Analog</essenceTrackEncoding>
+            <signalCapture>Analog</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>94</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>LP Record (45)</formatName>
+            <essenceTrackType>audio</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Analog</essenceTrackEncoding>
+            <signalCapture>Analog</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>107</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>Minidisc</formatName>
+            <essenceTrackType>audio</essenceTrackType>
+            <essenceTrackStandard>ATRAC</essenceTrackStandard>
+            <essenceTrackEncoding>ATRAC</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>133</cavafyFormatID>
+            <formatType>FormatDigital</formatType>
+            <formatName>not specified</formatName>
+            <essenceTrackType/>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Digital</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>131</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>Paper</formatName>
+            <essenceTrackType/>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding/>
+        </format>
+        <format>
+            <cavafyFormatID>116</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>Photograph</formatName>
+            <essenceTrackType>image</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding/>
+        </format>
+        <format>
+            <cavafyFormatID>101</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>Shellac disc</formatName>
+            <essenceTrackType>audio</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Analog</essenceTrackEncoding>
+            <signalCapture>Analog</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>48</cavafyFormatID>
+            <formatType>FormatPhysical</formatType>
+            <formatName>VHS</formatName>
+            <essenceTrackType>video</essenceTrackType>
+            <essenceTrackStandard/>
+            <essenceTrackEncoding>Analog</essenceTrackEncoding>
+            <signalCapture>Analog</signalCapture>
+        </format>
+        <format>
+            <cavafyFormatID>140</cavafyFormatID>
+            <formatType>FormatDigital</formatType>
+            <formatName>video/DV</formatName>
+            <essenceTrackType>video</essenceTrackType>
+            <essenceTrackStandard>DV</essenceTrackStandard>
+            <essenceTrackEncoding>Digital</essenceTrackEncoding>
+            <signalCapture>Digital</signalCapture>
+        </format>
+    </validFormats>
+    <verbs>
+        <!-- What people do sometimes -->
+        <verb>a history of | with a history of</verb>
+        <verb>, about</verb>
+        <verb>analyzes?</verb>
+        <verb>answers questions</verb>
+        <verb>and his |and her |and their</verb>
+        <verb>assess |assesses |reassess |reassesses</verb>
+        <verb>helps? celebrate |celebrates?</verb>
+        <verb>chooses?</verb>
+        <verb>compares?</verb>
+        <verb>confess |confesses |fesses up</verb>
+        <verb>considers?</verb>
+        <verb>critiques?</verb>
+        <verb>deconstructs?</verb>
+        <verb>discuss |discusses</verb>
+        <verb>divulges?</verb>
+        <verb>dots the "i"s and clarifies the "e"s</verb>
+        <verb>evaluates?</verb>
+        <verb>examines? |reexamines? |re\-examines?</verb>
+        <verb>explains?</verb>
+        <verb>explores?</verb>        
+        <verb>exposes?</verb>
+        <verb>extols?</verb>
+        <verb>fields questions about</verb>
+        <verb>gets up-close and personal about</verb>
+        <verb>gives?</verb>
+        <verb>grapples? |grapples? with</verb>
+        <verb>highlights?</verb>
+        <verb>interviews?</verb>
+        <verb>introduces?</verb>
+        <verb>listens?</verb>
+        <verb>looks? back on</verb>
+        <verb>looks? at</verb>
+        <verb>makes? sense of</verb>
+        <verb>offers?</verb>
+        <verb>on his |on her |on how |on their |on the | on</verb>
+        <verb>performs?</verb>
+        <verb>picks?</verb>
+        <verb>plays</verb>
+        <verb>predicts?</verb>
+        <verb>previews?</verb>
+        <verb>pulls?</verb>
+        <verb>re:</verb>
+        <verb>reflects |reflects on</verb>
+        <verb>relates?</verb>
+        <verb>relays?</verb>
+        <verb>relives?</verb>
+        <verb>remembers?</verb>
+        <verb>reminisces? |reminisces? about</verb>
+        <verb>reports? |reports? on</verb>
+        <verb>reveals?</verb>
+        <verb>reviews?</verb>
+        <verb>revisits?</verb>
+        <verb>ruminates about</verb>
+        <verb>search |searches |search for |searches for</verb>
+        <verb>shares?</verb>
+        <verb>showcases?</verb>
+        <verb>shows?</verb>
+        <verb>solves?</verb>
+        <verb>sorts? |sorts? out</verb>
+        <verb>speaks? |speaks? with |speaks? about</verb>
+        <verb>spills?</verb>
+        <verb>sums up</verb>
+        <verb>surveys?</verb>
+        <verb>tackles?</verb>
+        <verb>takes? us</verb>
+        <verb>talks? about</verb>
+        <verb>talks to us</verb>
+        <verb>tells? |tells? of |tells? why</verb>
+        <verb>untangles?</verb>
+        <verb>will answer</verb>
+        <verb>with his |with her |with their |with the |with a |with an |with some of his |with some of her |with some of their |with some of the</verb>                
+        <verb>, on his |, on her |, on their |, on the |on the</verb>
+        <verb>about the</verb>
+        <verb>: his |: her |: their |: the |:</verb>
+    </verbs>
 </utilityLists>

@@ -237,7 +237,7 @@ and output an html error doc -->
                             concat('file:///', 
                             inputs/originalExif
                             /rdf:Description
-                            /System:Directory, 
+                            /System:Directory[1], 
                             '/', 
                             $justFilename[. != ''])"/>
                             
@@ -383,7 +383,7 @@ and output an html error doc -->
                             concat('file:///', 
                             inputs/originalExif
                             /rdf:Description
-                            /System:Directory, 
+                            /System:Directory[1], 
                             '/', 
                             $justFilename[. != ''])"/>
                         
@@ -464,7 +464,7 @@ and output an html error doc -->
                             concat('file:///',
                             inputs/originalExif
                             /rdf:Description
-                            /System:Directory,
+                            /System:Directory[1],
                             '/',
                             $justFilename[. != ''])"/>
 

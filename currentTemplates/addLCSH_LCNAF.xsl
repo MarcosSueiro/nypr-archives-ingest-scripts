@@ -38,9 +38,6 @@
                 <xsl:apply-templates select="rdf:Description" mode="addLCSH_LCNAF"/>
             </xsl:element>
         </xsl:variable>
-        
-        
-        
         <xsl:apply-templates select="
             $pbcoreCollection/pb:pbcoreCollection" mode="breakItUp">
             <xsl:with-param name="maxOccurrences" select="200"/>

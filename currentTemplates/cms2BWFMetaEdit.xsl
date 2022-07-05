@@ -5,7 +5,7 @@ and output its data in BWF MetaEdit Core format -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:XMP="http://ns.exiftool.ca/XMP/XMP-x/1.0/"
+    xmlns:XMP="http://ns.exiftool.ca/XMP/XMP-x/1.0/"    
     xmlns:XMP-xmp="http://ns.exiftool.ca/XMP/XMP-xmp/1.0/"
     xmlns:XMP-xmpDM="http://ns.exiftool.ca/XMP/XMP-xmpDM/1.0/"
     xmlns:XMP-xmpMM="http://ns.exiftool.ca/XMP/XMP-xmpMM/1.0/"
@@ -19,6 +19,8 @@ and output its data in BWF MetaEdit Core format -->
     <xsl:mode on-no-match="text-only-copy"/>
     <xsl:mode name="noMatch" on-no-match="deep-skip"/>
 
+    <xsl:import href="utilities.xsl"/>
+    <xsl:import href="processLoCURL.xsl"/>
     <xsl:param name="ISODatePattern"
         select="
             '^([0-9]{4})-?(1[0-2]|0[1-9])-?(3[01]|0[1-9]|[12][0-9])$'"/>
@@ -30,13 +32,11 @@ and output its data in BWF MetaEdit Core format -->
     <xsl:variable name="legalCharacters">
         <xsl:text>"" '——…—'</xsl:text>
     </xsl:variable>
-    
-    <xsl:template match="MOTIVE" mode="getCMSData">
-        <xsl:call-template name="getCMSData">
-            <xsl:with-param name="theme" select="."/>
-        </xsl:call-template>
-    </xsl:template>
-
+    <xsl:variable name="NYPRProperties"
+        select="doc('utilityLists.xml')/utilityLists/NYPRProperties"/>
+    <xsl:variable name="NYPRPropertiesRegex">
+        <xsl:value-of select="$NYPRProperties/NYPRProperty" separator="|"/>
+    </xsl:variable>
     <xsl:template name="getCMSData" match="pb:pbcoreDescriptionDocument" mode="getCMSData">
         <!-- Search the station's CMS -->
         <!-- Output: cms data from the API as xml -->
@@ -126,8 +126,7 @@ and output its data in BWF MetaEdit Core format -->
             </searchResultJson>
         </xsl:param>
 
-        <xsl:param name="searchResultXml" select="
-            json-to-xml($searchResultJson)/*"/>
+        <xsl:param name="searchResultXml" select="json-to-xml($searchResultJson)/*"/>
         
         <xsl:param name="cmsRecordsFoundCount" select="
                 if ($slugSearch 
@@ -206,139 +205,105 @@ and output its data in BWF MetaEdit Core format -->
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template name="exifFiller">
+    <xsl:template match="cmsData" name="exifFiller">
         <!-- Map cms data as xml
         to a bwf metaEdit kind of output -->
-        <xsl:param name="orgFlags"
-            select="'WNYC|WQXR|NJPR|Gothamist|Greene|NYPR|New York Public Radio'"/>
+        <xsl:param name="cmsData" select="."/>
+        
         <xsl:param name="creatorsFlags" select="'host|producer|author'"/>
         <xsl:param name="segmentFlags" select="'segment'"/>
-        <xsl:param name="cmsData"/>
+
         <xsl:param name="dbxURL" select="$cmsData//dbxURL"/>
         <xsl:param name="dbxData" select="document($dbxURL)"/>
         <xsl:param name="cmsDataMessage">
             <xsl:message select="'xmlData:', $cmsData"/>
         </xsl:param>
-        <xsl:param name="nprAnalytics"
-            select="
+        
+        <xsl:param name="episodeProducingOrganizations" select="
                 $cmsData/cmsData/data/attributes/
-                npr-analytics-dimensions"/>
-        <xsl:param name="episodeProducingOrganizations"
-            select="
+                producing-organizations/name"/>        
+        <xsl:param name="showProducingOrganizations" select="
                 $cmsData/cmsData/data/attributes/
-                producing-organizations[matches(., '\w')]"/>
-        <xsl:param name="nprAnalyticsProducingOrganizations"
-            select="
-                $nprAnalytics/
-                nprAnalyticsDimension
-                [matches(., $orgFlags, 'i')]"/>
-        <xsl:param name="showProducingOrganizations"
-            select="
-                $cmsData/cmsData/data/attributes/
-                show-producing-orgs[matches(., '\w')]"/>
-        <xsl:param name="urlProducingOrganizations"
-            select="
-                tokenize(
-                $cmsData/cmsData/data/attributes/
-                headers/brand/url,
-                '\.|/'
-                )[matches(., $orgFlags, 'i')]"/>
-        <xsl:param name="producingOrganizations"
-            select="
-                distinct-values(
-                ($episodeProducingOrganizations,
-                $nprAnalyticsProducingOrganizations))"/>
-
-        <xsl:param name="producingOrganizationsParsed"
-            select="
-                distinct-values((
-                $producingOrganizations,
-                $showProducingOrganizations/name
-                [empty($producingOrganizations)],
-                $urlProducingOrganizations
-                [empty($producingOrganizations)]
-                [empty($showProducingOrganizations)]))"/>
-        <xsl:param name="producingOrganizationsAsText">
-            <xsl:value-of select="
-                    $producingOrganizationsParsed"
-                separator=" ; "/>
+                show-producing-orgs/name"/>
+        <xsl:param name="defaultProducingOrganizations">
+            <xsl:call-template name="mergeData">
+                <xsl:with-param name="fieldName" select="'cmsProducingOrganizations'"/>
+                <xsl:with-param name="field1">
+                    <xsl:value-of select="$showProducingOrganizations" separator="{$separatingToken}"/>
+                </xsl:with-param>
+                <xsl:with-param name="validatingString" select="$NYPRPropertiesRegex"/>
+            </xsl:call-template>
         </xsl:param>
-        <xsl:param name="producingOrgW4Letters"
-            select="
-                $producingOrganizationsParsed
+        <xsl:param name="producingOrganizations">
+            <xsl:call-template name="mergeData">
+                <xsl:with-param name="fieldName" select="'cmsProducingOrganizations'"/>
+                <xsl:with-param name="field1">
+                    <xsl:value-of select="$episodeProducingOrganizations" separator="{$separatingToken}"/>
+                </xsl:with-param>
+                <xsl:with-param name="field2">
+                    <xsl:value-of select="$defaultProducingOrganizations" separator="{$separatingToken}"/>
+                </xsl:with-param>
+                <xsl:with-param name="validatingString" select="$NYPRPropertiesRegex"/>
+            </xsl:call-template>
+        </xsl:param>
+        
+        <xsl:param name="producingOrgW4Letters" select="
+                tokenize($producingOrganizations, $separatingToken)
                 [string-length(.) = 4][1]"/>
 
 
         <xsl:param name="ArchivalLocationCode">
             <xsl:value-of select="$producingOrgW4Letters"/>
-            <xsl:value-of
-                select="
+            <xsl:value-of select="
                     substring(
-                    $producingOrganizationsParsed[1], 1, 4)
-                    [empty($producingOrgW4Letters)]"
-            />
+                    $producingOrganizations[1], 1, 4)
+                    [empty($producingOrgW4Letters)]"/>
         </xsl:param>
 
-        <xsl:param name="producers"
-            select="
+        <xsl:param name="producers" select="
                 $cmsData/cmsData/data/attributes/appearances/producers"/>
-        <xsl:param name="authors"
-            select="
+        <xsl:param name="authors" select="
                 $cmsData/cmsData/data/attributes/appearances/authors"/>
-        <xsl:param name="hosts"
-            select="
+        <xsl:param name="hosts" select="
                 $cmsData/cmsData/data/attributes/appearances/hosts"/>
-        <xsl:param name="creators" 
-                select="
-                    distinct-values(
-                    ($producers/name,
-                    $authors/name,
-                    $hosts/name)
-                    )"/>
+        <xsl:param name="creators" select="
+                distinct-values(
+                ($producers/name,
+                $authors/name,
+                $hosts/name)
+                )"/>
 
-        <xsl:param name="cmsEngineers"
-            select="
+        <xsl:param name="cmsEngineers" select="
                 distinct-values(
                 $cmsData/cmsData/data/attributes/appearances/engineers[matches(., '\w')])"/>
-        <xsl:param name="DAVIDEditor"
-            select="
+        <xsl:param name="DAVIDEditor" select="
                 $dbxData/ENTRIES/ENTRY/EDITOR[matches(., '\w')]"/>
-        <xsl:param name="DAVIDAuthor"
-            select="
+        <xsl:param name="DAVIDAuthor" select="
                 $dbxData/ENTRIES/ENTRY/AUTHOR[matches(., '\w')]"/>
-        <xsl:param name="DAVIDChangeUser"
-            select="
+        <xsl:param name="DAVIDChangeUser" select="
                 $dbxData/ENTRIES/ENTRY/CHANGEUSER[matches(., '\w')]"/>
-        <xsl:param name="DAVIDEngineers"
-            select="
+        <xsl:param name="DAVIDEngineers" select="
                 $DAVIDEditor,
                 $DAVIDAuthor[empty($DAVIDEditor)],
                 $DAVIDChangeUser[empty($DAVIDAuthor)]
                 "/>
         <xsl:param name="otherContributors">
-            <xsl:value-of
-                select="
+            <xsl:value-of select="
                     distinct-values($cmsData/cmsData/data/
                     attributes/appearances/
                     *
                     [not(matches(local-name(), $creatorsFlags, 'i'))]
                     [not(matches(local-name(), 'engineer', 'i'))]/
-                    name)"
-                separator=" ; "/>
+                    name)" separator=" ; "/>
         </xsl:param>
-
-        <xsl:param name="isSegment"
-            select="
-                boolean($nprAnalytics/
-                nprAnalyticsDimension[matches(.,
-                $orgFlags, 'i')])"/>
-        <xsl:param name="type" select="$cmsData/cmsData/data/type"/>
+        <xsl:param name="item_type" select="$cmsData/cmsData/data/item-type"/>
+        <xsl:param name="isSegment" select="$item_type = 'segment'"/>
         <xsl:param name="DAVIDClass" select="$dbxData/ENTRIES/ENTRY/CLASS"/>
 
         <!--        <originaldata>
             <xsl:copy-of select="$xmlData"></xsl:copy-of>
         </originaldata>-->
-
+<xsl:copy-of select="$cmsData"/>
         <IARL>
             <xsl:value-of select="'US, '"/>
             <xsl:value-of select="$ArchivalLocationCode"/>
@@ -346,8 +311,9 @@ and output its data in BWF MetaEdit Core format -->
         </IARL>
         <IART>
             <xsl:value-of select="$otherContributors"/>
-            <xsl:value-of
-                select="$producingOrganizationsAsText[not(matches($otherContributors, '\w'))]"/>
+            <xsl:copy-of select="
+                    $producingOrganizations
+                    [not(matches($otherContributors, '\w'))]"/>
             <xsl:value-of select="'&#013;'"/>
         </IART>
         <ICMS>
@@ -362,8 +328,7 @@ and output its data in BWF MetaEdit Core format -->
                             </xsl:with-param>
                         </xsl:call-template>
                     </xsl:variable>
-                    <xsl:variable name="locURL"
-                        select="
+                    <xsl:variable name="locURL" select="
                             $locData/rdf:RDF/madsrdf:PersonalName"/>
                     <xsl:copy-of select="$locURL"/>
                     <madsrdf:PersonalName>
@@ -374,44 +339,38 @@ and output its data in BWF MetaEdit Core format -->
                 </xsl:for-each>
             </xsl:variable>
             <xsl:variable name="processedCreatorsAsText">
-                <xsl:value-of
-                    select="
+                <xsl:value-of select="
                         $processedCreators/
                         madsrdf:PersonalName/
-                        @rdf:about[. != '']"
-                    separator=" ; "/>
+                        @rdf:about[. != '']" separator=" ; "/>
             </xsl:variable>
             <xsl:value-of select="$processedCreatorsAsText"/>
-            <xsl:value-of
-                select="$producingOrganizationsAsText
-                [not(matches($processedCreatorsAsText, '\w'))]"/>
+            <xsl:value-of select="
+                    $producingOrganizations
+                    [not(matches($processedCreatorsAsText, '\w'))]"/>
             <xsl:value-of select="'&#013;'"/>
         </ICMS>
 
         <ICMT>
 
             <xsl:call-template name="strip-tags">
-                <xsl:with-param name="text"
-                    select="
+                <xsl:with-param name="text" select="
                         concat(
                         'Story published at ',
                         $cmsData/cmsData/data/attributes/url,
                         ' on ',
                         $cmsData/cmsData/data/attributes/newsdate,
                         '. '
-                        )"
-                />
+                        )"/>
             </xsl:call-template>
             <xsl:call-template name="strip-tags">
-                <xsl:with-param name="text"
-                    select="
+                <xsl:with-param name="text" select="
                         concat(
                         'mp3 available at ',
                         $cmsData/cmsData/data/attributes/audio,
                         ' as of ',
                         current-date()
-                        )"
-                />
+                        )"/>
             </xsl:call-template>
             <xsl:value-of
                 select="$dbxData/ENTRIES/ENTRY/REMARK[. != '']/concat('. DAVID Remark: ', .)"/>
@@ -419,7 +378,7 @@ and output its data in BWF MetaEdit Core format -->
 
         <ICOP>
             <xsl:value-of
-                select="concat('Terms of Use and Reproduction: ', $producingOrganizationsAsText)"/>
+                select="concat('Terms of Use and Reproduction: ', $producingOrganizations)"/>
             <xsl:if test="$cmsData/cmsData/data/attributes/audio-may-download = 'true'">
                 <xsl:value-of select="concat('&#013;Audio may download as of ', current-date())"/>
             </xsl:if>
@@ -448,14 +407,11 @@ and output its data in BWF MetaEdit Core format -->
             <xsl:value-of select="'&#013;'"/>
         </ICRD>
         <IENG>
-            <xsl:value-of
-                select="
+            <xsl:value-of select="
                     distinct-values((
                     $cmsEngineers,
-                    $DAVIDEngineers[empty($cmsEngineers)]))"
-                separator=" ; "/>
-            <xsl:value-of
-                select="
+                    $DAVIDEngineers[empty($cmsEngineers)]))" separator=" ; "/>
+            <xsl:value-of select="
                     concat(
                     $ArchivalLocationCode, ' engineer')
                     [empty($DAVIDEngineers)]"/>
@@ -531,7 +487,7 @@ and output its data in BWF MetaEdit Core format -->
                 </xsl:when>
                 <xsl:when test="$cmsData/cmsData/data/attributes/series != ''">
                     <xsl:value-of
-                        select="translate($cmsData/cmsData/data/attributes/series/title, $illegalCharacters, $legalCharacters)"/>
+                        select="$cmsData/cmsData/data/attributes/series/title/translate(., $illegalCharacters, $legalCharacters)"/>
                     <xsl:value-of select="concat(' (', $episodeProducingOrganizations, ' series)')"
                     />
                 </xsl:when>
@@ -552,11 +508,12 @@ and output its data in BWF MetaEdit Core format -->
                 <xsl:with-param name="text"
                     select="translate($cmsData/cmsData/data/attributes/body, $illegalCharacters, $legalCharacters)"
                 />
-            </xsl:call-template>            
+            </xsl:call-template>
             <xsl:value-of select="'&#013;&#013;'"/>
-            <xsl:value-of select="$dbxData/ENTRIES/ENTRY/REMARK[. != '']"/>            
+            <xsl:value-of select="$dbxData/ENTRIES/ENTRY/REMARK[. != '']"/>
             <xsl:if test="
-                contains($cmsData/cmsData/data/attributes/url, '-dummy-post-')"> DUMMY
+                    contains($cmsData/cmsData/data/attributes/url, '-dummy-post-')"
+                > DUMMY
                 POST </xsl:if>
             <xsl:if test="$cmsData/cmsData/data/attributes/body = ''">NO DESCRIPTION</xsl:if>
             <xsl:value-of select="'&#013;'"/>
@@ -575,10 +532,10 @@ and output its data in BWF MetaEdit Core format -->
             <xsl:value-of select="'&#013;'"/>
         </ISRC>
         <ISRF>
-            <xsl:value-of select="$producingOrganizations[1], $DAVIDClass"/>            
+            <xsl:value-of select="$producingOrganizations[1], $DAVIDClass"/>
             <xsl:value-of select="' segment'[$isSegment]"/>
             <xsl:value-of select="'. '"/>
-            <xsl:value-of select="WNYC:Capitalize($type, 1), 'id is '"/>
+            <xsl:value-of select="WNYC:Capitalize($item_type, 1), 'id is '"/>
             <xsl:value-of select="$cmsData/cmsData/data/id"/>
             <xsl:value-of select="'&#013;'"/>
         </ISRF>

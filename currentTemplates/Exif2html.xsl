@@ -7,6 +7,7 @@
 
 <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
+    xmlns:op="https://www.w3.org/TR/2017/REC-xpath-functions-31-20170321"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -20,7 +21,7 @@
 
     <xsl:import href="cavafySearch.xsl"/>
     
-    <!--Output definitions -->
+    <!-- Output definitions -->
     <xsl:output encoding="UTF-8" method="html" version="4.0" indent="yes"/>    
 
     <xsl:param name="todaysDate" select="current-date()"/>
@@ -132,9 +133,11 @@
                         tokenize(., ', part ', 'i')[1]"/>
                     <xsl:variable name="assetDescription" select="
                         current-group()/RIFF:Subject/
-                        tokenize(., 'Part.{1,4}of: \n', 'i')[last()]"/>
+                        tokenize(., 'PART.{1,4}OF:', 'i')[last()]"/>
                     <xsl:variable name="distinctAssetDescriptions">
-                        <xsl:value-of select="distinct-values($assetDescription)" separator="{&#xD; }"/>
+                        <xsl:value-of select="
+                            distinct-values(
+                            $assetDescription)" separator="{&#xD;&#xD;}" default-collation="http://www.w3.org/2013/collation/UCA?ignore-symbols=yes;strength=primary"/>
                     </xsl:variable>
                     <h3 style="color:red; ">
                         <a href="{RIFF:Source}">

@@ -28,8 +28,7 @@
         two of which are required*:
         
         sourceInstantiationID*
-        destinationAssetID*
-        newInstantiationID
+        destinationAssetID* OR newInstantiationID*
         newTitle
         newAbstract
         newGenre
@@ -45,8 +44,9 @@
         (DOCUMENT 1)
         1. Add the source instantiation 
         to the destination asset 
-        using the next instantiation ID 
+        using the next instantiation ID         
         available in that asset
+        OR the provided destination instantiation ID
         (and note the original instantiation ID)
         2. Delete the source instantiation 
         from the source asset
@@ -201,12 +201,18 @@
             <xsl:for-each-group select="
                 mergeAssets[newInstantiationID]
                 [newInstantiationID != sourceInstantiationID]" group-by="
-                destinationAssetID">
+                tokenize(newInstantiationID, '\.')[1]">                
+                <xsl:variable name="destinationAssetID">
+                    <xsl:call-template name="checkConflicts">
+                        <xsl:with-param name="fieldName" select="'destinationAssetID'"/>
+                        <xsl:with-param name="field1" select="destinationAssetID"/>
+                        <xsl:with-param name="field2" select="current-grouping-key()"/>
+                    </xsl:call-template>
+                </xsl:variable>
                 <xsl:variable name="destinationAssetXML">
                     <xsl:call-template name="findSpecificCavafyAssetXML">
                         <xsl:with-param name="assetID"
-                            select="
-                            current-grouping-key()"/>
+                            select="$destinationAssetID"/>
                     </xsl:call-template>
                 </xsl:variable>
                 <xsl:variable name="nextInstantiationSuffixDigit">
@@ -438,31 +444,34 @@
                             <xsl:copy-of select="."/>
                         </xsl:for-each-group>
 
-                        <!-- Create / check new titles -->
+                        <!-- Update titles -->
                         <!-- Episode -->
-                        <xsl:choose>
-                            <xsl:when test="matches($newTitle, '[A-Z]')">
-                                <xsl:element name="pbcoreTitle"
-                                    namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
-                                    <xsl:attribute name="titleType" select="'Episode'"/>
-                                    <xsl:copy-of select="$newTitle"/>
-                                </xsl:element>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:for-each-group
-                                    select="
-                                        (
-                                        $destinationAssetXML |
-                                        $sourceInstantiationData/instantiationToAdd)/
-                                        pb:pbcoreDescriptionDocument/
-                                        pb:pbcoreTitle
-                                        [@titleType = 'Episode']"
-                                    group-by=".">
-                                    <xsl:copy-of select="."/>
-                                </xsl:for-each-group>
-                            </xsl:otherwise>
-                        </xsl:choose>
-
+                        <xsl:variable name="sourceTitles">
+                            <xsl:value-of select="fn:distinct-values((
+                            $destinationAssetXML |
+                            $sourceInstantiationData/instantiationToAdd)/
+                            pb:pbcoreDescriptionDocument/
+                            pb:pbcoreTitle
+                            [@titleType = 'Episode'])" separator="{$separatingTokenForFreeTextFields}"/>                            
+                        </xsl:variable>
+                        <xsl:variable name="updatedTitle">
+                            <xsl:call-template name="checkConflicts">
+                                <xsl:with-param name="fieldName" select="'updatedTitle'"/>
+                                <xsl:with-param name="field1" select="$sourceTitles"/>
+                                <xsl:with-param name="field2" select="$newTitle"/>
+                                <xsl:with-param name="separatingToken"
+                                    select="$separatingTokenForFreeTextFields"/>
+                            </xsl:call-template>
+                        </xsl:variable>
+                        
+                        <xsl:element name="pbcoreTitle"
+                            namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
+                            <xsl:attribute name="titleType" select="'Episode'"/>
+                            <xsl:value-of select="$updatedTitle"/>
+                            <xsl:copy-of select="$updatedTitle[//error]"/>
+                        </xsl:element>
+                        
+                        
                         <!-- Series -->
                         <xsl:for-each-group
                             select="
@@ -497,30 +506,32 @@
                             <xsl:copy-of select="."/>
                         </xsl:for-each-group>
 
-                        <!-- Create new abstract -->
-                        <xsl:choose>
-                            <xsl:when test="matches($newAbstract, '[A-Z]')">
-                                <xsl:element name="pbcoreDescription"
-                                    namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
-                                    <xsl:attribute name="descriptionType"
-                                        select="
-                                            'Abstract'"/>
-                                    <xsl:copy-of select="$newAbstract"/>
-                                </xsl:element>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:for-each-group
-                                    select="
-                                        ($destinationAssetXML | 
-                                        $sourceInstantiationData/instantiationToAdd)/
-                                        pb:pbcoreDescriptionDocument/
-                                        pb:pbcoreDescription
-                                        [@descriptionType = 'Abstract']"
-                                    group-by=".">
-                                    <xsl:copy-of select="."/>
-                                </xsl:for-each-group>
-                            </xsl:otherwise>
-                        </xsl:choose>
+                        <!-- Update abstract -->
+                        <xsl:variable name="sourceAbstracts">
+                            <xsl:value-of select="fn:distinct-values((
+                                $destinationAssetXML |
+                                $sourceInstantiationData/instantiationToAdd)/
+                                pb:pbcoreDescriptionDocument/
+                                pb:pbcoreDescription
+                                [@descriptionType = 'Abstract'])" separator="{$separatingTokenForFreeTextFields}"/>                            
+                        </xsl:variable>
+                        
+                        <xsl:variable name="updatedAbstract">
+                            <xsl:call-template name="checkConflicts">
+                                <xsl:with-param name="fieldName" select="'updatedAbstract'"/>
+                                <xsl:with-param name="field1" select="$sourceAbstracts"/>
+                                <xsl:with-param name="field2" select="$newAbstract"/>
+                                <xsl:with-param name="separatingToken"
+                                    select="$separatingTokenForFreeTextFields"/>
+                                <xsl:with-param name="normalize" select="false()"/>
+                            </xsl:call-template>
+                        </xsl:variable>
+                        <xsl:element name="pbcoreDescription"
+                            namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
+                            <xsl:attribute name="descriptionType" select="'Abstract'"/>
+                            <xsl:value-of select="$updatedAbstract"/>
+                            <xsl:copy-of select="$updatedAbstract[//error]"/>
+                        </xsl:element>
 
                         <!-- Merge other descriptions -->
                         <xsl:for-each-group
@@ -536,26 +547,30 @@
                             <xsl:copy-of select="."/>
                         </xsl:for-each-group>
 
-                        <!-- Create new genre -->
-                        <xsl:choose>
-                            <xsl:when test="matches($newGenre, '\w')">
-                                <xsl:element name="pbcoreGenre"
-                                    namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
-                                    <xsl:copy-of select="$newGenre"/>
-                                </xsl:element>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:for-each-group
-                                    select="
-                                        ($destinationAssetXML | 
-                                        $sourceInstantiationData/instantiationToAdd)/
-                                        pb:pbcoreDescriptionDocument/
-                                        pb:pbcoreGenre"
-                                    group-by=".">
-                                    <xsl:copy-of select="."/>
-                                </xsl:for-each-group>
-                            </xsl:otherwise>
-                        </xsl:choose>
+                        <!-- Update genre -->
+                        <xsl:variable name="sourceGenres">
+                            <xsl:value-of select="fn:distinct-values((
+                                $destinationAssetXML |
+                                $sourceInstantiationData/instantiationToAdd)/
+                                pb:pbcoreDescriptionDocument/
+                                pb:pbcoreGenre)" separator="{$separatingTokenForFreeTextFields}"/>                            
+                        </xsl:variable>
+                        
+                        <xsl:variable name="updatedGenre">
+                            <xsl:call-template name="checkConflicts">
+                                <xsl:with-param name="fieldName" select="'updatedGenre'"/>
+                                <xsl:with-param name="field1" select="$sourceGenres"/>
+                                <xsl:with-param name="field2" select="$newGenre"/>
+                                <xsl:with-param name="separatingToken"
+                                    select="$separatingTokenForFreeTextFields"/>
+                            </xsl:call-template>
+                        </xsl:variable>
+                        <xsl:element name="pbcoreGenre"
+                            namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">                            
+                            <xsl:value-of select="$updatedGenre"/>
+                            <xsl:copy-of select="$updatedGenre[//error]"/>
+                        </xsl:element>
+                        
 
 
                         <!-- Merge relations -->
@@ -612,29 +627,35 @@
                             <xsl:copy-of select="."/>
                         </xsl:for-each-group>
 
-                        <!-- Create new copyright -->
-                        <xsl:choose>
-                            <xsl:when test="matches($newCopyright, '\w')">
-                                <xsl:element name="pbcoreRightsSummary"
-                                    namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
-                                    <xsl:element name="rightsSummary"
-                                        namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
-                                        <xsl:copy-of select="$newCopyright"/>
-                                    </xsl:element>
-                                </xsl:element>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:for-each-group
-                                    select="
-                                        ($destinationAssetXML | 
-                                        $sourceInstantiationData/instantiationToAdd)/
-                                        pb:pbcoreDescriptionDocument/
-                                        pb:pbcoreRightsSummary"
-                                    group-by="pb:rightsSummary">
-                                    <xsl:copy-of select="."/>
-                                </xsl:for-each-group>
-                            </xsl:otherwise>
-                        </xsl:choose>
+                        <!-- Update copyright -->
+                        <xsl:variable name="sourceCopyrights">
+                            <xsl:value-of select="fn:distinct-values(
+                                (
+                                $destinationAssetXML |
+                                $sourceInstantiationData/instantiationToAdd)/
+                                pb:pbcoreDescriptionDocument/
+                                pb:pbcoreRightsSummary/
+                                pb:rightsSummary
+                                )" separator="{$separatingTokenForFreeTextFields}"/>                            
+                        </xsl:variable>
+                        
+                        <xsl:variable name="updatedCopyright">
+                            <xsl:call-template name="checkConflicts">
+                                <xsl:with-param name="fieldName" select="'updatedCopyright'"/>
+                                <xsl:with-param name="field1" select="$sourceCopyrights"/>
+                                <xsl:with-param name="field2" select="$newCopyright"/>
+                                <xsl:with-param name="separatingToken"
+                                    select="$separatingTokenForFreeTextFields"/>
+                            </xsl:call-template>
+                        </xsl:variable>
+                        <xsl:element name="pbcoreRightsSummary"
+                            namespace="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
+                            <xsl:element name="rightsSummary">
+                                <xsl:value-of select="$updatedCopyright"/>
+                                <xsl:copy-of select="$updatedCopyright[//error]"/>
+                            </xsl:element>
+                        </xsl:element>
+                        
 
                         <!-- Merge annotations -->
                         <xsl:for-each-group
@@ -754,9 +775,9 @@
                         <p/>
                     </xsl:variable>
 
-                    <xsl:for-each
+                    <!--<xsl:for-each
                         select="
-                            $mergeAssets/
+                            $mergeAssets//
                             *[local-name() = 'error']">
                         <div>
                             <p>
@@ -769,7 +790,7 @@
                                 </p>
                             </p>
                         </div>
-                    </xsl:for-each>
+                    </xsl:for-each>-->
 
                     <xsl:for-each
                         select="
@@ -797,10 +818,13 @@
                                             distinct-values(pb:pbcoreInstantiation/
                                             pb:instantiationIdentifier)
                                             [. = $instIDsToDelete]"
-                                        separator=" and "/> INTO <a>
+                                        separator=" and "/> INTO 
+                                    <a>
                                         <xsl:attribute name="href">
+                                            
                                             <xsl:value-of select="$destinationURL"/>
-                                        </xsl:attribute> <xsl:value-of
+                                        </xsl:attribute>
+                                        <xsl:value-of
                                             select="pb:pbcoreIdentifier[@source = 'WNYC Archive Catalog']"
                                         />
                                     </a>

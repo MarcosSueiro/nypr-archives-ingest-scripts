@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<cavafyFormats xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<cavafyFormats>
 	<format>1 inch audio tape</format>
 	<format>1/4 inch audio tape</format>
 	<format>3/4 inch videotape: U-matic</format>
@@ -17,8 +17,7 @@
 	<format>Betacam</format>
 	<format>Betacam Digital (Digi Beta)</format>
 	<format>Betacam SP</format>
-	<format>Book</format>
-	<format>BWF</format>
+	<format>Book</format>	
 	<format>CD-Audio</format>
 	<format>CD-Data</format>
 	<format>CD-Data/Audio</format>
@@ -58,4 +57,5 @@
 	<format>Video Beta</format>
 	<format>video/DV</format>
 	<format>video/mp4</format>
+	<format>wav</format>
 </cavafyFormats>

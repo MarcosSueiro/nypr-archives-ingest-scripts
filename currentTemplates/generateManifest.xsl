@@ -105,8 +105,9 @@ enter:
         <xsl:param name="instantiationIDs">
             <xsl:message
                 select="
-                    'Generate a list ',
-                    'of instantiation IDs'"/>
+                    'Generate a list of instantiation IDs', 
+                    ' for series ', $seriesName, 
+                    ' and format ', $format"/>
             <xsl:element name="instantiationIDs">
                 <xsl:attribute name="series" select="
                         $seriesName"/>
@@ -149,7 +150,7 @@ enter:
                 pb:pbcoreCollection/
                 pb:pbcoreDescriptionDocument/
                 pb:pbcoreInstantiation
-                [pb:instantiationPhysical = $format]"
+                [pb:instantiationPhysical = $format or pb:instantiationDigital = $format]"
                 mode="
                 generateSourceExif"/> 
         </xsl:param>
@@ -204,9 +205,10 @@ enter:
             generateExif">
             <xsl:with-param name="
                 stopIfError" select="true()" tunnel="yes"/>
-            <xsl:with-param name="filenameAddendum" tunnel="yes"
-                select="
-                    $filenameAddendum"/>
+            <xsl:with-param name="filenameAddendum" tunnel="yes">
+                <xsl:value-of select="$compactFormat"/>
+                <xsl:value-of select="$filenameAddendum"/>                
+            </xsl:with-param>
         </xsl:apply-templates>
     </xsl:template>
 
@@ -223,7 +225,7 @@ enter:
         <xsl:for-each
             select="
                 pb:pbcoreInstantiation
-                [pb:instantiationPhysical = $format]">
+                [pb:instantiationPhysical = $format or pb:instantiationDigital = $format]">
             <xsl:apply-templates select="
                     parent::pb:pbcoreDescriptionDocument">
                 <xsl:with-param name="filename">

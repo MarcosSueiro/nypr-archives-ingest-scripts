@@ -31,7 +31,10 @@ from different sources -->
         <xsl:param name="field3"/>
         <xsl:param name="field4"/>
         <xsl:param name="field5"/>
-        <xsl:param name="fieldName" select="name($field1[. != ''][1])"/>
+        <xsl:param name="allFields" select="$field1, $field2, $field3,$field4, $field5"/>
+        <xsl:param name="fieldName" select="
+            $allFields[. instance of node()]/name(), 
+            'noFieldName'[not($allFields[. instance of node()])]"/>        
         <xsl:param name="filename"/>
         <xsl:param name="validatingString" select="'\w'"/><!-- Needs a 'word' string -->
         <xsl:param name="separatingToken" select="$separatingToken"/>
@@ -64,7 +67,8 @@ from different sources -->
                         ($field1, $field2, $field3, $field4, $field5), 
                         $separatingToken)"/>
                 </xsl:with-param>
-                <xsl:with-param name="separatingToken" select="$separatingToken"/>
+                <xsl:with-param name="separatingToken" select="
+                    $separatingToken"/>
                 <xsl:with-param name="validatingString" select="
                     $validatingString"/>
                 <xsl:with-param name="normalize" select="$normalize"/>
@@ -144,7 +148,7 @@ from different sources -->
         <xsl:variable name="checkConflictResultLength" select="string-length($checkConflictResult)"/>
         <xsl:variable name="checkConflictResultIsLong" select="$checkConflictResultLength gt 100"/>
         <xsl:message>
-            <xsl:value-of select="'Chosen value:', substring($checkConflictResult, 1, 100)"/>
+            <xsl:value-of select="'Chosen value for ', $fieldName, ': ', substring($checkConflictResult, 1, 100)"/>
             <xsl:value-of select="' . . .'[$checkConflictResultIsLong]"/>
         </xsl:message>
     </xsl:template>
@@ -160,9 +164,10 @@ from different sources -->
         <xsl:param name="field3"/>
         <xsl:param name="field4"/>
         <xsl:param name="field5"/>
+        <xsl:param name="allFields" select="$field1, $field2, $field3,$field4, $field5"/>
         <xsl:param name="fieldName" select="
-            name(($field1, $field2, $field3, $field4, $field5)[. instance of node()][1]), 
-            'noFieldName'[not(. instance of node())]"/>
+            $allFields[. instance of node()]/name(), 
+            'noFieldName'[not($allFields[. instance of node()])]"/>    
         <xsl:param name="validatingString" select="''"/>
         <xsl:param name="separatingToken" select="$separatingToken"/>
         <xsl:param name="defaultValue">

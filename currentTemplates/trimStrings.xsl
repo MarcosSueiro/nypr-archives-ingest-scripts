@@ -174,11 +174,9 @@
                 <xsl:with-param name="substr" select="' '"/>
             </xsl:call-template>
         </xsl:variable>
-        <xsl:message select="'Abbreviated text:', $abbreviatedText"/>
-        <originalText>
-            <xsl:value-of select="$text"/>
-        </originalText>
+        <xsl:message select="'Abbreviated text:', $abbreviatedText"/>        
         <abbreviatedText>
+            <xsl:attribute name="originalText" select="$text"/>
             <xsl:value-of select="$abbreviatedText"/>
         </abbreviatedText>
     </xsl:template> 

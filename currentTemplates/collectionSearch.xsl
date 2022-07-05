@@ -6,7 +6,7 @@
     
     <!-- Find collection info
         from the Collection list concordance -->
-    <xsl:template name="collectionSearch" match="/">
+    <xsl:template name="collectionSearch" match="node()">
         <xsl:param name="collectionAcronym" select="'WNYC'"/>
         <xsl:param name="collectionURL"
             select="document('CollectionConcordance.xml')//*[collAcro = $collectionAcronym]/collURL"

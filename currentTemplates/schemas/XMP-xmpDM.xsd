@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://ns.exiftool.ca/XMP/XMP-xmpDM/1.0/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:System="http://ns.exiftool.ca/File/System/1.0/" xmlns:XMP-xmpDM="http://ns.exiftool.ca/XMP/XMP-xmpDM/1.0/" xmlns:XMP-plus="http://ns.exiftool.ca/XMP/XMP-plus/1.0/" xmlns:ExifTool="http://ns.exiftool.ca/ExifTool/1.0/" xmlns:et="http://ns.exiftool.ca/1.0/" xmlns:File="http://ns.exiftool.ca/File/1.0/" xmlns:RIFF="http://ns.exiftool.ca/RIFF/RIFF/1.0/" xmlns:XMP-dc="http://ns.exiftool.ca/XMP/XMP-dc/1.0/">
+  <xs:import namespace="http://ns.exiftool.ca/1.0/" schemaLocation="et.xsd"/>
+  <xs:import namespace="http://ns.exiftool.ca/ExifTool/1.0/" schemaLocation="ExifTool.xsd"/>
+  <xs:import namespace="http://ns.exiftool.ca/File/1.0/" schemaLocation="File.xsd"/>
+  <xs:import namespace="http://ns.exiftool.ca/File/System/1.0/" schemaLocation="System.xsd"/>
+  <xs:import namespace="http://ns.exiftool.ca/RIFF/RIFF/1.0/" schemaLocation="RIFF.xsd"/>
+  <xs:import namespace="http://ns.exiftool.ca/XMP/XMP-dc/1.0/" schemaLocation="XMP-dc.xsd"/>
+  <xs:import namespace="http://ns.exiftool.ca/XMP/XMP-plus/1.0/" schemaLocation="XMP-plus.xsd"/>
+  <xs:import namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#" schemaLocation="Exif2Excel.xsd"/>
+  <xs:element name="Artist" type="rdf:bag"/>
+  <xs:element name="Engineer" type="xs:string"/>
+  <xs:element name="Genre" type="xs:string"/>
+</xs:schema>
