@@ -43,6 +43,8 @@ _Main task:_ Prepare self-described, compliant files for ingestion into DAMS
 2. Notify DAMS team of new batch of files
 3. Store physical carriers in Archives storage
 
+
+
 _For a more detailed explanation of all steps, see https://nypr.sharepoint.com/:w:/s/NYPRArchives/Ed938H9TBPxAnZ8oB3VvuTIBF_UAL6SZb0dELNTE_q4lIg?e=mCH45h (internal NYPR use only)_
 
-_For more detailed description of the Archives workflow, see https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/master/additionalDocs/ArchivesWorkflow.md_
+_For more detailed description of the general Archives workflow, see https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/master/additionalDocs/ArchivesWorkflow.md_
