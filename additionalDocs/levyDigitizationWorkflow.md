@@ -38,7 +38,7 @@ _Main task:_ Verify quality of files
 7. Contact vendor about issues
 
 ## Prepare for Ingest 
-_Main task:_ Prepare compliant files for ingestion into DAMS
+_Main task:_ Prepare self-described, compliant files for ingestion into DAMS
 1. Ensure embedded metadata complies; fix if needed. If needed, include additional metadata by listening to the file
 2. Notify DAMS team of new batch of files
 3. Store physical carriers in Archives storage
