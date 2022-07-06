@@ -25,7 +25,7 @@ _Main task:_ Locate and ship physical items
 
 ## Digitize (Done by Vendor)
 _Main task:_ Create compliant, surrogate digital files of the shipped items
-1. Check received items agains manifest
+1. Check received items against manifest
 2. Reformat items according to Statement of Work (SOW)
 3. Generate additional metadata (e.g. Coding History, transfer technician, condition report)
 4. Communicate with NYPR about unforeseen issues
