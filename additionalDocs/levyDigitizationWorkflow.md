@@ -4,6 +4,10 @@ _INPUT:_ A show and a physical format
 
 _OUTPUT:_ Self-described, compliant Broadcast WAVE Files 
 
+New York Public Radio Archives is currently digitizing tens of thousands of its physical items as part of a generous grant from the [Leon Levy Foundation](https://nypublicradio.org/2020/02/24/new-york-public-radio-archives-receives-2-5-million-grant-from-the-leon-levy-foundation-for-the-preservation-of-wnyc-and-wqxr-archival-collections/) and the [National Endowment for the Humanities](https://www.neh.gov/).
+
+The project is divided into shipments that comprise all items of a show recorded in a particular format (e.g. “all _Mostly Mozart_ DATs”), which we send to a digitizing vendor.
+
 ## Choose and Describe Items
 _Main task:_ Ensure items to ship are properly described 
 1. Choose Shipment: a show restricted by a format (e.g. “Mostly Mozart” “DAT”) 
@@ -39,7 +43,7 @@ _Main task:_ Verify quality of files
 
 ## Prepare for Ingest 
 _Main task:_ Prepare self-described, compliant files for ingestion into DAMS
-1. Ensure embedded metadata complies; fix if needed. If needed, include additional metadata by listening to the file
+1. Ensure embedded metadata complies; fix if needed. If necessary, include additional metadata by listening to the file
 2. Notify DAMS team of new batch of files
 3. Store physical carriers in Archives storage
 
