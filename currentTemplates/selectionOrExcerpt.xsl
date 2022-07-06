@@ -111,13 +111,13 @@ Edited file timings:
         </xsl:message>
         <xsl:apply-templates select="
             $xmpTracks/rdf:Bag/rdf:li[@rdf:parseType='Resource']/
-            XMP-xmpDM:Markers">
+            XMP-xmpDM:Markers" mode="tracksToText">
             <xsl:with-param name="frameRate" select="
                 $frameRate[. &gt; 0]"/>
         </xsl:apply-templates>
     </xsl:template>
     
-    <xsl:template match="XMP-xmpDM:Markers">
+    <xsl:template match="XMP-xmpDM:Markers" mode="tracksToText">
         <xsl:param name="frameRate"
             select="
                 number(
@@ -129,13 +129,13 @@ Edited file timings:
             <xsl:value-of select="concat('Frame rate: ', $frameRate)"/>
         </xsl:message>
         <xsl:apply-templates select="
-            rdf:Bag/rdf:li[@rdf:parseType = 'Resource']">
+            rdf:Bag/rdf:li[@rdf:parseType = 'Resource']" mode="trackToText">
             <xsl:with-param name="frameRate" select="$frameRate"/>
         </xsl:apply-templates>
     </xsl:template>
     
-    <xsl:template match="
-            XMP-xmpDM:Markers/rdf:Bag/rdf:li[@rdf:parseType = 'Resource']">
+    <xsl:template name="trackToText" match="
+            XMP-xmpDM:Markers/rdf:Bag/rdf:li[@rdf:parseType = 'Resource']" mode="trackToText">
         <xsl:param name="frameRate"
             select="
                 number(
@@ -144,6 +144,7 @@ Edited file timings:
                 'f')
                 )"/>
         <xsl:param name="markerName" select="XMP-xmpDM:Name"/>
+        <xsl:param name="markerComment" select="XMP-xmpDM:comment"/>
         <xsl:param name="timeSamples" select="
             if (contains(XMP-xmpDM:StartTime, 'f')) 
             then 
@@ -188,9 +189,56 @@ Edited file timings:
         <xsl:value-of select="concat($startTimeCode, ' - ', $markerName)"/>
         <xsl:value-of
             select="concat(' ', '(', format-number($durationMinutes, '##.#'), ' m)')[$durationMinutes &gt; 0.99]"/>
+        <xsl:value-of select="$markerComment[matches(., '\w')]/concat(': ', .)"/>
     </xsl:template>
     
+    <xsl:template match="Cues" mode="CuesToText">
+        <xsl:apply-templates select="Cue" mode="cueToText"/>
+    </xsl:template>
     
+    <xsl:template match="Cue" mode="cueToText">        
+        <xsl:param name="frameRate" select="44100"/>
+        <xsl:call-template name="trackToText">
+            <xsl:with-param name="startTimeFrameRate" select="$frameRate"/>
+            <xsl:with-param name="timeSamples" select="Position"/>
+            <xsl:with-param name="markerName" select="Label"/>
+            <xsl:with-param name="markerComment" select="Note"/>
+        </xsl:call-template>        
+    </xsl:template>
     
+    <xsl:template match="Cues" mode="CuesToXMP">
+        <xsl:param name="frameRate" select="44100"/>
+        <XMP-xmpDM:Tracks>
+            <rdf:Bag>
+                <rdf:li rdf:parseType="Resource">
+                    <XMP-xmpDM:TrackName>CuePoint Markers</XMP-xmpDM:TrackName>
+                    <XMP-xmpDM:TrackType>Cue</XMP-xmpDM:TrackType>
+                    <XMP-xmpDM:FrameRate>
+                        <xsl:value-of select="'f'"/>
+                        <xsl:value-of select="$frameRate"/>
+                    </XMP-xmpDM:FrameRate>
+                    <XMP-xmpDM:Markers>                        
+                        <rdf:Bag>
+                            <xsl:apply-templates select="Cue" mode="cueToXMP"/>                            
+                        </rdf:Bag>
+                    </XMP-xmpDM:Markers>
+                </rdf:li>                
+            </rdf:Bag>
+        </XMP-xmpDM:Tracks>
+    </xsl:template>
+    
+    <xsl:template match="Cue" mode="cueToXMP">
+        <rdf:li rdf:parseType="Resource">
+            <XMP-xmpDM:startTime>
+                <xsl:value-of select="Position"/>
+            </XMP-xmpDM:startTime>
+            <XMP-xmpDM:comment>
+                <xsl:value-of select="Note"/>
+            </XMP-xmpDM:comment>
+            <XMP-xmpDM:name>
+                <xsl:value-of select="Label"/>
+            </XMP-xmpDM:name>            
+        </rdf:li>
+    </xsl:template>
     
 </xsl:stylesheet>

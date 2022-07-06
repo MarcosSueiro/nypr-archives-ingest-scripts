@@ -3002,7 +3002,7 @@ Subject headings / IKEY
                         <xsl:call-template name="
                             generateError">
                             <xsl:with-param name="fieldName" select="'ExifEncoding'"/>
-                            <xsl:with-param name="errorType" select="'Invalid encoding'"/>
+                            <xsl:with-param name="errorType" select="'Invalid encoding: ', $exifEncoding"/>
                         </xsl:call-template>
                     </xsl:if>
 
