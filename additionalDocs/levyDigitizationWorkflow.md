@@ -29,7 +29,7 @@ _Main task:_ Create compliant, surrogate digital files of the shipped items
 
 ## Control Quality
 _Main task:_ Verify quality of files 
-1. Check received files agains manifest
+1. Check received files against manifest
 2. Validate md5 on delivery drive
 3. Validate file format, encoding and structure
 4. Generate reports on quality of the file’s audio data
