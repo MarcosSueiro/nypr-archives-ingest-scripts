@@ -13,8 +13,7 @@ _Main task:_ Ensure items to ship are properly described
 1. Choose Shipment: a show restricted by a format (e.g. “Mostly Mozart” “DAT”) 
 2. Gather supporting print and digital documentation for the show (press releases, logs, production notes, program guides, physical containers, etc.); OCR as needed 
 3. Fully describe the overall show with values for genre, creators, subject headings and copyright; these will become the default values for all the episodes within that show.
-4. Make sure each episode has correct values for title, dates, abstract and genre; merge episodes where appropriate.
-5. Add Library of Congress contributors and subject headings
+4. Make sure each episode has correct values for title, dates, and abstract; merge episodes where appropriate.
 
 ## Ship Items
 _Main task:_ Locate and ship physical items
@@ -43,9 +42,12 @@ _Main task:_ Verify quality of files
 
 ## Prepare for Ingest 
 _Main task:_ Prepare self-described, compliant files for ingestion into DAMS
-1. Ensure embedded metadata complies; fix if needed. If necessary, include additional metadata by listening to the file
-2. Notify DAMS team of new batch of files
-3. Store physical carriers in Archives storage
+1. Ensure embedded metadata complies; fix if needed
+2. Add controlled-vocabulary metadata: Library of Congress contributors and subject headings 
+3. If necessary, refine metadata by listening to the file
+4. Embed updated metadata
+5. Notify DAMS team of new batch of files
+6. Store physical carriers in Archives storage
 
 
 
