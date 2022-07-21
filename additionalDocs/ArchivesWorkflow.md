@@ -121,7 +121,7 @@ Where
 - 12345: cavafy asset number
 - ext: Instantiation suffix, where each instantiation within an asset has a unique extension. Parts are designated with letters (e.g. .1a, .1b…)
 - [Free text]: An optional free text that may include information about :
-  - ther IDs (e.g. LT6978 for MUNI)
+  - other IDs (e.g. LT6978 for MUNI)
   - generation information (first two may be combined):
 
 - WEB EDIT: file to be published
