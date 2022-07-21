@@ -75,27 +75,28 @@ Generally, the ingestion of new digital audio files follows the following steps:
 
 It is usually advisable to add as many additional fields as possible from the information at hand.
 
-1. The transfer technician generates audio files according to the Archives naming convention, namely
+3. The transfer technician generates audio files according to the Archives naming convention, namely
  COLL-SERIES-YYYY-MM-DD-12345.ext[Free text].wav
  (see below)
-2. Using BWF MetaEdit, the transfer technician embeds additional metadata in the audio file. At a minimum:
-  1. Medium (IMED)
-  2. Technician (ITCH)
+4. Using BWF MetaEdit, the transfer technician embeds additional metadata in the audio file. At a minimum:
+  - Medium (IMED)
+  - Technician (ITCH)
 
 Encouraged:
 
-  1. Source (ISRC) (cavafy catalog URL)
+  - Source (ISRC) (cavafy catalog URL)
 
 The following fields will also need to be present either embedded or in cavafy:
 
-  1. Title
-  2. Description (abstract/subject)
-  3. One Library of Congress subject heading (keyword)
-1. Archives personnel creates an rdf file via exiftool
-2. The rdf file runs through an xslt transform, which generates several xml and html files
-3. Metadata is embedded in the wav file via BWF MetaEdit
-4. Files are uploaded to DAVID through a .DBX file
-5. Files are added to cavafy through a pbcore file
+  - Title
+  - Description (abstract/ISBJ)
+  - One Library of Congress subject heading (IKEY)
+
+5. Archives personnel creates an rdf file via exiftool
+6. The rdf file runs through an xslt transform, which generates several xml and html files
+7. Metadata is embedded in the wav file via BWF MetaEdit
+8. Files are uploaded to DAVID through a .DBX file
+9. Files are added to cavafy through a pbcore file
 
 
 
