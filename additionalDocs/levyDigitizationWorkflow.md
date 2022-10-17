@@ -11,16 +11,16 @@ The project is divided into shipments. Each shipment contains episodes of a show
 ## Choose and Describe Items
 _Main task:_ Ensure items to ship are properly described 
 1. Choose Shipment: a show restricted by a format (e.g. “Mostly Mozart” “DAT”) 
-2. Gather supporting print and digital documentation for the show (press releases, logs, production notes, program guides, physical containers, etc.); OCR as needed 
-3. Fully describe the overall show with values for genre, creators, subject headings and copyright; these will become the default values for all the episodes within that show.
-4. Make sure each episode has correct values for title, dates, and abstract; merge episodes where appropriate.
+2. Gather physical items from onsite and remote storage
+3. Gather supporting print and digital documentation for the show (press releases, logs, production notes, program guides, physical containers, etc.); OCR as needed 
+4. Fully describe the overall show with values for genre, creators, subject headings and copyright; these will become the default values for all the episodes within that show.
+5. Make sure each episode has correct values for title, dates, and abstract; merge episodes where appropriate.
 
 ## Ship Items
 _Main task:_ Locate and ship physical items
-1. Create a manifest
-2. Gather physical items from onsite and remote storage 
-3. Print and affix barcodes
-4. Pack and ship items
+1. Create a manifest2. 
+2. Print and affix barcodes
+3. Pack and ship items
 
 ## Digitize (Done by Vendor)
 _Main task:_ Create compliant, surrogate digital files of the shipped items
