@@ -8,7 +8,7 @@ This document outlines how NYPR Archival materials are classified.
          * whose physical (1/4 inch audio tape, DAT) or digital (WAVE files) manifestations are called **Instantiations**.
 
 <p align="center">
-  <img src="http://www.plantuml.com/plantuml/png/SoWkIImgAStDuShBJqbLSCxFoKbDBidCpuFmWrEBCbEB8Mp7ukBK4WZJCm-eBQyaCn6iaWkXIo5VLnUc2KA1HA1QmII8ZwRV8JKl1UW20000">
+  <img src="http://www.plantuml.com/plantuml/png/LOr12WCX54Ftdc8kC7UOqbNNFO5qGX7qV_1dxbym5jkDFo_8on7CdLUhoVp4TlTQyM9n4p_H2qBv5W4gFYoOZIN__dmt62Um8xUKbcxpVV_QT4OZvtW7_uiNBODMvbMdiGDsNgr-0000">
 </p>
 
 
