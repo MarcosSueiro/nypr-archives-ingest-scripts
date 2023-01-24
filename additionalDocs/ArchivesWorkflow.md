@@ -4,7 +4,7 @@ Since about 2016, the New York Public Radio (NYPR) Archive uses a workflow for a
 
 # OVERVIEW
 
-The workflow accepts metadata from Broadcast WAV files as an xml RDF document. (Other sources such as those from exiftool or MediaInfo are first converted to an exiftool-like RDF) It then generates a new set of metadata as a &quot;golden record&quot; xml RDF document, taking into account the following possible sources:
+The workflow accepts metadata from Broadcast WAV files as an xml RDF document. (Other sources such as those from BWF MetaEdit or MediaInfo are first converted to an exiftool-like RDF) It then generates a new set of metadata as a &quot;golden record&quot; xml RDF document, taking into account the following possible sources:
 
 ## INPUTS
 
