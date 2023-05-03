@@ -20,7 +20,7 @@ That is, the filenapaths cannot have the same 'letters', regardless of capitaliz
 
 For NYPR assets, we propose the following definition: 
 
-**Two files that share the following attributes will be considered duplicate:**
+**Two audio files with the following matching attribute values will be considered duplicate:**
    * **a. Sonic content**
    * **b. Published metadata**
 
