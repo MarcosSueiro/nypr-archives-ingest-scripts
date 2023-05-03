@@ -16,11 +16,11 @@ Different systems choose different attributes to establish duplicates. For examp
 * ```C:/myDrive/myfile.txt```
 * ```C:/myDrive/MYFILE.txt```
 
-That is, the filenapaths cannot have the same 'letters', regardless of capitalization.
+That is, the filepaths cannot have the same 'letters', regardless of capitalization.
 
 For NYPR assets, we propose the following definition: 
 
-**Two audio files with the following matching attribute values will be considered duplicate:**
+**Two audio files with the following matching attributes will be considered duplicate:**
    * **a. Sonic content**
    * **b. Published metadata**
 
