@@ -33,7 +33,7 @@ ffmpeg can generate the same hash, provided one uses [specific options](https://
 _(Incidentally, we have evaluated other possible attributes and combinations, including: filesize; exact duration in miliseconds; embedded UMID; filenames; UMIDs in sidecar DBX files; etc., but they all seem to produce either false positives or false negatives for our purposes.)_
 
 #### b. Published metadata
-DAVID's 'theme' links an audio file to the the station's CMS, Publisher, which holds metadata of interest. So it behooves us to treat two such files as essentially different, even if they are sonically identical.
+DAVID's 'theme' provides the link between an audio file in DAVID and the station's CMS, Publisher, which holds metadata of interest. So it behooves us to treat two such files as essentially different, even if they are sonically identical.
 
 The DAVID 'theme' can be extracted from the DAVID sidecar .DBX file.
 
@@ -42,7 +42,7 @@ As of April 2023, all valid WAVE files in archives-managed DAVID subfolders (plu
 
 ```DAVIDDupesByMD5.xsl``` identifies files with matching audio-only MD5s in those exported documents. It then looks up the corresponding DAVID sidecar .DBX file.
 
-As an example, ```DAVIDDupesByMD5.xsl``` has identified 2489 sets of duplicate files and potential excess files in the DAVID subfolder 'NewsBroadcastArchives'.
+As an example, ```DAVIDDupesByMD5.xsl``` has identified 2,489 sets of sonically identical files, including 3,978 potential excess files, in the DAVID subfolder 'NewsBroadcastArchives'.
 
 At the end of this document we include a partial sample output.
 
@@ -50,7 +50,7 @@ At the end of this document we include a partial sample output.
 - [ ] TO DO: Compare across folders.
 
 ## 3. De-duping
-Different systems deal with potential duplicates in different ways. For instance, when you try to save a file over an exisiting 'identical' filepath, you may be asked to overwrite the previous file, or the system may add some characters (e.g. '(1)' or '\_01') to the end of the file.
+Different systems deal with potential duplicates in different ways. For instance, when you try to save a file over an existing 'identical' filepath, you may be asked to overwrite the previous file, rename it, or the system may add some characters (e.g. '(1)' or '\_01') to the end of the file.
 
 Here is how two systems at the station deal with potential duplicates:
 
