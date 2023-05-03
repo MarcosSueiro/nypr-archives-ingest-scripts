@@ -31,12 +31,12 @@ Ffmpeg can provide the same hash, provided one uses [specific options](https://s
 _(Incidentally, other possible attributes and combinations have been evaluated, including: filesize; file length in miliseconds; embedded UMID; filenames; UMIDs in sidecar DBX files; etc., but they all seem to produce false positives or false negatives for our purposes.)_
 
 #### b. Published metadata
-DAVID's 'theme' is used as a link to the the station's CMS, Publisher, which can then hold metadata of interest. So it behooves us to treat two such files as essentially different, even if they are sonically identical.
+DAVID's 'theme' links an audio file to the the station's CMS, Publisher, which holds metadata of interest. So it behooves us to treat two such files as essentially different, even if they are sonically identical.
 
-The 'theme' can be extracted from the DAVID sidecar file.
+The 'theme' can be extracted from the DAVID sidecar .DBX file.
 
 ## 2. Duplicate identification
-All valid WAVE files in archives-managed DAVID subfolders (plus 'News Broadcast Archives' and 'News in Progress Archives') currently have an MD5 hash embedded. This metadata has then been exported as xml documents, one for each DAVID subfolder.
+As of April 2023, all valid WAVE files in archives-managed DAVID subfolders (plus 'News Broadcast Archives' and 'News in Progress Archives') currently have an audio-only MD5 hash embedded. The metadata for all files has then been exported as xml documents, one for each DAVID subfolder.
 
 ```DAVIDDupesByMD5.xsl``` identifies files with matching audio-only MD5s in those exported documents. It then looks up the corresponding DAVID sidecar .DBX file.
 
