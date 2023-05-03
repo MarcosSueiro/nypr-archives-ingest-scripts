@@ -24,11 +24,11 @@ That is, the filenames cannot have the same 'letters', regardless of capitalizat
 
 
 #### a. Sonic content
-BWF MetaEdit [provides a hash](https://mediaarea.net/BWFMetaEdit/md5) to determine if the audio in two files is identical, regardless of other data in the file. BWF MetaEdit can embed the MD5 hash in the file, and can also verify the data.
+BWF MetaEdit can [generate an MD5 hash](https://mediaarea.net/BWFMetaEdit/md5) to determine if the audio content in two files is identical, regardless of other data in the file. BWF MetaEdit can embed this MD5 hash in the file, and can also verify the data.
 
-Ffmpeg can provide the same hash, provided one uses [specific options](https://superuser.com/questions/1044413/audio-md5-checksum-with-ffmpeg).
+Ffmpeg can generate the same hash, provided one uses [specific options](https://superuser.com/questions/1044413/audio-md5-checksum-with-ffmpeg).
 
-_(Incidentally, other possible attributes and combinations have been evaluated, including: filesize; file length in miliseconds; embedded UMID; filenames; UMIDs in sidecar DBX files; etc., but they all seem to produce false positives or false negatives for our purposes.)_
+_(Incidentally, we have evaluated other possible attributes and combinations, including: filesize; file length in miliseconds; embedded UMID; filenames; UMIDs in sidecar DBX files; etc., but they all seem to produce false positives or false negatives for our purposes.)_
 
 #### b. Published metadata
 DAVID's 'theme' links an audio file to the the station's CMS, Publisher, which holds metadata of interest. So it behooves us to treat two such files as essentially different, even if they are sonically identical.
