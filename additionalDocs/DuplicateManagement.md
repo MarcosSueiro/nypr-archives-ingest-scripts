@@ -34,7 +34,7 @@ We have evaluated other possible attributes and combinations, including: filesiz
 (Incidentally, ffmpeg can generate --albeit not embed-- the same hash, provided one uses [specific options](https://superuser.com/questions/1044413/audio-md5-checksum-with-ffmpeg).)
 
 #### b. Published metadata
-The 'theme' (or 'MOTIVE') field in DAVID links an audio file to the station's CMS, Publisher, which holds metadata of interest. So it behooves us to treat two such audio files as essentially different, even if they are sonically identical.
+The 'theme' (a.k.a. 'MOTIVE') field in DAVID links an audio file to the station's CMS, Publisher, which holds metadata of interest. So it behooves us to treat two such audio files as essentially different, even if they are sonically identical.
 
 DAVID's 'theme' can be extracted from the DAVID sidecar .DBX file.
 
