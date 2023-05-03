@@ -40,9 +40,9 @@ All valid WAVE files in archives-managed DAVID subfolders (plus 'News Broadcast 
 
 ```DAVIDDupesByMD5.xsl``` identifies files with matching audio-only MD5s in those exported documents. It then looks up the corresponding DAVID sidecar .DBX file.
 
-As an example, ```DAVIDDupesByMD5.xsl``` has identified 2489 sets of duplicate files and potential excess files in the DAVID folder 'NewsBroadcastArchives'.
+As an example, ```DAVIDDupesByMD5.xsl``` has identified 2489 sets of duplicate files and potential excess files in the DAVID subfolder 'NewsBroadcastArchives'.
 
-At the end of this document we include a sample, partial output.
+At the end of this document we include a partial sample output.
 
 - [ ] TO DO: Group by theme/MOTIVE. 
 - [ ] TO DO: Compare across folders.
