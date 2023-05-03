@@ -26,7 +26,7 @@ That is, the filenames cannot have the same 'letters', regardless of capitalizat
 #### a. Sonic content
 BWF MetaEdit can [generate an MD5 hash](https://mediaarea.net/BWFMetaEdit/md5) to determine if the audio content in two files is identical, regardless of other data in the file. BWF MetaEdit can embed this MD5 hash in the file, and can also verify the data.
 
-Ffmpeg can generate the same hash, provided one uses [specific options](https://superuser.com/questions/1044413/audio-md5-checksum-with-ffmpeg).
+ffmpeg can generate the same hash, provided one uses [specific options](https://superuser.com/questions/1044413/audio-md5-checksum-with-ffmpeg).
 
 _(Incidentally, we have evaluated other possible attributes and combinations, including: filesize; file length in miliseconds; embedded UMID; filenames; UMIDs in sidecar DBX files; etc., but they all seem to produce false positives or false negatives for our purposes.)_
 
