@@ -1,24 +1,26 @@
-# Duplicate management
-Duplicate files are wasteful and expensive. We know that NYPR's internal audio file storage system, DAVID, holds many thousands of 'duplicate' WAVE files. It is best practice that we de-dupe these files before importing them into the new DAMS system, Cortex. How to go about it?
+# Duplicate file management
+Managing and storing duplicate audiovisual files is wasteful and expensive. We know that NYPR's internal audio file storage system, DAVID, holds many thousands of 'duplicate' WAVE files. It would be in the organization’s best interest to de-dupe these files before importing them into the new DAMS system, Cortex. How to go about it?
 
-Successful duplicate managament involves
-1. A definition of duplicates
-2. A way to identify them
-3. A process to de-dupe
+Successful duplicate managament involves establishing the following:
+1. A _definition_ of 'duplicate files'
+2. A way to _identify_ duplicate files
+3. A process to _de-duplicate_ duplicate files
 
-Let's look at these processes in turn.
+Let's look at these three processes in turn.
 
 ## 1. Duplicate definition
 
 We can define two files as duplicate if they **share a particular attribute** or set of attributes. 
 
-Different systems choose different attributes. For example, most operating systems will treat these two files as duplicate:
+Different systems choose different attributes to establish duplicates. For example, most operating systems will treat these two files as duplicate:
 * ```C:/myDrive/myfile.txt```
 * ```C:/myDrive/MYFILE.txt```
 
-That is, the filenames cannot have the same 'letters', regardless of capitalization.
+That is, the filenapaths cannot have the same 'letters', regardless of capitalization.
 
-**For NYPR assets, we propose we consider two files as duplicate if they share _both_ of the following attributes:**
+For NYPR assets, we propose the following definition: 
+
+**Two files that share the following attributes will be considered duplicate:**
    * **a. Sonic content**
    * **b. Published metadata**
 
@@ -28,15 +30,15 @@ BWF MetaEdit can [generate an MD5 hash](https://mediaarea.net/BWFMetaEdit/md5) t
 
 ffmpeg can generate the same hash, provided one uses [specific options](https://superuser.com/questions/1044413/audio-md5-checksum-with-ffmpeg).
 
-_(Incidentally, we have evaluated other possible attributes and combinations, including: filesize; file length in miliseconds; embedded UMID; filenames; UMIDs in sidecar DBX files; etc., but they all seem to produce false positives or false negatives for our purposes.)_
+_(Incidentally, we have evaluated other possible attributes and combinations, including: filesize; exact duration in miliseconds; embedded UMID; filenames; UMIDs in sidecar DBX files; etc., but they all seem to produce either false positives or false negatives for our purposes.)_
 
 #### b. Published metadata
 DAVID's 'theme' links an audio file to the the station's CMS, Publisher, which holds metadata of interest. So it behooves us to treat two such files as essentially different, even if they are sonically identical.
 
-The 'theme' can be extracted from the DAVID sidecar .DBX file.
+The DAVID 'theme' can be extracted from the DAVID sidecar .DBX file.
 
 ## 2. Duplicate identification
-As of April 2023, all valid WAVE files in archives-managed DAVID subfolders (plus 'News Broadcast Archives' and 'News in Progress Archives') currently have an audio-only MD5 hash embedded. The metadata for all files has then been exported as xml documents, one for each DAVID subfolder.
+As of April 2023, all valid WAVE files in archives-managed DAVID subfolders (plus 'News Broadcast Archives' and 'News in Progress Archives') have an embedded audio-only MD5. The metadata for all files has then been exported as xml documents, one for each DAVID subfolder.
 
 ```DAVIDDupesByMD5.xsl``` identifies files with matching audio-only MD5s in those exported documents. It then looks up the corresponding DAVID sidecar .DBX file.
 
@@ -48,12 +50,12 @@ At the end of this document we include a partial sample output.
 - [ ] TO DO: Compare across folders.
 
 ## 3. De-duping
-Different systems deal with potential duplicates in different ways. For example, when you download a file with into an 'identical' filepath, you may be asked to overwrite the previous file, or the systen may add some characters (e.g. '(1)') to the end of the file.
+Different systems deal with potential duplicates in different ways. For instance, when you try to save a file over an exisiting 'identical' filepath, you may be asked to overwrite the previous file, or the system may add some characters (e.g. '(1)' or '\_01') to the end of the file.
 
-For example, within systems at the station:
+Here is how two systems at the station deal with potential duplicates:
 
-- DAVID generates a new filepath with each new ingestion for each file
-- The station's CMS overwrites files coming from DAVID with the same theme
+- _DAVID_ generates a new filepath with each new file ingestion
+- _Publisher_ overwrites files coming from DAVID with the same theme
 
 Given two sonically identical files with matching 'theme' (our suggested definition for duplicate), **we propose we keep:**
 
@@ -61,11 +63,13 @@ Given two sonically identical files with matching 'theme' (our suggested definit
 2. **The file with most recently updated metadata in DAVID (most recent sidecar .DBX file)**; failing that,
 3. **The file most recently created**
 
-Once the script determies which files can be erased, their filepaths can be submitted for deletion to administrators.
+Once the script determines which files can be erased, their filepaths can be submitted for deletion to administrators.
 
 #### Sample identical-MD5 document
 
-Note the different level of metadata
+Here is an example of a set of potential duplicates generated by ```DAVIDDupesByMD5.xsl```, taking into account only the audio MD5. 
+
+Note the different level of metadata; in this case, the suggested protocol would keep copy no. 2.
 ```
 <dupes count="2">
       <File>
