@@ -10,7 +10,7 @@ Let's look at these processes in turn.
 
 ## 1. Duplicate definition
 
-We can define two files as duplicate if they **share a particular attribute**. 
+We can define two files as duplicate if they **share a particular attribute** or set of attributes. 
 
 Different systems choose different attributes. For example, most operating systems will treat these two files as duplicate:
 * ```C:/myDrive/myfile.txt```
