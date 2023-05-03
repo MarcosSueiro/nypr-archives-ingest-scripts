@@ -51,11 +51,11 @@ At the end of this document we include a partial sample output.
 - [ ] TO DO: Compare across folders.
 
 ## 3. De-duping
-Different systems deal with potential duplicates in different ways. For instance, when you try to save a file over an existing 'identical' filepath, you may be asked to overwrite the previous file, rename it, or the system may add some characters (e.g. '(1)' or '\_01') to the end of the file.
+Different systems deal with potential duplicates in different ways. For instance, when you try to save a file over an existing 'identical' filepath, you may be asked to overwrite the previous file or rename the current file; alternately, the system may automatically add some characters (e.g. '(1)' or '\_01') to the end of the filename.
 
 Here is how two systems at the station deal with potential duplicates:
 
-- _DAVID_ generates a new filepath with each new file ingestion
+- _DAVID_ generates a new filepath with each new audio ingestion
 - _Publisher_ overwrites files coming from DAVID with the same theme
 
 Given two sonically identical files with matching 'theme' (our suggested definition for duplicate), **we propose we keep:**
