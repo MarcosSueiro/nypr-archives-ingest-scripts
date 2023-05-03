@@ -1,4 +1,4 @@
-# Duplicate file management
+# Duplicate file management at NYPR
 Managing and storing duplicate audiovisual files is wasteful and expensive. We know that NYPR's internal audio file storage system, DAVID, holds many thousands of 'duplicate' WAVE files. It would be in the organization’s best interest to de-dupe these files before importing them into the new DAMS system, Cortex. How to go about it?
 
 Successful duplicate managament involves establishing the following:
