@@ -19,19 +19,21 @@ Different systems choose different attributes. For example, most operating syste
 That is, the filenames cannot have the same 'letters', regardless of capitalization.
 
 **For NYPR assets, we propose we consider two files as duplicate if they share _both_ of the following attributes:**
-1. **Audio-only MD5**
-2. **'theme' in DAVID**
+   * **a. Sonic content**
+   * **b. Published metadata**
 
 
-#### Audio-only MD5s
+#### a. Sonic content
 BWF MetaEdit [provides a hash](https://mediaarea.net/BWFMetaEdit/md5) to determine if the audio in two files is identical, regardless of other data in the file. BWF MetaEdit can embed the MD5 hash in the file, and can also verify the data.
 
 Ffmpeg can provide the same hash, provided one uses [specific options](https://superuser.com/questions/1044413/audio-md5-checksum-with-ffmpeg).
 
 _(Incidentally, other possible attributes and combinations have been evaluated, including: filesize; file length in miliseconds; embedded UMID; filenames; UMIDs in sidecar DBX files; etc., but they all seem to produce false positives or false negatives for our purposes.)_
 
-#### theme/MOTIVE
+#### b. Published metadata
 DAVID's 'theme' is used as a link to the the station's CMS, Publisher, which can then hold metadata of interest. So it behooves us to treat two such files as essentially different, even if they are sonically identical.
+
+The 'theme' can be extracted from the DAVID sidecar file.
 
 ## 2. Duplicate identification
 All valid WAVE files in archives-managed DAVID subfolders (plus 'News Broadcast Archives' and 'News in Progress Archives') currently have an MD5 hash embedded. This metadata has then been exported as xml documents, one for each DAVID subfolder.
