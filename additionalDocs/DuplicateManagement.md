@@ -29,7 +29,7 @@ We now define these two terms for our purposes.
 #### a. Sonic content
 BWF MetaEdit can [generate an MD5 hash](https://mediaarea.net/BWFMetaEdit/md5) to determine if the audio content in two files is identical, regardless of other data in the file. BWF MetaEdit can embed this MD5 hash in the file, and can also verify the data.
 
-We have evaluated other possible attributes and combinations, including: filesize; exact duration in miliseconds; embedded UMID; filenames; UMIDs in sidecar DBX files; etc., but they all seem to produce either false positives or false negatives for our purposes.
+We have evaluated other possible attributes and combinations, including: filesize; exact duration in miliseconds; whole-file MD5; embedded UMID; filenames; UMIDs in sidecar DBX files; etc., but they all seem to produce either false positives or false negatives for our purposes.
 
 (Incidentally, ffmpeg can generate --albeit not embed-- the same hash, provided one uses [specific options](https://superuser.com/questions/1044413/audio-md5-checksum-with-ffmpeg).)
 
