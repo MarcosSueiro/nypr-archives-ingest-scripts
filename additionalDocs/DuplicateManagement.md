@@ -62,7 +62,8 @@ Given two sonically identical files with matching 'theme' (our suggested definit
 
 1. **The file with most complete metadata in DAVID (largest sidecar .DBX file)**; failing that, 
 2. **The file with most recently updated metadata in DAVID (most recent sidecar .DBX file)**; failing that,
-3. **The file most recently created**
+3. **The file most recently created**; failing that,
+4. **A specific file as determined by a human**
 
 Once the script determines which files can be erased, their filepaths can be submitted for deletion to administrators.
 
