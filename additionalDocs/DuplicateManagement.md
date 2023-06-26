@@ -47,7 +47,7 @@ As an example, ```DAVIDDupesByMD5.xsl``` has identified 2,489 sets of sonically 
 
 At the end of this document we include a partial sample output.
 
-- [ ] TO DO: Group by theme. 
+- [x] TO DO: Group by theme. 
 - [ ] TO DO: Compare across folders.
 
 ## 3. De-duping
