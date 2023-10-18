@@ -37,6 +37,7 @@ Result: XXX files
 7. We transcode/export the desired files, renaming them according to Archives protocol
 Result: 1k files
 - Complication: "Project" files saved as multi-chunk wave files --will need to export as valid WAV
+- Do we want to add files with a description (Note) in DAVID?
  
 
 
