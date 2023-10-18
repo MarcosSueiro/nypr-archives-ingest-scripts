@@ -11,8 +11,8 @@ After sunset, there were two issues:
 - Most of the weekday finsihed products were already in the DAMS
 1. We created a script that ran through all dates between XXX and XXX
 2. We searched the DAVID titles in two folders looking for the following string matches:
-    - "Takeaway"
-    - A date formatted in one of six formats
+    - "Takeaway", and
+    - A date formatted in one of six formats (YYYY-MM-DD, MMDDYY, etc.)
 
 Result: XXX files
 
@@ -25,6 +25,17 @@ Result: XXX files
   - Listed as guests
   - Links in the description
   - **Bold** in the description
+3. Choose files within five days previous to broadcast
+4. Within those files, look for last-name string match
+5. Generate a chooser html document (radio buttons):
+    - Alphabetical by last name
+    - Showing context
+    - Show exact length, name, etc
+    - Warn of common last names ("Smith")
+6. A human chooses file(s) from this list
+7. We transcode/export the desired files, renaming them according to Archives protocol
+- Complication: "Project" files saved as multi-chunk wave files --will need to export as valid WAV
+ 
 
 
 
