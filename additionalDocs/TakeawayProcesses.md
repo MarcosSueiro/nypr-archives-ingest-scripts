@@ -8,7 +8,7 @@ After sunset, there were two issues:
 ## Complete runs
 - The Takeaway broadcast mostly on weekdays but it occasionally broadcast on weekends
 - All of the finished products appeared to be in one of two folders: Archives_Takeaway and Archives_44k
-- Most of the weekday finsihed products were already in the DAMS
+- Most of the weekday finished products were already in the DAMS
 1. We created a script that ran through all dates between XXX and XXX
 2. We searched the DAVID titles in two folders looking for the following string matches:
     - "Takeaway", and
@@ -20,8 +20,9 @@ Result: XXX files
 - Production raw files in the DAVID folder showed many different names
 - 250k+ files
 - Lots of name duplicates
-1. Create an entire run of published Takeaway online
-2. Parse out guests:
+1. Create a frequency list of all "words" in DAVID titles of files 30 min or longer
+2. Create an entire run of published Takeaway online
+3. Parse out guests:
   - Listed as guests
   - Links in the description
   - **Bold** in the description
