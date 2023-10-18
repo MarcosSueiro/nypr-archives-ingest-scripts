@@ -4,7 +4,7 @@ The Takeaway was a radio newsmagazine that broadcast between XXX and XXXX.
 The Takeaway used DAVID as a production tool.
 After sunset, there were two issues:
 1. We wanted to make sure that we could get all the finished product
-2. We wanted to make sure that we could identify production files
+2. We wanted to make sure that we could identify substantial production files
 ## Complete runs
 - The Takeaway broadcast mostly on weekdays but it occasionally broadcast on weekends
 - All of the finished products appeared to be in one of two folders: Archives_Takeaway and Archives_44k
@@ -25,7 +25,7 @@ Result: XXX files
   - Listed as guests
   - Links in the description
   - **Bold** in the description
-3. Choose files within five days previous to broadcast
+3. Choose files at least 30 min long within five days previous to broadcast
 4. Within those files, look for last-name string match
 5. Generate a chooser html document (radio buttons):
     - Alphabetical by last name
@@ -34,6 +34,7 @@ Result: XXX files
     - Warn of common last names ("Smith")
 6. A human chooses file(s) from this list
 7. We transcode/export the desired files, renaming them according to Archives protocol
+Result: 1k files
 - Complication: "Project" files saved as multi-chunk wave files --will need to export as valid WAV
  
 
