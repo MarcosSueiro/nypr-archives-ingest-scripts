@@ -2,23 +2,26 @@
 ## Intro
 The Takeaway was a radio newsmagazine that broadcast between March 31, 2008 and June 2, 2023. 
 The Takeaway used DAVID as a production tool.
-After sunsetting the show, we wanted to make sure that Archives had:
+After sunsetting the show, we wanted to make sure that NYPR had:
 1. A **complete run** of all the finished product
 2. Substantial **production files**: e.g. raw interviews
 ## Complete runs
 - The Takeaway broadcast mostly on weekdays but it occasionally broadcast on weekends
-- All of the finished products appeared to be in one of two folders: Archives_Takeaway and Archives_44k; segments in 'TakeawayLoRes'
+- All of the finished products appeared to be in one of two folders: Archives_Takeaway and Archives_44k, with segments in 'TakeawayLoRes'
 - Most of the weekday finished products were already in the DAMS
 - No files in DAVID after October 5, 2022 (straight into DAMS)
+
+Process:
 1. Run through all dates between March 31, 2008 and October 5, 2022
 2. Search DAVID titles in DAVID folder 'Archives_Takeaway' looking for the following string matches:
     - "Takeaway", and
     - A date formatted as YYYY-MM-DD or MM-DD-YYYY
 3. If not found (1,537 files), search in 'Archives_44k' with date formats YYYY-MM-DD and MMDDYY (30 files found)
 4. If not found but in online [schedule](https://www.wnyc.org/schedule/2023/oct/31/) (62 events), search in previous two folders using additional date formats (YYMMDD, etc.) (0 files found)
-5. If not found during second attempt, look for matches in DAVID folder 'TakeawayLoRes' (297 segments)
+5. If not found during second attempt (1,507 dates), look for matches in DAVID folder 'TakeawayLoRes' and date formats YYYY-MM-DD, MM-DD-YYYY or MMDDYY (297 segments)
 
 ## Matched production files
+- Looking mostly for raw interviews with specific people
 - 250k+ production raw files in the DAVID folder "Takeaway Lo Res" 
 - Inconsistently named
 - Lots of name duplicates
