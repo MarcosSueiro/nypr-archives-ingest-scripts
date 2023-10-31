@@ -43,7 +43,7 @@ Result: 1k files
   4. Export as .AAF
   5. Open AAF in ProTools; check that files are _copied_, not just referenced
   6. Save as PT session - files will now be in Audio Files subfolder of the PT session
-- Do we want to add files with a description (Note) in DAVID? - nothing there beyond a few seconds
+- NOTE: No files longer than five minutes have any substantial descriptions (REMARK) in DAVID
  
 
 
