@@ -36,7 +36,13 @@ Result: XXX files
 6. A human chooses file(s) from this list
 7. We transcode/export the desired files, renaming them according to Archives protocol
 Result: 1k files
-- Complication: "Project" files saved as multi-chunk wave files --will need to export as valid WAV
+- Complication: "Project" files saved as multi-chunk wave files --need to export as valid WAV:
+  1. Open "Project" file in DAVID MultiTrack editor
+  2. Go to "SingleTrack" tab
+  3. Place files one after another
+  4. Export as .AAF
+  5. Open AAF in ProTools; check that files are _copied_, not just referenced
+  6. Save as PT session - files will now be in Audio Files subfolder of the PT session
 - Do we want to add files with a description (Note) in DAVID? - nothing there beyond a few seconds
  
 
