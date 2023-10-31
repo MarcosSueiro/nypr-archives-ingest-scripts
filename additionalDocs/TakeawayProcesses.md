@@ -37,7 +37,7 @@ Process:
   - **Bold** in the CMS description
 3. Choose files at least 5 min long within five days previous to broadcast
 4. Within those files, look for last-name string match
-5. Generate a chooser html document (with radio buttons):
+5. Generate a [chooser html document](https://marcossueiro.github.io/takeawayChoose/) (with radio buttons):
     - Alphabetical by last name
     - Showing context
     - Show exact length, name, etc
