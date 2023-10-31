@@ -1,41 +1,47 @@
 # Takeaway end-of-life processes
 ## Intro
-The Takeaway was a radio newsmagazine that broadcast between XXX and XXXX. 
+The Takeaway was a radio newsmagazine that broadcast between March 31, 2008 and June 2, 2023. 
 The Takeaway used DAVID as a production tool.
-After sunset, there were two issues:
-1. We wanted to make sure that we could get all the finished product
-2. We wanted to make sure that we could identify substantial production files
+After sunsetting the show, we wanted to make sure that Archives had:
+1. A **complete run** of all the finished product
+2. Substantial **production files**: e.g. raw interviews
 ## Complete runs
 - The Takeaway broadcast mostly on weekdays but it occasionally broadcast on weekends
 - All of the finished products appeared to be in one of two folders: Archives_Takeaway and Archives_44k
 - Most of the weekday finished products were already in the DAMS
-1. We created a script that ran through all dates between XXX and XXX
-2. We searched the DAVID titles in two folders looking for the following string matches:
+- No files in DAVID after October 5, 2022 (straight into DAMS)
+1. Run through all dates between March 31, 2008 and October 5, 2022
+2. Search DAVID titles in DAVID folder 'Archives_Takeaway' looking for the following string matches:
     - "Takeaway", and
-    - A date formatted in one of six formats (YYYY-MM-DD, MMDDYY, etc.)
+    - A date formatted as YYYY-MM-DD or MM-DD-YYYY
+3. If not found, search in 'Archives_44k'
+4. If not found but in online [schedule](https://www.wnyc.org/schedule/2023/oct/31/), search in previous two folders using additional date formats (YYMMDD, etc.)
+5. If not found during second attempt, look for dates in DAVID foldre 'TakeawayLoRes'
 
 Result: XXX files
 
 ## Matched production files
-- Production raw files in the DAVID folder showed many different names
-- 250k+ files
+- 250k+ production raw files in the DAVID folder "Takeaway Lo Res" 
+- Inconsistently named
 - Lots of name duplicates
-1. Create a frequency list of all "words" in DAVID titles of files 30 min or longer
+
+Process:
+1. Create a frequency list of all "words" in DAVID titles in this folder
 2. Create an entire run of published Takeaway online
-3. Parse out guests:
+3. From (2), parse out guests, identified as:
   - Listed as guests
-  - Links in the description
-  - **Bold** in the description
-3. Choose files at least 30 min long within five days previous to broadcast
+  - Links in the CMS description
+  - **Bold** in the CMS description
+3. Choose files at least 5 min long within five days previous to broadcast
 4. Within those files, look for last-name string match
-5. Generate a chooser html document (radio buttons):
+5. Generate a chooser html document (with radio buttons):
     - Alphabetical by last name
     - Showing context
     - Show exact length, name, etc
     - Warn of common last names ("Smith")
 6. A human chooses file(s) from this list
-7. We transcode/export the desired files, renaming them according to Archives protocol
-Result: 1k files
+7. Transcode/export the chosen files, renaming them according to Archives protocol, e.g. "WNYC-TAKE-2008-10-06-w6289.2 SEGMENT RAW Uchitelle.WAV"
+Result: 700 files
 - Complication: "Project" files saved as multi-chunk wave files --need to export as valid WAV:
   1. Open "Project" file in DAVID MultiTrack editor
   2. Go to "SingleTrack" tab
