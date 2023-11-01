@@ -30,7 +30,7 @@ Conclusion: We may have missed most week-end broadcasts
 
 Process:
 1. Create a frequency list of all "words" in DAVID titles in this folder
-2. Create an entire run of published Takeaway online
+2. From the CMS, create an entire run of published Takeaway online
 3. From (2), parse out guests, identified as:
   - Listed as guests
   - Links in the CMS description
