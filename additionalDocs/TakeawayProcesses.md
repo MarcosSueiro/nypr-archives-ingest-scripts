@@ -42,7 +42,7 @@ Conclusion: We may have missed most week-end broadcasts
     - Showing context
     - Show exact length, name, etc
     - Warn of common last names ("Smith")
-6. A human chooses file(s) from this list
+6. A human chooses files from this list
 7. Transcode/export the chosen 720 files:
     - rename them according to Archives protocol, e.g. "WNYC-TAKE-2008-10-06-w6289.2 SEGMENT RAW Uchitelle.WAV"
     - embed metadata accroding to Archives protocol
