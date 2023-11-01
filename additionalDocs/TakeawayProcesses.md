@@ -11,7 +11,7 @@ After sunsetting the show, we wanted to make sure that NYPR had:
 - Most of the weekday finished products were already in the DAMS
 - No files in DAVID after October 5, 2022 (straight into DAMS)
 
-Process:
+### Process:
 1. Run through all dates between March 31, 2008 and October 5, 2022
 2. Search DAVID titles in DAVID folder 'Archives_Takeaway' looking for the following string matches:
     - "Takeaway", and
@@ -28,7 +28,7 @@ Conclusion: We may have missed most week-end broadcasts
 - Inconsistently named
 - Lots of name duplicates
 
-Process:
+### Process:
 1. Create a frequency list of all "words" in DAVID titles in this folder
 2. From the CMS, create an entire run of published Takeaway online
 3. From (2), parse out guests, identified as:
