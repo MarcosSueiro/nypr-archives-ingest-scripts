@@ -4,7 +4,7 @@ Since noon of April 18, 2011, New York Public Radio automatically records every 
 
 The DAVID recording process automatically starts the recording at :04 after the hour, which is when the local newscast is broadcast. The process assigns a unique filename and a 'title' following the following pattern: *'WNYC-NWSC-[YYYY-MM-DD hh]h[mm]m';* for example *'WNYC-NWSC-2021-11-07 19h11m'.* This pinpoints which hourly broadcast is recorded (the part indicating the minutes after the hour seems to vary). Each recording is always less than five minutes long.
 
-On the other hand, the station's newsroom automation system, [NewsBoss](https://www.newsboss.com/), stores the text that the station's host reads during the local newscasts, as well as additional information such as other audio files to play and the names of the writers and editors of each news story.
+On the other hand, the station's newsroom automation system, [NewsBoss](https://www.newsboss.com/), stores the text that the station's host reads during the local newscasts, as well as additional information such as other audio files to play and the names of the writers and editors of each news story. The data begins on May 30, 2008.
 
 This document describes an [NYPR Archives](https://www.wnyc.org/series/archives-preservation) project in the Fall of 2021 that matched the original WAVE files to the NewsBoss descriptions. We then embedded the NewsBoss metadata in the WAVE files for easier ingest into the station's DAMS, and for better discoverability.
 
