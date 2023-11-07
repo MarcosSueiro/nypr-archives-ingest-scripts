@@ -15,7 +15,7 @@ Here are the steps:
 1. Log in to NewsBoss
 2. Find the newscasts in NewsBoss:
    * Search NewsBoss 'Archive' for the text ":04" *in slugs*...
-     * ...limiting the search to one year (this may no longer be strictly necessary, but it likely has beefits later on with regards to managing large files, etc.)
+     * ...limiting the search to one year (NewsBoss can retrieve up to 10,000 entries per search)
      * ...limiting results to Newscasts, not stories
 3. Select all results
 4. Retrieve to your 'queue'
