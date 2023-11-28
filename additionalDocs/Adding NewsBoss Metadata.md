@@ -18,7 +18,7 @@ Here are the steps:
      * ...limiting the search to one year (NewsBoss can retrieve up to 10,000 entries per search)
      * ...limiting results to Newscasts, not stories
 3. Select all results
-4. Retrieve to your 'queue'
+4. **Retrieve** to your 'queue'
 5. Select your entire queue and export as an .htm file with the following name: '[YYYY]newscasts.htm' (e.g. '2015newscasts.htm')
 6. Clean up the htm file in a text editor: 
    * Fix ```<meta>``` tag: replace ```'charset=utf-8">'```  with   ```'charset=utf-8"/>'```
