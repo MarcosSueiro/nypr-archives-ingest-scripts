@@ -48,13 +48,16 @@ Conclusion: We may have missed most week-end broadcasts
     - embed metadata accroding to Archives protocol
 
 
-- Complication: 115 "Project" files saved as multi-chunk wave files --need to export as valid WAV:
-  1. Open "Project" file in DAVID MultiTrack editor
-  2. Go to "SingleTrack" tab
-  3. Place files one after another
-  4. Export as .AAF
-  5. Open AAF in ProTools; check that files are _copied_, not just referenced
-  6. Save as PT session - files will now be in Audio Files subfolder of the PT session
+#### Complication: 115 "Project" files saved as multi-chunk wave files --need to export as valid WAV:
+  1. Copy title of project you are about to open from DBX file
+  2. Edit "Project" file in DAVID EasyTrack editor
+  3. Sort files in "clips" tab by descending length (the ones we want will usually be longest)
+  4. Right click on file, select "Properties..." and listen to the file
+  5. Select *one* File you want to keep, and 
+  6. Select File > Save Project as...
+  7. Select *one* file to save, and save as wav file with filename as title in step 1
+  8. Match file with info based on DBX and matched CMS-DAVID xml files
+  9. Repeat steps 5-8 for each file within project that you want to save
 
 - NOTE: No files longer than five minutes have any substantial descriptions (REMARK) in DAVID
  
