@@ -49,15 +49,15 @@ Conclusion: We may have missed most week-end broadcasts
 
 
 #### Complication: 115 "Project" files saved as multi-chunk wave files --need to export as valid WAV:
-  1. Copy title of project you are about to open from DBX file
-  2. Edit "Project" file in DAVID EasyTrack editor
-  3. Sort files in "clips" tab by descending length (the ones we want will usually be longest)
-  4. Right click on file, select "Properties..." and listen to the file
-  5. Select *one* File you want to keep, and 
-  6. Select File > Save Project as...
-  7. Select *one* file to save, and save as wav file with filename as title in step 1
-  8. Match file with info based on DBX and matched CMS-DAVID xml files
-  9. Repeat steps 5-8 for each file within project that you want to save
+  1. Copy DAVID title of project you are about to open from DBX file or a document such as "takeawayFilesToCopy.xml"
+  2. Select Takeaway Past-LoRes folder in DAVID and paste the title in the search field. Press ENTER
+  3. In case of multiple matches, select the appropriate file by matching filename
+  4. Edit "Project" file in DAVID MultiTrack editor
+  5. Sort files in "clips" tab by descending length (the ones we want will usually be longest)
+  6. Drag the files you want to keep to the "Save" icon 💾 in MultiTrack
+  7. Select "Disc Prod - Archives Test" as the destination folder in the popup
+  8. Once new take is rendered, paste the DAVID title in the "Comment:" section; repeat for each new take
+  9. Repeat from step 1
 
 - NOTE: No files longer than five minutes have any substantial descriptions (REMARK) in DAVID
  
