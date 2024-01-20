@@ -51,14 +51,15 @@ Conclusion: We may have missed most week-end broadcasts
 #### Complication: 115 "Project" files saved as multi-chunk wave files --need to export as valid WAV:
 115 Files are saved as "Project" (multitrack) type. The underlying wav files are concatenated as one long WAVE file, with each 'track' separated by `<fmt >` chunks (headers) (!). See issue [here](https://github.com/MediaArea/BWFMetaEdit/issues/264)
   1. Copy DAVID title of project you are about to open from DBX file or a document such as "`takeawayFilesToCopy.xml`"
-  2. Select `Takeaway Past-LoRes` folder in DAVID and paste the title in the search field. Press ENTER
+  2. Select `Takeaway Past-LoRes` folder in DAVID (you have to choose every time) and paste the title in the search field. Press ENTER
   3. In case of multiple matches, select the appropriate file by matching filename
   4. Edit "Project" file in DAVID MultiTrack editor
   5. Sort files in "clips" tab by descending length (the ones we want will usually be longest)
   6. Drag the files you want to keep to the "Save" icon 💾 in MultiTrack
-  7. Select `Disc Prod - Archives Test` as the destination folder in the popup
+  7. Select `Disc Prod - Archives Test` as the destination folder in the popup (you **have** to choose every time)
   8. Once new take is rendered, paste the DAVID title in the `Comment:` section; repeat for each new take
-  9. Repeat from step 1
+  9. Go back to MultiTrack Editor, select all clips, right-click and choose "Delete all elements"; confirm
+  10. Repeat from step 1
 
 - NOTE: No files longer than five minutes have any substantial descriptions (REMARK) in DAVID
  
