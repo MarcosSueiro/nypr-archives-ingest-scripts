@@ -20,7 +20,7 @@ This will be done by creating, first, mezzanine parse-able descriptions that, af
 - Consistent, parse-able descriptions of the performance as _abstract_
 
 ## Workflow
-1. Catalogers will work on the Archives' cataloging tool (known as "cavafy") using a template for each major section of the concert or performance (see [below](### Sample section entry) for a sample)
+1. Catalogers will work on the Archives' cataloging tool (known as "cavafy") using a template for each major section of the concert or performance (see [below](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/master/additionalDocs/performanceCataloging.md#sample-section-entry) for a sample)
 2. An xslt script will use LoC's API to suggest entries that match titles, composers, performers and media of performance. Catalogers will choose the appropriate entry
 3. Catalog records will be updated as stated above
 
