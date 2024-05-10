@@ -23,3 +23,83 @@ This will be done by creating, first, mezzanine parse-able descriptions that, af
 1. Catalogers will work on the Archives' cataloging tool (known as "cavafy") using a template for each major section of the concert or performance (see below for a sample)
 2. An xslt script will use LoC's API to suggest entries that match titles, composers, performers and media of performance. Catalogers will choose the appropriate entry
 3. Catalog records will be updated as stated above
+
+## Appendix
+### Sample section entry 
+The following is a filled-out template for the mezzanine description of a musical performance. Note that there are extra segments that will be ignored when creating the final abstract.
+```HOUR PERFORMANCE DATE: 1996-03-04
+HOUR SEQUENCE: 
+HOUR DESCRIPTION: Jordan Sandke and his Sunset Serenaders with guest violinist Joel Smirnoff. Listed as "Sunrise Serenaders" on box. (Note: There have been several bands called "Sunset Serenaders". This is the New York-based ensemble led by Jordan Sandke)
+HOUR HOST: John Schaefer
+HOUR ENGINEER:  
+HOUR NOTES: 
+<SEGMENT>
+** LIVE WORK TITLE: Taking a chance on love
+** LIVE WORK COMPOSER: Duke, Vernon
+** LIVE WORK PERFORMERS: [SUNSET SERENADERS: Jordan Sandke|cornet ; John Di Martino|piano ; Rob Thomas|bass]
+** GUEST PERFORMERS, INTERVIEWEES: Joel Smirnoff | violin
+** SEGMENT NOTES: 
+</SEGMENT>
+<SEGMENT>
+** LIVE WORK TITLE: Tin tin deo
+** LIVE WORK COMPOSER: Dizzy Gillespie ; Chano Pozo
+** LIVE WORK PERFORMERS: [SUNSET SERENADERS: Jordan Sandke|cornet ; John Di Martino|piano ; Rob Thomas|bass]
+** GUEST PERFORMERS, INTERVIEWEES: Joel Smirnoff | violin
+** SEGMENT NOTES: 
+</SEGMENT>
+<SEGMENT>
+** LIVE WORK TITLE: Black Satin
+** LIVE WORK COMPOSER: Joe Venuti ; Russ Morgan
+** LIVE WORK PERFORMERS: [SUNSET SERENADERS: Jordan Sandke|cornet ; John Di Martino|piano ; Rob Thomas|bass]
+** GUEST PERFORMERS, INTERVIEWEES: Joel Smirnoff | violin
+** SEGMENT NOTES: 
+</SEGMENT>
+<SEGMENT>
+** LIVE WORK TITLE: Medley: Beethoven violin concerto with Sweet Georgia Brown
+** LIVE WORK COMPOSER: 
+** LIVE WORK PERFORMERS: [SUNSET SERENADERS: Jordan Sandke|cornet ; John Di Martino|piano ; Rob Thomas|bass]
+** GUEST PERFORMERS, INTERVIEWEES: Joel Smirnoff | violin
+** SEGMENT NOTES: 
+</SEGMENT>
+<SEGMENT>
+** LIVE WORK TITLE: 
+** LIVE WORK COMPOSER: 
+** LIVE WORK PERFORMERS: 
+** GUEST PERFORMERS, INTERVIEWEES: 
+** SEGMENT NOTES: 
+</SEGMENT>
+<SEGMENT>
+** LIVE WORK TITLE: 
+** LIVE WORK COMPOSER: 
+** LIVE WORK PERFORMERS: 
+** GUEST PERFORMERS, INTERVIEWEES: 
+** SEGMENT NOTES: 
+</SEGMENT>
+<SEGMENT>
+** LIVE WORK TITLE: 
+** LIVE WORK COMPOSER: 
+** LIVE WORK PERFORMERS: 
+** GUEST PERFORMERS, INTERVIEWEES: 
+** SEGMENT NOTES: 
+</SEGMENT>
+<SEGMENT>
+** LIVE WORK TITLE: 
+** LIVE WORK COMPOSER: 
+** LIVE WORK PERFORMERS: 
+** GUEST PERFORMERS, INTERVIEWEES: 
+** SEGMENT NOTES: 
+</SEGMENT>
+<SEGMENT>
+** LIVE WORK TITLE: 
+** LIVE WORK COMPOSER: 
+** LIVE WORK PERFORMERS: 
+** GUEST PERFORMERS, INTERVIEWEES: 
+** SEGMENT NOTES: 
+</SEGMENT>
+<SEGMENT>
+** LIVE WORK TITLE: 
+** LIVE WORK COMPOSER: 
+** LIVE WORK PERFORMERS: 
+** GUEST PERFORMERS, INTERVIEWEES: 
+** SEGMENT NOTES: 
+</SEGMENT>```
