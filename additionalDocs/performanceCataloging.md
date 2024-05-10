@@ -24,6 +24,12 @@ This will be done by creating, first, mezzanine parse-able descriptions that, af
 2. An xslt script will use LoC's API to suggest entries that match titles, composers, performers and media of performance. Catalogers will choose the appropriate entry
 3. Catalog records will be updated as stated above
 
+## Cataloging resources
+- https://www.iasa-web.org/sound-archives/cataloguing
+- https://www.iasa-web.org/cataloguing-rules
+- https://wiki.lyrasis.org/display/LD4P/Performed+Music+Ontology
+- https://www.fiafnet.org/pages/E-Resources/Cataloguing-Manual.html 
+
 ## Appendix
 ### Sample section entry 
 The following is a filled-out template for the mezzanine description of a musical performance. Note that there are extra segments that will be ignored when creating the final abstract.
