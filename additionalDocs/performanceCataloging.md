@@ -1,7 +1,7 @@
 # Creating consistent descriptions of musical performances
 
 ## Introduction
-The NYPR Archives contains many decades of remarkable performance recordings, including shows such as Around New York or New Sounds Live. These performances are particularly valuable because they may be subject to fewer intellectual control restrictions than mass-replicated recordings and because they are unique.
+The NYPR Archives contains many decades of remarkable performance recordings, including shows such as _Around New York_ or _New Sounds Live_. These performances are particularly valuable because they may be subject to fewer intellectual control restrictions than mass-replicated recordings and because they are unique.
 
 We aim to provide **consistent, reference-able listings** within each live performance of the following aspects:
 - musical works
