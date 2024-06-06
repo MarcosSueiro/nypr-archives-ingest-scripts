@@ -3,28 +3,83 @@
 ## Introduction
 The NYPR Archives contains many decades of remarkable performance recordings, including shows such as _Around New York_ or _New Sounds Live_. These performances are particularly valuable because they may be subject to fewer intellectual control restrictions than mass-replicated recordings and because they are unique.
 
-We aim to provide **consistent, reference-able listings** within each live performance of the following aspects:
-- musical works
-- performers
-- media of performance
+We aim to provide:
+- **normalised, reference-able listings** within each live performance of the following aspects:
+
+1. musical works
+2. performers
+3. media of performance
+
+- **standardised, parse-able** performance listings
 
 This will allow us to answer questions such as: 
 - What other performances do we have of the Mozart clarinet concerto?
 - What instruments does Evan Ziporyn play in our collection?
 - What published recordings exist of James P. Johnson’s “Charleston”?
 
-This will be done by creating, first, mezzanine parse-able descriptions that, after parsing, will eventually result in the following data:
-- LCNAF entries for works or composers (whichever is more specific) as _subjects_
-- LCNAF or WNYC entries for performers as _contributors_
-- (maybe) URLs (TBD) for media of performance as _contributorRoles_
-- Consistent, parse-able descriptions of the performance as _abstract_
+## Musical works
+We aim to have a **standardised, referenceable entry** for each work performed live.
+
+Whenever possible, use a NameTitle entry from LCNAF:
+
+    Mozart, Wolfgang Amadeus, 1756-1791. Quintets, clarinet, violins (2), viola, cello, K. 581, A major
+
+    http://id.loc.gov/authorities/names/n81128331
+
+The important part of the entry above is the URL.
+
+Many non-classical and "new" musical works have no entries in LoC. 
+
+We need to find at most two additional databases that include:
+
+- A complete URL for each work
+- (Preferably) serialization as json or xml
+- (Preferably) a RESTFul API
+- (Preferably) synchronization with WQXR exiting databases
+
+### Movements, Sections, Arrangements and medleys
+Devise a way to note these when not specified in LCNAF
+
+## Performers
+Use LCNAF entries whenever possible. 
+
+If no LCNAF entry exist, use or create a wnyc.org/person entry. Here is an [example](https://www.wnyc.org/people/richard-borinstein/).
+
+## Media of performance
+Use [LCMPT](http://id.loc.gov/authorities/performanceMediums) whenever possible. 
+
+LCMPT does not include some performance roles such as a non-performing conductor. We need to come up with an alternative. 
+
+## Performance listings
+
+Devise a parse-able description that clearly presents the structure of a performance recording, e.g.:
+
+```
+SECTION (e.g. hour)
+  sectionDescription
+  sectionTitle
+  segment
+    segmentDescription
+    work
+      workComposer
+      workTitle
+      performer : mediumOfPerformance
+    segmentNotes
+  sectionNotes
+    
+```
 
 ## Workflow
-1. Catalogers will work on the Archives' cataloging tool (known as "cavafy") using a template for each major section of the concert or performance (see [below](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/master/additionalDocs/performanceCataloging.md#sample-section-entry) for a sample)
-2. An xslt script will use LoC's API to suggest entries that match titles, composers, performers and media of performance. Catalogers will choose the appropriate entry
-3. Catalog records will be updated as stated above
+To be devised.
+
+Options include:
+- pre-loaded forms in cavafy, e.g. [this](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/master/additionalDocs/performanceCataloging.md#sample-section-entry)
+- spreadsheets
+- OpenRefine interactive spreadsheets
+- xhtml forms
 
 ## Cataloging resources
+- https://web.library.yale.edu/cataloging/music
 - https://www.iasa-web.org/sound-archives/cataloguing
 - https://www.iasa-web.org/cataloguing-rules
 - https://wiki.lyrasis.org/display/LD4P/Performed+Music+Ontology
