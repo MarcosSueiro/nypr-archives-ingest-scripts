@@ -18,7 +18,7 @@ This will allow us to answer questions such as:
 - What published recordings exist of James P. Johnson’s “Charleston”?
 
 ## Musical works
-We aim to have a **standardised, referenceable entry** for each work performed live.
+We aim to have a **standardised, referenceable entry** for each work performed live. The goal is to not create new titles, but instead reference a URL.
 
 Whenever possible, use a NameTitle entry from LCNAF:
 
@@ -28,14 +28,23 @@ Whenever possible, use a NameTitle entry from LCNAF:
 
 The important part of the entry above is the URL.
 
-Many non-classical and "new" musical works have no entries in LoC. 
-
-We need to find at most two additional databases that include:
+Many non-classical and "new" musical works have no entries in LoC. For these, we need to find at most two additional databases that include:
 
 - A complete URL for each work
 - (Preferably) serialization as json or xml
 - (Preferably) a RESTFul API
 - (Preferably) synchronization with WQXR exiting databases
+
+Potential resources:
+
+https://musicbrainz.org/doc/Work ([example](https://musicbrainz.org/iswc/T-070.024.453-6))
+
+https://www.discogs.com/developers/#
+
+https://portal.themlc.com/search#work
+
+https://iswcnet.cisac.org/search
+
 
 ### Movements, Sections, Arrangements and medleys
 Devise a way to note these when not specified in LCNAF
@@ -80,6 +89,8 @@ Options include:
 
 ## Cataloging resources
 - https://web.library.yale.edu/cataloging/music
+- https://cmc.wp.musiclibraryassoc.org/mla-best-practices/
+- https://original.rdatoolkit.org/document.php?id=mlabpchp6
 - https://www.iasa-web.org/sound-archives/cataloguing
 - https://www.iasa-web.org/cataloguing-rules
 - https://wiki.lyrasis.org/display/LD4P/Performed+Music+Ontology
