@@ -54,7 +54,7 @@ Devise a way to note these when not specified in LCNAF
 ## Performers
 Use LCNAF entries whenever possible. 
 
-If no LCNAF entry exist, use or create a wnyc.org/person entry. Here is an [example](https://www.wnyc.org/people/richard-borinstein/).
+If no LCNAF entry exists, use or create a wnyc.org/person entry. Here is an [example](https://www.wnyc.org/people/richard-borinstein/).
 
 ## Media of performance
 Use [LCMPT](http://id.loc.gov/authorities/performanceMediums) whenever possible. 
