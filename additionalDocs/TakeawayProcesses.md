@@ -61,13 +61,13 @@ Conclusion: We may have missed most week-end broadcasts
   9. Go back to MultiTrack Editor, select all clips, right-click and choose "Delete all elements"; confirm
   10. Repeat from step 1
 
-- Export 167 files to ARCHIVESNAS1\INGEST\01 PLEASE REVIEW\takeawayRaw\takeawayFilesExtractedFromMultitrack
+- Export 167 files (from the original 115 multitrack projects) to ARCHIVESNAS1\INGEST\01 PLEASE REVIEW\takeawayRaw\takeawayFilesExtractedFromMultitrack
 - Embed metadata according to Archives protocol
 
 - NOTE: No files longer than five minutes have any substantial descriptions (REMARK) in DAVID
  
 #### Adding LCSH to exported files
 1. User (Martha) chooses LCSH for each story based on subject "clusters" around CMS tags
-2. (TO DO) Embed LCSH URIs in files
+2. (TO DO) Embed LCSH URIs in all files
 
 
