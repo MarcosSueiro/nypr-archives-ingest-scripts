@@ -4,7 +4,7 @@ The Takeaway was a radio newsmagazine that broadcast between March 31, 2008 and 
 The Takeaway used DAVID as a production tool.
 After sunsetting the show, we wanted to make sure that NYPR had:
 1. A **complete run** of all the finished product
-2. Substantial **production files**: e.g. raw interviews
+2. Important **production files**: e.g. raw interviews
 ## Complete runs
 - The Takeaway broadcast mostly on weekdays but it occasionally broadcast on weekends
 - All of the finished products appeared to be in one of two folders: Archives_Takeaway and Archives_44k, with segments in 'TakeawayLoRes'
@@ -45,7 +45,7 @@ Conclusion: We may have missed most week-end broadcasts
 6. A human chooses files from this list
 7. Transcode/export the chosen 720 files:
     - rename them according to Archives protocol, e.g. "WNYC-TAKE-2008-10-06-w6289.2 SEGMENT RAW Uchitelle.WAV"
-    - embed metadata accroding to Archives protocol
+    - embed metadata according to Archives protocol
 
 
 #### Complication: 115 "Project" files saved as multi-chunk wave files --need to export as valid WAV:
@@ -61,8 +61,13 @@ Conclusion: We may have missed most week-end broadcasts
   9. Go back to MultiTrack Editor, select all clips, right-click and choose "Delete all elements"; confirm
   10. Repeat from step 1
 
+- Export 167 files to ARCHIVESNAS1\INGEST\01 PLEASE REVIEW\takeawayRaw\takeawayFilesExtractedFromMultitrack
+- Embed metadata according to Archives protocol
+
 - NOTE: No files longer than five minutes have any substantial descriptions (REMARK) in DAVID
  
-
+#### Adding LCSH to exported files
+1. User (Martha) chooses LCSH for each story based on subject "clusters" around CMS tags
+2. (TO DO) Embed LCSH URIs in files
 
 
