@@ -35,7 +35,13 @@ Dates are always formatted YYYY-MM-DD, with unknown data as "u" (e.g. (1985-uu-u
 ## Instantiation ID
 The instantiation ID is unique to the filename. It consists of a numeric **asset ID** and an alphanumeric **instantiation suffix** joined by a period (".")
 #### Asset ID
-The asset ID is the unique number assigned to one of about 70,000 conceptual "assets" in the NYPR catalogue under which one or more manifestations ("instantiations", in pbcore parlance) are grouped. Asset IDs are between four and six digits long, non-continuous.
+
+An asset ID can be one of two types: 
+
+- the unique number (bewteen four and six digits) assigned to one of about 70,000 conceptual "assets" (usually a specific episode in a show, or a particular news item) in the [NYPR Archives catalogue](https://cavafy.wnyc.org/). 
+
+- the story ID in Publisher. In that case it is preceded by a lowercase "w".
+  
 #### Instantiation suffix
 The instantiation suffix is unique within an asset for each instantiation. In the example above, ".4" denotes the fourth instantiation of that asset. (Please note that the number does not imply of ordinality: that is, instantiation ".4"  could be as much a derivative of ".3" as of ".6")
 
