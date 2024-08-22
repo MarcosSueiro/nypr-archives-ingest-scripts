@@ -117,9 +117,10 @@ The following fields will also need to be present either embedded or in cavafy:
 
 ## Filename
 
-The NYPR Archives [naming convention](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/master/additionalDocs/fileNaming.md) is as follows:
+The NYPR Archives [naming convention](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/master/additionalDocs/fileNaming.md) functions as a classification "call number".
+The naming convention follows this pattern:
 
-COLL-SERIES-YYYY-MM-DD-12345.ext\[Free text\].wav
+```   COLL-SERIES-YYYY-MM-DD-12345.ext\[Free text\].wav```
 
 Where
 
