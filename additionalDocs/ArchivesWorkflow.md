@@ -79,7 +79,7 @@ Generally, the ingestion of new digital audio files follows the following steps:
 2. Archives personnel create new cavafy assets with at least the following two fields either manually or via spreadsheet (recommended):
 
    - Collection name (e.g. WNYC, MUNI...)
-  - Unique asset number
+   - Unique asset number
 
 It is usually advisable to add as many additional fields as possible from the information at hand.
 
