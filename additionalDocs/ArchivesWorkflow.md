@@ -117,7 +117,7 @@ The following fields will also need to be present either embedded or in cavafy:
 
 ## Filename
 
-The NYPR Archives naming convention is as follows:
+The NYPR Archives [naming convention](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/master/additionalDocs/fileNaming.md) is as follows:
 
 COLL-SERIES-YYYY-MM-DD-12345.ext\[Free text\].wav
 
