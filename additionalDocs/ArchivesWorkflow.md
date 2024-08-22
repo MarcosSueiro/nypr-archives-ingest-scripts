@@ -78,8 +78,8 @@ Generally, the ingestion of new digital audio files follows the following steps:
 1. New assets are identified (e.g. a donation of new tapes)
 2. Archives personnel create new cavafy assets with at least the following two fields either manually or via spreadsheet (recommended):
 
-- Collection name (e.g. WNYC, MUNI...)
-- Unique asset number
+   - Collection name (e.g. WNYC, MUNI...)
+  - Unique asset number
 
 It is usually advisable to add as many additional fields as possible from the information at hand.
 
@@ -87,18 +87,18 @@ It is usually advisable to add as many additional fields as possible from the in
  COLL-SERIES-YYYY-MM-DD-12345.ext[Free text].wav
  (see below)
 4. Using BWF MetaEdit, the transfer technician embeds additional metadata in the audio file. At a minimum:
-  - Medium (IMED)
-  - Technician (ITCH)
+   - Medium (IMED)
+   - Technician (ITCH)
 
 Encouraged:
 
-  - Source (ISRC) (cavafy catalog URL)
+   - Source (ISRC) (cavafy catalog URL)
 
 The following fields will also need to be present either embedded or in cavafy:
 
-  - Title
-  - Description (abstract/ISBJ)
-  - One Library of Congress subject heading (IKEY)
+   - Title
+   - Description (abstract/ISBJ)
+   - One Library of Congress subject heading (IKEY)
 
 5. Archives personnel creates an rdf file via exiftool
 6. The rdf file runs through an xslt transform, which generates several xml and html files
