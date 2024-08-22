@@ -230,10 +230,10 @@ Some fields in the master document allow for multiple entries, marked above with
 
 Correspondences in hierarchical order:
 
-| Filename | &#39;US, &#39; + COLL |
+| Filename | COUNTRY CODE + &#39;, &#39; + COLL |
 | --- | --- |
 | LIST | IARL |
-| Cavafy | US, &#39; + pbcoreTitle[@titleType=Collection] |
+| Cavafy | COUNTRY CODE + &#39;, &#39; + pbcoreTitle[@titleType=Collection] |
 | DAVID | Description: COLL |
 | Publisher | Web domain |
 | NewsBoss | &#39;WNYC&#39; |
