@@ -90,11 +90,11 @@ It is usually advisable to add as many additional fields as possible from the in
    - Medium (IMED)
    - Technician (ITCH)
 
-Encouraged:
+     Encouraged:
 
    - Source (ISRC) (cavafy catalog URL)
 
-The following fields will also need to be present either embedded or in cavafy:
+     The following fields will also need to be present either embedded or in cavafy:
 
    - Title
    - Description (abstract/ISBJ)
