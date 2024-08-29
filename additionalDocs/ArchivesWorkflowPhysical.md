@@ -29,10 +29,9 @@ The instantiation suffix will be the next integer after the current instantiatio
 
 Add an additional segment suffix (a, b, c...) for partial instantiations designed to play sequentially (for example, first hour of a two-hour show).
 
-Examples of instantiation IDs
------------------------
-12345.3
-45678.7a
+    Examples of instantiation IDs
+    12345.3
+    45678.7a
 
 See [instantiation IDs](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/master/additionalDocs/fileNaming.md#instantiation-id) for more information.
 
