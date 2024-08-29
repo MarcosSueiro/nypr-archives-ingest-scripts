@@ -21,6 +21,20 @@ Use ample space and segregate your materials by format
 
 ## 3. Identify related assets in cavafy
 
+The Archives catalog (colloquially known as &quot;[cavafy](https://cavafy.wnyc.org/)&quot;) uses the [pbcore](https://pbcore.org/) standard, which differentiates between conceptual &quot;assets&quot; and their associated &quot;instantiations&quot; (recordings). Look in the archives catalog for related assets. You can use dates (in the YYYY-MM-DD format), series or keywords.
+
+If you find a related asset in cavafy, apply a label with an instantiation ID. The ID must follow this pattern: assetID.instSuffix
+
+The instantiation suffix will be the next integer after the current instantiations listed in cavafy. E.g., if the highest instantation ID in cavafy is 12345.2, the instantiation suffix will be 3, so the complete instantiation ID will be 12345.3.
+
+Add an additional segment suffix (a, b, c...) for partial instantiations designed to play sequentially (for example, first hour of a two-hour show).
+
+Examples of instantiation IDs
+-----------------------
+12345.3
+45678.7a
+
+See [instantiation IDs](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/master/additionalDocs/fileNaming.md#instantiation-id) for more information.
 
 The workflow accepts metadata from Broadcast WAV files as an xml RDF document. (Other sources such as those from BWF MetaEdit or MediaInfo are first converted to an exiftool-like RDF) It then generates a new set of metadata as a &quot;golden record&quot; xml RDF document, taking into account the following possible sources:
 
