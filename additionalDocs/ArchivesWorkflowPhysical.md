@@ -43,7 +43,7 @@ Enter each asset and instantiation suffix in the archives spreadsheet.
 
 Labeled items with the same asset number will clearly belong together. Do the same with unlabeled items that appear to "belong" together: use rubber bands, temporary labels, etc. to accomplish this.
 
-Determine how many new assets you will need to create. Archives staff will then provide you with a spreadsheet that includes the existing asset IDs you identified in [Step 3](#3.-identify-related-assets-in-cavafy), as well as new asset IDs. Label the physical items with the new instantiation IDs.
+Determine how many new assets you will need to create. Archives staff will then provide you with a spreadsheet that includes the existing asset IDs you identified in [Step 3](#3-identify-related-assets-in-cavafy), as well as new asset IDs. Label the physical items with the new instantiation IDs.
 
 ## 5. Enter descriptive metadata
 
