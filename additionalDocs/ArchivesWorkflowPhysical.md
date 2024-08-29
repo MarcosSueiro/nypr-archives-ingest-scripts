@@ -1,6 +1,8 @@
 # INGESTING PHYSICAL ITEMS
 
-Ingesting physical items (tapes, discs, prints, etc.) benefits from a spreadsheet inventory. Once you determine which items you want to keep, the cataloging process is iterative and follows the following steps:
+Ingesting physical items (tapes, discs, prints, etc.) benefits from creating a spreadsheet inventory. Archives staff can provide a special spreadsheet, which is mapped to an rdf-like schema. 
+
+Once you determine which items you want to keep, the cataloging process is iterative and follows the following steps:
 
 1. Segregate by format
 2. Organise by collection and series, then by date
