@@ -23,7 +23,7 @@ Use ample space and segregate your materials by format
 
 ## 3. Identify related assets in cavafy
 
-The Archives catalog (colloquially known as &quot;[cavafy](https://cavafy.wnyc.org/)&quot;) uses the [pbcore](https://pbcore.org/) standard, which differentiates between conceptual &quot;assets&quot; and their associated &quot;instantiations&quot; (recordings). Look in the archives catalog for related assets. You can use dates (in the YYYY-MM-DD format), series or keywords.
+The Archives catalog (colloquially known as &quot;[cavafy](https://cavafy.wnyc.org/)&quot;) uses the [pbcore](https://pbcore.org/) standard, which differentiates between conceptual &quot;assets&quot; and their associated &quot;instantiations&quot; (recordings). Look in the archives catalog for related assets; you can use dates (in the YYYY-MM-DD format), series or keywords.
 
 If you find a related asset in cavafy, apply a label with an instantiation ID. The ID must follow this pattern: assetID.instSuffix
 
@@ -38,6 +38,10 @@ Add an additional segment suffix (a, b, c...) for partial instantiations designe
 See [instantiation IDs](https://github.com/MarcosSueiro/nypr-archives-ingest-scripts/blob/master/additionalDocs/fileNaming.md#instantiation-id) for more information.
 
 Set aside the items that have labels, in asset number order. 
+
+Now you are ready to enter information in the archives spreadsheet. This is much faster nd accurate than entering individual items in the catalogue.
+
+Create a copy of the archives template spreadsheet for each format group and collection group. For example: WQXR DATs can go in one spreadsheet. 
 
 Enter each asset and instantiation suffix in the archives spreadsheet.
 
